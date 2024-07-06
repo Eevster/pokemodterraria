@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj": {}
+    "c:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj": {}
   },
   "projects": {
-    "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj": {
+    "c:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj",
+        "projectUniqueName": "c:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj",
         "projectName": "Pokemod",
-        "projectPath": "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj",
+        "projectPath": "c:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj",
         "packagesPath": "C:\\Users\\loris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\obj\\",
+        "outputPath": "c:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

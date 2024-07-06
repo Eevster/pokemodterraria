@@ -24,6 +24,7 @@ Projectiles: {
 	CharmeleonPetProjectileShiny.DisplayName: Charmeleon Pet Projectile Shiny
 	IvysaurPetProjectileShiny.DisplayName: Ivysaur Pet Projectile Shiny
 	VenusaurPetProjectileShiny.DisplayName: Venusaur Pet Projectile Shiny
+	TorchicPetProjectile.DisplayName: Torchic Pet Projectile
 }
 
 Items: {
@@ -251,6 +252,11 @@ Items: {
 		DisplayName: Blacephalon Critter Item
 		Tooltip: ""
 	}
+
+	TorchicPetItem: {
+		DisplayName: Torchic Pet Item
+		Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -377,6 +383,11 @@ Buffs: {
 	VenusaurPetBuffShiny: {
 		DisplayName: Venusaur Pet Buff Shiny
 		Description: Mods.Pokemod.Buffs.VenusaurPetBuffShiny.Description
+	}
+
+	TorchicPetBuff: {
+		DisplayName: Torchic Pet Buff
+		Description: Mods.Pokemod.Buffs.TorchicPetBuff.Description
 	}
 }
 

@@ -1,0 +1,5 @@
+c:\Users\loris\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\Pokemod\obj\Debug\net8.0\Pokemod.csproj.AssemblyReference.cache
+c:\Users\loris\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\Pokemod\obj\Debug\net8.0\Pokemod.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\loris\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\Pokemod\obj\Debug\net8.0\Pokemod.AssemblyInfoInputs.cache
+c:\Users\loris\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\Pokemod\obj\Debug\net8.0\Pokemod.AssemblyInfo.cs
+c:\Users\loris\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\Pokemod\obj\Debug\net8.0\Pokemod.csproj.CoreCompileInputs.cache

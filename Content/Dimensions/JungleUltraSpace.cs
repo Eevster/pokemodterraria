@@ -12,7 +12,7 @@ using Pokemod.Backgrounds;
 using Terraria.GameContent.Generation;
 using Pokemod.Content.NPCs;
 
-public class IceUltraSpaceSubworld : Subworld
+public class JungleUltraSpaceSubworld : Subworld
 {
     public override int Width => 1000;
     public override int Height => 1000;
@@ -22,7 +22,7 @@ public class IceUltraSpaceSubworld : Subworld
 
     public override List<GenPass> Tasks => new List<GenPass>()
     {
-        new IceUltraSpaceGenPass()
+        new JungleUltraSpaceGenPass()
     };
 
     // Sets the time to the middle of the day whenever the subworld loads
@@ -36,10 +36,10 @@ public class IceUltraSpaceSubworld : Subworld
     }
 }
 
-public class IceUltraSpaceGenPass : GenPass
+public class JungleUltraSpaceGenPass : GenPass
 {
     //TODO: remove this once tML changes generation passes
-    public IceUltraSpaceGenPass() : base("Terrain", 1) { }
+    public JungleUltraSpaceGenPass() : base("Terrain", 1) { }
 
     protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
     {
@@ -60,12 +60,12 @@ public class IceUltraSpaceGenPass : GenPass
                 if (j == surfaceLevel)
                 {
                     tile.HasTile = true;
-                    tile.TileType = TileID.SnowBlock; // You can change this to any other tile type for the surface layer
+                    tile.TileType = TileID.JungleGrass; // You can change this to any other tile type for the surface layer
                 }
                 else if (j > surfaceLevel) // Below the surface level
                 {
                     tile.HasTile = true;
-                    tile.TileType = TileID.IceBlock; // Set the underground to dirt, change it as needed
+                    tile.TileType = TileID.Mud; // Set the underground to dirt, change it as needed
                 }
             }
         }
