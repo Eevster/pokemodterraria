@@ -1,0 +1,16 @@
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\tModLoader.targets" />
+  <PropertyGroup>
+    <AssemblyName>Pokemod</AssemblyName>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SubworldLibrary">
+        <HintPath>Pokemod/libraries/SubworldLibrary.dll</HintPath>
+    </Reference>
+    <Content Include="Pokemod/libraries/SubworldLibrary.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

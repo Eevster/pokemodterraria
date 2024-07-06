@@ -1,0 +1,394 @@
+Projectiles: {
+	EeveePetProjectile.DisplayName: Eevee Pet Projectile
+	PikachuPetProjectile.DisplayName: Pikachu Pet Projectile
+	BulbasaurPetProjectile.DisplayName: Bulbasaur Pet Projectile
+	CharmanderPetProjectile.DisplayName: Charmander Pet Projectile
+	SquirtlePetProjectile.DisplayName: Squirtle Pet Projectile
+	IvysaurPetProjectile.DisplayName: Ivysaur Pet Projectile
+	CharmeleonPetProjectile.DisplayName: Charmeleon Pet Projectile
+	VenusaurPetProjectile.DisplayName: Venusaur Pet Projectile
+	CharizardPetProjectile.DisplayName: Charizard Pet Projectile
+	ChikoritaPetProjectile.DisplayName: Chikorita Pet Projectile
+	CyndaquilPetProjectile.DisplayName: Cyndaquil Pet Projectile
+	TotodilePetProjectile.DisplayName: Totodile Pet Projectile
+	BulbasaurPetProjectileShiny.DisplayName: Bulbasaur Pet Projectile Shiny
+	CharmanderPetProjectileShiny.DisplayName: Charmander Pet Projectile Shiny
+	VenusaurPetProjectileMega.DisplayName: Venusaur Pet Projectile Mega
+	WartortlePetProjectile.DisplayName: Wartortle Pet Projectile
+	BlastoisePetProjectile.DisplayName: Blastoise Pet Projectile
+	BlastoisePetProjectileMega.DisplayName: Blastoise Pet Projectile Mega
+	CharizardPetProjectileMegaX.DisplayName: Charizard Pet Projectile Mega X
+	CharizardPetProjectileMegaY.DisplayName: Charizard Pet Projectile Mega Y
+	SquirtlePetProjectileShiny.DisplayName: Squirtle Pet Projectile Shiny
+	CharizardPetProjectileShiny.DisplayName: Charizard Pet Projectile Shiny
+	CharmeleonPetProjectileShiny.DisplayName: Charmeleon Pet Projectile Shiny
+	IvysaurPetProjectileShiny.DisplayName: Ivysaur Pet Projectile Shiny
+	VenusaurPetProjectileShiny.DisplayName: Venusaur Pet Projectile Shiny
+}
+
+Items: {
+	EeveePetItem: {
+		Tooltip: ""
+		DisplayName: Eevee Pet Item
+	}
+
+	PikachuPetItem: {
+		DisplayName: Pikachu Pet Item
+		Tooltip: ""
+	}
+
+	BulbasaurPetItem: {
+		Tooltip: ""
+		DisplayName: Bulbasaur Pet Item
+	}
+
+	CharmanderPetItem: {
+		Tooltip: ""
+		DisplayName: Charmander Pet Item
+	}
+
+	EeveeCritterItem: {
+		Tooltip: ""
+		DisplayName: Eevee Critter Item
+	}
+
+	PokeballItem: {
+		Tooltip: ""
+		DisplayName: Pokeball Item
+	}
+
+	PikachuCritterItem: {
+		DisplayName: Pikachu Critter Item
+		Tooltip: ""
+	}
+
+	BulbasaurCritterItem: {
+		Tooltip: ""
+		DisplayName: Bulbasaur Critter Item
+	}
+
+	CharmanderCritterItem: {
+		DisplayName: Charmander Critter Item
+		Tooltip: ""
+	}
+
+	SquirtlePetItem: {
+		DisplayName: Squirtle Pet Item
+		Tooltip: ""
+	}
+
+	SquirtleCritterItem: {
+		Tooltip: ""
+		DisplayName: Squirtle Critter Item
+	}
+
+	IvysaurPetItem: {
+		DisplayName: Ivysaur Pet Item
+		Tooltip: ""
+	}
+
+	RareCandyItem: {
+		DisplayName: Rare Candy Item
+		Tooltip: ""
+	}
+
+	CharmeleonPetItem: {
+		DisplayName: Charmeleon Pet Item
+		Tooltip: ""
+	}
+
+	VenusaurPetItem: {
+		DisplayName: Venusaur Pet Item
+		Tooltip: ""
+	}
+
+	CharizardPetItem: {
+		Tooltip: ""
+		DisplayName: Charizard Pet Item
+	}
+
+	VenusaurMegaStoneItem: {
+		DisplayName: Venusaur Mega Stone Item
+		Tooltip: ""
+	}
+
+	GreatballItem: {
+		DisplayName: Greatball Item
+		Tooltip: ""
+	}
+
+	ChikoritaPetItem: {
+		DisplayName: Chikorita Pet Item
+		Tooltip: ""
+	}
+
+	CyndaquilPetItem: {
+		DisplayName: Cyndaquil Pet Item
+		Tooltip: ""
+	}
+
+	TotodilePetItem: {
+		DisplayName: Totodile Pet Item
+		Tooltip: ""
+	}
+
+	VSSeekerItem: {
+		DisplayName: V S Seeker Item
+		Tooltip: ""
+	}
+
+	BulbasaurPetItemShiny: {
+		DisplayName: Bulbasaur Pet Item Shiny
+		Tooltip: ""
+	}
+
+	BulbasaurCritterItemShiny: {
+		DisplayName: Bulbasaur Critter Item Shiny
+		Tooltip: ""
+	}
+
+	CharmanderPetItemShiny: {
+		DisplayName: Charmander Pet Item Shiny
+		Tooltip: ""
+	}
+
+	CharmanderCritterItemShiny: {
+		DisplayName: Charmander Critter Item Shiny
+		Tooltip: ""
+	}
+
+	KeyStoneItem: {
+		DisplayName: Key Stone Item
+		Tooltip: ""
+	}
+
+	MegaCuffItem: {
+		DisplayName: Mega Cuff Item
+		Tooltip: ""
+	}
+
+	VenusaurPetItemMega: {
+		DisplayName: Venusaur Pet Item Mega
+		Tooltip: ""
+	}
+
+	WartortlePetItem: {
+		DisplayName: Wartortle Pet Item
+		Tooltip: ""
+	}
+
+	BlastoisePetItem: {
+		DisplayName: Blastoise Pet Item
+		Tooltip: ""
+	}
+
+	BlastoiseMegaStoneItem: {
+		DisplayName: Blastoise Mega Stone Item
+		Tooltip: ""
+	}
+
+	CharizardMegaStoneItemX: {
+		DisplayName: Charizard Mega Stone Item X
+		Tooltip: ""
+	}
+
+	CharizardMegaStoneItemY: {
+		DisplayName: Charizard Mega Stone Item Y
+		Tooltip: ""
+	}
+
+	BlastoisePetItemMega: {
+		DisplayName: Blastoise Pet Item Mega
+		Tooltip: ""
+	}
+
+	CharizardPetItemMegaX: {
+		DisplayName: Charizard Pet Item Mega X
+		Tooltip: ""
+	}
+
+	CharizardPetItemMegaY: {
+		DisplayName: Charizard Pet Item Mega Y
+		Tooltip: ""
+	}
+
+	SquirtlePetItemShiny: {
+		DisplayName: Squirtle Pet Item Shiny
+		Tooltip: ""
+	}
+
+	SquirtleCritterItemShiny: {
+		DisplayName: Squirtle Critter Item Shiny
+		Tooltip: ""
+	}
+
+	CharizardPetItemShiny: {
+		DisplayName: Charizard Pet Item Shiny
+		Tooltip: ""
+	}
+
+	CharmeleonPetItemShiny: {
+		DisplayName: Charmeleon Pet Item Shiny
+		Tooltip: ""
+	}
+
+	IvysaurPetItemShiny: {
+		DisplayName: Ivysaur Pet Item Shiny
+		Tooltip: ""
+	}
+
+	VenusaurPetItemShiny: {
+		DisplayName: Venusaur Pet Item Shiny
+		Tooltip: ""
+	}
+
+	UltraPortalItem: {
+		DisplayName: Ultra Portal Item
+		Tooltip: ""
+	}
+
+	BlacephalonCritterItem: {
+		DisplayName: Blacephalon Critter Item
+		Tooltip: ""
+	}
+}
+
+Buffs: {
+	EeveePetBuff: {
+		Description: Mods.Pokemod.Buffs.EeveePetBuff.Description
+		DisplayName: Eevee Pet Buff
+	}
+
+	PikachuPetBuff: {
+		DisplayName: Pikachu Pet Buff
+		Description: Mods.Pokemod.Buffs.PikachuPetBuff.Description
+	}
+
+	BulbasaurPetBuff: {
+		Description: Mods.Pokemod.Buffs.BulbasaurPetBuff.Description
+		DisplayName: Bulbasaur Pet Buff
+	}
+
+	CharmanderPetBuff: {
+		Description: Mods.Pokemod.Buffs.CharmanderPetBuff.Description
+		DisplayName: Charmander Pet Buff
+	}
+
+	SquirtlePetBuff: {
+		DisplayName: Squirtle Pet Buff
+		Description: Mods.Pokemod.Buffs.SquirtlePetBuff.Description
+	}
+
+	IvysaurPetBuff: {
+		DisplayName: Ivysaur Pet Buff
+		Description: Mods.Pokemod.Buffs.IvysaurPetBuff.Description
+	}
+
+	CharmeleonPetBuff: {
+		DisplayName: Charmeleon Pet Buff
+		Description: Mods.Pokemod.Buffs.CharmeleonPetBuff.Description
+	}
+
+	VenusaurPetBuff: {
+		DisplayName: Venusaur Pet Buff
+		Description: Mods.Pokemod.Buffs.VenusaurPetBuff.Description
+	}
+
+	CharizardPetBuff: {
+		Description: Mods.Pokemod.Buffs.CharizardPetBuff.Description
+		DisplayName: Charizard Pet Buff
+	}
+
+	ChikoritaPetBuff: {
+		DisplayName: Chikorita Pet Buff
+		Description: Mods.Pokemod.Buffs.ChikoritaPetBuff.Description
+	}
+
+	CyndaquilPetBuff: {
+		DisplayName: Cyndaquil Pet Buff
+		Description: Mods.Pokemod.Buffs.CyndaquilPetBuff.Description
+	}
+
+	TotodilePetBuff: {
+		DisplayName: Totodile Pet Buff
+		Description: Mods.Pokemod.Buffs.TotodilePetBuff.Description
+	}
+
+	BulbasaurPetBuffShiny: {
+		DisplayName: Bulbasaur Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.BulbasaurPetBuffShiny.Description
+	}
+
+	CharmanderPetBuffShiny: {
+		DisplayName: Charmander Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.CharmanderPetBuffShiny.Description
+	}
+
+	VenusaurPetBuffMega: {
+		DisplayName: Venusaur Pet Buff Mega
+		Description: Mods.Pokemod.Buffs.VenusaurPetBuffMega.Description
+	}
+
+	WartortlePetBuff: {
+		DisplayName: Wartortle Pet Buff
+		Description: Mods.Pokemod.Buffs.WartortlePetBuff.Description
+	}
+
+	BlastoisePetBuff: {
+		DisplayName: Blastoise Pet Buff
+		Description: Mods.Pokemod.Buffs.BlastoisePetBuff.Description
+	}
+
+	BlastoisePetBuffMega: {
+		DisplayName: Blastoise Pet Buff Mega
+		Description: Mods.Pokemod.Buffs.BlastoisePetBuffMega.Description
+	}
+
+	CharizardPetBuffMegaX: {
+		DisplayName: Charizard Pet Buff Mega X
+		Description: Mods.Pokemod.Buffs.CharizardPetBuffMegaX.Description
+	}
+
+	CharizardPetBuffMegaY: {
+		DisplayName: Charizard Pet Buff Mega Y
+		Description: Mods.Pokemod.Buffs.CharizardPetBuffMegaY.Description
+	}
+
+	SquirtlePetBuffShiny: {
+		DisplayName: Squirtle Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.SquirtlePetBuffShiny.Description
+	}
+
+	CharizardPetBuffShiny: {
+		DisplayName: Charizard Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.CharizardPetBuffShiny.Description
+	}
+
+	CharmeleonPetBuffShiny: {
+		DisplayName: Charmeleon Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.CharmeleonPetBuffShiny.Description
+	}
+
+	IvysaurPetBuffShiny: {
+		DisplayName: Ivysaur Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.IvysaurPetBuffShiny.Description
+	}
+
+	VenusaurPetBuffShiny: {
+		DisplayName: Venusaur Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.VenusaurPetBuffShiny.Description
+	}
+}
+
+NPCs: {
+	EeveeCritterNPC.DisplayName: Eevee Critter N P C
+	PikachuCritterNPC.DisplayName: Pikachu Critter N P C
+	BulbasaurCritterNPC.DisplayName: Bulbasaur Critter N P C
+	CharmanderCritterNPC.DisplayName: Charmander Critter N P C
+	SquirtleCritterNPC.DisplayName: Squirtle Critter N P C
+	ProfOakTravelingMerchant.DisplayName: Prof Oak Traveling Merchant
+	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur Critter N P C Shiny
+	CharmanderCritterNPCShiny.DisplayName: Charmander Critter N P C Shiny
+	SquirtleCritterNPCShiny.DisplayName: Squirtle Critter N P C Shiny
+	BlacephalonCritterNPC.DisplayName: Blacephalon Critter N P C
+}

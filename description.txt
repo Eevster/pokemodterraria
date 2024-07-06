@@ -1,0 +1,19 @@
+Welcome to Pokemod! The first Terraria mod fully striving to add every single pokemon into your terraria world! Each Mon will have its own unique way of obtaining it! Be sure to join my Discord where I create Minecraft and now Terraria content! Discord Link: https://discord.gg/pT5UagAB3n
+
+Contributers:
+-jacsmith (Discord) Artist
+
+Changelog:
+-Added Shiny Pokemon! The will spawn rarely in the same biomes as their regular forms.
+
+-All Pokemon now have support Buffs! Thsi will serve as the purpose of the "Pokemon Trainer" class until another system is put in place.
+
+-Added the Mega Kanto Trio! These 3 will be ubtainable by having aMega Cuff in your inventory, and then crafting a Keystone with other materials. Then combine them with the pokemon to create the Mega Evolution.
+
+Legal:
+This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 
+All Pokémon-related content, including names, designs, and concepts, is the intellectual property of The Pokémon Company, Nintendo, and Game Freak. 
+This mod is created by fans for fans, and no official affiliation with the Pokémon franchise is claimed. 
+We respect the original creators and encourage players to support official Pokémon games.
+We will also fully respect the decision to remove content posted at the disgretion of the Official Nintendo Company and/or the Official GameFreak Company.
+Impersonators will not be tolerated.
