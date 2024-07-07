@@ -1,4 +1,7 @@
-﻿using Terraria;
+﻿using System;
+using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,43 +9,390 @@ namespace Pokemod.Content.Pets.EeveePetShiny
 {
 	public class EeveePetProjectileShiny : ModProjectile
 	{
+		public int currentStatus = 0;
+		public enum ProjStatus
+		{
+			Idle,
+			Walk,
+			Jump,
+			Fall
+		}
+
+		public int timer = 0;
+		private int[] attackProjs = {-1,-1,-1,-1};
+		public bool canAttack = true;
+		public const int attackDuration = 0;
+		public const int attackCooldown = 120;
+
 		public override void SetStaticDefaults() {
-			Main.projFrames[Projectile.type] = 4;
+			Main.projFrames[Projectile.type] = 18;
 			Main.projPet[Projectile.type] = true;
 
-			// This code is needed to customize the vanity pet display in the player select screen. Quick explanation:
-			// * It uses fluent API syntax, just like Recipe
-			// * You start with ProjectileID.Sets.SimpleLoop, specifying the start and end frames as well as the speed, and optionally if it should animate from the end after reaching the end, effectively "bouncing"
-			// * To stop the animation if the player is not highlighted/is standing, as done by most grounded pets, add a .WhenNotSelected(0, 0) (you can customize it just like SimpleLoop)
-			// * To set offset and direction, use .WithOffset(x, y) and .WithSpriteDirection(-1)
-			// * To further customize the behavior and animation of the pet (as its AI does not run), you have access to a few vanilla presets in DelegateMethods.CharacterPreview to use via .WithCode(). You can also make your own, showcased in MinionBossPetProjectile
-			ProjectileID.Sets.CharacterPreviewAnimations[Projectile.type] = ProjectileID.Sets.SimpleLoop(0, Main.projFrames[Projectile.type], 6)
-				.WithOffset(-10, -20f)
-				.WithSpriteDirection(-1)
-				.WithCode(DelegateMethods.CharacterPreview.Float);
+			// Basics of CharacterPreviewAnimations explained in ExamplePetProjectile
+			// Notice we define our own method to use in .WithCode() below. This technically allows us to animate the projectile manually using frameCounter and frame as well
+			ProjectileID.Sets.CharacterPreviewAnimations[Projectile.type] = ProjectileID.Sets.SimpleLoop(9, 9, 5)
+				.WhenNotSelected(0, 9)
+				.WithOffset(-12f, 4f);
 		}
 
 		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.ZephyrFish); // Copy the stats of the Zephyr Fish
+			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			AIType = ProjectileID.ZephyrFish; // Mimic as the Zephyr Fish during AI.
-		}
-
-		public override bool PreAI() {
-			Player player = Main.player[Projectile.owner];
-
-			player.zephyrfish = false; // Relic from AIType
-
-			return true;
+			Projectile.width = 50;
+			Projectile.height = 40;
+			Projectile.aiStyle = -1; // Use custom AI
+			Projectile.light = 0f;
+			Projectile.tileCollide = true; 
 		}
 
 		public override void AI() {
 			Player player = Main.player[Projectile.owner];
 
-			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff.
+			CheckActive(player);
+
+			GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
+			SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
+			Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
+			Visuals();
+		}
+
+		private void CheckActive(Player player) {
+			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff
 			if (!player.dead && player.HasBuff(ModContent.BuffType<EeveePetBuffShiny>())) {
 				Projectile.timeLeft = 2;
 			}
 		}
+
+		private void GeneralBehavior(Player owner, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition) {
+			Vector2 idlePosition = owner.Center;
+			idlePosition.Y -= 48f; // Go up 48 coordinates (three tiles from the center of the player)
+
+			float minionPositionOffsetX = (10 + Projectile.minionPos * 40) * -owner.direction;
+			idlePosition.X += minionPositionOffsetX; // Go behind the player
+
+			// All of this code below this line is adapted from Spazmamini code (ID 388, aiStyle 66)
+
+			// Teleport to player if distance is too big
+			vectorToIdlePosition = idlePosition - Projectile.Center;
+			distanceToIdlePosition = vectorToIdlePosition.Length();
+
+			if (Main.myPlayer == owner.whoAmI && distanceToIdlePosition > 2000f) {
+				// Whenever you deal with non-regular events that change the behavior or position drastically, make sure to only run the code on the owner of the projectile,
+				// and then set netUpdate to true
+				Projectile.position = idlePosition;
+				Projectile.velocity *= 0.1f;
+				Projectile.netUpdate = true;
+			}
+
+			// If your minion is flying, you want to do this independently of any conditions
+			float overlapVelocity = 0.04f;
+
+			// Fix overlap with other minions
+			for (int i = 0; i < Main.maxProjectiles; i++) {
+				Projectile other = Main.projectile[i];
+
+				if (i != Projectile.whoAmI && other.active && other.owner == Projectile.owner && Math.Abs(Projectile.position.X - other.position.X) + Math.Abs(Projectile.position.Y - other.position.Y) < Projectile.width) {
+					if (Projectile.position.X < other.position.X) {
+						Projectile.velocity.X -= overlapVelocity;
+					}
+					else {
+						Projectile.velocity.X += overlapVelocity;
+					}
+
+					if (Projectile.position.Y < other.position.Y) {
+						Projectile.velocity.Y -= overlapVelocity;
+					}
+					else {
+						Projectile.velocity.Y += overlapVelocity;
+					}
+				}
+			}
+		}
+
+		private void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter) {
+			// Starting search distance
+			distanceFromTarget = 1000f;
+			targetCenter = Projectile.position;
+			foundTarget = false;
+
+			if (!foundTarget) {
+				// This code is required either way, used for finding a target
+				for (int i = 0; i < Main.maxNPCs; i++) {
+					NPC npc = Main.npc[i];
+
+					if (npc.CanBeChasedBy()) {
+						float between = Vector2.Distance(npc.Center, Projectile.Center);
+						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
+						bool inRange = between < distanceFromTarget;
+
+						if(npc.boss){
+							distanceFromTarget = between;
+							targetCenter = npc.Center;
+							foundTarget = true;
+							break;
+						}
+
+						if ((closest && inRange) || !foundTarget) {
+							distanceFromTarget = between;
+							targetCenter = npc.Center;
+							foundTarget = true;
+						}
+					}
+				}
+			}
+
+			// friendly needs to be set to true so the minion can deal contact damage
+			// friendly needs to be set to false so it doesn't damage things like target dummies while idling
+			// Both things depend on if it has a target or not, so it's just one assignment here
+			// You don't need this assignment if your minion is shooting things instead of dealing contact damage
+			Projectile.friendly = foundTarget;
+		}
+
+		private void Movement(bool foundTarget, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition) {
+			// Default movement parameters (here for attacking)
+			float speed = 5f;
+			float inertia = 20f;
+
+			float maxFallSpeed = 10f;
+
+			if (foundTarget) {
+				if(distanceFromTarget > 400f){
+					Vector2 direction = targetCenter - Projectile.Center;
+					direction.Normalize();
+					direction *= speed;
+
+					Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
+
+					if((targetCenter - Projectile.Center).Y < 0 && -(targetCenter - Projectile.Center).Y > Math.Abs((targetCenter - Projectile.Center).X)){
+						if(Math.Abs(Projectile.velocity.Y) < float.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+							currentStatus = (int)ProjStatus.Jump;
+							Projectile.velocity.Y -= (int)Math.Sqrt(2*0.3f*Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y),0,96));
+						}
+					}
+				}else{
+					if(distanceFromTarget > 200f){
+						Vector2 direction = targetCenter - Projectile.Center;
+						direction.Normalize();
+						direction *= speed/2;
+
+						Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
+					}else{
+						Projectile.velocity.X *= 0.95f;
+					}
+				}
+				if(distanceFromTarget < 800f){
+					if(timer <= 0){
+						if(canAttack){
+							SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
+							if(Projectile.owner == Main.myPlayer){
+								for(int i = 0; i < 4; i++){
+									attackProjs[i] = Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<EeveePet.Swift>(), 40, 2f, Projectile.owner, i*MathHelper.PiOver2);
+								} 
+							}
+							timer = attackDuration;
+							canAttack = false;
+						}
+					}
+				}
+
+				for(int i = 0; i < 4; i++){
+					if(attackProjs[i] != -1){
+						if(Main.projectile[attackProjs[i]].active){
+							if(Main.projectile[attackProjs[i]].ai[1] == 0){
+								Main.projectile[attackProjs[i]].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(Main.projectile[attackProjs[i]].ai[0]);
+							}else{
+								attackProjs[i] = -1;
+							}
+						}else{
+							attackProjs[i] = -1;
+						}
+					}
+				}
+
+				if(timer <= 0){
+					if(!canAttack){
+						canAttack = true;
+						timer = attackCooldown;
+					}
+				}
+			}
+			else {
+				if(!canAttack){
+					canAttack = true;
+					timer = attackCooldown;
+				}
+				for(int i = 0; i < 4; i++){
+					if(attackProjs[i] != -1){
+						if(Main.projectile[attackProjs[i]].active){
+							if(Main.projectile[attackProjs[i]].ai[1] != 0){
+								attackProjs[i] = -1;
+							}
+						}else{
+							attackProjs[i] = -1;
+						}
+					}
+				}
+				// Minion doesn't have a target: return to player and idle
+				if (distanceToIdlePosition > 600f) {
+					// Speed up the minion if it's away from the player
+					speed = 8f;
+				}
+				else {
+					// Slow down the minion if closer to the player
+					speed = 5f;
+				}
+
+				if (distanceToIdlePosition > 80f) {
+					// The immediate range around the player (when it passively floats about)
+
+					// This is a simple movement formula using the two parameters and its desired direction to create a "homing" movement
+					vectorToIdlePosition.Normalize();
+					vectorToIdlePosition *= speed;
+					Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia).X;
+				}else{
+					if(Math.Abs(Projectile.velocity.X)>0.2f){
+						Projectile.velocity.X *= 0.9f;
+					}else{
+						Projectile.velocity.X = 0;
+					}
+				}
+			}
+
+			if(currentStatus != (int)ProjStatus.Jump){
+				if(Math.Abs(Projectile.velocity.X) < float.Epsilon){
+					currentStatus = (int)ProjStatus.Idle;
+				}else{
+					currentStatus = (int)ProjStatus.Walk;
+				}
+			}
+
+			if(Projectile.velocity.Y > 0.04f){
+				currentStatus = (int)ProjStatus.Fall;
+			}
+
+			if(Math.Abs(Projectile.velocity.Y) < float.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+				Jump();
+			}
+
+			if(timer > 0){
+				timer--;
+			}
+
+			Projectile.velocity.Y += 0.2f;
+			if(Projectile.velocity.Y > maxFallSpeed){
+				Projectile.velocity.Y = maxFallSpeed;
+			}
+		}
+
+		private void Jump(){
+			int scanHeight = 10;
+
+			int moveDirection = 0;
+			if (Projectile.velocity.X < 0f)
+			{
+				moveDirection = -1;
+			}
+			if (Projectile.velocity.X > 0f)
+			{
+				moveDirection = 1;
+			}
+
+			if(moveDirection == 0){
+				return;
+			}
+
+			float jumpHeight = 0;
+
+			for(int i = 1; i < 4; i++){
+				jumpHeight = 0;
+                for(int j = 0; j < scanHeight; j++){
+					if(j == scanHeight-1){
+						return;
+					}
+                    Vector2 scanPosition = Projectile.Bottom + new Vector2(moveDirection*16*i,-16*(j+1));
+
+                    if(Collision.SolidCollision(scanPosition - new Vector2(8,16), 16, 16) || Main.tile[(int)scanPosition.X/16-moveDirection, (int)scanPosition.Y/16+1].IsHalfBlock || Main.tile[(int)scanPosition.X/16, (int)scanPosition.Y/16].IsHalfBlock){
+                        jumpHeight += 1f;
+                    }else{
+						break;
+					}
+                }
+				if(jumpHeight > 0){
+					break;
+				}
+            }
+
+			if(jumpHeight != 0){
+				currentStatus = (int)ProjStatus.Jump;
+				Projectile.velocity.Y -= (int)Math.Sqrt(2*0.3f*jumpHeight*16f);
+			}
+		}
+
+		private void Visuals() {
+			if(Math.Sign(Projectile.velocity.X) == 1 || Math.Sign(Projectile.velocity.X) == -1){
+				Projectile.direction = Math.Sign(Projectile.velocity.X);
+				Projectile.spriteDirection = Projectile.direction;
+			}
+
+			int initialFrame = 0;
+			int finalFrame = 0;
+			int frameSpeed = 5;
+
+			switch(currentStatus){
+				case (int)ProjStatus.Idle:
+					initialFrame = 0;
+					finalFrame = 8;
+					break;
+				case (int)ProjStatus.Walk:
+					initialFrame = 9;
+					finalFrame = 17;
+					frameSpeed = (int)(5*3f/Math.Clamp(Math.Abs(Projectile.velocity.X), 2f, 100f));
+					break;
+				case (int)ProjStatus.Jump:
+					initialFrame = 12;
+					finalFrame = 12;
+					break;
+				case (int)ProjStatus.Fall:
+					initialFrame = 15;
+					finalFrame = 15;
+					break;
+			}
+
+			if(Projectile.frame > finalFrame || Projectile.frame < initialFrame){
+				Projectile.frame = initialFrame;
+			}
+
+			Projectile.frameCounter++;
+
+			if (Projectile.frameCounter >= frameSpeed) {
+				Projectile.frameCounter = 0;
+				Projectile.frame++;
+
+				if (Projectile.frame > finalFrame) {
+					Projectile.frame = initialFrame;
+				}
+			}
+		}
+
+		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            width = 22;
+			height = 30;
+            fallThrough = false;
+
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
+
+		public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+			if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f) {
+				Projectile.velocity.X = 0;
+			}
+			if (Projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f) {
+				Projectile.velocity.Y = 0;
+			}
+
+            return false;
+        }
 	}
 }
