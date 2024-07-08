@@ -25,6 +25,12 @@ Projectiles: {
 	IvysaurPetProjectileShiny.DisplayName: Ivysaur Pet Projectile Shiny
 	VenusaurPetProjectileShiny.DisplayName: Venusaur Pet Projectile Shiny
 	TorchicPetProjectile.DisplayName: Torchic Pet Projectile
+	EeveePetProjectileShiny.DisplayName: Eevee Pet Projectile Shiny
+	Swift.DisplayName: Swift
+	VineWhipBack.DisplayName: Vine Whip Back
+	VineWhipFront.DisplayName: Vine Whip Front
+	ThunderboltHold.DisplayName: Thunderbolt Hold
+	PikachuPetProjectileShiny.DisplayName: Pikachu Pet Projectile Shiny
 }
 
 Items: {
@@ -257,6 +263,21 @@ Items: {
 		DisplayName: Torchic Pet Item
 		Tooltip: ""
 	}
+
+	EeveeCritterItemShiny: {
+		DisplayName: Eevee Critter Item Shiny
+		Tooltip: ""
+	}
+
+	EeveePetItemShiny: {
+		DisplayName: Eevee Pet Item Shiny
+		Tooltip: ""
+	}
+
+	PikachuPetItemShiny: {
+		DisplayName: Pikachu Pet Item Shiny
+		Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -389,6 +410,16 @@ Buffs: {
 		DisplayName: Torchic Pet Buff
 		Description: Mods.Pokemod.Buffs.TorchicPetBuff.Description
 	}
+
+	EeveePetBuffShiny: {
+		DisplayName: Eevee Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.EeveePetBuffShiny.Description
+	}
+
+	PikachuPetBuffShiny: {
+		DisplayName: Pikachu Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.PikachuPetBuffShiny.Description
+	}
 }
 
 NPCs: {
@@ -402,4 +433,5 @@ NPCs: {
 	CharmanderCritterNPCShiny.DisplayName: Charmander Critter N P C Shiny
 	SquirtleCritterNPCShiny.DisplayName: Squirtle Critter N P C Shiny
 	BlacephalonCritterNPC.DisplayName: Blacephalon Critter N P C
+	EeveeCritterNPCShiny.DisplayName: Eevee Critter N P C Shiny
 }

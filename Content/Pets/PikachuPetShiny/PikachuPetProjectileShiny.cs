@@ -1,13 +1,14 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Pokemod.Content.Pets.PikachuPet;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.EeveePet
+namespace Pokemod.Content.Pets.PikachuPetShiny
 {
-	public class EeveePetProjectile : ModProjectile
+	public class PikachuPetProjectileShiny : ModProjectile
 	{
 		public int currentStatus = 0;
 		public enum ProjStatus
@@ -15,17 +16,18 @@ namespace Pokemod.Content.Pets.EeveePet
 			Idle,
 			Walk,
 			Jump,
-			Fall
+			Fall,
+			Attack
 		}
 
 		public int timer = 0;
-		private int[] attackProjs = {-1,-1,-1,-1};
+		private int attackProj = -1;
 		public bool canAttack = true;
-		public const int attackDuration = 0;
-		public const int attackCooldown = 120;
+		public const int attackDuration = 30;
+		public const int attackCooldown = 60;
 
 		public override void SetStaticDefaults() {
-			Main.projFrames[Projectile.type] = 18;
+			Main.projFrames[Projectile.type] = 19;
 			Main.projPet[Projectile.type] = true;
 
 			// Basics of CharacterPreviewAnimations explained in ExamplePetProjectile
@@ -38,10 +40,10 @@ namespace Pokemod.Content.Pets.EeveePet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			Projectile.width = 50;
-			Projectile.height = 40;
+			Projectile.width = 48;
+			Projectile.height = 36;
 			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0f;
+			Projectile.light = 0.3f;
 			Projectile.tileCollide = true; 
 		}
 
@@ -58,7 +60,7 @@ namespace Pokemod.Content.Pets.EeveePet
 
 		private void CheckActive(Player player) {
 			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff
-			if (!player.dead && player.HasBuff(ModContent.BuffType<EeveePetBuff>())) {
+			if (!player.dead && player.HasBuff(ModContent.BuffType<PikachuPetBuffShiny>())) {
 				Projectile.timeLeft = 2;
 			}
 		}
@@ -124,6 +126,10 @@ namespace Pokemod.Content.Pets.EeveePet
 						float between = Vector2.Distance(npc.Center, Projectile.Center);
 						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
 						bool inRange = between < distanceFromTarget;
+						bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
+						// Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
+						// The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
+						bool closeThroughWall = between < 100f;
 
 						if(npc.boss){
 							distanceFromTarget = between;
@@ -132,7 +138,7 @@ namespace Pokemod.Content.Pets.EeveePet
 							break;
 						}
 
-						if ((closest && inRange) || !foundTarget) {
+						if (((closest && inRange) || !foundTarget) && (lineOfSight || closeThroughWall)) {
 							distanceFromTarget = between;
 							targetCenter = npc.Center;
 							foundTarget = true;
@@ -164,73 +170,55 @@ namespace Pokemod.Content.Pets.EeveePet
 					Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
 
 					if((targetCenter - Projectile.Center).Y < 0 && -(targetCenter - Projectile.Center).Y > Math.Abs((targetCenter - Projectile.Center).X)){
-						if(Math.Abs(Projectile.velocity.Y) < float.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+						if(Math.Abs(Projectile.velocity.Y) < Double.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
 							currentStatus = (int)ProjStatus.Jump;
-							Projectile.velocity.Y -= (int)Math.Sqrt(2*0.3f*Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y),0,96));
+							Projectile.velocity.Y -= (int)Math.Sqrt(2*0.3f*Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y),0,160));
 						}
 					}
-				}else{
-					if(distanceFromTarget > 200f){
-						Vector2 direction = targetCenter - Projectile.Center;
-						direction.Normalize();
-						direction *= speed/2;
-
-						Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
-					}else{
-						Projectile.velocity.X *= 0.95f;
-					}
 				}
-				if(distanceFromTarget < 800f){
+				if(distanceFromTarget < 600f){
 					if(timer <= 0){
 						if(canAttack){
-							SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
+							currentStatus = (int)ProjStatus.Attack;
+							SoundEngine.PlaySound(SoundID.Item94, Projectile.position);
 							if(Projectile.owner == Main.myPlayer){
-								for(int i = 0; i < 4; i++){
-									attackProjs[i] = Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), 40, 2f, Projectile.owner, i*MathHelper.PiOver2);
-								} 
+								attackProj = Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<ThunderboltHold>(), 40, 2f, Projectile.owner);
 							}
 							timer = attackDuration;
 							canAttack = false;
 						}
 					}
 				}
-
-				for(int i = 0; i < 4; i++){
-					if(attackProjs[i] != -1){
-						if(Main.projectile[attackProjs[i]].active){
-							if(Main.projectile[attackProjs[i]].ai[1] == 0){
-								Main.projectile[attackProjs[i]].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(Main.projectile[attackProjs[i]].ai[0]);
-							}else{
-								attackProjs[i] = -1;
-							}
-						}else{
-							attackProjs[i] = -1;
-						}
-					}
-				}
-
 				if(timer <= 0){
 					if(!canAttack){
+						if(currentStatus == (int)ProjStatus.Attack){
+							currentStatus = (int)ProjStatus.Idle;
+						}
 						canAttack = true;
 						timer = attackCooldown;
 					}
 				}
+				if(attackProj != -1){
+					if(Main.projectile[attackProj].active){
+						Projectile.velocity.X *= 0.9f;
+						maxFallSpeed = 2f;
+						Main.projectile[attackProj].Center = Projectile.Center;
+					}else{
+						attackProj = -1;
+					}
+				}
 			}
 			else {
-				if(!canAttack){
+				if(currentStatus == (int)ProjStatus.Attack){
+					currentStatus = (int)ProjStatus.Idle;
 					canAttack = true;
 					timer = attackCooldown;
 				}
-				for(int i = 0; i < 4; i++){
-					if(attackProjs[i] != -1){
-						if(Main.projectile[attackProjs[i]].active){
-							if(Main.projectile[attackProjs[i]].ai[1] != 0){
-								attackProjs[i] = -1;
-							}
-						}else{
-							attackProjs[i] = -1;
-						}
+				if(attackProj != -1){
+					if(Main.projectile[attackProj].active){
+						Main.projectile[attackProj].Kill();
 					}
+					attackProj = -1;
 				}
 				// Minion doesn't have a target: return to player and idle
 				if (distanceToIdlePosition > 600f) {
@@ -258,20 +246,22 @@ namespace Pokemod.Content.Pets.EeveePet
 				}
 			}
 
-			if(currentStatus != (int)ProjStatus.Jump){
-				if(Math.Abs(Projectile.velocity.X) < float.Epsilon){
-					currentStatus = (int)ProjStatus.Idle;
-				}else{
-					currentStatus = (int)ProjStatus.Walk;
+			if(currentStatus != (int)ProjStatus.Attack){
+				if(currentStatus != (int)ProjStatus.Jump){
+					if(Math.Abs(Projectile.velocity.X) < Double.Epsilon){
+						currentStatus = (int)ProjStatus.Idle;
+					}else{
+						currentStatus = (int)ProjStatus.Walk;
+					}
 				}
-			}
 
-			if(Projectile.velocity.Y > 0.04f){
-				currentStatus = (int)ProjStatus.Fall;
-			}
+				if(Projectile.velocity.Y > Double.Epsilon){
+					currentStatus = (int)ProjStatus.Fall;
+				}
 
-			if(Math.Abs(Projectile.velocity.Y) < float.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
-				Jump();
+				if(Math.Abs(Projectile.velocity.Y) < Double.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+					Jump();
+				}
 			}
 
 			if(timer > 0){
@@ -349,12 +339,16 @@ namespace Pokemod.Content.Pets.EeveePet
 					frameSpeed = (int)(5*3f/Math.Clamp(Math.Abs(Projectile.velocity.X), 2f, 100f));
 					break;
 				case (int)ProjStatus.Jump:
-					initialFrame = 12;
-					finalFrame = 12;
+					initialFrame = 11;
+					finalFrame = 11;
 					break;
 				case (int)ProjStatus.Fall:
 					initialFrame = 15;
 					finalFrame = 15;
+					break;
+				case (int)ProjStatus.Attack:
+					initialFrame = 18;
+					finalFrame = 18;
 					break;
 			}
 
@@ -376,8 +370,8 @@ namespace Pokemod.Content.Pets.EeveePet
 
 		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
-            width = 22;
-			height = 30;
+            width = 16;
+			height = 26;
             fallThrough = false;
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
