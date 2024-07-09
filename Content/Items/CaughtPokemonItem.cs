@@ -13,7 +13,7 @@ using Terraria.ModLoader.IO;
 
 namespace Pokemod.Content.Items
 {
-	public class CapturedPokemonItem : ModItem
+	public class CaughtPokemonItem : ModItem
 	{
         public string PokemonName;
 		public bool Shiny;
@@ -27,9 +27,11 @@ namespace Pokemod.Content.Items
 			Item.useAnimation = 30;
             Item.width = 14;
             Item.height = 14;
+			Item.UseSound = SoundID.Item1;
 			Item.useStyle = ItemUseStyleID.Shoot;
 			Item.shoot = ProjectileID.None;
 			Item.buffType = 0;
+			Item.noUseGraphic = true;
 		}
 
         public override bool? UseItem(Player player)
@@ -41,7 +43,7 @@ namespace Pokemod.Content.Items
 		}
 
 		public override ModItem Clone(Item item) {
-			CapturedPokemonItem clone = (CapturedPokemonItem)base.Clone(item);
+			CaughtPokemonItem clone = (CaughtPokemonItem)base.Clone(item);
 			clone.PokemonName = (string)PokemonName?.Clone(); // note the ? here is important, colors may be null if spawned from other mods which don't call OnCreate
 			return clone;
 		}
@@ -123,6 +125,11 @@ namespace Pokemod.Content.Items
 			}
 
             base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
+        }
+
+        public override void UseStyle(Player player, Rectangle heldItemFrame)
+        {
+            base.UseStyle(player, heldItemFrame);
         }
 
         public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)

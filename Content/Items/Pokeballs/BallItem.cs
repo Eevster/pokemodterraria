@@ -166,6 +166,7 @@ namespace Pokemod.Content.Items.Pokeballs
 				targetPokemon = target;
 				targetPokemon.hide = true;
 				targetPokemon.friendly = true;
+				targetPokemon.dontTakeDamageFromHostiles = true;
 
 				captureStage = 0;
 				Projectile.velocity = new Vector2(0,-5);
@@ -178,14 +179,15 @@ namespace Pokemod.Content.Items.Pokeballs
 			targetPokemon.Center = Projectile.Center + new Vector2(0,-targetPokemon.height/2);
 			targetPokemon.hide = false;
 			targetPokemon.friendly = false;
+			targetPokemon.dontTakeDamageFromHostiles = false;
 			Projectile.Kill();
 		}
 
 		public void CaptureSuccess(){
-			int item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CapturedPokemonItem>());
+			int item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
 			string pokemonName = targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName;
 			bool shiny = targetPokemon.GetGlobalNPC<PokemonNPCData>().shiny;
-			CapturedPokemonItem pokeItem = (CapturedPokemonItem)Main.item[item].ModItem;
+			CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
 			pokeItem.SetPokemonData(pokemonName, shiny, BallType: GetType().Name.Replace("Proj","Item"));
 			targetPokemon.StrikeInstantKill();
 			Projectile.Kill();

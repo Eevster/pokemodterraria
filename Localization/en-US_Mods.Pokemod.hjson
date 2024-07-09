@@ -32,6 +32,13 @@ Projectiles: {
 	ThunderboltHold.DisplayName: Thunderbolt Hold
 	PikachuPetProjectileShiny.DisplayName: Pikachu Pet Projectile Shiny
 	PokeballProj.DisplayName: Pokeball Proj
+	UltraballProj.DisplayName: Ultraball Proj
+	MasterballProj.DisplayName: Masterball Proj
+	HonorballProj.DisplayName: Honorball Proj
+	GreatballProj.DisplayName: Greatball Proj
+	FeatherballProj.DisplayName: Featherball Proj
+	DuskballProj.DisplayName: Duskball Proj
+	BeastballProj.DisplayName: Beastball Proj
 }
 
 Items: {
@@ -62,7 +69,7 @@ Items: {
 
 	PokeballItem: {
 		Tooltip: ""
-		DisplayName: Pokeball Item
+		DisplayName: Pokeball
 	}
 
 	PikachuCritterItem: {
@@ -121,7 +128,7 @@ Items: {
 	}
 
 	GreatballItem: {
-		DisplayName: Greatball Item
+		DisplayName: Greatball
 		Tooltip: ""
 	}
 
@@ -280,13 +287,38 @@ Items: {
 		Tooltip: ""
 	}
 
-	CapturedPokemonItem: {
-		DisplayName: Captured Pokemon Item
+	UltraballItem: {
 		Tooltip: ""
+		DisplayName: Ultraball
 	}
 
-	PokeballItemAlt: {
-		DisplayName: Pokeball Item Alt
+	MasterballItem: {
+		Tooltip: ""
+		DisplayName: Masterball
+	}
+
+	HonorballItem: {
+		Tooltip: ""
+		DisplayName: Honorball
+	}
+
+	FeatherballItem: {
+		Tooltip: ""
+		DisplayName: Featherball
+	}
+
+	DuskballItem: {
+		Tooltip: ""
+		DisplayName: Duskball
+	}
+
+	BeastballItem: {
+		Tooltip: ""
+		DisplayName: Beastball
+	}
+
+	CaughtPokemonItem: {
+		DisplayName: Caught Pokemon Item
 		Tooltip: ""
 	}
 }
@@ -434,15 +466,15 @@ Buffs: {
 }
 
 NPCs: {
-	EeveeCritterNPC.DisplayName: Eevee Critter N P C
-	PikachuCritterNPC.DisplayName: Pikachu Critter N P C
-	BulbasaurCritterNPC.DisplayName: Bulbasaur Critter N P C
-	CharmanderCritterNPC.DisplayName: Charmander Critter N P C
-	SquirtleCritterNPC.DisplayName: Squirtle Critter N P C
+	EeveeCritterNPC.DisplayName: Eevee
+	PikachuCritterNPC.DisplayName: Pikachu
+	BulbasaurCritterNPC.DisplayName: Bulbasaur
+	CharmanderCritterNPC.DisplayName: Charmander
+	SquirtleCritterNPC.DisplayName: Squirtle
 	ProfOakTravelingMerchant.DisplayName: Prof Oak Traveling Merchant
-	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur Critter N P C Shiny
-	CharmanderCritterNPCShiny.DisplayName: Charmander Critter N P C Shiny
-	SquirtleCritterNPCShiny.DisplayName: Squirtle Critter N P C Shiny
-	BlacephalonCritterNPC.DisplayName: Blacephalon Critter N P C
-	EeveeCritterNPCShiny.DisplayName: Eevee Critter N P C Shiny
+	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
+	CharmanderCritterNPCShiny.DisplayName: Charmander
+	SquirtleCritterNPCShiny.DisplayName: Squirtle
+	BlacephalonCritterNPC.DisplayName: Blacephalon
+	EeveeCritterNPCShiny.DisplayName: Eevee
 }
