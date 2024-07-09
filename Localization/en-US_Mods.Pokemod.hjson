@@ -289,6 +289,11 @@ Items: {
 		DisplayName: Pokeball Item Alt
 		Tooltip: ""
 	}
+
+	PikachuCritterItemShiny: {
+		DisplayName: Pikachu Critter Item Shiny
+		Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -445,4 +450,5 @@ NPCs: {
 	SquirtleCritterNPCShiny.DisplayName: Squirtle Critter N P C Shiny
 	BlacephalonCritterNPC.DisplayName: Blacephalon Critter N P C
 	EeveeCritterNPCShiny.DisplayName: Eevee Critter N P C Shiny
+	PikachuCritterNPCShiny.DisplayName: Pikachu Critter N P C Shiny
 }
