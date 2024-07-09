@@ -142,7 +142,7 @@ namespace Pokemod.Content.NPCs
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			return SpawnCondition.OverworldDay.Chance * 0.1f;
+			return SpawnCondition.OverworldDay.Chance * 0.00025f;
 		}
 
 		public override void HitEffect(NPC.HitInfo hit) {
