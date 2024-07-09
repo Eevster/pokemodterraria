@@ -13,11 +13,13 @@ namespace Pokemod.Content.NPCs
 		public bool isPokemon = false;
         public string pokemonName = "";
         public bool shiny = false;
+        public bool ultrabeast = false;
 
-        public void SetPokemonNPCData(string pokemonName, bool shiny = false){
+        public void SetPokemonNPCData(string pokemonName, bool shiny = false, bool ultrabeast = false){
             isPokemon = true;
             this.pokemonName = pokemonName;
             this.shiny = shiny;
+            this.ultrabeast = ultrabeast;
         }
     }
 }
