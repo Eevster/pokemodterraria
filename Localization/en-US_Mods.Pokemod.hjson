@@ -31,6 +31,7 @@ Projectiles: {
 	VineWhipFront.DisplayName: Vine Whip Front
 	ThunderboltHold.DisplayName: Thunderbolt Hold
 	PikachuPetProjectileShiny.DisplayName: Pikachu Pet Projectile Shiny
+	PokeballProj.DisplayName: Pokeball Proj
 }
 
 Items: {
@@ -276,6 +277,16 @@ Items: {
 
 	PikachuPetItemShiny: {
 		DisplayName: Pikachu Pet Item Shiny
+		Tooltip: ""
+	}
+
+	CapturedPokemonItem: {
+		DisplayName: Captured Pokemon Item
+		Tooltip: ""
+	}
+
+	PokeballItemAlt: {
+		DisplayName: Pokeball Item Alt
 		Tooltip: ""
 	}
 }
