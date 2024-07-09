@@ -17,8 +17,9 @@ namespace Pokemod.Content.Items
 	{
         public string PokemonName;
 		public bool Shiny;
+		public string BallType;
 
-		public override string Texture => "Pokemod/Content/Items/PokeballItem";
+		public override string Texture => "Pokemod/Assets/Textures/Pokeballs/PokeballItem";
 
 		public override void SetDefaults() {
 			Item.CloneDefaults(ItemID.ZephyrFish);
@@ -54,14 +55,19 @@ namespace Pokemod.Content.Items
 					line.Text = PokemonName;
 					if(Shiny) line.OverrideColor = Main.DiscoColor;
 				}
+				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
+					line.Text = "Caught in a "+BallType.Replace("Item", "");
+				}
 			}
-			/*TooltipLine tooltipLine = new TooltipLine(Mod, "EntityName", PokemonName);
-            tooltips.Add(tooltipLine);*/
+
+			/*TooltipLine tooltipLine = new TooltipLine(Mod, "BallType", "Caught in a "+BallType.Replace("Item", ""));
+			tooltips.Add(tooltipLine);*/
 		}
 
-        public void SetPokemonData(string PokemonName, bool Shiny){
+        public void SetPokemonData(string PokemonName, bool Shiny, string BallType){
             this.PokemonName = PokemonName;
 			this.Shiny = Shiny;
+			this.BallType = BallType;
 			
 			SetPetInfo();
         }
@@ -90,16 +96,50 @@ namespace Pokemod.Content.Items
         public override void SaveData(TagCompound tag) {
 			tag["PokemonName"] = PokemonName;
 			tag["Shiny"] = Shiny;
+			tag["BallType"] = BallType;
 		}
 
 		public override void LoadData(TagCompound tag) {
 			PokemonName = tag.GetString("PokemonName");
 			Shiny = tag.GetBool("Shiny");
+			BallType = tag.GetString("BallType");
 			SetPetInfo();
 		}
 
+        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        {
+			if(BallType != null && BallType != ""){
+				Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+BallType);
+
+				spriteBatch.Draw(ballTexture.Value,
+					position: Item.position-Main.screenPosition,
+					sourceRectangle: ballTexture.Value.Bounds,
+					lightColor,
+					rotation: 0f,
+					origin: Vector2.Zero,
+					scale: 1f,
+					SpriteEffects.None,
+					layerDepth: 0f);
+			}
+
+            base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
+        }
+
         public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
+			if(BallType != null && BallType != ""){
+				Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+BallType);
+
+				spriteBatch.Draw(ballTexture.Value,
+					position: position-new Vector2(ballTexture.Value.Width/2, ballTexture.Value.Height/2),
+					sourceRectangle: ballTexture.Value.Bounds,
+					drawColor,
+					rotation: 0f,
+					origin: Vector2.Zero,
+					scale: 1f,
+					SpriteEffects.None,
+					layerDepth: 0f);
+			}
 			if(PokemonName != null && PokemonName != ""){
 				Asset<Texture2D> texture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/"+PokemonName+(Shiny?"PetShiny":"Pet")+"/"+PokemonName+(Shiny?"PetItemShiny":"PetItem"));
 

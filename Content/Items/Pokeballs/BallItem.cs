@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Content.NPCs;
@@ -11,12 +12,16 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Items
+namespace Pokemod.Content.Items.Pokeballs
 {
 	// This is an example bug net designed to demonstrate the use cases for various hooks related to catching NPCs such as critters with items.
-	public class PokeballItemAlt : ModItem
+	public abstract class BallItem : ModItem
 	{
-		public override string Texture => "Pokemod/Content/Items/PokeballItem";
+		public override string Texture => "Pokemod/Assets/Textures/Pokeballs/"+ GetType().Name;
+		protected virtual int BallProj => ModContent.ProjectileType<BallProj>();
+		protected virtual int BallValue => 1000;
+		protected virtual float CatchRate => 1f;
+		
 		public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
@@ -26,8 +31,8 @@ namespace Pokemod.Content.Items
 			Item.width = 14;
 			Item.height = 14;
 			Item.rare = ItemRarityID.Blue;
-			Item.value = Item.buyPrice(0, 10, 0);
-			Item.maxStack = 999;
+			Item.value = BallValue;
+			Item.maxStack = 9999;
 			Item.consumable = true;
 			// Use Properties
 			Item.useAnimation = 25;
@@ -36,36 +41,34 @@ namespace Pokemod.Content.Items
 			Item.autoReuse = true;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.noMelee = true;
-			Item.shootSpeed = 12f;
+			Item.shootSpeed = 15f;
 			Item.UseSound = SoundID.Item1;
 
-			Item.shoot = ModContent.ProjectileType<PokeballProj>();
+			Item.shoot = BallProj;
 		}
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-			Projectile.NewProjectile(source, position, velocity, type, 1, 0, player.whoAmI);
+			Projectile.NewProjectile(source, position, velocity, type, 1, 0, player.whoAmI, CatchRate);
 
             return false;
         }
 
-        // Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-        public override void AddRecipes() {
-			CreateRecipe(1)
-				.AddIngredient(ItemID.GemTreeRubySeed, 3)
-				.AddIngredient(ItemID.IronBar, 3)
-				.AddTile(TileID.WorkBenches)
-				.Register();
+		public override void ModifyTooltips(List<TooltipLine> tooltips)
+		{
+			TooltipLine tooltipLine = new TooltipLine(Mod, "CatchRate", CatchRate+" catch rate");
+            tooltips.Add(tooltipLine);
 		}
 	}
 
-	public class PokeballProj : ModProjectile
+	public abstract class BallProj : ModProjectile
 	{
-		public override string Texture => "Pokemod/Content/Items/PokeballItem";
-		private float catchRate = 1f;
+		public override string Texture => "Pokemod/Assets/Textures/Pokeballs/"+ GetType().Name.Replace("Proj","Item");
+		protected virtual bool hasGravity => true;
+		private float catchRate => Projectile.ai[0];
 		private int bounces = 3;
 		private int captureStage = -1;
-		private NPC targetPokemon;
+		public NPC targetPokemon;
 		private int moveTimer = 0;
 		public const int moveTime = 80;
 		public override void SetDefaults()
@@ -112,7 +115,7 @@ namespace Pokemod.Content.Items
 				Projectile.timeLeft = 10;
 				if(moveTimer <= 0){
 					captureStage++;
-					if(Main.rand.NextBool((int)(5 * catchRate))){
+					if(FailureProb(catchRate)){
 						CaptureFailure();
 					}else{
 						if(captureStage > 3){
@@ -125,13 +128,32 @@ namespace Pokemod.Content.Items
 				}
 			}
 
-			Projectile.velocity.Y += 0.2f;
+			if(hasGravity || captureStage >= 0){
+				Projectile.velocity.Y += 0.2f;
 
-			float maxFallSpeed = 10f;
-			if(Projectile.velocity.Y > maxFallSpeed){
-				Projectile.velocity.Y = maxFallSpeed;
+				float maxFallSpeed = 10f;
+				if(Projectile.velocity.Y > maxFallSpeed){
+					Projectile.velocity.Y = maxFallSpeed;
+				}
 			}
         }
+
+		public virtual bool FailureProb(float catchRate){
+			return RegularProb(catchRate);
+		}
+
+		public bool RegularProb(float catchRate){
+			float prob = 5 * catchRate;
+
+			if(catchRate >= 255){
+				return false;
+			}
+			if(prob < 1){
+				prob = 1;
+			}
+
+			return Main.rand.NextBool((int)prob);
+		}
 
         public override bool? CanHitNPC(NPC target)
         {
@@ -164,7 +186,7 @@ namespace Pokemod.Content.Items
 			string pokemonName = targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName;
 			bool shiny = targetPokemon.GetGlobalNPC<PokemonNPCData>().shiny;
 			CapturedPokemonItem pokeItem = (CapturedPokemonItem)Main.item[item].ModItem;
-			pokeItem.SetPokemonData(pokemonName, shiny);
+			pokeItem.SetPokemonData(pokemonName, shiny, BallType: GetType().Name.Replace("Proj","Item"));
 			targetPokemon.StrikeInstantKill();
 			Projectile.Kill();
 		}

@@ -132,10 +132,10 @@ namespace Pokemod.Content.NPCs
 			AnimationType = ClonedNPCID;
 		}
 
-		public override void OnSpawn(IEntitySource source)
+		/*public override void OnSpawn(IEntitySource source)
         {
 			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData("Blacephalon");
-        }
+        }*/
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
@@ -166,8 +166,8 @@ namespace Pokemod.Content.NPCs
 						dust.scale = 0.7f * NPC.scale;
 					}
 				}
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>($"{Name}_Gore_Head").Type, NPC.scale);
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>($"{Name}_Gore_Leg").Type, NPC.scale);
+				//Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>($"{Name}_Gore_Head").Type, NPC.scale);
+				//Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>($"{Name}_Gore_Leg").Type, NPC.scale);
 			}
 		}
 		public override void OnCaughtBy(Player player, Item item, bool failed) {

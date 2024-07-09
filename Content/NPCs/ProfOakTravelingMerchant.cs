@@ -20,6 +20,7 @@ using Pokemod.Content.Pets.CharmanderPet;
 using Pokemod.Content.Pets.ChikoritaPet;
 using Pokemod.Content.Pets.CyndaquilPet;
 using Pokemod.Content.Pets.TotodilePet;
+using Pokemod.Content.Items.Pokeballs;
 
 namespace Pokemod.Content.NPCs
 {
