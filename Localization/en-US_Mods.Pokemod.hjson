@@ -477,18 +477,10 @@ NPCs: {
 	CharmanderCritterNPC.DisplayName: Charmander
 	SquirtleCritterNPC.DisplayName: Squirtle
 	ProfOakTravelingMerchant.DisplayName: Prof Oak Traveling Merchant
-<<<<<<< HEAD
-	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur Critter N P C Shiny
-	CharmanderCritterNPCShiny.DisplayName: Charmander Critter N P C Shiny
-	SquirtleCritterNPCShiny.DisplayName: Squirtle Critter N P C Shiny
-	BlacephalonCritterNPC.DisplayName: Blacephalon Critter N P C
-	EeveeCritterNPCShiny.DisplayName: Eevee Critter N P C Shiny
-	PikachuCritterNPCShiny.DisplayName: Pikachu Critter N P C Shiny
-=======
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
 	CharmanderCritterNPCShiny.DisplayName: Charmander
 	SquirtleCritterNPCShiny.DisplayName: Squirtle
 	BlacephalonCritterNPC.DisplayName: Blacephalon
 	EeveeCritterNPCShiny.DisplayName: Eevee
->>>>>>> 8dc836638c539773efc299bb93c09a2144cb53e0
+	PikachuCritterNPCShiny.DisplayName: Pikachu Critter N P C Shiny
 }
