@@ -9,6 +9,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
+using Terraria.DataStructures;
 namespace Pokemod.Content.NPCs
 {
 	/// <summary>
@@ -94,7 +95,6 @@ namespace Pokemod.Content.NPCs
 		}
 
 		public override void SetStaticDefaults() {
-			
 			Main.npcFrameCount[Type] = Main.npcFrameCount[ClonedNPCID];
 			Main.npcCatchable[Type] = true; // This is for certain release situations
 
@@ -129,7 +129,12 @@ namespace Pokemod.Content.NPCs
 			AnimationType = ClonedNPCID;
 		}
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void OnSpawn(IEntitySource source)
+        {
+			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData("Bulbasaur");
+        }
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("For some time after its birth, it grows by taking nourishment from the seed on its back."));
 		}

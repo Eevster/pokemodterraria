@@ -9,6 +9,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
+using Terraria.DataStructures;
 
 namespace Pokemod.Content.NPCs
 {
@@ -129,6 +130,11 @@ namespace Pokemod.Content.NPCs
 			AIType = ClonedNPCID;
 			AnimationType = ClonedNPCID;
 		}
+
+		public override void OnSpawn(IEntitySource source)
+        {
+			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData("Bulbasaur", true);
+        }
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,

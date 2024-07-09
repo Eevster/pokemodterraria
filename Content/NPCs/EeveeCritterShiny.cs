@@ -9,6 +9,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
+using Terraria.DataStructures;
 
 namespace Pokemod.Content.NPCs
 {
@@ -130,6 +131,11 @@ namespace Pokemod.Content.NPCs
 			AnimationType = ClonedNPCID;
 		}
 
+		public override void OnSpawn(IEntitySource source)
+        {
+			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData("Eevee", true);
+        }
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("Its ability to evolve into many forms allows it to adapt smoothly and perfectly to any environment."));
@@ -193,7 +199,7 @@ namespace Pokemod.Content.NPCs
 
 			// Cloning ItemID.Frog sets the preceding values
 			Item.CloneDefaults(ItemID.Frog);
-			Item.makeNPC = ModContent.NPCType<EeveeCritterNPC>();
+			Item.makeNPC = ModContent.NPCType<EeveeCritterNPCShiny>();
 			Item.value += Item.buyPrice(0, 0, 30, 0); // Make this critter worth slightly more than the frog
 			Item.rare = ItemRarityID.Blue;
 		}

@@ -29,6 +29,7 @@ namespace Pokemod.Content.Items
 			Item.height = 28;
 			Item.rare = ItemRarityID.Blue;
 			Item.value = Item.buyPrice(0, 10, 0);
+			Item.maxStack = 999;
 			// Use Properties
 			Item.useAnimation = 25;
 			Item.useTurn = true;
