@@ -148,7 +148,7 @@ namespace Pokemod.Content.Items
 					layerDepth: 0f);
 			}
 			if(PokemonName != null && PokemonName != ""){
-				Asset<Texture2D> texture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/"+PokemonName+(Shiny?"PetShiny":"Pet")+"/"+PokemonName+(Shiny?"PetItemShiny":"PetItem"));
+				Asset<Texture2D> texture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/"+PokemonName+(Shiny?"PetShiny":"Pet")+"/"+PokemonName+(Shiny?"PetBuffShiny":"PetBuff"));
 
 				spriteBatch.Draw(texture.Value,
 					position: position-new Vector2(texture.Value.Width/4, texture.Value.Height/4),
