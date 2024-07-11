@@ -4,19 +4,12 @@ using Terraria.ID;
 
 namespace Pokemod.Content.Pets.CharizardPetShiny
 {
-	public class CharizardPetBuffShiny : ModBuff
+	public class CharizardPetBuffShiny : PokemonPetBuff
 	{
-		public override void SetStaticDefaults() {
-			Main.buffNoTimeDisplay[Type] = true;
-			Main.vanityPet[Type] = true;
-		}
+        public override string PokeName => "Charizard";
+        public override int ProjType => ModContent.ProjectileType<CharizardPetProjectileShiny>();
 
-		public override void Update(Player player, ref int buffIndex)
-        {
-            bool unused = false;
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<CharizardPetProjectileShiny>());
-
-            // Apply buffs only if the pet is active
+        public override void UpdateExtraChanges(Player player){
             if (player.HasBuff(Type))
             {
                 player.AddBuff(BuffID.Featherfall, 60); // Apply the first buff

@@ -2,12 +2,12 @@
 using Terraria.ModLoader;
 using Terraria.ID;
 
-namespace Pokemod.Content.Pets.WartortlePet
+namespace Pokemod.Content.Pets.WartortlePetShiny
 {
-	public class WartortlePetBuff : PokemonPetBuff
+	public class WartortlePetBuffShiny : PokemonPetBuff
 	{
         public override string PokeName => "Wartortle";
-        public override int ProjType => ModContent.ProjectileType<WartortlePetProjectile>();
+        public override int ProjType => ModContent.ProjectileType<WartortlePetProjectileShiny>();
 
         public override void UpdateExtraChanges(Player player){
             if (player.HasBuff(Type))

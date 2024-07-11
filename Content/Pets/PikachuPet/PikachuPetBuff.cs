@@ -1,22 +1,16 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
+using Microsoft.Xna.Framework;
+using Pokemod.Content.Items;
 
 namespace Pokemod.Content.Pets.PikachuPet
 {
-	public class PikachuPetBuff : ModBuff
+	public class PikachuPetBuff : PokemonPetBuff
 	{
-		public override void SetStaticDefaults() {
-			Main.buffNoTimeDisplay[Type] = true;
-			Main.vanityPet[Type] = true;
-		}
-
-		public override void Update(Player player, ref int buffIndex)
-        {
-            bool unused = false;
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<PikachuPetProjectile>());
-
-            // Apply buffs only if the pet is active
+        public override string PokeName => "Pikachu";
+        public override int ProjType => ModContent.ProjectileType<PikachuPetProjectile>();
+        public override void UpdateExtraChanges(Player player){
             if (player.HasBuff(Type))
             {
                 player.AddBuff(BuffID.Shine, 60); // Apply the first buff

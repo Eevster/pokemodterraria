@@ -13,7 +13,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Pets.BulbasaurPet
 {
-	public class VineWhipBack : ModProjectile
+	public class VineWhipBack : PokemonAttack
 	{
 		private NPC targetEnemy;
 		private bool foundTarget = false;
@@ -43,7 +43,7 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 			Projectile.light = 1f;
 
 			Projectile.usesLocalNPCImmunity = true;
-			Projectile.localNPCHitCooldown = 15;
+			Projectile.localNPCHitCooldown = 20;
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -156,7 +156,7 @@ namespace Pokemod.Content.Pets.BulbasaurPet
         }
     }
 
-	public class VineWhipFront : ModProjectile
+	public class VineWhipFront : PokemonAttack
 	{
 		private NPC targetEnemy;
 		private bool foundTarget = false;
@@ -186,7 +186,7 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 			Projectile.light = 1f;
 
 			Projectile.usesLocalNPCImmunity = true;
-			Projectile.localNPCHitCooldown = 15;
+			Projectile.localNPCHitCooldown = 20;
         }
 
         public override void OnSpawn(IEntitySource source)

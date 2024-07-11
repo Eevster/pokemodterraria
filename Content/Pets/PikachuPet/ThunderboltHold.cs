@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Pets.PikachuPet
 {
-	public class ThunderboltHold : ModProjectile
+	public class ThunderboltHold : PokemonAttack
 	{
 		NPC targetEnemy;
 		bool foundTarget = false;
@@ -53,7 +53,7 @@ namespace Pokemod.Content.Pets.PikachuPet
 			Projectile.hide = true;
         }
 
-		public override bool PreDrawExtras()
+        public override bool PreDrawExtras()
         {
             if(foundTarget){
                 Vector2 center = Projectile.Center;

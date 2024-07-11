@@ -4,19 +4,12 @@ using Terraria.ID;
 
 namespace Pokemod.Content.Pets.SquirtlePet
 {
-	public class SquirtlePetBuff : ModBuff
+	public class SquirtlePetBuff : PokemonPetBuff
 	{
-		public override void SetStaticDefaults() {
-			Main.buffNoTimeDisplay[Type] = true;
-			Main.vanityPet[Type] = true;
-		}
+        public override string PokeName => "Squirtle";
+        public override int ProjType => ModContent.ProjectileType<SquirtlePetProjectile>();
 
-		public override void Update(Player player, ref int buffIndex)
-        {
-            bool unused = false;
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<SquirtlePetProjectile>());
-
-            // Apply buffs only if the pet is active
+        public override void UpdateExtraChanges(Player player){
             if (player.HasBuff(Type))
             {
                 player.AddBuff(BuffID.Flipper, 60); // Apply the first buff

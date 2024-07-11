@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Pokemod.Content.Pets.EeveePet;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -7,33 +8,22 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Pets.EeveePetShiny
 {
-	public class EeveePetProjectileShiny : ModProjectile
+	public class EeveePetProjectileShiny : PokemonPetProjectile
 	{
-		public int currentStatus = 0;
-		public enum ProjStatus
-		{
-			Idle,
-			Walk,
-			Jump,
-			Fall
-		}
+		public override int nAttackProjs => 4;
+		public override int baseDamage => 3;
+		public override int PokemonBuff => ModContent.BuffType<EeveePetBuffShiny>();
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => true;
+		public override int attackDuration => 0;
+		public override int attackCooldown => 120;
 
-		public int timer = 0;
-		private int[] attackProjs = {-1,-1,-1,-1};
-		public bool canAttack = true;
-		public const int attackDuration = 0;
-		public const int attackCooldown = 120;
-
-		public override void SetStaticDefaults() {
-			Main.projFrames[Projectile.type] = 18;
-			Main.projPet[Projectile.type] = true;
-
-			// Basics of CharacterPreviewAnimations explained in ExamplePetProjectile
-			// Notice we define our own method to use in .WithCode() below. This technically allows us to animate the projectile manually using frameCounter and frame as well
-			ProjectileID.Sets.CharacterPreviewAnimations[Projectile.type] = ProjectileID.Sets.SimpleLoop(9, 9, 5)
-				.WhenNotSelected(0, 9)
-				.WithOffset(-12f, 4f);
-		}
+		public override int totalFrames => 18;
+		public override int animationSpeed => 5;
+		public override int[] idleStartEnd => [0,8];
+		public override int[] walkStartEnd => [9,17];
+		public override int[] jumpStartEnd => [12,12];
+		public override int[] fallStartEnd => [15,15];
 
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
@@ -45,110 +35,7 @@ namespace Pokemod.Content.Pets.EeveePetShiny
 			Projectile.tileCollide = true; 
 		}
 
-		public override void AI() {
-			Player player = Main.player[Projectile.owner];
-
-			CheckActive(player);
-
-			GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
-			SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
-			Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
-			Visuals();
-		}
-
-		private void CheckActive(Player player) {
-			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff
-			if (!player.dead && player.HasBuff(ModContent.BuffType<EeveePetBuffShiny>())) {
-				Projectile.timeLeft = 2;
-			}
-		}
-
-		private void GeneralBehavior(Player owner, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition) {
-			Vector2 idlePosition = owner.Center;
-			idlePosition.Y -= 48f; // Go up 48 coordinates (three tiles from the center of the player)
-
-			float minionPositionOffsetX = (10 + Projectile.minionPos * 40) * -owner.direction;
-			idlePosition.X += minionPositionOffsetX; // Go behind the player
-
-			// All of this code below this line is adapted from Spazmamini code (ID 388, aiStyle 66)
-
-			// Teleport to player if distance is too big
-			vectorToIdlePosition = idlePosition - Projectile.Center;
-			distanceToIdlePosition = vectorToIdlePosition.Length();
-
-			if (Main.myPlayer == owner.whoAmI && distanceToIdlePosition > 2000f) {
-				// Whenever you deal with non-regular events that change the behavior or position drastically, make sure to only run the code on the owner of the projectile,
-				// and then set netUpdate to true
-				Projectile.position = idlePosition;
-				Projectile.velocity *= 0.1f;
-				Projectile.netUpdate = true;
-			}
-
-			// If your minion is flying, you want to do this independently of any conditions
-			float overlapVelocity = 0.04f;
-
-			// Fix overlap with other minions
-			for (int i = 0; i < Main.maxProjectiles; i++) {
-				Projectile other = Main.projectile[i];
-
-				if (i != Projectile.whoAmI && other.active && other.owner == Projectile.owner && Math.Abs(Projectile.position.X - other.position.X) + Math.Abs(Projectile.position.Y - other.position.Y) < Projectile.width) {
-					if (Projectile.position.X < other.position.X) {
-						Projectile.velocity.X -= overlapVelocity;
-					}
-					else {
-						Projectile.velocity.X += overlapVelocity;
-					}
-
-					if (Projectile.position.Y < other.position.Y) {
-						Projectile.velocity.Y -= overlapVelocity;
-					}
-					else {
-						Projectile.velocity.Y += overlapVelocity;
-					}
-				}
-			}
-		}
-
-		private void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter) {
-			// Starting search distance
-			distanceFromTarget = 1000f;
-			targetCenter = Projectile.position;
-			foundTarget = false;
-
-			if (!foundTarget) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-							break;
-						}
-
-						if ((closest && inRange) || !foundTarget) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-						}
-					}
-				}
-			}
-
-			// friendly needs to be set to true so the minion can deal contact damage
-			// friendly needs to be set to false so it doesn't damage things like target dummies while idling
-			// Both things depend on if it has a target or not, so it's just one assignment here
-			// You don't need this assignment if your minion is shooting things instead of dealing contact damage
-			Projectile.friendly = foundTarget;
-		}
-
-		private void Movement(bool foundTarget, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition) {
+		public override void Movement(bool foundTarget, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition) {
 			// Default movement parameters (here for attacking)
 			float speed = 5f;
 			float inertia = 20f;
@@ -185,8 +72,10 @@ namespace Pokemod.Content.Pets.EeveePetShiny
 						if(canAttack){
 							SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
 							if(Projectile.owner == Main.myPlayer){
-								for(int i = 0; i < 4; i++){
-									attackProjs[i] = Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<EeveePet.Swift>(), 40, 2f, Projectile.owner, i*MathHelper.PiOver2);
+								for(int i = 0; i < nAttackProjs; i++){
+									if(attackProjs[i] == null){
+										attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), GetPokemonDamage(), 2f, Projectile.owner, i*MathHelper.PiOver2)];
+									}
 								} 
 							}
 							timer = attackDuration;
@@ -195,16 +84,14 @@ namespace Pokemod.Content.Pets.EeveePetShiny
 					}
 				}
 
-				for(int i = 0; i < 4; i++){
-					if(attackProjs[i] != -1){
-						if(Main.projectile[attackProjs[i]].active){
-							if(Main.projectile[attackProjs[i]].ai[1] == 0){
-								Main.projectile[attackProjs[i]].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(Main.projectile[attackProjs[i]].ai[0]);
-							}else{
-								attackProjs[i] = -1;
+				for(int i = 0; i < nAttackProjs; i++){
+					if(attackProjs[i] != null){
+						if(attackProjs[i].active){
+							if(attackProjs[i].ai[1] == 0){
+								attackProjs[i].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(attackProjs[i].ai[0]);
 							}
 						}else{
-							attackProjs[i] = -1;
+							attackProjs[i] = null;
 						}
 					}
 				}
@@ -221,14 +108,14 @@ namespace Pokemod.Content.Pets.EeveePetShiny
 					canAttack = true;
 					timer = attackCooldown;
 				}
-				for(int i = 0; i < 4; i++){
-					if(attackProjs[i] != -1){
-						if(Main.projectile[attackProjs[i]].active){
-							if(Main.projectile[attackProjs[i]].ai[1] != 0){
-								attackProjs[i] = -1;
+				for(int i = 0; i < nAttackProjs; i++){
+					if(attackProjs[i] != null){
+						if(attackProjs[i].active){
+							if(attackProjs[i].ai[1] != 0){
+								attackProjs[i] = null;
 							}
 						}else{
-							attackProjs[i] = -1;
+							attackProjs[i] = null;
 						}
 					}
 				}
@@ -284,96 +171,6 @@ namespace Pokemod.Content.Pets.EeveePetShiny
 			}
 		}
 
-		private void Jump(){
-			int scanHeight = 10;
-
-			int moveDirection = 0;
-			if (Projectile.velocity.X < 0f)
-			{
-				moveDirection = -1;
-			}
-			if (Projectile.velocity.X > 0f)
-			{
-				moveDirection = 1;
-			}
-
-			if(moveDirection == 0){
-				return;
-			}
-
-			float jumpHeight = 0;
-
-			for(int i = 1; i < 4; i++){
-				jumpHeight = 0;
-                for(int j = 0; j < scanHeight; j++){
-					if(j == scanHeight-1){
-						return;
-					}
-                    Vector2 scanPosition = Projectile.Bottom + new Vector2(moveDirection*16*i,-16*(j+1));
-
-                    if(Collision.SolidCollision(scanPosition - new Vector2(8,16), 16, 16) || Main.tile[(int)scanPosition.X/16-moveDirection, (int)scanPosition.Y/16+1].IsHalfBlock || Main.tile[(int)scanPosition.X/16, (int)scanPosition.Y/16].IsHalfBlock){
-                        jumpHeight += 1f;
-                    }else{
-						break;
-					}
-                }
-				if(jumpHeight > 0){
-					break;
-				}
-            }
-
-			if(jumpHeight != 0){
-				currentStatus = (int)ProjStatus.Jump;
-				Projectile.velocity.Y -= (int)Math.Sqrt(2*0.3f*jumpHeight*16f);
-			}
-		}
-
-		private void Visuals() {
-			if(Math.Sign(Projectile.velocity.X) == 1 || Math.Sign(Projectile.velocity.X) == -1){
-				Projectile.direction = Math.Sign(Projectile.velocity.X);
-				Projectile.spriteDirection = Projectile.direction;
-			}
-
-			int initialFrame = 0;
-			int finalFrame = 0;
-			int frameSpeed = 5;
-
-			switch(currentStatus){
-				case (int)ProjStatus.Idle:
-					initialFrame = 0;
-					finalFrame = 8;
-					break;
-				case (int)ProjStatus.Walk:
-					initialFrame = 9;
-					finalFrame = 17;
-					frameSpeed = (int)(5*3f/Math.Clamp(Math.Abs(Projectile.velocity.X), 2f, 100f));
-					break;
-				case (int)ProjStatus.Jump:
-					initialFrame = 12;
-					finalFrame = 12;
-					break;
-				case (int)ProjStatus.Fall:
-					initialFrame = 15;
-					finalFrame = 15;
-					break;
-			}
-
-			if(Projectile.frame > finalFrame || Projectile.frame < initialFrame){
-				Projectile.frame = initialFrame;
-			}
-
-			Projectile.frameCounter++;
-
-			if (Projectile.frameCounter >= frameSpeed) {
-				Projectile.frameCounter = 0;
-				Projectile.frame++;
-
-				if (Projectile.frame > finalFrame) {
-					Projectile.frame = initialFrame;
-				}
-			}
-		}
-
 		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
             width = 22;
@@ -381,18 +178,6 @@ namespace Pokemod.Content.Pets.EeveePetShiny
             fallThrough = false;
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
-
-		public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-			if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f) {
-				Projectile.velocity.X = 0;
-			}
-			if (Projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f) {
-				Projectile.velocity.Y = 0;
-			}
-
-            return false;
         }
 	}
 }

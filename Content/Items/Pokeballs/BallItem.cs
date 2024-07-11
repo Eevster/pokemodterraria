@@ -188,7 +188,7 @@ namespace Pokemod.Content.Items.Pokeballs
 			string pokemonName = targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName;
 			bool shiny = targetPokemon.GetGlobalNPC<PokemonNPCData>().shiny;
 			CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-			pokeItem.SetPokemonData(pokemonName, shiny, BallType: GetType().Name.Replace("Proj","Item"));
+			pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
 			targetPokemon.StrikeInstantKill();
 			Projectile.Kill();
 		}

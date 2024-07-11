@@ -24,12 +24,23 @@ namespace Pokemod.Content.Items
 			Item.width = 20; // The item texture's width
 			Item.height = 20; // The item texture's height
 
+			Item.useStyle = ItemUseStyleID.Swing;
+			Item.UseSound = SoundID.Item1;
+
 			Item.maxStack = Item.CommonMaxStack; // The item's max stack value
 			Item.value = Item.buyPrice(silver: 1); // The value of the item in copper coins. Item.buyPrice & Item.sellPrice are helper methods that returns costs in copper coins based on platinum/gold/silver/copper arguments provided to it.
 		}
 
-		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		public override void AddRecipes() {
+        public override bool? UseItem(Player player)
+        {
+			if(player.whoAmI == Main.myPlayer){
+				
+			}
+            return base.UseItem(player);
+        }
+
+        // Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
+        public override void AddRecipes() {
 			CreateRecipe(1)
 				.AddIngredient(ItemID.Silk, 40)
 				.AddIngredient(ItemID.GlowingMushroom, 20)

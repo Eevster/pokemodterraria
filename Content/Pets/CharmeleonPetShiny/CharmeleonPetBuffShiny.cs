@@ -4,22 +4,15 @@ using Terraria.ID;
 
 namespace Pokemod.Content.Pets.CharmeleonPetShiny
 {
-	public class CharmeleonPetBuffShiny : ModBuff
+	public class CharmeleonPetBuffShiny : PokemonPetBuff
 	{
-		public override void SetStaticDefaults() {
-			Main.buffNoTimeDisplay[Type] = true;
-			Main.vanityPet[Type] = true;
-		}
+        public override string PokeName => "Charmeleon";
+        public override int ProjType => ModContent.ProjectileType<CharmeleonPetProjectileShiny>();
 
-		public override void Update(Player player, ref int buffIndex)
-        {
-            bool unused = false;
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<CharmeleonPetProjectileShiny>());
-
-            // Apply buffs only if the pet is active
+        public override void UpdateExtraChanges(Player player){
             if (player.HasBuff(Type))
             {
-				player.AddBuff(BuffID.ObsidianSkin, 60); // Apply the first buff
+                player.AddBuff(BuffID.ObsidianSkin, 60); // Apply the first buff
             }
         }
 	}

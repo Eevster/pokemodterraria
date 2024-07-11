@@ -4,19 +4,12 @@ using Terraria.ID;
 
 namespace Pokemod.Content.Pets.IvysaurPetShiny
 {
-	public class IvysaurPetBuffShiny : ModBuff
+	public class IvysaurPetBuffShiny : PokemonPetBuff
 	{
-		public override void SetStaticDefaults() {
-			Main.buffNoTimeDisplay[Type] = true;
-			Main.vanityPet[Type] = true;
-		}
+        public override string PokeName => "Ivysaur";
+        public override int ProjType => ModContent.ProjectileType<IvysaurPetProjectileShiny>();
 
-		public override void Update(Player player, ref int buffIndex)
-        {
-            bool unused = false;
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<IvysaurPetProjectileShiny>());
-
-            // Apply buffs only if the pet is active
+        public override void UpdateExtraChanges(Player player){
             if (player.HasBuff(Type))
             {
                 player.AddBuff(BuffID.Heartreach, 60); // Apply the first buff

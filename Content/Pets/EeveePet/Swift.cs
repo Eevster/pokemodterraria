@@ -13,9 +13,10 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Pets.EeveePet
 {
-	public class Swift : ModProjectile
+	public class Swift : PokemonAttack
 	{
 		private NPC targetEnemy;
+		private Vector2 targetPosition;
 		private bool foundTarget = false;
 		private bool canfollow = true;
 		public override void SetStaticDefaults()
@@ -65,24 +66,26 @@ namespace Pokemod.Content.Pets.EeveePet
         {
 			Projectile.ai[0] += MathHelper.ToRadians(10);
 
-			if(Projectile.ai[1] == 0 && Projectile.timeLeft < 100){
+			if(Projectile.ai[1] == 0){
 				SearchTarget();
 			}
 
 			if(foundTarget){
-				if(Projectile.ai[1] == 0){
-					Projectile.timeLeft = 170;
-					Projectile.ai[1] = 1;
+				if(targetEnemy.active){
+					targetPosition = targetEnemy.Center;
 				}
-				float projSpeed = 18f;
-				if(canfollow){
-					if(targetEnemy.active && targetEnemy.life > 0){
-						Projectile.velocity =  (targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
-						if(Vector2.Distance(Projectile.Center, targetEnemy.Center) < projSpeed){
+
+				if(Projectile.timeLeft < 100){
+					if(Projectile.ai[1] == 0){
+						Projectile.timeLeft = 60;
+						Projectile.ai[1] = 1;
+					}
+					float projSpeed = 16f;
+					if(canfollow){
+						Projectile.velocity =  (targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+						if(Vector2.Distance(Projectile.Center, targetPosition) < 3*projSpeed){
 							canfollow = false;
 						}
-					}else{
-						SearchTarget();
 					}
 				}
 			}
@@ -96,9 +99,7 @@ namespace Pokemod.Content.Pets.EeveePet
 			float distanceFromTarget = 300f;
 			Vector2 targetCenter = Projectile.Center;
 
-			foundTarget = false;
-
-			if (!foundTarget) {
+			if (true) {
 				// This code is required either way, used for finding a target
 				for (int i = 0; i < Main.maxNPCs; i++) {
 					NPC npc = Main.npc[i];

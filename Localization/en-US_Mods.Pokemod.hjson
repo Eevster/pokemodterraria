@@ -39,6 +39,7 @@ Projectiles: {
 	FeatherballProj.DisplayName: Featherball Proj
 	DuskballProj.DisplayName: Duskball Proj
 	BeastballProj.DisplayName: Beastball Proj
+	WartortlePetProjectileShiny.DisplayName: Wartortle Pet Projectile Shiny
 }
 
 Items: {
@@ -326,6 +327,11 @@ Items: {
 		DisplayName: Pikachu Critter Item Shiny
 		Tooltip: ""
 	}
+
+	WartortlePetItemShiny: {
+		DisplayName: Wartortle Pet Item Shiny
+		Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -467,6 +473,11 @@ Buffs: {
 	PikachuPetBuffShiny: {
 		DisplayName: Pikachu Pet Buff Shiny
 		Description: Mods.Pokemod.Buffs.PikachuPetBuffShiny.Description
+	}
+
+	WartortlePetBuffShiny: {
+		DisplayName: Wartortle Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.WartortlePetBuffShiny.Description
 	}
 }
 

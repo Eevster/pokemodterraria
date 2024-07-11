@@ -1,48 +1,45 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Pokemod.Content.Pets.BlastoisePet
 {
-	public class BlastoisePetProjectile : ModProjectile
+	public class BlastoisePetProjectile : PokemonPetProjectile
 	{
-		public override void SetStaticDefaults() {
-			Main.projFrames[Projectile.type] = 4;
-			Main.projPet[Projectile.type] = true;
+		public override int nAttackProjs => 0;
+		public override int baseDamage => 3;
+		public override int PokemonBuff => ModContent.BuffType<BlastoisePetBuff>();
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => false;
+		public override int attackDuration => 0;
+		public override int attackCooldown => 120;
 
-			// This code is needed to customize the vanity pet display in the player select screen. Quick explanation:
-			// * It uses fluent API syntax, just like Recipe
-			// * You start with ProjectileID.Sets.SimpleLoop, specifying the start and end frames as well as the speed, and optionally if it should animate from the end after reaching the end, effectively "bouncing"
-			// * To stop the animation if the player is not highlighted/is standing, as done by most grounded pets, add a .WhenNotSelected(0, 0) (you can customize it just like SimpleLoop)
-			// * To set offset and direction, use .WithOffset(x, y) and .WithSpriteDirection(-1)
-			// * To further customize the behavior and animation of the pet (as its AI does not run), you have access to a few vanilla presets in DelegateMethods.CharacterPreview to use via .WithCode(). You can also make your own, showcased in MinionBossPetProjectile
-			ProjectileID.Sets.CharacterPreviewAnimations[Projectile.type] = ProjectileID.Sets.SimpleLoop(0, Main.projFrames[Projectile.type], 6)
-				.WithOffset(-10, -20f)
-				.WithSpriteDirection(-1)
-				.WithCode(DelegateMethods.CharacterPreview.Float);
-		}
+		public override int totalFrames => 24;
+		public override int animationSpeed => 5;
+		public override int[] idleStartEnd => [0,8];
+		public override int[] walkStartEnd => [9,16];
+		public override int[] jumpStartEnd => [11,11];
+		public override int[] fallStartEnd => [14,14];
+		public override int[] attackStartEnd => [17,23];
 
 		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.ZephyrFish); // Copy the stats of the Zephyr Fish
+			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			AIType = ProjectileID.ZephyrFish; // Mimic as the Zephyr Fish during AI.
+			Projectile.width = 80;
+			Projectile.height = 80;
+			Projectile.aiStyle = -1; // Use custom AI
+			Projectile.light = 0f;
+			Projectile.tileCollide = true; 
 		}
 
-		public override bool PreAI() {
-			Player player = Main.player[Projectile.owner];
+		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            width = 25;
+			height = 70;
+            fallThrough = false;
 
-			player.zephyrfish = false; // Relic from AIType
-
-			return true;
-		}
-
-		public override void AI() {
-			Player player = Main.player[Projectile.owner];
-
-			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff.
-			if (!player.dead && player.HasBuff(ModContent.BuffType<BlastoisePetBuff>())) {
-				Projectile.timeLeft = 2;
-			}
-		}
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
 	}
 }

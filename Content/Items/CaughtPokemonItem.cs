@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Content.Pets;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,12 @@ namespace Pokemod.Content.Items
 	public class CaughtPokemonItem : ModItem
 	{
         public string PokemonName;
+		public int level;
+		public int exp;
+		public int expToNextLevel;
 		public bool Shiny;
 		public string BallType;
+		public Projectile proj;
 
 		public override string Texture => "Pokemod/Assets/Textures/Pokeballs/PokeballItem";
 
@@ -36,13 +41,23 @@ namespace Pokemod.Content.Items
 
         public override bool? UseItem(Player player)
         {
+			player.ClearBuff(Item.buffType);
 			if (player.whoAmI == Main.myPlayer) {
 				player.AddBuff(Item.buffType, 3600);
 			}
+
    			return true;
 		}
 
-		public override ModItem Clone(Item item) {
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+			int projIndex = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+			proj = Main.projectile[projIndex];
+
+            return false;
+        }
+
+        public override ModItem Clone(Item item) {
 			CaughtPokemonItem clone = (CaughtPokemonItem)base.Clone(item);
 			clone.PokemonName = (string)PokemonName?.Clone(); // note the ? here is important, colors may be null if spawned from other mods which don't call OnCreate
 			return clone;
@@ -58,7 +73,7 @@ namespace Pokemod.Content.Items
 					if(Shiny) line.OverrideColor = Main.DiscoColor;
 				}
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
-					line.Text = "Caught in a "+BallType.Replace("Item", "");
+					line.Text = "Caught in a "+BallType.Replace("Item", "") + "\nLvl "+level+"  Exp: "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level));
 				}
 			}
 
@@ -66,10 +81,12 @@ namespace Pokemod.Content.Items
 			tooltips.Add(tooltipLine);*/
 		}
 
-        public void SetPokemonData(string PokemonName, bool Shiny, string BallType){
+        public void SetPokemonData(string PokemonName, bool Shiny, string BallType, int level = 5){
             this.PokemonName = PokemonName;
 			this.Shiny = Shiny;
 			this.BallType = BallType;
+			this.level = level;
+			this.exp = GetExpToLevel(level); 
 			
 			SetPetInfo();
         }
@@ -86,26 +103,87 @@ namespace Pokemod.Content.Items
             base.UpdateEquip(player);
         }
 
-        private void SetPetInfo(){
+        public void SetPetInfo(){
 			if(PokemonName != null && PokemonName != ""){
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
+
+				UpdateLevel();
+				GetProjExp();
 			}
+		}
+
+		private void GetProjExp(){
+			if(proj != null){
+				if(proj.active){
+					PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+					AddExp(PokemonProj.GetExpGained());
+				}else{
+					proj = null;
+				}
+			}
+		}
+
+		public void AddExp(int amount){
+			exp += amount;
+			UpdateLevel();
+		}
+
+		public void UpdateLevel(){
+			if(level == 0){
+				level = 1;
+			}
+			SetExpToNextLevel();
+			if(PokemonName != null && PokemonName != "" && level > 0){
+				if(exp>= expToNextLevel && level < 100){
+					level++;
+					if(level < 100){
+						SetExpToNextLevel();
+					}
+				}
+			}
+			UpdateProjLevel();
+		}
+
+		private void UpdateProjLevel(){
+			if(proj != null){
+				if(proj.active){
+					if(level > 0){
+						PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+						PokemonProj.SetPokemonLvl(level);
+					}
+				}else{
+					proj = null;
+				}
+			}
+		}
+
+		private void SetExpToNextLevel(){
+			expToNextLevel = GetExpToLevel(level+1);
+		}
+
+		private int GetExpToLevel(int lvl){
+			return (int)Math.Pow(lvl, 3);
 		}
 
         // NOTE: The tag instance provided here is always empty by default.
         // Read https://github.com/tModLoader/tModLoader/wiki/Saving-and-loading-using-TagCompound to better understand Saving and Loading data.
         public override void SaveData(TagCompound tag) {
 			tag["PokemonName"] = PokemonName;
+			tag["Level"] = level;
+			tag["Exp"] = exp;
 			tag["Shiny"] = Shiny;
 			tag["BallType"] = BallType;
 		}
 
 		public override void LoadData(TagCompound tag) {
 			PokemonName = tag.GetString("PokemonName");
+			level = tag.GetInt("Level");
+			exp = tag.GetInt("Exp");
 			Shiny = tag.GetBool("Shiny");
 			BallType = tag.GetString("BallType");
 			SetPetInfo();
+			SetExpToNextLevel();
 		}
 
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
@@ -125,11 +203,6 @@ namespace Pokemod.Content.Items
 			}
 
             base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
-        }
-
-        public override void UseStyle(Player player, Rectangle heldItemFrame)
-        {
-            base.UseStyle(player, heldItemFrame);
         }
 
         public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)

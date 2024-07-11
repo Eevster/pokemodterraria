@@ -4,19 +4,12 @@ using Terraria.ID;
 
 namespace Pokemod.Content.Pets.BlastoisePet
 {
-	public class BlastoisePetBuff : ModBuff
+	public class BlastoisePetBuff :  PokemonPetBuff
 	{
-		public override void SetStaticDefaults() {
-			Main.buffNoTimeDisplay[Type] = true;
-			Main.vanityPet[Type] = true;
-		}
+        public override string PokeName => "Blastoise";
+        public override int ProjType => ModContent.ProjectileType<BlastoisePetProjectile>();
 
-		public override void Update(Player player, ref int buffIndex)
-        {
-            bool unused = false;
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<BlastoisePetProjectile>());
-
-            // Apply buffs only if the pet is active
+        public override void UpdateExtraChanges(Player player){
             if (player.HasBuff(Type))
             {
                 player.AddBuff(BuffID.Gills, 60); // Apply the first buff
