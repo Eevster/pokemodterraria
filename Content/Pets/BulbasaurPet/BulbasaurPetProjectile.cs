@@ -26,6 +26,10 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 		public override int[] fallStartEnd => [9,9];
 		public override int[] attackStartEnd => [11,19];
 
+		public override string[] evolutions => ["Ivysaur"];
+		public override int levelToEvolve => 16;
+		public override int levelEvolutionsNumber => 1;
+
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 

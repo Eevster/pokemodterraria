@@ -43,6 +43,7 @@ namespace Pokemod.Content.Items.Pokeballs
 			Item.noMelee = true;
 			Item.shootSpeed = 15f;
 			Item.UseSound = SoundID.Item1;
+			Item.noUseGraphic = true;
 
 			Item.shoot = BallProj;
 		}

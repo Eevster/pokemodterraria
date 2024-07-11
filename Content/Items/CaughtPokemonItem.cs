@@ -109,18 +109,41 @@ namespace Pokemod.Content.Items
 				Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
 
 				UpdateLevel();
-				GetProjExp();
+				GetProjInfo();
+			}
+		}
+
+		private void GetProjInfo(){
+			if(proj != null){
+				if(proj.active){
+					GetProjExp();
+					GetUsedItems();
+				}else{
+					proj = null;
+				}
 			}
 		}
 
 		private void GetProjExp(){
-			if(proj != null){
-				if(proj.active){
-					PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-					AddExp(PokemonProj.GetExpGained());
-				}else{
-					proj = null;
-				}
+			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+			AddExp(PokemonProj.GetExpGained());
+		}
+
+		private void GetUsedItems(){
+			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+			if(PokemonProj.GetRareCandy()){
+				exp = expToNextLevel;
+			}
+		}
+
+		private void GetCanEvolve(){
+			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+			string newPokemonName = PokemonProj.GetCanEvolve();
+			if(newPokemonName != ""){
+				proj.Kill();
+				PokemonName = newPokemonName;
+				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
+				Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
 			}
 		}
 
@@ -140,17 +163,22 @@ namespace Pokemod.Content.Items
 					if(level < 100){
 						SetExpToNextLevel();
 					}
+					UpdateProjLevel(true);
 				}
 			}
 			UpdateProjLevel();
 		}
 
-		private void UpdateProjLevel(){
+		private void UpdateProjLevel(bool canEvolve = false){
 			if(proj != null){
 				if(proj.active){
 					if(level > 0){
 						PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
 						PokemonProj.SetPokemonLvl(level);
+						if(canEvolve){
+							PokemonProj.SetCanEvolve();
+							GetCanEvolve();
+						}
 					}
 				}else{
 					proj = null;

@@ -27,6 +27,12 @@ namespace Pokemod.Content.Pets
 		public virtual int[] fallStartEnd => [-1,-1];
 		public virtual int[] attackStartEnd => [-1,-1];
 
+		public int canEvolve = -1;
+		public virtual string[] evolutions => [];
+		public virtual int levelToEvolve => -1;
+		public virtual int levelEvolutionsNumber => 0;
+		public virtual string[] itemToEvolve => [];
+
 		public int currentStatus = 0;
 		public enum ProjStatus
 		{
@@ -41,6 +47,9 @@ namespace Pokemod.Content.Pets
 		public bool canAttack = false;
 		public virtual int attackDuration => 0;
 		public virtual int attackCooldown => 0;
+
+		//Item effects
+		public bool rareCandy = false;
 
 		public override void SetStaticDefaults() {
 			Main.projFrames[Projectile.type] = totalFrames;
@@ -66,6 +75,13 @@ namespace Pokemod.Content.Pets
 			return exp;
 		}
 
+		public bool GetRareCandy(){
+			bool used = rareCandy;
+			rareCandy = false;
+
+			return used;
+		}
+
 		public virtual int GetPokemonDamage(){
 			int pokemonDamage = (int)(0.5f*baseDamage*(0.4f*pokemonLvl+2)+2);
 
@@ -73,7 +89,39 @@ namespace Pokemod.Content.Pets
 		}
 
 		public void SetPokemonLvl(int lvl){
+			if(pokemonLvl != 0 && pokemonLvl != lvl){
+				CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile","")+" grew to lvl "+lvl);
+			}
 			pokemonLvl = lvl;
+		}
+
+		public virtual void SetCanEvolve(){
+			if(canEvolve == -1){
+				if(levelEvolutionsNumber>0){
+					if(pokemonLvl >= levelToEvolve){
+						canEvolve = Main.rand.Next(0,levelEvolutionsNumber);
+					}
+				}
+			}
+		}
+
+		public virtual bool UseEvoItem(Item item){
+			if(itemToEvolve.Length>0){
+				for(int i = 0; i < itemToEvolve.Length; i++){
+					if(item.GetType().Name == itemToEvolve[i]){
+						canEvolve = levelEvolutionsNumber+i;
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		public virtual string GetCanEvolve(){
+			if(canEvolve != -1){
+				return evolutions[canEvolve];
+			}
+			return "";
 		}
 
         public override void AI() {
@@ -87,6 +135,7 @@ namespace Pokemod.Content.Pets
 			SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
 			Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
 			GetAllProjsExp();
+			SetCanEvolve();
 			Visuals();
 		}
 

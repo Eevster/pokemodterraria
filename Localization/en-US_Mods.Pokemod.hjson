@@ -104,8 +104,8 @@ Items: {
 	}
 
 	RareCandyItem: {
-		DisplayName: Rare Candy Item
-		Tooltip: ""
+		DisplayName: Rare Candy
+		Tooltip: When used on a pokemon it increases its level by 1
 	}
 
 	CharmeleonPetItem: {

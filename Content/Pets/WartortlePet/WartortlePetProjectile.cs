@@ -23,6 +23,10 @@ namespace Pokemod.Content.Pets.WartortlePet
 		public override int[] fallStartEnd => [11,11];
 		public override int[] attackStartEnd => [16,16];
 
+		public override string[] evolutions => ["Blastoise"];
+		public override int levelToEvolve => 36;
+		public override int levelEvolutionsNumber => 1;
+
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 

@@ -23,6 +23,10 @@ namespace Pokemod.Content.Pets.CharmeleonPetShiny
 		public override int[] fallStartEnd => [12,12];
 		public override int[] attackStartEnd => [13,18];
 
+		public override string[] evolutions => ["Charizard"];
+		public override int levelToEvolve => 36;
+		public override int levelEvolutionsNumber => 1;
+
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 

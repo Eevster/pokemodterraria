@@ -37,6 +37,11 @@ namespace Pokemod.Content.Pets
             }
 
             UpdateExtraChanges(player);
+            
+            if(player.ownedProjectileCounts[ProjType] <= 0){
+                player.DelBuff(buffIndex);
+                buffIndex--;
+            }
         }
 
         public virtual void UpdateExtraChanges(Player player){
