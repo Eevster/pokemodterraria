@@ -15,7 +15,7 @@ namespace Pokemod.Content.Items.Pokeballs
 			CreateRecipe(1)
 				.AddIngredient(ItemID.GemTreeSapphireSeed, 2)
 				.AddIngredient(ItemID.GemTreeRubySeed, 1)
-				.AddRecipeGroup(RecipeGroupID.IronBar, 3)
+				.AddRecipeGroup(RecipeGroupID.IronBar, 2)
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}

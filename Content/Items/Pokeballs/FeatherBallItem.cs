@@ -13,9 +13,9 @@ namespace Pokemod.Content.Items.Pokeballs
 		protected override float CatchRate => 1f;
 		public override void AddRecipes() {
 			CreateRecipe(1)
-				.AddIngredient(ItemID.GemTreeSapphireSeed, 2)
-				.AddIngredient(ItemID.Feather, 2)
-				.AddRecipeGroup(RecipeGroupID.IronBar, 3)
+				.AddIngredient(ItemID.GemTreeSapphireSeed, 1)
+				.AddIngredient(ItemID.Feather, 1)
+				.AddRecipeGroup(RecipeGroupID.IronBar, 1)
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}

@@ -22,8 +22,8 @@ namespace Pokemod.Content.Items.Pokeballs
 
         public override void AddRecipes() {
 			CreateRecipe(1)
-				.AddIngredient(ItemID.GemTreeEmeraldSeed, 4)
-				.AddIngredient(ItemID.Obsidian, 2)
+				.AddIngredient(ItemID.GemTreeEmeraldSeed, 2)
+				.AddIngredient(ItemID.Obsidian, 1)
 				.AddRecipeGroup(RecipeGroupID.IronBar, 1)
 				.AddTile(TileID.WorkBenches)
 				.Register();
