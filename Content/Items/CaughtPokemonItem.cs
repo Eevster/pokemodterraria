@@ -41,11 +41,15 @@ namespace Pokemod.Content.Items
 
         public override bool? UseItem(Player player)
         {
-			player.ClearBuff(Item.buffType);
 			if (player.whoAmI == Main.myPlayer) {
-				player.AddBuff(Item.buffType, 3600);
+				if(!player.HasBuff(Item.buffType)){
+					player.AddBuff(Item.buffType, 3600);
+				}else{
+					player.ClearBuff(Item.buffType);
+					proj?.Kill();
+					proj = null;
+				}
 			}
-
    			return true;
 		}
 
@@ -93,6 +97,16 @@ namespace Pokemod.Content.Items
 
         public override void UpdateInventory(Player player)
         {
+			if(!player.HasBuff(Item.buffType)){
+				proj?.Kill();
+				proj = null;
+			}
+			if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
+				if(player.miscEquips[0] != Item){
+					proj?.Kill();
+					proj = null;
+				}
+			}
 			SetPetInfo();
             base.UpdateInventory(player);
         }

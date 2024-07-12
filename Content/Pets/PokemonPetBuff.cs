@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Pokemod.Content.Items;
+using System;
 
 namespace Pokemod.Content.Pets
 {
@@ -17,31 +18,34 @@ namespace Pokemod.Content.Pets
 
 		public override void Update(Player player, ref int buffIndex)
         {
-            if(player.ownedProjectileCounts[ProjType] <= 0){
-                if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
-                    CaughtPokemonItem pokeItem = (CaughtPokemonItem)player.miscEquips[0].ModItem;
-                    if(pokeItem.PokemonName == PokeName){
+            bool Shiny = false;
+
+            if(GetType().Name.Contains("PetBuffShiny")) Shiny = true;
+
+            if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
+                CaughtPokemonItem pokeItem = (CaughtPokemonItem)player.miscEquips[0].ModItem;
+                if(pokeItem.proj == null || player.ownedProjectileCounts[ProjType] <= 0){
+                    if(pokeItem.PokemonName == PokeName && pokeItem.Shiny == Shiny){
                         int proj = Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ProjType, 0, 0f, player.whoAmI);
                         pokeItem.proj = Main.projectile[proj];
+                    }else{
+                        player.ClearBuff(buffIndex);
                     }
                 }
             }
-            if(player.ownedProjectileCounts[ProjType] >= 0){
+            if(player.ownedProjectileCounts[ProjType] > 0){
                 if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
                     CaughtPokemonItem pokeItem = (CaughtPokemonItem)player.miscEquips[0].ModItem;
-                    if(pokeItem.PokemonName == PokeName){
-                        pokeItem.SetPetInfo();
+                    if(pokeItem.proj != null){
+                        if(pokeItem.PokemonName == PokeName && pokeItem.Shiny == Shiny){
+                            pokeItem.SetPetInfo();
+                            player.buffTime[buffIndex] = 10;
+                        }
                     }
                 }
-                player.buffTime[buffIndex] = 10;
             }
 
             UpdateExtraChanges(player);
-            
-            if(player.ownedProjectileCounts[ProjType] <= 0){
-                player.DelBuff(buffIndex);
-                buffIndex--;
-            }
         }
 
         public virtual void UpdateExtraChanges(Player player){

@@ -16,7 +16,7 @@ namespace Pokemod.Content.Pets.BlastoisePet
 		public override int attackCooldown => 120;
 
 		public override int totalFrames => 24;
-		public override int animationSpeed => 5;
+		public override int animationSpeed => 6;
 		public override int[] idleStartEnd => [0,8];
 		public override int[] walkStartEnd => [9,16];
 		public override int[] jumpStartEnd => [11,11];
