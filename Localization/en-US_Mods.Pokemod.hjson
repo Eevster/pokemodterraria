@@ -40,6 +40,7 @@ Projectiles: {
 	DuskballProj.DisplayName: Duskball Proj
 	BeastballProj.DisplayName: Beastball Proj
 	WartortlePetProjectileShiny.DisplayName: Wartortle Pet Projectile Shiny
+	WingballProj.DisplayName: Wingball Proj
 }
 
 Items: {
@@ -330,6 +331,11 @@ Items: {
 
 	WartortlePetItemShiny: {
 		DisplayName: Wartortle Pet Item Shiny
+		Tooltip: ""
+	}
+
+	WingballItem: {
+		DisplayName: Wingball Item
 		Tooltip: ""
 	}
 }

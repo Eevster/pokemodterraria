@@ -21,7 +21,7 @@ namespace Pokemod.Content.Items.Pokeballs
 		protected override float CatchRate => 1f;
 
         public override void AddRecipes() {
-			CreateRecipe(1)
+			CreateRecipe(4)
 				.AddIngredient(ItemID.GemTreeEmeraldSeed, 2)
 				.AddIngredient(ItemID.Obsidian, 1)
 				.AddRecipeGroup(RecipeGroupID.IronBar, 1)

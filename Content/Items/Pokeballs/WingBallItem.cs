@@ -6,20 +6,22 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.Pokeballs
 {
-	public class GreatballItem : BallItem
+	public class WingballItem : BallItem
 	{
-		protected override int BallProj => ModContent.ProjectileType<GreatballProj>();
+		protected override int BallProj => ModContent.ProjectileType<WingballProj>();
 		protected override int BallValue => 5000;
 		protected override float CatchRate => 1.5f;
 		public override void AddRecipes() {
 			CreateRecipe(4)
 				.AddIngredient(ItemID.GemTreeSapphireSeed, 2)
-				.AddIngredient(ItemID.GemTreeRubySeed, 1)
+				.AddIngredient(ItemID.Feather, 3)
 				.AddRecipeGroup(RecipeGroupID.IronBar, 2)
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}
 	}
 
-	public class GreatballProj : BallProj{}
+	public class WingballProj : BallProj{
+		protected override bool hasGravity => false;
+	}
 }
