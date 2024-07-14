@@ -18,6 +18,12 @@ namespace Pokemod.Content.Items.Pokeballs
 				.AddRecipeGroup(RecipeGroupID.IronBar, 2)
 				.AddTile(TileID.WorkBenches)
 				.Register();
+			CreateRecipe(1)
+				.AddIngredient(ItemID.GemTreeTopazSeed, 3)
+				.AddIngredient(ItemID.Obsidian, 1)
+				.AddRecipeGroup(RecipeGroupID.IronBar, 2)
+				.AddTile(TileID.WorkBenches)
+				.Register();
 		}
 	}
 
