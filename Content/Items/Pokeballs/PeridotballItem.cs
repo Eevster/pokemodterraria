@@ -14,25 +14,20 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.Pokeballs
 {
-	public class CitrineItem : BallItem
+	public class PeridotballItem : BallItem
 	{
-		protected override int BallProj => ModContent.ProjectileType<CitrineballProj>();
+		protected override int BallProj => ModContent.ProjectileType<PeridotballProj>();
 		protected override int BallValue => 1000;
 		protected override float CatchRate => 1f;
 
         public override void AddRecipes() {
 			CreateRecipe(8)
-				.AddIngredient(ItemID.GemTreeAmberSeed, 1)
-				.AddRecipeGroup(RecipeGroupID.IronBar, 1)
-				.AddTile(TileID.WorkBenches)
-				.Register();
-			CreateRecipe(8)
-				.AddIngredient(ItemID.GemTreeTopazSeed, 1)
+				.AddIngredient(ItemID.GemTreeEmeraldSeed, 1)
 				.AddRecipeGroup(RecipeGroupID.IronBar, 1)
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }
 
-	public class CitrineballProj : BallProj{}
+	public class PeridotballProj : BallProj{}
 }

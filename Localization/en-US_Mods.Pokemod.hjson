@@ -41,6 +41,10 @@ Projectiles: {
 	BeastballProj.DisplayName: Beastball Proj
 	WartortlePetProjectileShiny.DisplayName: Wartortle Pet Projectile Shiny
 	WingballProj.DisplayName: Wingball Proj
+	CitrineballProj.DisplayName: Citrineball Proj
+	JetballProj.DisplayName: Jetball Proj
+	PeridotballProj.DisplayName: Peridotball Proj
+	VioletballProj.DisplayName: Violetball Proj
 }
 
 Items: {
@@ -336,6 +340,26 @@ Items: {
 
 	WingballItem: {
 		DisplayName: Wingball Item
+		Tooltip: ""
+	}
+
+	CitrineballItem: {
+		DisplayName: Citrineball Item
+		Tooltip: ""
+	}
+
+	JetballItem: {
+		DisplayName: Jetball Item
+		Tooltip: ""
+	}
+
+	PeridotballItem: {
+		DisplayName: Peridotball Item
+		Tooltip: ""
+	}
+
+	VioletballItem: {
+		DisplayName: Violetball Item
 		Tooltip: ""
 	}
 }

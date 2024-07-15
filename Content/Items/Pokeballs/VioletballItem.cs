@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.Pokeballs
 {
-	public class VioletItem : BallItem
+	public class VioletballItem : BallItem
 	{
 		protected override int BallProj => ModContent.ProjectileType<VioletballProj>();
 		protected override int BallValue => 1000;
