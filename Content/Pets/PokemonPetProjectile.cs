@@ -28,6 +28,7 @@ namespace Pokemod.Content.Pets
 		public virtual int[] attackStartEnd => [-1,-1];
 
 		public int canEvolve = -1;
+		public bool itemEvolve = false;
 		public virtual string[] evolutions => [];
 		public virtual int levelToEvolve => -1;
 		public virtual int levelEvolutionsNumber => 0;
@@ -105,11 +106,12 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-		public virtual bool UseEvoItem(Item item){
+		public virtual bool UseEvoItem(string itemName){
 			if(itemToEvolve.Length>0){
 				for(int i = 0; i < itemToEvolve.Length; i++){
-					if(item.GetType().Name == itemToEvolve[i]){
+					if(itemName == itemToEvolve[i]){
 						canEvolve = levelEvolutionsNumber+i;
+						itemEvolve = true;
 						return true;
 					}
 				}
@@ -165,6 +167,7 @@ namespace Pokemod.Content.Pets
 			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff
 			if (!player.dead && player.HasBuff(PokemonBuff)) {
 				Projectile.timeLeft = 2;
+				player.AddBuff(PokemonBuff, 10);
 			}
 		}
 

@@ -21,6 +21,7 @@ namespace Pokemod.Content.Items.Pokeballs
 		protected virtual int BallProj => ModContent.ProjectileType<BallProj>();
 		protected virtual int BallValue => 1000;
 		protected virtual float CatchRate => 1f;
+		protected virtual float ThrowSpeed => 15f;
 		
 		public override void SetStaticDefaults()
         {
@@ -32,7 +33,7 @@ namespace Pokemod.Content.Items.Pokeballs
 			Item.height = 14;
 			Item.rare = ItemRarityID.Blue;
 			Item.value = BallValue;
-			Item.maxStack = 9999;
+			Item.maxStack = Item.CommonMaxStack;
 			Item.consumable = true;
 			// Use Properties
 			Item.useAnimation = 25;
@@ -41,7 +42,7 @@ namespace Pokemod.Content.Items.Pokeballs
 			Item.autoReuse = true;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.noMelee = true;
-			Item.shootSpeed = 15f;
+			Item.shootSpeed = ThrowSpeed;
 			Item.UseSound = SoundID.Item1;
 			Item.noUseGraphic = true;
 

@@ -107,31 +107,31 @@ namespace Pokemod.Content.Items
 					proj = null;
 				}
 			}
-			SetPetInfo();
+			SetPetInfo(player);
             base.UpdateInventory(player);
         }
 
         public override void UpdateEquip(Player player)
         {
-			SetPetInfo();
+			SetPetInfo(player);
             base.UpdateEquip(player);
         }
 
-        public void SetPetInfo(){
+        public void SetPetInfo(Player player = null){
 			if(PokemonName != null && PokemonName != ""){
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
 
 				UpdateLevel();
-				GetProjInfo();
+				GetProjInfo(player);
 			}
 		}
 
-		private void GetProjInfo(){
+		private void GetProjInfo(Player player = null){
 			if(proj != null){
 				if(proj.active){
 					GetProjExp();
-					GetUsedItems();
+					GetUsedItems(player);
 				}else{
 					proj = null;
 				}
@@ -143,18 +143,22 @@ namespace Pokemod.Content.Items
 			AddExp(PokemonProj.GetExpGained());
 		}
 
-		private void GetUsedItems(){
+		private void GetUsedItems(Player player = null){
 			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+			if(PokemonProj.itemEvolve){
+				GetCanEvolve(player);
+			}
 			if(PokemonProj.GetRareCandy()){
 				exp = expToNextLevel;
 			}
 		}
 
-		private void GetCanEvolve(){
+		private void GetCanEvolve(Player player = null){
 			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
 			string newPokemonName = PokemonProj.GetCanEvolve();
 			if(newPokemonName != ""){
 				proj.Kill();
+				player?.ClearBuff(Item.buffType);
 				PokemonName = newPokemonName;
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
@@ -166,7 +170,7 @@ namespace Pokemod.Content.Items
 			UpdateLevel();
 		}
 
-		public void UpdateLevel(){
+		public void UpdateLevel(Player player = null){
 			if(level == 0){
 				level = 1;
 			}
@@ -177,13 +181,13 @@ namespace Pokemod.Content.Items
 					if(level < 100){
 						SetExpToNextLevel();
 					}
-					UpdateProjLevel(true);
+					UpdateProjLevel(true, player);
 				}
 			}
 			UpdateProjLevel();
 		}
 
-		private void UpdateProjLevel(bool canEvolve = false){
+		private void UpdateProjLevel(bool canEvolve = false, Player player = null){
 			if(proj != null){
 				if(proj.active){
 					if(level > 0){
