@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Pokemod")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a07a202e1ae1d3309864d9792a0b45eff04c037")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f012064e3078482421f935b00def82ddc9244240")]
 [assembly: System.Reflection.AssemblyProductAttribute("Pokemod")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Pokemod")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
