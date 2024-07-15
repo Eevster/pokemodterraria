@@ -26,6 +26,9 @@ namespace Pokemod.Content.Pets.PikachuPetShiny
 		public override int[] fallStartEnd => [15,15];
 		public override int[] attackStartEnd => [18,18];
 
+		public override string[] evolutions => ["Raichu"];
+		public override string[] itemToEvolve => ["ThunderStoneItem"];
+
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 

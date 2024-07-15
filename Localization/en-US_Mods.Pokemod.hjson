@@ -46,6 +46,8 @@ Projectiles: {
 	PeridotballProj.DisplayName: Peridotball Proj
 	VioletballProj.DisplayName: Violetball Proj
 	AzureballProj.DisplayName: Azureball Proj
+	RaichuPetProjectile.DisplayName: Raichu Pet Projectile
+	RaichuPetProjectileShiny.DisplayName: Raichu Pet Projectile Shiny
 }
 
 Items: {
@@ -368,6 +370,11 @@ Items: {
 		DisplayName: Azureball Item
 		Tooltip: ""
 	}
+
+	ThunderStoneItem: {
+		DisplayName: Thunder Stone Item
+		Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -514,6 +521,16 @@ Buffs: {
 	WartortlePetBuffShiny: {
 		DisplayName: Wartortle Pet Buff Shiny
 		Description: Mods.Pokemod.Buffs.WartortlePetBuffShiny.Description
+	}
+
+	RaichuPetBuff: {
+		DisplayName: Raichu Pet Buff
+		Description: Mods.Pokemod.Buffs.RaichuPetBuff.Description
+	}
+
+	RaichuPetBuffShiny: {
+		DisplayName: Raichu Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.RaichuPetBuffShiny.Description
 	}
 }
 
