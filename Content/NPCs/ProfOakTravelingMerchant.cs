@@ -63,6 +63,8 @@ namespace Pokemod.Content.NPCs
 
 			// Always bring an ExampleItem
 			Shop.Add<PokeballItem>();
+			Shop.Add<GreatballItem>();
+			Shop.Add<UltraballItem>();
 
 			// Bring  Tools
 			Shop.AddPool("Tools", slots: 1)

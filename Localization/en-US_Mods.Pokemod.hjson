@@ -45,6 +45,7 @@ Projectiles: {
 	JetballProj.DisplayName: Jetball Proj
 	PeridotballProj.DisplayName: Peridotball Proj
 	VioletballProj.DisplayName: Violetball Proj
+	AzureballProj.DisplayName: Azureball Proj
 }
 
 Items: {
@@ -360,6 +361,11 @@ Items: {
 
 	VioletballItem: {
 		DisplayName: Violetball Item
+		Tooltip: ""
+	}
+
+	AzureballItem: {
+		DisplayName: Azureball Item
 		Tooltip: ""
 	}
 }
