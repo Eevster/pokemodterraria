@@ -68,29 +68,34 @@ namespace Pokemod.Content.Items.Pokeballs
 	{
 		public override string Texture => "Pokemod/Assets/Textures/Pokeballs/"+ GetType().Name.Replace("Proj","Item");
 		protected virtual bool hasGravity => true;
-		private float catchRate => Projectile.ai[0];
+		private ref float catchRate => ref Projectile.ai[0];
 		private int bounces = 3;
 		private int captureStage = -1;
+		private bool canCapture;
 		public NPC targetPokemon;
 		private int moveTimer = 0;
 		public const int moveTime = 80;
 
 		public override void SendExtraAI(BinaryWriter writer)
         {
+			writer.Write((double)catchRate);
             writer.Write((double)bounces);
 			writer.Write((double)captureStage);
 			writer.Write((double)moveTimer);
 			writer.Write(targetPokemon != null?(double)targetPokemon.whoAmI:-1);
+			writer.Write(canCapture);
             base.SendExtraAI(writer);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
+			catchRate = (float)reader.ReadDouble();
             bounces = (int)reader.ReadDouble();
 			captureStage = (int)reader.ReadDouble();
 			moveTimer = (int)reader.ReadDouble();
 			int targetIndex = (int)reader.ReadDouble();
 			targetPokemon = targetIndex != -1?Main.npc[targetIndex]:null;
+			canCapture = reader.ReadBoolean();
             base.ReceiveExtraAI(reader);
         }
 		
@@ -131,14 +136,22 @@ namespace Pokemod.Content.Items.Pokeballs
 			}else{
 				targetPokemon.velocity = Vector2.Zero;
 				targetPokemon.Center = Projectile.Center + new Vector2(0,-targetPokemon.height/2);
+				targetPokemon.hide = true;
+				targetPokemon.friendly = true;
+				targetPokemon.dontTakeDamageFromHostiles = true;
 				Projectile.rotation = 0;
+			}
+
+			if(Projectile.owner == Main.myPlayer){
+				canCapture = FailureProb(catchRate);
+				Projectile.netUpdate = true;
 			}
 
 			if(bounces < 0){
 				Projectile.timeLeft = 10;
 				if(moveTimer <= 0){
 					captureStage++;
-					if(FailureProb(catchRate)){
+					if(canCapture){
 						CaptureFailure();
 					}else{
 						if(captureStage > 3){
@@ -161,7 +174,9 @@ namespace Pokemod.Content.Items.Pokeballs
 			}
 
 			if(targetPokemon != null){
-				targetPokemon.netUpdate = true;
+				if(Main.myPlayer == Projectile.owner){
+					targetPokemon.netUpdate = true;
+				}
 			}
 
 			if(Main.myPlayer == Projectile.owner){
@@ -191,6 +206,11 @@ namespace Pokemod.Content.Items.Pokeballs
             return target.GetGlobalNPC<PokemonNPCData>().isPokemon && !target.friendly;
         }
 
+        public override bool? CanDamage()
+        {
+            return captureStage < 0;
+        }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
 			if(captureStage < 0){
@@ -201,6 +221,10 @@ namespace Pokemod.Content.Items.Pokeballs
 
 				captureStage = 0;
 				Projectile.velocity = new Vector2(0,-5);
+
+				if(Main.myPlayer == Projectile.owner){
+					targetPokemon.netUpdate = true;
+				}
 			}
 
             base.OnHitNPC(target, hit, damageDone);
@@ -221,13 +245,11 @@ namespace Pokemod.Content.Items.Pokeballs
 			bool shiny = targetPokemon.GetGlobalNPC<PokemonNPCData>().shiny;
 
 			if (Main.netMode == NetmodeID.SinglePlayer){
-				Main.NewText("Item.newItem");
 				item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
 				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
 				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
 			}else{
 				if(Main.netMode == NetmodeID.Server){
-					Main.NewText("QuickSpawnItem");
 					item = player.QuickSpawnItem(Projectile.InheritSource(Projectile), ModContent.ItemType<CaughtPokemonItem>());
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
 					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
@@ -276,6 +298,20 @@ namespace Pokemod.Content.Items.Pokeballs
             fallThrough = true;
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            if(targetPokemon != null){
+				if(targetPokemon.hide){
+					targetPokemon.hide = false;
+					targetPokemon.friendly = false;
+					targetPokemon.dontTakeDamageFromHostiles = false;
+				}
+				if(Main.myPlayer == Projectile.owner){
+					targetPokemon.netUpdate = true;
+				}
+			}
         }
     }
 }
