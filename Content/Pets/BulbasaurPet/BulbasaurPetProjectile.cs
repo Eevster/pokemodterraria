@@ -85,13 +85,19 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 						timer = attackCooldown;
 					}
 				}
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] != null){
-						if(attackProjs[i].active){
-							Projectile.velocity.X *= 0.95f;
-							attackProjs[i].Center = Projectile.Center;
-						}else{
-							attackProjs[i] = null;
+				if(currentStatus == (int)ProjStatus.Attack){
+					Projectile.velocity.X *= 0.95f;
+				}
+				
+				if(Projectile.owner == Main.myPlayer){
+					for(int i = 0; i < nAttackProjs; i++){
+						if(attackProjs[i] != null){
+							if(attackProjs[i].active){
+								attackProjs[i].Center = Projectile.Center;
+								attackProjs[i].netUpdate = true;
+							}else{
+								attackProjs[i] = null;
+							}
 						}
 					}
 				}
@@ -102,12 +108,14 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 					canAttack = true;
 					timer = attackCooldown;
 				}
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] != null){
-						if(attackProjs[i].active){
-							attackProjs[i].Kill();
+				if(Projectile.owner == Main.myPlayer){
+					for(int i = 0; i < nAttackProjs; i++){
+						if(attackProjs[i] != null){
+							if(attackProjs[i].active){
+								attackProjs[i].Kill();
+							}
+							attackProjs[i] = null;
 						}
-						attackProjs[i] = null;
 					}
 				}
 				// Minion doesn't have a target: return to player and idle

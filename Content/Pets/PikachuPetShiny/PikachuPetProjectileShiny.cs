@@ -83,13 +83,15 @@ namespace Pokemod.Content.Pets.PikachuPetShiny
 						timer = attackCooldown;
 					}
 				}
-				if(attackProjs[0] != null){
-					if(attackProjs[0].active){
-						Projectile.velocity.X *= 0.9f;
-						maxFallSpeed = 2f;
-						attackProjs[0].Center = Projectile.Center;
-					}else{
-						attackProjs[0] = null;
+				if(Projectile.owner == Main.myPlayer){
+					if(attackProjs[0] != null){
+						if(attackProjs[0].active){
+							Projectile.velocity.X *= 0.9f;
+							maxFallSpeed = 2f;
+							attackProjs[0].Center = Projectile.Center;
+						}else{
+							attackProjs[0] = null;
+						}
 					}
 				}
 			}
@@ -99,11 +101,13 @@ namespace Pokemod.Content.Pets.PikachuPetShiny
 					canAttack = true;
 					timer = attackCooldown;
 				}
-				if(attackProjs[0] != null){
-					if(attackProjs[0].active){
-						attackProjs[0].Kill();
+				if(Projectile.owner == Main.myPlayer){
+					if(attackProjs[0] != null){
+						if(attackProjs[0].active){
+							attackProjs[0].Kill();
+						}
+						attackProjs[0] = null;
 					}
-					attackProjs[0] = null;
 				}
 				// Minion doesn't have a target: return to player and idle
 				if (distanceToIdlePosition > 600f) {

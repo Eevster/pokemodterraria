@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
@@ -85,6 +86,10 @@ namespace Pokemod.Content.Pets.PikachuPet
 			SearchTarget();
 
 			UpdateAnimation();
+
+            if(Projectile.owner == Main.myPlayer){
+				Projectile.netUpdate = true;
+			}
         }
 	
         private void UpdateAnimation()

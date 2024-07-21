@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Pokemod.Content.Items;
 using Terraria;
@@ -43,6 +44,18 @@ namespace Pokemod.Content.Pets
 			Fall,
 			Attack
 		}
+
+		public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write((double)currentStatus);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            currentStatus = (int)reader.ReadDouble();
+            base.ReceiveExtraAI(reader);
+        }
 
 		public int timer = 0;
 		public bool canAttack = false;
@@ -139,11 +152,17 @@ namespace Pokemod.Content.Pets
 			GetAllProjsExp();
 			SetCanEvolve();
 			Visuals();
+
+			if(Main.myPlayer == Projectile.owner){
+				Projectile.netUpdate = true;
+			}
 		}
 
 		public virtual void GetAllProjsExp(){
-			for(int i = 0; i < nAttackProjs; i++){
-				GetProjExp(i);
+			if(Projectile.owner == Main.myPlayer){
+				for(int i = 0; i < nAttackProjs; i++){
+					GetProjExp(i);
+				}
 			}
 		}
 
@@ -168,6 +187,9 @@ namespace Pokemod.Content.Pets
 			if (!player.dead && player.HasBuff(PokemonBuff)) {
 				Projectile.timeLeft = 2;
 				player.AddBuff(PokemonBuff, 10);
+			}
+			if(Main.myPlayer == Projectile.owner){
+				Projectile.netUpdate = true;
 			}
 		}
 
@@ -432,7 +454,22 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-		public override bool OnTileCollide(Vector2 oldVelocity)
+        public override void OnKill(int timeLeft)
+        {
+			if(Projectile.owner == Main.myPlayer){
+				for(int i = 0; i < nAttackProjs; i++){
+					if(attackProjs[i] != null){
+						if(attackProjs[i].active){
+							attackProjs[i].Kill();
+						}else{
+							attackProjs[i] = null;
+						}
+					}
+				}
+			}
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity)
         {
 			if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f) {
 				Projectile.velocity.X = 0;

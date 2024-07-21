@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
@@ -20,7 +21,23 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 		private bool canDamage = true;
 		private int projDirection = 1;
 		Vector2 vectorToTarget;
+		Vector2 positionAjust;
 		float positionRotation;
+		public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.WriteVector2(vectorToTarget);
+			writer.Write((double)projDirection);
+			writer.WriteVector2(positionAjust);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            vectorToTarget = reader.ReadVector2();
+			projDirection = (int)reader.ReadDouble();
+			positionAjust = reader.ReadVector2();
+            base.ReceiveExtraAI(reader);
+        }
 		public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 9;
@@ -55,6 +72,7 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 
 			vectorToTarget = new Vector2(projDirection,0);
 			positionRotation = vectorToTarget.ToRotation();
+			positionAjust = new Vector2(56,-18*projDirection).RotatedBy(positionRotation);
         }
 
         public override void AI()
@@ -81,9 +99,19 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 				positionRotation = vectorToTarget.ToRotation();
 			}
 
-			Projectile.Center += new Vector2(56,-18*projDirection).RotatedBy(positionRotation);
+			if(Projectile.owner == Main.myPlayer){
+				Projectile.netUpdate = true;
+			}
+
+			positionAjust = new Vector2(56,-18*projDirection).RotatedBy(positionRotation);
+
+			Projectile.Center += positionAjust;
 
         	UpdateAnimation();
+
+			if(Projectile.owner == Main.myPlayer){
+				Projectile.netUpdate = true;
+			}
         }
 	
         private void UpdateAnimation()
@@ -163,7 +191,23 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 		private bool canDamage = true;
 		private int projDirection = 1;
 		Vector2 vectorToTarget;
+		Vector2 positionAjust;
 		float positionRotation;
+		public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.WriteVector2(vectorToTarget);
+			writer.Write((double)projDirection);
+			writer.WriteVector2(positionAjust);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            vectorToTarget = reader.ReadVector2();
+			projDirection = (int)reader.ReadDouble();
+			positionAjust = reader.ReadVector2();
+            base.ReceiveExtraAI(reader);
+        }
 		public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 9;
@@ -194,6 +238,7 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 			projDirection = (int)Projectile.ai[1];
 			vectorToTarget = new Vector2(projDirection,0);
         	positionRotation = vectorToTarget.ToRotation();
+			positionAjust = new Vector2(56,-18*projDirection).RotatedBy(positionRotation);
         }
 
         public override void AI()
@@ -220,9 +265,19 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 				positionRotation = vectorToTarget.ToRotation();
 			}
 
-			Projectile.Center += new Vector2(56,-18*projDirection).RotatedBy(positionRotation);
+			if(Projectile.owner == Main.myPlayer){
+				Projectile.netUpdate = true;
+			}
+
+			positionAjust = new Vector2(56,-18*projDirection).RotatedBy(positionRotation);
+
+			Projectile.Center += positionAjust;
 
         	UpdateAnimation();
+
+			if(Projectile.owner == Main.myPlayer){
+				Projectile.netUpdate = true;
+			}
         }
 	
         private void UpdateAnimation()

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Content.NPCs;
@@ -73,6 +74,26 @@ namespace Pokemod.Content.Items.Pokeballs
 		public NPC targetPokemon;
 		private int moveTimer = 0;
 		public const int moveTime = 80;
+
+		public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write((double)bounces);
+			writer.Write((double)captureStage);
+			writer.Write((double)moveTimer);
+			writer.Write(targetPokemon != null?(double)targetPokemon.whoAmI:-1);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            bounces = (int)reader.ReadDouble();
+			captureStage = (int)reader.ReadDouble();
+			moveTimer = (int)reader.ReadDouble();
+			int targetIndex = (int)reader.ReadDouble();
+			targetPokemon = targetIndex != -1?Main.npc[targetIndex]:null;
+            base.ReceiveExtraAI(reader);
+        }
+		
 		public override void SetDefaults()
         {
             Projectile.DamageType = ModContent.GetInstance<MeleeDamageClass>();
@@ -138,6 +159,14 @@ namespace Pokemod.Content.Items.Pokeballs
 					Projectile.velocity.Y = maxFallSpeed;
 				}
 			}
+
+			if(targetPokemon != null){
+				targetPokemon.netUpdate = true;
+			}
+
+			if(Main.myPlayer == Projectile.owner){
+				Projectile.netUpdate = true;
+			}
         }
 
 		public virtual bool FailureProb(float catchRate){
@@ -186,11 +215,25 @@ namespace Pokemod.Content.Items.Pokeballs
 		}
 
 		public void CaptureSuccess(){
-			int item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
+			Player player = Main.player[Projectile.owner];
+			int item;
 			string pokemonName = targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName;
 			bool shiny = targetPokemon.GetGlobalNPC<PokemonNPCData>().shiny;
-			CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-			pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
+
+			if (Main.netMode == NetmodeID.SinglePlayer){
+				Main.NewText("Item.newItem");
+				item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
+				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
+				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
+			}else{
+				if(Main.netMode == NetmodeID.Server){
+					Main.NewText("QuickSpawnItem");
+					item = player.QuickSpawnItem(Projectile.InheritSource(Projectile), ModContent.ItemType<CaughtPokemonItem>());
+					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
+					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
+				}
+			}
+
 			targetPokemon.StrikeInstantKill();
 			Projectile.Kill();
 		}

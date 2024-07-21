@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
@@ -19,6 +20,17 @@ namespace Pokemod.Content.Pets.EeveePet
 		private Vector2 targetPosition;
 		private bool foundTarget = false;
 		private bool canfollow = true;
+		public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.WriteVector2(targetPosition);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            targetPosition = reader.ReadVector2();
+            base.ReceiveExtraAI(reader);
+        }
 		public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5; // The length of old position to be recorded
@@ -92,6 +104,10 @@ namespace Pokemod.Content.Pets.EeveePet
 
 			if(Projectile.ai[1] == 1){
 				Projectile.rotation += MathHelper.ToRadians(10);
+			}
+
+			if(Projectile.owner == Main.myPlayer){
+				Projectile.netUpdate = true;
 			}
         }
 

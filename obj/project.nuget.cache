@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "mkOMsy+vNx4=",
+  "dgSpecHash": "vL0r0YGP4ckZnIepm97Wq3EILqin46aSGBuMfthUJEoEY1BZt8ccJn6plEtEVmavTYKyXacDQ60BlGA2i4VeLA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj",
+  "projectFilePath": "C:\\Users\\JAC521\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\loris\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
+    "C:\\Users\\JAC521\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
   ],
   "logs": []
 }

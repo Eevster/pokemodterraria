@@ -15,6 +15,7 @@ namespace Pokemod.Content.Pets
 	public abstract class PokemonAttack : ModProjectile
 	{
 		private int expGained = 0;
+		public Vector2 positionAux;
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

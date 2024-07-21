@@ -83,14 +83,16 @@ namespace Pokemod.Content.Pets.EeveePet
 					}
 				}
 
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] != null){
-						if(attackProjs[i].active){
-							if(attackProjs[i].ai[1] == 0){
-								attackProjs[i].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(attackProjs[i].ai[0]);
+				if(Projectile.owner == Main.myPlayer){
+					for(int i = 0; i < nAttackProjs; i++){
+						if(attackProjs[i] != null){
+							if(attackProjs[i].active){
+								if(attackProjs[i].ai[1] == 0){
+									attackProjs[i].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(attackProjs[i].ai[0]);
+								}
+							}else{
+								attackProjs[i] = null;
 							}
-						}else{
-							attackProjs[i] = null;
 						}
 					}
 				}
@@ -107,14 +109,16 @@ namespace Pokemod.Content.Pets.EeveePet
 					canAttack = true;
 					timer = attackCooldown;
 				}
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] != null){
-						if(attackProjs[i].active){
-							if(attackProjs[i].ai[1] != 0){
+				if(Projectile.owner == Main.myPlayer){
+					for(int i = 0; i < nAttackProjs; i++){
+						if(attackProjs[i] != null){
+							if(attackProjs[i].active){
+								if(attackProjs[i].ai[1] != 0){
+									attackProjs[i] = null;
+								}
+							}else{
 								attackProjs[i] = null;
 							}
-						}else{
-							attackProjs[i] = null;
 						}
 					}
 				}

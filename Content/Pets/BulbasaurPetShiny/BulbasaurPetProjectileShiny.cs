@@ -65,15 +65,19 @@ namespace Pokemod.Content.Pets.BulbasaurPetShiny
 				}
 				if(distanceFromTarget < 140f){
 					if(timer <= 0){
-						if(canAttack && (attackProjs[0] == null || attackProjs[1] == null)){
-							currentStatus = (int)ProjStatus.Attack;
-							SoundEngine.PlaySound(SoundID.Item1, Projectile.position);
+						if(canAttack){
 							if(Projectile.owner == Main.myPlayer){
-								if(attackProjs[0] == null) attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<VineWhipBack>(), GetPokemonDamage(), 2f, Projectile.owner, 0, Math.Sign((targetCenter - Projectile.Center).X))];
-								if(attackProjs[1] == null) attackProjs[1] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<VineWhipFront>(), GetPokemonDamage(), 2f, Projectile.owner, 0, Math.Sign((targetCenter - Projectile.Center).X))];
+								if(attackProjs[0] == null || attackProjs[1] == null){
+									currentStatus = (int)ProjStatus.Attack;
+									SoundEngine.PlaySound(SoundID.Item1, Projectile.position);
+									if(Projectile.owner == Main.myPlayer){
+										if(attackProjs[0] == null) attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<VineWhipBack>(), GetPokemonDamage(), 2f, Projectile.owner, 0, Math.Sign((targetCenter - Projectile.Center).X))];
+										if(attackProjs[1] == null) attackProjs[1] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<VineWhipFront>(), GetPokemonDamage(), 2f, Projectile.owner, 0, Math.Sign((targetCenter - Projectile.Center).X))];
+									}
+									timer = attackDuration;
+									canAttack = false;
+								}
 							}
-							timer = attackDuration;
-							canAttack = false;
 						}
 					}
 				}
@@ -86,13 +90,19 @@ namespace Pokemod.Content.Pets.BulbasaurPetShiny
 						timer = attackCooldown;
 					}
 				}
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] != null){
-						if(attackProjs[i].active){
-							Projectile.velocity.X *= 0.95f;
-							attackProjs[i].Center = Projectile.Center;
-						}else{
-							attackProjs[i] = null;
+				if(currentStatus == (int)ProjStatus.Attack){
+					Projectile.velocity.X *= 0.95f;
+				}
+
+				if(Projectile.owner == Main.myPlayer){
+					for(int i = 0; i < nAttackProjs; i++){
+						if(attackProjs[i] != null){
+							if(attackProjs[i].active){
+								attackProjs[i].Center = Projectile.Center;
+								attackProjs[i].netUpdate = true;
+							}else{
+								attackProjs[i] = null;
+							}
 						}
 					}
 				}
@@ -103,12 +113,14 @@ namespace Pokemod.Content.Pets.BulbasaurPetShiny
 					canAttack = true;
 					timer = attackCooldown;
 				}
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] != null){
-						if(attackProjs[i].active){
-							attackProjs[i].Kill();
+				if(Projectile.owner == Main.myPlayer){
+					for(int i = 0; i < nAttackProjs; i++){
+						if(attackProjs[i] != null){
+							if(attackProjs[i].active){
+								attackProjs[i].Kill();
+							}
+							attackProjs[i] = null;
 						}
-						attackProjs[i] = null;
 					}
 				}
 				// Minion doesn't have a target: return to player and idle

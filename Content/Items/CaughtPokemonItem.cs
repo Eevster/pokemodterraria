@@ -4,6 +4,7 @@ using Pokemod.Content.Pets;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
@@ -39,6 +40,22 @@ namespace Pokemod.Content.Items
 			Item.noUseGraphic = true;
 		}
 
+		public override void NetSend(BinaryWriter writer) {
+			writer.Write(PokemonName ?? "");
+			writer.Write(Shiny);
+			writer.Write(BallType ?? "");
+			writer.Write((double)level);
+			writer.Write((double)exp);
+		}
+
+		public override void NetReceive(BinaryReader reader) {
+			PokemonName = reader.ReadString();
+			Shiny = reader.ReadBoolean();
+			BallType = reader.ReadString();
+			level = (int)reader.ReadDouble();
+			exp = (int)reader.ReadDouble();
+		}
+
         public override bool? UseItem(Player player)
         {
 			if (player.whoAmI == Main.myPlayer) {
@@ -64,11 +81,12 @@ namespace Pokemod.Content.Items
         public override ModItem Clone(Item item) {
 			CaughtPokemonItem clone = (CaughtPokemonItem)base.Clone(item);
 			clone.PokemonName = (string)PokemonName?.Clone(); // note the ? here is important, colors may be null if spawned from other mods which don't call OnCreate
+			clone.BallType = (string)BallType?.Clone();
 			return clone;
 		}
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-			if (PokemonName == null) //colors may be null if spawned from other mods which don't call OnCreate
+			if (PokemonName == null || PokemonName == "") //colors may be null if spawned from other mods which don't call OnCreate
 				return;
 
 			foreach (TooltipLine line in tooltips) {
