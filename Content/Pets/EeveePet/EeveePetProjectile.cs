@@ -16,6 +16,7 @@ namespace Pokemod.Content.Pets.EeveePet
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 0;
 		public override int attackCooldown => 120;
+		public override bool canMoveWhileAttack => true;
 
 		public override int totalFrames => 18;
 		public override int animationSpeed => 5;
@@ -27,150 +28,37 @@ namespace Pokemod.Content.Pets.EeveePet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			Projectile.width = 50;
+			//Projectile.width = 50;
+			Projectile.width = 22;
+			DrawOffsetX = -(25 - Projectile.width/2);
 			Projectile.height = 40;
 			Projectile.aiStyle = -1; // Use custom AI
 			Projectile.light = 0f;
 			Projectile.tileCollide = true; 
 		}
 
-		public override void Movement(bool foundTarget, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition) {
-			// Default movement parameters (here for attacking)
-			float speed = 5f;
-			float inertia = 20f;
-
-			float maxFallSpeed = 10f;
-
-			if (foundTarget) {
-				if(distanceFromTarget > 400f){
-					Vector2 direction = targetCenter - Projectile.Center;
-					direction.Normalize();
-					direction *= speed;
-
-					Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
-
-					if((targetCenter - Projectile.Center).Y < 0 && -(targetCenter - Projectile.Center).Y > Math.Abs((targetCenter - Projectile.Center).X)){
-						if(Math.Abs(Projectile.velocity.Y) < float.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
-							currentStatus = (int)ProjStatus.Jump;
-							Projectile.velocity.Y -= (int)Math.Sqrt(2*0.3f*Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y),0,96));
-						}
+		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
+			SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
+			if(Projectile.owner == Main.myPlayer){
+				for(int i = 0; i < nAttackProjs; i++){
+					if(attackProjs[i] == null){
+						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), GetPokemonDamage(), 2f, Projectile.owner, i*MathHelper.PiOver2)];
 					}
-				}else{
-					if(distanceFromTarget > 200f){
-						Vector2 direction = targetCenter - Projectile.Center;
-						direction.Normalize();
-						direction *= speed/2;
-
-						Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
-					}else{
-						Projectile.velocity.X *= 0.95f;
-					}
-				}
-				if(distanceFromTarget < 800f){
-					if(timer <= 0){
-						if(canAttack){
-							SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
-							if(Projectile.owner == Main.myPlayer){
-								for(int i = 0; i < nAttackProjs; i++){
-									if(attackProjs[i] == null){
-										attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), GetPokemonDamage(), 2f, Projectile.owner, i*MathHelper.PiOver2)];
-									}
-								} 
-							}
-							timer = attackDuration;
-							canAttack = false;
-						}
-					}
-				}
-
-				if(Projectile.owner == Main.myPlayer){
-					for(int i = 0; i < nAttackProjs; i++){
-						if(attackProjs[i] != null){
-							if(attackProjs[i].active){
-								if(attackProjs[i].ai[1] == 0){
-									attackProjs[i].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(attackProjs[i].ai[0]);
-								}
-							}else{
-								attackProjs[i] = null;
-							}
-						}
-					}
-				}
-
-				if(timer <= 0){
-					if(!canAttack){
-						canAttack = true;
-						timer = attackCooldown;
-					}
-				}
+				} 
 			}
-			else {
-				if(!canAttack){
-					canAttack = true;
-					timer = attackCooldown;
-				}
-				if(Projectile.owner == Main.myPlayer){
-					for(int i = 0; i < nAttackProjs; i++){
-						if(attackProjs[i] != null){
-							if(attackProjs[i].active){
-								if(attackProjs[i].ai[1] != 0){
-									attackProjs[i] = null;
-								}
-							}else{
-								attackProjs[i] = null;
-							}
-						}
-					}
-				}
-				// Minion doesn't have a target: return to player and idle
-				if (distanceToIdlePosition > 600f) {
-					// Speed up the minion if it's away from the player
-					speed = 8f;
-				}
-				else {
-					// Slow down the minion if closer to the player
-					speed = 5f;
-				}
+			timer = attackDuration;
+			canAttack = false;
+		}
 
-				if (distanceToIdlePosition > 80f) {
-					// The immediate range around the player (when it passively floats about)
-
-					// This is a simple movement formula using the two parameters and its desired direction to create a "homing" movement
-					vectorToIdlePosition.Normalize();
-					vectorToIdlePosition *= speed;
-					Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia).X;
-				}else{
-					if(Math.Abs(Projectile.velocity.X)>0.2f){
-						Projectile.velocity.X *= 0.9f;
-					}else{
-						Projectile.velocity.X = 0;
-					}
-				}
+		public override void UpdateAttackProjs(int i, ref float maxFallSpeed){
+			if(attackProjs[i].ai[1] == 0){
+				attackProjs[i].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(attackProjs[i].ai[0]);
 			}
+		}
 
-			if(currentStatus != (int)ProjStatus.Jump){
-				if(Math.Abs(Projectile.velocity.X) < float.Epsilon){
-					currentStatus = (int)ProjStatus.Idle;
-				}else{
-					currentStatus = (int)ProjStatus.Walk;
-				}
-			}
-
-			if(Projectile.velocity.Y > 0.04f){
-				currentStatus = (int)ProjStatus.Fall;
-			}
-
-			if(Math.Abs(Projectile.velocity.Y) < float.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
-				Jump();
-			}
-
-			if(timer > 0){
-				timer--;
-			}
-
-			Projectile.velocity.Y += 0.2f;
-			if(Projectile.velocity.Y > maxFallSpeed){
-				Projectile.velocity.Y = maxFallSpeed;
+		public override void UpdateNoAttackProjs(int i){
+			if(attackProjs[i].ai[1] != 0){
+				attackProjs[i] = null;
 			}
 		}
 

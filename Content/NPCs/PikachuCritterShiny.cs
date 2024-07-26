@@ -1,5 +1,5 @@
 ﻿using Pokemod.Content.Items;
-using Pokemod.Content.Pets.PikachuPetShiny;
+using Pokemod.Content.Pets.PikachuPet;
 using Microsoft.Xna.Framework;
 using MonoMod.Cil;
 using System;

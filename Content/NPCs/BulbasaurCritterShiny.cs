@@ -1,5 +1,5 @@
 ﻿using Pokemod.Content.Items;
-using Pokemod.Content.Pets.BulbasaurPetShiny;
+using Pokemod.Content.Pets.BulbasaurPet;
 using Microsoft.Xna.Framework;
 using MonoMod.Cil;
 using System;

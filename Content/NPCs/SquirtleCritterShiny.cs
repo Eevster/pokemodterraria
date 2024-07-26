@@ -1,5 +1,5 @@
 ﻿using Pokemod.Content.Items;
-using Pokemod.Content.Pets.SquirtlePetShiny;
+using Pokemod.Content.Pets.SquirtlePet;
 using Microsoft.Xna.Framework;
 using MonoMod.Cil;
 using System;

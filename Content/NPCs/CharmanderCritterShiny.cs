@@ -1,5 +1,5 @@
 ﻿using Pokemod.Content.Items;
-using Pokemod.Content.Pets.CharmanderPetShiny;
+using Pokemod.Content.Pets.CharmanderPet;
 using Microsoft.Xna.Framework;
 using MonoMod.Cil;
 using System;

@@ -48,6 +48,15 @@ Projectiles: {
 	AzureballProj.DisplayName: Azureball Proj
 	RaichuPetProjectile.DisplayName: Raichu Pet Projectile
 	RaichuPetProjectileShiny.DisplayName: Raichu Pet Projectile Shiny
+	PoisonPowder.DisplayName: Poison Powder
+	SolarBeamHold.DisplayName: Solar Beam Hold
+	Ember.DisplayName: Ember
+	Flamethrower.DisplayName: Flamethrower
+	FireBlast.DisplayName: Fire Blast
+	Bubble.DisplayName: Bubble
+	WaterPulse.DisplayName: Water Pulse
+	HydroPump.DisplayName: Hydro Pump
+	BlastoisePetProjectileShiny.DisplayName: Blastoise Pet Projectile Shiny
 }
 
 Items: {
@@ -531,6 +540,11 @@ Buffs: {
 	RaichuPetBuffShiny: {
 		DisplayName: Raichu Pet Buff Shiny
 		Description: Mods.Pokemod.Buffs.RaichuPetBuffShiny.Description
+	}
+
+	BlastoisePetBuffShiny: {
+		DisplayName: Blastoise Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.BlastoisePetBuffShiny.Description
 	}
 }
 
