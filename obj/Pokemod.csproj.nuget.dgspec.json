@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JAC521\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj": {}
+    "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JAC521\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj": {
+    "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JAC521\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj",
+        "projectUniqueName": "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj",
         "projectName": "Pokemod",
-        "projectPath": "C:\\Users\\JAC521\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj",
-        "packagesPath": "C:\\Users\\JAC521\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JAC521\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\obj\\",
+        "projectPath": "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\Pokemod.csproj",
+        "packagesPath": "C:\\Users\\loris\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\loris\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Pokemod\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\JAC521\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\loris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -64,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
