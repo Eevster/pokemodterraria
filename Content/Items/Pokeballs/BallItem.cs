@@ -183,6 +183,7 @@ namespace Pokemod.Content.Items.Pokeballs
 				Projectile.netUpdate = true;
 			}
         }
+		
 
 		public virtual bool FailureProb(float catchRate){
 			return RegularProb(catchRate);

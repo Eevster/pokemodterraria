@@ -6,12 +6,13 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.Pokeballs
 {
-	public class FeatherballItem : BallItem
+	public class HeavyballItem : BallItem
 	{
-		protected override int BallProj => ModContent.ProjectileType<FeatherballProj>();
+		protected override int BallProj => ModContent.ProjectileType<HeavyballProj>();
 		protected override int BallValue => 5000;
 		protected override float CatchRate => 1f;
-		public override void AddRecipes() {
+        protected override float ThrowSpeed => 5f;
+        public override void AddRecipes() {
 			CreateRecipe(8)
 				.AddIngredient(ItemID.GemTreeSapphireSeed, 1)
 				.AddIngredient(ItemID.Feather, 1)
@@ -21,8 +22,10 @@ namespace Pokemod.Content.Items.Pokeballs
 		}
 	}
 
-	public class FeatherballProj : BallProj{
-		protected override bool hasGravity => false;
+	public class HeavyballProj : BallProj{
         
+	
+		
+
     }
 }
