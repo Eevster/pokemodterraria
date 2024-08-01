@@ -58,6 +58,8 @@ Projectiles: {
 	HydroPump.DisplayName: Hydro Pump
 	BlastoisePetProjectileShiny.DisplayName: Blastoise Pet Projectile Shiny
 	HeavyballProj.DisplayName: Heavyball Proj
+	GigatonballProj.DisplayName: Gigatonball Proj
+	LeadenballProj.DisplayName: Leadenball Proj
 }
 
 Items: {
@@ -388,6 +390,26 @@ Items: {
 
 	HeavyballItem: {
 		DisplayName: Heavyball Item
+		Tooltip: ""
+	}
+
+	FireStoneItem: {
+		DisplayName: Fire Stone Item
+		Tooltip: ""
+	}
+
+	WaterStoneItem: {
+		DisplayName: Water Stone Item
+		Tooltip: ""
+	}
+
+	GigatonballItem: {
+		DisplayName: Gigatonball Item
+		Tooltip: ""
+	}
+
+	LeadenballItem: {
+		DisplayName: Leadenball Item
 		Tooltip: ""
 	}
 }

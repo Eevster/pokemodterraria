@@ -6,11 +6,11 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.Pokeballs
 {
-	public class HeavyballItem : BallItem
+	public class LeadenballItem : BallItem
 	{
-		protected override int BallProj => ModContent.ProjectileType<HeavyballProj>();
+		protected override int BallProj => ModContent.ProjectileType<LeadenballProj>();
 		protected override int BallValue => 5000;
-		protected override float CatchRate => 1.5f;
+		protected override float CatchRate => 2f;
         protected override float ThrowSpeed => 8f;
         public override void AddRecipes() {
 			CreateRecipe(8)
@@ -22,9 +22,9 @@ namespace Pokemod.Content.Items.Pokeballs
 		}
 	}
 
-	public class HeavyballProj : BallProj{
+	public class LeadenballProj : BallProj{
 
-        protected override float gravityScale => 2f;
+        protected override float gravityScale => 3f;
 
 
 
