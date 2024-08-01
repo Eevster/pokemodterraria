@@ -68,6 +68,7 @@ namespace Pokemod.Content.Items.Pokeballs
 	{
 		public override string Texture => "Pokemod/Assets/Textures/Pokeballs/"+ GetType().Name.Replace("Proj","Item");
 		protected virtual bool hasGravity => true;
+		protected virtual float gravityScale => 1f; 
 		private ref float catchRate => ref Projectile.ai[0];
 		private int bounces = 3;
 		private int captureStage = -1;
@@ -165,7 +166,7 @@ namespace Pokemod.Content.Items.Pokeballs
 			}
 
 			if(hasGravity || captureStage >= 0){
-				Projectile.velocity.Y += 0.2f;
+				Projectile.velocity.Y += 0.2f*gravityScale;
 
 				float maxFallSpeed = 10f;
 				if(Projectile.velocity.Y > maxFallSpeed){

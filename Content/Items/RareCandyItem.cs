@@ -12,8 +12,8 @@ namespace Pokemod.Content.Items
 	public class RareCandyItem : PokemonConsumableItem
 	{
 		public override void SetDefaults() {
-			Item.width = 20; // The item texture's width
-			Item.height = 20; // The item texture's height
+			Item.width = 24; // The item texture's width
+			Item.height = 24; // The item texture's height
 
 			Item.useTime = 1;
 			Item.useAnimation = 1;

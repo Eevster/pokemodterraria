@@ -9,7 +9,7 @@ using Pokemod.Content.Pets;
 
 namespace Pokemod.Content.Items
 {
-	public class ThunderStoneItem : PokemonConsumableItem
+	public class WaterStoneItem : PokemonConsumableItem
 	{
 		public override void SetDefaults() {
 			Item.width = 24; // The item texture's width
