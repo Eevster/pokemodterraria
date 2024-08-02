@@ -60,6 +60,8 @@ Projectiles: {
 	HeavyballProj.DisplayName: Heavyball Proj
 	GigatonballProj.DisplayName: Gigatonball Proj
 	LeadenballProj.DisplayName: Leadenball Proj
+	FlareonPetProjectile.DisplayName: Flareon Pet Projectile
+	FlareonPetProjectileShiny.DisplayName: Flareon Pet Projectile Shiny
 }
 
 Items: {
@@ -573,6 +575,16 @@ Buffs: {
 	BlastoisePetBuffShiny: {
 		DisplayName: Blastoise Pet Buff Shiny
 		Description: Mods.Pokemod.Buffs.BlastoisePetBuffShiny.Description
+	}
+
+	FlareonPetBuff: {
+		DisplayName: Flareon Pet Buff
+		Description: Mods.Pokemod.Buffs.FlareonPetBuff.Description
+	}
+
+	FlareonPetBuffShiny: {
+		DisplayName: Flareon Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.FlareonPetBuffShiny.Description
 	}
 }
 
