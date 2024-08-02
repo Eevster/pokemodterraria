@@ -1,41 +1,38 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using Pokemod.Content.Pets.EeveePet;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.EeveePet
+namespace Pokemod.Content.Pets.FlareonPet
 {
-	public class EeveePetProjectileShiny : PokemonPetProjectile
+	public class FlareonPetProjectileShiny : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 4;
-		public override int baseDamage => 3;
-		public override int PokemonBuff => ModContent.BuffType<EeveePetBuffShiny>();
+		public override int nAttackProjs => 0;
+		public override int baseDamage => 4;
+		public override int PokemonBuff => ModContent.BuffType<FlareonPetBuffShiny>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 0;
 		public override int attackCooldown => 120;
-		public override bool canMoveWhileAttack => true;
+		public override bool canMoveWhileAttack => false;
 
-		public override int totalFrames => 18;
+		public override int totalFrames => 22;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,8];
 		public override int[] walkStartEnd => [9,17];
 		public override int[] jumpStartEnd => [12,12];
 		public override int[] fallStartEnd => [15,15];
-
-		public override string[] evolutions => ["Flareon"];
-		public override string[] itemToEvolve => ["FireStoneItem"];
+		public override int[] attackStartEnd => [18,21];
 
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			//Projectile.width = 50;
-			Projectile.width = 22;
-			DrawOffsetX = -(25 - Projectile.width/2);
-			Projectile.height = 40;
+			//Projectile.width = 60;
+			Projectile.width = 32;
+			DrawOffsetX = -(30 - Projectile.width/2);
+			Projectile.height = 44;
 			Projectile.aiStyle = -1; // Use custom AI
 			Projectile.light = 0f;
 			Projectile.tileCollide = true; 
@@ -46,7 +43,7 @@ namespace Pokemod.Content.Pets.EeveePet
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), GetPokemonDamage(), 2f, Projectile.owner, i*MathHelper.PiOver2)];
+						//attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), GetPokemonDamage(), 2f, Projectile.owner, i*MathHelper.PiOver2)];
 					}
 				} 
 			}
@@ -68,8 +65,8 @@ namespace Pokemod.Content.Pets.EeveePet
 
 		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
-            width = 22;
-			height = 30;
+            width = 32;
+			height = 36;
             fallThrough = false;
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);

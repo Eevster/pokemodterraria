@@ -23,10 +23,6 @@ namespace Pokemod.Content.Items.Pokeballs
 	}
 
 	public class GigatonballProj : BallProj{
-
         protected override float gravityScale => 4f;
-
-
-
     }
 }

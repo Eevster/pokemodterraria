@@ -23,10 +23,6 @@ namespace Pokemod.Content.Items.Pokeballs
 	}
 
 	public class LeadenballProj : BallProj{
-
         protected override float gravityScale => 3f;
-
-
-
     }
 }

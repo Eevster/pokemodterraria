@@ -23,10 +23,6 @@ namespace Pokemod.Content.Items.Pokeballs
 	}
 
 	public class HeavyballProj : BallProj{
-
         protected override float gravityScale => 2f;
-
-
-
     }
 }

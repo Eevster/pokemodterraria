@@ -25,6 +25,9 @@ namespace Pokemod.Content.Pets.EeveePet
 		public override int[] jumpStartEnd => [12,12];
 		public override int[] fallStartEnd => [15,15];
 
+		public override string[] evolutions => ["Flareon"];
+		public override string[] itemToEvolve => ["FireStoneItem"];
+
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
