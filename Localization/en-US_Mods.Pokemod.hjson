@@ -62,6 +62,8 @@ Projectiles: {
 	LeadenballProj.DisplayName: Leadenball Proj
 	FlareonPetProjectile.DisplayName: Flareon Pet Projectile
 	FlareonPetProjectileShiny.DisplayName: Flareon Pet Projectile Shiny
+	StrangeballProj.DisplayName: Strangeball Proj
+	CherishballProj.DisplayName: Cherishball Proj
 }
 
 Items: {
@@ -412,6 +414,16 @@ Items: {
 
 	LeadenballItem: {
 		DisplayName: Leadenball Item
+		Tooltip: ""
+	}
+
+	StrangeballItem: {
+		DisplayName: Strangeball Item
+		Tooltip: ""
+	}
+
+	CherishballItem: {
+		DisplayName: Cherishball Item
 		Tooltip: ""
 	}
 }
