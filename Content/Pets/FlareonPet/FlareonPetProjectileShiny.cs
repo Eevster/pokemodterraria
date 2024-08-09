@@ -19,7 +19,7 @@ namespace Pokemod.Content.Pets.FlareonPet
 		public override bool canMoveWhileAttack => false;
 
 		public override int totalFrames => 22;
-		public override int animationSpeed => 5;
+		public override int animationSpeed => 6;
 		public override int[] idleStartEnd => [0,8];
 		public override int[] walkStartEnd => [9,17];
 		public override int[] jumpStartEnd => [12,12];

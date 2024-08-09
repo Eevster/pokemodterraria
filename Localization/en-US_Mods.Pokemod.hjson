@@ -64,6 +64,10 @@ Projectiles: {
 	FlareonPetProjectileShiny.DisplayName: Flareon Pet Projectile Shiny
 	StrangeballProj.DisplayName: Strangeball Proj
 	CherishballProj.DisplayName: Cherishball Proj
+	JolteonPetProjectile.DisplayName: Jolteon Pet Projectile
+	JolteonPetProjectileShiny.DisplayName: Jolteon Pet Projectile Shiny
+	VaporeonPetProjectile.DisplayName: Vaporeon Pet Projectile
+	VaporeonPetProjectileShiny.DisplayName: Vaporeon Pet Projectile Shiny
 }
 
 Items: {
@@ -597,6 +601,26 @@ Buffs: {
 	FlareonPetBuffShiny: {
 		DisplayName: Flareon Pet Buff Shiny
 		Description: Mods.Pokemod.Buffs.FlareonPetBuffShiny.Description
+	}
+
+	VaporeonPetBuffShiny: {
+		Description: Mods.Pokemod.Buffs.VaporeonPetBuffShiny.Description
+		DisplayName: Vaporeon Pet Buff Shiny
+	}
+
+	VaporeonPetBuff: {
+		Description: Mods.Pokemod.Buffs.VaporeonPetBuff.Description
+		DisplayName: Vaporeon Pet Buff
+	}
+
+	JolteonPetBuffShiny: {
+		Description: Mods.Pokemod.Buffs.JolteonPetBuffShiny.Description
+		DisplayName: Jolteon Pet Buff Shiny
+	}
+
+	JolteonPetBuff: {
+		Description: Mods.Pokemod.Buffs.JolteonPetBuff.Description
+		DisplayName: Jolteon Pet Buff
 	}
 }
 
