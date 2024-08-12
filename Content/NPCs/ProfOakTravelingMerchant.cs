@@ -67,16 +67,15 @@ namespace Pokemod.Content.NPCs
 			Shop.Add<UltraballItem>();
 
 			// Bring  Tools
-			Shop.AddPool("Tools", slots: 1)
+			Shop.AddPool("Grass", slots: 1)
 				.Add<BulbasaurPetItem>()
 				.Add<ChikoritaPetItem>();
-			Shop.AddPool("Furniture", slots: 1)
+			Shop.AddPool("Fire", slots: 1)
 				.Add<CharmanderPetItem>()
 				.Add<CyndaquilPetItem>();
-			Shop.AddPool("Weapons", slots: 1)
+			Shop.AddPool("Water", slots: 1)
 				.Add<SquirtlePetItem>()
 				.Add<TotodilePetItem>();
-
 
 			Shop.Register();
 		}
@@ -218,7 +217,7 @@ namespace Pokemod.Content.NPCs
 				Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<Sparkle>());
 			}
 
-			// Create gore when the NPC is killed.
+			/*// Create gore when the NPC is killed.
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0) {
 				// Retrieve the gore types. This NPC has shimmer variants for head, arm, and leg gore. It also has a custom hat gore. (7 gores)
 				// This NPC will spawn either the assigned party hat or a custom hat gore when not shimmered. When shimmered the top hat is part of the head and no hat gore is spawned.
@@ -242,7 +241,7 @@ namespace Pokemod.Content.NPCs
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armGore);
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 34), NPC.velocity, legGore);
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 34), NPC.velocity, legGore);
-			}
+			}*/
 		}
 
 		public override bool UsesPartyHat() {

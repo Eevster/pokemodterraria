@@ -23,6 +23,5 @@ namespace Pokemod.Content.Pets.CharmanderPet
 			}
    			return true;
 		}
-
 	}
 }
