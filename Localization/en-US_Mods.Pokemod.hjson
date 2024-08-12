@@ -68,6 +68,10 @@ Projectiles: {
 	JolteonPetProjectileShiny.DisplayName: Jolteon Pet Projectile Shiny
 	VaporeonPetProjectile.DisplayName: Vaporeon Pet Projectile
 	VaporeonPetProjectileShiny.DisplayName: Vaporeon Pet Projectile Shiny
+	ThunderCloud.DisplayName: Thunder Cloud
+	AquaRing.DisplayName: Aqua Ring
+	Discharge.DisplayName: Discharge
+	LavaPlume.DisplayName: Lava Plume
 }
 
 Items: {

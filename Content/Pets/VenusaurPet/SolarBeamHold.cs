@@ -46,6 +46,9 @@ namespace Pokemod.Content.Pets.VenusaurPet
             Projectile.tileCollide = false;  
             Projectile.penetrate = -1;
 
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
+
 			Projectile.light = 1f;
         }
 
@@ -97,7 +100,7 @@ namespace Pokemod.Content.Pets.VenusaurPet
                 SearchTarget();
             }else{
                 if(canPlaySound){
-                    SoundEngine.PlaySound(SoundID.Item43, Projectile.position);
+                    SoundEngine.PlaySound(SoundID.Item67, Projectile.position);
                     canPlaySound = false;
                 }
                 if(targetEnemy != null){

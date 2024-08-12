@@ -9,14 +9,17 @@ namespace Pokemod.Content.Pets.FlareonPet
 {
 	public class FlareonPetProjectileShiny : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 0;
+		public override int nAttackProjs => 16;
 		public override int baseDamage => 4;
 		public override int PokemonBuff => ModContent.BuffType<FlareonPetBuffShiny>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 0;
-		public override int attackCooldown => 120;
+		public override int attackDuration => 20;
+		public override int attackCooldown => 40;
 		public override bool canMoveWhileAttack => false;
+
+		public override float moveDistance1 => 50f;
+		public override float moveDistance2 => 50f;
 
 		public override int totalFrames => 22;
 		public override int animationSpeed => 6;
@@ -39,28 +42,19 @@ namespace Pokemod.Content.Pets.FlareonPet
 		}
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
-			SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
 			if(Projectile.owner == Main.myPlayer){
-				for(int i = 0; i < nAttackProjs; i++){
+				for(int i = 0; i < nAttackProjs; i+=8){
 					if(attackProjs[i] == null){
-						//attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), GetPokemonDamage(), 2f, Projectile.owner, i*MathHelper.PiOver2)];
+						SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
+						currentStatus = (int)ProjStatus.Attack;
+						for(int j = 0; j < 8; j++){
+							attackProjs[j] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 15*new Vector2(0,-1).RotatedBy(MathHelper.ToRadians(j*45f)), ModContent.ProjectileType<LavaPlume>(), GetPokemonDamage(), 2f, Projectile.owner)];
+						}
 					}
 				} 
 			}
 			timer = attackDuration;
 			canAttack = false;
-		}
-
-		public override void UpdateAttackProjs(int i, ref float maxFallSpeed){
-			if(attackProjs[i].ai[1] == 0){
-				attackProjs[i].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(attackProjs[i].ai[0]);
-			}
-		}
-
-		public override void UpdateNoAttackProjs(int i){
-			if(attackProjs[i].ai[1] != 0){
-				attackProjs[i] = null;
-			}
 		}
 
 		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)

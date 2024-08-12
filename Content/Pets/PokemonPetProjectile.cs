@@ -200,10 +200,12 @@ namespace Pokemod.Content.Pets
 			int exp = 0;
 			if(attackProjs[projIndex] != null){
 				if(attackProjs[projIndex].active){
-					PokemonAttack AttackProj = (PokemonAttack)attackProjs[projIndex].ModProjectile;
-					exp = AttackProj.GetExpGained();
-					if(exp != 0){
-						CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+exp+" Exp");
+					PokemonAttack AttackProj = (PokemonAttack)attackProjs[projIndex]?.ModProjectile;
+					if(AttackProj != null){
+						exp = AttackProj.GetExpGained();
+						if(exp != 0){
+							CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+exp+" Exp");
+						}
 					}
 				}else{
 					attackProjs[projIndex] = null;
