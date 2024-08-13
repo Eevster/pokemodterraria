@@ -272,7 +272,7 @@ namespace Pokemod.Content.Items
         public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
 			if(BallType != null && BallType != ""){
-				Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+BallType);
+				Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+BallType+"Big");
 
 				spriteBatch.Draw(ballTexture.Value,
 					position: position-new Vector2(ballTexture.Value.Width/2, ballTexture.Value.Height/2),

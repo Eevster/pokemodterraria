@@ -6,9 +6,9 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.Pokeballs
 {
-	public class HonorballItem : BallItem
+	public class PremierballItem : BallItem
 	{
-		protected override int BallProj => ModContent.ProjectileType<HonorballProj>();
+		protected override int BallProj => ModContent.ProjectileType<PremierballProj>();
 		protected override int BallValue => 1000;
 		protected override float CatchRate => 1f;
 
@@ -21,5 +21,5 @@ namespace Pokemod.Content.Items.Pokeballs
 		}
 	}
 
-	public class HonorballProj : BallProj{}
+	public class PremierballProj : BallProj{}
 }

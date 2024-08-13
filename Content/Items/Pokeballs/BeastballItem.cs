@@ -24,7 +24,9 @@ namespace Pokemod.Content.Items.Pokeballs
 
 	public class BeastballProj : BallProj{
 		public override bool FailureProb(float catchRate){
-			if(targetPokemon.GetGlobalNPC<PokemonNPCData>().ultrabeast) catchRate = 5f;
+			if(targetPokemon != null){
+				if(targetPokemon.GetGlobalNPC<PokemonNPCData>().ultrabeast) catchRate = 5f;
+			}
 
 			return RegularProb(catchRate);
 		}

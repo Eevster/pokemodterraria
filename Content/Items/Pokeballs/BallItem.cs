@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Content.NPCs;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -62,6 +63,23 @@ namespace Pokemod.Content.Items.Pokeballs
 			TooltipLine tooltipLine = new TooltipLine(Mod, "CatchRate", CatchRate+" catch rate");
             tooltips.Add(tooltipLine);
 		}
+
+		public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+        {
+			Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+GetType().Name+"Big");
+
+			spriteBatch.Draw(ballTexture.Value,
+				position: position-new Vector2(ballTexture.Value.Width/2, ballTexture.Value.Height/2),
+				sourceRectangle: ballTexture.Value.Bounds,
+				drawColor,
+				rotation: 0f,
+				origin: Vector2.Zero,
+				scale: 1f,
+				SpriteEffects.None,
+				layerDepth: 0f);
+				
+            base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
+        }
 	}
 
 	public abstract class BallProj : ModProjectile
@@ -233,32 +251,36 @@ namespace Pokemod.Content.Items.Pokeballs
         }
 
 		public void CaptureFailure(){
-			targetPokemon.Center = Projectile.Center + new Vector2(0,-targetPokemon.height/2);
-			targetPokemon.hide = false;
-			targetPokemon.friendly = false;
-			targetPokemon.dontTakeDamageFromHostiles = false;
-			Projectile.Kill();
+			if(targetPokemon != null){
+				targetPokemon.Center = Projectile.Center + new Vector2(0,-targetPokemon.height/2);
+				targetPokemon.hide = false;
+				targetPokemon.friendly = false;
+				targetPokemon.dontTakeDamageFromHostiles = false;
+				Projectile.Kill();
+			}
 		}
 
 		public void CaptureSuccess(){
-			Player player = Main.player[Projectile.owner];
-			int item;
-			string pokemonName = targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName;
-			bool shiny = targetPokemon.GetGlobalNPC<PokemonNPCData>().shiny;
+			if(targetPokemon != null){
+				Player player = Main.player[Projectile.owner];
+				int item;
+				string pokemonName = targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName;
+				bool shiny = targetPokemon.GetGlobalNPC<PokemonNPCData>().shiny;
 
-			if (Main.netMode == NetmodeID.SinglePlayer){
-				item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
-				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
-			}else{
-				if(Main.netMode == NetmodeID.Server){
-					item = player.QuickSpawnItem(Projectile.InheritSource(Projectile), ModContent.ItemType<CaughtPokemonItem>());
+				if (Main.netMode == NetmodeID.SinglePlayer){
+					item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
 					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
+				}else{
+					if(Main.netMode == NetmodeID.Server){
+						item = player.QuickSpawnItem(Projectile.InheritSource(Projectile), ModContent.ItemType<CaughtPokemonItem>());
+						CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
+						pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
+					}
 				}
-			}
 
-			targetPokemon.StrikeInstantKill();
+				targetPokemon.StrikeInstantKill();
+			}
 			Projectile.Kill();
 		}
 

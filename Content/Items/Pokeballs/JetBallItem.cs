@@ -11,6 +11,7 @@ namespace Pokemod.Content.Items.Pokeballs
 		protected override int BallProj => ModContent.ProjectileType<WingballProj>();
 		protected override int BallValue => 5000;
 		protected override float CatchRate => 2.0f;
+		protected override float ThrowSpeed => 25f;
 		public override void AddRecipes() {
 			CreateRecipe(1)
 				.AddIngredient(ItemID.GemTreeSapphireSeed, 2)
