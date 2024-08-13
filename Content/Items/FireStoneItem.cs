@@ -31,5 +31,13 @@ namespace Pokemod.Content.Items
 				Item.consumable = true;
 			}
 		}
+		public override void AddRecipes() {
+			CreateRecipe(1)
+				.AddIngredient(ItemID.Hellstone, 40)
+				.AddIngredient(ItemID.Obsidian, 20)
+				.AddIngredient(ItemID.AshBlock, 20)
+				.AddTile(TileID.WorkBenches)
+				.Register();
+	}
 	}
 }
