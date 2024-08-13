@@ -34,7 +34,6 @@ Projectiles: {
 	PokeballProj.DisplayName: Pokeball Proj
 	UltraballProj.DisplayName: Ultraball Proj
 	MasterballProj.DisplayName: Masterball Proj
-	HonorballProj.DisplayName: Honorball Proj
 	GreatballProj.DisplayName: Greatball Proj
 	FeatherballProj.DisplayName: Featherball Proj
 	DuskballProj.DisplayName: Duskball Proj
@@ -72,6 +71,7 @@ Projectiles: {
 	AquaRing.DisplayName: Aqua Ring
 	Discharge.DisplayName: Discharge
 	LavaPlume.DisplayName: Lava Plume
+	PremierballProj.DisplayName: Premierball Proj
 }
 
 Items: {
@@ -366,265 +366,270 @@ Items: {
 	}
 
 	WingballItem: {
-		DisplayName: Wingball Item
+		DisplayName: Wingball
 		Tooltip: ""
 	}
 
 	CitrineballItem: {
-		DisplayName: Citrineball Item
+		DisplayName: Citrineball
 		Tooltip: ""
 	}
 
 	JetballItem: {
-		DisplayName: Jetball Item
+		DisplayName: Jetball
 		Tooltip: ""
 	}
 
 	PeridotballItem: {
-		DisplayName: Peridotball Item
+		DisplayName: Peridotball
 		Tooltip: ""
 	}
 
 	VioletballItem: {
-		DisplayName: Violetball Item
+		DisplayName: Violetball
 		Tooltip: ""
 	}
 
 	AzureballItem: {
-		DisplayName: Azureball Item
+		DisplayName: Azureball
 		Tooltip: ""
 	}
 
 	ThunderStoneItem: {
-		DisplayName: Thunder Stone Item
+		DisplayName: Thunder Stone
 		Tooltip: ""
 	}
 
 	HeavyballItem: {
-		DisplayName: Heavyball Item
+		DisplayName: Heavyball
 		Tooltip: ""
 	}
 
 	FireStoneItem: {
-		DisplayName: Fire Stone Item
+		DisplayName: Fire Stone
 		Tooltip: ""
 	}
 
 	WaterStoneItem: {
-		DisplayName: Water Stone Item
+		DisplayName: Water Stone
 		Tooltip: ""
 	}
 
 	GigatonballItem: {
-		DisplayName: Gigatonball Item
+		DisplayName: Gigatonball
 		Tooltip: ""
 	}
 
 	LeadenballItem: {
-		DisplayName: Leadenball Item
+		DisplayName: Leadenball
 		Tooltip: ""
 	}
 
 	StrangeballItem: {
-		DisplayName: Strangeball Item
+		DisplayName: Strangeball
 		Tooltip: ""
 	}
 
 	CherishballItem: {
-		DisplayName: Cherishball Item
+		DisplayName: Cherishball
 		Tooltip: ""
+	}
+
+	PremierballItem: {
+		Tooltip: ""
+		DisplayName: Premierball
 	}
 }
 
 Buffs: {
 	EeveePetBuff: {
 		Description: Mods.Pokemod.Buffs.EeveePetBuff.Description
-		DisplayName: Eevee Pet Buff
+		DisplayName: Eevee
 	}
 
 	PikachuPetBuff: {
-		DisplayName: Pikachu Pet Buff
+		DisplayName: Pikachu
 		Description: Mods.Pokemod.Buffs.PikachuPetBuff.Description
 	}
 
 	BulbasaurPetBuff: {
 		Description: Mods.Pokemod.Buffs.BulbasaurPetBuff.Description
-		DisplayName: Bulbasaur Pet Buff
+		DisplayName: Bulbasaur
 	}
 
 	CharmanderPetBuff: {
 		Description: Mods.Pokemod.Buffs.CharmanderPetBuff.Description
-		DisplayName: Charmander Pet Buff
+		DisplayName: Charmander
 	}
 
 	SquirtlePetBuff: {
-		DisplayName: Squirtle Pet Buff
+		DisplayName: Squirtle
 		Description: Mods.Pokemod.Buffs.SquirtlePetBuff.Description
 	}
 
 	IvysaurPetBuff: {
-		DisplayName: Ivysaur Pet Buff
+		DisplayName: Ivysaur
 		Description: Mods.Pokemod.Buffs.IvysaurPetBuff.Description
 	}
 
 	CharmeleonPetBuff: {
-		DisplayName: Charmeleon Pet Buff
+		DisplayName: Charmeleon
 		Description: Mods.Pokemod.Buffs.CharmeleonPetBuff.Description
 	}
 
 	VenusaurPetBuff: {
-		DisplayName: Venusaur Pet Buff
+		DisplayName: Venusaur
 		Description: Mods.Pokemod.Buffs.VenusaurPetBuff.Description
 	}
 
 	CharizardPetBuff: {
 		Description: Mods.Pokemod.Buffs.CharizardPetBuff.Description
-		DisplayName: Charizard Pet Buff
+		DisplayName: Charizard
 	}
 
 	ChikoritaPetBuff: {
-		DisplayName: Chikorita Pet Buff
+		DisplayName: Chikorita
 		Description: Mods.Pokemod.Buffs.ChikoritaPetBuff.Description
 	}
 
 	CyndaquilPetBuff: {
-		DisplayName: Cyndaquil Pet Buff
+		DisplayName: Cyndaquil
 		Description: Mods.Pokemod.Buffs.CyndaquilPetBuff.Description
 	}
 
 	TotodilePetBuff: {
-		DisplayName: Totodile Pet Buff
+		DisplayName: Totodile
 		Description: Mods.Pokemod.Buffs.TotodilePetBuff.Description
 	}
 
 	BulbasaurPetBuffShiny: {
-		DisplayName: Bulbasaur Pet Buff Shiny
+		DisplayName: Bulbasaur Shiny
 		Description: Mods.Pokemod.Buffs.BulbasaurPetBuffShiny.Description
 	}
 
 	CharmanderPetBuffShiny: {
-		DisplayName: Charmander Pet Buff Shiny
+		DisplayName: Charmander Shiny
 		Description: Mods.Pokemod.Buffs.CharmanderPetBuffShiny.Description
 	}
 
 	VenusaurPetBuffMega: {
-		DisplayName: Venusaur Pet Buff Mega
+		DisplayName: Venusaur Mega
 		Description: Mods.Pokemod.Buffs.VenusaurPetBuffMega.Description
 	}
 
 	WartortlePetBuff: {
-		DisplayName: Wartortle Pet Buff
+		DisplayName: Wartortle
 		Description: Mods.Pokemod.Buffs.WartortlePetBuff.Description
 	}
 
 	BlastoisePetBuff: {
-		DisplayName: Blastoise Pet Buff
+		DisplayName: Blastoise
 		Description: Mods.Pokemod.Buffs.BlastoisePetBuff.Description
 	}
 
 	BlastoisePetBuffMega: {
-		DisplayName: Blastoise Pet Buff Mega
+		DisplayName: Blastoise Mega
 		Description: Mods.Pokemod.Buffs.BlastoisePetBuffMega.Description
 	}
 
 	CharizardPetBuffMegaX: {
-		DisplayName: Charizard Pet Buff Mega X
+		DisplayName: Charizard Mega X
 		Description: Mods.Pokemod.Buffs.CharizardPetBuffMegaX.Description
 	}
 
 	CharizardPetBuffMegaY: {
-		DisplayName: Charizard Pet Buff Mega Y
+		DisplayName: Charizard Mega Y
 		Description: Mods.Pokemod.Buffs.CharizardPetBuffMegaY.Description
 	}
 
 	SquirtlePetBuffShiny: {
-		DisplayName: Squirtle Pet Buff Shiny
+		DisplayName: Squirtle Shiny
 		Description: Mods.Pokemod.Buffs.SquirtlePetBuffShiny.Description
 	}
 
 	CharizardPetBuffShiny: {
-		DisplayName: Charizard Pet Buff Shiny
+		DisplayName: Charizard Shiny
 		Description: Mods.Pokemod.Buffs.CharizardPetBuffShiny.Description
 	}
 
 	CharmeleonPetBuffShiny: {
-		DisplayName: Charmeleon Pet Buff Shiny
+		DisplayName: Charmeleon Shiny
 		Description: Mods.Pokemod.Buffs.CharmeleonPetBuffShiny.Description
 	}
 
 	IvysaurPetBuffShiny: {
-		DisplayName: Ivysaur Pet Buff Shiny
+		DisplayName: Ivysaur Shiny
 		Description: Mods.Pokemod.Buffs.IvysaurPetBuffShiny.Description
 	}
 
 	VenusaurPetBuffShiny: {
-		DisplayName: Venusaur Pet Buff Shiny
+		DisplayName: Venusaur Shiny
 		Description: Mods.Pokemod.Buffs.VenusaurPetBuffShiny.Description
 	}
 
 	TorchicPetBuff: {
-		DisplayName: Torchic Pet Buff
+		DisplayName: Torchic
 		Description: Mods.Pokemod.Buffs.TorchicPetBuff.Description
 	}
 
 	EeveePetBuffShiny: {
-		DisplayName: Eevee Pet Buff Shiny
+		DisplayName: Eevee Shiny
 		Description: Mods.Pokemod.Buffs.EeveePetBuffShiny.Description
 	}
 
 	PikachuPetBuffShiny: {
-		DisplayName: Pikachu Pet Buff Shiny
+		DisplayName: Pikachu Shiny
 		Description: Mods.Pokemod.Buffs.PikachuPetBuffShiny.Description
 	}
 
 	WartortlePetBuffShiny: {
-		DisplayName: Wartortle Pet Buff Shiny
+		DisplayName: Wartortle Shiny
 		Description: Mods.Pokemod.Buffs.WartortlePetBuffShiny.Description
 	}
 
 	RaichuPetBuff: {
-		DisplayName: Raichu Pet Buff
+		DisplayName: Raichu
 		Description: Mods.Pokemod.Buffs.RaichuPetBuff.Description
 	}
 
 	RaichuPetBuffShiny: {
-		DisplayName: Raichu Pet Buff Shiny
+		DisplayName: Raichu Shiny
 		Description: Mods.Pokemod.Buffs.RaichuPetBuffShiny.Description
 	}
 
 	BlastoisePetBuffShiny: {
-		DisplayName: Blastoise Pet Buff Shiny
+		DisplayName: Blastoise Shiny
 		Description: Mods.Pokemod.Buffs.BlastoisePetBuffShiny.Description
 	}
 
 	FlareonPetBuff: {
-		DisplayName: Flareon Pet Buff
+		DisplayName: Flareon
 		Description: Mods.Pokemod.Buffs.FlareonPetBuff.Description
 	}
 
 	FlareonPetBuffShiny: {
-		DisplayName: Flareon Pet Buff Shiny
+		DisplayName: Flareon Shiny
 		Description: Mods.Pokemod.Buffs.FlareonPetBuffShiny.Description
 	}
 
 	VaporeonPetBuffShiny: {
 		Description: Mods.Pokemod.Buffs.VaporeonPetBuffShiny.Description
-		DisplayName: Vaporeon Pet Buff Shiny
+		DisplayName: Vaporeon Shiny
 	}
 
 	VaporeonPetBuff: {
 		Description: Mods.Pokemod.Buffs.VaporeonPetBuff.Description
-		DisplayName: Vaporeon Pet Buff
+		DisplayName: Vaporeon
 	}
 
 	JolteonPetBuffShiny: {
 		Description: Mods.Pokemod.Buffs.JolteonPetBuffShiny.Description
-		DisplayName: Jolteon Pet Buff Shiny
+		DisplayName: Jolteon Shiny
 	}
 
 	JolteonPetBuff: {
 		Description: Mods.Pokemod.Buffs.JolteonPetBuff.Description
-		DisplayName: Jolteon Pet Buff
+		DisplayName: Jolteon
 	}
 }
 
@@ -640,5 +645,5 @@ NPCs: {
 	SquirtleCritterNPCShiny.DisplayName: Squirtle
 	BlacephalonCritterNPC.DisplayName: Blacephalon
 	EeveeCritterNPCShiny.DisplayName: Eevee
-	PikachuCritterNPCShiny.DisplayName: Pikachu Critter N P C Shiny
+	PikachuCritterNPCShiny.DisplayName: Pikachu
 }
