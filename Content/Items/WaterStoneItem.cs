@@ -31,5 +31,13 @@ namespace Pokemod.Content.Items
 				Item.consumable = true;
 			}
 		}
+		public override void AddRecipes() {
+			CreateRecipe(1)
+				.AddIngredient(ItemID.Waterleaf, 40)
+				.AddIngredient(ItemID.Coral, 20)
+				.AddIngredient(ItemID.SharkFin, 20)
+				.AddTile(TileID.WorkBenches)
+				.Register();
+	}
 	}
 }

@@ -31,5 +31,12 @@ namespace Pokemod.Content.Items
 				Item.consumable = true;
 			}
 		}
+		public override void AddRecipes() {
+			CreateRecipe(1)
+				.AddIngredient(ItemID.YellowMarigold, 40)
+				.AddIngredient(ItemID.FallenStar, 20)
+				.AddIngredient(ItemID.Wire, 20)
+				.AddTile(TileID.WorkBenches)
+				.Register();
 	}
-}
+}}
