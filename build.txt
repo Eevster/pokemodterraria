@@ -1,4 +1,4 @@
-displayName = Pokemod V.O.9 (Final pre-release)
+displayName = Pokemod V1.0 (Full Release)
 author = Eevster
-version = 0.9
+version = 1.0
 modReferences = SubworldLibrary
