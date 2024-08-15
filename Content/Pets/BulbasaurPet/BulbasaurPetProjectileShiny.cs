@@ -63,7 +63,9 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 		}
 
 		public override void UpdateAttackProjs(int i, ref float maxFallSpeed){
-			((PokemonAttack)attackProjs[i].ModProjectile).positionAux = Projectile.Center;
+			if(attackProjs[i].ModProjectile is PokemonAttack){
+				((PokemonAttack)attackProjs[i]?.ModProjectile).positionAux = Projectile.Center;
+			}
 			attackProjs[i].netUpdate = true;
 		}
 

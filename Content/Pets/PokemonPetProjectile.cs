@@ -78,12 +78,14 @@ namespace Pokemod.Content.Pets
 		public override void SendExtraAI(BinaryWriter writer)
         {
             writer.Write((double)currentStatus);
+			writer.Write((double)expGained);
             base.SendExtraAI(writer);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             currentStatus = (int)reader.ReadDouble();
+			expGained = (int)reader.ReadDouble();
             base.ReceiveExtraAI(reader);
         }
 
@@ -200,11 +202,14 @@ namespace Pokemod.Content.Pets
 			int exp = 0;
 			if(attackProjs[projIndex] != null){
 				if(attackProjs[projIndex].active){
-					PokemonAttack AttackProj = (PokemonAttack)attackProjs[projIndex]?.ModProjectile;
-					if(AttackProj != null){
-						exp = AttackProj.GetExpGained();
-						if(exp != 0){
-							CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+exp+" Exp");
+					if(attackProjs[projIndex].ModProjectile is PokemonAttack){
+						PokemonAttack AttackProj = (PokemonAttack)attackProjs[projIndex]?.ModProjectile;
+						if(AttackProj != null){
+							AttackProj.pokemonProj = Projectile;
+							/*exp = AttackProj.GetExpGained();
+							if(exp != 0){
+								CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+exp+" Exp");
+							}*/
 						}
 					}
 				}else{
@@ -212,6 +217,17 @@ namespace Pokemod.Content.Pets
 				}
 			}
 			expGained += exp;
+		}
+
+		public void SetExtraExp(int extraExp){
+			if(Projectile.owner == Main.myPlayer){
+				if(extraExp > 0){
+					CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+extraExp+" Exp");
+				}
+				Projectile.netUpdate = true;
+			}
+
+			expGained += extraExp;
 		}
 
 		public virtual void CheckActive(Player player) {
