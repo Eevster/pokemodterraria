@@ -27,9 +27,9 @@ Projectiles: {
 	TorchicPetProjectile.DisplayName: Torchic Pet Projectile
 	EeveePetProjectileShiny.DisplayName: Eevee Pet Projectile Shiny
 	Swift.DisplayName: Swift
-	VineWhipBack.DisplayName: Vine Whip Back
-	VineWhipFront.DisplayName: Vine Whip Front
-	ThunderboltHold.DisplayName: Thunderbolt Hold
+	VineWhipBack.DisplayName: Vine Whip
+	VineWhipFront.DisplayName: Vine Whip
+	ThunderboltHold.DisplayName: Thunderbolt
 	PikachuPetProjectileShiny.DisplayName: Pikachu Pet Projectile Shiny
 	PokeballProj.DisplayName: Pokeball Proj
 	UltraballProj.DisplayName: Ultraball Proj
@@ -48,7 +48,7 @@ Projectiles: {
 	RaichuPetProjectile.DisplayName: Raichu Pet Projectile
 	RaichuPetProjectileShiny.DisplayName: Raichu Pet Projectile Shiny
 	PoisonPowder.DisplayName: Poison Powder
-	SolarBeamHold.DisplayName: Solar Beam Hold
+	SolarBeamHold.DisplayName: Solar Beam
 	Ember.DisplayName: Ember
 	Flamethrower.DisplayName: Flamethrower
 	FireBlast.DisplayName: Fire Blast
@@ -67,7 +67,7 @@ Projectiles: {
 	JolteonPetProjectileShiny.DisplayName: Jolteon Pet Projectile Shiny
 	VaporeonPetProjectile.DisplayName: Vaporeon Pet Projectile
 	VaporeonPetProjectileShiny.DisplayName: Vaporeon Pet Projectile Shiny
-	ThunderCloud.DisplayName: Thunder Cloud
+	ThunderCloud.DisplayName: Thunder
 	AquaRing.DisplayName: Aqua Ring
 	Discharge.DisplayName: Discharge
 	LavaPlume.DisplayName: Lava Plume
@@ -443,192 +443,192 @@ Items: {
 
 Buffs: {
 	EeveePetBuff: {
-		Description: Mods.Pokemod.Buffs.EeveePetBuff.Description
+		Description: " "
 		DisplayName: Eevee
 	}
 
 	PikachuPetBuff: {
 		DisplayName: Pikachu
-		Description: Mods.Pokemod.Buffs.PikachuPetBuff.Description
+		Description: " "
 	}
 
 	BulbasaurPetBuff: {
-		Description: Mods.Pokemod.Buffs.BulbasaurPetBuff.Description
+		Description: " "
 		DisplayName: Bulbasaur
 	}
 
 	CharmanderPetBuff: {
-		Description: Mods.Pokemod.Buffs.CharmanderPetBuff.Description
+		Description: " "
 		DisplayName: Charmander
 	}
 
 	SquirtlePetBuff: {
 		DisplayName: Squirtle
-		Description: Mods.Pokemod.Buffs.SquirtlePetBuff.Description
+		Description: " "
 	}
 
 	IvysaurPetBuff: {
 		DisplayName: Ivysaur
-		Description: Mods.Pokemod.Buffs.IvysaurPetBuff.Description
+		Description: " "
 	}
 
 	CharmeleonPetBuff: {
 		DisplayName: Charmeleon
-		Description: Mods.Pokemod.Buffs.CharmeleonPetBuff.Description
+		Description: " "
 	}
 
 	VenusaurPetBuff: {
 		DisplayName: Venusaur
-		Description: Mods.Pokemod.Buffs.VenusaurPetBuff.Description
+		Description: " "
 	}
 
 	CharizardPetBuff: {
-		Description: Mods.Pokemod.Buffs.CharizardPetBuff.Description
+		Description: " "
 		DisplayName: Charizard
 	}
 
 	ChikoritaPetBuff: {
 		DisplayName: Chikorita
-		Description: Mods.Pokemod.Buffs.ChikoritaPetBuff.Description
+		Description: " "
 	}
 
 	CyndaquilPetBuff: {
 		DisplayName: Cyndaquil
-		Description: Mods.Pokemod.Buffs.CyndaquilPetBuff.Description
+		Description: " "
 	}
 
 	TotodilePetBuff: {
 		DisplayName: Totodile
-		Description: Mods.Pokemod.Buffs.TotodilePetBuff.Description
+		Description: " "
 	}
 
 	BulbasaurPetBuffShiny: {
 		DisplayName: Bulbasaur Shiny
-		Description: Mods.Pokemod.Buffs.BulbasaurPetBuffShiny.Description
+		Description: " "
 	}
 
 	CharmanderPetBuffShiny: {
 		DisplayName: Charmander Shiny
-		Description: Mods.Pokemod.Buffs.CharmanderPetBuffShiny.Description
+		Description: " "
 	}
 
 	VenusaurPetBuffMega: {
 		DisplayName: Venusaur Mega
-		Description: Mods.Pokemod.Buffs.VenusaurPetBuffMega.Description
+		Description: " "
 	}
 
 	WartortlePetBuff: {
 		DisplayName: Wartortle
-		Description: Mods.Pokemod.Buffs.WartortlePetBuff.Description
+		Description: " "
 	}
 
 	BlastoisePetBuff: {
 		DisplayName: Blastoise
-		Description: Mods.Pokemod.Buffs.BlastoisePetBuff.Description
+		Description: " "
 	}
 
 	BlastoisePetBuffMega: {
 		DisplayName: Blastoise Mega
-		Description: Mods.Pokemod.Buffs.BlastoisePetBuffMega.Description
+		Description: " "
 	}
 
 	CharizardPetBuffMegaX: {
 		DisplayName: Charizard Mega X
-		Description: Mods.Pokemod.Buffs.CharizardPetBuffMegaX.Description
+		Description: " "
 	}
 
 	CharizardPetBuffMegaY: {
 		DisplayName: Charizard Mega Y
-		Description: Mods.Pokemod.Buffs.CharizardPetBuffMegaY.Description
+		Description: " "
 	}
 
 	SquirtlePetBuffShiny: {
 		DisplayName: Squirtle Shiny
-		Description: Mods.Pokemod.Buffs.SquirtlePetBuffShiny.Description
+		Description: " "
 	}
 
 	CharizardPetBuffShiny: {
 		DisplayName: Charizard Shiny
-		Description: Mods.Pokemod.Buffs.CharizardPetBuffShiny.Description
+		Description: " "
 	}
 
 	CharmeleonPetBuffShiny: {
 		DisplayName: Charmeleon Shiny
-		Description: Mods.Pokemod.Buffs.CharmeleonPetBuffShiny.Description
+		Description: " "
 	}
 
 	IvysaurPetBuffShiny: {
 		DisplayName: Ivysaur Shiny
-		Description: Mods.Pokemod.Buffs.IvysaurPetBuffShiny.Description
+		Description: " "
 	}
 
 	VenusaurPetBuffShiny: {
 		DisplayName: Venusaur Shiny
-		Description: Mods.Pokemod.Buffs.VenusaurPetBuffShiny.Description
+		Description: " "
 	}
 
 	TorchicPetBuff: {
 		DisplayName: Torchic
-		Description: Mods.Pokemod.Buffs.TorchicPetBuff.Description
+		Description: " "
 	}
 
 	EeveePetBuffShiny: {
 		DisplayName: Eevee Shiny
-		Description: Mods.Pokemod.Buffs.EeveePetBuffShiny.Description
+		Description: " "
 	}
 
 	PikachuPetBuffShiny: {
 		DisplayName: Pikachu Shiny
-		Description: Mods.Pokemod.Buffs.PikachuPetBuffShiny.Description
+		Description: " "
 	}
 
 	WartortlePetBuffShiny: {
 		DisplayName: Wartortle Shiny
-		Description: Mods.Pokemod.Buffs.WartortlePetBuffShiny.Description
+		Description: " "
 	}
 
 	RaichuPetBuff: {
 		DisplayName: Raichu
-		Description: Mods.Pokemod.Buffs.RaichuPetBuff.Description
+		Description: " "
 	}
 
 	RaichuPetBuffShiny: {
 		DisplayName: Raichu Shiny
-		Description: Mods.Pokemod.Buffs.RaichuPetBuffShiny.Description
+		Description: " "
 	}
 
 	BlastoisePetBuffShiny: {
 		DisplayName: Blastoise Shiny
-		Description: Mods.Pokemod.Buffs.BlastoisePetBuffShiny.Description
+		Description: " "
 	}
 
 	FlareonPetBuff: {
 		DisplayName: Flareon
-		Description: Mods.Pokemod.Buffs.FlareonPetBuff.Description
+		Description: " "
 	}
 
 	FlareonPetBuffShiny: {
 		DisplayName: Flareon Shiny
-		Description: Mods.Pokemod.Buffs.FlareonPetBuffShiny.Description
+		Description: " "
 	}
 
 	VaporeonPetBuffShiny: {
-		Description: Mods.Pokemod.Buffs.VaporeonPetBuffShiny.Description
+		Description: " "
 		DisplayName: Vaporeon Shiny
 	}
 
 	VaporeonPetBuff: {
-		Description: Mods.Pokemod.Buffs.VaporeonPetBuff.Description
+		Description: " "
 		DisplayName: Vaporeon
 	}
 
 	JolteonPetBuffShiny: {
-		Description: Mods.Pokemod.Buffs.JolteonPetBuffShiny.Description
+		Description: " "
 		DisplayName: Jolteon Shiny
 	}
 
 	JolteonPetBuff: {
-		Description: Mods.Pokemod.Buffs.JolteonPetBuff.Description
+		Description: " "
 		DisplayName: Jolteon
 	}
 }

@@ -84,12 +84,12 @@ namespace Pokemod.Content.Pets.IvysaurPet
 				float projSpeed = 12f;
 				if(canfollow){
 					if(Vector2.Distance(Projectile.Center, targetPosition) > 4*projSpeed){
-						Projectile.velocity +=  0.08f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+						Projectile.velocity +=  0.1f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 						if(Projectile.velocity.Length() > projSpeed){
 							Projectile.velocity = Vector2.Normalize(Projectile.velocity)*projSpeed;
 						}
 					}else if(Vector2.Distance(Projectile.Center, targetPosition) > projSpeed){
-						Projectile.velocity +=  0.25f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+						Projectile.velocity +=  0.3f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 						if(Projectile.velocity.Length() > 2f*projSpeed){
 							Projectile.velocity = 2f*Vector2.Normalize(Projectile.velocity)*projSpeed;
 						}
