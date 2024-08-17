@@ -13,10 +13,10 @@ namespace Pokemod.Content.Items.Pokeballs
 		protected override float CatchRate => 2f;
         protected override float ThrowSpeed => 8f;
         public override void AddRecipes() {
-			CreateRecipe(8)
+			CreateRecipe(4)
 				.AddIngredient(ItemID.GemTreeSapphireSeed, 1)
-				.AddIngredient(ItemID.Feather, 1)
-				.AddRecipeGroup(RecipeGroupID.IronBar, 1)
+				.AddIngredient(ItemID.Obsidian, 5)
+				.AddRecipeGroup(RecipeGroupID.IronBar, 5)
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}
