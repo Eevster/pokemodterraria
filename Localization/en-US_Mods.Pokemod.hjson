@@ -439,6 +439,11 @@ Items: {
 		Tooltip: ""
 		DisplayName: Premierball
 	}
+
+	RedApricorn: {
+		Tooltip: ""
+		DisplayName: Red Apricorn
+	}
 }
 
 Buffs: {
@@ -647,3 +652,5 @@ NPCs: {
 	EeveeCritterNPCShiny.DisplayName: Eevee
 	PikachuCritterNPCShiny.DisplayName: Pikachu
 }
+
+Tiles.RedApricornPlant.MapEntry: Red Apricorn Plant
