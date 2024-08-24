@@ -19,18 +19,12 @@ namespace Pokemod.Content.Items.Apricorns
 
         public override void SetDefaults()
         {
-            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.RedApricornPlant>());
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.ApricornPlant>());
             Item.width = 12;
             Item.height = 14;
             Item.value = 80;
         }
 
-        public override void AddRecipes()
-        {
-            CreateRecipe(20)
-                .AddIngredient(ItemID.DirtBlock)
-                .AddTile(TileID.WorkBenches)
-                .Register();
-        }
+
     }
 }
