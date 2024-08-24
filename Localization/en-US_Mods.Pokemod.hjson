@@ -653,4 +653,7 @@ NPCs: {
 	PikachuCritterNPCShiny.DisplayName: Pikachu
 }
 
-Tiles.RedApricornPlant.MapEntry: Red Apricorn Plant
+Tiles: {
+	RedApricornPlant.MapEntry: Red Apricorn Plant
+	ApricornPlant.MapEntry: Apricorn Plant
+}
