@@ -444,6 +444,41 @@ Items: {
 		Tooltip: ""
 		DisplayName: Red Apricorn
 	}
+
+	YellowApricorn: {
+		Tooltip: ""
+		DisplayName: Yellow Apricorn
+	}
+
+	WhiteApricorn: {
+		Tooltip: ""
+		DisplayName: White Apricorn
+	}
+
+	PinkApricorn: {
+		Tooltip: ""
+		DisplayName: Pink Apricorn
+	}
+
+	GreenApricorn: {
+		Tooltip: ""
+		DisplayName: Green Apricorn
+	}
+
+	BlueApricorn: {
+		Tooltip: ""
+		DisplayName: Blue Apricorn
+	}
+
+	BlackApricorn: {
+		Tooltip: ""
+		DisplayName: Black Apricorn
+	}
+
+	ApricornSeed: {
+		Tooltip: ""
+		DisplayName: Apricorn Seed
+	}
 }
 
 Buffs: {

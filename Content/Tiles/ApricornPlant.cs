@@ -127,29 +127,57 @@ namespace Pokemod.Content.Tiles
             Vector2 worldPosition = new Vector2(i, j).ToWorldCoordinates();
             Player nearestPlayer = Main.player[Player.FindClosest(worldPosition, 16, 16)];
 
-            int herbItemType = ModContent.ItemType<RedApricorn>();
+            int herbSeedItem = ModContent.ItemType<ApricornSeed>();
+            int herbSeedStack = 1;
+
+            int herbItemType = chooseSpawnItem();
             int herbItemStack = 1;
 
             if (nearestPlayer.active && (nearestPlayer.HeldItem.type == ItemID.StaffofRegrowth || nearestPlayer.HeldItem.type == ItemID.AcornAxe))
             {
                 // Increased yields with Staff of Regrowth, even when not fully grown
-                herbItemStack = Main.rand.Next(1, 4);
+                 
+                herbItemStack = Main.rand.Next(1, 6);
+                herbSeedStack = Main.rand.Next(1, 30);
             }
             else if (stage < PlantStage.Grown)
             {
-                herbItemStack = 1;
+                herbItemStack = 0;
+                herbSeedStack = 1;
             }
             else if (stage == PlantStage.Grown)
             {
                 // Default yields, only when fully grown
-                herbItemStack = 4;
+                herbSeedStack = 1;
+                herbItemStack = Main.rand.Next(1, 4);
             }
 
             if (herbItemType > 0 && herbItemStack > 0)
             {
+                
                 yield return new Item(herbItemType, herbItemStack);
             }
 
+            if (herbSeedItem > 0 && herbSeedStack > 0)
+            {
+                yield return new Item(herbSeedItem, herbSeedStack);
+            }
+
+        }
+        public int chooseSpawnItem()
+        {
+            int itemDrop = 0;
+            int rand = Main.rand.Next(0, 7);
+            if (rand == 0) itemDrop = ModContent.ItemType<BlackApricorn>();
+            if (rand == 1) itemDrop = ModContent.ItemType<BlueApricorn>();
+            if (rand == 2) itemDrop = ModContent.ItemType<GreenApricorn>();
+            if (rand == 3) itemDrop = ModContent.ItemType<PinkApricorn>();
+            if (rand == 4) itemDrop = ModContent.ItemType<RedApricorn>(); 
+            if (rand == 5) itemDrop = ModContent.ItemType<WhiteApricorn>(); 
+            if (rand == 6) itemDrop = ModContent.ItemType<YellowApricorn>();
+
+
+            return itemDrop;
         }
 
         public override bool IsTileSpelunkable(int i, int j)

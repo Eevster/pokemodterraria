@@ -19,7 +19,7 @@ namespace Pokemod.Content.Items.Apricorns
 
         public override void SetDefaults()
         {
-            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.ApricornPlant>());
+            Item.maxStack = 999;
             Item.width = 12;
             Item.height = 14;
             Item.value = 80;
