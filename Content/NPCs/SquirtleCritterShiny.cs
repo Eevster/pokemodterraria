@@ -142,7 +142,11 @@ namespace Pokemod.Content.NPCs
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			return SpawnCondition.Ocean.Chance * 0.00025f;
+			if (spawnInfo.Player.ZoneBeach) {
+                return SpawnCondition.OverworldDay.Chance * 0.5f * 0.0025f;
+            }
+
+			return 0f;
 		}
 
 		public override void HitEffect(NPC.HitInfo hit) {

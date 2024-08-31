@@ -42,7 +42,6 @@ namespace Pokemod.Common.GlobalNPCs
                         if(pokemonProj.ModProjectile is PokemonPetProjectile){
                             PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
                             pokemonMainProj?.SetExtraExp(SetExpGained(npc));
-                            Main.NewText(pokemonMainProj.Name);
                         }
                     }
                 }

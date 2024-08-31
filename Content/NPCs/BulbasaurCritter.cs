@@ -100,14 +100,11 @@ namespace Pokemod.Content.NPCs
 
 			// These three are typical critter values
 			NPCID.Sets.CountsAsCritter[Type] = true;
-			NPCID.Sets.TakesDamageFromHostilesWithoutBeingFriendly[Type] = true;
+			NPCID.Sets.TakesDamageFromHostilesWithoutBeingFriendly[Type] = false;
 			NPCID.Sets.TownCritter[Type] = true;
 
 			// The frog is immune to confused
 			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
-
-			// This is so it appears between the frog and the gold frog
-			NPCID.Sets.NormalGoldCritterBestiaryPriority.Insert(NPCID.Sets.NormalGoldCritterBestiaryPriority.IndexOf(ClonedNPCID) + 1, Type);
 		}
 
 		public override void SetDefaults() {
@@ -135,12 +132,16 @@ namespace Pokemod.Content.NPCs
         }
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("For some time after its birth, it grows by taking nourishment from the seed on its back."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			return SpawnCondition.SurfaceJungle.Chance * 0.1f;
+			if (spawnInfo.Player.ZoneJungle) {
+                return SpawnCondition.OverworldDay.Chance * 0.5f;
+            }
+
+			return 0f;
 		}
 
 		public override void HitEffect(NPC.HitInfo hit) {

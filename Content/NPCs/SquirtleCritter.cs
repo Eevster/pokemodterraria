@@ -102,7 +102,7 @@ namespace Pokemod.Content.NPCs
 
 			// These three are typical critter values
 			NPCID.Sets.CountsAsCritter[Type] = true;
-			NPCID.Sets.TakesDamageFromHostilesWithoutBeingFriendly[Type] = true;
+			NPCID.Sets.TakesDamageFromHostilesWithoutBeingFriendly[Type] = false;
 			NPCID.Sets.TownCritter[Type] = true;
 
 			// The frog is immune to confused
@@ -142,7 +142,11 @@ namespace Pokemod.Content.NPCs
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			return SpawnCondition.Ocean.Chance * 0.1f;
+			if (spawnInfo.Player.ZoneBeach) {
+                return SpawnCondition.OverworldDay.Chance * 0.5f;
+            }
+
+			return 0f;
 		}
 
 		public override void HitEffect(NPC.HitInfo hit) {
