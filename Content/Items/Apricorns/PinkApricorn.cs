@@ -9,11 +9,11 @@ using Terraria;
 
 namespace Pokemod.Content.Items.Apricorns
 {
-    public class RedApricorn : ModItem
+    public class PinkApricorn : ModItem
     {
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.DisableAutomaticPlaceableDrop[Type] = false; 
+            ItemID.Sets.DisableAutomaticPlaceableDrop[Type] = false;
             Item.ResearchUnlockCount = 25;
         }
 

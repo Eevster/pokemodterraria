@@ -12,11 +12,18 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.Enums;
+using Microsoft.Build.Tasks;
+using Terraria.GameContent.Drawing;
+using ReLogic.Content;
 
 namespace Pokemod.Content.Tiles
 {
-    public class RedApricornPlant : ModTile
+    public class ApricornPlant : ModTile
     {
+        private Asset<Texture2D> ApricornTexture;
+
         // An enum for the 4 stages of herb growth
         public enum PlantStage : byte
         {
@@ -27,11 +34,11 @@ namespace Pokemod.Content.Tiles
         }
 
 
-        private const int FrameWidth = 16; // A constant for readability and to kick out those magic numbers
-
+        private const int FrameWidth = 36; // A constant for readability and to kick out those magic numbers
         public override void SetStaticDefaults()
         {
-            
+
+
             Main.tileFrameImportant[Type] = true;
             Main.tileObsidianKill[Type] = true;
             Main.tileCut[Type] = true;
@@ -39,30 +46,24 @@ namespace Pokemod.Content.Tiles
             TileID.Sets.ReplaceTileBreakUp[Type] = true;
             TileID.Sets.IgnoredInHouseScore[Type] = true;
             TileID.Sets.IgnoredByGrowingSaplings[Type] = true;
-            TileMaterials.SetForTileId(Type, TileMaterials._materialsByName["Plant"]); // Make this tile interact with golf balls in the same way other plants do
+            TileMaterials.SetForTileId(Type, TileMaterials._materialsByName["Plant"]);
 
-            // We do not use this because our tile should only be spelunkable when it's fully grown. That's why we use the IsTileSpelunkable hook instead
-            //Main.tileSpelunker[Type] = true;
-
-            // Do NOT use this, it causes many unintended side effects
-            //Main.tileAlch[Type] = true;
 
             LocalizedText name = CreateMapEntryName();
             AddMapEntry(new Color(128, 128, 128), name);
 
-            TileObjectData.newTile.CopyFrom(TileObjectData.StyleAlch);
+            TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
             TileObjectData.newTile.AnchorValidTiles = new int[] {
-                TileID.Grass,
-                TileID.HallowedGrass
+                TileID.Grass
             };
             TileObjectData.newTile.AnchorAlternateTiles = new int[] {
-                TileID.ClayPot,
                 TileID.PlanterBox
             };
             TileObjectData.addTile(Type);
 
             HitSound = SoundID.Grass;
             DustType = DustID.Ambient_DarkBrown;
+            //ApricornTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
         }
 
         public override bool CanPlace(int i, int j)
@@ -86,7 +87,7 @@ namespace Pokemod.Content.Tiles
                     {
                         bool foliageGrass = tileType == TileID.Plants || tileType == TileID.Plants2;
                         bool moddedFoliage = tileType >= TileID.Count && (Main.tileCut[tileType] || TileID.Sets.BreakableWhenPlacing[tileType]);
-                        bool harvestableVanillaHerb = Main.tileAlch[tileType] && WorldGen.IsHarvestableHerbWithSeed(tileType, tile.TileFrameX / 16);
+                        bool harvestableVanillaHerb = Main.tileAlch[tileType] && WorldGen.IsHarvestableHerbWithSeed(tileType, tile.TileFrameX);
 
                         if (foliageGrass || moddedFoliage || harvestableVanillaHerb)
                         {
@@ -105,19 +106,6 @@ namespace Pokemod.Content.Tiles
             }
 
             return true;
-        }
-
-        public override void SetSpriteEffects(int i, int j, ref SpriteEffects spriteEffects)
-        {
-            if (i % 2 == 0)
-            {
-                spriteEffects = SpriteEffects.FlipHorizontally;
-            }
-        }
-
-        public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
-        {
-            offsetY = -2; // This is -1 for tiles using StyleAlch, but vanilla sets to -2 for herbs, which causes a slight visual offset between the placement preview and the placed tile. 
         }
 
         public override bool CanDrop(int i, int j)
@@ -139,29 +127,57 @@ namespace Pokemod.Content.Tiles
             Vector2 worldPosition = new Vector2(i, j).ToWorldCoordinates();
             Player nearestPlayer = Main.player[Player.FindClosest(worldPosition, 16, 16)];
 
-            int herbItemType = ModContent.ItemType<RedApricorn>();
+            int herbSeedItem = ModContent.ItemType<ApricornSeed>();
+            int herbSeedStack = 1;
+
+            int herbItemType = chooseSpawnItem();
             int herbItemStack = 1;
 
             if (nearestPlayer.active && (nearestPlayer.HeldItem.type == ItemID.StaffofRegrowth || nearestPlayer.HeldItem.type == ItemID.AcornAxe))
             {
                 // Increased yields with Staff of Regrowth, even when not fully grown
-                herbItemStack = Main.rand.Next(1, 4);
+                 
+                herbItemStack = Main.rand.Next(1, 6);
+                herbSeedStack = Main.rand.Next(1, 30);
             }
             else if (stage < PlantStage.Grown)
             {
-                herbItemStack = 1;
+                herbItemStack = 0;
+                herbSeedStack = 1;
             }
             else if (stage == PlantStage.Grown)
             {
                 // Default yields, only when fully grown
-                herbItemStack = 4;
+                herbSeedStack = 1;
+                herbItemStack = Main.rand.Next(1, 4);
             }
 
             if (herbItemType > 0 && herbItemStack > 0)
             {
+                
                 yield return new Item(herbItemType, herbItemStack);
             }
 
+            if (herbSeedItem > 0 && herbSeedStack > 0)
+            {
+                yield return new Item(herbSeedItem, herbSeedStack);
+            }
+
+        }
+        public int chooseSpawnItem()
+        {
+            int itemDrop = 0;
+            int rand = Main.rand.Next(0, 7);
+            if (rand == 0) itemDrop = ModContent.ItemType<BlackApricorn>();
+            if (rand == 1) itemDrop = ModContent.ItemType<BlueApricorn>();
+            if (rand == 2) itemDrop = ModContent.ItemType<GreenApricorn>();
+            if (rand == 3) itemDrop = ModContent.ItemType<PinkApricorn>();
+            if (rand == 4) itemDrop = ModContent.ItemType<RedApricorn>(); 
+            if (rand == 5) itemDrop = ModContent.ItemType<WhiteApricorn>(); 
+            if (rand == 6) itemDrop = ModContent.ItemType<YellowApricorn>();
+
+
+            return itemDrop;
         }
 
         public override bool IsTileSpelunkable(int i, int j)
@@ -174,29 +190,42 @@ namespace Pokemod.Content.Tiles
 
         public override void RandomUpdate(int i, int j)
         {
-            Tile tile = Framing.GetTileSafely(i, j);
+            Tile tile = Main.tile[i, j];
             PlantStage stage = GetStage(i, j);
+
 
             // Only grow to the next stage if there is a next stage. We don't want our tile turning pink!
             if (stage != PlantStage.Grown)
             {
-                // Increase the x frame to change the stage
-                tile.TileFrameX += FrameWidth;
+                int topX = i - tile.TileFrameX % 36 / 18;
+                int topY = j - tile.TileFrameY % 56 / 18;
+
+                for (int x = topX; x < topX + 2; x++)
+                {
+                    for (int y = topY; y < topY + 3; y++)
+                    {
+                        Main.tile[x, y].TileFrameX += FrameWidth;
+                    }
+                }
 
                 // If in multiplayer, sync the frame change
                 if (Main.netMode != NetmodeID.SinglePlayer)
                 {
-                    NetMessage.SendTileSquare(-1, i, j, 1);
+                    NetMessage.SendTileSquare(-1, i, topY, 2, 3, TileChangeType.None);
                 }
+
             }
         }
 
+       
+        
         // A helper method to quickly get the current stage of the herb (assuming the tile at the coordinates is our herb)
         private static PlantStage GetStage(int i, int j)
         {
             Tile tile = Framing.GetTileSafely(i, j);
             return (PlantStage)(tile.TileFrameX / FrameWidth);
         }
-    }
 
+
+    }
 }

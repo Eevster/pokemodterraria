@@ -9,16 +9,17 @@ using Terraria;
 
 namespace Pokemod.Content.Items.Apricorns
 {
-    public class RedApricorn : ModItem
+    public class ApricornSeed : ModItem
     {
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.DisableAutomaticPlaceableDrop[Type] = false; 
+            ItemID.Sets.DisableAutomaticPlaceableDrop[Type] = false;
             Item.ResearchUnlockCount = 25;
         }
 
         public override void SetDefaults()
         {
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.ApricornPlant>());
             Item.maxStack = 999;
             Item.width = 12;
             Item.height = 14;
