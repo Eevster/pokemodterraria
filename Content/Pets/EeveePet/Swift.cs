@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Common.Players;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -78,14 +79,34 @@ namespace Pokemod.Content.Pets.EeveePet
         {
 			Projectile.ai[0] += MathHelper.ToRadians(10);
 
-			if(Projectile.ai[1] == 0){
-				SearchTarget();
-			}
+			PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
 
-			if(foundTarget){
-				if(targetEnemy.active){
-					targetPosition = targetEnemy.Center;
+			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+				if(Projectile.ai[1] == 0){
+					SearchTarget();
 				}
+
+				if(foundTarget){
+					if(targetEnemy.active){
+						targetPosition = targetEnemy.Center;
+					}
+
+					if(Projectile.timeLeft < 100){
+						if(Projectile.ai[1] == 0){
+							Projectile.timeLeft = 60;
+							Projectile.ai[1] = 1;
+						}
+						float projSpeed = 16f;
+						if(canfollow){
+							Projectile.velocity =  (targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+							if(Vector2.Distance(Projectile.Center, targetPosition) < 3*projSpeed){
+								canfollow = false;
+							}
+						}
+					}
+				}
+			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+				targetPosition = trainer.attackPosition;
 
 				if(Projectile.timeLeft < 100){
 					if(Projectile.ai[1] == 0){

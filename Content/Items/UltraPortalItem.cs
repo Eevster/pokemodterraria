@@ -46,52 +46,52 @@ namespace Pokemod.Content.Items
 
 		public override bool? UseItem(Player player)
 		{
-    // Check if this is the client
-    if (!Main.dedServ)
-    {
-        // Check if this is the right-click event
-        if (player.altFunctionUse == 2)
-        {
-            // Call the SubworldSystem.Enter<T>() method here
-            // Replace T with your desired type
-            Random rnd = new Random();
-            int ultraSpaceType = rnd.Next(1, 3);
-            if (ultraSpaceType == 1) {
-                bool enteredSubworld = SubworldSystem.Enter<IceUltraSpaceSubworld>();
-                if (enteredSubworld)
+            // Check if this is the client
+            if (!Main.dedServ)
             {
-                Main.NewText("You entered the Ultra Space!");
-                // Consume the item if the subworld entrance is successful
-                player.ConsumeItem(Item.type);
-            }
-            else
-            {
-                Main.NewText("Failed to enter the Ultra Space. Make sure you're in the right environment.");
-            }
+                // Check if this is the right-click event
+                if (player.altFunctionUse == 2)
+                {
+                    // Call the SubworldSystem.Enter<T>() method here
+                    // Replace T with your desired type
+                    Random rnd = new Random();
+                    int ultraSpaceType = rnd.Next(1, 3);
+                    if (ultraSpaceType == 1) {
+                        bool enteredSubworld = SubworldSystem.Enter<IceUltraSpaceSubworld>();
+                        if (enteredSubworld)
+                        {
+                            Main.NewText("You entered the Ultra Space!");
+                            // Consume the item if the subworld entrance is successful
+                            player.ConsumeItem(Item.type);
+                        }
+                        else
+                        {
+                            Main.NewText("Failed to enter the Ultra Space. Make sure you're in the right environment.");
+                        }
 
-            // Return true if the subworld was entered successfully, otherwise return false
-            return enteredSubworld;
-            }
-             if (ultraSpaceType == 2) {
-                bool enteredSubworld = SubworldSystem.Enter<JungleUltraSpaceSubworld>();
-                if (enteredSubworld)
-            {
-                Main.NewText("You entered the Jungle Ultra Space!");
-                // Consume the item if the subworld entrance is successful
-                player.ConsumeItem(Item.type);
-            }
-            else
-            {
-                Main.NewText("Failed to enter the Ultra Space. Make sure you're in the right environment.");
-            }
+                        // Return true if the subworld was entered successfully, otherwise return false
+                        return enteredSubworld;
+                    }
+                    if (ultraSpaceType == 2) {
+                        bool enteredSubworld = SubworldSystem.Enter<JungleUltraSpaceSubworld>();
+                        if (enteredSubworld)
+                        {
+                            Main.NewText("You entered the Jungle Ultra Space!");
+                            // Consume the item if the subworld entrance is successful
+                            player.ConsumeItem(Item.type);
+                        }
+                        else
+                        {
+                            Main.NewText("Failed to enter the Ultra Space. Make sure you're in the right environment.");
+                        }
 
-            // Return true if the subworld was entered successfully, otherwise return false
-            return enteredSubworld;
+                        // Return true if the subworld was entered successfully, otherwise return false
+                        return enteredSubworld;
+                    }
+                    
+                }
             }
-            
+            return base.UseItem(player);
         }
-    }
-    return base.UseItem(player);
-}
 	}
 }

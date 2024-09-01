@@ -55,7 +55,7 @@ namespace Pokemod.Content.Pets.WartortlePet
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 25f*Vector2.Normalize(targetCenter-Projectile.Center), ModContent.ProjectileType<WaterPulse>(), GetPokemonDamage(), 2f, Projectile.owner)];
+						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 10f*Vector2.Normalize(targetCenter-Projectile.Center), ModContent.ProjectileType<WaterPulse>(), GetPokemonDamage(), 2f, Projectile.owner)];
 						currentStatus = (int)ProjStatus.Attack;
 						SoundEngine.PlaySound(SoundID.Item21, Projectile.position);
 						timer = attackDuration;

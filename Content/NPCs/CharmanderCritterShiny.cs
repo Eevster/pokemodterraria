@@ -107,9 +107,6 @@ namespace Pokemod.Content.NPCs
 
 			// The frog is immune to confused
 			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
-
-			// This is so it appears between the frog and the gold frog
-			NPCID.Sets.NormalGoldCritterBestiaryPriority.Insert(NPCID.Sets.NormalGoldCritterBestiaryPriority.IndexOf(ClonedNPCID) + 1, Type);
 		}
 
 		public override void SetDefaults() {
@@ -137,12 +134,16 @@ namespace Pokemod.Content.NPCs
         }
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
 				new FlavorTextBestiaryInfoElement("The fire on the tip of its tail is a measure of its life. If the Pokémon is healthy, its tail burns intensely."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			return SpawnCondition.OverworldDayDesert.Chance * 0.00025f;
+			if (spawnInfo.Player.ZoneDesert) {
+                return SpawnCondition.OverworldDay.Chance * 0.5f * 0.0025f;
+            }
+
+			return 0f;
 		}
 
 		public override void HitEffect(NPC.HitInfo hit) {

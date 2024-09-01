@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Common.Players;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -21,6 +22,18 @@ namespace Pokemod.Content.Pets.CharmeleonPet
 		bool foundTarget = false;
         float maxLenght = 400;
         int soundTimer = 0;
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.WriteVector2(enemyCenter);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            enemyCenter = reader.ReadVector2();
+            base.ReceiveExtraAI(reader);
+        }
 
 		public override void SetDefaults()
         {
@@ -43,6 +56,8 @@ namespace Pokemod.Content.Pets.CharmeleonPet
             Projectile.scale = 0.1f;
             enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(Projectile.velocity);
             Projectile.velocity = Vector2.Zero;
+
+            base.OnSpawn(source);
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -79,12 +94,16 @@ namespace Pokemod.Content.Pets.CharmeleonPet
 
         public override void AI()
         {
+            PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+            
             if(--soundTimer < 0){
                 SoundEngine.PlaySound(SoundID.Item20, Projectile.position);
                 soundTimer = 20;
             }
 
-			SearchTarget();
+            if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+			    SearchTarget();
+            }
 
             if(targetEnemy != null){
                 if(targetEnemy.active){

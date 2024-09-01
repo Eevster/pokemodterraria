@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Common.Players;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -16,6 +17,7 @@ namespace Pokemod.Content.Pets.PikachuPet
 	public class ThunderboltHold : PokemonAttack
 	{
 		NPC targetEnemy;
+        Vector2 targetPosition;
 		bool foundTarget = false;
 		public override void SetStaticDefaults()
         {
@@ -58,7 +60,9 @@ namespace Pokemod.Content.Pets.PikachuPet
         {
             if(foundTarget){
                 Vector2 center = Projectile.Center;
-                Vector2 directionToOrigin = targetEnemy.Center - Projectile.Center;
+                if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack && targetEnemy != null) targetPosition = targetEnemy.Center;
+
+                Vector2 directionToOrigin = targetPosition - Projectile.Center;
 
                 float distanceToOrigin = directionToOrigin.Length();
 
@@ -68,7 +72,7 @@ namespace Pokemod.Content.Pets.PikachuPet
                     directionToOrigin *= chainTexture.Width(); 
 
                     center += directionToOrigin; 
-                    directionToOrigin = targetEnemy.Center - center; 
+                    directionToOrigin = targetPosition - center; 
                     distanceToOrigin = directionToOrigin.Length();
 
 
@@ -83,7 +87,12 @@ namespace Pokemod.Content.Pets.PikachuPet
 
         public override void AI()
         {
-			SearchTarget();
+            if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+			    SearchTarget();
+            }else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+                targetPosition = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().attackPosition;
+                foundTarget = true;
+            }
 
 			UpdateAnimation();
 
@@ -155,8 +164,9 @@ namespace Pokemod.Content.Pets.PikachuPet
 			if(!foundTarget){
 				return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 48f, ref collisionPoint);
 			}else{
+                if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack && targetEnemy != null) targetPosition = targetEnemy.Center;
 				return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 48f, ref collisionPoint) ||
-					Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, targetEnemy.Center, 32f, ref collisionPoint);
+					Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, targetPosition, 32f, ref collisionPoint);
 			}
 		}
 

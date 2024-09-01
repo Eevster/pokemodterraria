@@ -17,6 +17,7 @@ using Terraria.Enums;
 using Microsoft.Build.Tasks;
 using Terraria.GameContent.Drawing;
 using ReLogic.Content;
+using Pokemod.Content.TileEntities;
 
 namespace Pokemod.Content.Tiles
 {
@@ -37,17 +38,12 @@ namespace Pokemod.Content.Tiles
         private const int FrameWidth = 36; // A constant for readability and to kick out those magic numbers
         public override void SetStaticDefaults()
         {
-
-
             Main.tileFrameImportant[Type] = true;
             Main.tileObsidianKill[Type] = true;
-            Main.tileCut[Type] = true;
             Main.tileNoFail[Type] = true;
             TileID.Sets.ReplaceTileBreakUp[Type] = true;
             TileID.Sets.IgnoredInHouseScore[Type] = true;
-            TileID.Sets.IgnoredByGrowingSaplings[Type] = true;
             TileMaterials.SetForTileId(Type, TileMaterials._materialsByName["Plant"]);
-
 
             LocalizedText name = CreateMapEntryName();
             AddMapEntry(new Color(128, 128, 128), name);
@@ -59,12 +55,55 @@ namespace Pokemod.Content.Tiles
             TileObjectData.newTile.AnchorAlternateTiles = new int[] {
                 TileID.PlanterBox
             };
+            TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(ModContent.GetInstance<ApricornTileEntity>().Hook_AfterPlacement, -1, 0, true);
+
+            // This is required so the hook is actually called.
+            TileObjectData.newTile.UsesCustomCanPlace = true;
             TileObjectData.addTile(Type);
 
             HitSound = SoundID.Grass;
             DustType = DustID.Ambient_DarkBrown;
-            //ApricornTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
+            ApricornTexture = ModContent.Request<Texture2D>(Texture + "_Fruit");
         }
+
+        public override void PostDraw(int i, int j, SpriteBatch spriteBatch) {
+			var tile = Main.tile[i, j];
+
+			if (!TileDrawing.IsVisible(tile)) {
+				return;
+			}
+
+            int topX = i - tile.TileFrameX % 36 / 18;
+            int topY = j - tile.TileFrameY % 56 / 18;
+
+            PlantStage stage = GetStage(i, j);
+
+            if(j <= topY){
+                if (TileUtils.TryGetTileEntityAs(i, j, out ApricornTileEntity entity))
+                {
+                    if (stage == PlantStage.Grown && entity.apricornType >= 0) {
+                        Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+                        if (Main.drawToScreen) {
+                            zero = Vector2.Zero;
+                        }
+
+                        Rectangle drawRectangle = new Rectangle(18*(i-topX), 18*entity.apricornType, 16, 16);
+
+                        spriteBatch.Draw(ApricornTexture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y - 4) + zero, drawRectangle, Lighting.GetColor(i, j), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                    }
+                }
+            }
+		}
+
+        public override void KillMultiTile(int i, int j, int frameX, int frameY)
+        {
+            ModContent.GetInstance<ApricornTileEntity>().Kill(i, j);
+            base.KillMultiTile(i, j, frameX, frameY);
+        }
+
+        public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY) {
+			offsetY = 2; // This is -1 for tiles using StyleAlch, but vanilla sets to -2 for herbs, which causes a slight visual offset between the placement preview and the placed tile. 
+		}
 
         public override bool CanPlace(int i, int j)
         {
@@ -130,7 +169,7 @@ namespace Pokemod.Content.Tiles
             int herbSeedItem = ModContent.ItemType<ApricornSeed>();
             int herbSeedStack = 1;
 
-            int herbItemType = chooseSpawnItem();
+            int herbItemType = chooseSpawnItem(i,j);
             int herbItemStack = 1;
 
             if (nearestPlayer.active && (nearestPlayer.HeldItem.type == ItemID.StaffofRegrowth || nearestPlayer.HeldItem.type == ItemID.AcornAxe))
@@ -162,40 +201,85 @@ namespace Pokemod.Content.Tiles
             {
                 yield return new Item(herbSeedItem, herbSeedStack);
             }
-
         }
-        public int chooseSpawnItem()
+        public int chooseSpawnItem(int i, int j)
         {
             int itemDrop = 0;
-            int rand = Main.rand.Next(0, 7);
-            if (rand == 0) itemDrop = ModContent.ItemType<BlackApricorn>();
-            if (rand == 1) itemDrop = ModContent.ItemType<BlueApricorn>();
-            if (rand == 2) itemDrop = ModContent.ItemType<GreenApricorn>();
-            if (rand == 3) itemDrop = ModContent.ItemType<PinkApricorn>();
-            if (rand == 4) itemDrop = ModContent.ItemType<RedApricorn>(); 
-            if (rand == 5) itemDrop = ModContent.ItemType<WhiteApricorn>(); 
-            if (rand == 6) itemDrop = ModContent.ItemType<YellowApricorn>();
-
+            if (TileUtils.TryGetTileEntityAs(i, j, out ApricornTileEntity entity))
+            {
+                int type = entity.apricornType;
+                if (type == 0) itemDrop = ModContent.ItemType<BlackApricorn>();
+                if (type == 1) itemDrop = ModContent.ItemType<BlueApricorn>();
+                if (type == 2) itemDrop = ModContent.ItemType<GreenApricorn>();
+                if (type == 3) itemDrop = ModContent.ItemType<PinkApricorn>();
+                if (type == 4) itemDrop = ModContent.ItemType<RedApricorn>(); 
+                if (type == 5) itemDrop = ModContent.ItemType<WhiteApricorn>(); 
+                if (type == 6) itemDrop = ModContent.ItemType<YellowApricorn>();
+            }
 
             return itemDrop;
         }
 
         public override bool IsTileSpelunkable(int i, int j)
         {
+            if (TileUtils.TryGetTileEntityAs(i, j, out ApricornTileEntity entity))
+            {
+                if(entity.apricornType != -1){
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public override bool RightClick(int i, int j) {
             PlantStage stage = GetStage(i, j);
 
-            // Only glow if the herb is grown
-            return stage == PlantStage.Grown;
-        }
+            if (TileUtils.TryGetTileEntityAs(i, j, out ApricornTileEntity entity))
+            {
+                if (stage == PlantStage.Grown && entity.apricornType >= 0)
+                {
+                    int x = i - Main.tile[i, j].TileFrameX % 36 / 18;
+                    int y = j - Main.tile[i, j].TileFrameY % 56 / 18;
+
+                    const int TileWidth = 2;
+                    const int TileHeight = 3;
+
+                    float spawnX = (x + TileWidth * 0.5f) * 16;
+                    float spawnY = (y + TileHeight * 0.65f) * 16;
+
+                    var entitySource = new EntitySource_TileUpdate(i, j, context: "ApricornTree");
+                    
+                    int number = Item.NewItem(entitySource, (int)spawnX, (int)spawnY - 20, 0, 0, chooseSpawnItem(i,j), 1, false, -1);
+
+                    if (Main.netMode == NetmodeID.MultiplayerClient){
+			            NetMessage.SendData(21, -1, -1, null, number, 1f);
+                    }
+                    
+                    entity.setApricorn(-1);
+
+                    return true;
+                }
+            }
+
+			return false;
+		}
 
         public override void RandomUpdate(int i, int j)
         {
+            if (!WorldGen.genRand.NextBool(20)) {
+				return;
+			}
+
+            GrowPlant(i, j);
+        }
+
+        public void GrowPlant(int i, int j){
             Tile tile = Main.tile[i, j];
             PlantStage stage = GetStage(i, j);
 
-
             // Only grow to the next stage if there is a next stage. We don't want our tile turning pink!
-            if (stage != PlantStage.Grown)
+            if (stage < PlantStage.Grown)
             {
                 int topX = i - tile.TileFrameX % 36 / 18;
                 int topY = j - tile.TileFrameY % 56 / 18;
@@ -211,13 +295,18 @@ namespace Pokemod.Content.Tiles
                 // If in multiplayer, sync the frame change
                 if (Main.netMode != NetmodeID.SinglePlayer)
                 {
-                    NetMessage.SendTileSquare(-1, i, topY, 2, 3, TileChangeType.None);
+                    NetMessage.SendTileSquare(-1, topX, topY, 2, 3);
                 }
 
+            }else{
+                if (TileUtils.TryGetTileEntityAs(i, j, out ApricornTileEntity entity))
+                {
+                    if(entity.apricornType < 0){
+                        entity.setApricorn(Main.rand.Next(0, 7));
+                    }
+                }
             }
         }
-
-       
         
         // A helper method to quickly get the current stage of the herb (assuming the tile at the coordinates is our herb)
         private static PlantStage GetStage(int i, int j)

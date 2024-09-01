@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Common.Players;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -89,11 +90,13 @@ namespace Pokemod.Content.Pets.WartortlePet
 		}
 
         public override void AI()
-        {
+        {	
 			if(!exploded){
 				Projectile.rotation = Projectile.velocity.ToRotation();
-		
-				SearchTarget();
+
+				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+					SearchTarget();
+				}
 
 				if(foundTarget){
 					if(targetEnemy.active){

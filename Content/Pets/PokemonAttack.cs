@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using Pokemod.Common.GlobalNPCs;
+using Pokemod.Common.Players;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -16,8 +18,26 @@ namespace Pokemod.Content.Pets
 	public abstract class PokemonAttack : ModProjectile
 	{
 		private int expGained = 0;
+		public int attackMode = 0;
 		public Vector2 positionAux;
 		public Projectile pokemonProj;
+		public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write((byte)attackMode);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            attackMode = reader.ReadByte();
+			base.ReceiveExtraAI(reader);
+		}
+
+        public override void OnSpawn(IEntitySource source)
+        {
+			attackMode = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().attackMode;
+            base.OnSpawn(source);
+        }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
