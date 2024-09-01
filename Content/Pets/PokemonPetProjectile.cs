@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Xna.Framework;
+using Pokemod.Common.Players;
 using Pokemod.Content.Items;
 using Terraria;
 using Terraria.Audio;
@@ -293,34 +294,42 @@ namespace Pokemod.Content.Pets
 			targetCenter = Projectile.position;
 			foundTarget = false;
 
-			if (!foundTarget) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
+			PokemonPlayer trainer = owner.GetModPlayer<PokemonPlayer>();
 
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-						bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
-						// Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
-						// The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
-						bool closeThroughWall = between < 100f;
+			if(trainer.attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+				if (!foundTarget) {
+					// This code is required either way, used for finding a target
+					for (int i = 0; i < Main.maxNPCs; i++) {
+						NPC npc = Main.npc[i];
 
-						if(npc.boss){
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-							break;
-						}
+						if (npc.CanBeChasedBy()) {
+							float between = Vector2.Distance(npc.Center, Projectile.Center);
+							bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
+							bool inRange = between < distanceFromTarget;
+							bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
+							// Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
+							// The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
+							bool closeThroughWall = between < 100f;
 
-						if (((closest && inRange) || !foundTarget) && (lineOfSight || closeThroughWall || canAttackThroughWalls)) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
+							if(npc.boss){
+								distanceFromTarget = between;
+								targetCenter = npc.Center;
+								foundTarget = true;
+								break;
+							}
+
+							if (((closest && inRange) || !foundTarget) && (lineOfSight || closeThroughWall || canAttackThroughWalls)) {
+								distanceFromTarget = between;
+								targetCenter = npc.Center;
+								foundTarget = true;
+							}
 						}
 					}
 				}
+			}else if(trainer.attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+				targetCenter = trainer.attackPosition;
+				distanceFromTarget = Vector2.Distance(Projectile.Center, targetCenter);
+				foundTarget = true;
 			}
 
 			// friendly needs to be set to true so the minion can deal contact damage

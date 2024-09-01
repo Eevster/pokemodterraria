@@ -479,6 +479,11 @@ Items: {
 		Tooltip: ""
 		DisplayName: Apricorn Seed
 	}
+
+	TrainerGlove: {
+		Tooltip: ""
+		DisplayName: Trainer Glove
+	}
 }
 
 Buffs: {

@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Common.Players;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -17,6 +18,7 @@ namespace Pokemod.Content.Pets.BlastoisePet
 	public class HydroPump : PokemonAttack
 	{
 		float projSpeed = 20f;
+		private bool canTrack = true;
 		private NPC targetEnemy;
 		private bool foundTarget = false;
         private static Asset<Texture2D> bodyTexture;
@@ -81,21 +83,47 @@ namespace Pokemod.Content.Pets.BlastoisePet
 
         public override void AI()
         {
+			PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+
 			Projectile.rotation = Projectile.velocity.ToRotation();
 		
 			if(Projectile.timeLeft < 110){
-				SearchTarget();
+				if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+					foundTarget = true;
+					if(trainer.targetNPC != null){
+						targetEnemy = trainer.targetNPC;
+					}
+				}else{
+					SearchTarget();
+				}
+			}
+
+			if(attackMode == (int)PokemonPlayer.AttackMode.No_Attack || !canTrack){
+				foundTarget = false;
 			}
 
 			if(foundTarget){
-				if(targetEnemy.active){
-					Projectile.velocity +=  0.2f*(targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+				if(targetEnemy == null){
+					Projectile.velocity +=  0.2f*(trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 
 					if(Projectile.velocity.Length() > projSpeed){
 						Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
 					}
+
+					if(Vector2.Distance(Projectile.Center, trainer.attackPosition) < 2*Projectile.velocity.Length()){
+						canTrack = false;
+						foundTarget = false;
+					}
 				}else{
-					Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
+					if(targetEnemy.active){
+						Projectile.velocity +=  0.2f*(targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+
+						if(Projectile.velocity.Length() > projSpeed){
+							Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
+						}
+					}else{
+						Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
+					}
 				}
 			}else{
 				Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
@@ -154,7 +182,7 @@ namespace Pokemod.Content.Pets.BlastoisePet
 			Vector2 targetCenter = Projectile.Center;
 
 			foundTarget = false;
-
+			
 			if (true) {
 				// This code is required either way, used for finding a target
 				for (int i = 0; i < Main.maxNPCs; i++) {

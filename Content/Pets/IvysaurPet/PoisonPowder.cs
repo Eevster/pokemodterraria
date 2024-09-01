@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Common.Players;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -73,33 +74,52 @@ namespace Pokemod.Content.Pets.IvysaurPet
 			Projectile.ai[0] += MathHelper.ToRadians(5);
 
 			if(Projectile.timeLeft < 110){
-				SearchTarget();
+				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+					SearchTarget();
+				}
 			}
 
-			if(foundTarget){
-				if(targetEnemy.active){
-					targetPosition = targetEnemy.Center;
-				}
+			float projSpeed = 12f;
 
-				float projSpeed = 12f;
-				if(canfollow){
-					if(Vector2.Distance(Projectile.Center, targetPosition) > 4*projSpeed){
-						Projectile.velocity +=  0.1f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
-						if(Projectile.velocity.Length() > projSpeed){
-							Projectile.velocity = Vector2.Normalize(Projectile.velocity)*projSpeed;
+			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+				if(foundTarget){
+					if(targetEnemy.active){
+						targetPosition = targetEnemy.Center;
+					}
+
+					if(canfollow){
+						if(Vector2.Distance(Projectile.Center, targetPosition) > 4*projSpeed){
+							Projectile.velocity +=  0.1f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+							if(Projectile.velocity.Length() > projSpeed){
+								Projectile.velocity = Vector2.Normalize(Projectile.velocity)*projSpeed;
+							}
+						}else if(Vector2.Distance(Projectile.Center, targetPosition) > projSpeed){
+							Projectile.velocity +=  0.3f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+							if(Projectile.velocity.Length() > 2f*projSpeed){
+								Projectile.velocity = 2f*Vector2.Normalize(Projectile.velocity)*projSpeed;
+							}
 						}
-					}else if(Vector2.Distance(Projectile.Center, targetPosition) > projSpeed){
-						Projectile.velocity +=  0.3f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
-						if(Projectile.velocity.Length() > 2f*projSpeed){
-							Projectile.velocity = 2f*Vector2.Normalize(Projectile.velocity)*projSpeed;
-						}
+					}
+				}else{
+					if(Projectile.velocity.Y < 4){
+						Projectile.velocity.Y += 0.1f;
+					}else{
+						Projectile.velocity.Y = 4;
 					}
 				}
 			}else{
-				if(Projectile.velocity.Y < 4){
-					Projectile.velocity.Y += 0.1f;
-				}else{
-					Projectile.velocity.Y = 4;
+				PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+
+				if(Vector2.Distance(Projectile.Center, trainer.attackPosition) > 4*projSpeed){
+					Projectile.velocity +=  0.1f*(trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+					if(Projectile.velocity.Length() > projSpeed){
+						Projectile.velocity = Vector2.Normalize(Projectile.velocity)*projSpeed;
+					}
+				}else if(Vector2.Distance(Projectile.Center, trainer.attackPosition) > projSpeed){
+					Projectile.velocity +=  0.3f*(trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+					if(Projectile.velocity.Length() > 2f*projSpeed){
+						Projectile.velocity = 2f*Vector2.Normalize(Projectile.velocity)*projSpeed;
+					}
 				}
 			}
 
