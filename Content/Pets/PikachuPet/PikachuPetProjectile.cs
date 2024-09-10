@@ -9,7 +9,10 @@ namespace Pokemod.Content.Pets.PikachuPet
 {
 	public class PikachuPetProjectile : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 1;
+        
+        public override int baseHP => 35;
+        public override int baseDef => 40;
+        public override int nAttackProjs => 1;
 		public override int baseDamage => 3;
 		public override int PokemonBuff => ModContent.BuffType<PikachuPetBuff>();
 		public override float enemySearchDistance => 1000;
@@ -32,8 +35,12 @@ namespace Pokemod.Content.Pets.PikachuPet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			//Projectile.width = 48;
-			Projectile.width = 16;
+            //current HP set to beyond max so pokemon won't instantly despawn
+            currentHp = 1000;
+
+
+            //Projectile.width = 48;
+            Projectile.width = 16;
 			DrawOffsetX = -(24 - Projectile.width/2);
 			Projectile.height = 36;
 			Projectile.aiStyle = -1; // Use custom AI
@@ -69,5 +76,6 @@ namespace Pokemod.Content.Pets.PikachuPet
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
-	}
+        
+    }
 }

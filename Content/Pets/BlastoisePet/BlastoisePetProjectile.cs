@@ -8,7 +8,9 @@ namespace Pokemod.Content.Pets.BlastoisePet
 {
 	public class BlastoisePetProjectile : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 8;
+        public override int baseHP => 79;
+        public override int baseDef => 100;
+        public override int nAttackProjs => 8;
 		public override int baseDamage => 5;
 		public override int PokemonBuff => ModContent.BuffType<BlastoisePetBuff>();
 		public override float enemySearchDistance => 1000;
@@ -33,8 +35,10 @@ namespace Pokemod.Content.Pets.BlastoisePet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			//Projectile.width = 80;
-			Projectile.width = 26;
+            currentHp = 1000;
+
+            //Projectile.width = 80;
+            Projectile.width = 26;
 			DrawOffsetX = -(40 - Projectile.width/2);
 			Projectile.height = 80;
 			Projectile.aiStyle = -1; // Use custom AI

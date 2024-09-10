@@ -4,7 +4,6 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
-using Pokemod.Common.Players;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -56,8 +55,6 @@ namespace Pokemod.Content.Pets.VenusaurPet
         public override void OnSpawn(IEntitySource source)
         {
             Projectile.scale = 0.1f;
-
-            base.OnSpawn(source);
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -94,32 +91,22 @@ namespace Pokemod.Content.Pets.VenusaurPet
 
         public override void AI()
         {
-            PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
-
 			if(Projectile.timeLeft > 35){
                 if(Projectile.scale < 1f){
                     Projectile.scale += 0.03f;
                 }else{
                     Projectile.scale = 1f;
                 }
-                if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-                    SearchTarget();
-                }else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-                    foundTarget = true;
-                }
+                SearchTarget();
             }else{
                 if(canPlaySound){
                     SoundEngine.PlaySound(SoundID.Item67, Projectile.position);
                     canPlaySound = false;
                 }
-                if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-                    if(targetEnemy != null){
-                        if(targetEnemy.active){
-                            enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetEnemy.Center - Projectile.Center);
-                        }
+                if(targetEnemy != null){
+                    if(targetEnemy.active){
+                        enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetEnemy.Center - Projectile.Center);
                     }
-                }else{
-                    enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(trainer.attackPosition - Projectile.Center);
                 }
             }
 

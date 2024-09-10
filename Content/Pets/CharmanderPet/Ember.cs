@@ -48,18 +48,19 @@ namespace Pokemod.Content.Pets.CharmanderPet
 			}
         }
 
+       
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
 			target.AddBuff(BuffID.OnFire, 2*60);
             base.OnHitNPC(target, hit, damageDone);
-        }
-
+       }
+       
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
 			target.AddBuff(BuffID.OnFire, 2*60);
             base.OnHitPlayer(target, info);
         }
-
+      
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item20, Projectile.position);

@@ -10,7 +10,9 @@ namespace Pokemod.Content.Pets.CharmanderPet
 {
 	public class CharmanderPetProjectileShiny : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 3;
+        public override int baseHP => 39;
+        public override int baseDef => 43;
+        public override int nAttackProjs => 3;
 		public override int baseDamage => 3;
 		public override int PokemonBuff => ModContent.BuffType<CharmanderPetBuffShiny>();
 		public override float enemySearchDistance => 1000;
@@ -33,8 +35,10 @@ namespace Pokemod.Content.Pets.CharmanderPet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			//Projectile.width = 36;
-			Projectile.width = 20;
+            currentHp = 1000;
+
+            //Projectile.width = 36;
+            Projectile.width = 20;
 			DrawOffsetX = -(18 - Projectile.width/2);
 			Projectile.height = 40;
 			Projectile.aiStyle = -1; // Use custom AI
@@ -65,5 +69,7 @@ namespace Pokemod.Content.Pets.CharmanderPet
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
-	}
+        
+
+    }
 }

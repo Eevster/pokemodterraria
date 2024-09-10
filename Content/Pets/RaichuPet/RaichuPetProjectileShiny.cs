@@ -11,7 +11,10 @@ namespace Pokemod.Content.Pets.RaichuPet
 {
 	public class RaichuPetProjectileShiny : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 6;
+        
+        public override int baseHP => 60;
+        public override int baseDef => 90;
+        public override int nAttackProjs => 6;
 		public override int baseDamage => 4;
 		public override int PokemonBuff => ModContent.BuffType<RaichuPetBuffShiny>();
 		public override float enemySearchDistance => 1000;
@@ -31,8 +34,9 @@ namespace Pokemod.Content.Pets.RaichuPet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			//Projectile.width = 96;
-			Projectile.width = 24;
+            currentHp = 1000;
+            //Projectile.width = 96;
+            Projectile.width = 24;
 			DrawOffsetX = -(48 - Projectile.width/2);
 			Projectile.height = 60;
 			Projectile.aiStyle = -1; // Use custom AI
@@ -81,5 +85,7 @@ namespace Pokemod.Content.Pets.RaichuPet
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
-	}
+        
+
+    }
 }

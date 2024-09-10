@@ -25,6 +25,6 @@ namespace Pokemod.Content.Items.Apricorns
             Item.value = 80;
         }
 
-
+       
     }
 }

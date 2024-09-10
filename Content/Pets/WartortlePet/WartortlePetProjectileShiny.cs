@@ -8,7 +8,9 @@ namespace Pokemod.Content.Pets.WartortlePet
 {
 	public class WartortlePetProjectileShiny : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 2;
+        public override int baseHP => 59;
+        public override int baseDef => 80;
+        public override int nAttackProjs => 2;
 		public override int baseDamage => 4;
 		public override int PokemonBuff => ModContent.BuffType<WartortlePetBuffShiny>();
 		public override float enemySearchDistance => 1000;
@@ -41,8 +43,10 @@ namespace Pokemod.Content.Pets.WartortlePet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			//Projectile.width = 60;
-			Projectile.width = 32;
+            currentHp = 1000;
+
+            //Projectile.width = 60;
+            Projectile.width = 32;
 			DrawOffsetX = -(30 - Projectile.width/2);
 			Projectile.height = 48;
 			Projectile.aiStyle = -1; // Use custom AI

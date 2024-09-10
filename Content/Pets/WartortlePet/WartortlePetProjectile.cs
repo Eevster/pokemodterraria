@@ -8,7 +8,9 @@ namespace Pokemod.Content.Pets.WartortlePet
 {
 	public class WartortlePetProjectile : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 2;
+        public override int baseHP => 59;
+        public override int baseDef => 80;
+        public override int nAttackProjs => 2;
 		public override int baseDamage => 4;
 		public override int PokemonBuff => ModContent.BuffType<WartortlePetBuff>();
 		public override float enemySearchDistance => 1000;
@@ -41,8 +43,10 @@ namespace Pokemod.Content.Pets.WartortlePet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			//Projectile.width = 60;
-			Projectile.width = 32;
+			currentHp = 1000;
+            
+            //Projectile.width = 60;
+            Projectile.width = 32;
 			DrawOffsetX = -(30 - Projectile.width/2);
 			Projectile.height = 48;
 			Projectile.aiStyle = -1; // Use custom AI
@@ -55,7 +59,7 @@ namespace Pokemod.Content.Pets.WartortlePet
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 10f*Vector2.Normalize(targetCenter-Projectile.Center), ModContent.ProjectileType<WaterPulse>(), GetPokemonDamage(), 2f, Projectile.owner)];
+						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 25f*Vector2.Normalize(targetCenter-Projectile.Center), ModContent.ProjectileType<WaterPulse>(), GetPokemonDamage(), 2f, Projectile.owner)];
 						currentStatus = (int)ProjStatus.Attack;
 						SoundEngine.PlaySound(SoundID.Item21, Projectile.position);
 						timer = attackDuration;

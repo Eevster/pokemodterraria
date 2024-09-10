@@ -4,7 +4,6 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
-using Pokemod.Common.Players;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -70,15 +69,11 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 			vectorToTarget = new Vector2(projDirection,0);
 			positionRotation = vectorToTarget.ToRotation();
 			positionAjust = new Vector2(56,-18*projDirection).RotatedBy(positionRotation);
-
-			base.OnSpawn(source);
         }
 
         public override void AI()
         {
-			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-				SearchTarget();
-			}
+			SearchTarget();
 
 			Projectile.timeLeft = 10;
 
@@ -86,10 +81,7 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 
 			if(foundTarget){
 				vectorToTarget = targetEnemy.Center-Projectile.Center;
-			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				vectorToTarget = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().attackPosition-Projectile.Center;
 			}
-
 
 			UpdateAnimation();
 
@@ -244,15 +236,11 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 			vectorToTarget = new Vector2(projDirection,0);
         	positionRotation = vectorToTarget.ToRotation();
 			positionAjust = new Vector2(56,-18*projDirection).RotatedBy(positionRotation);
-
-			base.OnSpawn(source);
         }
 
         public override void AI()
         {
-			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-				SearchTarget();
-			}
+			SearchTarget();
 
 			Projectile.timeLeft = 10;
 
@@ -260,8 +248,6 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 
 			if(foundTarget){
 				vectorToTarget = targetEnemy.Center-Projectile.Center;
-			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				vectorToTarget = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().attackPosition-Projectile.Center;
 			}
 
 			UpdateAnimation();

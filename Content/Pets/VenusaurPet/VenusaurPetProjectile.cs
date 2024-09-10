@@ -9,7 +9,10 @@ namespace Pokemod.Content.Pets.VenusaurPet
 {
 	public class VenusaurPetProjectile : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 1;
+       
+        public override int baseHP => 80;
+        public override int baseDef => 83;
+        public override int nAttackProjs => 1;
 		public override int baseDamage => 5;
 		public override int PokemonBuff => ModContent.BuffType<VenusaurPetBuff>();
 		public override float enemySearchDistance => 1500;
@@ -32,8 +35,11 @@ namespace Pokemod.Content.Pets.VenusaurPet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			//Projectile.width = 76;
-			Projectile.width = 50;
+            //current HP set to beyond max so pokemon won't instantly despawn
+            currentHp = 1000;
+
+            //Projectile.width = 76;
+            Projectile.width = 50;
 			DrawOffsetX = -(38 - Projectile.width/2);
 			Projectile.height = 72;
 			Projectile.aiStyle = -1; // Use custom AI
@@ -72,5 +78,6 @@ namespace Pokemod.Content.Pets.VenusaurPet
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
-	}
+       
+    }
 }

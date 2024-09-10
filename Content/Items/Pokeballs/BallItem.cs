@@ -127,7 +127,7 @@ namespace Pokemod.Content.Items.Pokeballs
             Projectile.hostile = false;
             Projectile.penetrate = 1;
             Projectile.timeLeft = 360;
-            Projectile.ignoreWater = true;
+            Projectile.ignoreWater = false;
             Projectile.tileCollide = true;
 			Projectile.stopsDealingDamageAfterPenetrateHits = true;
         }

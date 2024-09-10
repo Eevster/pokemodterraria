@@ -10,7 +10,10 @@ namespace Pokemod.Content.Pets.EeveePet
 {
 	public class EeveePetProjectileShiny : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 4;
+        
+        public override int baseHP => 55;
+        public override int baseDef => 50;
+        public override int nAttackProjs => 4;
 		public override int baseDamage => 3;
 		public override int PokemonBuff => ModContent.BuffType<EeveePetBuffShiny>();
 		public override float enemySearchDistance => 1000;
@@ -32,8 +35,10 @@ namespace Pokemod.Content.Pets.EeveePet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			//Projectile.width = 50;
-			Projectile.width = 22;
+            currentHp = 1000;
+
+            //Projectile.width = 50;
+            Projectile.width = 22;
 			DrawOffsetX = -(25 - Projectile.width/2);
 			Projectile.height = 40;
 			Projectile.aiStyle = -1; // Use custom AI
@@ -74,5 +79,7 @@ namespace Pokemod.Content.Pets.EeveePet
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
-	}
+        //Stat block to add to all pokemon
+       
+    }
 }

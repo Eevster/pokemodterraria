@@ -9,7 +9,10 @@ namespace Pokemod.Content.Pets.SquirtlePet
 {
 	public class SquirtlePetProjectileShiny : PokemonPetProjectile
 	{
-		public override int nAttackProjs => 8;
+        
+        public override int baseHP => 48;
+        public override int baseDef => 65;
+        public override int nAttackProjs => 8;
 		public override int baseDamage => 3;
 		public override int PokemonBuff => ModContent.BuffType<SquirtlePetBuffShiny>();
 		public override float enemySearchDistance => 1000;
@@ -43,8 +46,10 @@ namespace Pokemod.Content.Pets.SquirtlePet
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
-			//Projectile.width = 44;
-			Projectile.width = 24;
+            currentHp = 1000;
+
+            //Projectile.width = 44;
+            Projectile.width = 24;
 			Projectile.ignoreWater = false;
 			DrawOffsetX = -(22 - Projectile.width/2);
 			Projectile.height = 40;
@@ -76,5 +81,7 @@ namespace Pokemod.Content.Pets.SquirtlePet
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
-	}
+        
+
+    }
 }
