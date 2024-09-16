@@ -10,6 +10,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -72,8 +73,10 @@ namespace Pokemod.Content.Items
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-			int projIndex = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-			proj = Main.projectile[projIndex];
+			if(player.HasBuff(Item.buffType)){
+				int projIndex = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+				proj = Main.projectile[projIndex];
+			}
 
             return false;
         }
@@ -261,7 +264,7 @@ namespace Pokemod.Content.Items
 					lightColor,
 					rotation: 0f,
 					origin: Vector2.Zero,
-					scale: 1f,
+					scale: scale,
 					SpriteEffects.None,
 					layerDepth: 0f);
 			}
@@ -275,12 +278,12 @@ namespace Pokemod.Content.Items
 				Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+BallType+"Big");
 
 				spriteBatch.Draw(ballTexture.Value,
-					position: position-new Vector2(ballTexture.Value.Width/2, ballTexture.Value.Height/2),
+					position: position-scale*new Vector2(ballTexture.Value.Width/2, ballTexture.Value.Height/2),
 					sourceRectangle: ballTexture.Value.Bounds,
 					drawColor,
 					rotation: 0f,
 					origin: Vector2.Zero,
-					scale: 1f,
+					scale: scale,
 					SpriteEffects.None,
 					layerDepth: 0f);
 			}
@@ -288,12 +291,12 @@ namespace Pokemod.Content.Items
 				Asset<Texture2D> texture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokesprites/"+PokemonName+(Shiny?"Shiny":""));
 
 				spriteBatch.Draw(texture.Value,
-					position: position-new Vector2(texture.Value.Width/4, texture.Value.Height/4),
+					position: position-scale*new Vector2(texture.Value.Width/4, texture.Value.Height/4),
 					sourceRectangle: texture.Value.Bounds,
 					drawColor,
 					rotation: 0f,
 					origin: Vector2.Zero,
-					scale: 1f,
+					scale: scale,
 					SpriteEffects.None,
 					layerDepth: 0f);
 			}

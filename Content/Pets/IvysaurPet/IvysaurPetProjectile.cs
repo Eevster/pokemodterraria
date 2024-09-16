@@ -9,6 +9,9 @@ namespace Pokemod.Content.Pets.IvysaurPet
 {
 	public class IvysaurPetProjectile : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 24;
+		public override int hitboxHeight => 26;
+
 		public override int nAttackProjs => 8;
 		public override int baseDamage => 4;
 		public override int PokemonBuff => ModContent.BuffType<IvysaurPetBuff>();
@@ -32,18 +35,6 @@ namespace Pokemod.Content.Pets.IvysaurPet
 		public override int levelToEvolve => 32;
 		public override int levelEvolutionsNumber => 1;
 
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 50;
-			Projectile.width = 24;
-			DrawOffsetX = -(25 - Projectile.width/2);
-			Projectile.height = 42;
-			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0f;
-			Projectile.tileCollide = true; 
-		}
-
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
@@ -58,14 +49,5 @@ namespace Pokemod.Content.Pets.IvysaurPet
 				} 
 			}
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 24;
-			height = 34;
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }

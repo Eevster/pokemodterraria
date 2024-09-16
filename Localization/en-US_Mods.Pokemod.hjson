@@ -72,6 +72,14 @@ Projectiles: {
 	Discharge.DisplayName: Discharge
 	LavaPlume.DisplayName: Lava Plume
 	PremierballProj.DisplayName: Premierball Proj
+	RazorLeaf.DisplayName: Razor Leaf
+	ChikoritaPetProjectileShiny.DisplayName: Chikorita Pet Projectile Shiny
+	MagicalLeaf.DisplayName: Magical Leaf
+	BayleefPetProjectileShiny.DisplayName: Bayleef Pet Projectile Shiny
+	BayleefPetProjectile.DisplayName: Bayleef Pet Projectile
+	MeganiumPetProjectileShiny.DisplayName: Meganium Pet Projectile Shiny
+	MeganiumPetProjectile.DisplayName: Meganium Pet Projectile
+	GigaDrain.DisplayName: Giga Drain
 }
 
 Items: {
@@ -484,6 +492,16 @@ Items: {
 		Tooltip: ""
 		DisplayName: Trainer Glove
 	}
+
+	ChikoritaCritterItem: {
+		DisplayName: Chikorita Critter Item
+		Tooltip: ""
+	}
+
+	PokeballItemTileItem: {
+		DisplayName: Pokeball Item Tile Item
+		Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -676,6 +694,31 @@ Buffs: {
 		Description: " "
 		DisplayName: Jolteon
 	}
+
+	ChikoritaPetBuffShiny: {
+		Description: Mods.Pokemod.Buffs.ChikoritaPetBuffShiny.Description
+		DisplayName: Chikorita Pet Buff Shiny
+	}
+
+	BayleefPetBuffShiny: {
+		Description: Mods.Pokemod.Buffs.BayleefPetBuffShiny.Description
+		DisplayName: Bayleef Pet Buff Shiny
+	}
+
+	BayleefPetBuff: {
+		Description: Mods.Pokemod.Buffs.BayleefPetBuff.Description
+		DisplayName: Bayleef Pet Buff
+	}
+
+	MeganiumPetBuffShiny: {
+		Description: Mods.Pokemod.Buffs.MeganiumPetBuffShiny.Description
+		DisplayName: Meganium Pet Buff Shiny
+	}
+
+	MeganiumPetBuff: {
+		Description: Mods.Pokemod.Buffs.MeganiumPetBuff.Description
+		DisplayName: Meganium Pet Buff
+	}
 }
 
 NPCs: {
@@ -691,9 +734,14 @@ NPCs: {
 	BlacephalonCritterNPC.DisplayName: Blacephalon
 	EeveeCritterNPCShiny.DisplayName: Eevee
 	PikachuCritterNPCShiny.DisplayName: Pikachu
+	ChikoritaCritterNPC.DisplayName: Chikorita Critter N P C
+	CharizardCritterNPC.DisplayName: Charizard Critter N P C
 }
 
 Tiles: {
 	RedApricornPlant.MapEntry: Red Apricorn Plant
 	ApricornPlant.MapEntry: Apricorn Plant
+	PokeballItemTile.MapEntry: Pokeball Item Tile
 }
+
+WorldGen.PokeballItemTilePassMessage: Mods.Pokemod.WorldGen.PokeballItemTilePassMessage

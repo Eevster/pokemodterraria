@@ -11,6 +11,9 @@ namespace Pokemod.Content.Pets.RaichuPet
 {
 	public class RaichuPetProjectile : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 24;
+		public override int hitboxHeight => 30;
+
 		public override int nAttackProjs => 6;
 		public override int baseDamage => 4;
 		public override int PokemonBuff => ModContent.BuffType<RaichuPetBuff>();
@@ -27,18 +30,6 @@ namespace Pokemod.Content.Pets.RaichuPet
 		public override int[] jumpStartEnd => [11,11];
 		public override int[] fallStartEnd => [15,15];
 		public override int[] attackStartEnd => [18,18];
-
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 96;
-			Projectile.width = 24;
-			DrawOffsetX = -(48 - Projectile.width/2);
-			Projectile.height = 60;
-			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0.5f;
-			Projectile.tileCollide = true; 
-		}
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
@@ -71,15 +62,5 @@ namespace Pokemod.Content.Pets.RaichuPet
 				}
 			}
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 24;
-			height = 36;
-			hitboxCenterFrac = new Vector2(0.5f, 0.3f);
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }

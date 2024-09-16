@@ -9,6 +9,9 @@ namespace Pokemod.Content.Pets.JolteonPet
 {
 	public class JolteonPetProjectile : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 32;
+		public override int hitboxHeight => 24;
+
 		public override int nAttackProjs => 1;
 		public override int baseDamage => 4;
 		public override int PokemonBuff => ModContent.BuffType<JolteonPetBuff>();
@@ -28,18 +31,6 @@ namespace Pokemod.Content.Pets.JolteonPet
 		public override int[] walkStartEnd => [9,17];
 		public override int[] jumpStartEnd => [12,12];
 		public override int[] fallStartEnd => [15,15];
-
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 60;
-			Projectile.width = 32;
-			DrawOffsetX = -(28 - Projectile.width/2);
-			Projectile.height = 40;
-			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0f;
-			Projectile.tileCollide = true; 
-		}
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
@@ -62,14 +53,5 @@ namespace Pokemod.Content.Pets.JolteonPet
 		public override void UpdateNoAttackProjs(int i){
 			attackProjs[i].Center = Projectile.Center;
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 32;
-			height = 32;
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }

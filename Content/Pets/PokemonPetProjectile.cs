@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Players;
 using Pokemod.Content.Items;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -28,6 +30,9 @@ namespace Pokemod.Content.Pets
 		public virtual float moveDistance1 => 400f;
 		public virtual float moveDistance2 => 200f;
 		public virtual bool canMoveWhileAttack => false;
+
+		public virtual int hitboxWidth => 0;
+		public virtual int hitboxHeight => 0;
 
 		public virtual int totalFrames => 0;
 		public virtual int animationSpeed => 5;
@@ -109,9 +114,25 @@ namespace Pokemod.Content.Pets
 				.WithOffset(0f, 4f);
 		}
 
+		public override void SetDefaults() {
+			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
+
+			Asset<Texture2D> pokeTexture = ModContent.Request<Texture2D>(Texture);
+			Projectile.width = hitboxWidth;
+			DrawOffsetX = -(pokeTexture.Width() - Projectile.width)/2;
+			Projectile.height = hitboxHeight;
+			DrawOriginOffsetY = -(pokeTexture.Height()/(totalFrames)-hitboxHeight-4);
+			Projectile.light = 0f;
+			Projectile.aiStyle = -1; // Use custom AI
+			Projectile.tileCollide = true;
+			Projectile.ignoreWater = false;
+		}
+
         public override void OnSpawn(IEntitySource source)
         {
+			Player player = Main.player[Projectile.owner];
 			attackProjs = new Projectile[nAttackProjs];
+			Projectile.Center = player.Center+new Vector2(0,(player.height-Projectile.height)/2);
             base.OnSpawn(source);
         }
 
@@ -416,6 +437,10 @@ namespace Pokemod.Content.Pets
 					AttackOutTimer(distanceFromTarget, targetCenter);
 				}
 
+				if(currentStatus == (int)ProjStatus.Attack){
+					Projectile.direction = Math.Sign(targetCenter.X-Projectile.Center.X);
+				}
+
 				if(Projectile.owner == Main.myPlayer){
 					for(int i = 0; i < nAttackProjs; i++){
 						if(attackProjs[i] != null){
@@ -580,7 +605,7 @@ namespace Pokemod.Content.Pets
 					if(j == maxJumpHeight-1){
 						return;
 					}
-                    Vector2 scanPosition = Projectile.Bottom + new Vector2(moveDirection*16*i,-16*(j+1));
+                    Vector2 scanPosition = Projectile.Center + new Vector2(0,hitboxHeight/2) + new Vector2(moveDirection*16*i,-16*(j+1));
 
                     if(Collision.SolidCollision(scanPosition - new Vector2(8,16), 16, 16) || Main.tile[(int)scanPosition.X/16-moveDirection, (int)scanPosition.Y/16+1].IsHalfBlock || Main.tile[(int)scanPosition.X/16, (int)scanPosition.Y/16].IsHalfBlock){
                         jumpHeight += 1f;
@@ -600,10 +625,12 @@ namespace Pokemod.Content.Pets
 		}
 
 		public virtual void Visuals() {
-			if(Math.Sign(Projectile.velocity.X) == 1 || Math.Sign(Projectile.velocity.X) == -1){
-				Projectile.direction = Math.Sign(Projectile.velocity.X);
-				Projectile.spriteDirection = Projectile.direction;
+			if(currentStatus != (int)ProjStatus.Attack){
+				if(Math.Abs(Projectile.velocity.X) > float.Epsilon){
+					Projectile.direction = Math.Sign(Projectile.velocity.X);
+				}
 			}
+			Projectile.spriteDirection = Projectile.direction;
 
 			int initialFrame = 0;
 			int finalFrame = 0;
@@ -708,6 +735,13 @@ namespace Pokemod.Content.Pets
 			}
 
             return false;
+        }
+
+		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            fallThrough = false;
+
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
 	}
 }

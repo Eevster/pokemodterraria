@@ -69,12 +69,12 @@ namespace Pokemod.Content.Items.Pokeballs
 			Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+GetType().Name+"Big");
 
 			spriteBatch.Draw(ballTexture.Value,
-				position: position-new Vector2(ballTexture.Value.Width/2, ballTexture.Value.Height/2),
+				position: position,
 				sourceRectangle: ballTexture.Value.Bounds,
 				drawColor,
 				rotation: 0f,
-				origin: Vector2.Zero,
-				scale: 1f,
+				origin: ballTexture.Size()/2,
+				scale: scale,
 				SpriteEffects.None,
 				layerDepth: 0f);
 				

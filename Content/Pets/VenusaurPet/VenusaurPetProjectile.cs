@@ -9,6 +9,9 @@ namespace Pokemod.Content.Pets.VenusaurPet
 {
 	public class VenusaurPetProjectile : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 50;
+		public override int hitboxHeight => 40;
+
 		public override int nAttackProjs => 1;
 		public override int baseDamage => 5;
 		public override int PokemonBuff => ModContent.BuffType<VenusaurPetBuff>();
@@ -28,18 +31,6 @@ namespace Pokemod.Content.Pets.VenusaurPet
 		public override int[] jumpStartEnd => [10,10];
 		public override int[] fallStartEnd => [14,14];
 		public override int[] attackStartEnd => [15,24];
-
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 76;
-			Projectile.width = 50;
-			DrawOffsetX = -(38 - Projectile.width/2);
-			Projectile.height = 72;
-			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0f;
-			Projectile.tileCollide = true; 
-		}
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
@@ -63,14 +54,5 @@ namespace Pokemod.Content.Pets.VenusaurPet
 		public override void UpdateNoAttackProjs(int i){
 			attackProjs[i].Center = Projectile.Center+new Vector2(0,-28);
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 50;
-			height = 64;
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }

@@ -9,6 +9,9 @@ namespace Pokemod.Content.Pets.FlareonPet
 {
 	public class FlareonPetProjectile : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 32;
+		public override int hitboxHeight => 28;
+
 		public override int nAttackProjs => 16;
 		public override int baseDamage => 4;
 		public override int PokemonBuff => ModContent.BuffType<FlareonPetBuff>();
@@ -29,18 +32,6 @@ namespace Pokemod.Content.Pets.FlareonPet
 		public override int[] fallStartEnd => [15,15];
 		public override int[] attackStartEnd => [18,21];
 
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 60;
-			Projectile.width = 32;
-			DrawOffsetX = -(30 - Projectile.width/2);
-			Projectile.height = 44;
-			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0f;
-			Projectile.tileCollide = true; 
-		}
-
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i+=8){
@@ -56,14 +47,5 @@ namespace Pokemod.Content.Pets.FlareonPet
 			timer = attackDuration;
 			canAttack = false;
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 32;
-			height = 36;
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }

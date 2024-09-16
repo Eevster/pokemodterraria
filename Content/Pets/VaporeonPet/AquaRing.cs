@@ -91,6 +91,14 @@ namespace Pokemod.Content.Pets.VaporeonPet
             base.OnHitNPC(target, hit, damageDone);
         }
 
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            Player player = Main.player[Projectile.owner];
+            player.Heal(player.statLifeMax2>300?2:1);
+
+            base.OnHitPlayer(target, info);
+        }
+
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"
 			// shootSpeed is 2.1f for reference, so this is basically plotting 12 pixels ahead from the center

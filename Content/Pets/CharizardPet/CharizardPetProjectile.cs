@@ -9,6 +9,9 @@ namespace Pokemod.Content.Pets.CharizardPet
 {
 	public class CharizardPetProjectile : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 36;
+		public override int hitboxHeight => 56;
+
 		public override int nAttackProjs => 5;
 		public override int baseDamage => 3;
 		public override int PokemonBuff => ModContent.BuffType<CharizardPetBuff>();
@@ -32,19 +35,13 @@ namespace Pokemod.Content.Pets.CharizardPet
 		public override int[] walkFlyStartEnd => [36,41];
 		public override int[] attackFlyStartEnd => [30,35];
 
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 96;
-			Projectile.width = 36;
-			DrawOffsetX = -(48 - Projectile.width/2);
-			Projectile.height = 80;
-			Projectile.aiStyle = -1; // Use custom AI
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
 			Projectile.light = 1f;
-			Projectile.tileCollide = true; 
-		}
+        }
 
-		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
+        public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
@@ -58,14 +55,5 @@ namespace Pokemod.Content.Pets.CharizardPet
 				} 
 			}
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 36;
-			height = 72;
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }

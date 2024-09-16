@@ -8,6 +8,9 @@ namespace Pokemod.Content.Pets.BlastoisePet
 {
 	public class BlastoisePetProjectileShiny : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 26;
+		public override int hitboxHeight => 56;
+
 		public override int nAttackProjs => 8;
 		public override int baseDamage => 5;
 		public override int PokemonBuff => ModContent.BuffType<BlastoisePetBuffShiny>();
@@ -29,19 +32,6 @@ namespace Pokemod.Content.Pets.BlastoisePet
 		public override int[] idleSwimStartEnd => [0,8];
 		public override int[] walkSwimStartEnd => [9,16];
 		public override int[] attackSwimStartEnd => [17,23];
-
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 80;
-			Projectile.width = 26;
-			DrawOffsetX = -(40 - Projectile.width/2);
-			Projectile.height = 80;
-			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0f;
-			Projectile.tileCollide = true;
-			Projectile.ignoreWater = false;
-		}
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
@@ -75,14 +65,5 @@ namespace Pokemod.Content.Pets.BlastoisePet
 				}
 			}
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 26;
-			height = 70;
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }

@@ -9,6 +9,9 @@ namespace Pokemod.Content.Pets.VaporeonPet
 {
 	public class VaporeonPetProjectile : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 32;
+		public override int hitboxHeight => 26;
+
 		public override int nAttackProjs => 1;
 		public override int baseDamage => 3;
 		public override int PokemonBuff => ModContent.BuffType<VaporeonPetBuff>();
@@ -36,19 +39,6 @@ namespace Pokemod.Content.Pets.VaporeonPet
 		public override int[] walkSwimStartEnd => [9,17];
 		public override int[] attackSwimStartEnd => [18,18];
 
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 60;
-			Projectile.width = 32;
-			DrawOffsetX = -(40 - Projectile.width/2);
-			Projectile.height = 44;
-			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0f;
-			Projectile.tileCollide = true;
-			Projectile.ignoreWater = false;
-		}
-
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
@@ -71,14 +61,5 @@ namespace Pokemod.Content.Pets.VaporeonPet
 		public override void UpdateNoAttackProjs(int i){
 			attackProjs[i].Center = Projectile.Center;
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 32;
-			height = 36;
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }

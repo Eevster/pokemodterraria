@@ -4,23 +4,16 @@ using Terraria.ID;
 
 namespace Pokemod.Content.Pets.ChikoritaPet
 {
-	public class ChikoritaPetBuff : ModBuff
+	public class ChikoritaPetBuff: PokemonPetBuff
 	{
-		public override void SetStaticDefaults() {
-			Main.buffNoTimeDisplay[Type] = true;
-			Main.vanityPet[Type] = true;
-		}
+        public override string PokeName => "Chikorita";
+        public override int ProjType => ModContent.ProjectileType<ChikoritaPetProjectile>();
 
-		public override void Update(Player player, ref int buffIndex)
-        {
-            bool unused = false;
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<ChikoritaPetProjectile>());
-
-            // Apply buffs only if the pet is active
+        public override void UpdateExtraChanges(Player player){
             if (player.HasBuff(Type))
             {
-				player.AddBuff(BuffID.Lifeforce, 60); // Apply the first buff
+                player.AddBuff(BuffID.Lifeforce, 60); // Apply the first buff
             }
         }
-	}
+    }
 }

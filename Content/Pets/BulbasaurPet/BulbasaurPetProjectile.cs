@@ -9,6 +9,9 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 {
 	public class BulbasaurPetProjectile : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 24;
+		public override int hitboxHeight => 24;
+
 		public override int nAttackProjs => 2;
 		public override int baseDamage => 3;
 		public override int PokemonBuff => ModContent.BuffType<BulbasaurPetBuff>();
@@ -35,18 +38,6 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 		public override string[] evolutions => ["Ivysaur"];
 		public override int levelToEvolve => 16;
 		public override int levelEvolutionsNumber => 1;
-
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 44;
-			Projectile.width = 24;
-			DrawOffsetX = -(22 - Projectile.width/2);
-			Projectile.height = 36;
-			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0.3f;
-			Projectile.tileCollide = true; 
-		}
 		
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
@@ -71,14 +62,5 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 		public override void UpdateNoAttackProjs(int i){
 			attackProjs[i].Kill();
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 24;
-			height = 26;
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }

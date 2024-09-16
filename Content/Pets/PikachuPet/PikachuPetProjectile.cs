@@ -9,6 +9,9 @@ namespace Pokemod.Content.Pets.PikachuPet
 {
 	public class PikachuPetProjectile : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 16;
+		public override int hitboxHeight => 24;
+
 		public override int nAttackProjs => 1;
 		public override int baseDamage => 3;
 		public override int PokemonBuff => ModContent.BuffType<PikachuPetBuff>();
@@ -29,18 +32,6 @@ namespace Pokemod.Content.Pets.PikachuPet
 		public override string[] evolutions => ["Raichu"];
 		public override string[] itemToEvolve => ["ThunderStoneItem"];
 
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 48;
-			Projectile.width = 16;
-			DrawOffsetX = -(24 - Projectile.width/2);
-			Projectile.height = 36;
-			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0.3f;
-			Projectile.tileCollide = true; 
-		}
-
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			currentStatus = (int)ProjStatus.Attack;
 			SoundEngine.PlaySound(SoundID.Item94, Projectile.position);
@@ -60,14 +51,5 @@ namespace Pokemod.Content.Pets.PikachuPet
 		public override void UpdateNoAttackProjs(int i){
 			attackProjs[0].Kill();
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 16;
-			height = 26;
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }

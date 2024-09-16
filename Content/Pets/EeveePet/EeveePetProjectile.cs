@@ -9,6 +9,9 @@ namespace Pokemod.Content.Pets.EeveePet
 {
 	public class EeveePetProjectile : PokemonPetProjectile
 	{
+		public override int hitboxWidth => 22;
+		public override int hitboxHeight => 30;
+		
 		public override int nAttackProjs => 4;
 		public override int baseDamage => 3;
 		public override int PokemonBuff => ModContent.BuffType<EeveePetBuff>();
@@ -27,18 +30,6 @@ namespace Pokemod.Content.Pets.EeveePet
 
 		public override string[] evolutions => ["Flareon", "Jolteon", "Vaporeon"];
 		public override string[] itemToEvolve => ["FireStoneItem", "ThunderStoneItem", "WaterStoneItem"];
-
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
-
-			//Projectile.width = 50;
-			Projectile.width = 22;
-			DrawOffsetX = -(25 - Projectile.width/2);
-			Projectile.height = 40;
-			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.light = 0f;
-			Projectile.tileCollide = true; 
-		}
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
@@ -64,14 +55,5 @@ namespace Pokemod.Content.Pets.EeveePet
 				attackProjs[i] = null;
 			}
 		}
-
-		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 22;
-			height = 30;
-            fallThrough = false;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
 	}
 }
