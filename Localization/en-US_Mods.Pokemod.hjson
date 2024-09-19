@@ -80,6 +80,7 @@ Projectiles: {
 	MeganiumPetProjectileShiny.DisplayName: Meganium Pet Projectile Shiny
 	MeganiumPetProjectile.DisplayName: Meganium Pet Projectile
 	GigaDrain.DisplayName: Giga Drain
+	CyndaquilPetProjectileShiny.DisplayName: Cyndaquil Pet Projectile Shiny
 }
 
 Items: {
@@ -359,7 +360,7 @@ Items: {
 	}
 
 	CaughtPokemonItem: {
-		DisplayName: Caught Pokemon Item
+		DisplayName: Pokemon
 		Tooltip: ""
 	}
 
@@ -499,7 +500,12 @@ Items: {
 	}
 
 	PokeballItemTileItem: {
-		DisplayName: Pokeball Item Tile Item
+		DisplayName: Pokeball Item
+		Tooltip: ""
+	}
+
+	Potion: {
+		DisplayName: Potion
 		Tooltip: ""
 	}
 }
@@ -696,28 +702,33 @@ Buffs: {
 	}
 
 	ChikoritaPetBuffShiny: {
-		Description: Mods.Pokemod.Buffs.ChikoritaPetBuffShiny.Description
-		DisplayName: Chikorita Pet Buff Shiny
+		Description: " "
+		DisplayName: Chikorita Shiny
 	}
 
 	BayleefPetBuffShiny: {
-		Description: Mods.Pokemod.Buffs.BayleefPetBuffShiny.Description
-		DisplayName: Bayleef Pet Buff Shiny
+		Description: " "
+		DisplayName: Bayleef Shiny
 	}
 
 	BayleefPetBuff: {
-		Description: Mods.Pokemod.Buffs.BayleefPetBuff.Description
-		DisplayName: Bayleef Pet Buff
+		Description: " "
+		DisplayName: Bayleef
 	}
 
 	MeganiumPetBuffShiny: {
-		Description: Mods.Pokemod.Buffs.MeganiumPetBuffShiny.Description
-		DisplayName: Meganium Pet Buff Shiny
+		Description: " "
+		DisplayName: Meganium Shiny
 	}
 
 	MeganiumPetBuff: {
-		Description: Mods.Pokemod.Buffs.MeganiumPetBuff.Description
-		DisplayName: Meganium Pet Buff
+		Description: " "
+		DisplayName: Meganium
+	}
+
+	CyndaquilPetBuffShiny: {
+		Description: " "
+		DisplayName: Cyndaquil Shiny
 	}
 }
 
@@ -734,8 +745,12 @@ NPCs: {
 	BlacephalonCritterNPC.DisplayName: Blacephalon
 	EeveeCritterNPCShiny.DisplayName: Eevee
 	PikachuCritterNPCShiny.DisplayName: Pikachu
-	ChikoritaCritterNPC.DisplayName: Chikorita Critter N P C
-	CharizardCritterNPC.DisplayName: Charizard Critter N P C
+	ChikoritaCritterNPC.DisplayName: Chikorita
+	CharizardCritterNPC.DisplayName: Charizard
+	CharizardCritterNPCShiny.DisplayName: Charizard
+	ChikoritaCritterNPCShiny.DisplayName: Chikorita
+	CyndaquilCritterNPC.DisplayName: Cyndaquil
+	CyndaquilCritterNPCShiny.DisplayName: Cyndaquil
 }
 
 Tiles: {

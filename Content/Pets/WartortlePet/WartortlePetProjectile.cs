@@ -11,18 +11,6 @@ namespace Pokemod.Content.Pets.WartortlePet
 		public override int hitboxWidth => 32;
 		public override int hitboxHeight => 36;
 
-		public override int nAttackProjs => 2;
-		public override int baseDamage => 4;
-		public override int PokemonBuff => ModContent.BuffType<WartortlePetBuff>();
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => false;
-
-		public override float moveSpeed1 => 4f;
-		public override float moveSpeed2 => 7f;
-
-		public override int attackDuration => 40;
-		public override int attackCooldown => 60;
-
 		public override int totalFrames => 17;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,7];
@@ -36,6 +24,17 @@ namespace Pokemod.Content.Pets.WartortlePet
 		public override int[] idleSwimStartEnd => [0,7];
 		public override int[] walkSwimStartEnd => [8,15];
 		public override int[] attackSwimStartEnd => [16,16];
+
+		public override int nAttackProjs => 2;
+		public override int baseDamage => 4;
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => false;
+
+		public override float moveSpeed1 => 4f;
+		public override float moveSpeed2 => 7f;
+
+		public override int attackDuration => 40;
+		public override int attackCooldown => 60;
 
 		public override string[] evolutions => ["Blastoise"];
 		public override int levelToEvolve => 36;
@@ -56,4 +55,6 @@ namespace Pokemod.Content.Pets.WartortlePet
 			}
 		}
 	}
+
+	public class WartortlePetProjectileShiny : WartortlePetProjectile{}
 }

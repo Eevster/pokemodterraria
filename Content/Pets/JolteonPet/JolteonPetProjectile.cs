@@ -14,7 +14,6 @@ namespace Pokemod.Content.Pets.JolteonPet
 
 		public override int nAttackProjs => 1;
 		public override int baseDamage => 4;
-		public override int PokemonBuff => ModContent.BuffType<JolteonPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override float distanceToAttack => 200f;
 		public override bool canAttackThroughWalls => true;
@@ -54,4 +53,6 @@ namespace Pokemod.Content.Pets.JolteonPet
 			attackProjs[i].Center = Projectile.Center;
 		}
 	}
+
+	public class JolteonPetProjectileShiny : JolteonPetProjectile{}
 }

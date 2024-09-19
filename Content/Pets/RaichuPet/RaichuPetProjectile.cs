@@ -16,7 +16,6 @@ namespace Pokemod.Content.Pets.RaichuPet
 
 		public override int nAttackProjs => 6;
 		public override int baseDamage => 4;
-		public override int PokemonBuff => ModContent.BuffType<RaichuPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => false;
 		public override int attackDuration => 30;
@@ -63,4 +62,6 @@ namespace Pokemod.Content.Pets.RaichuPet
 			}
 		}
 	}
+
+	public class RaichuPetProjectileShiny : RaichuPetProjectile{}
 }

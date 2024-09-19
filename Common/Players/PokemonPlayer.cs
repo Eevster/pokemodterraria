@@ -17,6 +17,8 @@ using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.IO;
+using Pokemod.Content.Pets.ChikoritaPet;
+using Pokemod.Content.Pets.CyndaquilPet;
 
 namespace Pokemod.Common.Players
 {
@@ -121,13 +123,16 @@ namespace Pokemod.Common.Players
 
         public override void PostBuyItem(NPC vendor, Item[] shopInventory, Item item)
         {
-			if(item.type == ModContent.ItemType<CharmanderPetItem>() || item.type == ModContent.ItemType<BulbasaurPetItem>() || item.type == ModContent.ItemType<SquirtlePetItem>()){
+			if(item.type == ModContent.ItemType<CharmanderPetItem>() || item.type == ModContent.ItemType<BulbasaurPetItem>() || item.type == ModContent.ItemType<SquirtlePetItem>()||
+			item.type == ModContent.ItemType<ChikoritaPetItem>() || item.type == ModContent.ItemType<CyndaquilPetItem>()){
 				int ballItem;
 				string pokemonName = "";
 				
 				if(item.type == ModContent.ItemType<CharmanderPetItem>()) pokemonName = "Charmander";
 				if(item.type == ModContent.ItemType<BulbasaurPetItem>()) pokemonName = "Bulbasaur";
 				if(item.type == ModContent.ItemType<SquirtlePetItem>()) pokemonName = "Squirtle";
+				if(item.type == ModContent.ItemType<ChikoritaPetItem>()) pokemonName = "Chikorita";
+				if(item.type == ModContent.ItemType<CyndaquilPetItem>()) pokemonName = "Cyndaquil";
 
 				if (Main.netMode == NetmodeID.SinglePlayer){
 					ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());

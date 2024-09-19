@@ -5,6 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Pokemod.Content.Items;
+using Pokemod.Content.Items.Consumables;
+using Pokemod.Content.Items.EvoStones;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -38,6 +40,7 @@ namespace Pokemod.Content.Tiles
                 ModContent.ItemType<FireStoneItem>(),
                 ModContent.ItemType<WaterStoneItem>(),
                 ModContent.ItemType<ThunderStoneItem>(),
+                ModContent.ItemType<Potion>()
             };
 
 			yield return new Item(items[Main.rand.Next(items.Length)], 1);

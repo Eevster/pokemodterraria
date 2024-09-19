@@ -13,7 +13,6 @@ namespace Pokemod.Content.Pets.ChikoritaPet
 
 		public override int nAttackProjs => 3;
 		public override int baseDamage => 3;
-		public override int PokemonBuff => ModContent.BuffType<ChikoritaPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => false;
 		public override int attackDuration => 45;
@@ -64,4 +63,6 @@ namespace Pokemod.Content.Pets.ChikoritaPet
 			}
 		}
 	}
+
+	public class ChikoritaPetProjectileShiny : ChikoritaPetProjectile{}
 }

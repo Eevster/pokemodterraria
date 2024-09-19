@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Pokemod.Content.Pets.BlastoisePetMega;
+using Pokemod.Content.Items.MegaStones;
 
 namespace Pokemod.Content.Pets.BlastoisePetMega
 {

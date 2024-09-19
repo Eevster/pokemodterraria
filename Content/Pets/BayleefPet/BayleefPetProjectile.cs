@@ -13,7 +13,6 @@ namespace Pokemod.Content.Pets.BayleefPet
 
 		public override int nAttackProjs => 8;
 		public override int baseDamage => 4;
-		public override int PokemonBuff => ModContent.BuffType<BayleefPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 10;
@@ -46,4 +45,6 @@ namespace Pokemod.Content.Pets.BayleefPet
 			}
 		}
 	}
+
+	public class BayleefPetProjectileShiny : BayleefPetProjectile{}
 }

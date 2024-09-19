@@ -14,7 +14,6 @@ namespace Pokemod.Content.Pets.CharmeleonPet
 
 		public override int nAttackProjs => 1;
 		public override int baseDamage => 4;
-		public override int PokemonBuff => ModContent.BuffType<CharmeleonPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override float distanceToAttack => 400f;
 		public override bool canAttackThroughWalls => false;
@@ -62,4 +61,5 @@ namespace Pokemod.Content.Pets.CharmeleonPet
 			attackProjs[i].Center = Projectile.Center+new Vector2(0,-4);
 		}
 	}
+	public class CharmeleonPetProjectileShiny : CharmeleonPetProjectile{}
 }

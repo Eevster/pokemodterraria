@@ -13,7 +13,6 @@ namespace Pokemod.Content.Pets.BlastoisePet
 
 		public override int nAttackProjs => 8;
 		public override int baseDamage => 5;
-		public override int PokemonBuff => ModContent.BuffType<BlastoisePetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 42;
@@ -66,4 +65,6 @@ namespace Pokemod.Content.Pets.BlastoisePet
 			}
 		}
 	}
+
+	public class BlastoisePetProjectileShiny : BlastoisePetProjectile{}
 }

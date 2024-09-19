@@ -39,8 +39,8 @@ namespace Pokemod.Content.Pets.BayleefPet
         }
 		public override void SetDefaults()
         {
-            Projectile.width = 22;
-            Projectile.height = 22;
+            Projectile.width = 28;
+            Projectile.height = 28;
 
             Projectile.friendly = true;
             Projectile.hostile = false;
@@ -196,11 +196,11 @@ namespace Pokemod.Content.Pets.BayleefPet
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"
 			// shootSpeed is 2.1f for reference, so this is basically plotting 12 pixels ahead from the center
-			Vector2 start = Projectile.Center + new Vector2(12f,0);
-			Vector2 end = Projectile.Center - new Vector2(12f,0);
+			Vector2 start = Projectile.Center + new Vector2(15f,0);
+			Vector2 end = Projectile.Center - new Vector2(15f,0);
 			float collisionPoint = 0f; // Don't need that variable, but required as parameter
 
-			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 24f, ref collisionPoint);
+			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 30f, ref collisionPoint);
 		}
     }
 }

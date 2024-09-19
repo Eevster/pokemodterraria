@@ -26,17 +26,18 @@ namespace Pokemod.Content.NPCs
 		public virtual int pokemonID => 0;
 		public virtual int minLevel => 1;
 		public virtual int maxLevel => 100;
+		public virtual float catchRate => 45;
 		public virtual string pokemonName => GetType().Name.Replace("CritterNPC","").Replace("Shiny","");
 		public virtual bool shiny => GetType().Name.Contains("Shiny");
-		public override string Texture => "Pokemod/Content/Pets/"+pokemonName+"Pet/"+pokemonName+(shiny?"PetProjectileShiny":"PetProjectile");
+		public override string Texture => "Pokemod/Assets/Textures/Pokesprites/Pets/"+pokemonName+(shiny?"PetProjectileShiny":"PetProjectile");
 		public virtual int totalFrames => 0;
 		public virtual int hitboxWidth => 0;
 		public virtual int hitboxHeight => 0;
 
 		/// <summary>
-		/// [baseHP, baseAtk, baseDef, baseSpded, baseSpatk, baseSpeed]
+		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
 		/// </summary>
-		public virtual int[] baseStats => [0,0,0,0,0,0];
+		public virtual int[] baseStats => [50,50,50,50,50,50];
 		public int[] finalStats;
 
 		public override void SetStaticDefaults() {

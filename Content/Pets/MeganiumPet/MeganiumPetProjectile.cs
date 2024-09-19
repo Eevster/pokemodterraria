@@ -13,7 +13,6 @@ namespace Pokemod.Content.Pets.MeganiumPet
 
 		public override int nAttackProjs => 1;
 		public override int baseDamage => 5;
-		public override int PokemonBuff => ModContent.BuffType<MeganiumPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 56;
@@ -42,4 +41,6 @@ namespace Pokemod.Content.Pets.MeganiumPet
 			}
 		}
 	}
+
+	public class MeganiumPetProjectileShiny : MeganiumPetProjectile{}
 }

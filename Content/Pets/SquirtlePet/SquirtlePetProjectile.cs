@@ -14,7 +14,6 @@ namespace Pokemod.Content.Pets.SquirtlePet
 
 		public override int nAttackProjs => 8;
 		public override int baseDamage => 3;
-		public override int PokemonBuff => ModContent.BuffType<SquirtlePetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override float distanceToAttack => 600f;
 		public override bool canAttackThroughWalls => false;
@@ -58,4 +57,6 @@ namespace Pokemod.Content.Pets.SquirtlePet
 			}
 		}
 	}
+
+	public class SquirtlePetProjectileShiny : SquirtlePetProjectile{}
 }

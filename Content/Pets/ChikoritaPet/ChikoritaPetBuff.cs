@@ -16,4 +16,17 @@ namespace Pokemod.Content.Pets.ChikoritaPet
             }
         }
     }
+
+    public class ChikoritaPetBuffShiny : PokemonPetBuff
+	{
+        public override string PokeName => "Chikorita";
+        public override int ProjType => ModContent.ProjectileType<ChikoritaPetProjectileShiny>();
+
+        public override void UpdateExtraChanges(Player player){
+            if (player.HasBuff(Type))
+            {
+                player.AddBuff(BuffID.Lifeforce, 60); // Apply the first buff
+            }
+        }
+    }
 }

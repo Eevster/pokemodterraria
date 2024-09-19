@@ -4,45 +4,26 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Pets.CyndaquilPet
 {
-	public class CyndaquilPetProjectile : ModProjectile
+	public class CyndaquilPetProjectile : PokemonPetProjectile
 	{
-		public override void SetStaticDefaults() {
-			Main.projFrames[Projectile.type] = 4;
-			Main.projPet[Projectile.type] = true;
+		public override int hitboxWidth => 24;
+		public override int hitboxHeight => 26;
 
-			// This code is needed to customize the vanity pet display in the player select screen. Quick explanation:
-			// * It uses fluent API syntax, just like Recipe
-			// * You start with ProjectileID.Sets.SimpleLoop, specifying the start and end frames as well as the speed, and optionally if it should animate from the end after reaching the end, effectively "bouncing"
-			// * To stop the animation if the player is not highlighted/is standing, as done by most grounded pets, add a .WhenNotSelected(0, 0) (you can customize it just like SimpleLoop)
-			// * To set offset and direction, use .WithOffset(x, y) and .WithSpriteDirection(-1)
-			// * To further customize the behavior and animation of the pet (as its AI does not run), you have access to a few vanilla presets in DelegateMethods.CharacterPreview to use via .WithCode(). You can also make your own, showcased in MinionBossPetProjectile
-			ProjectileID.Sets.CharacterPreviewAnimations[Projectile.type] = ProjectileID.Sets.SimpleLoop(0, Main.projFrames[Projectile.type], 6)
-				.WithOffset(-10, -20f)
-				.WithSpriteDirection(-1)
-				.WithCode(DelegateMethods.CharacterPreview.Float);
-		}
+		public override int nAttackProjs => 3;
+		public override int baseDamage => 3;
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => false;
+		public override int attackDuration => 45;
+		public override int attackCooldown => 0;
 
-		public override void SetDefaults() {
-			Projectile.CloneDefaults(ProjectileID.ZephyrFish); // Copy the stats of the Zephyr Fish
-
-			AIType = ProjectileID.ZephyrFish; // Mimic as the Zephyr Fish during AI.
-		}
-
-		public override bool PreAI() {
-			Player player = Main.player[Projectile.owner];
-
-			player.zephyrfish = false; // Relic from AIType
-
-			return true;
-		}
-
-		public override void AI() {
-			Player player = Main.player[Projectile.owner];
-
-			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff.
-			if (!player.dead && player.HasBuff(ModContent.BuffType<CyndaquilPetBuff>())) {
-				Projectile.timeLeft = 2;
-			}
-		}
+		public override int totalFrames => 14;
+		public override int animationSpeed => 5;
+		public override int[] idleStartEnd => [0,5];
+		public override int[] walkStartEnd => [6,10];
+		public override int[] jumpStartEnd => [7,7];
+		public override int[] fallStartEnd => [10,10];
+		public override int[] attackStartEnd => [11,13];
 	}
+
+	public class CyndaquilPetProjectileShiny : CyndaquilPetProjectile{}
 }

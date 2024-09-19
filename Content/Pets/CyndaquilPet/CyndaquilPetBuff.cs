@@ -4,23 +4,15 @@ using Terraria.ID;
 
 namespace Pokemod.Content.Pets.CyndaquilPet
 {
-	public class CyndaquilPetBuff : ModBuff
+	public class CyndaquilPetBuff: PokemonPetBuff
 	{
-		public override void SetStaticDefaults() {
-			Main.buffNoTimeDisplay[Type] = true;
-			Main.vanityPet[Type] = true;
-		}
+        public override string PokeName => "Cyndaquil";
+        public override int ProjType => ModContent.ProjectileType<CyndaquilPetProjectile>();
+    }
 
-		public override void Update(Player player, ref int buffIndex)
-        {
-            bool unused = false;
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<CyndaquilPetProjectile>());
-
-            // Apply buffs only if the pet is active
-            if (player.HasBuff(Type))
-            {
-                player.AddBuff(BuffID.Rage, 60); // Apply the first buff
-            }
-        }
-	}
+    public class CyndaquilPetBuffShiny: PokemonPetBuff
+	{
+        public override string PokeName => "Cyndaquil";
+        public override int ProjType => ModContent.ProjectileType<CyndaquilPetProjectileShiny>();
+    }
 }

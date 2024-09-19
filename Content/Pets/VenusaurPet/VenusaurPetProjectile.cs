@@ -14,7 +14,6 @@ namespace Pokemod.Content.Pets.VenusaurPet
 
 		public override int nAttackProjs => 1;
 		public override int baseDamage => 5;
-		public override int PokemonBuff => ModContent.BuffType<VenusaurPetBuff>();
 		public override float enemySearchDistance => 1500;
 		public override bool canAttackThroughWalls => true;
 
@@ -55,4 +54,6 @@ namespace Pokemod.Content.Pets.VenusaurPet
 			attackProjs[i].Center = Projectile.Center+new Vector2(0,-28);
 		}
 	}
+
+	public class VenusaurPetProjectileShiny : VenusaurPetProjectile{}
 }

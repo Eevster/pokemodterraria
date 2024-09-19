@@ -9,6 +9,7 @@ namespace Pokemod.Content.Pets
 {
 	public abstract class PokemonPetBuff : ModBuff
 	{
+        public override string Texture => "Pokemod/Assets/Textures/Pokesprites/Buffs/"+GetType().Name;
         public virtual string PokeName => "";
         public virtual int ProjType => 0;
 		public override void SetStaticDefaults() {

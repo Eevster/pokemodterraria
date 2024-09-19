@@ -14,7 +14,6 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 
 		public override int nAttackProjs => 2;
 		public override int baseDamage => 3;
-		public override int PokemonBuff => ModContent.BuffType<BulbasaurPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override float distanceToAttack => 140f;
 		public override bool canAttackThroughWalls => false;
@@ -63,4 +62,6 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 			attackProjs[i].Kill();
 		}
 	}
+
+	public class BulbasaurPetProjectileShiny : BulbasaurPetProjectile{}
 }

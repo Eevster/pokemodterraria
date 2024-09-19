@@ -14,7 +14,6 @@ namespace Pokemod.Content.Pets.CharizardPet
 
 		public override int nAttackProjs => 5;
 		public override int baseDamage => 3;
-		public override int PokemonBuff => ModContent.BuffType<CharizardPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 40;
@@ -56,4 +55,6 @@ namespace Pokemod.Content.Pets.CharizardPet
 			}
 		}
 	}
+
+	public class CharizardPetProjectileShiny : CharizardPetProjectile{}
 }

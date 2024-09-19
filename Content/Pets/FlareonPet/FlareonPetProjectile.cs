@@ -14,7 +14,6 @@ namespace Pokemod.Content.Pets.FlareonPet
 
 		public override int nAttackProjs => 16;
 		public override int baseDamage => 4;
-		public override int PokemonBuff => ModContent.BuffType<FlareonPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 20;
@@ -48,4 +47,6 @@ namespace Pokemod.Content.Pets.FlareonPet
 			canAttack = false;
 		}
 	}
+
+	public class FlareonPetProjectileShiny : FlareonPetProjectile{}
 }

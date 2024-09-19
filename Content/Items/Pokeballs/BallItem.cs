@@ -162,7 +162,11 @@ namespace Pokemod.Content.Items.Pokeballs
 			}
 
 			if(Projectile.owner == Main.myPlayer){
-				canCapture = FailureProb(catchRate);
+				if(targetPokemon != null){
+					canCapture = FailureProb(catchRate);
+				}else{
+					canCapture = false;
+				}
 				Projectile.netUpdate = true;
 			}
 
@@ -209,16 +213,27 @@ namespace Pokemod.Content.Items.Pokeballs
 		}
 
 		public bool RegularProb(float catchRate){
-			float prob = 5 * catchRate;
-
 			if(catchRate >= 255){
 				return false;
 			}
-			if(prob < 1){
-				prob = 1;
+			float prob = 1;
+			if(targetPokemon.ModNPC is PokemonWildNPC nPC)
+            {
+				float pokemonRate = nPC.catchRate;
+				if(targetPokemon.lifeMax > 0){
+					prob =  pokemonRate * catchRate * 1.5f * (3*targetPokemon.lifeMax-2*targetPokemon.life)/(3*targetPokemon.lifeMax);
+				}else{
+					prob =  pokemonRate * catchRate * 1.5f;
+				}
+
+				if(prob < pokemonRate/3){
+					prob = pokemonRate/3;
+				}
 			}
 
-			return Main.rand.NextBool((int)prob);
+			int shakeProb = (int)(1048560/(int)Math.Sqrt((int)Math.Sqrt((int)(16711680/prob))));
+
+			return Main.rand.Next(65536) >= shakeProb;
 		}
 
         public override bool? CanHitNPC(NPC target)

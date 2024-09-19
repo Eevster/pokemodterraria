@@ -14,7 +14,6 @@ namespace Pokemod.Content.Pets.PikachuPet
 
 		public override int nAttackProjs => 1;
 		public override int baseDamage => 3;
-		public override int PokemonBuff => ModContent.BuffType<PikachuPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => false;
 		public override int attackDuration => 30;
@@ -52,4 +51,6 @@ namespace Pokemod.Content.Pets.PikachuPet
 			attackProjs[0].Kill();
 		}
 	}
+
+	public class PikachuPetProjectileShiny : PikachuPetProjectile{}
 }

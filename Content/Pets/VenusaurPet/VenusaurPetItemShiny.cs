@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Pokemod.Content.Items.Consumables;
 
 namespace Pokemod.Content.Pets.VenusaurPet
 {

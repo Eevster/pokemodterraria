@@ -4,10 +4,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Players;
 using Pokemod.Content.Items;
+using Pokemod.Content.NPCs;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -15,13 +17,26 @@ namespace Pokemod.Content.Pets
 {
 	public abstract class PokemonPetProjectile : ModProjectile
 	{
+		public override string Texture => "Pokemod/Assets/Textures/Pokesprites/Pets/"+GetType().Name;
+		public int PokemonBuff = 0;
 		private int expGained = 0;
+		public int pokemonLvl, npcdmg;
+
+		/// <summary>
+		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
+		/// </summary>
+		public virtual int[] baseStats => [50,50,50,50,50,50];
+		public virtual int baseDamage => 1;
+		public int[] finalStats = [0,0,0,0,0,0];
+
+		public bool canBeHurt = true;
+        public int hurtTime = 30;
+        public int currentHp = 0;
+        public bool showHp;
+
 		public virtual int nAttackProjs => 1;
 		public Projectile[] attackProjs;
 		public virtual float distanceToAttack => 800f;
-		public int pokemonLvl;
-		public virtual int baseDamage => 1;
-		public virtual int PokemonBuff => 0;
 		public virtual float enemySearchDistance => 1000;
 		public virtual bool canAttackThroughWalls => false;
 
@@ -83,6 +98,7 @@ namespace Pokemod.Content.Pets
 
 		public override void SendExtraAI(BinaryWriter writer)
         {
+			writer.Write((int)currentHp);
             writer.Write((double)currentStatus);
 			writer.Write((double)expGained);
             base.SendExtraAI(writer);
@@ -90,6 +106,7 @@ namespace Pokemod.Content.Pets
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
+			currentHp = reader.ReadInt32();
             currentStatus = (int)reader.ReadDouble();
 			expGained = (int)reader.ReadDouble();
             base.ReceiveExtraAI(reader);
@@ -131,10 +148,18 @@ namespace Pokemod.Content.Pets
         public override void OnSpawn(IEntitySource source)
         {
 			Player player = Main.player[Projectile.owner];
+			PokemonBuff = ModContent.Find<ModBuff>("Pokemod", GetType().Name.Replace("Projectile","Buff")).Type;
 			attackProjs = new Projectile[nAttackProjs];
 			Projectile.Center = player.Center+new Vector2(0,(player.height-Projectile.height)/2);
+			currentHp = 10000;
+			
             base.OnSpawn(source);
         }
+
+		public void UpdateStats(){
+			int[] EVs = [0,0,0,0,0,0];
+            finalStats = PokemonNPCData.CalcAllStats(pokemonLvl, baseStats, EVs);
+		}
 
         public int GetExpGained(){
 			int exp = expGained;
@@ -151,7 +176,7 @@ namespace Pokemod.Content.Pets
 		}
 
 		public virtual int GetPokemonDamage(){
-			int pokemonDamage = (int)(0.6f*baseDamage*(0.4f*pokemonLvl+2)+2);
+			int pokemonDamage = (int)(0.6f*finalStats[1]*(0.4f*pokemonLvl+2)+2);
 
 			return pokemonDamage;
 		}
@@ -161,6 +186,7 @@ namespace Pokemod.Content.Pets
 				CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile","")+" grew to lvl "+lvl);
 			}
 			pokemonLvl = lvl;
+			UpdateStats();
 		}
 
 		public virtual void SetCanEvolve(){
@@ -198,7 +224,10 @@ namespace Pokemod.Content.Pets
 
 			CheckActive(player);
 
-			GetAllProjsExp();
+			setMaxHP();
+			hurtTimer();
+            GetAllProjsExp();
+            TakeDamage();
 
 			GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
 			SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
@@ -251,6 +280,15 @@ namespace Pokemod.Content.Pets
 
 			expGained += extraExp;
 		}
+
+		public void setMaxHP()
+        {
+			if(pokemonLvl != 0 && finalStats[0] != 0){
+				if(currentHp > finalStats?[0]){
+					currentHp = finalStats[0];
+				}
+			}
+        }
 
 		public virtual void CheckActive(Player player) {
 			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff
@@ -709,6 +747,84 @@ namespace Pokemod.Content.Pets
 				}
 			}
 		}
+
+		public int calIncomingDmg(){
+            //calling Hp
+            if(currentHp > finalStats[0]) { currentHp = finalStats[0]; }
+            //cal damage versus defense for pokemon
+            int dmg = npcdmg - ((finalStats[2] * pokemonLvl) / 75);
+
+            //if dmg is less than 1 deal at least 1
+            if (dmg <= 0) dmg = 1;
+            //hurt pokemon
+            currentHp -= dmg;
+            //display damage done
+           // Main.NewText("HP: " + currentHp + "/" + getMaxHP());
+            CombatText.NewText(Projectile.Hitbox, new Color(255, 50, 50), dmg);
+            //if health is less than or equal to 0 despawn pokemon
+            if (currentHp <= 0) { Projectile.timeLeft = 0; Main.NewText("Your pokemon fainted!", 255, 130, 130); }
+
+            
+            return dmg;
+        }
+        
+        public void regenHP(int amount){
+            // heal hp
+            currentHp += amount;
+            CombatText.NewText(Projectile.Hitbox, new Color(50, 255, 50), "+" + amount);
+
+        }
+        
+        public void TakeDamage(){
+            NPC npc = null;
+            for (int i = 0; i < Main.maxNPCs; i++){
+                npc = Main.npc[i];
+
+                if (npc.CanBeChasedBy()){
+                    if (Projectile.Hitbox.Intersects(npc.getRect()) && !canBeHurt){
+                        npcdmg = npc.defDamage;
+                        calIncomingDmg();
+                        canBeHurt = true;
+                    }
+                }
+            }
+        }
+      
+        public void hurtTimer(){
+            if (canBeHurt){
+                hurtTime--;
+
+                if (hurtTime <= 0){
+                    hurtTime = 30;
+                    canBeHurt = false;
+                }
+            }
+        }
+
+		public override bool PreDrawExtras()
+        {
+            if(finalStats[0] != 0){
+				float quotient = (float)currentHp/ finalStats[0];// Creating a quotient that represents the difference of your currentResource vs your maximumResource, resulting in a float of 0-1f.
+				quotient = Utils.Clamp(quotient, 0f, 1f); // Clamping it to 0-1f so it doesn't go over that.
+
+				if (currentHp < finalStats[0])
+				{
+					// Now, using this hitbox, we draw a gradient by drawing vertical lines while slowly interpolating between the 2 colors.
+					int left = -24;
+					int right = 24;
+					int steps = (int)((right - left) * quotient);
+
+					for (int i = 0; i < steps; i += 1)
+					{
+						float percent = (float)i / (right - left);
+						Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Entity.Top + new Vector2(left + i, -20) - Main.screenPosition, new Rectangle(0, 0, 1, 8), Color.Lerp(new Color(50, 255, 50), new Color(50, 255, 50), percent), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
+
+					}
+					return true;
+				}
+			}
+            return false;
+        }
 
         public override void OnKill(int timeLeft)
         {

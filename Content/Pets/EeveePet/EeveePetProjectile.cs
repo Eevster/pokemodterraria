@@ -14,7 +14,6 @@ namespace Pokemod.Content.Pets.EeveePet
 		
 		public override int nAttackProjs => 4;
 		public override int baseDamage => 3;
-		public override int PokemonBuff => ModContent.BuffType<EeveePetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 0;
@@ -56,4 +55,6 @@ namespace Pokemod.Content.Pets.EeveePet
 			}
 		}
 	}
+
+	public class EeveePetProjectileShiny : EeveePetProjectile{}
 }

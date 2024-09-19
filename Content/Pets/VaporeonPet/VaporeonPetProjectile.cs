@@ -14,7 +14,6 @@ namespace Pokemod.Content.Pets.VaporeonPet
 
 		public override int nAttackProjs => 1;
 		public override int baseDamage => 3;
-		public override int PokemonBuff => ModContent.BuffType<VaporeonPetBuff>();
 		public override float enemySearchDistance => 1000;
 		public override float distanceToAttack => 100f;
 		public override bool canAttackThroughWalls => true;
@@ -62,4 +61,6 @@ namespace Pokemod.Content.Pets.VaporeonPet
 			attackProjs[i].Center = Projectile.Center;
 		}
 	}
+
+	public class VaporeonPetProjectileShiny : VaporeonPetProjectile{}
 }
