@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.IvysaurPet
 	{
 		public override int hitboxWidth => 24;
 		public override int hitboxHeight => 26;
-		public override int[] baseStats => [60, 62, 63, 80, 80, 60];
 
 		public override int totalFrames => 15;
 		public override int animationSpeed => 5;

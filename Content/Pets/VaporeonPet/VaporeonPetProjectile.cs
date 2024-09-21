@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.VaporeonPet
 	{
 		public override int hitboxWidth => 32;
 		public override int hitboxHeight => 26;
-		public override int[] baseStats => [130, 65, 60, 110, 95, 65];
 
 		public override int totalFrames => 19;
 		public override int animationSpeed => 6;

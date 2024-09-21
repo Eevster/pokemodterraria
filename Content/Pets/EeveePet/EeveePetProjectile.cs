@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.EeveePet
 	{
 		public override int hitboxWidth => 22;
 		public override int hitboxHeight => 30;
-		public override int[] baseStats => [55, 55, 50, 45, 65, 55];
 
 		public override int totalFrames => 18;
 		public override int animationSpeed => 5;

@@ -10,7 +10,6 @@ namespace Pokemod.Content.Pets.ChikoritaPet
 	{
 		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 28;
-		public override int[] baseStats => [45, 49, 65, 49, 65, 45];
 
 		public override int totalFrames => 20;
 		public override int animationSpeed => 5;

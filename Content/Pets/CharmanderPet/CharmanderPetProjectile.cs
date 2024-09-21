@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.CharmanderPet
 	{
 		public override int hitboxWidth => 20;
 		public override int hitboxHeight => 32;
-		public override int[] baseStats => [39, 52, 43, 60, 50, 65];
 
 		public override int totalFrames => 20;
 		public override int animationSpeed => 5;

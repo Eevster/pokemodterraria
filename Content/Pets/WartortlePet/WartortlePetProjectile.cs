@@ -10,7 +10,6 @@ namespace Pokemod.Content.Pets.WartortlePet
 	{
 		public override int hitboxWidth => 32;
 		public override int hitboxHeight => 36;
-		public override int[] baseStats => [59, 63, 80, 65, 80, 58];
 
 		public override int totalFrames => 17;
 		public override int animationSpeed => 5;

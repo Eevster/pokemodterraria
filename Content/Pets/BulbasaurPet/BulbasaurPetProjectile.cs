@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 	{
 		public override int hitboxWidth => 24;
 		public override int hitboxHeight => 24;
-		public override int[] baseStats => [45, 49, 49, 65, 65, 45];
 
 		public override int totalFrames => 20;
 		public override int animationSpeed => 5;

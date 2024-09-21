@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.SquirtlePet
 	{
 		public override int hitboxWidth => 24;
 		public override int hitboxHeight => 32;
-		public override int[] baseStats => [44, 48, 65, 50, 64, 43];
 
 		public override int totalFrames => 15;
 		public override int animationSpeed => 5;

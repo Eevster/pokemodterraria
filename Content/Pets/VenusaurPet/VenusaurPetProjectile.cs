@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.VenusaurPet
 	{
 		public override int hitboxWidth => 50;
 		public override int hitboxHeight => 40;
-		public override int[] baseStats => [80, 82, 83, 100, 100, 80];
 
 		public override int totalFrames => 25;
 		public override int animationSpeed => 7;

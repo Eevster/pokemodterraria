@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.FlareonPet
 	{
 		public override int hitboxWidth => 32;
 		public override int hitboxHeight => 28;
-		public override int[] baseStats => [65, 130, 60, 95, 110, 65];
 
 		public override int totalFrames => 22;
 		public override int animationSpeed => 6;

@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.JolteonPet
 	{
 		public override int hitboxWidth => 32;
 		public override int hitboxHeight => 24;
-		public override int[] baseStats => [65, 65, 60, 110, 95, 130];
 
 		public override int totalFrames => 18;
 		public override int animationSpeed => 5;

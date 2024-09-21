@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Players;
 using Pokemod.Content.Items;
 using Pokemod.Content.NPCs;
+using Pokemod.Content.Pets.FlareonPet;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -25,7 +26,7 @@ namespace Pokemod.Content.Pets
 		/// <summary>
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
 		/// </summary>
-		public virtual int[] baseStats => [50,50,50,50,50,50];
+		public int[] baseStats => PokemonNPCData.pokemonStats[GetType().Name.Replace("PetProjectile","").Replace("Shiny","")];
 		public int[] IVs = [0,0,0,0,0,0];
 		public int[] EVs = [0,0,0,0,0,0];
 		public int[] finalStats = [0,0,0,0,0,0];
@@ -854,6 +855,7 @@ namespace Pokemod.Content.Pets
 						}
 					}
 				}
+				Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<DespawnPokemon>(), 0, 0, Projectile.owner);
 			}
         }
 

@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.PikachuPet
 	{
 		public override int hitboxWidth => 16;
 		public override int hitboxHeight => 24;
-		public override int[] baseStats => [35, 55, 40, 50, 50, 90];
 
 		public override int totalFrames => 19;
 		public override int animationSpeed => 5;

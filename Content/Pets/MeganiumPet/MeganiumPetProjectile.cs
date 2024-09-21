@@ -10,7 +10,6 @@ namespace Pokemod.Content.Pets.MeganiumPet
 	{
 		public override int hitboxWidth => 36;
 		public override int hitboxHeight => 56;
-		public override int[] baseStats => [80, 82, 100, 83, 100, 80];
 
 		public override int totalFrames => 18;
 		public override int animationSpeed => 8;

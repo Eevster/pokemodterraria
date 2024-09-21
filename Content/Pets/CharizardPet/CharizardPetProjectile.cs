@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.CharizardPet
 	{
 		public override int hitboxWidth => 36;
 		public override int hitboxHeight => 56;
-		public override int[] baseStats => [78, 84, 78, 109, 85, 100];
 
 		public override int totalFrames => 42;
 		public override int animationSpeed => 7;

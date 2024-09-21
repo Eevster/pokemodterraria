@@ -81,6 +81,9 @@ Projectiles: {
 	MeganiumPetProjectile.DisplayName: Meganium Pet Projectile
 	GigaDrain.DisplayName: Giga Drain
 	CyndaquilPetProjectileShiny.DisplayName: Cyndaquil Pet Projectile Shiny
+	CaterpiePetProjectile.DisplayName: Caterpie Pet Projectile
+	CaterpiePetProjectileShiny.DisplayName: Caterpie Pet Projectile Shiny
+	DespawnPokemon.DisplayName: Despawn Pokemon
 }
 
 Items: {
@@ -146,7 +149,7 @@ Items: {
 
 	RareCandyItem: {
 		DisplayName: Rare Candy
-		Tooltip: 
+		Tooltip:
 			'''
 			To use it, click on your pokemon or right click on the corresponding pokeball
 			When used on a pokemon it increases its level by 1
@@ -510,7 +513,7 @@ Items: {
 
 	Potion: {
 		DisplayName: Potion
-		Tooltip: 
+		Tooltip:
 			'''
 			To use it, click on your pokemon or right click on the corresponding pokeball
 			When used on a pokemon it recovers 20 HP
@@ -519,10 +522,10 @@ Items: {
 
 	Revive: {
 		DisplayName: Revive
-		Tooltip: 
+		Tooltip:
 			'''
 			To use it, click on your pokemon or right click on the corresponding pokeball
-			When used on a weakened pokemon, it revives it with half its maximum HP
+			When used on a fainted pokemon, it revives it with half its maximum HP
 			'''
 	}
 }
@@ -747,6 +750,16 @@ Buffs: {
 		Description: " "
 		DisplayName: Cyndaquil Shiny
 	}
+
+	CaterpiePetBuffShiny: {
+		DisplayName: Caterpie Shiny
+		Description: " "
+	}
+
+	CaterpiePetBuff: {
+		Description: " "
+		DisplayName: Caterpie
+	}
 }
 
 NPCs: {
@@ -790,6 +803,8 @@ NPCs: {
 	VenusaurCritterNPCShiny.DisplayName: Venusaur Shiny
 	WartortleCritterNPC.DisplayName: Wartortle
 	WartortleCritterNPCShiny.DisplayName: Wartortle Shiny
+	CaterpieCritterNPC.DisplayName: Caterpie
+	CaterpieCritterNPCShiny.DisplayName: Caterpie Shiny
 }
 
 Tiles: {

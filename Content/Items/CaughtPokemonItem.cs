@@ -140,9 +140,11 @@ namespace Pokemod.Content.Items
 					if(Shiny) line.OverrideColor = Main.DiscoColor;
 				}
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
-					line.Text = "Caught in a "+BallType.Replace("Item", "") + "\n"+"Lvl "+level+"  Exp: "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level))+
-					"\n"+(currentHP>=0?"HP: "+(currentHP>0?(currentHP+"/"+fullStats[0]+" "):"Fainted "):"")+
-					"\nAtk: "+fullStats[1]+" Def: "+fullStats[2]+"\nSpAtk: "+fullStats[3]+" SpDef: "+fullStats[4]+" Vel: "+fullStats[5];
+					line.Text = "Caught in a "+BallType.Replace("Item", "") + "\n"+
+					"[c/ffd51c:Lvl] "+level+"  [c/ffd51c:Exp:] "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level))+
+					"\n"+(currentHP>=0?"[c/ffd51c:HP:] "+(currentHP>0?(currentHP+"/"+fullStats[0]+" "):"[c/fa3e42:Fainted] "):"")+
+					"\n[c/ffd51c:Atk:] "+fullStats[1]+"  [c/ffd51c:Def:] "+fullStats[2]+
+					"\n[c/ffd51c:SpAtk:] "+fullStats[3]+"  [c/ffd51c:SpDef:] "+fullStats[4]+"  [c/ffd51c:Vel:] "+fullStats[5];
 				}
 			}
 

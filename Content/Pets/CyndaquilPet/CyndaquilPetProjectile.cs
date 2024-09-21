@@ -8,7 +8,6 @@ namespace Pokemod.Content.Pets.CyndaquilPet
 	{
 		public override int hitboxWidth => 24;
 		public override int hitboxHeight => 26;
-		public override int[] baseStats => [39, 52, 43, 60, 50, 65];
 
 		public override int totalFrames => 14;
 		public override int animationSpeed => 5;

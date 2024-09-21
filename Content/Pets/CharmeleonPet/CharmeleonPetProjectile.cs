@@ -11,7 +11,6 @@ namespace Pokemod.Content.Pets.CharmeleonPet
 	{
 		public override int hitboxWidth => 24;
 		public override int hitboxHeight => 40;
-		public override int[] baseStats => [58, 64, 58, 80, 65, 80];
 
 		public override int totalFrames => 19;
 		public override int animationSpeed => 5;

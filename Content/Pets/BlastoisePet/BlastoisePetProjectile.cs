@@ -10,7 +10,6 @@ namespace Pokemod.Content.Pets.BlastoisePet
 	{
 		public override int hitboxWidth => 26;
 		public override int hitboxHeight => 56;
-		public override int[] baseStats => [79, 83, 100, 85, 105, 78];
 
 		public override int totalFrames => 24;
 		public override int animationSpeed => 6;

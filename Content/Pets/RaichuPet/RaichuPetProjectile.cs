@@ -13,7 +13,6 @@ namespace Pokemod.Content.Pets.RaichuPet
 	{
 		public override int hitboxWidth => 24;
 		public override int hitboxHeight => 30;
-		public override int[] baseStats => [60, 90, 55, 90, 80, 110];
 
 		public override int totalFrames => 19;
 		public override int animationSpeed => 5;

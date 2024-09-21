@@ -10,7 +10,6 @@ namespace Pokemod.Content.Pets.BayleefPet
 	{
 		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 40;
-		public override int[] baseStats => [60, 62, 80, 63, 80, 60];
 
 		public override int totalFrames => 12;
 		public override int animationSpeed => 5;

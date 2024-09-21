@@ -182,6 +182,7 @@ namespace Pokemod.Content.Items.Pokeballs
 						}
 					}
 					moveTimer = moveTime;
+					SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PBWiggle") with {Volume = 1.2f}, Projectile.Center);
 				}else{
 					moveTimer--;
 				}
@@ -271,6 +272,7 @@ namespace Pokemod.Content.Items.Pokeballs
 				targetPokemon.hide = false;
 				targetPokemon.friendly = false;
 				targetPokemon.dontTakeDamageFromHostiles = false;
+				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PBOut"), Projectile.Center);
 				Projectile.Kill();
 			}
 		}
