@@ -11,18 +11,7 @@ namespace Pokemod.Content.Pets.VaporeonPet
 	{
 		public override int hitboxWidth => 32;
 		public override int hitboxHeight => 26;
-
-		public override int nAttackProjs => 1;
-		public override int baseDamage => 3;
-		public override float enemySearchDistance => 1000;
-		public override float distanceToAttack => 100f;
-		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 90;
-		public override int attackCooldown => 60;
-		public override bool canMoveWhileAttack => false;
-
-		public override float moveDistance1 => 50f;
-		public override float moveDistance2 => 50f;
+		public override int[] baseStats => [130, 65, 60, 110, 95, 65];
 
 		public override int totalFrames => 19;
 		public override int animationSpeed => 6;
@@ -37,6 +26,17 @@ namespace Pokemod.Content.Pets.VaporeonPet
 		public override int[] idleSwimStartEnd => [0,8];
 		public override int[] walkSwimStartEnd => [9,17];
 		public override int[] attackSwimStartEnd => [18,18];
+
+		public override int nAttackProjs => 1;
+		public override float enemySearchDistance => 1000;
+		public override float distanceToAttack => 100f;
+		public override bool canAttackThroughWalls => true;
+		public override int attackDuration => 90;
+		public override int attackCooldown => 60;
+		public override bool canMoveWhileAttack => false;
+
+		public override float moveDistance1 => 50f;
+		public override float moveDistance2 => 50f;
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){

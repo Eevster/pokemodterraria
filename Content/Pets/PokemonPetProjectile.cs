@@ -26,7 +26,8 @@ namespace Pokemod.Content.Pets
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
 		/// </summary>
 		public virtual int[] baseStats => [50,50,50,50,50,50];
-		public virtual int baseDamage => 1;
+		public int[] IVs = [0,0,0,0,0,0];
+		public int[] EVs = [0,0,0,0,0,0];
 		public int[] finalStats = [0,0,0,0,0,0];
 
 		public bool canBeHurt = true;
@@ -151,14 +152,19 @@ namespace Pokemod.Content.Pets
 			PokemonBuff = ModContent.Find<ModBuff>("Pokemod", GetType().Name.Replace("Projectile","Buff")).Type;
 			attackProjs = new Projectile[nAttackProjs];
 			Projectile.Center = player.Center+new Vector2(0,(player.height-Projectile.height)/2);
-			currentHp = 10000;
+			currentHp = (int)Projectile.ai[0];
+			if(currentHp == -1){
+				currentHp = 10000;
+			}else if(currentHp == 0){
+				Projectile.Kill();
+				return;
+			}
 			
             base.OnSpawn(source);
         }
 
 		public void UpdateStats(){
-			int[] EVs = [0,0,0,0,0,0];
-            finalStats = PokemonNPCData.CalcAllStats(pokemonLvl, baseStats, EVs);
+            finalStats = PokemonNPCData.CalcAllStats(pokemonLvl, baseStats, IVs, EVs);
 		}
 
         public int GetExpGained(){
@@ -175,17 +181,20 @@ namespace Pokemod.Content.Pets
 			return used;
 		}
 
-		public virtual int GetPokemonDamage(){
-			int pokemonDamage = (int)(0.6f*finalStats[1]*(0.4f*pokemonLvl+2)+2);
+		public virtual int GetPokemonDamage(int power = 50){
+			int pokemonDamage = (int)((2+2*pokemonLvl/5)*power*finalStats[1]/1500);
 
 			return pokemonDamage;
 		}
 
-		public void SetPokemonLvl(int lvl){
+		public void SetPokemonLvl(int lvl, int[] IVs = null, int[] EVs = null){
 			if(pokemonLvl != 0 && pokemonLvl != lvl){
 				CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile","")+" grew to lvl "+lvl);
 			}
 			pokemonLvl = lvl;
+			if(IVs != null) this.IVs = IVs;
+			if(EVs != null) this.EVs = EVs;
+
 			UpdateStats();
 		}
 
@@ -752,7 +761,7 @@ namespace Pokemod.Content.Pets
             //calling Hp
             if(currentHp > finalStats[0]) { currentHp = finalStats[0]; }
             //cal damage versus defense for pokemon
-            int dmg = npcdmg - ((finalStats[2] * pokemonLvl) / 75);
+            int dmg = npcdmg - finalStats[2]/2;
 
             //if dmg is less than 1 deal at least 1
             if (dmg <= 0) dmg = 1;
@@ -762,17 +771,20 @@ namespace Pokemod.Content.Pets
            // Main.NewText("HP: " + currentHp + "/" + getMaxHP());
             CombatText.NewText(Projectile.Hitbox, new Color(255, 50, 50), dmg);
             //if health is less than or equal to 0 despawn pokemon
-            if (currentHp <= 0) { Projectile.timeLeft = 0; Main.NewText("Your pokemon fainted!", 255, 130, 130); }
-
+            if (currentHp <= 0) {
+				currentHp = 0;
+				Main.player[Projectile.owner].ClearBuff(PokemonBuff);
+				Main.NewText("Your pokemon fainted!", 255, 130, 130); 
+			}
             
             return dmg;
         }
         
-        public void regenHP(int amount){
+        public void regenHP(int amount, bool showText = true){
             // heal hp
             currentHp += amount;
-            CombatText.NewText(Projectile.Hitbox, new Color(50, 255, 50), "+" + amount);
-
+            if(showText) CombatText.NewText(Projectile.Hitbox, new Color(50, 255, 50), "+" + amount);
+			if(currentHp > finalStats[0]) { currentHp = finalStats[0]; }
         }
         
         public void TakeDamage(){
@@ -780,10 +792,12 @@ namespace Pokemod.Content.Pets
             for (int i = 0; i < Main.maxNPCs; i++){
                 npc = Main.npc[i];
 
-                if (npc.CanBeChasedBy()){
+                if (npc.CanBeChasedBy() && npc.damage != 0){
                     if (Projectile.Hitbox.Intersects(npc.getRect()) && !canBeHurt){
                         npcdmg = npc.defDamage;
-                        calIncomingDmg();
+                        if(currentHp != 0){
+							calIncomingDmg();
+						}
                         canBeHurt = true;
                     }
                 }
@@ -804,6 +818,8 @@ namespace Pokemod.Content.Pets
 		public override bool PreDrawExtras()
         {
             if(finalStats[0] != 0){
+				Asset<Texture2D> barTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/PokemonHPBar");
+
 				float quotient = (float)currentHp/ finalStats[0];// Creating a quotient that represents the difference of your currentResource vs your maximumResource, resulting in a float of 0-1f.
 				quotient = Utils.Clamp(quotient, 0f, 1f); // Clamping it to 0-1f so it doesn't go over that.
 
@@ -820,10 +836,10 @@ namespace Pokemod.Content.Pets
 						Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Entity.Top + new Vector2(left + i, -20) - Main.screenPosition, new Rectangle(0, 0, 1, 8), Color.Lerp(new Color(50, 255, 50), new Color(50, 255, 50), percent), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
 
 					}
-					return true;
+					Main.EntitySpriteDraw(barTexture.Value, Entity.Top + new Vector2(0,-20) - Main.screenPosition, barTexture.Value.Bounds, Color.White, 0, barTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
 				}
 			}
-            return false;
+            return true;
         }
 
         public override void OnKill(int timeLeft)

@@ -29,8 +29,8 @@ namespace Pokemod.Content.Pets
                     if(player.miscEquips[0].ModItem is CaughtPokemonItem){
                         CaughtPokemonItem pokeItem = (CaughtPokemonItem)player.miscEquips[0].ModItem;
                         if(pokeItem.proj == null || player.ownedProjectileCounts[ProjType] <= 0){
-                            if(pokeItem.PokemonName == PokeName && pokeItem.Shiny == Shiny){
-                                int proj = Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ProjType, 0, 0f, player.whoAmI);
+                            if(pokeItem.PokemonName == PokeName && pokeItem.Shiny == Shiny && pokeItem.currentHP != 0){
+                                int proj = Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ProjType, 0, 0f, player.whoAmI, pokeItem.currentHP);
                                 pokeItem.proj = Main.projectile[proj];
                             }else{
                                 noProj = true;
@@ -45,7 +45,10 @@ namespace Pokemod.Content.Pets
                             if(pokeItem.proj != null){
                                 if(pokeItem.PokemonName == PokeName && pokeItem.Shiny == Shiny){
                                     pokeItem.SetPetInfo();
-                                    player.buffTime[buffIndex] = 10;
+                                    player.buffTime[buffIndex] = 2;
+                                    if(pokeItem.currentHP == 0){
+                                        noProj = true;
+                                    }
                                 }
                             }
                         }

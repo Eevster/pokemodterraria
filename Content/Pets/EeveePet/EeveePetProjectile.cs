@@ -11,14 +11,7 @@ namespace Pokemod.Content.Pets.EeveePet
 	{
 		public override int hitboxWidth => 22;
 		public override int hitboxHeight => 30;
-		
-		public override int nAttackProjs => 4;
-		public override int baseDamage => 3;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 0;
-		public override int attackCooldown => 120;
-		public override bool canMoveWhileAttack => true;
+		public override int[] baseStats => [55, 55, 50, 45, 65, 55];
 
 		public override int totalFrames => 18;
 		public override int animationSpeed => 5;
@@ -26,6 +19,13 @@ namespace Pokemod.Content.Pets.EeveePet
 		public override int[] walkStartEnd => [9,17];
 		public override int[] jumpStartEnd => [12,12];
 		public override int[] fallStartEnd => [15,15];
+		
+		public override int nAttackProjs => 4;
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => true;
+		public override int attackDuration => 0;
+		public override int attackCooldown => 120;
+		public override bool canMoveWhileAttack => true;
 
 		public override string[] evolutions => ["Flareon", "Jolteon", "Vaporeon"];
 		public override string[] itemToEvolve => ["FireStoneItem", "ThunderStoneItem", "WaterStoneItem"];

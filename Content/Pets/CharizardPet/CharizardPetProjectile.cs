@@ -11,13 +11,7 @@ namespace Pokemod.Content.Pets.CharizardPet
 	{
 		public override int hitboxWidth => 36;
 		public override int hitboxHeight => 56;
-
-		public override int nAttackProjs => 5;
-		public override int baseDamage => 3;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 40;
-		public override int attackCooldown => 40;
+		public override int[] baseStats => [78, 84, 78, 109, 85, 100];
 
 		public override int totalFrames => 42;
 		public override int animationSpeed => 7;
@@ -33,6 +27,12 @@ namespace Pokemod.Content.Pets.CharizardPet
 		public override int[] idleFlyStartEnd => [16,21];
 		public override int[] walkFlyStartEnd => [36,41];
 		public override int[] attackFlyStartEnd => [30,35];
+
+		public override int nAttackProjs => 5;
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => true;
+		public override int attackDuration => 40;
+		public override int attackCooldown => 40;
 
         public override void SetDefaults()
         {

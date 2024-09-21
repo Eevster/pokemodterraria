@@ -10,13 +10,7 @@ namespace Pokemod.Content.Pets.BlastoisePet
 	{
 		public override int hitboxWidth => 26;
 		public override int hitboxHeight => 56;
-
-		public override int nAttackProjs => 8;
-		public override int baseDamage => 5;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 42;
-		public override int attackCooldown => 18;
+		public override int[] baseStats => [79, 83, 100, 85, 105, 78];
 
 		public override int totalFrames => 24;
 		public override int animationSpeed => 6;
@@ -31,6 +25,13 @@ namespace Pokemod.Content.Pets.BlastoisePet
 		public override int[] idleSwimStartEnd => [0,8];
 		public override int[] walkSwimStartEnd => [9,16];
 		public override int[] attackSwimStartEnd => [17,23];
+
+		public override int nAttackProjs => 8;
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => true;
+		public override int attackDuration => 42;
+		public override int attackCooldown => 18;
+
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){

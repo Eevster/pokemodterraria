@@ -1,25 +1,28 @@
-﻿using Terraria.GameContent.Bestiary;
+﻿
+using Terraria.GameContent.Bestiary;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
-	public class BulbasaurCritterNPC : PokemonWildNPC
+	public class BayleefCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 24;
-		public override int hitboxHeight => 24;
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 40;
 
-		public override int totalFrames => 20;
+		public override int totalFrames => 12;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,5];
 		public override int[] walkStartEnd => [6,10];
 		public override int[] jumpStartEnd => [8,8];
-		public override int[] fallStartEnd => [9,9];
-		public override int[] attackStartEnd => [11,19];
+		public override int[] fallStartEnd => [10,10];
+		public override int[] attackStartEnd => [11,11];
+
+		public override int minLevel => 16;
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
-				new FlavorTextBestiaryInfoElement("For some time after its birth, it grows by taking nourishment from the seed on its back."));
+				new FlavorTextBestiaryInfoElement("The buds that ring its neck give off a spicy aroma that perks people up."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
@@ -31,7 +34,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		}
 	}
 
-	public class BulbasaurCritterNPCShiny : BulbasaurCritterNPC{
+	public class BayleefCritterNPCShiny : BayleefCritterNPC{
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneJungle) {
                 return SpawnCondition.OverworldDay.Chance * 0.5f * 0.00025f;

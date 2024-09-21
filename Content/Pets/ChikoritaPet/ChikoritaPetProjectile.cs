@@ -10,13 +10,7 @@ namespace Pokemod.Content.Pets.ChikoritaPet
 	{
 		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 28;
-
-		public override int nAttackProjs => 3;
-		public override int baseDamage => 3;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => false;
-		public override int attackDuration => 45;
-		public override int attackCooldown => 0;
+		public override int[] baseStats => [45, 49, 65, 49, 65, 45];
 
 		public override int totalFrames => 20;
 		public override int animationSpeed => 5;
@@ -25,6 +19,12 @@ namespace Pokemod.Content.Pets.ChikoritaPet
 		public override int[] jumpStartEnd => [7,7];
 		public override int[] fallStartEnd => [10,10];
 		public override int[] attackStartEnd => [11,19];
+
+		public override int nAttackProjs => 3;
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => false;
+		public override int attackDuration => 45;
+		public override int attackCooldown => 0;
 
 		public override string[] evolutions => ["Bayleef"];
 		public override int levelToEvolve => 16;

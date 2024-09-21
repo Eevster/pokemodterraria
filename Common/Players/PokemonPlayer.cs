@@ -73,7 +73,6 @@ namespace Pokemod.Common.Players
 			if (clone.attackMode != attackMode || clone.attackPosition != attackPosition)
 				SyncPlayer(toWho: -1, fromWho: Main.myPlayer, newPlayer: false);
 		}
-        
 
         public override void ResetEffects()
         {

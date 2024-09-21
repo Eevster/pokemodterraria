@@ -146,7 +146,11 @@ Items: {
 
 	RareCandyItem: {
 		DisplayName: Rare Candy
-		Tooltip: When used on a pokemon it increases its level by 1
+		Tooltip: 
+			'''
+			To use it, click on your pokemon or right click on the corresponding pokeball
+			When used on a pokemon it increases its level by 1
+			'''
 	}
 
 	CharmeleonPetItem: {
@@ -506,7 +510,20 @@ Items: {
 
 	Potion: {
 		DisplayName: Potion
-		Tooltip: ""
+		Tooltip: 
+			'''
+			To use it, click on your pokemon or right click on the corresponding pokeball
+			When used on a pokemon it recovers 20 HP
+			'''
+	}
+
+	Revive: {
+		DisplayName: Revive
+		Tooltip: 
+			'''
+			To use it, click on your pokemon or right click on the corresponding pokeball
+			When used on a weakened pokemon, it revives it with half its maximum HP
+			'''
 	}
 }
 
@@ -751,6 +768,28 @@ NPCs: {
 	ChikoritaCritterNPCShiny.DisplayName: Chikorita
 	CyndaquilCritterNPC.DisplayName: Cyndaquil
 	CyndaquilCritterNPCShiny.DisplayName: Cyndaquil
+	BlastoiseCritterNPC.DisplayName: Blastoise
+	BayleefCritterNPCShiny.DisplayName: BayleefShiny
+	BayleefCritterNPC.DisplayName: Bayleef
+	BlastoiseCritterNPCShiny.DisplayName: Blastoise Shiny
+	CharmeleonCritterNPC.DisplayName: Charmeleon
+	CharmeleonCritterNPCShiny.DisplayName: Charmeleon Shiny
+	FlareonCritterNPC.DisplayName: Flareon
+	FlareonCritterNPCShiny.DisplayName: Flareon Shiny
+	IvysaurCritterNPC.DisplayName: Ivysaur
+	IvysaurCritterNPCShiny.DisplayName: Ivysaur Shiny
+	JolteonCritterNPC.DisplayName: Jolteon
+	JolteonCritterNPCShiny.DisplayName: Jolteon Shiny
+	MeganiumCritterNPC.DisplayName: Meganium
+	MeganiumCritterNPCShiny.DisplayName: Meganium Shiny
+	RaichuCritterNPC.DisplayName: Raichu
+	RaichuCritterNPCShiny.DisplayName: Raichu Shiny
+	VaporeonCritterNPC.DisplayName: Vaporeon
+	VaporeonCritterNPCShiny.DisplayName: Vaporeon Shiny
+	VenusaurCritterNPC.DisplayName: Venusaur
+	VenusaurCritterNPCShiny.DisplayName: Venusaur Shiny
+	WartortleCritterNPC.DisplayName: Wartortle
+	WartortleCritterNPCShiny.DisplayName: Wartortle Shiny
 }
 
 Tiles: {

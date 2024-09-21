@@ -281,16 +281,17 @@ namespace Pokemod.Content.Items.Pokeballs
 				int item;
 				string pokemonName = targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName;
 				bool shiny = targetPokemon.GetGlobalNPC<PokemonNPCData>().shiny;
+				int lvl = targetPokemon.GetGlobalNPC<PokemonNPCData>().lvl;
 
 				if (Main.netMode == NetmodeID.SinglePlayer){
 					item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
+					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"), lvl);
 				}else{
 					if(Main.netMode == NetmodeID.Server){
 						item = player.QuickSpawnItem(Projectile.InheritSource(Projectile), ModContent.ItemType<CaughtPokemonItem>());
 						CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-						pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"));
+						pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"), lvl);
 					}
 				}
 

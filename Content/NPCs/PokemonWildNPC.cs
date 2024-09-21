@@ -24,7 +24,7 @@ namespace Pokemod.Content.NPCs
 	public abstract class PokemonWildNPC : ModNPC
 	{
 		public virtual int pokemonID => 0;
-		public virtual int minLevel => 1;
+		public virtual int minLevel => 5;
 		public virtual int maxLevel => 100;
 		public virtual float catchRate => 45;
 		public virtual string pokemonName => GetType().Name.Replace("CritterNPC","").Replace("Shiny","");
@@ -37,7 +37,7 @@ namespace Pokemod.Content.NPCs
 		/// <summary>
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
 		/// </summary>
-		public virtual int[] baseStats => [50,50,50,50,50,50];
+		public virtual int[] baseStats => PokemonNPCData.pokemonStats[pokemonName];
 		public int[] finalStats;
 
 		public override void SetStaticDefaults() {
@@ -73,15 +73,21 @@ namespace Pokemod.Content.NPCs
 		public override void OnSpawn(IEntitySource source)
         {
 			int lvl = Main.rand.Next(minLevel,maxLevel+1);
-			int[] EVs = PokemonNPCData.GenerateIVs();
-            finalStats = PokemonNPCData.CalcAllStats(lvl, baseStats, EVs);
+			int[] IVs = PokemonNPCData.GenerateIVs();
+            finalStats = PokemonNPCData.CalcAllStats(lvl, baseStats, IVs, [0,0,0,0,0,0]);
             NPC.lifeMax = finalStats[0];
 			NPC.life = NPC.lifeMax;
 			NPC.defense = finalStats[2];
-			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, EVs);
+			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, IVs);
         }
 
-		public override void HitEffect(NPC.HitInfo hit) {
+        public override void ModifyTypeName(ref string typeName)
+        {
+			typeName += " lvl " + NPC.GetGlobalNPC<PokemonNPCData>().lvl;
+            base.ModifyTypeName(ref typeName);
+        }
+
+        public override void HitEffect(NPC.HitInfo hit) {
 			if (NPC.life <= 0) {
 				for (int i = 0; i < 6; i++) {
 					Dust dust = Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, DustID.Worm, 2 * hit.HitDirection, -2f);

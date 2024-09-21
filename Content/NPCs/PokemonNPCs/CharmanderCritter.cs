@@ -1,15 +1,6 @@
-﻿using Pokemod.Content.Items;
-using Pokemod.Content.Pets.CharmanderPet;
-using Microsoft.Xna.Framework;
-using MonoMod.Cil;
-using System;
-using Terraria;
-using Terraria.Audio;
-using Terraria.GameContent.Bestiary;
-using Terraria.ID;
+﻿using Terraria.GameContent.Bestiary;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
-using Terraria.DataStructures;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
@@ -17,7 +8,6 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	{
 		public override int hitboxWidth => 20;
 		public override int hitboxHeight => 32;
-		public override int[] baseStats => [50,50,50,50,50,50];
 
 		public override int totalFrames => 20;
 		public override int animationSpeed => 5;

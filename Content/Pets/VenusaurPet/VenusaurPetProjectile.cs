@@ -11,17 +11,7 @@ namespace Pokemod.Content.Pets.VenusaurPet
 	{
 		public override int hitboxWidth => 50;
 		public override int hitboxHeight => 40;
-
-		public override int nAttackProjs => 1;
-		public override int baseDamage => 5;
-		public override float enemySearchDistance => 1500;
-		public override bool canAttackThroughWalls => true;
-
-		public override float moveSpeed1 => 4f;
-		public override float moveSpeed2 => 7f;
-		
-		public override int attackDuration => 70;
-		public override int attackCooldown => 30;
+		public override int[] baseStats => [80, 82, 83, 100, 100, 80];
 
 		public override int totalFrames => 25;
 		public override int animationSpeed => 7;
@@ -30,6 +20,16 @@ namespace Pokemod.Content.Pets.VenusaurPet
 		public override int[] jumpStartEnd => [10,10];
 		public override int[] fallStartEnd => [14,14];
 		public override int[] attackStartEnd => [15,24];
+
+		public override int nAttackProjs => 1;
+		public override float enemySearchDistance => 1500;
+		public override bool canAttackThroughWalls => true;
+
+		public override float moveSpeed1 => 4f;
+		public override float moveSpeed2 => 7f;
+		
+		public override int attackDuration => 70;
+		public override int attackCooldown => 30;
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){

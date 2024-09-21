@@ -11,9 +11,17 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 	{
 		public override int hitboxWidth => 24;
 		public override int hitboxHeight => 24;
+		public override int[] baseStats => [45, 49, 49, 65, 65, 45];
+
+		public override int totalFrames => 20;
+		public override int animationSpeed => 5;
+		public override int[] idleStartEnd => [0,5];
+		public override int[] walkStartEnd => [6,10];
+		public override int[] jumpStartEnd => [8,8];
+		public override int[] fallStartEnd => [9,9];
+		public override int[] attackStartEnd => [11,19];
 
 		public override int nAttackProjs => 2;
-		public override int baseDamage => 3;
 		public override float enemySearchDistance => 1000;
 		public override float distanceToAttack => 140f;
 		public override bool canAttackThroughWalls => false;
@@ -23,14 +31,6 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 		public override float moveDistance1 => 80f;
 		public override float moveDistance2 => 80f;
 		public override bool canMoveWhileAttack => true;
-
-		public override int totalFrames => 20;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,5];
-		public override int[] walkStartEnd => [6,10];
-		public override int[] jumpStartEnd => [8,8];
-		public override int[] fallStartEnd => [9,9];
-		public override int[] attackStartEnd => [11,19];
 
 		public override int maxJumpHeight => 6;
 

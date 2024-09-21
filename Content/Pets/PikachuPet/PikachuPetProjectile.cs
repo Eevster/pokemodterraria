@@ -11,14 +11,7 @@ namespace Pokemod.Content.Pets.PikachuPet
 	{
 		public override int hitboxWidth => 16;
 		public override int hitboxHeight => 24;
-
-		public override int nAttackProjs => 1;
-		public override int baseDamage => 3;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => false;
-		public override int attackDuration => 30;
-		public override int attackCooldown => 60;
-		public override bool canMoveWhileAttack => true;
+		public override int[] baseStats => [35, 55, 40, 50, 50, 90];
 
 		public override int totalFrames => 19;
 		public override int animationSpeed => 5;
@@ -27,6 +20,13 @@ namespace Pokemod.Content.Pets.PikachuPet
 		public override int[] jumpStartEnd => [11,11];
 		public override int[] fallStartEnd => [15,15];
 		public override int[] attackStartEnd => [18,18];
+
+		public override int nAttackProjs => 1;
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => false;
+		public override int attackDuration => 30;
+		public override int attackCooldown => 60;
+		public override bool canMoveWhileAttack => true;
 
 		public override string[] evolutions => ["Raichu"];
 		public override string[] itemToEvolve => ["ThunderStoneItem"];

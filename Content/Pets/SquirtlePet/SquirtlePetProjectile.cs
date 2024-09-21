@@ -11,18 +11,7 @@ namespace Pokemod.Content.Pets.SquirtlePet
 	{
 		public override int hitboxWidth => 24;
 		public override int hitboxHeight => 32;
-
-		public override int nAttackProjs => 8;
-		public override int baseDamage => 3;
-		public override float enemySearchDistance => 1000;
-		public override float distanceToAttack => 600f;
-		public override bool canAttackThroughWalls => false;
-
-		public override float moveSpeed1 => 4f;
-		public override float moveSpeed2 => 7f;
-
-		public override int attackDuration => 10;
-		public override int attackCooldown => 10;
+		public override int[] baseStats => [44, 48, 65, 50, 64, 43];
 
 		public override int totalFrames => 15;
 		public override int animationSpeed => 5;
@@ -37,6 +26,17 @@ namespace Pokemod.Content.Pets.SquirtlePet
 		public override int[] idleSwimStartEnd => [0,6];
 		public override int[] walkSwimStartEnd => [7,13];
 		public override int[] attackSwimStartEnd => [14,14];
+
+		public override int nAttackProjs => 8;
+		public override float enemySearchDistance => 1000;
+		public override float distanceToAttack => 600f;
+		public override bool canAttackThroughWalls => false;
+
+		public override float moveSpeed1 => 4f;
+		public override float moveSpeed2 => 7f;
+
+		public override int attackDuration => 10;
+		public override int attackCooldown => 10;
 
 		public override string[] evolutions => ["Wartortle"];
 		public override int levelToEvolve => 16;

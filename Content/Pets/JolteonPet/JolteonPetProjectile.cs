@@ -11,9 +11,16 @@ namespace Pokemod.Content.Pets.JolteonPet
 	{
 		public override int hitboxWidth => 32;
 		public override int hitboxHeight => 24;
+		public override int[] baseStats => [65, 65, 60, 110, 95, 130];
+
+		public override int totalFrames => 18;
+		public override int animationSpeed => 5;
+		public override int[] idleStartEnd => [0,8];
+		public override int[] walkStartEnd => [9,17];
+		public override int[] jumpStartEnd => [12,12];
+		public override int[] fallStartEnd => [15,15];
 
 		public override int nAttackProjs => 1;
-		public override int baseDamage => 4;
 		public override float enemySearchDistance => 1000;
 		public override float distanceToAttack => 200f;
 		public override bool canAttackThroughWalls => true;
@@ -23,13 +30,6 @@ namespace Pokemod.Content.Pets.JolteonPet
 
 		public override float moveDistance1 => 50f;
 		public override float moveDistance2 => 50f;
-
-		public override int totalFrames => 18;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,8];
-		public override int[] walkStartEnd => [9,17];
-		public override int[] jumpStartEnd => [12,12];
-		public override int[] fallStartEnd => [15,15];
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){

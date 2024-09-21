@@ -4,40 +4,41 @@ using Terraria.ModLoader.Utilities;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
-	public class ChikoritaCritterNPC : PokemonWildNPC
+	public class MeganiumCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 28;
+		public override int hitboxWidth => 36;
+		public override int hitboxHeight => 56;
 
-		public override int totalFrames => 20;
-		public override int animationSpeed => 5;
+		public override int totalFrames => 18;
+		public override int animationSpeed => 8;
 		public override int[] idleStartEnd => [0,5];
 		public override int[] walkStartEnd => [6,10];
-		public override int[] jumpStartEnd => [7,7];
+		public override int[] jumpStartEnd => [8,8];
 		public override int[] fallStartEnd => [10,10];
-		public override int[] attackStartEnd => [11,19];
+		public override int[] attackStartEnd => [11,17];
 
+		public override int minLevel => 32;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
-				new FlavorTextBestiaryInfoElement("It uses the leaf on its head to determine the air's temperature and humidity. It loves to sunbathe."));
+				new FlavorTextBestiaryInfoElement("Its breath has the fantastic ability to revive dead plants and flowers."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneJungle) {
-                return SpawnCondition.OverworldDay.Chance * 0.5f;
-            }
+				return SpawnCondition.OverworldDay.Chance * 0.5f;
+			}
 
 			return 0f;
 		}
 	}
 
-	public class ChikoritaCritterNPCShiny : ChikoritaCritterNPC{
+	public class MeganiumCritterNPCShiny : MeganiumCritterNPC{
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneJungle) {
-                return SpawnCondition.OverworldDay.Chance * 0.5f * 0.00025f;
-            }
-
+				return SpawnCondition.OverworldDay.Chance * 0.5f * 0.00025f;
+			}
+			
 			return 0f;
 		}
 	}

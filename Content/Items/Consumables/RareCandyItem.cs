@@ -23,12 +23,28 @@ namespace Pokemod.Content.Items.Consumables
 
 			Item.maxStack = Item.CommonMaxStack; // The item's max stack value
 			Item.value = Item.buyPrice(silver: 1); // The value of the item in copper coins. Item.buyPrice & Item.sellPrice are helper methods that returns costs in copper coins based on platinum/gold/silver/copper arguments provided to it.
+
+			Item.consumable = true;
 		}
 
-        public override void OnItemUse(Projectile proj){
+        public override bool OnItemUse(Projectile proj){
 			PokemonPetProjectile pokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-			pokemonProj.rareCandy = true;
-			Item.consumable = true;
+			if(pokemonProj.pokemonLvl < 100){
+				pokemonProj.rareCandy = true;
+				Item.consumable = true;
+				return true;
+			}
+			Item.consumable = false;
+			return false;
+		}
+
+		public override bool OnItemInvUse(CaughtPokemonItem item, Player player){
+            if(item.level < 100){
+                item.exp = item.expToNextLevel;
+				ReduceStack(player, Item.type);
+                return true;
+            }
+            return false;
 		}
 
         // Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.

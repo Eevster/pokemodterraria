@@ -1,15 +1,6 @@
-﻿using Pokemod.Content.Items;
-using Pokemod.Content.Pets.SquirtlePet;
-using Microsoft.Xna.Framework;
-using MonoMod.Cil;
-using System;
-using Terraria;
-using Terraria.Audio;
-using Terraria.GameContent.Bestiary;
-using Terraria.ID;
+﻿using Terraria.GameContent.Bestiary;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
-using Terraria.DataStructures;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
@@ -17,7 +8,6 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	{
 		public override int hitboxWidth => 36;
 		public override int hitboxHeight => 56;
-		public override int[] baseStats => [50,50,50,50,50,50];
 
 		public override int totalFrames => 42;
 		public override int animationSpeed => 7;
@@ -33,6 +23,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkFlyStartEnd => [36,41];
 		public override int[] attackFlyStartEnd => [30,35];
 
+		public override int minLevel => 36;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,

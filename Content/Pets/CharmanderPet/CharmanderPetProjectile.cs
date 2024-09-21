@@ -11,13 +11,7 @@ namespace Pokemod.Content.Pets.CharmanderPet
 	{
 		public override int hitboxWidth => 20;
 		public override int hitboxHeight => 32;
-
-		public override int nAttackProjs => 3;
-		public override int baseDamage => 3;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => false;
-		public override int attackDuration => 30;
-		public override int attackCooldown => 30;
+		public override int[] baseStats => [39, 52, 43, 60, 50, 65];
 
 		public override int totalFrames => 20;
 		public override int animationSpeed => 5;
@@ -26,6 +20,12 @@ namespace Pokemod.Content.Pets.CharmanderPet
 		public override int[] jumpStartEnd => [8,8];
 		public override int[] fallStartEnd => [10,10];
 		public override int[] attackStartEnd => [14,19];
+
+		public override int nAttackProjs => 3;
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => false;
+		public override int attackDuration => 30;
+		public override int attackCooldown => 30;
 
 		public override string[] evolutions => ["Charmeleon"];
 		public override int levelToEvolve => 16;

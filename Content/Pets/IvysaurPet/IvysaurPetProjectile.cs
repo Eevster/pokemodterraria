@@ -11,14 +11,7 @@ namespace Pokemod.Content.Pets.IvysaurPet
 	{
 		public override int hitboxWidth => 24;
 		public override int hitboxHeight => 26;
-
-		public override int nAttackProjs => 8;
-		public override int baseDamage => 4;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 20;
-		public override int attackCooldown => 20;
-		public override bool canMoveWhileAttack => true;
+		public override int[] baseStats => [60, 62, 63, 80, 80, 60];
 
 		public override int totalFrames => 15;
 		public override int animationSpeed => 5;
@@ -27,6 +20,13 @@ namespace Pokemod.Content.Pets.IvysaurPet
 		public override int[] jumpStartEnd => [8,8];
 		public override int[] fallStartEnd => [9,9];
 		public override int[] attackStartEnd => [11,14];
+
+		public override int nAttackProjs => 8;
+		public override float enemySearchDistance => 1000;
+		public override bool canAttackThroughWalls => true;
+		public override int attackDuration => 20;
+		public override int attackCooldown => 20;
+		public override bool canMoveWhileAttack => true;
 
 		public override int maxJumpHeight => 6;
 

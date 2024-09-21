@@ -22,6 +22,28 @@ namespace Pokemod.Content.Items.Consumables
 			//ItemID.Sets.CoinLuckValue[Type] = Item.value;
 		}
 
+        /*public override void HoldItem(Player player)
+        {
+			if(player.whoAmI == Main.myPlayer){
+				if(Main.HoverItem.ModItem is CaughtPokemonItem){
+					if(Main.mouseRight && player.ItemTimeIsZero){
+						Item pokeItem = player.inventory[player.FindItem(Main.HoverItem.netID)];
+						if(pokeItem.ModItem is CaughtPokemonItem item){
+							if(OnItemInvUse(item)){
+								Main.NewText("Use");
+								Item.stack--;
+								if(Item.stack <= 0){
+									Item.TurnToAir();
+								}
+								player.itemTime = 20;
+							}
+						}
+					}
+				}
+			}
+            base.HoldItem(player);
+        }*/
+
         public override bool? UseItem(Player player)
         {
 			if(player.whoAmI == Main.myPlayer){
@@ -42,11 +64,36 @@ namespace Pokemod.Content.Items.Consumables
 				}
 			}
 			Item.consumable = false;
-            return false;
+            return true;
         }
 
-        public virtual void OnItemUse(Projectile proj){
+        public virtual bool OnItemUse(Projectile proj){
+			return false;
+		}
 
+		public virtual bool OnItemInvUse(CaughtPokemonItem item, Player player){
+			return false;
+		}
+
+		public void ReduceStack(Player player, int type){
+			if(player != null){
+				if(player.whoAmI == Main.myPlayer){
+					if(Main.mouseItem != null){
+						if(Main.mouseItem?.ModItem?.Type == type){
+							Main.mouseItem.stack--;
+							if(Main.mouseItem.IsAir){
+								Main.mouseItem.TurnToAir();
+							}
+						}
+					}else{
+						Item.consumable = true;
+						Item.stack--;
+						if(Item.IsAir){
+							Item.TurnToAir();
+						}
+					}
+				}
+			}
 		}
 	}
 }

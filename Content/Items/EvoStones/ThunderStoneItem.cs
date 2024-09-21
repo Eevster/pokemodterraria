@@ -26,11 +26,14 @@ namespace Pokemod.Content.Items.EvoStones
 			Item.value = Item.buyPrice(silver: 1); // The value of the item in copper coins. Item.buyPrice & Item.sellPrice are helper methods that returns costs in copper coins based on platinum/gold/silver/copper arguments provided to it.
 		}
 
-        public override void OnItemUse(Projectile proj){
+        public override bool OnItemUse(Projectile proj){
 			PokemonPetProjectile pokemonProj = (PokemonPetProjectile)proj.ModProjectile;
 			if(pokemonProj.UseEvoItem(GetType().Name)){
 				Item.consumable = true;
+				return true;
 			}
+			Item.consumable = false;
+			return false;
 		}
 		public override void AddRecipes() {
 			CreateRecipe(1)

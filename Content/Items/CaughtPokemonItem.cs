@@ -1,5 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Content.Items.Consumables;
+using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
 using ReLogic.Content;
 using System;
@@ -22,6 +24,9 @@ namespace Pokemod.Content.Items
 		public int level;
 		public int exp;
 		public int expToNextLevel;
+		public int currentHP;
+		public int[] IVs = [0,0,0,0,0,0];
+		public int[] EVs = [0,0,0,0,0,0];
 		public bool Shiny;
 		public string BallType;
 		public Projectile proj;
@@ -39,6 +44,7 @@ namespace Pokemod.Content.Items
 			Item.shoot = ProjectileID.None;
 			Item.buffType = 0;
 			Item.noUseGraphic = true;
+			Item.consumable = false;
 		}
 
 		public override void NetSend(BinaryWriter writer) {
@@ -47,6 +53,13 @@ namespace Pokemod.Content.Items
 			writer.Write(BallType ?? "");
 			writer.Write((double)level);
 			writer.Write((double)exp);
+			foreach(int IV in IVs){
+				writer.Write((double)IV);
+			}
+			foreach(int EV in EVs){
+				writer.Write((double)EV);
+			}
+			writer.Write((double)currentHP);
 		}
 
 		public override void NetReceive(BinaryReader reader) {
@@ -55,6 +68,13 @@ namespace Pokemod.Content.Items
 			BallType = reader.ReadString();
 			level = (int)reader.ReadDouble();
 			exp = (int)reader.ReadDouble();
+			for(int i = 0; i < IVs.Length; i++){
+				IVs[i] = (int)reader.ReadDouble();
+			}
+			for(int i = 0; i < EVs.Length; i++){
+				EVs[i] = (int)reader.ReadDouble();
+			}
+			currentHP = (int)reader.ReadDouble();
 		}
 
         public override bool? UseItem(Player player)
@@ -73,11 +93,32 @@ namespace Pokemod.Content.Items
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-			if(player.HasBuff(Item.buffType)){
-				int projIndex = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+			if(player.HasBuff(Item.buffType) && currentHP != 0){
+				int projIndex = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, currentHP);
 				proj = Main.projectile[projIndex];
 			}
 
+            return false;
+        }
+
+        public override bool CanRightClick()
+        {
+            return true;
+        }
+
+        public override void RightClick(Player player)
+        {
+			if(player.ItemTimeIsZero){
+				if(player.HeldItem.ModItem is PokemonConsumableItem item){
+					if(item.OnItemInvUse(this, player)){
+						player.itemTime = 20;
+					}
+				}
+			}
+        }
+
+        public override bool ConsumeItem(Player player)
+        {
             return false;
         }
 
@@ -92,13 +133,16 @@ namespace Pokemod.Content.Items
 			if (PokemonName == null || PokemonName == "") //colors may be null if spawned from other mods which don't call OnCreate
 				return;
 
+			int[] fullStats = GetPokemonStats();
 			foreach (TooltipLine line in tooltips) {
 				if (line.Mod == "Terraria" && line.Name == "ItemName") {
 					line.Text = PokemonName;
 					if(Shiny) line.OverrideColor = Main.DiscoColor;
 				}
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
-					line.Text = "Caught in a "+BallType.Replace("Item", "") + "\nLvl "+level+"  Exp: "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level));
+					line.Text = "Caught in a "+BallType.Replace("Item", "") + "\n"+"Lvl "+level+"  Exp: "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level))+
+					"\n"+(currentHP>=0?"HP: "+(currentHP>0?(currentHP+"/"+fullStats[0]+" "):"Fainted "):"")+
+					"\nAtk: "+fullStats[1]+" Def: "+fullStats[2]+"\nSpAtk: "+fullStats[3]+" SpDef: "+fullStats[4]+" Vel: "+fullStats[5];
 				}
 			}
 
@@ -106,21 +150,35 @@ namespace Pokemod.Content.Items
 			tooltips.Add(tooltipLine);*/
 		}
 
-        public void SetPokemonData(string PokemonName, bool Shiny, string BallType, int level = 5){
+        public void SetPokemonData(string PokemonName, bool Shiny, string BallType, int level = 5, int[] IVs = null){
             this.PokemonName = PokemonName;
 			this.Shiny = Shiny;
 			this.BallType = BallType;
 			this.level = level;
-			this.exp = GetExpToLevel(level); 
+			this.exp = GetExpToLevel(level);
+			if(IVs != null){
+				this.IVs = IVs;
+			}
+			currentHP = GetPokemonStats()[0];
 			
 			SetPetInfo();
         }
 
+		public int[] GetPokemonStats(){
+			return PokemonNPCData.CalcAllStats(level, PokemonNPCData.pokemonStats[PokemonName], IVs, EVs);
+		}
+
         public override void UpdateInventory(Player player)
         {
-			if(!player.HasBuff(Item.buffType)){
-				proj?.Kill();
-				proj = null;
+			if(PokemonName != null && PokemonName != ""){
+				GetProjInfo(player);
+			}
+			if(proj != null){
+				if(((!player.HasBuff(Item.buffType) && Item.buffType != 0) || currentHP == 0) && proj.active){
+					player.ClearBuff(Item.buffType);
+					proj?.Kill();
+					proj = null;
+				}
 			}
 			if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
 				if(player.miscEquips[0] != Item){
@@ -132,12 +190,6 @@ namespace Pokemod.Content.Items
             base.UpdateInventory(player);
         }
 
-        public override void UpdateEquip(Player player)
-        {
-			SetPetInfo(player);
-            base.UpdateEquip(player);
-        }
-
         public void SetPetInfo(Player player = null){
 			if(PokemonName != null && PokemonName != ""){
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
@@ -145,6 +197,13 @@ namespace Pokemod.Content.Items
 
 				UpdateLevel();
 				GetProjInfo(player);
+				if(currentHP == 0){
+					if(Item.buffType != 0 && player != null){
+						player.ClearBuff(Item.buffType);
+					}
+					Item.shoot = 0;
+					Item.buffType = 0;
+				}
 			}
 		}
 
@@ -153,6 +212,7 @@ namespace Pokemod.Content.Items
 				if(proj.active){
 					GetProjExp();
 					GetUsedItems(player);
+					GetProjHP();
 				}else{
 					proj = null;
 				}
@@ -161,16 +221,27 @@ namespace Pokemod.Content.Items
 
 		private void GetProjExp(){
 			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-			AddExp(PokemonProj.GetExpGained());
+			if(PokemonProj != null){
+				AddExp(PokemonProj.GetExpGained());
+			}
+		}
+
+		private void GetProjHP(){
+			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+			if(PokemonProj != null){
+				currentHP = PokemonProj.currentHp;
+			}
 		}
 
 		private void GetUsedItems(Player player = null){
-			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-			if(PokemonProj.itemEvolve){
-				GetCanEvolve(player);
-			}
-			if(PokemonProj.GetRareCandy()){
-				exp = expToNextLevel;
+			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
+			if(PokemonProj != null){
+				if(PokemonProj.itemEvolve){
+					GetCanEvolve(player);
+				}
+				if(PokemonProj.GetRareCandy()){
+					exp = expToNextLevel;
+				}
 			}
 		}
 
@@ -213,7 +284,7 @@ namespace Pokemod.Content.Items
 				if(proj.active){
 					if(level > 0){
 						PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-						PokemonProj.SetPokemonLvl(level);
+						PokemonProj.SetPokemonLvl(level, IVs, EVs);
 						if(canEvolve){
 							PokemonProj.SetCanEvolve();
 							GetCanEvolve();
@@ -241,6 +312,9 @@ namespace Pokemod.Content.Items
 			tag["Exp"] = exp;
 			tag["Shiny"] = Shiny;
 			tag["BallType"] = BallType;
+			tag["CurrentHP"] = currentHP;
+			tag["IVs"] = IVs.ToList();
+			tag["EVs"] = EVs.ToList();
 		}
 
 		public override void LoadData(TagCompound tag) {
@@ -249,6 +323,14 @@ namespace Pokemod.Content.Items
 			exp = tag.GetInt("Exp");
 			Shiny = tag.GetBool("Shiny");
 			BallType = tag.GetString("BallType");
+			currentHP = tag.GetInt("CurrentHP");
+			if(tag.ContainsKey("IVs")){
+				IVs = [.. tag.GetList<int>("IVs")];
+			}
+			if(tag.ContainsKey("EVs")){
+				EVs = [.. tag.GetList<int>("EVs")];
+			}
+
 			SetPetInfo();
 			SetExpToNextLevel();
 		}
