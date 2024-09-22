@@ -160,6 +160,8 @@ namespace Pokemod.Content.Pets
 				Projectile.Kill();
 				return;
 			}
+
+			SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
 			
             base.OnSpawn(source);
         }
