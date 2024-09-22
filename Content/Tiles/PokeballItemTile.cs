@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Pokemod.Content.Items;
 using Pokemod.Content.Items.Consumables;
 using Pokemod.Content.Items.EvoStones;
+using Pokemod.Content.Items.Pokeballs;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -40,7 +41,25 @@ namespace Pokemod.Content.Tiles
                 ModContent.ItemType<FireStoneItem>(),
                 ModContent.ItemType<WaterStoneItem>(),
                 ModContent.ItemType<ThunderStoneItem>(),
-                ModContent.ItemType<Potion>()
+                ModContent.ItemType<Potion>(),
+                ModContent.ItemType<PokeballItem>(),
+                ModContent.ItemType<AzureballItem>(),
+                ModContent.ItemType<BeastballItem>(),
+                ModContent.ItemType<CherishballItem>(),
+                ModContent.ItemType<CitrineballItem>(),
+                ModContent.ItemType<DuskballItem>(),
+                ModContent.ItemType<FeatherballItem>(),
+                ModContent.ItemType<GigatonballItem>(),
+                ModContent.ItemType<GreatballItem>(),
+                ModContent.ItemType<HeavyballItem>(),
+                ModContent.ItemType<JetballItem>(),
+                ModContent.ItemType<LeadenballItem>(),
+                ModContent.ItemType<PeridotballItem>(),
+                ModContent.ItemType<PremierballItem>(),
+                ModContent.ItemType<StrangeballItem>(),
+                ModContent.ItemType<UltraballItem>(),
+                ModContent.ItemType<VioletballItem>(),
+                ModContent.ItemType<WingballItem>(),
             };
 
 			yield return new Item(items[Main.rand.Next(items.Length)], 1);
