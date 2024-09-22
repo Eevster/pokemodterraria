@@ -22,6 +22,10 @@ namespace Pokemod.Content.Pets.CaterpiePet
 		public override bool canAttackThroughWalls => false;
 		public override int attackDuration => 45;
 		public override int attackCooldown => 0;
+
+		public override string[] evolutions => ["Metapod"];
+		public override int levelToEvolve => 7;
+		public override int levelEvolutionsNumber => 1;
 	}
 
 	public class CaterpiePetProjectileShiny : CaterpiePetProjectile{}

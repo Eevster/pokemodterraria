@@ -33,6 +33,7 @@ namespace Pokemod.Content.NPCs
 		public virtual int totalFrames => 0;
 		public virtual int hitboxWidth => 0;
 		public virtual int hitboxHeight => 0;
+		public virtual float moveSpeed => 1f;
 
 		/// <summary>
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
@@ -252,7 +253,7 @@ namespace Pokemod.Content.NPCs
 
 		public virtual void Movement() {
 			// Default movement parameters (here for attacking)
-			float speed = 1;
+			float speed = moveSpeed;
 			float speedMultiplier = 1f;
 
 			if(--AI_Timer <= 0){

@@ -84,6 +84,10 @@ Projectiles: {
 	CaterpiePetProjectile.DisplayName: Caterpie Pet Projectile
 	CaterpiePetProjectileShiny.DisplayName: Caterpie Pet Projectile Shiny
 	DespawnPokemon.DisplayName: Despawn Pokemon
+	MetapodPetProjectile.DisplayName: Metapod Pet Projectile
+	MetapodPetProjectileShiny.DisplayName: Metapod Pet Projectile Shiny
+	KakunaPetProjectile.DisplayName: Kakuna Pet Projectile
+	KakunaPetProjectileShiny.DisplayName: Kakuna Pet Projectile Shiny
 }
 
 Items: {
@@ -760,6 +764,26 @@ Buffs: {
 		Description: " "
 		DisplayName: Caterpie
 	}
+
+	MetapodPetBuff: {
+		Description: " "
+		DisplayName: Metapod
+	}
+
+	MetapodPetBuffShiny: {
+		DisplayName: Metapod Shiny
+		Description: " "
+	}
+
+	KakunaPetBuffShiny: {
+		DisplayName: Kakuna Shiny
+		Description: " "
+	}
+
+	KakunaPetBuff: {
+		Description: " "
+		DisplayName: Kakuna
+	}
 }
 
 NPCs: {
@@ -805,6 +829,10 @@ NPCs: {
 	WartortleCritterNPCShiny.DisplayName: Wartortle Shiny
 	CaterpieCritterNPC.DisplayName: Caterpie
 	CaterpieCritterNPCShiny.DisplayName: Caterpie Shiny
+	MetapodCritterNPC.DisplayName: Metapod
+	MetapodCritterNPCShiny.DisplayName: Metapod Shiny
+	KakunaCritterNPC.DisplayName: Kakuna
+	KakunaCritterNPCShiny.DisplayName: Kakuna Shiny
 }
 
 Tiles: {
