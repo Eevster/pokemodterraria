@@ -33,6 +33,5 @@ namespace Pokemod.Content.Pets.VenusaurPet
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}
-
 	}
 }

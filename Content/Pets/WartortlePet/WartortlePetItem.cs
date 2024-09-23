@@ -33,6 +33,5 @@ namespace Pokemod.Content.Pets.WartortlePet
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}
-
 	}
 }

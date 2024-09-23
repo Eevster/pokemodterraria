@@ -25,6 +25,10 @@ namespace Pokemod.Content.Pets.MetapodPet
 		public override bool canAttackThroughWalls => false;
 		public override int attackDuration => 45;
 		public override int attackCooldown => 0;
+
+		public override string[] evolutions => ["Butterfree"];
+		public override int levelToEvolve => 10;
+		public override int levelEvolutionsNumber => 1;
 	}
 
 	public class MetapodPetProjectileShiny : MetapodPetProjectile{}

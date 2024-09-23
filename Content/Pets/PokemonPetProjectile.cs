@@ -389,7 +389,7 @@ namespace Pokemod.Content.Pets
 								break;
 							}
 
-							if (((closest && inRange) || !foundTarget) && (lineOfSight || closeThroughWall || canAttackThroughWalls)) {
+							if (((closest && inRange) || !foundTarget) && (lineOfSight || closeThroughWall || canAttackThroughWalls) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
 								distanceFromTarget = between;
 								targetCenter = npc.Center;
 								foundTarget = true;

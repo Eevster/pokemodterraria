@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using Pokemod.Common.Players;
+using Pokemod.Content.NPCs;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -193,7 +194,7 @@ namespace Pokemod.Content.Pets.WartortlePet
 							break;
 						}
 
-						if ((closest && inRange) || !foundTarget) {
+						if (((closest && inRange) || !foundTarget) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
 							distanceFromTarget = between;
 							targetCenter = npc.Center;
 							foundTarget = true;

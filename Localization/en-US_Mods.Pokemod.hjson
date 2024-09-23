@@ -88,6 +88,10 @@ Projectiles: {
 	MetapodPetProjectileShiny.DisplayName: Metapod Pet Projectile Shiny
 	KakunaPetProjectile.DisplayName: Kakuna Pet Projectile
 	KakunaPetProjectileShiny.DisplayName: Kakuna Pet Projectile Shiny
+	WeedlePetProjectile.DisplayName: Weedle Pet Projectile
+	WeedlePetProjectileShiny.DisplayName: Weedle Pet Projectile Shiny
+	ButterfreePetProjectile.DisplayName: Butterfree Pet Projectile
+	ButterfreePetProjectileShiny.DisplayName: Butterfree Pet Projectile Shiny
 }
 
 Items: {
@@ -784,6 +788,26 @@ Buffs: {
 		Description: " "
 		DisplayName: Kakuna
 	}
+
+	WeedlePetBuffShiny: {
+		DisplayName: Weedle Shiny
+		Description: " "
+	}
+
+	WeedlePetBuff: {
+		Description: " "
+		DisplayName: Weedle
+	}
+
+	ButterfreePetBuff: {
+		DisplayName: Butterfree
+		Description: " "
+	}
+
+	ButterfreePetBuffShiny: {
+		DisplayName: Butterfree Shiny
+		Description: " "
+	}
 }
 
 NPCs: {
@@ -833,6 +857,10 @@ NPCs: {
 	MetapodCritterNPCShiny.DisplayName: Metapod Shiny
 	KakunaCritterNPC.DisplayName: Kakuna
 	KakunaCritterNPCShiny.DisplayName: Kakuna Shiny
+	WeedleCritterNPC.DisplayName: Weedle
+	WeedleCritterNPCShiny.DisplayName: Weedle Shiny
+	ButterfreeCritterNPC.DisplayName: Butterfree
+	ButterfreeCritterNPCShiny.DisplayName: Butterfree Shiny
 }
 
 Tiles: {
