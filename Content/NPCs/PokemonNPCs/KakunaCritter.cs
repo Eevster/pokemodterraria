@@ -28,7 +28,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return SpawnCondition.OverworldDay.Chance * 0.5f;
+				return SpawnCondition.Overworld.Chance * 0.5f;
 			}
 
 			return 0f;
@@ -38,7 +38,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	public class KakunaCritterNPCShiny : KakunaCritterNPC{
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return SpawnCondition.OverworldDay.Chance * 0.5f * 0.00025f;
+				return SpawnCondition.Overworld.Chance * 0.5f * 0.00025f;
 			}
 			
 			return 0f;

@@ -222,14 +222,14 @@ namespace Pokemod.Content.Items
 		}
 
 		private void GetProjExp(){
-			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
 			if(PokemonProj != null){
 				AddExp(PokemonProj.GetExpGained());
 			}
 		}
 
 		private void GetProjHP(){
-			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
 			if(PokemonProj != null){
 				currentHP = PokemonProj.currentHp;
 			}

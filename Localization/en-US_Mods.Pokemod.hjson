@@ -102,6 +102,10 @@ Projectiles: {
 	ElectrodePetProjectileShiny.DisplayName: Electrode Pet Projectile Shiny
 	MagnemitePetProjectile.DisplayName: Magnemite Pet Projectile
 	MagnemitePetProjectileShiny.DisplayName: Magnemite Pet Projectile Shiny
+	MagnetonPetProjectile.DisplayName: Magneton Pet Projectile
+	MagnetonPetProjectileShiny.DisplayName: Magneton Pet Projectile Shiny
+	HaunterPetProjectile.DisplayName: Haunter Pet Projectile
+	HaunterPetProjectileShiny.DisplayName: Haunter Pet Projectile Shiny
 }
 
 Items: {
@@ -868,6 +872,26 @@ Buffs: {
 		DisplayName: Magnemite Shiny
 		Description: " "
 	}
+
+	MagnetonPetBuff: {
+		DisplayName: Magneton
+		Description: " "
+	}
+
+	MagnetonPetBuffShiny: {
+		DisplayName: Magneton Shiny
+		Description: " "
+	}
+
+	HaunterPetBuff: {
+		DisplayName: Haunter
+		Description: " "
+	}
+
+	HaunterPetBuffShiny: {
+		DisplayName: Haunter Shiny
+		Description: " "
+	}
 }
 
 NPCs: {
@@ -931,6 +955,10 @@ NPCs: {
 	ElectrodeCritterNPCShiny.DisplayName: Electrode Shiny
 	MagnemiteCritterNPC.DisplayName: Magnemite
 	MagnemiteCritterNPCShiny.DisplayName: Magnemite Shiny
+	MagnetonCritterNPC.DisplayName: Magneton
+	MagnetonCritterNPCShiny.DisplayName: Magneton Shiny
+	HaunterCritterNPC.DisplayName: Haunter
+	HaunterCritterNPCShiny.DisplayName: Haunter Shiny
 }
 
 Tiles: {

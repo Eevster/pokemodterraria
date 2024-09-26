@@ -4,10 +4,10 @@ using Terraria.ModLoader.Utilities;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
-	public class BeedrillCritterNPC : PokemonWildNPC
+	public class HaunterCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 32;
-		public override int hitboxHeight => 48;
+		public override int hitboxWidth => 36;
+		public override int hitboxHeight => 40;
 
 		public override int totalFrames => 12;
 		public override int animationSpeed => 5;
@@ -19,15 +19,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] idleFlyStartEnd => [0,5];
 		public override int[] walkFlyStartEnd => [0,5];
 		public override int[] attackFlyStartEnd => [6,11];
-		public override int minLevel => 10;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Its best attack involves flying around at high speed, striking with poison needles, then flying off."));
+        public override int minLevel => 25;
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
+				new FlavorTextBestiaryInfoElement("It licks with its gaseous tongue to steal its victim's life-force. It lurks in darkness, waiting for prey."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneForest) {
+			if (spawnInfo.Player.ZoneCorrupt || spawnInfo.Player.ZoneCrimson) {
 				return SpawnCondition.Overworld.Chance * 0.5f;
 			}
 
@@ -35,9 +36,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		}
 	}
 
-	public class BeedrillCritterNPCShiny : BeedrillCritterNPC{
+	public class HaunterCritterNPCShiny : HaunterCritterNPC{
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneForest) {
+			if (spawnInfo.Player.ZoneCorrupt || spawnInfo.Player.ZoneCrimson) {
 				return SpawnCondition.Overworld.Chance * 0.5f * 0.00025f;
 			}
 			

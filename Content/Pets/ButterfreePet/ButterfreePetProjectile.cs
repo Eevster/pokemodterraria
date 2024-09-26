@@ -7,7 +7,7 @@ namespace Pokemod.Content.Pets.ButterfreePet
 	public class ButterfreePetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 24;
-		public override int hitboxHeight => 24;
+		public override int hitboxHeight => 36;
 
 		public override int totalFrames => 7;
 		public override int animationSpeed => 5;

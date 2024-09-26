@@ -6,8 +6,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class ButterfreeCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 32;
-		public override int hitboxHeight => 44;
+		public override int hitboxWidth => 24;
+		public override int hitboxHeight => 36;
 		public override float moveSpeed => 0.75f;
 
 		public override int totalFrames => 7;
@@ -29,7 +29,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return SpawnCondition.OverworldDay.Chance * 0.5f;
+				return SpawnCondition.Overworld.Chance * 0.5f;
 			}
 
 			return 0f;
@@ -39,7 +39,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	public class ButterfreeCritterNPCShiny : ButterfreeCritterNPC{
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return SpawnCondition.OverworldDay.Chance * 0.5f * 0.00025f;
+				return SpawnCondition.Overworld.Chance * 0.5f * 0.00025f;
 			}
 			
 			return 0f;

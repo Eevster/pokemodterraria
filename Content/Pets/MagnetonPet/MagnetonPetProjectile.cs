@@ -2,12 +2,12 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.MagnemitePet
+namespace Pokemod.Content.Pets.MagnetonPet
 {
-	public class MagnemitePetProjectile : PokemonPetProjectile
+	public class MagnetonPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 20;
-		public override int hitboxHeight => 28;
+		public override int hitboxWidth => 36;
+		public override int hitboxHeight => 48;
 
 		public override int totalFrames => 16;
 		public override int animationSpeed => 5;
@@ -25,11 +25,7 @@ namespace Pokemod.Content.Pets.MagnemitePet
 		public override bool canAttackThroughWalls => false;
 		public override int attackDuration => 45;
 		public override int attackCooldown => 0;
-
-		public override string[] evolutions => ["Magneton"];
-		public override int levelToEvolve => 30;
-		public override int levelEvolutionsNumber => 1;
 	}
 
-	public class MagnemitePetProjectileShiny : MagnemitePetProjectile{}
+	public class MagnetonPetProjectileShiny : MagnetonPetProjectile{}
 }

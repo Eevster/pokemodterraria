@@ -28,6 +28,10 @@ namespace Pokemod.Content.Pets.GastlyPet
 
         public override bool tangible => false;
 
+		public override string[] evolutions => ["Haunter"];
+		public override int levelToEvolve => 25;
+		public override int levelEvolutionsNumber => 1;
+
 		public override void SetDefaults()
         {
             base.SetDefaults();
