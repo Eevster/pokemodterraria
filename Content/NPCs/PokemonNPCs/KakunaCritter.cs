@@ -19,6 +19,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [0,0];
 		public override int[] attackStartEnd => [1,4];
 
+		public override int minLevel => 7;
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("While awaiting evolution, it hides from predators under leaves and in nooks of branches."));

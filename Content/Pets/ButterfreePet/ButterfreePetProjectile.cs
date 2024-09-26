@@ -13,6 +13,9 @@ namespace Pokemod.Content.Pets.ButterfreePet
 		public override int animationSpeed => 5;
 		public override int moveStyle => 1;
 
+		public override int[] idleStartEnd => [0,6];
+		public override int[] walkStartEnd => [0,6];
+
 		public override int[] idleFlyStartEnd => [0,6];
 		public override int[] walkFlyStartEnd => [0,6];
 		public override int[] attackFlyStartEnd => [0,6];

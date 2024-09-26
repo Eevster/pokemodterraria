@@ -4,26 +4,26 @@ using Terraria.ModLoader.Utilities;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
-	public class MetapodCritterNPC : PokemonWildNPC
+	public class MagnemiteCritterNPC : PokemonWildNPC
 	{
-		public override float moveSpeed => 0.2f;
+		public override int hitboxWidth => 20;
+		public override int hitboxHeight => 28;
+		public override float moveSpeed => 0.75f;
 
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 32;
-
-		public override int totalFrames => 5;
+		public override int totalFrames => 16;
 		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,0];
-		public override int[] jumpStartEnd => [0,0];
-		public override int[] fallStartEnd => [0,0];
-		public override int[] attackStartEnd => [1,4];
+		public override int moveStyle => 1;
 
-		public override int minLevel => 7;
+		public override int[] idleStartEnd => [0,7];
+		public override int[] walkStartEnd => [0,7];
+
+		public override int[] idleFlyStartEnd => [0,7];
+		public override int[] walkFlyStartEnd => [0,7];
+		public override int[] attackFlyStartEnd => [8,15];
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("A steel-hard shell protects its tender body. The Pokémon quietly endures hardships while awaiting evolution."));
+				new FlavorTextBestiaryInfoElement("The units at its sides generate electromagnetic waves that keep it airborne. It feeds on electricity."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
@@ -35,7 +35,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		}
 	}
 
-	public class MetapodCritterNPCShiny : MetapodCritterNPC{
+	public class MagnemiteCritterNPCShiny : MagnemiteCritterNPC{
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
 				return SpawnCondition.OverworldDay.Chance * 0.5f * 0.00025f;

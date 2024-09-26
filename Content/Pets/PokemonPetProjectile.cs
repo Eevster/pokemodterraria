@@ -74,6 +74,9 @@ namespace Pokemod.Content.Pets
 		public bool isSwimming = false;
 		public bool isFlying = false;
 
+		public virtual bool tangible => true;
+		public virtual bool canRotate => false;
+
 		public enum MovementStyle
 		{
 			Ground,
@@ -143,7 +146,7 @@ namespace Pokemod.Content.Pets
 			DrawOriginOffsetY = -(pokeTexture.Height()/(totalFrames)-hitboxHeight-4);
 			Projectile.light = 0f;
 			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.tileCollide = true;
+			Projectile.tileCollide = tangible;
 			Projectile.ignoreWater = false;
 		}
 
@@ -315,7 +318,7 @@ namespace Pokemod.Content.Pets
 
 		public virtual void GeneralBehavior(Player owner, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition) {
 			Vector2 idlePosition = owner.Center;
-			idlePosition.Y -= 48f; // Go up 48 coordinates (three tiles from the center of the player)
+			idlePosition.Y -= 16-(owner.height-Projectile.height)/2; // Go up 48 coordinates (three tiles from the center of the player)
 
 			float minionPositionOffsetX = (10 + Projectile.minionPos * 40) * -owner.direction;
 			idlePosition.X += minionPositionOffsetX; // Go behind the player
@@ -534,7 +537,7 @@ namespace Pokemod.Content.Pets
 						}
 					}
 				}
-				if(isFlying && distanceToIdlePosition > 1200f && moveStyle == (int)MovementStyle.Hybrid){
+				if(isFlying && distanceToIdlePosition > 1200f && tangible){
 					Projectile.tileCollide = false;
 				}
 				// Minion doesn't have a target: return to player and idle
@@ -549,9 +552,11 @@ namespace Pokemod.Content.Pets
 					// Slow down the minion if closer to the player
 					speed = moveSpeed1;
 
-					if(distanceToIdlePosition < 60f && moveStyle == (int)MovementStyle.Hybrid){
+					if(distanceToIdlePosition < 60f && tangible){
 						Projectile.tileCollide = true;
-						isFlying = false;
+						if(moveStyle == (int)MovementStyle.Hybrid){
+							isFlying = false;
+						}
 					}
 				}
 
@@ -609,6 +614,10 @@ namespace Pokemod.Content.Pets
 				if(Projectile.velocity.Y > maxFallSpeed){
 					Projectile.velocity.Y = maxFallSpeed;
 				}
+			}
+
+			if(canRotate){
+				Projectile.rotation += Projectile.spriteDirection*MathHelper.ToRadians(1.5f*Projectile.velocity.Length());
 			}
 
 			if(timer > 0){

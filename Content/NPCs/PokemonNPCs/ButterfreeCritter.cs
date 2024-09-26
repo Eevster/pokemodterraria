@@ -20,6 +20,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] idleFlyStartEnd => [0,6];
 		public override int[] walkFlyStartEnd => [0,6];
 		public override int[] attackFlyStartEnd => [0,6];
+		public override int minLevel => 10;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,

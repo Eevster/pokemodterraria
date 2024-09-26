@@ -92,6 +92,16 @@ Projectiles: {
 	WeedlePetProjectileShiny.DisplayName: Weedle Pet Projectile Shiny
 	ButterfreePetProjectile.DisplayName: Butterfree Pet Projectile
 	ButterfreePetProjectileShiny.DisplayName: Butterfree Pet Projectile Shiny
+	BeedrillPetProjectile.DisplayName: Beedrill Pet Projectile
+	BeedrillPetProjectileShiny.DisplayName: Beedrill Pet Projectile Shiny
+	GastlyPetProjectile.DisplayName: Gastly Pet Projectile
+	GastlyPetProjectileShiny.DisplayName: Gastly Pet Projectile Shiny
+	VoltorbPetProjectile.DisplayName: Voltorb Pet Projectile
+	VoltorbPetProjectileShiny.DisplayName: Voltorb Pet Projectile Shiny
+	ElectrodePetProjectile.DisplayName: Electrode Pet Projectile
+	ElectrodePetProjectileShiny.DisplayName: Electrode Pet Projectile Shiny
+	MagnemitePetProjectile.DisplayName: Magnemite Pet Projectile
+	MagnemitePetProjectileShiny.DisplayName: Magnemite Pet Projectile Shiny
 }
 
 Items: {
@@ -808,6 +818,56 @@ Buffs: {
 		DisplayName: Butterfree Shiny
 		Description: " "
 	}
+
+	BeedrillPetBuffShiny: {
+		DisplayName: Beedrill Shiny
+		Description: " "
+	}
+
+	BeedrillPetBuff: {
+		Description: " "
+		DisplayName: Beedrill
+	}
+
+	GastlyPetBuff: {
+		DisplayName: Gastly
+		Description: " "
+	}
+
+	GastlyPetBuffShiny: {
+		DisplayName: Gastly Shiny
+		Description: " "
+	}
+
+	VoltorbPetBuff: {
+		DisplayName: Voltorb
+		Description: " "
+	}
+
+	VoltorbPetBuffShiny: {
+		DisplayName: Voltorb Shiny
+		Description: " "
+	}
+
+	ElectrodePetBuff: {
+		DisplayName: Electrode
+		Description: " "
+	}
+
+	ElectrodePetBuffShiny: {
+		DisplayName: Electrode Shiny
+		Description: " "
+	}
+
+	MagnemitePetBuff: {
+		DisplayName: Magnemite
+		Description: " "
+	}
+
+	MagnemitePetBuffShiny: {
+		DisplayName: Magnemite Shiny
+		Description: " "
+	}
 }
 
 NPCs: {
@@ -861,6 +921,16 @@ NPCs: {
 	WeedleCritterNPCShiny.DisplayName: Weedle Shiny
 	ButterfreeCritterNPC.DisplayName: Butterfree
 	ButterfreeCritterNPCShiny.DisplayName: Butterfree Shiny
+	BeedrillCritterNPC.DisplayName: Beedrill
+	BeedrillCritterNPCShiny.DisplayName: Beedrill Shiny
+	GastlyCritterNPC.DisplayName: Gastly
+	GastlyCritterNPCShiny.DisplayName: Gastly Shiny
+	VoltorbCritterNPC.DisplayName: Voltorb
+	VoltorbCritterNPCShiny.DisplayName: Voltorb Shiny
+	ElectrodeCritterNPC.DisplayName: Electrode
+	ElectrodeCritterNPCShiny.DisplayName: Electrode Shiny
+	MagnemiteCritterNPC.DisplayName: Magnemite
+	MagnemiteCritterNPCShiny.DisplayName: Magnemite Shiny
 }
 
 Tiles: {

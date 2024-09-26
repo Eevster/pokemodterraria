@@ -69,6 +69,8 @@ namespace Pokemod.Content.NPCs
 			NPC.value = 60f;
 			NPC.knockBackResist = 0.5f;
 			NPC.aiStyle = -1;
+
+			NPC.noTileCollide = !tangible;
 		}
 
 		public override void OnSpawn(IEntitySource source)
@@ -124,6 +126,9 @@ namespace Pokemod.Content.NPCs
 		public int flyDirection = 0;
 		public bool isSwimming = false;
 		public bool isFlying = false;
+
+		public virtual bool tangible => true;
+		public virtual bool canRotate => false;
 
 		public enum MovementStyle
 		{
@@ -354,6 +359,10 @@ namespace Pokemod.Content.NPCs
 					}
 				}
 			}
+
+			if(canRotate){
+				NPC.rotation -= NPC.spriteDirection*MathHelper.ToRadians(2f*NPC.velocity.Length());
+			}
 		}
 
 		public virtual void Jump(){
@@ -397,23 +406,6 @@ namespace Pokemod.Content.NPCs
 				AI_State = (int)NPCStatus.Jump;
 				NPC.velocity.Y -= (int)Math.Sqrt(2*0.3f*jumpHeight*16f);
 			}
-		}
-
-		public override bool ModifyCollisionData(Rectangle victimHitbox, ref int immunityCooldownSlot, ref MultipliableFloat damageMultiplier, ref Rectangle npcHitbox) {
-			// We can use ModifyCollisionData to customize collision damage.
-			// Here we double damage when this npc is in the falling state and the victim is almost directly below the npc
-			if (AI_State == (float)NPCStatus.Attack) {
-				// We can modify npcHitbox directly to implement a dynamic hitbox, but in this example we make a new hitbox to apply bonus damage
-				// This math creates a hitbox focused on the bottom center of the original 36x36 hitbox:
-				// --> ☐☐☐
-				//     ☐☒☐
-				Rectangle extraDamageHitbox = new Rectangle(npcHitbox.X + 12, npcHitbox.Y + 18, npcHitbox.Width - 24, npcHitbox.Height - 18);
-				if (victimHitbox.Intersects(extraDamageHitbox)) {
-					damageMultiplier *= 2f;
-					Main.NewText("You got stomped");
-				}
-			}
-			return true;
 		}
 	}
 }
