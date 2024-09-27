@@ -84,6 +84,9 @@ namespace Pokemod.Content.Pets
 			Hybrid
 		}
 
+		public bool isEvolving = false;
+		public int evolveTimer = 0;
+		public const int maxEvolveTimer = 2*60;
 		public int canEvolve = -1;
 		public bool itemEvolve = false;
 		public virtual string[] evolutions => [];
@@ -155,7 +158,7 @@ namespace Pokemod.Content.Pets
 			Player player = Main.player[Projectile.owner];
 			PokemonBuff = ModContent.Find<ModBuff>("Pokemod", GetType().Name.Replace("Projectile","Buff")).Type;
 			attackProjs = new Projectile[nAttackProjs];
-			Projectile.Center = player.Center+new Vector2(0,(player.height-Projectile.height)/2);
+			Projectile.Center += new Vector2(0,(player.height-Projectile.height)/2);
 			currentHp = (int)Projectile.ai[0];
 			if(currentHp == -1){
 				currentHp = 10000;
@@ -204,10 +207,25 @@ namespace Pokemod.Content.Pets
 			UpdateStats();
 		}
 
+		public virtual void SetEvolution(){
+			if(canEvolve == -1){
+				isEvolving = true;
+				evolveTimer = maxEvolveTimer;
+			}
+		}
+
 		public virtual void SetCanEvolve(){
+			/*if(canEvolve == -1){
+				if(levelEvolutionsNumber>0){
+					if(pokemonLvl >= levelToEvolve){
+						canEvolve = Main.rand.Next(0,levelEvolutionsNumber);
+					}
+				}
+			}*/
 			if(canEvolve == -1){
 				if(levelEvolutionsNumber>0){
 					if(pokemonLvl >= levelToEvolve){
+						SetEvolution();
 						canEvolve = Main.rand.Next(0,levelEvolutionsNumber);
 					}
 				}
@@ -218,6 +236,7 @@ namespace Pokemod.Content.Pets
 			if(itemToEvolve.Length>0){
 				for(int i = 0; i < itemToEvolve.Length; i++){
 					if(itemName == itemToEvolve[i]){
+						SetEvolution();
 						canEvolve = levelEvolutionsNumber+i;
 						itemEvolve = true;
 						return true;
@@ -227,9 +246,19 @@ namespace Pokemod.Content.Pets
 			return false;
 		}
 
+		public virtual void EvolutionProcess(){
+			if(isEvolving){
+				if(evolveTimer>0){
+					evolveTimer--;
+				}
+			}
+		}
+
 		public virtual string GetCanEvolve(){
 			if(canEvolve != -1){
-				return evolutions[canEvolve];
+				if(isEvolving && evolveTimer <= 0){
+					return evolutions[canEvolve];
+				}
 			}
 			return "";
 		}
@@ -248,7 +277,7 @@ namespace Pokemod.Content.Pets
 			SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
 			Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
 			GetAllProjsExp();
-			SetCanEvolve();
+			EvolutionProcess();
 			Visuals();
 
 			if(Main.myPlayer == Projectile.owner){
@@ -854,6 +883,36 @@ namespace Pokemod.Content.Pets
             return true;
         }
 
+        public override void PostDraw(Color lightColor)
+        {
+			if(isEvolving && evolveTimer > 0){
+				Vector2 drawPos2 = Projectile.Center - Main.screenPosition;
+				float lightScale = (float)(0.1f*Math.Sqrt(maxEvolveTimer-evolveTimer));
+				for(int i = 0; i < 10; i++){
+					DrawPrettyStarSparkle(Projectile.Opacity, SpriteEffects.None, drawPos2, new Color(255, 255, 255) * 0.5f, new Color(255, 255, 255), 0.5f, 0f, 0.5f, 0.5f, 1f, Projectile.rotation+ MathHelper.ToRadians(i*360f/10f) + MathHelper.ToRadians(Main.rand.Next(-8,9)), new Vector2(2f, Utils.Remap(0.5f, 0f, 1f, 4f, 1f)) * Projectile.scale * lightScale, 2*Vector2.One * Projectile.scale * lightScale);
+				}
+			}
+        }
+
+        private static void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawPos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness) {
+			Texture2D sparkleTexture = TextureAssets.Extra[98].Value;
+			Color bigColor = shineColor * opacity * 0.5f;
+			bigColor.A = 0;
+			Vector2 origin = sparkleTexture.Size() / 2f;
+			Color smallColor = drawColor * 0.5f;
+			float lerpValue = Utils.GetLerpValue(fadeInStart, fadeInEnd, flareCounter, clamped: true) * Utils.GetLerpValue(fadeOutEnd, fadeOutStart, flareCounter, clamped: true);
+			Vector2 scaleLeftRight = new Vector2(fatness.X * 0.5f, scale.X) * lerpValue;
+			Vector2 scaleUpDown = new Vector2(fatness.Y * 0.5f, scale.Y) * lerpValue;
+			bigColor *= lerpValue;
+			smallColor *= lerpValue;
+			// Bright, large part
+			Main.EntitySpriteDraw(sparkleTexture, drawPos, null, bigColor, MathHelper.PiOver2 + rotation, origin, scaleLeftRight, dir);
+			Main.EntitySpriteDraw(sparkleTexture, drawPos, null, bigColor, 0f + rotation, origin, scaleUpDown, dir);
+			// Dim, small part
+			Main.EntitySpriteDraw(sparkleTexture, drawPos, null, smallColor, MathHelper.PiOver2 + rotation, origin, scaleLeftRight * 0.6f, dir);
+			Main.EntitySpriteDraw(sparkleTexture, drawPos, null, smallColor, 0f + rotation, origin, scaleUpDown * 0.6f, dir);
+		}
+
         public override void OnKill(int timeLeft)
         {
 			if(Projectile.owner == Main.myPlayer){
@@ -866,7 +925,9 @@ namespace Pokemod.Content.Pets
 						}
 					}
 				}
-				Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<DespawnPokemon>(), 0, 0, Projectile.owner);
+				if(!(canEvolve != -1 && isEvolving && evolveTimer <= 0)){
+					Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<DespawnPokemon>(), 0, 0, Projectile.owner);
+				}
 			}
         }
 

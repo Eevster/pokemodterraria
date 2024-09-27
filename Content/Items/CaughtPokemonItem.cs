@@ -197,7 +197,7 @@ namespace Pokemod.Content.Items
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
 
-				UpdateLevel();
+				UpdateLevel(player);
 				GetProjInfo(player);
 				if(currentHP == 0){
 					if(Item.buffType != 0 && player != null){
@@ -212,7 +212,7 @@ namespace Pokemod.Content.Items
 		private void GetProjInfo(Player player = null){
 			if(proj != null){
 				if(proj.active){
-					GetProjExp();
+					GetProjExp(player);
 					GetUsedItems(player);
 					GetProjHP();
 				}else{
@@ -221,10 +221,10 @@ namespace Pokemod.Content.Items
 			}
 		}
 
-		private void GetProjExp(){
+		private void GetProjExp(Player player = null){
 			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
 			if(PokemonProj != null){
-				AddExp(PokemonProj.GetExpGained());
+				AddExp(PokemonProj.GetExpGained(), player);
 			}
 		}
 
@@ -251,17 +251,25 @@ namespace Pokemod.Content.Items
 			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
 			string newPokemonName = PokemonProj.GetCanEvolve();
 			if(newPokemonName != ""){
+				Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 				proj.Kill();
-				player?.ClearBuff(Item.buffType);
+				if(player != null){
+					player.ClearBuff(Item.buffType);
+				}
 				PokemonName = newPokemonName;
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
+				if(player != null){
+					player.AddBuff(Item.buffType, 3600);
+					int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
+					proj = Main.projectile[projIndex];
+				}
 			}
 		}
 
-		public void AddExp(int amount){
+		public void AddExp(int amount, Player player = null){
 			exp += amount;
-			UpdateLevel();
+			UpdateLevel(player);
 		}
 
 		public void UpdateLevel(Player player = null){
@@ -278,7 +286,7 @@ namespace Pokemod.Content.Items
 					UpdateProjLevel(true, player);
 				}
 			}
-			UpdateProjLevel();
+			UpdateProjLevel(false, player);
 		}
 
 		private void UpdateProjLevel(bool canEvolve = false, Player player = null){
@@ -289,8 +297,8 @@ namespace Pokemod.Content.Items
 						PokemonProj.SetPokemonLvl(level, IVs, EVs);
 						if(canEvolve){
 							PokemonProj.SetCanEvolve();
-							GetCanEvolve();
 						}
+						GetCanEvolve(player);
 					}
 				}else{
 					proj = null;
