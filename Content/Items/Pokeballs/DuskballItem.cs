@@ -11,6 +11,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Pokemod.Content.Items.Apricorns;
 
 namespace Pokemod.Content.Items.Pokeballs
 {
@@ -22,7 +23,7 @@ namespace Pokemod.Content.Items.Pokeballs
 
         public override void AddRecipes() {
 			CreateRecipe(4)
-				.AddIngredient(ItemID.GemTreeEmeraldSeed, 2)
+				.AddIngredient(ModContent.ItemType<GreenApricorn>(), 2)
 				.AddIngredient(ItemID.Obsidian, 1)
 				.AddRecipeGroup(RecipeGroupID.IronBar, 1)
 				.AddTile(TileID.WorkBenches)

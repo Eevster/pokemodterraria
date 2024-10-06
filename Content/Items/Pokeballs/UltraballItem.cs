@@ -3,6 +3,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Pokemod.Content.Items.Apricorns;
 
 namespace Pokemod.Content.Items.Pokeballs
 {
@@ -13,13 +14,7 @@ namespace Pokemod.Content.Items.Pokeballs
 		protected override float CatchRate => 2f;
 		public override void AddRecipes() {
 			CreateRecipe(1)
-				.AddIngredient(ItemID.GemTreeAmberSeed, 3)
-				.AddIngredient(ItemID.Obsidian, 1)
-				.AddRecipeGroup(RecipeGroupID.IronBar, 2)
-				.AddTile(TileID.WorkBenches)
-				.Register();
-			CreateRecipe(1)
-				.AddIngredient(ItemID.GemTreeTopazSeed, 3)
+				.AddIngredient(ModContent.ItemType<YellowApricorn>(), 3)
 				.AddIngredient(ItemID.Obsidian, 1)
 				.AddRecipeGroup(RecipeGroupID.IronBar, 2)
 				.AddTile(TileID.WorkBenches)
