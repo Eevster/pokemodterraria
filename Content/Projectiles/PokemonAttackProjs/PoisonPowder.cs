@@ -14,7 +14,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.IvysaurPet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class PoisonPowder : PokemonAttack
 	{

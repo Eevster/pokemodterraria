@@ -12,7 +12,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.FlareonPet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class LavaPlume : PokemonAttack
 	{
@@ -39,7 +39,7 @@ namespace Pokemod.Content.Pets.FlareonPet
 			Projectile.tileCollide = false;
 
 			Projectile.usesLocalNPCImmunity = true;
-			Projectile.localNPCHitCooldown = 15;
+			Projectile.localNPCHitCooldown = 20;
         }
 
 		public override bool PreDraw(ref Color lightColor) {

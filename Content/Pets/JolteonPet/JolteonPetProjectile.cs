@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -34,7 +35,7 @@ namespace Pokemod.Content.Pets.JolteonPet
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Discharge>(), GetPokemonDamage(), 4f, Projectile.owner)];
+						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Discharge>(), GetPokemonDamage(80, true), 4f, Projectile.owner)];
 						SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
 						timer = attackDuration;
 						canAttack = false;

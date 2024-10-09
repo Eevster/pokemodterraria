@@ -12,6 +12,8 @@ using Terraria.ModLoader.Utilities;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Pokemod.Common.Players;
+using Pokemod.Common.Systems;
 
 namespace Pokemod.Content.NPCs
 {
@@ -24,7 +26,7 @@ namespace Pokemod.Content.NPCs
 	public abstract class PokemonWildNPC : ModNPC
 	{
 		public virtual int pokemonID => 0;
-		public virtual int minLevel => 5;
+		public virtual int minLevel => 2;
 		public virtual int maxLevel => 100;
 		public virtual float catchRate => 45;
 		public virtual string pokemonName => GetType().Name.Replace("CritterNPC","").Replace("Shiny","");
@@ -75,7 +77,7 @@ namespace Pokemod.Content.NPCs
 
 		public override void OnSpawn(IEntitySource source)
         {
-			int lvl = Main.rand.Next(minLevel,maxLevel+1);
+			int lvl = Main.rand.Next(minLevel,Math.Min(WorldLevel.MaxWorldLevel, maxLevel)+1);
 			int[] IVs = PokemonNPCData.GenerateIVs();
             finalStats = PokemonNPCData.CalcAllStats(lvl, baseStats, IVs, [0,0,0,0,0,0]);
             NPC.lifeMax = finalStats[0];
@@ -103,6 +105,21 @@ namespace Pokemod.Content.NPCs
 					}
 				}
 			}
+		}
+
+		public float GetSpawnChance(NPCSpawnInfo spawnInfo, float chance){
+			if(shiny){
+				chance *= 0.024f;
+				if(spawnInfo.Player.GetModPlayer<PokemonPlayer>().HasShinyCharm){
+					chance *= 3f;
+				}
+			}
+
+			if(minLevel > WorldLevel.MaxWorldLevel){
+				chance = 0;
+			}
+
+			return chance;
 		}
 
 		public virtual int animationSpeed => 6;

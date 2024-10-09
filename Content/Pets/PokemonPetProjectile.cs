@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Players;
 using Pokemod.Content.Items;
 using Pokemod.Content.NPCs;
-using Pokemod.Content.Pets.FlareonPet;
+using Pokemod.Content.Projectiles;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -21,7 +21,7 @@ namespace Pokemod.Content.Pets
 		public override string Texture => "Pokemod/Assets/Textures/Pokesprites/Pets/"+GetType().Name;
 		public int PokemonBuff = 0;
 		private int expGained = 0;
-		public int pokemonLvl, npcdmg;
+		public int pokemonLvl;
 
 		/// <summary>
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
@@ -190,8 +190,9 @@ namespace Pokemod.Content.Pets
 			return used;
 		}
 
-		public virtual int GetPokemonDamage(int power = 50){
-			int pokemonDamage = (int)((2+2*pokemonLvl/5)*power*finalStats[1]/1500);
+		public virtual int GetPokemonDamage(int power = 50, bool special = false){
+			int atkStat = special?finalStats[3]:finalStats[1];
+			int pokemonDamage = 2+(int)((2+2f*pokemonLvl/5)*power*atkStat/(50f*10f));
 
 			return pokemonDamage;
 		}
@@ -798,11 +799,12 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-		public int calIncomingDmg(){
+		public int calIncomingDmg(int npcdmg){
             //calling Hp
             if(currentHp > finalStats[0]) { currentHp = finalStats[0]; }
             //cal damage versus defense for pokemon
-            int dmg = npcdmg - finalStats[2]/2;
+			//int dmg = npcdmg - finalStats[2]/2;
+			int dmg = 2 + (int)(Math.Clamp(npcdmg-2f,0f,9999f)/finalStats[2]);
 
             //if dmg is less than 1 deal at least 1
             if (dmg <= 0) dmg = 1;
@@ -835,9 +837,9 @@ namespace Pokemod.Content.Pets
 
                 if (npc.CanBeChasedBy() && npc.damage != 0){
                     if (Projectile.Hitbox.Intersects(npc.getRect()) && !canBeHurt){
-                        npcdmg = npc.defDamage;
+                        int npcdmg = npc.defDamage;
                         if(currentHp != 0){
-							calIncomingDmg();
+							calIncomingDmg(npcdmg);
 						}
                         canBeHurt = true;
                     }

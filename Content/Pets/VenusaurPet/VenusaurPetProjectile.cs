@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -34,7 +35,7 @@ namespace Pokemod.Content.Pets.VenusaurPet
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center+new Vector2(0,-28), Vector2.Zero, ModContent.ProjectileType<SolarBeamHold>(), GetPokemonDamage(), 4f, Projectile.owner)];
+						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center+new Vector2(0,-28), Vector2.Zero, ModContent.ProjectileType<SolarBeamHold>(), GetPokemonDamage(120, true), 4f, Projectile.owner)];
 						currentStatus = (int)ProjStatus.Attack;
 						SoundEngine.PlaySound(SoundID.Item43, Projectile.position);
 						timer = attackDuration;

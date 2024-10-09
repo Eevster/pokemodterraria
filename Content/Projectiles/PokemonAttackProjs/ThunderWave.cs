@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using Pokemod.Common.Players;
+using Pokemod.Content.Buffs;
 using Pokemod.Content.NPCs;
 using ReLogic.Content;
 using Terraria;
@@ -14,9 +15,9 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.WartortlePet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-	public class WaterPulse : PokemonAttack
+	public class ThunderWave : PokemonAttack
 	{
 		private NPC targetEnemy;
 		private bool foundTarget = false;
@@ -25,7 +26,7 @@ namespace Pokemod.Content.Pets.WartortlePet
         
         public override void Load()
         { 
-            explosionTexture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/WartortlePet/WaterPulseExplosion");
+            explosionTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/ThunderWaveExplosion");
         }
 
         public override void Unload()
@@ -61,17 +62,24 @@ namespace Pokemod.Content.Pets.WartortlePet
             Projectile.timeLeft = 120;
 
             Projectile.tileCollide = false;  
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
 
-			Projectile.usesLocalNPCImmunity = true;
-			Projectile.localNPCHitCooldown = 15;
+			Projectile.light = 1f;
+
+			Projectile.stopsDealingDamageAfterPenetrateHits = true;
         }
 
 		public override bool PreDraw(ref Color lightColor) {
 			if(exploded){
-                Main.EntitySpriteDraw(explosionTexture.Value, Projectile.Center - Main.screenPosition,
-                    explosionTexture.Value.Bounds, lightColor*Projectile.Opacity, 0,
-                    explosionTexture.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
+				float freq = 18f;
+
+				for(int i = 0; i < 3; i++){
+					float scale = 1f*((Projectile.timeLeft-(freq*i/3))%(int)freq)/freq;
+						
+					Main.EntitySpriteDraw(explosionTexture.Value, Projectile.Center - Main.screenPosition,
+						explosionTexture.Frame(1, 4, 0, Projectile.frame), Color.White*(1f-(scale*scale)), 0,
+						explosionTexture.Frame(1, 4).Size() / 2f, 2f*scale, SpriteEffects.None, 0);
+				}
 
                 return false;
             }else{
@@ -108,7 +116,6 @@ namespace Pokemod.Content.Pets.WartortlePet
 			}else{
 				Projectile.velocity = Vector2.Zero;
 				Projectile.rotation = 0;
-				Projectile.scale += 0.06f;
 
 				if(foundTarget){
 					if(targetEnemy.active){
@@ -129,11 +136,11 @@ namespace Pokemod.Content.Pets.WartortlePet
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"
 			// shootSpeed is 2.1f for reference, so this is basically plotting 12 pixels ahead from the center
-			Vector2 start = Projectile.Center + Projectile.scale*new Vector2(exploded?32:11,0);
-			Vector2 end = Projectile.Center - Projectile.scale*new Vector2(exploded?32:11,0);
+			Vector2 start = Projectile.Center + Projectile.scale*new Vector2(11,0);
+			Vector2 end = Projectile.Center - Projectile.scale*new Vector2(11,0);
 			float collisionPoint = 0f; // Don't need that variable, but required as parameter
 
-			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, Projectile.scale*(exploded?64f:22f), ref collisionPoint);
+			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, Projectile.scale*22f, ref collisionPoint);
 		}
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -142,10 +149,9 @@ namespace Pokemod.Content.Pets.WartortlePet
                 exploded = true;
                 Projectile.frame = 0;
                 Projectile.velocity = Vector2.Zero;
-                Projectile.scale = 0.1f;
                 Projectile.timeLeft = 30;
             }
-			target.AddBuff(BuffID.Confused, 60);
+			target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), (target.boss?2:3)*60);
             base.OnHitNPC(target, hit, damageDone);
         }
 
@@ -155,20 +161,19 @@ namespace Pokemod.Content.Pets.WartortlePet
                 exploded = true;
                 Projectile.frame = 0;
                 Projectile.velocity = Vector2.Zero;
-                Projectile.scale = 0.1f;
                 Projectile.timeLeft = 20;
             }
-			target.AddBuff(BuffID.Confused, 60);
+			target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), 2*60);
             base.OnHitPlayer(target, info);
         }
 
 		public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Item21, Projectile.position);
+            SoundEngine.PlaySound(SoundID.Item94, Projectile.position);
 
             for (int i = 0; i < 20; i++)
             {
-                Dust.NewDust(Projectile.Center-new Vector2(8*Projectile.scale, 8*Projectile.scale), (int)(16*Projectile.scale), (int)(16*Projectile.scale), DustID.Water, Main.rand.NextFloat(-3,3), Main.rand.NextFloat(-3,3), 100, default(Color), 2f);
+                Dust.NewDust(Projectile.Center-new Vector2(8*Projectile.scale, 8*Projectile.scale), (int)(16*Projectile.scale), (int)(16*Projectile.scale), DustID.YellowStarDust, Main.rand.NextFloat(-3,3), Main.rand.NextFloat(-3,3), 100, default(Color), 2f);
             }
         }
 

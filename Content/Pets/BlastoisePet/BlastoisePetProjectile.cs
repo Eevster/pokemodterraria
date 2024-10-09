@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -52,7 +53,7 @@ namespace Pokemod.Content.Pets.BlastoisePet
 					int remainProjs = 2;
 					for(int i = 0; i < nAttackProjs; i++){
 						if(attackProjs[i] == null){
-							attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center+new Vector2(Projectile.spriteDirection*(-18+50*(2-remainProjs)),-32), 20f*Vector2.Normalize(new Vector2(Projectile.spriteDirection*(2-remainProjs),-1)), ModContent.ProjectileType<HydroPump>(), GetPokemonDamage(), 2f, Projectile.owner)];
+							attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center+new Vector2(Projectile.spriteDirection*(-18+50*(2-remainProjs)),-32), 20f*Vector2.Normalize(new Vector2(Projectile.spriteDirection*(2-remainProjs),-1)), ModContent.ProjectileType<HydroPump>(), GetPokemonDamage(110, true), 2f, Projectile.owner)];
 							SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
 							remainProjs--;
 							canAttackOutTimer = false;

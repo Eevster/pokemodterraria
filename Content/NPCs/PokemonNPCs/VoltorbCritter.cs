@@ -28,20 +28,12 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneMarble) {
-				return 0.002f;
+				return GetSpawnChance(spawnInfo, 0.005f);
 			}
 
 			return 0f;
 		}
 	}
 
-	public class VoltorbCritterNPCShiny : VoltorbCritterNPC{
-		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneMarble) {
-				return 0.002f * 0.00025f;
-			}
-			
-			return 0f;
-		}
-	}
+	public class VoltorbCritterNPCShiny : VoltorbCritterNPC{}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -19,7 +20,7 @@ namespace Pokemod.Content.Pets.EeveePet
 		public override int[] jumpStartEnd => [12,12];
 		public override int[] fallStartEnd => [15,15];
 		
-		public override int nAttackProjs => 4;
+		public override int nAttackProjs => 3;
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 0;
@@ -34,7 +35,7 @@ namespace Pokemod.Content.Pets.EeveePet
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), GetPokemonDamage(), 2f, Projectile.owner, i*MathHelper.PiOver2)];
+						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), GetPokemonDamage(60, true), 2f, Projectile.owner, i*MathHelper.TwoPi/3)];
 					}
 				} 
 			}

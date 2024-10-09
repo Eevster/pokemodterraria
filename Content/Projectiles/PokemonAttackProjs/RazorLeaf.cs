@@ -12,7 +12,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.ChikoritaPet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class RazorLeaf : PokemonAttack
 	{

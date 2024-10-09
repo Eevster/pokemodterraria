@@ -13,7 +13,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.FlareonPet
+namespace Pokemod.Content.Projectiles
 {
 	public class DespawnPokemon : PokemonAttack
 	{

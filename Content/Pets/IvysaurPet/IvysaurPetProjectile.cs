@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -37,7 +38,7 @@ namespace Pokemod.Content.Pets.IvysaurPet
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 8*new Vector2(0,-1).RotatedByRandom(MathHelper.ToRadians(20)), ModContent.ProjectileType<PoisonPowder>(), GetPokemonDamage(), 2f, Projectile.owner)];
+						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 8*new Vector2(0,-1).RotatedByRandom(MathHelper.ToRadians(20)), ModContent.ProjectileType<PoisonPowder>(), GetPokemonDamage(special: true), 2f, Projectile.owner)];
 						currentStatus = (int)ProjStatus.Attack;
 						SoundEngine.PlaySound(SoundID.Item17, Projectile.position);
 						timer = attackDuration;

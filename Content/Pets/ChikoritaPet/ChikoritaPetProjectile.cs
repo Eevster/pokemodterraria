@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -49,7 +50,7 @@ namespace Pokemod.Content.Pets.ChikoritaPet
 					int remainProjs = 1;
 					for(int i = 0; i < nAttackProjs; i++){
 						if(attackProjs[i] == null){
-							attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 15f*Vector2.Normalize(targetCenter-Projectile.Center), ModContent.ProjectileType<RazorLeaf>(), GetPokemonDamage(), 2f, Projectile.owner)];
+							attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 15f*Vector2.Normalize(targetCenter-Projectile.Center), ModContent.ProjectileType<RazorLeaf>(), GetPokemonDamage(55), 2f, Projectile.owner)];
 							SoundEngine.PlaySound(SoundID.Item1, Projectile.position);
 							remainProjs--;
 							canAttackOutTimer = false;

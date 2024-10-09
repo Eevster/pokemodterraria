@@ -14,7 +14,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.CharmeleonPet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Flamethrower : PokemonAttack
 	{

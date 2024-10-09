@@ -14,7 +14,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.BlastoisePet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class HydroPump : PokemonAttack
 	{
@@ -29,7 +29,7 @@ namespace Pokemod.Content.Pets.BlastoisePet
         
         public override void Load()
         { 
-            bodyTexture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/BlastoisePet/HydroPump_Tail");
+            bodyTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/HydroPump_Tail");
         }
         public override void Unload()
         {

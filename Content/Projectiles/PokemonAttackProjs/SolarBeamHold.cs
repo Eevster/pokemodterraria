@@ -13,7 +13,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.VenusaurPet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class SolarBeamHold : PokemonAttack
 	{
@@ -27,7 +27,7 @@ namespace Pokemod.Content.Pets.VenusaurPet
         
         public override void Load()
         { 
-            chainTexture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/VenusaurPet/SolarBeam");
+            chainTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/SolarBeam");
         }
 
         public override void Unload()

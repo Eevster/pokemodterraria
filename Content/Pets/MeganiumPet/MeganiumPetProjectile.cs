@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -30,7 +31,7 @@ namespace Pokemod.Content.Pets.MeganiumPet
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
 						SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), targetCenter, Vector2.Zero, ModContent.ProjectileType<GigaDrain>(), GetPokemonDamage(), 2f, Projectile.owner)];
+						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), targetCenter, Vector2.Zero, ModContent.ProjectileType<GigaDrain>(), GetPokemonDamage(75, true), 2f, Projectile.owner)];
 						currentStatus = (int)ProjStatus.Attack;
 						timer = attackDuration;
 						canAttack = false;

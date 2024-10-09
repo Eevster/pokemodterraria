@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -34,7 +35,7 @@ namespace Pokemod.Content.Pets.PikachuPet
 			currentStatus = (int)ProjStatus.Attack;
 			SoundEngine.PlaySound(SoundID.Item94, Projectile.position);
 			if(Projectile.owner == Main.myPlayer){
-				attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<ThunderboltHold>(), GetPokemonDamage(), 2f, Projectile.owner)];
+				attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<ThunderboltHold>(), GetPokemonDamage(90, true), 2f, Projectile.owner)];
 			}
 			timer = attackDuration;
 			canAttack = false;

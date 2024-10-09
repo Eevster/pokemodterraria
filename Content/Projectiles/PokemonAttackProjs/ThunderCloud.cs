@@ -12,7 +12,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.RaichuPet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class ThunderCloud : PokemonAttack
 	{
@@ -29,8 +29,8 @@ namespace Pokemod.Content.Pets.RaichuPet
         
         public override void Load()
         { 
-            chainTexture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/RaichuPet/ThunderProj");
-            lightTexture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/RaichuPet/ThunderCloudLight");
+            chainTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/ThunderProj");
+            lightTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/ThunderCloudLight");
         }
 
         public override void Unload()

@@ -192,6 +192,39 @@ namespace Pokemod.Content.Items
             base.UpdateInventory(player);
         }
 
+        public override void HoldItem(Player player)
+        {
+			if(PokemonName != null && PokemonName != ""){
+				GetProjInfo(player);
+				if(Main.mouseItem != null){
+					if(Main.mouseItem.ModItem is CaughtPokemonItem ball){
+						ball.GetProjInfo(player);
+					}
+				}
+			}
+			if(proj != null){
+				if(((!player.HasBuff(Item.buffType) && Item.buffType != 0) || currentHP == 0) && proj.active){
+					player.ClearBuff(Item.buffType);
+					proj?.Kill();
+					proj = null;
+				}
+			}
+			if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
+				if(player.miscEquips[0] != Item){
+					proj?.Kill();
+					proj = null;
+				}
+			}
+			SetPetInfo(player);
+			if(Main.mouseItem != null){
+				if(Main.mouseItem.ModItem is CaughtPokemonItem ball){
+					ball.SetPetInfo(player);
+				}
+			}
+
+            base.HoldItem(player);
+        }
+
         public void SetPetInfo(Player player = null){
 			if(PokemonName != null && PokemonName != ""){
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
@@ -203,7 +236,7 @@ namespace Pokemod.Content.Items
 					if(Item.buffType != 0 && player != null){
 						player.ClearBuff(Item.buffType);
 					}
-					Item.shoot = 0;
+					Item.shoot = ProjectileID.None;
 					Item.buffType = 0;
 				}
 			}
@@ -285,6 +318,9 @@ namespace Pokemod.Content.Items
 					}
 					UpdateProjLevel(true, player);
 				}
+				if(level >= 100 && exp> expToNextLevel){
+					exp = expToNextLevel;
+				}
 			}
 			UpdateProjLevel(false, player);
 		}
@@ -359,6 +395,15 @@ namespace Pokemod.Content.Items
 					scale: scale,
 					SpriteEffects.None,
 					layerDepth: 0f);
+			}
+
+			if(proj != null){
+				if(proj.active){
+					GetProjHP();
+					proj.Kill();
+				}else{
+					proj = null;
+				}
 			}
 
             base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);

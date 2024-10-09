@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -42,8 +44,8 @@ namespace Pokemod.Content.Pets.BulbasaurPet
 				if(attackProjs[0] == null || attackProjs[1] == null){
 					currentStatus = (int)ProjStatus.Attack;
 					SoundEngine.PlaySound(SoundID.Item1, Projectile.position);
-					if(attackProjs[0] == null) attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<VineWhipBack>(), GetPokemonDamage(), 2f, Projectile.owner, 0, Math.Sign((targetCenter - Projectile.Center).X))];
-					if(attackProjs[1] == null) attackProjs[1] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<VineWhipFront>(), GetPokemonDamage(), 2f, Projectile.owner, 0, Math.Sign((targetCenter - Projectile.Center).X))];
+					if(attackProjs[0] == null) attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<VineWhipBack>(), GetPokemonDamage(45), 2f, Projectile.owner, 0, Math.Sign((targetCenter - Projectile.Center).X))];
+					if(attackProjs[1] == null) attackProjs[1] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<VineWhipFront>(), GetPokemonDamage(45), 2f, Projectile.owner, 0, Math.Sign((targetCenter - Projectile.Center).X))];
 				}
 			}
 			timer = attackDuration;

@@ -49,8 +49,9 @@ namespace Pokemod.Common.GlobalNPCs
             base.HitEffect(npc, hit);
         }
 
-        public int SetExpGained(NPC npc){
-            int exp = (int)Math.Sqrt(npc.value);
+        public static int SetExpGained(NPC npc){
+            //int exp = ((int)Math.Sqrt(5*npc.value));
+            int exp = (int)(4f*npc.lifeMax/10f);
             if(exp < 1) exp = 1;
 
             return exp;

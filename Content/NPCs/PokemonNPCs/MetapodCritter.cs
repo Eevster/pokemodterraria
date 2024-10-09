@@ -28,20 +28,12 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return SpawnCondition.Overworld.Chance * 0.5f;
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
 			}
 
 			return 0f;
 		}
 	}
 
-	public class MetapodCritterNPCShiny : MetapodCritterNPC{
-		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneForest) {
-				return SpawnCondition.Overworld.Chance * 0.5f * 0.00025f;
-			}
-			
-			return 0f;
-		}
-	}
+	public class MetapodCritterNPCShiny : MetapodCritterNPC{}
 }

@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using Pokemod.Common.GlobalNPCs;
 using Pokemod.Common.Players;
+using Pokemod.Content.NPCs;
+using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -13,7 +15,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets
+namespace Pokemod.Content.Projectiles
 {
 	public abstract class PokemonAttack : ModProjectile
 	{
@@ -44,17 +46,29 @@ namespace Pokemod.Content.Pets
 			//SetExpGained(target, hit);
 			if(pokemonProj != null){
 				if(pokemonProj.active){
+					if(target.life <= 0 && target.GetGlobalNPC<HitByPokemonNPC>().pokemonProj != pokemonProj){
+						PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
+						pokemonMainProj?.SetExtraExp(HitByPokemonNPC.SetExpGained(target));
+					}
 					target.GetGlobalNPC<HitByPokemonNPC>().pokemonProj = pokemonProj;
-					/*PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
-					if(pokemonMainProj != null){
-						pokemonMainProj.SetExtraExp(0);
-					}*/
 				}
 			}
             base.OnHitNPC(target, hit, damageDone);
         }
 
-		/*public void SetExpGained(NPC target, NPC.HitInfo hit){
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+			if(target.ModNPC is PokemonWildNPC wildNPC){
+				modifiers.DefenseEffectiveness *= 0;
+				modifiers.FinalDamage -= 2f;
+				modifiers.FinalDamage /= wildNPC.finalStats[2]/10f;
+				modifiers.FinalDamage += 2f;
+			}
+
+            base.ModifyHitNPC(target, ref modifiers);
+        }
+
+        /*public void SetExpGained(NPC target, NPC.HitInfo hit){
 			if(target.life <= 0 || hit.InstantKill){
 				int exp = (int)Math.Sqrt(target.value);
 				if(exp < 1) exp = 1;
@@ -62,7 +76,7 @@ namespace Pokemod.Content.Pets
 			}
 		}*/
 
-		/*public int GetExpGained(){
+        /*public int GetExpGained(){
 			int exp = expGained;
 			expGained = 0;
 			return exp;

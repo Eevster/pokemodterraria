@@ -23,20 +23,12 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return SpawnCondition.OverworldDay.Chance * 0.1f;
+				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.1f);
 			}
 
 			return 0f;
 		}
 	}
 
-	public class EeveeCritterNPCShiny : EeveeCritterNPC{
-		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneForest) {
-				return SpawnCondition.OverworldDay.Chance * 0.1f * 0.00025f;
-			}
-			
-			return 0f;
-		}
-	}
+	public class EeveeCritterNPCShiny : EeveeCritterNPC{}
 }

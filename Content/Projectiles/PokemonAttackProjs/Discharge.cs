@@ -11,7 +11,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.JolteonPet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Discharge : PokemonAttack
 	{
@@ -24,7 +24,7 @@ namespace Pokemod.Content.Pets.JolteonPet
         
         public override void Load()
         { 
-            LightTexture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/JolteonPet/DischargeProj");
+            LightTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/DischargeProj");
         }
 
         public override void Unload()

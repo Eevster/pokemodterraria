@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using Pokemod.Content.Items;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -49,7 +48,7 @@ namespace Pokemod.Content.Pets.RaichuPet
 					if(timer%5 == 4){
 						for(int i = 0; i < nAttackProjs; i++){
 							if(attackProjs[i] == null){
-								attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), targetCenter + new Vector2(i%3==0?0:(i%3==1?-32:32),-400), Vector2.Zero, ModContent.ProjectileType<ThunderCloud>(), GetPokemonDamage(), 2f, Projectile.owner)];
+								attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), targetCenter + new Vector2(i%3==0?0:(i%3==1?-32:32),-400), Vector2.Zero, ModContent.ProjectileType<ThunderCloud>(), GetPokemonDamage(110, true), 2f, Projectile.owner)];
 								SoundEngine.PlaySound(SoundID.Item8, Projectile.position);
 								break;
 							}

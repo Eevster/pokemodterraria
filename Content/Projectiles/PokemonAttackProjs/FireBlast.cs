@@ -12,7 +12,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.CharizardPet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class FireBlast : PokemonAttack
 	{
@@ -25,7 +25,7 @@ namespace Pokemod.Content.Pets.CharizardPet
         
         public override void Load()
         { 
-            explosionTexture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/CharizardPet/FireBlastExplosion");
+            explosionTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/FireBlastExplosion");
         }
 
         public override void Unload()

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -27,9 +28,6 @@ namespace Pokemod.Content.Pets.FlareonPet
 		public override int attackCooldown => 40;
 		public override bool canMoveWhileAttack => false;
 
-		public override float moveDistance1 => 50f;
-		public override float moveDistance2 => 50f;
-
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i+=8){
@@ -37,7 +35,7 @@ namespace Pokemod.Content.Pets.FlareonPet
 						SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
 						currentStatus = (int)ProjStatus.Attack;
 						for(int j = 0; j < 8; j++){
-							attackProjs[j] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 15*new Vector2(0,-1).RotatedBy(MathHelper.ToRadians(j*45f)), ModContent.ProjectileType<LavaPlume>(), GetPokemonDamage(), 2f, Projectile.owner)];
+							attackProjs[j] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 15*Vector2.Normalize(targetCenter-Projectile.Center).RotatedBy(MathHelper.ToRadians(j*45f)), ModContent.ProjectileType<LavaPlume>(), GetPokemonDamage(80, true), 2f, Projectile.owner)];
 						}
 					}
 				} 

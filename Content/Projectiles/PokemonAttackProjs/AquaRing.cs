@@ -11,7 +11,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.VaporeonPet
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class AquaRing : PokemonAttack
 	{
@@ -19,7 +19,7 @@ namespace Pokemod.Content.Pets.VaporeonPet
         
         public override void Load()
         { 
-            ringTexture = ModContent.Request<Texture2D>("Pokemod/Content/Pets/VaporeonPet/AquaRingVisual");
+            ringTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/AquaRingVisual");
         }
 
         public override void Unload()
