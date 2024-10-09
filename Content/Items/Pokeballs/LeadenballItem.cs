@@ -3,6 +3,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Pokemod.Content.Items.Apricorns;
 
 namespace Pokemod.Content.Items.Pokeballs
 {
@@ -14,7 +15,7 @@ namespace Pokemod.Content.Items.Pokeballs
         protected override float ThrowSpeed => 8f;
         public override void AddRecipes() {
 			CreateRecipe(4)
-				.AddIngredient(ItemID.GemTreeSapphireSeed, 1)
+				.AddIngredient(ModContent.ItemType<BlackApricorn>(), 1)
 				.AddIngredient(ItemID.Obsidian, 5)
 				.AddRecipeGroup(RecipeGroupID.IronBar, 5)
 				.AddTile(TileID.WorkBenches)
