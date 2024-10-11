@@ -18,9 +18,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class PoisonPowder : PokemonAttack
 	{
-		private NPC targetEnemy;
 		private Vector2 targetPosition;
-		private bool foundTarget = false;
 		private bool canfollow = true;
 		public override void SendExtraAI(BinaryWriter writer)
         {
@@ -76,7 +74,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if(Projectile.timeLeft < 110){
 				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-					SearchTarget();
+					SearchTarget(300F);
 				}
 			}
 
@@ -84,8 +82,18 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				if(foundTarget){
-					if(targetEnemy.active){
-						targetPosition = targetEnemy.Center;
+					if(targetPlayer != null){
+						if(targetPlayer.active && !targetPlayer.dead){
+							targetPosition = targetPlayer.Center;
+						}else{
+							targetPlayer = null;
+						}
+					}else if(targetEnemy != null){
+						if(targetEnemy.active){
+							targetPosition = targetEnemy.Center;
+						}else{
+							targetEnemy = null;
+						}
 					}
 
 					if(canfollow){
@@ -109,15 +117,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					}
 				}
 			}else{
-				PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
-
-				if(Vector2.Distance(Projectile.Center, trainer.attackPosition) > 4*projSpeed){
-					Projectile.velocity +=  0.1f*(trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+				if(Vector2.Distance(Projectile.Center, Trainer.attackPosition) > 4*projSpeed){
+					Projectile.velocity +=  0.1f*(Trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 					if(Projectile.velocity.Length() > projSpeed){
 						Projectile.velocity = Vector2.Normalize(Projectile.velocity)*projSpeed;
 					}
-				}else if(Vector2.Distance(Projectile.Center, trainer.attackPosition) > projSpeed){
-					Projectile.velocity +=  0.3f*(trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+				}else if(Vector2.Distance(Projectile.Center, Trainer.attackPosition) > projSpeed){
+					Projectile.velocity +=  0.3f*(Trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 					if(Projectile.velocity.Length() > 2f*projSpeed){
 						Projectile.velocity = 2f*Vector2.Normalize(Projectile.velocity)*projSpeed;
 					}
@@ -140,38 +146,5 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			target.AddBuff(BuffID.Poisoned, 5*60);
             base.OnHitPlayer(target, info);
         }
-
-        private void SearchTarget(){
-			float distanceFromTarget = 300f;
-			Vector2 targetCenter = Projectile.Center;
-
-			foundTarget = false;
-
-			if (true) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-							foundTarget = true;
-							targetEnemy = npc;
-							break;
-						}
-
-						if (((closest && inRange) || !foundTarget) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-							targetEnemy = npc;
-						}
-					}
-				}
-			}
-		}
     }
 }

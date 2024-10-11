@@ -18,9 +18,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Flamethrower : PokemonAttack
 	{
-        private NPC targetEnemy;
 		Vector2 enemyCenter;
-		bool foundTarget = false;
         float maxLenght = 400;
         int soundTimer = 0;
 
@@ -48,6 +46,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             Projectile.tileCollide = false;  
             Projectile.penetrate = -1;
+
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 20;
 
 			Projectile.light = 1f;
         }
@@ -81,7 +82,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 directionToOrigin = enemyCenter - center; 
                 distanceToOrigin = directionToOrigin.Length();
 
-                rotationAux = MathHelper.ToRadians(10);
+                rotationAux += MathHelper.ToRadians(10);
 
                 Main.EntitySpriteDraw(chainTexture, center - Main.screenPosition + (-20f*((float)soundTimer/20f)+10f)*Vector2.Normalize(directionToOrigin),
                     chainTexture.Bounds, Color.White*0.5f, directionToOrigin.ToRotation()+MathHelper.ToRadians(18f*soundTimer)+rotationAux,
@@ -103,52 +104,29 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
 
             if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-			    SearchTarget();
-            }
+			    SearchTarget(1000f, false);
 
-            if(targetEnemy != null){
-                if(targetEnemy.active){
-                    enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetEnemy.Center - Projectile.Center);
+                if(targetPlayer != null){
+                    if(targetPlayer.active && !targetPlayer.dead){
+                        enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetPlayer.Center - Projectile.Center);
+                    }else{
+                        targetPlayer = null;
+                    }
+                }else if(targetEnemy != null){
+                    if(targetEnemy.active){
+                        enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetEnemy.Center - Projectile.Center);
+                    }else{
+                        targetEnemy = null;
+                    }
                 }
+            }else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+                enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(Trainer.attackPosition - Projectile.Center);
             }
 
             if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
 			}
         }
-
-		private void SearchTarget(){
-			float distanceFromTarget = 1000f;
-			Vector2 targetCenter = Projectile.Center;
-
-			if (true) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-							foundTarget = true;
-                            targetEnemy = npc;
-                            enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(npc.Center - Projectile.Center);
-							break;
-						}
-
-						if (((closest && inRange) || !foundTarget) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
-							distanceFromTarget = between;
-                            targetEnemy = npc;
-							targetCenter = npc.Center;
-							foundTarget = true;
-                            enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(npc.Center - Projectile.Center);
-						}
-					}
-				}
-			}
-		}
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

@@ -18,8 +18,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class WaterPulse : PokemonAttack
 	{
-		private NPC targetEnemy;
-		private bool foundTarget = false;
 		bool exploded = false;
         private static Asset<Texture2D> explosionTexture;
         
@@ -96,13 +94,31 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.rotation = Projectile.velocity.ToRotation();
 
 				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-					SearchTarget();
+					SearchTarget(300f, false);
+				}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+					if(Trainer.targetPlayer != null){
+						targetPlayer = Trainer.targetPlayer;
+						foundTarget = true;
+					}else if(Trainer.targetNPC != null){
+						targetEnemy = Trainer.targetNPC;
+						foundTarget = true;
+					}
 				}
 
 				if(foundTarget){
-					if(targetEnemy.active){
-						float projSpeed = 10f;
-						Projectile.velocity =  (targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+					float projSpeed = 10f;
+					if(targetPlayer != null){
+						if(targetPlayer.active && !targetPlayer.dead){
+							Projectile.velocity =  (targetPlayer.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+						}else{
+							targetPlayer = null;
+						}
+					}else if(targetEnemy != null){
+						if(targetEnemy.active){
+							Projectile.velocity =  (targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+						}else{
+							targetEnemy = null;
+						}
 					}
 				}
 			}else{
@@ -110,9 +126,17 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.rotation = 0;
 				Projectile.scale += 0.06f;
 
-				if(foundTarget){
+				if(targetPlayer != null){
+					if(targetPlayer.active && !targetPlayer.dead){
+						Projectile.Center = targetPlayer.Center;
+					}else{
+						targetPlayer = null;
+					}
+				}else if(targetEnemy != null){
 					if(targetEnemy.active){
 						Projectile.Center = targetEnemy.Center;
+					}else{
+						targetEnemy = null;
 					}
 				}
 
@@ -171,38 +195,5 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Dust.NewDust(Projectile.Center-new Vector2(8*Projectile.scale, 8*Projectile.scale), (int)(16*Projectile.scale), (int)(16*Projectile.scale), DustID.Water, Main.rand.NextFloat(-3,3), Main.rand.NextFloat(-3,3), 100, default(Color), 2f);
             }
         }
-
-        private void SearchTarget(){
-			float distanceFromTarget = 300f;
-			Vector2 targetCenter = Projectile.Center;
-
-			foundTarget = false;
-
-			if (true) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-							foundTarget = true;
-							targetEnemy = npc;
-							break;
-						}
-
-						if (((closest && inRange) || !foundTarget) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-							targetEnemy = npc;
-						}
-					}
-				}
-			}
-		}
     }
 }

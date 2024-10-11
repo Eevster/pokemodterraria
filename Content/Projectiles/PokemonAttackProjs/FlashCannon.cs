@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Common.Players;
 using Pokemod.Content.NPCs;
 using ReLogic.Content;
 using Terraria;
@@ -98,7 +99,23 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}
 
 				if(Projectile.scale >= 1f){
-					SearchTarget();
+					if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+						SearchTarget(1000f);
+
+						if(targetPlayer != null){
+							if(targetPlayer.active && !targetPlayer.dead){
+								ShootProj(targetPlayer.Center);
+							}else{
+								targetPlayer = null;
+							}
+						}else if(targetEnemy != null){
+							if(targetEnemy.active){
+								ShootProj(targetEnemy.Center);
+							}
+						}
+					}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+						ShootProj(Trainer.attackPosition);
+					}
 				}else{
 					Projectile.scale += 0.025f;
 				}
@@ -123,44 +140,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
         }
 
-		private void SearchTarget(){
-			float distanceFromTarget = 1000f;
-			bool foundTarget = false;
-			Vector2 targetCenter = Projectile.Center;
-
-			if (Projectile.frame == 0) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-                            Projectile.velocity = projSpeed*Vector2.Normalize(npc.Center - Projectile.Center);
-							SoundEngine.PlaySound(SoundID.Item96, Projectile.position);
-							Projectile.timeLeft = 60;
-							Projectile.frame = 1;
-							return;
-						}
-
-						if (((closest && inRange) || !foundTarget) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-						}
-					}
-				}
-
-				if(foundTarget){
-					Projectile.velocity = projSpeed*Vector2.Normalize(targetCenter - Projectile.Center);
-					SoundEngine.PlaySound(SoundID.Item96, Projectile.position);
-					Projectile.timeLeft = 60;
-					Projectile.frame = 1;
-				}
-			}
+		private void ShootProj(Vector2 targetCenter){
+			Projectile.velocity = projSpeed*Vector2.Normalize(targetCenter - Projectile.Center);
+			SoundEngine.PlaySound(SoundID.Item96, Projectile.position);
+			Projectile.timeLeft = 60;
+			Projectile.frame = 1;
 		}
 
 		public override void OnKill(int timeLeft)

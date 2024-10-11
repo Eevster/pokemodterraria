@@ -19,8 +19,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class ThunderWave : PokemonAttack
 	{
-		private NPC targetEnemy;
-		private bool foundTarget = false;
 		bool exploded = false;
         private static Asset<Texture2D> explosionTexture;
         
@@ -61,7 +59,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             Projectile.timeLeft = 120;
 
-            Projectile.tileCollide = false;  
+            Projectile.tileCollide = true;  
             Projectile.penetrate = 1;
 
 			Projectile.light = 1f;
@@ -104,22 +102,48 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.rotation = Projectile.velocity.ToRotation();
 
 				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-					SearchTarget();
+					SearchTarget(300f, false);
+				}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+					if(Trainer.targetPlayer != null){
+						targetPlayer = Trainer.targetPlayer;
+						foundTarget = true;
+					}else if(Trainer.targetNPC != null){
+						targetEnemy = Trainer.targetNPC;
+						foundTarget = true;
+					}
 				}
 
 				if(foundTarget){
-					if(targetEnemy.active){
-						float projSpeed = 10f;
-						Projectile.velocity =  (targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+					float projSpeed = 10f;
+					if(targetPlayer != null){
+						if(targetPlayer.active && !targetPlayer.dead){
+							Projectile.velocity =  (targetPlayer.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+						}else{
+							targetPlayer = null;
+						}
+					}else if(targetEnemy != null){
+						if(targetEnemy.active){
+							Projectile.velocity =  (targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+						}else{
+							targetEnemy = null;
+						}
 					}
 				}
 			}else{
 				Projectile.velocity = Vector2.Zero;
 				Projectile.rotation = 0;
 
-				if(foundTarget){
+				if(targetPlayer != null){
+					if(targetPlayer.active && !targetPlayer.dead){
+						Projectile.Center = targetPlayer.Center;
+					}else{
+						targetPlayer = null;
+					}
+				}else if(targetEnemy != null){
 					if(targetEnemy.active){
 						Projectile.Center = targetEnemy.Center;
+					}else{
+						targetEnemy = null;
 					}
 				}
 
@@ -161,7 +185,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 exploded = true;
                 Projectile.frame = 0;
                 Projectile.velocity = Vector2.Zero;
-                Projectile.timeLeft = 20;
+                Projectile.timeLeft = 30;
             }
 			target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), 2*60);
             base.OnHitPlayer(target, info);
@@ -177,37 +201,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
         }
 
-        private void SearchTarget(){
-			float distanceFromTarget = 300f;
-			Vector2 targetCenter = Projectile.Center;
-
-			foundTarget = false;
-
-			if (true) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-							foundTarget = true;
-							targetEnemy = npc;
-							break;
-						}
-
-						if (((closest && inRange) || !foundTarget) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-							targetEnemy = npc;
-						}
-					}
-				}
-			}
-		}
+		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+			width = 6;
+			height = 6;
+			fallThrough = true;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
     }
 }

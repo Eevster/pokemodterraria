@@ -17,9 +17,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class ThunderboltHold : PokemonAttack
 	{
-		NPC targetEnemy;
         Vector2 targetPosition;
-		bool foundTarget = false;
 		public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 3;
@@ -89,7 +87,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void AI()
         {
             if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-			    SearchTarget();
+			    SearchTarget(600f, false);
             }else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
                 targetPosition = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().attackPosition;
                 foundTarget = true;
@@ -113,47 +111,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 }
             }
         }
-
-		private void SearchTarget(){
-			float distanceFromTarget = 600f;
-			Vector2 targetCenter = Projectile.Center;
-
-			if(foundTarget){
-				if(!targetEnemy.active || targetEnemy.life <=0){
-					foundTarget = false;
-				}
-			}
-
-			if (!foundTarget) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-						bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
-						// Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
-						// The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
-						bool closeThroughWall = between < 100f;
-
-						if(npc.boss){
-							foundTarget = true;
-							targetEnemy = npc;
-							break;
-						}
-
-						if (((closest && inRange) || !foundTarget) && (lineOfSight || closeThroughWall) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-							targetEnemy = npc;
-						}
-					}
-				}
-			}
-		}
 
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"

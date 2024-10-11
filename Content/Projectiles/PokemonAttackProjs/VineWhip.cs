@@ -17,8 +17,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class VineWhipBack : PokemonAttack
 	{
-		private NPC targetEnemy;
-		private bool foundTarget = false;
 		private bool canDamage = true;
 		private int projDirection = 1;
 		Vector2 vectorToTarget;
@@ -77,7 +75,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void AI()
         {
 			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-				SearchTarget();
+				SearchTarget(160f);
 			}
 
 			Projectile.timeLeft = 10;
@@ -85,11 +83,23 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.direction = Projectile.spriteDirection = projDirection;
 
 			if(foundTarget){
-				vectorToTarget = targetEnemy.Center-Projectile.Center;
-			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				vectorToTarget = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().attackPosition-Projectile.Center;
+				if(targetPlayer != null){
+					if(targetPlayer.active && !targetPlayer.dead){
+						vectorToTarget = targetPlayer.Center-Projectile.Center;
+					}else{
+						targetPlayer = null;
+					}
+				}else if(targetEnemy != null){
+					if(targetEnemy.active){
+						vectorToTarget = targetEnemy.Center-Projectile.Center;
+					}else{
+						targetEnemy = null;
+					}
+				}
 			}
-
+			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+				vectorToTarget = Trainer.attackPosition-Projectile.Center;
+			}
 
 			UpdateAnimation();
 
@@ -144,39 +154,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             return canDamage;
         }
 
-        private void SearchTarget(){
-			float distanceFromTarget = 160f;
-			Vector2 targetCenter = Projectile.Center;
-
-			foundTarget = false;
-
-			if (!foundTarget) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-							foundTarget = true;
-							targetEnemy = npc;
-							break;
-						}
-
-						if ((closest && inRange) || !foundTarget) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-							targetEnemy = npc;
-						}
-					}
-				}
-			}
-		}
-
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"
 			// shootSpeed is 2.1f for reference, so this is basically plotting 12 pixels ahead from the center
@@ -195,8 +172,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 	public class VineWhipFront : PokemonAttack
 	{
-		private NPC targetEnemy;
-		private bool foundTarget = false;
 		private bool canDamage = true;
 		private int projDirection = 1;
 		Vector2 vectorToTarget;
@@ -251,7 +226,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void AI()
         {
 			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-				SearchTarget();
+				SearchTarget(160f);
 			}
 
 			Projectile.timeLeft = 10;
@@ -259,9 +234,22 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.direction = Projectile.spriteDirection = projDirection;
 
 			if(foundTarget){
-				vectorToTarget = targetEnemy.Center-Projectile.Center;
-			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				vectorToTarget = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().attackPosition-Projectile.Center;
+				if(targetPlayer != null){
+					if(targetPlayer.active && !targetPlayer.dead){
+						vectorToTarget = targetPlayer.Center-Projectile.Center;
+					}else{
+						targetPlayer = null;
+					}
+				}else if(targetEnemy != null){
+					if(targetEnemy.active){
+						vectorToTarget = targetEnemy.Center-Projectile.Center;
+					}else{
+						targetEnemy = null;
+					}
+				}
+			}
+			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+				vectorToTarget = Trainer.attackPosition-Projectile.Center;
 			}
 
 			UpdateAnimation();
@@ -313,39 +301,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             return canDamage;
         }
-
-        private void SearchTarget(){
-			float distanceFromTarget = 300f;
-			Vector2 targetCenter = Projectile.Center;
-
-			foundTarget = false;
-
-			if (!foundTarget) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-							foundTarget = true;
-							targetEnemy = npc;
-							break;
-						}
-
-						if ((closest && inRange) || !foundTarget) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-							targetEnemy = npc;
-						}
-					}
-				}
-			}
-		}
 
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"

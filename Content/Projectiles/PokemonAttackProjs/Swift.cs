@@ -18,9 +18,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Swift : PokemonAttack
 	{
-		private NPC targetEnemy;
 		private Vector2 targetPosition;
-		private bool foundTarget = false;
 		private bool canfollow = true;
 		public override void SendExtraAI(BinaryWriter writer)
         {
@@ -80,16 +78,24 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
 			Projectile.ai[0] += MathHelper.ToRadians(10);
 
-			PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
-
 			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				if(Projectile.ai[1] == 0){
-					SearchTarget();
+					SearchTarget(300f);
 				}
 
 				if(foundTarget){
-					if(targetEnemy.active){
-						targetPosition = targetEnemy.Center;
+					if(targetPlayer != null){
+						if(targetPlayer.active && !targetPlayer.dead){
+							targetPosition = targetPlayer.Center;
+						}else{
+							targetPlayer = null;
+						}
+					}else if(targetEnemy != null){
+						if(targetEnemy.active){
+							targetPosition = targetEnemy.Center;
+						}else{
+							targetEnemy = null;
+						}
 					}
 
 					if(Projectile.timeLeft < 100){
@@ -107,7 +113,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					}
 				}
 			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				targetPosition = trainer.attackPosition;
+				targetPosition = Trainer.attackPosition;
 
 				if(Projectile.timeLeft < 100){
 					if(Projectile.ai[1] == 0){
@@ -132,37 +138,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.netUpdate = true;
 			}
         }
-
-		private void SearchTarget(){
-			float distanceFromTarget = 300f;
-			Vector2 targetCenter = Projectile.Center;
-
-			if (true) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-							foundTarget = true;
-							targetEnemy = npc;
-							break;
-						}
-
-						if (((closest && inRange) || !foundTarget) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-							targetEnemy = npc;
-						}
-					}
-				}
-			}
-		}
 
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"

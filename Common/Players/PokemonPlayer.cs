@@ -35,6 +35,7 @@ namespace Pokemod.Common.Players
         }
 		public Vector2 attackPosition;
 		public NPC targetNPC;
+		public Player targetPlayer;
 		private static Asset<Texture2D> targetTexture;
 
 		public override void Load()
@@ -85,6 +86,14 @@ namespace Pokemod.Common.Players
 					targetNPC = null;
 				}
 			}
+
+			if(targetPlayer != null){
+				if(targetPlayer.active){
+					attackPosition = targetPlayer.Center;
+				}else{
+					targetPlayer = null;
+				}
+			}
 			
 			HasShinyCharm = false;
         }
@@ -94,6 +103,7 @@ namespace Pokemod.Common.Players
 			SoundEngine.PlaySound(SoundID.Item1, Player.position);
 
 			targetNPC = null;
+			targetPlayer = null;
 
 			if(attackMode == (int)AttackMode.Directed_Attack){
 				attackPosition = Main.MouseWorld;
@@ -104,17 +114,43 @@ namespace Pokemod.Common.Players
 		public void SearchNPCTarget(float maxDetectDistance){
 			float sqrMaxDetectDistance = maxDetectDistance * maxDetectDistance;
 
-			for (int k = 0; k < Main.maxNPCs; k++) {
-				NPC target = Main.npc[k];
+			targetNPC = null;
+			targetPlayer = null;
 
-				if (target.CanBeChasedBy()) {
-					// The DistanceSquared function returns a squared distance between 2 points, skipping relatively expensive square root calculations
-					float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, attackPosition);
+			for (int k = 0; k < Main.maxPlayers; k++) {
+				if(Main.player[k] != null){
+					Player target = Main.player[k];
+					if(target.whoAmI != Player.whoAmI){
+						if(target.active && !target.dead){
+							float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, attackPosition);
 
-					// Check if it is within the radius
-					if (sqrDistanceToTarget < sqrMaxDetectDistance) {
-						sqrMaxDetectDistance = sqrDistanceToTarget;
-						targetNPC = target;
+							// Check if it is within the radius
+							if (sqrDistanceToTarget < sqrMaxDetectDistance) {
+								if(target.hostile){
+									sqrMaxDetectDistance = sqrDistanceToTarget;
+									targetPlayer = target;
+									targetNPC = null;
+								}
+							}
+						}
+					}
+				}
+			}
+			// This code is required either way, used for finding a target
+			if(targetPlayer == null){
+				for (int k = 0; k < Main.maxNPCs; k++) {
+					NPC target = Main.npc[k];
+
+					if (target.CanBeChasedBy()) {
+						// The DistanceSquared function returns a squared distance between 2 points, skipping relatively expensive square root calculations
+						float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, attackPosition);
+
+						// Check if it is within the radius
+						if (sqrDistanceToTarget < sqrMaxDetectDistance) {
+							sqrMaxDetectDistance = sqrDistanceToTarget;
+							targetNPC = target;
+							targetPlayer = null;
+						}
 					}
 				}
 			}

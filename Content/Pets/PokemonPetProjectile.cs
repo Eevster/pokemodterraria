@@ -403,6 +403,32 @@ namespace Pokemod.Content.Pets
 			if(trainer.attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				if (!foundTarget) {
 					// This code is required either way, used for finding a target
+					if(Main.netMode != NetmodeID.SinglePlayer){
+						float sqrMaxDetectDistance = distanceFromTarget*distanceFromTarget;
+						for (int k = 0; k < Main.maxPlayers; k++) {
+							if(Main.player[k] != null){
+								Player target = Main.player[k];
+								if(target.whoAmI != Projectile.owner){
+									if(target.active && !target.dead){
+										float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, Projectile.Center);
+										bool lineOfSight = Collision.CanHitLine(Projectile.Center-Vector2.One, 2, 2, target.position, target.width, target.height);
+										bool closeThroughWall = Vector2.Distance(target.Center, Projectile.Center) < 100f || canAttackThroughWalls;
+
+										// Check if it is within the radius
+										if (sqrDistanceToTarget < sqrMaxDetectDistance && (lineOfSight || closeThroughWall)) {
+											if(target.hostile){
+												sqrMaxDetectDistance = sqrDistanceToTarget;
+												distanceFromTarget = Vector2.Distance(target.Center, Projectile.Center);
+												targetCenter = target.Center;
+												foundTarget = true;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
 					for (int i = 0; i < Main.maxNPCs; i++) {
 						NPC npc = Main.npc[i];
 
@@ -410,7 +436,7 @@ namespace Pokemod.Content.Pets
 							float between = Vector2.Distance(npc.Center, Projectile.Center);
 							bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
 							bool inRange = between < distanceFromTarget;
-							bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
+							bool lineOfSight = Collision.CanHitLine(Projectile.Center-Vector2.One, 2, 2, npc.position, npc.width, npc.height);
 							// Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
 							// The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
 							bool closeThroughWall = between < 100f;
@@ -822,6 +848,19 @@ namespace Pokemod.Content.Pets
             
             return dmg;
         }
+
+		public void manualDmg(int dmg){
+			if (dmg <= 0) dmg = 1;
+
+            currentHp -= dmg;
+            CombatText.NewText(Projectile.Hitbox, new Color(255, 50, 50), dmg);
+
+            if (currentHp <= 0) {
+				currentHp = 0;
+				Main.player[Projectile.owner].ClearBuff(PokemonBuff);
+				Main.NewText("Your pokemon fainted!", 255, 130, 130); 
+			}
+		}
         
         public void regenHP(int amount, bool showText = true){
             // heal hp

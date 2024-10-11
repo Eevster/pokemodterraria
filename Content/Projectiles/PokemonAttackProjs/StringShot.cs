@@ -29,7 +29,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             Projectile.timeLeft = 60;
 
-            Projectile.tileCollide = false;  
+            Projectile.tileCollide = true;  
             Projectile.penetrate = 1;
         }
 
@@ -84,6 +84,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
 			target.AddBuff(ModContent.BuffType<StringShotDebuff>(), 60);
             base.OnHitPlayer(target, info);
+        }
+
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+			width = 6;
+			height = 6;
+			fallThrough = true;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
     }
 }

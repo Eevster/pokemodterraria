@@ -20,8 +20,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 	{
 		float projSpeed = 20f;
 		private bool canTrack = true;
-		private NPC targetEnemy;
-		private bool foundTarget = false;
         private static Asset<Texture2D> bodyTexture;
         private const int nBody = 10;
         private Vector2[] bodyPositions;
@@ -84,18 +82,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void AI()
         {
-			PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
-
 			Projectile.rotation = Projectile.velocity.ToRotation();
 		
 			if(Projectile.timeLeft < 110){
 				if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
 					foundTarget = true;
-					if(trainer.targetNPC != null){
-						targetEnemy = trainer.targetNPC;
-					}
 				}else{
-					SearchTarget();
+					SearchTarget(800f);
 				}
 			}
 
@@ -104,23 +97,37 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
 
 			if(foundTarget){
-				if(targetEnemy == null){
-					Projectile.velocity +=  0.2f*(trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+				if(targetEnemy == null && targetPlayer == null){
+					Projectile.velocity +=  0.2f*(Trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 
 					if(Projectile.velocity.Length() > projSpeed){
 						Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
 					}
 
-					if(Vector2.Distance(Projectile.Center, trainer.attackPosition) < 2*Projectile.velocity.Length()){
+					if(Vector2.Distance(Projectile.Center, Trainer.attackPosition) < 2*Projectile.velocity.Length()){
 						canTrack = false;
 						foundTarget = false;
 					}
 				}else{
-					if(targetEnemy.active){
-						Projectile.velocity +=  0.2f*(targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+					if(targetPlayer != null){
+						if(targetPlayer.active && !targetPlayer.dead){
+							Projectile.velocity +=  0.2f*(targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 
-						if(Projectile.velocity.Length() > projSpeed){
-							Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
+							if(Projectile.velocity.Length() > projSpeed){
+								Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
+							}
+						}else{
+							targetPlayer = null;
+						}
+					}else if(targetEnemy != null){
+						if(targetEnemy.active){
+							Projectile.velocity +=  0.2f*(targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+
+							if(Projectile.velocity.Length() > projSpeed){
+								Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
+							}
+						}else{
+							targetEnemy = null;
 						}
 					}else{
 						Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
@@ -177,38 +184,5 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Dust.NewDust(Projectile.Center-new Vector2(15*Projectile.scale, 15*Projectile.scale), (int)(30*Projectile.scale), (int)(30*Projectile.scale), DustID.Water, Main.rand.NextFloat(-3,3), Main.rand.NextFloat(-3,3), 100, default(Color), 2f);
             }
         }
-
-        private void SearchTarget(){
-			float distanceFromTarget = 800f;
-			Vector2 targetCenter = Projectile.Center;
-
-			foundTarget = false;
-			
-			if (true) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-							foundTarget = true;
-							targetEnemy = npc;
-							break;
-						}
-
-						if (((closest && inRange) || !foundTarget) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
-							distanceFromTarget = between;
-							targetCenter = npc.Center;
-							foundTarget = true;
-							targetEnemy = npc;
-						}
-					}
-				}
-			}
-		}
     }
 }

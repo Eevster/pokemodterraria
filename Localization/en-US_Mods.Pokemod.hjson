@@ -112,6 +112,11 @@ Projectiles: {
 	PinMissile.DisplayName: Pin Missile
 	ThunderWave.DisplayName: Thunder Wave
 	FlashCannon.DisplayName: Flash Cannon
+	ConfuseRay.DisplayName: Confuse Ray
+	Hex.DisplayName: Hex
+	SelfDestruct.DisplayName: Self Destruct
+	Explosion.DisplayName: Explosion
+	Harden.DisplayName: Harden
 }
 
 Items: {

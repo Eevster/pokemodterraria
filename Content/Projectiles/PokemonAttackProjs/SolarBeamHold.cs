@@ -17,9 +17,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class SolarBeamHold : PokemonAttack
 	{
-        private NPC targetEnemy;
 		Vector2 enemyCenter;
-		bool foundTarget = false;
         float maxLenght = 1500;
         bool canPlaySound = true;
 		
@@ -104,8 +102,23 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     Projectile.scale = 1f;
                 }
                 if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-                    SearchTarget();
+                    SearchTarget(1000f, false);
+
+                    if(targetPlayer != null){
+                        if(targetPlayer.active && !targetPlayer.dead){
+                            enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetPlayer.Center - Projectile.Center);
+                        }else{
+                            targetPlayer = null;
+                        }
+                    }else if(targetEnemy != null){
+                        if(targetEnemy.active){
+                            enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetEnemy.Center - Projectile.Center);
+                        }else{
+                            targetEnemy = null;
+                        }
+                    }
                 }else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+                    enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(Trainer.attackPosition - Projectile.Center);
                     foundTarget = true;
                 }
             }else{
@@ -113,54 +126,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     SoundEngine.PlaySound(SoundID.Item67, Projectile.position);
                     canPlaySound = false;
                 }
-                if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-                    if(targetEnemy != null){
-                        if(targetEnemy.active){
-                            enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetEnemy.Center - Projectile.Center);
-                        }
-                    }
-                }else{
-                    enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(trainer.attackPosition - Projectile.Center);
-                }
             }
 
             if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
 			}
         }
-
-		private void SearchTarget(){
-			float distanceFromTarget = 1000f;
-			Vector2 targetCenter = Projectile.Center;
-
-			if (true) {
-				// This code is required either way, used for finding a target
-				for (int i = 0; i < Main.maxNPCs; i++) {
-					NPC npc = Main.npc[i];
-
-					if (npc.CanBeChasedBy()) {
-						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-						bool inRange = between < distanceFromTarget;
-
-						if(npc.boss){
-							foundTarget = true;
-                            targetEnemy = npc;
-                            enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(npc.Center - Projectile.Center);
-							break;
-						}
-
-						if (((closest && inRange) || !foundTarget) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
-							distanceFromTarget = between;
-                            targetEnemy = npc;
-							targetCenter = npc.Center;
-							foundTarget = true;
-                            enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(npc.Center - Projectile.Center);
-						}
-					}
-				}
-			}
-		}
 
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			Vector2 start = Projectile.Center;

@@ -17,8 +17,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Confusion : PokemonAttack
 	{
-		NPC targetEnemy;
-		Player targetPlayer;
 		private Vector2 targetPosition;
 
 		public override void SendExtraAI(BinaryWriter writer)
@@ -71,16 +69,30 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnSpawn(IEntitySource source)
         {
-			SearchTarget();
+			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+				SearchTarget(64f);
+			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+				if(Trainer.targetPlayer != null){
+					targetPlayer = Trainer.targetPlayer;
+				}else if(Trainer.targetNPC != null){
+					targetEnemy = Trainer.targetNPC;
+				}
+			}
 
             base.OnSpawn(source);
         }
 
         public override void AI()
         {
-            Player player = Main.player[Projectile.owner];
-
 			Lighting.AddLight(Projectile.Center, Projectile.Opacity, Projectile.Opacity, Projectile.Opacity*0.3f);
+
+			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+				if(Trainer.targetPlayer != null){
+					targetPlayer = Trainer.targetPlayer;
+				}else if(Trainer.targetNPC != null){
+					targetEnemy = Trainer.targetNPC;
+				}
+			}
 
 			if(Projectile.timeLeft < 20){
 				Projectile.Opacity = Projectile.timeLeft*0.05f;
@@ -111,10 +123,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
         }
 
-		private void SearchTarget(){
+		/*private void SearchTarget(){
+			if(attackMode == (int)PokemonPlayer.AttackMode.No_Attack) return;
+
 			float distanceFromTarget = 16f;
 			Vector2 targetCenter = Projectile.Center;
 			bool foundTarget = false;
+
+			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+				return;
+			}
 
 			if (true) {
 				float sqrMaxDetectDistance = distanceFromTarget*distanceFromTarget;
@@ -161,7 +179,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					}
 				}
 			}
-		}
+		}*/
 
 		public override bool? CanHitNPC(NPC target)
         {
@@ -201,25 +219,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override bool ShouldUpdatePosition() {
 			// Update Projectile.Center manually
 			return false;
-		}
-
-        private static void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawPos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness) {
-			Texture2D sparkleTexture = TextureAssets.Extra[98].Value;
-			Color bigColor = shineColor * opacity * 0.5f;
-			bigColor.A = 0;
-			Vector2 origin = sparkleTexture.Size() / 2f;
-			Color smallColor = drawColor * 0.5f;
-			float lerpValue = Utils.GetLerpValue(fadeInStart, fadeInEnd, flareCounter, clamped: true) * Utils.GetLerpValue(fadeOutEnd, fadeOutStart, flareCounter, clamped: true);
-			Vector2 scaleLeftRight = new Vector2(fatness.X * 0.5f, scale.X) * lerpValue;
-			Vector2 scaleUpDown = new Vector2(fatness.Y * 0.5f, scale.Y) * lerpValue;
-			bigColor *= lerpValue;
-			smallColor *= lerpValue;
-			// Bright, large part
-			Main.EntitySpriteDraw(sparkleTexture, drawPos, null, bigColor, MathHelper.PiOver2 + rotation, origin, scaleLeftRight, dir);
-			Main.EntitySpriteDraw(sparkleTexture, drawPos, null, bigColor, 0f + rotation, origin, scaleUpDown, dir);
-			// Dim, small part
-			Main.EntitySpriteDraw(sparkleTexture, drawPos, null, smallColor, MathHelper.PiOver2 + rotation, origin, scaleLeftRight * 0.6f, dir);
-			Main.EntitySpriteDraw(sparkleTexture, drawPos, null, smallColor, 0f + rotation, origin, scaleUpDown * 0.6f, dir);
 		}
     }
 }

@@ -15,9 +15,10 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-	public class GigaDrain : PokemonAttack
+	public class ConfuseRay : PokemonAttack
 	{
 		private Vector2 targetPosition;
+		bool exploded = false;
 		public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
 
 		public override void SendExtraAI(BinaryWriter writer)
@@ -50,8 +51,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override bool PreDraw(ref Color lightColor)
         {
             Vector2 drawPos2 = Projectile.Center - Main.screenPosition;
+			if(exploded){
+				drawPos2 = Projectile.Center + new Vector2(-32f*(float)Math.Cos(6f*MathHelper.Pi*(60f-Projectile.timeLeft)/60f), 32f-64f*(Projectile.timeLeft/60f)) - Main.screenPosition;
+			}
 			for(int i = 0; i < 20; i++){
-                DrawPrettyStarSparkle(Projectile.Opacity, SpriteEffects.None, drawPos2, new Color(176, 255, 106, 0) * 0.5f, new Color(45, 185, 0), 0.5f, 0f, 0.5f, 0.5f, 1f, Projectile.rotation+ MathHelper.ToRadians(i*360f/20f) + MathHelper.ToRadians(Main.rand.Next(-8,9)), new Vector2(2f, Utils.Remap(0.5f, 0f, 1f, 4f, 1f)) * Projectile.scale, 2*Vector2.One * Projectile.scale);
+                DrawPrettyStarSparkle(Projectile.Opacity, SpriteEffects.None, drawPos2, new Color(255, 247, 227, 0) * 0.5f, new Color(255, 195, 35), 0.5f, 0f, 0.5f, 0.5f, 1f, Projectile.rotation+ MathHelper.ToRadians(i*360f/20f) + MathHelper.ToRadians(Main.rand.Next(-8,9)), new Vector2(2f, Utils.Remap(0.5f, 0f, 1f, 4f, 1f)) * Projectile.scale, 2*Vector2.One * Projectile.scale);
             }
 
             return false;
@@ -59,15 +63,26 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.scale = 0.1f;
+            Projectile.scale = 0.05f;
+
 			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				SearchTarget(64f);
-			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				if(Trainer.targetPlayer != null){
-					targetPlayer = Trainer.targetPlayer;
-				}else if(Trainer.targetNPC != null){
-					targetEnemy = Trainer.targetNPC;
+				if(targetPlayer != null){
+					if(targetPlayer.active && !targetPlayer.dead){
+						targetPosition = targetPlayer.Center;
+					}else{
+						targetPlayer = null;
+					}
+				}else if(targetEnemy != null){
+					if(targetEnemy.active){
+						targetPosition = targetEnemy.Center;
+					}else{
+						targetEnemy = null;
+					}
 				}
+			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+				float projSpeed = 10f;
+				Projectile.velocity = (Trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 			}
 
             base.OnSpawn(source);
@@ -77,39 +92,58 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
 			Lighting.AddLight(Projectile.Center, Projectile.Opacity*0.3f, Projectile.Opacity, Projectile.Opacity*0.3f);
 
-			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				if(Trainer.targetPlayer != null){
-					targetPlayer = Trainer.targetPlayer;
-				}else if(Trainer.targetNPC != null){
-					targetEnemy = Trainer.targetNPC;
-				}
+            if(Projectile.scale < 0.2f){
+                Projectile.scale += 0.005f/Projectile.scale;
+            }else{
+				Projectile.scale = 0.2f;
 			}
-
-            if(Projectile.scale < 1.5f){
-                Projectile.scale += 0.02f/Projectile.scale;
-            }
 
 			if(Projectile.timeLeft < 20){
 				Projectile.Opacity = Projectile.timeLeft*0.05f;
 			}
 
-			if(targetEnemy != null || targetPlayer != null){
-				if(targetEnemy != null){
-					if(targetEnemy.active){
-						targetPosition = targetEnemy.Center;
-					}else{
-						targetEnemy = null;
+
+			if(!exploded){
+				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+					SearchTarget(64f);
+
+					float projSpeed = 10f;
+
+					if(targetPlayer != null){
+						if(targetPlayer.active && !targetPlayer.dead){
+							targetPosition = targetPlayer.Center;
+							Projectile.velocity += 0.2f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+						}else{
+							targetPlayer = null;
+						}
+					}else if(targetEnemy != null){
+						if(targetEnemy.active){
+							targetPosition = targetEnemy.Center;
+							Projectile.velocity += 0.2f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+						}else{
+							targetEnemy = null;
+						}
+					}
+
+					if(Projectile.velocity.Length() > projSpeed){
+						Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
 					}
 				}
+			}else{
+				Projectile.velocity = Vector2.Zero;
+
 				if(targetPlayer != null){
 					if(targetPlayer.active && !targetPlayer.dead){
-						targetPosition = targetPlayer.Center;
+						Projectile.Center = targetPlayer.Center;
 					}else{
 						targetPlayer = null;
 					}
-				}
-				if(targetEnemy != null || targetPlayer != null){
-					Projectile.Center = targetPosition;
+				}else if(targetEnemy != null){
+					if(targetEnemy.active){
+						Projectile.Center = targetEnemy.Center;
+					}else{
+						targetEnemy = null;
+					}
 				}
 			}
 
@@ -118,62 +152,33 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
         }
 
-		public override bool? CanHitNPC(NPC target)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-			if(targetEnemy != null){
-				if(targetEnemy.active){
-					return target.whoAmI == targetEnemy.whoAmI;
-				}
-			}
-            return false;
-        }
-
-        public override bool CanHitPvp(Player target)
-        {
-			if(targetPlayer != null){
-				if(targetPlayer.active){
-					return target.whoAmI == targetPlayer.whoAmI;
-				}
-			}
-            return false;
-        }
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if(target.CanBeChasedBy()){
-                HealEffect();
+			if(!exploded){
+                exploded = true;
+                Projectile.velocity = Vector2.Zero;
+                Projectile.timeLeft = 60;
+				targetEnemy = target;
+				foundTarget = true;
             }
+			target.AddBuff(BuffID.Confused, 7*60);
+
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            HealEffect();
+			if(!exploded){
+                exploded = true;
+                Projectile.velocity = Vector2.Zero;
+                Projectile.timeLeft = 60;
+				targetPlayer = target;
+				foundTarget = true;
+            }
+			target.AddBuff(BuffID.Confused, 7*60);
 
             base.OnHitPlayer(target, info);
         }
-
-		public void HealEffect(){
-			Player player = Main.player[Projectile.owner];
-			player.Heal(player.statLifeMax2>300?3:2);
-
-			for(int i = 0; i < 10; i++){
-				int dustIndex = Dust.NewDust(Projectile.Center-0.5f*new Vector2(32,32), 64, 64, DustID.DryadsWard, 0f, 0f, 200, default(Color), 1f);
-				Main.dust[dustIndex].noGravity = true;
-				Main.dust[dustIndex].velocity = 16f*Vector2.Normalize(player.Center-Main.dust[dustIndex].position);
-			}
-		}
-
-
-        public override Color? GetAlpha(Color lightColor)
-        {
-            return new Color(255, 94, 24)*Projectile.Opacity;
-        }
-
-        public override bool ShouldUpdatePosition() {
-			// Update Projectile.Center manually
-			return false;
-		}
 
         private static void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawPos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness) {
 			Texture2D sparkleTexture = TextureAssets.Extra[98].Value;
@@ -196,7 +201,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {
-            behindNPCs.Add(index);
+            if(!exploded || Projectile.timeLeft%20 < 10){
+				behindNPCs.Add(index);
+			}else{
+				overPlayers.Add(index);
+			}
         }
     }
 }
