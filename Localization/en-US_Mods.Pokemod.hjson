@@ -117,6 +117,13 @@ Projectiles: {
 	SelfDestruct.DisplayName: Self Destruct
 	Explosion.DisplayName: Explosion
 	Harden.DisplayName: Harden
+	QuilavaPetProjectile.DisplayName: Quilava Pet Projectile
+	QuilavaPetProjectileShiny.DisplayName: Quilava Pet Projectile Shiny
+	TyphlosionPetProjectile.DisplayName: Typhlosion Pet Projectile
+	TyphlosionPetProjectileShiny.DisplayName: Typhlosion Pet Projectile Shiny
+	TotodilePetProjectileShiny.DisplayName: Totodile Pet Projectile Shiny
+	CroconawPetProjectile.DisplayName: Croconaw Pet Projectile
+	CroconawPetProjectileShiny.DisplayName: Croconaw Pet Projectile Shiny
 }
 
 Items: {
@@ -911,12 +918,47 @@ Buffs: {
 
 	StringShotDebuff: {
 		DisplayName: String Shot Debuff
-		Description: Mods.Pokemod.Buffs.StringShotDebuff.Description
+		Description: " "
 	}
 
 	ParalizedDebuff: {
-		Description: Mods.Pokemod.Buffs.ParalizedDebuff.Description
+		Description: " "
 		DisplayName: Paralized Debuff
+	}
+
+	QuilavaPetBuffShiny: {
+		DisplayName: Quilava Shiny
+		Description: " "
+	}
+
+	QuilavaPetBuff: {
+		Description: " "
+		DisplayName: Quilava
+	}
+
+	TyphlosionPetBuff: {
+		DisplayName: Typhlosion
+		Description: " "
+	}
+
+	TyphlosionPetBuffShiny: {
+		DisplayName: Typhlosion Shiny
+		Description: " "
+	}
+
+	CroconawPetBuff: {
+		DisplayName: Croconaw
+		Description: " "
+	}
+
+	CroconawPetBuffShiny: {
+		DisplayName: Croconaw Shiny
+		Description: " "
+	}
+
+	TotodilePetBuffShiny: {
+		DisplayName: Totodile Shiny
+		Description: " "
 	}
 }
 
@@ -985,6 +1027,14 @@ NPCs: {
 	MagnetonCritterNPCShiny.DisplayName: Magneton Shiny
 	HaunterCritterNPC.DisplayName: Haunter
 	HaunterCritterNPCShiny.DisplayName: Haunter Shiny
+	QuilavaCritterNPC.DisplayName: Quilava
+	QuilavaCritterNPCShiny.DisplayName: Quilava Shiny
+	TyphlosionCritterNPC.DisplayName: Typhlosion
+	TyphlosionCritterNPCShiny.DisplayName: Typhlosion Shiny
+	TotodileCritterNPCShiny.DisplayName: Totodile Shiny
+	TotodileCritterNPC.DisplayName: Totodile
+	CroconawCritterNPC.DisplayName: Croconaw
+	CroconawCritterNPCShiny.DisplayName: Croconaw Shiny
 }
 
 Tiles: {

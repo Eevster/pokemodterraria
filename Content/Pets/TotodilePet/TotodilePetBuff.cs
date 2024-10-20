@@ -4,23 +4,15 @@ using Terraria.ID;
 
 namespace Pokemod.Content.Pets.TotodilePet
 {
-	public class TotodilePetBuff : ModBuff
+	public class TotodilePetBuff: PokemonPetBuff
 	{
-		public override void SetStaticDefaults() {
-			Main.buffNoTimeDisplay[Type] = true;
-			Main.vanityPet[Type] = true;
-		}
+        public override string PokeName => "Totodile";
+        public override int ProjType => ModContent.ProjectileType<TotodilePetProjectile>();
+    }
 
-		public override void Update(Player player, ref int buffIndex)
-        {
-            bool unused = false;
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<TotodilePetProjectile>());
-
-            // Apply buffs only if the pet is active
-            if (player.HasBuff(Type))
-            {
-                player.AddBuff(BuffID.Fishing, 60); // Apply the first buff
-            }
-        }
-	}
+    public class TotodilePetBuffShiny: PokemonPetBuff
+	{
+        public override string PokeName => "Totodile";
+        public override int ProjType => ModContent.ProjectileType<TotodilePetProjectileShiny>();
+    }
 }

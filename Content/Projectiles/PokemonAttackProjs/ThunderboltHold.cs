@@ -74,7 +74,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     directionToOrigin = targetPosition - center; 
                     distanceToOrigin = directionToOrigin.Length();
 
-
                     Main.EntitySpriteDraw(chainTexture.Value, center - Main.screenPosition,
                         chainTexture.Frame(1, 3, 0, Projectile.frame), Color.White, directionToOrigin.ToRotation(),
                         chainTexture.Frame(1, 3).Size() / 2f, 1f, SpriteEffects.None, 0);
