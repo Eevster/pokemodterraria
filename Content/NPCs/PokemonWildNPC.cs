@@ -109,7 +109,7 @@ namespace Pokemod.Content.NPCs
 
 		public float GetSpawnChance(NPCSpawnInfo spawnInfo, float chance){
 			if(shiny){
-				chance *= 0.024f;
+				chance *= 0.0024f;
 				if(spawnInfo.Player.GetModPlayer<PokemonPlayer>().HasShinyCharm){
 					chance *= 3f;
 				}
