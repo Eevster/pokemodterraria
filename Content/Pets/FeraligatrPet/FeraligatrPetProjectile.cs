@@ -2,19 +2,19 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.CroconawPet
+namespace Pokemod.Content.Pets.FeraligatrPet
 {
-	public class CroconawPetProjectile : PokemonPetProjectile
+	public class FeraligatrPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 38;
+		public override int hitboxWidth => 40;
+		public override int hitboxHeight => 50;
 
 		public override int totalFrames => 18;
-		public override int animationSpeed => 5;
+		public override int animationSpeed => 7;
 		public override int[] idleStartEnd => [0,5];
 		public override int[] walkStartEnd => [6,11];
 		public override int[] jumpStartEnd => [7,7];
-		public override int[] fallStartEnd => [11,11];
+		public override int[] fallStartEnd => [10,10];
 		public override int[] attackStartEnd => [12,17];
 
 		public override bool canSwim => true;
@@ -30,11 +30,7 @@ namespace Pokemod.Content.Pets.CroconawPet
 
 		public override int attackDuration => 10;
 		public override int attackCooldown => 10;
-
-		public override string[] evolutions => ["Feraligatr"];
-		public override int levelToEvolve => 30;
-		public override int levelEvolutionsNumber => 1;
 	}
 
-	public class CroconawPetProjectileShiny : CroconawPetProjectile{}
+	public class FeraligatrPetProjectileShiny : FeraligatrPetProjectile{}
 }

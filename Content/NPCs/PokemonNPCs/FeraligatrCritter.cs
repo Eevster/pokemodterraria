@@ -4,17 +4,17 @@ using Terraria.ModLoader.Utilities;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
-	public class CroconawCritterNPC : PokemonWildNPC
+	public class FeraligatrCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 38;
+		public override int hitboxWidth => 40;
+		public override int hitboxHeight => 50;
 
 		public override int totalFrames => 18;
-		public override int animationSpeed => 5;
+		public override int animationSpeed => 7;
 		public override int[] idleStartEnd => [0,5];
 		public override int[] walkStartEnd => [6,11];
 		public override int[] jumpStartEnd => [7,7];
-		public override int[] fallStartEnd => [11,11];
+		public override int[] fallStartEnd => [10,10];
 		public override int[] attackStartEnd => [12,17];
 
 		public override bool canSwim => true;
@@ -23,11 +23,11 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkSwimStartEnd => [6,11];
 		public override int[] attackSwimStartEnd => [12,17];
 
-		public override int minLevel => 16;
+		public override int minLevel => 36;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
-				new FlavorTextBestiaryInfoElement("Once it bites down, it won't let go until it loses its fangs. New fangs quickly grow into place."));
+				new FlavorTextBestiaryInfoElement("It usually moves slowly, but it goes at blinding speed when it attacks and bites prey."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
@@ -39,5 +39,5 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		}
 	}
 
-	public class CroconawCritterNPCShiny : CroconawCritterNPC{}
+	public class FeraligatrCritterNPCShiny : FeraligatrCritterNPC{}
 }

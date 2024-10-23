@@ -25,7 +25,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
 				new FlavorTextBestiaryInfoElement("It has a habit of biting everything with its well-developed jaws. Even its Trainer needs to be careful."));
 		}
 
