@@ -124,6 +124,8 @@ Projectiles: {
 	TotodilePetProjectileShiny.DisplayName: Totodile Pet Projectile Shiny
 	CroconawPetProjectile.DisplayName: Croconaw Pet Projectile
 	CroconawPetProjectileShiny.DisplayName: Croconaw Pet Projectile Shiny
+	FeraligatrPetProjectile.DisplayName: Feraligatr Pet Projectile
+	FeraligatrPetProjectileShiny.DisplayName: Feraligatr Pet Projectile Shiny
 }
 
 Items: {
@@ -960,6 +962,16 @@ Buffs: {
 		DisplayName: Totodile Shiny
 		Description: " "
 	}
+
+	FeraligatrPetBuff: {
+		DisplayName: Feraligatr
+		Description: " "
+	}
+
+	FeraligatrPetBuffShiny: {
+		DisplayName: Feraligatr Shiny
+		Description: " "
+	}
 }
 
 NPCs: {
@@ -1035,6 +1047,8 @@ NPCs: {
 	TotodileCritterNPC.DisplayName: Totodile
 	CroconawCritterNPC.DisplayName: Croconaw
 	CroconawCritterNPCShiny.DisplayName: Croconaw Shiny
+	FeraligatrCritterNPC.DisplayName: Feraligatr
+	FeraligatrCritterNPCShiny.DisplayName: Feraligatr Shiny
 }
 
 Tiles: {
