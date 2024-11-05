@@ -441,14 +441,13 @@ namespace Pokemod.Content.Pets
 							// The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
 							bool closeThroughWall = between < 100f;
 
-							if(npc.boss){
-								distanceFromTarget = between;
-								targetCenter = npc.Center;
-								foundTarget = true;
-								break;
-							}
-
-							if (((closest && inRange) || !foundTarget) && (lineOfSight || closeThroughWall || canAttackThroughWalls) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
+							if (inRange && (closest || !foundTarget) && (lineOfSight || closeThroughWall || canAttackThroughWalls) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
+								if(npc.boss){
+									distanceFromTarget = between;
+									targetCenter = npc.Center;
+									foundTarget = true;
+									break;
+								}
 								distanceFromTarget = between;
 								targetCenter = npc.Center;
 								foundTarget = true;
