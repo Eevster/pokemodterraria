@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Pokemod.Common.Players;
 using Pokemod.Common.Systems;
+using System.IO;
 
 namespace Pokemod.Content.NPCs
 {
@@ -28,6 +29,10 @@ namespace Pokemod.Content.NPCs
 		public virtual int pokemonID => 0;
 		public virtual int minLevel => 2;
 		public virtual int maxLevel => 100;
+		public int lvl {
+			get => (int)NPC.ai[3];
+			set => NPC.ai[3] = value;
+		}
 		public virtual float catchRate => 45;
 		public virtual string pokemonName => GetType().Name.Replace("CritterNPC","").Replace("Shiny","");
 		public virtual bool shiny => GetType().Name.Contains("Shiny");
@@ -42,6 +47,18 @@ namespace Pokemod.Content.NPCs
 		/// </summary>
 		public virtual int[] baseStats => PokemonNPCData.pokemonStats[pokemonName];
 		public int[] finalStats;
+
+		public override void SendExtraAI(BinaryWriter writer) {
+			writer.Write((double)moveDirection);
+			writer.Write((double)flyDirection);
+			writer.Write(isFlying);
+		}
+
+		public override void ReceiveExtraAI(BinaryReader reader) {
+			moveDirection = (int)reader.ReadDouble();
+			flyDirection = (int)reader.ReadDouble();
+			isFlying = reader.ReadBoolean();
+		}
 
 		public override void SetStaticDefaults() {
 			Main.npcFrameCount[Type] = totalFrames;
@@ -77,7 +94,10 @@ namespace Pokemod.Content.NPCs
 
 		public override void OnSpawn(IEntitySource source)
         {
-			int lvl = Main.rand.Next(minLevel,Math.Min(WorldLevel.MaxWorldLevel, maxLevel)+1);
+			if(Main.netMode != NetmodeID.MultiplayerClient){
+				lvl = Main.rand.Next(minLevel,Math.Min(WorldLevel.MaxWorldLevel, maxLevel)+1);
+				NPC.netUpdate = true;
+			}
 			int[] IVs = PokemonNPCData.GenerateIVs();
             finalStats = PokemonNPCData.CalcAllStats(lvl, baseStats, IVs, [0,0,0,0,0,0]);
             NPC.lifeMax = finalStats[0];
@@ -88,7 +108,7 @@ namespace Pokemod.Content.NPCs
 
         public override void ModifyTypeName(ref string typeName)
         {
-			typeName += " lvl " + NPC.GetGlobalNPC<PokemonNPCData>().lvl;
+			typeName += " lvl " + lvl;
             base.ModifyTypeName(ref typeName);
         }
 
@@ -166,7 +186,6 @@ namespace Pokemod.Content.NPCs
 		public ref float AI_State => ref NPC.ai[0];
 		public ref float AI_Timer => ref NPC.ai[1];
 		public ref float currentFrame => ref NPC.ai[2];
-
 
 		public override void AI() {
 			Movement();
@@ -279,28 +298,36 @@ namespace Pokemod.Content.NPCs
 			float speedMultiplier = 1f;
 
 			if(--AI_Timer <= 0){
-				AI_Timer = Main.rand.Next(60,300);
-				/*if(moveDirection == 0){
-					moveDirection = 1+2*Main.rand.Next(-1,1);
-				}else{
-					moveDirection = 0;
-				}*/
-				moveDirection = Main.rand.Next(-1,2);
+				if (Main.netMode != NetmodeID.MultiplayerClient) {
+					AI_Timer = Main.rand.Next(60,300);
+					/*if(moveDirection == 0){
+						moveDirection = 1+2*Main.rand.Next(-1,1);
+					}else{
+						moveDirection = 0;
+					}*/
+					moveDirection = Main.rand.Next(-1,2);
+				}
 
 				if(moveStyle == (int)MovementStyle.Hybrid){
 					if(!isFlying){
-						if(Main.rand.NextBool(3)){
-							isFlying = true;
+						if (Main.netMode != NetmodeID.MultiplayerClient) {
+							isFlying = Main.rand.NextBool(3);
 						}
 					}
 				}
 
 				if(moveStyle == (int)MovementStyle.Hybrid || moveStyle == (int)MovementStyle.Fly){
-					flyDirection = Main.rand.Next(-1,2);
+					if (Main.netMode != NetmodeID.MultiplayerClient) {
+						flyDirection = Main.rand.Next(-1,2);
+					}
 					if(flyDirection != 0){
 						NPC.velocity.Y = flyDirection;
 					}
 				}
+			}
+
+			if (Main.netMode != NetmodeID.MultiplayerClient) {
+				NPC.netUpdate = true;
 			}
 
 			if(moveStyle == (int)MovementStyle.Hybrid){

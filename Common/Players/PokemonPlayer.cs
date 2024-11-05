@@ -19,6 +19,7 @@ using ReLogic.Content;
 using System.IO;
 using Pokemod.Content.Pets.ChikoritaPet;
 using Pokemod.Content.Pets.CyndaquilPet;
+using Pokemod.Content.Pets.TotodilePet;
 
 namespace Pokemod.Common.Players
 {
@@ -163,7 +164,7 @@ namespace Pokemod.Common.Players
         public override void PostBuyItem(NPC vendor, Item[] shopInventory, Item item)
         {
 			if(item.type == ModContent.ItemType<CharmanderPetItem>() || item.type == ModContent.ItemType<BulbasaurPetItem>() || item.type == ModContent.ItemType<SquirtlePetItem>()||
-			item.type == ModContent.ItemType<ChikoritaPetItem>() || item.type == ModContent.ItemType<CyndaquilPetItem>()){
+			item.type == ModContent.ItemType<ChikoritaPetItem>() || item.type == ModContent.ItemType<CyndaquilPetItem>() || item.type == ModContent.ItemType<TotodilePetItem>()){
 				int ballItem;
 				string pokemonName = "";
 				
@@ -172,6 +173,7 @@ namespace Pokemod.Common.Players
 				if(item.type == ModContent.ItemType<SquirtlePetItem>()) pokemonName = "Squirtle";
 				if(item.type == ModContent.ItemType<ChikoritaPetItem>()) pokemonName = "Chikorita";
 				if(item.type == ModContent.ItemType<CyndaquilPetItem>()) pokemonName = "Cyndaquil";
+				if(item.type == ModContent.ItemType<TotodilePetItem>()) pokemonName = "Totodile";
 
 				if (Main.netMode == NetmodeID.SinglePlayer){
 					ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());

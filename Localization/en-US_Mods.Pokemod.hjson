@@ -126,6 +126,12 @@ Projectiles: {
 	CroconawPetProjectileShiny.DisplayName: Croconaw Pet Projectile Shiny
 	FeraligatrPetProjectile.DisplayName: Feraligatr Pet Projectile
 	FeraligatrPetProjectileShiny.DisplayName: Feraligatr Pet Projectile Shiny
+	Smokescreen.DisplayName: Smokescreen
+	FlameWheel.DisplayName: Flame Wheel
+	OverHeat.DisplayName: Over Heat
+	WaterGun.DisplayName: Water Gun
+	IceFang.DisplayName: Ice Fang
+	Waterfall.DisplayName: Waterfall
 }
 
 Items: {

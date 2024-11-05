@@ -133,13 +133,12 @@ namespace Pokemod.Content.Projectiles
 					bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
 					bool closeThroughWall = between < 100f || canAttackThroughWalls;
 
-					if(npc.boss){
-						targetEnemy = npc;
-						foundTarget = true;
-						break;
-					}
-
-					if (((closest && inRange) || !foundTarget) && (lineOfSight || closeThroughWall) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
+					if (inRange && (closest || !foundTarget) && (lineOfSight || closeThroughWall) && !(npc.GetGlobalNPC<PokemonNPCData>().isPokemon && npc.GetGlobalNPC<PokemonNPCData>().shiny)) {
+						if(npc.boss){
+							targetEnemy = npc;
+							foundTarget = true;
+							break;
+						}
 						distanceFromTarget = between;
 						targetCenter = npc.Center;
 						targetEnemy = npc;

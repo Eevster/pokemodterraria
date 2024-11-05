@@ -71,9 +71,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             for (int g = 0; g < 16; g++)
             {
                 int goreIndex = Gore.NewGore(Projectile.InheritSource(Projectile), Projectile.Center + new Vector2(Main.rand.NextFloat(-explosionSize*0.5f, explosionSize*0.5f), Main.rand.NextFloat(-explosionSize*0.5f, explosionSize*0.5f)), default(Vector2), Main.rand.Next(61, 64), 1f);
-                Main.gore[goreIndex].scale = Main.rand.NextFloat(1f, 2f);
-                Main.gore[goreIndex].velocity.X = Main.gore[goreIndex].velocity.X + 0.5f;
-                Main.gore[goreIndex].velocity.Y = Main.gore[goreIndex].velocity.Y + 0.5f;
+                Main.gore[goreIndex].scale = Main.rand.NextFloat(0.5f, 1f);
             }
         }
 
