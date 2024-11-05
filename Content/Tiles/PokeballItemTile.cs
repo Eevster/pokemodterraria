@@ -131,7 +131,6 @@ namespace Pokemod.Content.Tiles
                     if (TileObject.CanPlace(x, y, ModContent.TileType<PokeballItemTile>(), 0, 1, out var objectData)) {
                         WorldGen.PlaceTile(x, y, ModContent.TileType<PokeballItemTile>(), mute: true);
 					    success = Main.tile[x, y].TileType == ModContent.TileType<PokeballItemTile>();
-                        if(success) Console.WriteLine($"Item generated at {x},{y}");
                     }
                 }
             }

@@ -129,6 +129,9 @@ Projectiles: {
 	Smokescreen.DisplayName: Smokescreen
 	FlameWheel.DisplayName: Flame Wheel
 	OverHeat.DisplayName: Over Heat
+	WaterGun.DisplayName: Water Gun
+	IceFang.DisplayName: Ice Fang
+	Waterfall.DisplayName: Waterfall
 }
 
 Items: {

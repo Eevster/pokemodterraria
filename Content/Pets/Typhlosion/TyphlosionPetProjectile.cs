@@ -1,5 +1,5 @@
-﻿using GumGum.Projectiles;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;

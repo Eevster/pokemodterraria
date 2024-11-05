@@ -15,9 +15,9 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace GumGum.Projectiles
+namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-    public class OverHeat : ModProjectile
+    public class OverHeat : PokemonAttack
     {
         public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/LavaPlume";
 
@@ -33,6 +33,8 @@ namespace GumGum.Projectiles
             Projectile.Opacity = 0.6f;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 6;
+
+            Projectile.hide = true;
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -143,5 +145,10 @@ namespace GumGum.Projectiles
 			Main.EntitySpriteDraw(sparkleTexture, drawPos, null, smallColor, MathHelper.PiOver2 + rotation, origin, scaleLeftRight * 0.6f, dir);
 			Main.EntitySpriteDraw(sparkleTexture, drawPos, null, smallColor, 0f + rotation, origin, scaleUpDown * 0.6f, dir);
 		}
+
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            behindProjectiles.Add(index);
+        }
     }
 }
