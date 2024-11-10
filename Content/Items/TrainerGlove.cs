@@ -66,5 +66,13 @@ namespace Pokemod.Content.Items
 
             base.ModifyTooltips(tooltips);
 		}
+		public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.Cloth, 50)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 5)
+                .AddTile(TileID.Bottles) // Making this recipe be crafted at bottles will automatically make Alchemy Table's effect apply to its ingredients.
+                .Register();
+        }
 	}
 }
