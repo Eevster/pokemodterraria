@@ -31,10 +31,10 @@ namespace Pokemod.Content.Pets.BayleefPet
 		public override int levelEvolutionsNumber => 1;
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
-			SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
+						SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
 						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(Main.rand.NextFloat(-10,10),-10), ModContent.ProjectileType<MagicalLeaf>(), GetPokemonDamage(60, true), 2f, Projectile.owner)];
 						currentStatus = (int)ProjStatus.Attack;
 						timer = attackDuration;

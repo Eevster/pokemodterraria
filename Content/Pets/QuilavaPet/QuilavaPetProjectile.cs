@@ -30,6 +30,12 @@ namespace Pokemod.Content.Pets.QuilavaPet
 		public override int levelToEvolve => 36;
 		public override int levelEvolutionsNumber => 1;
 
+		public override void SetDefaults()
+        {
+            base.SetDefaults();
+			Projectile.light = 1f;
+        }
+
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
