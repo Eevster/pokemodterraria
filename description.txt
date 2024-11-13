@@ -1,14 +1,24 @@
 Welcome to Pokemod! The first Terraria mod fully striving to add every single pokemon into your terraria world! Each Mon will have its own unique way of obtaining it! Be sure to join my Discord where I create Minecraft and now Terraria content! Discord Link: https://discord.gg/pT5UagAB3n
 
 Contributers:
--JACSMITH (Discord) Artist
+-JACSMITH (Discord) Artist/Developer
+-PriddyNeatGames (Discord) Developer
 
 Changelog:
--Fully scripted Pokeball system
--Fully functional level system
--Trading
--Pokémon now have unique attacks
--Fully auto evolution
+-New Stats System
+-Added Many New Pokemon
+-Added Hp System
+-Added Healing Items
+-Fixed Many Previous Bugs
+-Apricorn System
+-Wiki (Very Much A W.I.P) https://terrariamods.wiki.gg/wiki/Pokemod Feel Free to Contribute!
+-New Evolution Particles
+-Better Wild Pokemon AI 
+-Pokeloot
+-Pokemon Battle Glove! You can now control your Pokemon! Toggle between modes with left-click and lock that choice in with right-click!
+-And so much more coming soon!
+
+1.1: We hope you enjoy as Pokemod takes it's next big steps into the future. Stay tuned as there is plenty more to come!
 
 Legal:
 This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 

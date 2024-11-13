@@ -1,4 +1,4 @@
-displayName = Pokemod V1.0 (Full Release)
+displayName = Pokemod V1.1.1 (Emergency Bugfix)
 author = Eevster
-version = 1.0
+version = 1.1.1
 modReferences = SubworldLibrary
