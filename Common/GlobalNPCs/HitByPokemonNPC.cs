@@ -36,7 +36,7 @@ namespace Pokemod.Common.GlobalNPCs
 
         public override void HitEffect(NPC npc, NPC.HitInfo hit)
         {
-            if(npc.life <= 0){
+            if(npc.life <= 0 && !npc.immortal){
                 if(pokemonProj != null){
                     if(pokemonProj.active){
                         if(pokemonProj.ModProjectile is PokemonPetProjectile){

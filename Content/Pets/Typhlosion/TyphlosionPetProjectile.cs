@@ -30,6 +30,12 @@ namespace Pokemod.Content.Pets.TyphlosionPet
 		public override float moveDistance1 => 50f;
 		public override float moveDistance2 => 50f;
 
+		public override void SetDefaults()
+        {
+            base.SetDefaults();
+			Projectile.light = 1f;
+        }
+
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
