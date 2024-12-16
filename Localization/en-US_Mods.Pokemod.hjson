@@ -132,6 +132,7 @@ Projectiles: {
 	WaterGun.DisplayName: Water Gun
 	IceFang.DisplayName: Ice Fang
 	Waterfall.DisplayName: Waterfall
+	MetapodPetProjectileChristmas.DisplayName: Metapod Pet Projectile Christmas
 }
 
 Items: {
@@ -978,6 +979,11 @@ Buffs: {
 		DisplayName: Feraligatr Shiny
 		Description: " "
 	}
+
+	MetapodPetBuffChristmas: {
+		DisplayName: Metapod Pet Buff Christmas
+		Description: Mods.Pokemod.Buffs.MetapodPetBuffChristmas.Description
+	}
 }
 
 NPCs: {
@@ -1055,6 +1061,7 @@ NPCs: {
 	CroconawCritterNPCShiny.DisplayName: Croconaw Shiny
 	FeraligatrCritterNPC.DisplayName: Feraligatr
 	FeraligatrCritterNPCShiny.DisplayName: Feraligatr Shiny
+	MetapodCritterNPCChristmas.DisplayName: Metapod Critter N P C Christmas
 }
 
 Tiles: {
