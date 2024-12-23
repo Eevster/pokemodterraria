@@ -34,6 +34,7 @@ namespace Pokemod.Content.Pets
 		public bool canBeHurt = true;
         public int hurtTime = 30;
         public int currentHp = 0;
+		public string variant = "";
         public bool showHp;
 
 		public virtual int nAttackProjs => 1;
@@ -896,7 +897,24 @@ namespace Pokemod.Content.Pets
             }
         }
 
-		public override bool PreDrawExtras()
+        public override bool PreDraw(ref Color lightColor)
+        {
+            if(variant != null){
+				if(variant != ""){
+					Asset<Texture2D> variantTexture = ModContent.Request<Texture2D>(Texture+"_"+variant);
+
+                    Main.EntitySpriteDraw(variantTexture.Value, Projectile.Center - Main.screenPosition,
+                        variantTexture.Frame(1, totalFrames, 0, Projectile.frame), lightColor, Projectile.rotation,
+                        variantTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection>=0?SpriteEffects.None:SpriteEffects.FlipHorizontally, 0);
+
+					return false;
+                }
+            }
+            
+            return true;
+        }
+
+        public override bool PreDrawExtras()
         {
             if(finalStats[0] != 0){
 				Asset<Texture2D> barTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/PokemonHPBar");

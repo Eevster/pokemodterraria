@@ -132,6 +132,14 @@ Projectiles: {
 	WaterGun.DisplayName: Water Gun
 	IceFang.DisplayName: Ice Fang
 	Waterfall.DisplayName: Waterfall
+	PidgeotPetProjectile.DisplayName: Pidgeot Pet Projectile
+	PidgeotPetProjectileShiny.DisplayName: Pidgeot Pet Projectile Shiny
+	PidgeottoPetProjectile.DisplayName: Pidgeotto Pet Projectile
+	PidgeottoPetProjectileShiny.DisplayName: Pidgeotto Pet Projectile Shiny
+	PidgeyPetProjectile.DisplayName: Pidgey Pet Projectile
+	PidgeyPetProjectileShiny.DisplayName: Pidgey Pet Projectile Shiny
+	RattataPetProjectile.DisplayName: Rattata Pet Projectile
+	RattataPetProjectileShiny.DisplayName: Rattata Pet Projectile Shiny
 }
 
 Items: {
@@ -978,6 +986,46 @@ Buffs: {
 		DisplayName: Feraligatr Shiny
 		Description: " "
 	}
+
+	PidgeotPetBuffShiny: {
+		DisplayName: Pidgeot Shiny
+		Description: " "
+	}
+
+	PidgeotPetBuff: {
+		Description: " "
+		DisplayName: Pidgeot
+	}
+
+	PidgeottoPetBuff: {
+		DisplayName: Pidgeotto
+		Description: " "
+	}
+
+	PidgeottoPetBuffShiny: {
+		DisplayName: Pidgeotto Shiny
+		Description: " "
+	}
+
+	PidgeyPetBuff: {
+		DisplayName: Pidgey
+		Description: " "
+	}
+
+	PidgeyPetBuffShiny: {
+		DisplayName: Pidgey Shiny
+		Description: " "
+	}
+
+	RattataPetBuffShiny: {
+		DisplayName: Rattata Shiny
+		Description: " "
+	}
+
+	RattataPetBuff: {
+		Description: " "
+		DisplayName: Rattata
+	}
 }
 
 NPCs: {
@@ -1055,6 +1103,14 @@ NPCs: {
 	CroconawCritterNPCShiny.DisplayName: Croconaw Shiny
 	FeraligatrCritterNPC.DisplayName: Feraligatr
 	FeraligatrCritterNPCShiny.DisplayName: Feraligatr Shiny
+	PidgeotCritterNPC.DisplayName: Pidgeot
+	PidgeotCritterNPCShiny.DisplayName: Pidgeot Shiny
+	PidgeottoCritterNPC.DisplayName: Pidgeotto
+	PidgeottoCritterNPCShiny.DisplayName: Pidgeotto Shiny
+	PidgeyCritterNPC.DisplayName: Pidgey
+	PidgeyCritterNPCShiny.DisplayName: Pidgey Shiny
+	RattataCritterNPC.DisplayName: Rattata
+	RattataCritterNPCShiny.DisplayName: Rattata Shiny
 }
 
 Tiles: {

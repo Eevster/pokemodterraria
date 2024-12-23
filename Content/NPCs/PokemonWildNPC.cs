@@ -48,6 +48,9 @@ namespace Pokemod.Content.NPCs
 		public virtual int[] baseStats => PokemonNPCData.pokemonStats[pokemonName];
 		public int[] finalStats;
 
+		public virtual string[] variants => [];
+		public string variant;
+
 		public override void SendExtraAI(BinaryWriter writer) {
 			writer.Write((double)moveDirection);
 			writer.Write((double)flyDirection);
@@ -96,6 +99,11 @@ namespace Pokemod.Content.NPCs
         {
 			if(Main.netMode != NetmodeID.MultiplayerClient){
 				lvl = Main.rand.Next(minLevel,Math.Min(WorldLevel.MaxWorldLevel, maxLevel)+1);
+				if(Main.rand.NextBool(2)){
+					if(variants.Length>0){
+						variant = variants[Main.rand.Next(variants.Length)];
+					}
+				}
 				NPC.netUpdate = true;
 			}
 			int[] IVs = PokemonNPCData.GenerateIVs();
@@ -103,7 +111,7 @@ namespace Pokemod.Content.NPCs
             NPC.lifeMax = finalStats[0];
 			NPC.life = NPC.lifeMax;
 			NPC.defense = finalStats[2];
-			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, IVs);
+			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, IVs, variant: variant);
         }
 
         public override void ModifyTypeName(ref string typeName)
@@ -142,7 +150,20 @@ namespace Pokemod.Content.NPCs
 			return chance;
 		}
 
-		public virtual int animationSpeed => 6;
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+			if(variant != null){
+				if(variant != ""){
+					Asset<Texture2D> variantTexture = ModContent.Request<Texture2D>(Texture+"_"+variant);
+					spriteBatch.Draw(variantTexture.Value, NPC.Center-screenPos, variantTexture.Frame(1, totalFrames, 0, (int)currentFrame), drawColor, NPC.rotation, variantTexture.Frame(1, totalFrames).Size() / 2f, NPC.scale, NPC.direction>=0?SpriteEffects.None:SpriteEffects.FlipHorizontally, 0f);
+					return false;
+				}
+			}
+
+            return true;
+        }
+
+        public virtual int animationSpeed => 6;
 		public virtual int[] idleStartEnd => [-1,-1];
 		public virtual int[] walkStartEnd => [-1,-1];
 		public virtual int[] jumpStartEnd => [-1,-1];

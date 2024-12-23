@@ -19,6 +19,7 @@ namespace Pokemod.Content.NPCs
         public int[] baseStats;
         public int[] IVs;
         public bool ultrabeast = false;
+        public string variant = "";
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter) {
 			bitWriter.WriteBit(isPokemon);
@@ -35,14 +36,15 @@ namespace Pokemod.Content.NPCs
             pokemonName = binaryReader.ReadString();
 		}
 
-        public void SetPokemonNPCData(string pokemonName, bool shiny = false, int lvl = 5, int[] baseStats = null, int[] EVs = null, bool ultrabeast = false){
+        public void SetPokemonNPCData(string pokemonName, bool shiny = false, int lvl = 5, int[] baseStats = null, int[] IVs = null, bool ultrabeast = false, string variant = ""){
             isPokemon = true;
             this.pokemonName = pokemonName;
             this.shiny = shiny;
             this.lvl = lvl;
             this.baseStats = baseStats;
-            this.IVs = EVs;
+            this.IVs = IVs;
             this.ultrabeast = ultrabeast;
+            this.variant = variant;
         }
 
         public static int[] CalcAllStats(int level, int[] stats, int[] IVs, int[] EVs)

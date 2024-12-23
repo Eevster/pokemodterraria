@@ -21,6 +21,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 7;
 
+		public override string[] variants => ["Christmas"];
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("A steel-hard shell protects its tender body. The Pokémon quietly endures hardships while awaiting evolution."));
