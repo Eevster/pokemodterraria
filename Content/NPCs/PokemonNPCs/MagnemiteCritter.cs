@@ -20,6 +20,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] idleFlyStartEnd => [0,7];
 		public override int[] walkFlyStartEnd => [0,7];
 		public override int[] attackFlyStartEnd => [8,15];
+		public override string[] variants => ["Christmas"];
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
