@@ -21,6 +21,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkFlyStartEnd => [0,6];
 		public override int[] attackFlyStartEnd => [0,6];
 		public override int minLevel => 30;
+		public override string[] variants => ["Christmas"];
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,

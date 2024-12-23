@@ -36,6 +36,7 @@ namespace Pokemod.Content.Pets.MetapodPet
 		public override float moveDistance2 => 80f;
 
 		public override string[] evolutions => ["Butterfree"];
+
 		public override int levelToEvolve => 10;
 		public override int levelEvolutionsNumber => 1;
 

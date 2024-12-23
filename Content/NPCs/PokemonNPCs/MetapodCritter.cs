@@ -20,7 +20,6 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackStartEnd => [1,4];
 
 		public override int minLevel => 7;
-
 		public override string[] variants => ["Christmas"];
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
@@ -30,7 +29,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.5f);
 			}
 
 			return 0f;
