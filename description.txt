@@ -5,20 +5,13 @@ Contributers:
 -PriddyNeatGames (Discord) Developer
 
 Changelog:
--New Stats System
--Added Many New Pokemon
--Added Hp System
--Added Healing Items
--Fixed Many Previous Bugs
--Apricorn System
--Wiki (Very Much A W.I.P) https://terrariamods.wiki.gg/wiki/Pokemod Feel Free to Contribute!
--New Evolution Particles
--Better Wild Pokemon AI 
--Pokeloot
--Pokemon Battle Glove! You can now control your Pokemon! Toggle between modes with left-click and lock that choice in with right-click!
--And so much more coming soon!
+-Christmas Pokemon Forms
+-Pidgey and Rattata Lines
+-Pokehealer
+-More Healing Items
+-Spanish Support
 
-1.1: We hope you enjoy as Pokemod takes it's next big steps into the future. Stay tuned as there is plenty more to come!
+1.1.2: Merry Christmas and Happy Holidays!
 
 Legal:
 This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 

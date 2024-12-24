@@ -1,4 +1,4 @@
-displayName = Pokemod V1.1.1 (Emergency Bugfix)
+displayName = Pokemod V1.1.2 (Happy Holidays)
 author = Eevster
-version = 1.1.1
+version = 1.1.2
 modReferences = SubworldLibrary
