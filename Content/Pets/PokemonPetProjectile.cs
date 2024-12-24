@@ -12,6 +12,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Pokemod.Content.Pets
@@ -200,7 +201,7 @@ namespace Pokemod.Content.Pets
 
 		public void SetPokemonLvl(int lvl, int[] IVs = null, int[] EVs = null){
 			if(pokemonLvl != 0 && pokemonLvl != lvl){
-				CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile","")+" grew to lvl "+lvl);
+				CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile",""), lvl).Value);
 			}
 			pokemonLvl = lvl;
 			if(IVs != null) this.IVs = IVs;
@@ -844,7 +845,7 @@ namespace Pokemod.Content.Pets
 				currentHp = 0;
 				Main.player[Projectile.owner].ClearBuff(PokemonBuff);
 				if(Projectile.owner == Main.myPlayer){
-					Main.NewText("Your pokemon fainted!", 255, 130, 130); 
+					Main.NewText(Language.GetTextValue("Mods.Pokemod.PokemonInfo.FaintedMsg"), 255, 130, 130); 
 				}
 			}
             
@@ -861,7 +862,7 @@ namespace Pokemod.Content.Pets
 				currentHp = 0;
 				Main.player[Projectile.owner].ClearBuff(PokemonBuff);
 				if(Projectile.owner == Main.myPlayer){
-					Main.NewText("Your pokemon fainted!", 255, 130, 130); 
+					Main.NewText(Language.GetTextValue("Mods.Pokemod.PokemonInfo.FaintedMsg"), 255, 130, 130); 
 				}
 			}
 		}

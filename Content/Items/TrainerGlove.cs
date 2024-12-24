@@ -9,6 +9,7 @@ using Pokemod.Common.Players;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria.Audio;
+using Terraria.Localization;
 
 namespace Pokemod.Content.Items
 {
@@ -56,11 +57,11 @@ namespace Pokemod.Content.Items
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
 			foreach (TooltipLine line in tooltips) {
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
-                    line.Text = "Left click to make your pokemon perform: ";
-					if(attackType == 0) line.Text += "Auto Attack";
-                    if(attackType == 1) line.Text += "No Attack";
-                    if(attackType == 2) line.Text += "Directed Attack";
-                    line.Text += "\nRight click to switch modes";
+					string mode = "";
+					if(attackType == 0) mode = Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack");
+                    if(attackType == 1) mode = Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack");
+                    if(attackType == 2) mode = Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack");
+                    line.Text = Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(mode).Value;
 				}
 			}
 

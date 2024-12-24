@@ -102,7 +102,11 @@ namespace Pokemod.Content.NPCs
 				if(Main.rand.NextBool(2)){
 					if(variants.Length>0){
 						variant = variants[Main.rand.Next(variants.Length)];
+					}else{
+						variant = "";
 					}
+				}else{
+					variant = "";
 				}
 				NPC.netUpdate = true;
 			}

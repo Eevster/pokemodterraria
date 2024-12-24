@@ -207,7 +207,7 @@ Items: {
 		DisplayName: Rare Candy
 		Tooltip:
 			'''
-			To use it, click on your pokemon or right click on the corresponding pokeball
+			{$Mods.Pokemod.PokemonInfo.ItemUse}
 			When used on a pokemon it increases its level by 1
 			'''
 	}
@@ -402,11 +402,6 @@ Items: {
 		DisplayName: Masterball
 	}
 
-	HonorballItem: {
-		Tooltip: ""
-		DisplayName: Honorball
-	}
-
 	FeatherballItem: {
 		Tooltip: ""
 		DisplayName: Featherball
@@ -571,7 +566,7 @@ Items: {
 		DisplayName: Potion
 		Tooltip:
 			'''
-			To use it, click on your pokemon or right click on the corresponding pokeball
+			{$Mods.Pokemod.PokemonInfo.ItemUse}
 			When used on a pokemon it recovers 20 HP
 			'''
 	}
@@ -580,39 +575,55 @@ Items: {
 		DisplayName: Revive
 		Tooltip:
 			'''
-			To use it, click on your pokemon or right click on the corresponding pokeball
+			{$Mods.Pokemod.PokemonInfo.ItemUse}
 			When used on a fainted pokemon, it revives it with half its maximum HP
 			'''
 	}
 
 	ShinyCharm: {
 		DisplayName: Shiny Charm
-		Tooltip: ""
+		Tooltip: When equipped, the probability of encountering a shiny Pokémon increases
 	}
 
 	HyperPotion: {
 		DisplayName: Hyper Potion
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemUse}
+			When used on a pokemon it recovers 120 HP
+			'''
 	}
 
 	MaxRevive: {
 		DisplayName: Max Revive
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemUse}
+			When used on a fainted pokemon, it revives it with its maximum HP
+			'''
 	}
 
 	OranBerry: {
 		DisplayName: Oran Berry
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemUse}
+			When used on a pokemon it recovers 10 HP
+			'''
 	}
 
 	SuperPotion: {
 		DisplayName: Super Potion
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemUse}
+			When used on a pokemon it recovers 60 HP
+			'''
 	}
 
 	PokeHealer: {
 		DisplayName: Poke Healer
-		Tooltip: ""
+		Tooltip: Useful machine to heal your pokemon, right click to use it, it can only be used every 3 minutes
 	}
 }
 
@@ -1053,8 +1064,8 @@ Buffs: {
 	}
 
 	PokeHealerDebuff: {
-		Description: Mods.Pokemod.Buffs.PokeHealerDebuff.Description
-		DisplayName: Poke Healer Debuff
+		Description: You must wait to be able to use the Poke Healer again!
+		DisplayName: Poke Healer Cooldown
 	}
 }
 
@@ -1144,10 +1155,9 @@ NPCs: {
 }
 
 Tiles: {
-	RedApricornPlant.MapEntry: Red Apricorn Plant
 	ApricornPlant.MapEntry: Apricorn Plant
-	PokeballItemTile.MapEntry: Pokeball Item Tile
-	PokeHealerTile.MapEntry: Poke Healer Tile
+	PokeballItemTile.MapEntry: Pokeball Item
+	PokeHealerTile.MapEntry: Poke Healer
 }
 
 WorldGen.PokeballItemTilePassMessage: Mods.Pokemod.WorldGen.PokeballItemTilePassMessage
@@ -1155,4 +1165,15 @@ WorldGen.PokeballItemTilePassMessage: Mods.Pokemod.WorldGen.PokeballItemTilePass
 PokemonInfo: {
 	Fainted: Fainted
 	CaughtIn: Caught in a {0}
+	LevelUp: "{0} grew to lvl {1}"
+	FaintedMsg: Your pokemon fainted!
+	ItemUse: To use it, click on your pokemon or right click on the corresponding pokeball
+	GloveTooltip:
+		'''
+		Left click to make your pokemon perform: {0}
+		Right click to switch modes
+		'''
+	AutoAttack: Auto Attack
+	NoAttack: No Attack
+	DirectedAttack: Directed Attack
 }
