@@ -108,7 +108,7 @@ namespace Pokemod.Common.Players
 
 			if(attackMode == (int)AttackMode.Directed_Attack){
 				attackPosition = Main.MouseWorld;
-				SearchNPCTarget(16);
+				SearchNPCTarget(32);
 			}
 		}
 

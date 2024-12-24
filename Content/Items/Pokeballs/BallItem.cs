@@ -190,11 +190,6 @@ namespace Pokemod.Content.Items.Pokeballs
 
 			if(hasGravity || captureStage >= 0){
 				Projectile.velocity.Y += 0.2f*gravityScale;
-
-				float maxFallSpeed = 10f;
-				if(Projectile.velocity.Y > maxFallSpeed){
-					Projectile.velocity.Y = maxFallSpeed;
-				}
 			}
 
 			if(targetPokemon != null){
@@ -321,7 +316,7 @@ namespace Pokemod.Content.Items.Pokeballs
 				if (Projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f) {
 					if(bounces>0 && oldVelocity.Y > 1f){
 						Projectile.timeLeft = 360;
-						Projectile.velocity.Y = oldVelocity.Y * -0.6f;
+						Projectile.velocity.Y = Math.Clamp(oldVelocity.Y,-10,10) * -0.6f;
 						bounces--;
 					}else{
 						Projectile.timeLeft = 360;
