@@ -18,6 +18,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackStartEnd => [13,18];
 
 		public override int minLevel => 16;
+		public override string[] variants => ["Christmas"];
+
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
