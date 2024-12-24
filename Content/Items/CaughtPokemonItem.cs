@@ -1,3 +1,4 @@
+using Humanizer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Content.Items.Consumables;
@@ -139,13 +140,13 @@ namespace Pokemod.Content.Items
 			int[] fullStats = GetPokemonStats();
 			foreach (TooltipLine line in tooltips) {
 				if (line.Mod == "Terraria" && line.Name == "ItemName") {
-					line.Text = PokemonName;
+					line.Text = Language.GetTextValue("Mods.Pokemod.NPCs."+PokemonName+"CritterNPC.DisplayName");
 					if(Shiny) line.OverrideColor = Main.DiscoColor;
 				}
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
-					line.Text = (variant!=""?("[c/23a462:"+variant+" variant]\n"):"")+"Caught in a "+BallType.Replace("Item", "") + "\n"+
+					line.Text = (variant!=""?("[c/23a462:"+variant+" variant]\n"):"")+Language.GetText("Mods.Pokemod.PokemonInfo.CaughtIn").WithFormatArgs(BallType.Replace("Item", "")).Value + "\n"+
 					"[c/ffd51c:Lvl] "+level+"  [c/ffd51c:Exp:] "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level))+
-					"\n"+(currentHP>=0?"[c/ffd51c:HP:] "+(currentHP>0?(currentHP+"/"+fullStats[0]+" "):"[c/fa3e42:Fainted] "):"")+
+					"\n"+(currentHP>=0?"[c/ffd51c:HP:] "+(currentHP>0?(currentHP+"/"+fullStats[0]+" "):"[c/fa3e42:"+Language.GetTextValue("Mods.Pokemod.PokemonInfo.Fainted")+"] "):"")+
 					"\n[c/ffd51c:Atk:] "+fullStats[1]+"  [c/ffd51c:Def:] "+fullStats[2]+
 					"\n[c/ffd51c:SpAtk:] "+fullStats[3]+"  [c/ffd51c:SpDef:] "+fullStats[4]+"  [c/ffd51c:Vel:] "+fullStats[5];
 				}

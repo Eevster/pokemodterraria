@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Pokemod.Content.Items.Consumables
 {
-    public class Revive : PokemonConsumableItem{
+    public class MaxRevive : PokemonConsumableItem{
         public override void SetDefaults() {
 			Item.width = 24; // The item texture's width
 			Item.height = 24; // The item texture's height
@@ -33,7 +33,7 @@ namespace Pokemod.Content.Items.Consumables
 
         public override bool OnItemInvUse(CaughtPokemonItem item, Player player){
             if(item.currentHP == 0){
-                item.currentHP = item.GetPokemonStats()[0]/2;
+                item.currentHP = item.GetPokemonStats()[0];
                 ReduceStack(player, Item.type);
                 return true;
             }
@@ -43,7 +43,7 @@ namespace Pokemod.Content.Items.Consumables
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.Mushroom, 5)
+                .AddIngredient(ItemID.UnicornHorn, 5)
                 .AddIngredient(ItemID.LifeCrystal, 1)
                 .AddTile(TileID.Bottles) // Making this recipe be crafted at bottles will automatically make Alchemy Table's effect apply to its ingredients.
                 .Register();

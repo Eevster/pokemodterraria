@@ -14,7 +14,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Pokemod.Content.Items.Consumables
 {
-    public class Revive : PokemonConsumableItem{
+    public class SuperPotion : PokemonConsumableItem{
+        int healAmount = 60;
         public override void SetDefaults() {
 			Item.width = 24; // The item texture's width
 			Item.height = 24; // The item texture's height
@@ -31,20 +32,46 @@ namespace Pokemod.Content.Items.Consumables
             Item.consumable = true;
 		}
 
+        public override bool OnItemUse(Projectile proj){
+			PokemonPetProjectile pokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+			if(pokemonProj.currentHp > 0 && pokemonProj.currentHp < pokemonProj.finalStats?[0]){
+                pokemonProj.regenHP(healAmount);
+                Item.consumable = true;
+                return true;
+            }
+            Item.consumable = false;
+            return false;
+		}
+
         public override bool OnItemInvUse(CaughtPokemonItem item, Player player){
-            if(item.currentHP == 0){
-                item.currentHP = item.GetPokemonStats()[0]/2;
+            if(item.proj != null){
+                if(item.proj.active){
+                    if(item.proj.ModProjectile is PokemonPetProjectile proj){
+                        if(proj.currentHp > 0 && proj.currentHp < proj.finalStats[0]){
+                            proj.regenHP(healAmount);
+                            ReduceStack(player, Item.type);
+                            return true;
+                        }
+                    }
+                }
+            }
+            if(item.currentHP > 0 && item.currentHP < item.GetPokemonStats()[0]){
+                item.currentHP += healAmount;
+                if(item.currentHP > item.GetPokemonStats()[0]){
+                    item.currentHP = item.GetPokemonStats()[0];
+                }
                 ReduceStack(player, Item.type);
                 return true;
             }
+
             return false;
 		}
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.Mushroom, 5)
-                .AddIngredient(ItemID.LifeCrystal, 1)
+                .AddIngredient(ItemID.FallenStar, 1)
+                .AddIngredient(ItemID.LesserHealingPotion, 1)
                 .AddTile(TileID.Bottles) // Making this recipe be crafted at bottles will automatically make Alchemy Table's effect apply to its ingredients.
                 .Register();
         }

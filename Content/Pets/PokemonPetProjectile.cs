@@ -843,7 +843,9 @@ namespace Pokemod.Content.Pets
             if (currentHp <= 0) {
 				currentHp = 0;
 				Main.player[Projectile.owner].ClearBuff(PokemonBuff);
-				Main.NewText("Your pokemon fainted!", 255, 130, 130); 
+				if(Projectile.owner == Main.myPlayer){
+					Main.NewText("Your pokemon fainted!", 255, 130, 130); 
+				}
 			}
             
             return dmg;
@@ -858,7 +860,9 @@ namespace Pokemod.Content.Pets
             if (currentHp <= 0) {
 				currentHp = 0;
 				Main.player[Projectile.owner].ClearBuff(PokemonBuff);
-				Main.NewText("Your pokemon fainted!", 255, 130, 130); 
+				if(Projectile.owner == Main.myPlayer){
+					Main.NewText("Your pokemon fainted!", 255, 130, 130); 
+				}
 			}
 		}
         

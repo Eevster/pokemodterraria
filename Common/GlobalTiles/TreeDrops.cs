@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Pokemod.Content.Items.Apricorns;
+using Pokemod.Content.Items.Consumables;
 
 namespace Pokemod.Common.GlobalTiles
 {
@@ -21,6 +22,10 @@ namespace Pokemod.Common.GlobalTiles
                 if (Main.rand.NextBool(20)) //1-in-20, or 5% chance
                 {
                     Item.NewItem(null, new Vector2(i * 16, j * 16), ModContent.ItemType<ApricornSeed>()); 
+                }
+                if (Main.rand.NextBool(20)) //1-in-20, or 5% chance
+                {
+                    Item.NewItem(null, new Vector2(i * 16, j * 16), ModContent.ItemType<OranBerry>()); 
                 }
             }
         }
