@@ -16,6 +16,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] jumpStartEnd => [8,8];
 		public override int[] fallStartEnd => [11,11];
 		public override int[] attackStartEnd => [14,14];
+		public override string[] variants => ["Christmas"];
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,

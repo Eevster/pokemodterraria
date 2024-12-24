@@ -21,7 +21,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackFlyStartEnd => [6,11];
 
         public override int minLevel => 25;
-
+		public override string[] variants => ["Christmas"];
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
 				new FlavorTextBestiaryInfoElement("It licks with its gaseous tongue to steal its victim's life-force. It lurks in darkness, waiting for prey."));
