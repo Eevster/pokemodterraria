@@ -85,7 +85,7 @@ namespace Pokemod.Content.Tiles
                     }
                 }
             }
-            if(item.currentHP > 0 && item.currentHP < item.GetPokemonStats()[0]){
+            if(item.currentHP < item.GetPokemonStats()[0]){
                 item.currentHP = item.GetPokemonStats()[0];
             }
         }
