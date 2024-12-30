@@ -99,9 +99,16 @@ namespace Pokemod.Content.NPCs
         {
 			if(Main.netMode != NetmodeID.MultiplayerClient){
 				lvl = Main.rand.Next(minLevel,Math.Min(WorldLevel.MaxWorldLevel, maxLevel)+1);
-				if(Main.rand.NextBool(2)){
+				//Probability of it being a variant
+				if(Main.rand.NextBool(10)){
 					if(variants.Length>0){
 						variant = variants[Main.rand.Next(variants.Length)];
+						//Remove the possibility of spawning with the "Christmas" variant if it is no longer Christmas
+						if(variant == "Christmas"){
+							if(!Main.xMas){
+								variant = "";
+							}
+						}
 					}else{
 						variant = "";
 					}
