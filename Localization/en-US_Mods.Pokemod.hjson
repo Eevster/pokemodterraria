@@ -1177,3 +1177,5 @@ PokemonInfo: {
 	NoAttack: No Attack
 	DirectedAttack: Directed Attack
 }
+
+DamageClasses.PokemonDamageClass.DisplayName: Pokemon Damage Class

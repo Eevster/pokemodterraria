@@ -14,6 +14,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Pokemod.Content.DamageClasses;
 
 namespace Pokemod.Content.Projectiles
 {
@@ -31,7 +32,13 @@ namespace Pokemod.Content.Projectiles
 
 		public Vector2 positionAux;
 		public Projectile pokemonProj;
-		public override void SendExtraAI(BinaryWriter writer)
+
+        public override void SetDefaults()
+        {
+			Projectile.DamageType = ModContent.GetInstance<PokemonDamageClass>();
+			base.SetDefaults();
+        }
+        public override void SendExtraAI(BinaryWriter writer)
         {
             writer.Write((byte)attackMode);
             base.SendExtraAI(writer);
