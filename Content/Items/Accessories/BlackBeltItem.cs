@@ -50,30 +50,11 @@ namespace Pokemod.Content.Items.Accessories
 
 			
 			// Some effects are applied in ExampleStatBonusAccessoryPlayer below.
-			player.GetModPlayer<PokemodStatBonusAccessoryPlayer>().pokemodStatBonusAccessory = true;
+			
 		}
 	}
 
 	// Some movement effects are not suitable to be modified in ModItem.UpdateAccessory due to how the math is done.
 	// ModPlayer.PostUpdateRunSpeeds is suitable for these modifications.
-	public class PokemodStatBonusAccessoryPlayer : ModPlayer {
-		public bool pokemodStatBonusAccessory = false;
-
-		public override void ResetEffects() {
-			pokemodStatBonusAccessory = false;
-		}
-
-		public override void PostUpdateRunSpeeds() {
-			// We only want our additional changes to apply if ExampleStatBonusAccessory is equipped and not on a mount.
-			if (Player.mount.Active || !pokemodStatBonusAccessory) {
-				return;
-			}
-
-			// The following modifications are similar to Shadow Armor set bonus
-			Player.runAcceleration *= 1.75f; // Modifies player run acceleration
-			Player.maxRunSpeed *= 1.15f;
-			Player.accRunSpeed *= 1.15f;
-			Player.runSlowdown *= 1.75f;
-		}
-	}
+	
 }
