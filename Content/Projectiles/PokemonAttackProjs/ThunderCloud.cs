@@ -55,6 +55,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.penetrate = -1;
 
 			Projectile.hide = true;
+            base.SetDefaults();
         }
 
         public override bool PreDrawExtras()

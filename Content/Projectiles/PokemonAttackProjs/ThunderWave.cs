@@ -65,6 +65,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.light = 1f;
 
 			Projectile.stopsDealingDamageAfterPenetrateHits = true;
+			base.SetDefaults();
         }
 
 		public override bool PreDraw(ref Color lightColor) {

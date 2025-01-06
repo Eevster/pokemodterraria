@@ -41,6 +41,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.localNPCHitCooldown = 5;
 
 			Projectile.hide = true;
+            base.SetDefaults();
         }
 
         public override void AI()

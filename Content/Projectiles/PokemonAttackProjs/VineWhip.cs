@@ -56,6 +56,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			Projectile.usesLocalNPCImmunity = true;
 			Projectile.localNPCHitCooldown = 20;
+			base.SetDefaults();
         }
 
         public override void OnSpawn(IEntitySource source)

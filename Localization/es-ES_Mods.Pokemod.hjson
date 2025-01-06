@@ -625,6 +625,11 @@ Items: {
 		DisplayName: Poke Healer
 		Tooltip: Máquina útil para curar a tus pokemon, úsala con clic derecho, solo puede usarse cada 3 minutos
 	}
+
+	BlackBeltItem: {
+		// DisplayName: Black Belt Item
+		// Tooltip: ""
+	}
 }
 
 Buffs: {

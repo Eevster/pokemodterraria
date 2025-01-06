@@ -31,6 +31,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             Projectile.tileCollide = true;  
             Projectile.penetrate = 1;
+            base.SetDefaults();
         }
 
         public override bool PreDrawExtras()
