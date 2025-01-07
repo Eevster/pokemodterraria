@@ -628,7 +628,23 @@ Items: {
 
 	BlackBeltItem: {
 		DisplayName: Cinturón Negro
-		Tooltip: "Un objeto que debe sostener el jugador, aumenta el daño de ataque de los Pokémon de los usuarios"
+		Tooltip: Un objeto que debe sostener el jugador, aumenta el daño de ataque de los Pokémon de los usuarios
+	}
+
+	FireStoneHelmet: {
+		// SetBonus: Mods.Pokemod.Items.FireStoneHelmet.SetBonus
+		// DisplayName: Fire Stone Helmet
+		// Tooltip: ""
+	}
+
+	FireStoneBreastplate: {
+		// DisplayName: Fire Stone Breastplate
+		// Tooltip: ""
+	}
+
+	FireStoneLeggings: {
+		// DisplayName: Fire Stone Leggings
+		// Tooltip: ""
 	}
 }
 

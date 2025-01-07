@@ -627,8 +627,24 @@ Items: {
 	}
 
 	BlackBeltItem: {
-		DisplayName: Black Belt 
-		Tooltip: "An Item to be held by the player, it increases the users Pokemon Attack Damage"
+		DisplayName: Black Belt
+		Tooltip: An Item to be held by the player, it increases the users Pokemon Attack Damage
+	}
+
+	FireStoneHelmet: {
+		SetBonus: Mods.Pokemod.Items.FireStoneHelmet.SetBonus
+		DisplayName: Fire Stone Helmet
+		Tooltip: ""
+	}
+
+	FireStoneBreastplate: {
+		DisplayName: Fire Stone Breastplate
+		Tooltip: ""
+	}
+
+	FireStoneLeggings: {
+		DisplayName: Fire Stone Leggings
+		Tooltip: ""
 	}
 }
 
