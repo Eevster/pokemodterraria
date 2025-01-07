@@ -627,8 +627,8 @@ Items: {
 	}
 
 	BlackBeltItem: {
-		DisplayName: Black Belt Item
-		Tooltip: ""
+		DisplayName: Black Belt 
+		Tooltip: "An Item to be held by the player, it increases the users Pokemon Attack Damage"
 	}
 }
 

@@ -627,8 +627,8 @@ Items: {
 	}
 
 	BlackBeltItem: {
-		// DisplayName: Black Belt Item
-		// Tooltip: ""
+		DisplayName: Cinturón Negro
+		Tooltip: "Un objeto que debe sostener el jugador, aumenta el daño de ataque de los Pokémon de los usuarios"
 	}
 }
 
