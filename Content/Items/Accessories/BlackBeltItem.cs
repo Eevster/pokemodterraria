@@ -19,7 +19,7 @@ namespace Pokemod.Content.Items.Accessories
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual) {
-			player.GetDamage<PokemonDamageClass>() += 0.60f;
+			player.GetDamage<PokemonDamageClass>() += 0.15f;
 		}
 	}
 

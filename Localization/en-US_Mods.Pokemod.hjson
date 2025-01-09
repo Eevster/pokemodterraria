@@ -140,6 +140,8 @@ Projectiles: {
 	PidgeyPetProjectileShiny.DisplayName: Pidgey Pet Projectile Shiny
 	RattataPetProjectile.DisplayName: Rattata Pet Projectile
 	RattataPetProjectileShiny.DisplayName: Rattata Pet Projectile Shiny
+	ZeraoraPetProjectile.DisplayName: Zeraora Pet Projectile
+	ZeraoraPetProjectileShiny.DisplayName: Zeraora Pet Projectile Shiny
 }
 
 Items: {
@@ -1088,6 +1090,16 @@ Buffs: {
 		Description: You must wait to be able to use the Poke Healer again!
 		DisplayName: Poke Healer Cooldown
 	}
+
+	ZeraoraPetBuff: {
+		DisplayName: Zeraora Pet Buff
+		Description: Mods.Pokemod.Buffs.ZeraoraPetBuff.Description
+	}
+
+	ZeraoraPetBuffShiny: {
+		DisplayName: Zeraora Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.ZeraoraPetBuffShiny.Description
+	}
 }
 
 NPCs: {
@@ -1173,6 +1185,8 @@ NPCs: {
 	PidgeyCritterNPCShiny.DisplayName: Pidgey Shiny
 	RattataCritterNPC.DisplayName: Rattata
 	RattataCritterNPCShiny.DisplayName: Rattata Shiny
+	ZeraoraCritterNPC.DisplayName: Zeraora Critter N P C
+	ZeraoraCritterNPCShiny.DisplayName: Zeraora Critter N P C Shiny
 }
 
 Tiles: {
