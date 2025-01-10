@@ -54,6 +54,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.localNPCHitCooldown = 15;
 
 			Projectile.hide = true;
+            base.SetDefaults();
         }
 
         public override bool PreDrawExtras()

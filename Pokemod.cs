@@ -3,6 +3,10 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Pokemod.Common.Players;
+using Terraria.UI;
+using Microsoft.Xna.Framework;
+using Pokemod.Content;
+
 
 namespace Pokemod
 {
@@ -33,5 +37,6 @@ namespace Pokemod
 					break;
 			}
 		}
+		
     }
 }

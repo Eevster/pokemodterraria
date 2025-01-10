@@ -33,6 +33,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.localNPCHitCooldown = 15;
 
 			Projectile.penetrate = -1;
+			base.SetDefaults();
 		}
 
 		public override void AI()

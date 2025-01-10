@@ -50,6 +50,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.localNPCHitCooldown = 10;
 
 			Projectile.light = 1f;
+            base.SetDefaults();
         }
 
         public override void OnSpawn(IEntitySource source)

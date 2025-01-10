@@ -53,6 +53,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.light = 1f;
 
 			Projectile.hide = true;
+            base.SetDefaults();
         }
 
         public override bool PreDrawExtras()

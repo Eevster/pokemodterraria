@@ -140,6 +140,8 @@ Projectiles: {
 	PidgeyPetProjectileShiny.DisplayName: Pidgey Pet Projectile Shiny
 	RattataPetProjectile.DisplayName: Rattata Pet Projectile
 	RattataPetProjectileShiny.DisplayName: Rattata Pet Projectile Shiny
+	ZeraoraPetProjectile.DisplayName: Zeraora Pet Projectile
+	ZeraoraPetProjectileShiny.DisplayName: Zeraora Pet Projectile Shiny
 }
 
 Items: {
@@ -625,6 +627,27 @@ Items: {
 		DisplayName: Poke Healer
 		Tooltip: Useful machine to heal your pokemon, right click to use it, it can only be used every 3 minutes
 	}
+
+	BlackBeltItem: {
+		DisplayName: Black Belt
+		Tooltip: An Item to be held by the player, it increases the users Pokemon Attack Damage
+	}
+
+	FireStoneHelmet: {
+		SetBonus: Mods.Pokemod.Items.FireStoneHelmet.SetBonus
+		DisplayName: Fire Stone Helmet
+		Tooltip: ""
+	}
+
+	FireStoneBreastplate: {
+		DisplayName: Fire Stone Breastplate
+		Tooltip: ""
+	}
+
+	FireStoneLeggings: {
+		DisplayName: Fire Stone Leggings
+		Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -1067,6 +1090,16 @@ Buffs: {
 		Description: You must wait to be able to use the Poke Healer again!
 		DisplayName: Poke Healer Cooldown
 	}
+
+	ZeraoraPetBuff: {
+		DisplayName: Zeraora Pet Buff
+		Description: Mods.Pokemod.Buffs.ZeraoraPetBuff.Description
+	}
+
+	ZeraoraPetBuffShiny: {
+		DisplayName: Zeraora Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.ZeraoraPetBuffShiny.Description
+	}
 }
 
 NPCs: {
@@ -1152,6 +1185,8 @@ NPCs: {
 	PidgeyCritterNPCShiny.DisplayName: Pidgey Shiny
 	RattataCritterNPC.DisplayName: Rattata
 	RattataCritterNPCShiny.DisplayName: Rattata Shiny
+	ZeraoraCritterNPC.DisplayName: Zeraora Critter N P C
+	ZeraoraCritterNPCShiny.DisplayName: Zeraora Critter N P C Shiny
 }
 
 Tiles: {
@@ -1177,3 +1212,5 @@ PokemonInfo: {
 	NoAttack: No Attack
 	DirectedAttack: Directed Attack
 }
+
+DamageClasses.PokemonDamageClass.DisplayName: Pokemon Damage Class

@@ -49,6 +49,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.localNPCHitCooldown = 15;
 
 			Projectile.stopsDealingDamageAfterPenetrateHits = true;
+			base.SetDefaults();
         }
 
 		public override bool PreDraw(ref Color lightColor) {

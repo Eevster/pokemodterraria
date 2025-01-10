@@ -14,6 +14,9 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Pokemod.Content.DamageClasses;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 
 namespace Pokemod.Content.Pets
 {
@@ -193,8 +196,10 @@ namespace Pokemod.Content.Pets
 		}
 
 		public virtual int GetPokemonDamage(int power = 50, bool special = false){
+			
 			int atkStat = special?finalStats[3]:finalStats[1];
 			int pokemonDamage = 2+(int)((2+2f*pokemonLvl/5)*power*atkStat/(50f*10f));
+			pokemonDamage = (int)(pokemonDamage*Main.player[Projectile.owner].GetTotalDamage<PokemonDamageClass>().ApplyTo(1f));
 
 			return pokemonDamage;
 		}

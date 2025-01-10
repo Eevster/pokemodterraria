@@ -65,6 +65,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			Projectile.usesLocalNPCImmunity = true;
 			Projectile.localNPCHitCooldown = 10;
+			base.SetDefaults();
         }
 
 		public override bool PreDraw(ref Color lightColor)
