@@ -54,25 +54,31 @@ namespace Pokemod.Content.Tiles
 
             if(player.HasBuff<PokeHealerDebuff>()) return false;
 
+            bool healed = false;
+
 			if (player.IsWithinSnappngRangeToTile(i, j, PlayerSittingHelper.ChairSittingMaxDistance)) { // Avoid being able to trigger it from long range
 				player.GamepadEnableGrappleCooldown();
-				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKHealer") with {Volume = 0.5f}, player.position);
                 foreach (Item item in player.inventory)
                 {
                     if (item.ModItem is CaughtPokemonItem pokeItem)
                     {
                         HealPokemon(pokeItem);
+                        healed = true;
                     }
                 }
                 if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
                     if (player.miscEquips[0].ModItem is CaughtPokemonItem pokeItem)
                     {
                         HealPokemon(pokeItem);
+                        healed = true;
                     }
                 }
 			}
 
-            player.AddBuff(ModContent.BuffType<PokeHealerDebuff>(), 3*60*60);
+            if(healed){
+                SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKHealer") with {Volume = 0.5f}, player.position);
+                player.AddBuff(ModContent.BuffType<PokeHealerDebuff>(), 3*60*60);
+            }
 
 			return true;
 		}
