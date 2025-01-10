@@ -142,6 +142,10 @@ Projectiles: {
 	RattataPetProjectileShiny.DisplayName: Rattata Pet Projectile Shiny
 	ZeraoraPetProjectile.DisplayName: Zeraora Pet Projectile
 	ZeraoraPetProjectileShiny.DisplayName: Zeraora Pet Projectile Shiny
+	SpearowPetProjectile.DisplayName: Spearow Pet Projectile
+	SpearowPetProjectileShiny.DisplayName: Spearow Pet Projectile Shiny
+	FearowPetProjectile.DisplayName: Fearow Pet Projectile
+	FearowPetProjectileShiny.DisplayName: Fearow Pet Projectile Shiny
 }
 
 Items: {
@@ -1100,6 +1104,26 @@ Buffs: {
 		DisplayName: Zeraora Pet Buff Shiny
 		Description: Mods.Pokemod.Buffs.ZeraoraPetBuffShiny.Description
 	}
+
+	SpearowPetBuff: {
+		DisplayName: Spearow Pet Buff
+		Description: Mods.Pokemod.Buffs.SpearowPetBuff.Description
+	}
+
+	SpearowPetBuffShiny: {
+		DisplayName: Spearow Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.SpearowPetBuffShiny.Description
+	}
+
+	FearowPetBuff: {
+		DisplayName: Fearow Pet Buff
+		Description: Mods.Pokemod.Buffs.FearowPetBuff.Description
+	}
+
+	FearowPetBuffShiny: {
+		DisplayName: Fearow Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.FearowPetBuffShiny.Description
+	}
 }
 
 NPCs: {
@@ -1187,6 +1211,10 @@ NPCs: {
 	RattataCritterNPCShiny.DisplayName: Rattata Shiny
 	ZeraoraCritterNPC.DisplayName: Zeraora Critter N P C
 	ZeraoraCritterNPCShiny.DisplayName: Zeraora Critter N P C Shiny
+	SpearowCritterNPC.DisplayName: Spearow Critter N P C
+	SpearowCritterNPCShiny.DisplayName: Spearow Critter N P C Shiny
+	FearowCritterNPC.DisplayName: Fearow Critter N P C
+	FearowCritterNPCShiny.DisplayName: Fearow Critter N P C Shiny
 }
 
 Tiles: {
