@@ -5,12 +5,12 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.RattataPet
+namespace Pokemod.Content.Pets.RaticatePet
 {
-	public class RattataPetProjectile : PokemonPetProjectile
+	public class RaticatePetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 20;
+		public override int hitboxHeight => 32;
 
 		public override int totalFrames => 8;
 		public override int animationSpeed => 5;
@@ -18,17 +18,14 @@ namespace Pokemod.Content.Pets.RattataPet
 		public override int[] walkStartEnd => [4,7];
 		public override int[] jumpStartEnd => [5,5];
 		public override int[] fallStartEnd => [7,7];
+		public override int[] attackStartEnd => [4,7];
 
 		public override int nAttackProjs => 0;
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => false;
 		public override int attackDuration => 60;
 		public override int attackCooldown => 45;
-
-		public override string[] evolutions => ["Raticate"];
-		public override int levelToEvolve => 20;
-		public override int levelEvolutionsNumber => 1;
 	}
 
-	public class RattataPetProjectileShiny : RattataPetProjectile{}
+	public class RaticatePetProjectileShiny : RaticatePetProjectile{}
 }

@@ -142,6 +142,14 @@ Projectiles: {
 	RattataPetProjectileShiny.DisplayName: Rattata Pet Projectile Shiny
 	// ZeraoraPetProjectile.DisplayName: Zeraora Pet Projectile
 	// ZeraoraPetProjectileShiny.DisplayName: Zeraora Pet Projectile Shiny
+	// ChanseyPetProjectile.DisplayName: Chansey Pet Projectile
+	// ChanseyPetProjectileShiny.DisplayName: Chansey Pet Projectile Shiny
+	// NidoranMPetProjectile.DisplayName: Nidoran M Pet Projectile
+	// NidoranMPetProjectileShiny.DisplayName: Nidoran M Pet Projectile Shiny
+	// NidorinoPetProjectile.DisplayName: Nidorino Pet Projectile
+	// NidorinoPetProjectileShiny.DisplayName: Nidorino Pet Projectile Shiny
+	// RaticatePetProjectile.DisplayName: Raticate Pet Projectile
+	// RaticatePetProjectileShiny.DisplayName: Raticate Pet Projectile Shiny
 }
 
 Items: {
@@ -1092,13 +1100,53 @@ Buffs: {
 	}
 
 	ZeraoraPetBuff: {
-		// DisplayName: Zeraora Pet Buff
-		// Description: Mods.Pokemod.Buffs.ZeraoraPetBuff.Description
+		// DisplayName: Zeraora
+		// Description: " "
 	}
 
 	ZeraoraPetBuffShiny: {
-		// DisplayName: Zeraora Pet Buff Shiny
-		// Description: Mods.Pokemod.Buffs.ZeraoraPetBuffShiny.Description
+		// DisplayName: Zeraora Shiny
+		// Description: " "
+	}
+
+	ChanseyPetBuff: {
+		// DisplayName: Chansey
+		// Description: " "
+	}
+
+	ChanseyPetBuffShiny: {
+		// DisplayName: Chansey Shiny
+		// Description: " "
+	}
+
+	NidoranMPetBuff: {
+		// DisplayName: Nidoran M
+		// Description: " "
+	}
+
+	NidoranMPetBuffShiny: {
+		// DisplayName: Nidoran M Shiny
+		// Description: " "
+	}
+
+	NidorinoPetBuff: {
+		// DisplayName: Nidorino
+		// Description: " "
+	}
+
+	NidorinoPetBuffShiny: {
+		// DisplayName: Nidorino Shiny
+		// Description: " "
+	}
+
+	RaticatePetBuffShiny: {
+		// DisplayName: Raticate Shiny
+		// Description: " "
+	}
+
+	RaticatePetBuff: {
+		// Description: " "
+		// DisplayName: Raticate
 	}
 }
 
@@ -1185,8 +1233,16 @@ NPCs: {
 	PidgeyCritterNPCShiny.DisplayName: Pidgey Shiny
 	RattataCritterNPC.DisplayName: Rattata
 	RattataCritterNPCShiny.DisplayName: Rattata Shiny
-	// ZeraoraCritterNPC.DisplayName: Zeraora Critter N P C
-	// ZeraoraCritterNPCShiny.DisplayName: Zeraora Critter N P C Shiny
+	// ZeraoraCritterNPC.DisplayName: Zeraora
+	// ZeraoraCritterNPCShiny.DisplayName: Zeraora Shiny
+	// ChanseyCritterNPC.DisplayName: Chansey
+	// ChanseyCritterNPCShiny.DisplayName: Chansey Shiny
+	// NidoranMCritterNPC.DisplayName: Nidoran M
+	// NidoranMCritterNPCShiny.DisplayName: Nidoran M Shiny
+	// NidorinoCritterNPC.DisplayName: Nidorino
+	// NidorinoCritterNPCShiny.DisplayName: Nidorino Shiny
+	// RaticateCritterNPC.DisplayName: Raticate
+	// RaticateCritterNPCShiny.DisplayName: Raticate Shiny
 }
 
 Tiles: {
