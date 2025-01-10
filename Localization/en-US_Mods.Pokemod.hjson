@@ -150,6 +150,10 @@ Projectiles: {
 	NidorinoPetProjectileShiny.DisplayName: Nidorino Pet Projectile Shiny
 	RaticatePetProjectile.DisplayName: Raticate Pet Projectile
 	RaticatePetProjectileShiny.DisplayName: Raticate Pet Projectile Shiny
+	FearowPetProjectile.DisplayName: Fearow Pet Projectile
+	FearowPetProjectileShiny.DisplayName: Fearow Pet Projectile Shiny
+	SpearowPetProjectile.DisplayName: Spearow Pet Projectile
+	SpearowPetProjectileShiny.DisplayName: Spearow Pet Projectile Shiny
 }
 
 Items: {
@@ -1263,6 +1267,10 @@ NPCs: {
 	NidorinoCritterNPCShiny.DisplayName: Nidorino Shiny
 	RaticateCritterNPC.DisplayName: Raticate
 	RaticateCritterNPCShiny.DisplayName: Raticate Shiny
+	FearowCritterNPC.DisplayName: Fearow Critter N P C
+	FearowCritterNPCShiny.DisplayName: Fearow Critter N P C Shiny
+	SpearowCritterNPC.DisplayName: Spearow Critter N P C
+	SpearowCritterNPCShiny.DisplayName: Spearow Critter N P C Shiny
 }
 
 Tiles: {
