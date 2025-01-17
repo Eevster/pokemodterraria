@@ -21,6 +21,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
 		}
 
+		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
+			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
+				if (spawnInfo.Player.ZoneForest) {
+					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
+			}
+			}
+
+			return 0f;
+		}
+
 		
 	}
 

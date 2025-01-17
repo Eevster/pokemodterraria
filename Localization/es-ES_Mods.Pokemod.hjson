@@ -1336,3 +1336,15 @@ PokemonInfo: {
 }
 
 // DamageClasses.PokemonDamageClass.DisplayName: Pokemon Damage Class
+
+Configs: {
+	BetaMonsConfig: {
+		// DisplayName: Beta Mons Config
+		// Headers.Items: Items Header
+
+		BetaMonsToggle: {
+			// Label: Beta Mons Toggle
+			// Tooltip: ""
+		}
+	}
+}
