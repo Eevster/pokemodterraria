@@ -1,6 +1,7 @@
 ﻿using Terraria.GameContent.Bestiary;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
+using Pokemod.Common.Configs;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {

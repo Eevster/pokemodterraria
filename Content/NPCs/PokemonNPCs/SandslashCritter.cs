@@ -5,7 +5,7 @@ using Pokemod.Common.Configs;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
-	public class FearowCritterNPC : PokemonWildNPC
+	public class SandslashCritterNPC : PokemonWildNPC
 	{
 		public override int hitboxWidth => 64;
 		public override int hitboxHeight => 64;
@@ -19,14 +19,13 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It has the stamina to fly all day on its broad wings. It fights by using its sharp beak."));
+				new FlavorTextBestiaryInfoElement("It digs deep burrows to live in. When in danger, it rolls up its body to withstand attacks."));
 		}
-
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneForest) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
-			}
+				if (spawnInfo.Player.ZoneDesert) {
+                return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.1f);
+            	}
 			}
 
 			return 0f;
@@ -35,5 +34,5 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		
 	}
 
-	public class FearowCritterNPCShiny : FearowCritterNPC{}
+	public class SandslashCritterNPCShiny : SandslashCritterNPC{}
 }

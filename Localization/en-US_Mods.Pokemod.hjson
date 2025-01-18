@@ -158,6 +158,10 @@ Projectiles: {
 	ArbokPetProjectileShiny.DisplayName: Arbok Pet Projectile Shiny
 	EkansPetProjectile.DisplayName: Ekans Pet Projectile
 	EkansPetProjectileShiny.DisplayName: Ekans Pet Projectile Shiny
+	SandshrewPetProjectile.DisplayName: Sandshrew Pet Projectile
+	SandshrewPetProjectileShiny.DisplayName: Sandshrew Pet Projectile Shiny
+	SandslashPetProjectile.DisplayName: Sandslash Pet Projectile
+	SandslashPetProjectileShiny.DisplayName: Sandslash Pet Projectile Shiny
 }
 
 Items: {
@@ -1201,6 +1205,26 @@ Buffs: {
 		DisplayName: Ekans Pet Buff Shiny
 		Description: Mods.Pokemod.Buffs.EkansPetBuffShiny.Description
 	}
+
+	SandshrewPetBuff: {
+		DisplayName: Sandshrew Pet Buff
+		Description: Mods.Pokemod.Buffs.SandshrewPetBuff.Description
+	}
+
+	SandshrewPetBuffShiny: {
+		DisplayName: Sandshrew Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.SandshrewPetBuffShiny.Description
+	}
+
+	SandslashPetBuff: {
+		DisplayName: Sandslash Pet Buff
+		Description: Mods.Pokemod.Buffs.SandslashPetBuff.Description
+	}
+
+	SandslashPetBuffShiny: {
+		DisplayName: Sandslash Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.SandslashPetBuffShiny.Description
+	}
 }
 
 NPCs: {
@@ -1304,6 +1328,10 @@ NPCs: {
 	ArbokCritterNPCShiny.DisplayName: Arbok Critter N P C Shiny
 	EkansCritterNPC.DisplayName: Ekans Critter N P C
 	EkansCritterNPCShiny.DisplayName: Ekans Critter N P C Shiny
+	SandshrewCritterNPC.DisplayName: Sandshrew Critter N P C
+	SandshrewCritterNPCShiny.DisplayName: Sandshrew Critter N P C Shiny
+	SandslashCritterNPC.DisplayName: Sandslash Critter N P C
+	SandslashCritterNPCShiny.DisplayName: Sandslash Critter N P C Shiny
 }
 
 Tiles: {
