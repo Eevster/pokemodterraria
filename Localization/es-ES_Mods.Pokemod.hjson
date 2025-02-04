@@ -162,6 +162,218 @@ Projectiles: {
 	// SandshrewPetProjectileShiny.DisplayName: Sandshrew Pet Projectile Shiny
 	// SandslashPetProjectile.DisplayName: Sandslash Pet Projectile
 	// SandslashPetProjectileShiny.DisplayName: Sandslash Pet Projectile Shiny
+	// ClefablePetProjectile.DisplayName: Clefable Pet Projectile
+	// ClefablePetProjectileShiny.DisplayName: Clefable Pet Projectile Shiny
+	// ClefairyPetProjectile.DisplayName: Clefairy Pet Projectile
+	// ClefairyPetProjectileShiny.DisplayName: Clefairy Pet Projectile Shiny
+	// AbraPetProjectile.DisplayName: Abra Pet Projectile
+	// AbraPetProjectileShiny.DisplayName: Abra Pet Projectile Shiny
+	// AerodactylPetProjectile.DisplayName: Aerodactyl Pet Projectile
+	// AerodactylPetProjectileShiny.DisplayName: Aerodactyl Pet Projectile Shiny
+	// AlakazamPetProjectile.DisplayName: Alakazam Pet Projectile
+	// AlakazamPetProjectileShiny.DisplayName: Alakazam Pet Projectile Shiny
+	// ArcaninePetProjectile.DisplayName: Arcanine Pet Projectile
+	// ArcaninePetProjectileShiny.DisplayName: Arcanine Pet Projectile Shiny
+	// ArticunoPetProjectile.DisplayName: Articuno Pet Projectile
+	// ArticunoPetProjectileShiny.DisplayName: Articuno Pet Projectile Shiny
+	// BellsproutPetProjectile.DisplayName: Bellsprout Pet Projectile
+	// BellsproutPetProjectileShiny.DisplayName: Bellsprout Pet Projectile Shiny
+	// CloysterPetProjectile.DisplayName: Cloyster Pet Projectile
+	// CloysterPetProjectileShiny.DisplayName: Cloyster Pet Projectile Shiny
+	// CubonePetProjectile.DisplayName: Cubone Pet Projectile
+	// CubonePetProjectileShiny.DisplayName: Cubone Pet Projectile Shiny
+	// DewgongPetProjectile.DisplayName: Dewgong Pet Projectile
+	// DewgongPetProjectileShiny.DisplayName: Dewgong Pet Projectile Shiny
+	// DiglettPetProjectile.DisplayName: Diglett Pet Projectile
+	// DiglettPetProjectileShiny.DisplayName: Diglett Pet Projectile Shiny
+	// DittoPetProjectile.DisplayName: Ditto Pet Projectile
+	// DittoPetProjectileShiny.DisplayName: Ditto Pet Projectile Shiny
+	// DodrioPetProjectile.DisplayName: Dodrio Pet Projectile
+	// DodrioPetProjectileShiny.DisplayName: Dodrio Pet Projectile Shiny
+	// DoduoPetProjectile.DisplayName: Doduo Pet Projectile
+	// DoduoPetProjectileShiny.DisplayName: Doduo Pet Projectile Shiny
+	// DragonairPetProjectile.DisplayName: Dragonair Pet Projectile
+	// DragonairPetProjectileShiny.DisplayName: Dragonair Pet Projectile Shiny
+	// DragonitePetProjectile.DisplayName: Dragonite Pet Projectile
+	// DragonitePetProjectileShiny.DisplayName: Dragonite Pet Projectile Shiny
+	// DratiniPetProjectile.DisplayName: Dratini Pet Projectile
+	// DratiniPetProjectileShiny.DisplayName: Dratini Pet Projectile Shiny
+	// DrowzeePetProjectile.DisplayName: Drowzee Pet Projectile
+	// DrowzeePetProjectileShiny.DisplayName: Drowzee Pet Projectile Shiny
+	// DugtrioPetProjectile.DisplayName: Dugtrio Pet Projectile
+	// DugtrioPetProjectileShiny.DisplayName: Dugtrio Pet Projectile Shiny
+	// ElectabuzzPetProjectile.DisplayName: Electabuzz Pet Projectile
+	// ElectabuzzPetProjectileShiny.DisplayName: Electabuzz Pet Projectile Shiny
+	// ExeggcutePetProjectile.DisplayName: Exeggcute Pet Projectile
+	// ExeggcutePetProjectileShiny.DisplayName: Exeggcute Pet Projectile Shiny
+	// ExeggutorPetProjectile.DisplayName: Exeggutor Pet Projectile
+	// ExeggutorPetProjectileShiny.DisplayName: Exeggutor Pet Projectile Shiny
+	// FarfetchdPetProjectile.DisplayName: Farfetchd Pet Projectile
+	// FarfetchdPetProjectileShiny.DisplayName: Farfetchd Pet Projectile Shiny
+	// GengarPetProjectile.DisplayName: Gengar Pet Projectile
+	// GengarPetProjectileShiny.DisplayName: Gengar Pet Projectile Shiny
+	// GeodudePetProjectile.DisplayName: Geodude Pet Projectile
+	// GeodudePetProjectileShiny.DisplayName: Geodude Pet Projectile Shiny
+	// GloomPetProjectile.DisplayName: Gloom Pet Projectile
+	// GloomPetProjectileShiny.DisplayName: Gloom Pet Projectile Shiny
+	// GolbatPetProjectile.DisplayName: Golbat Pet Projectile
+	// GolbatPetProjectileShiny.DisplayName: Golbat Pet Projectile Shiny
+	// GoldeenPetProjectile.DisplayName: Goldeen Pet Projectile
+	// GoldeenPetProjectileShiny.DisplayName: Goldeen Pet Projectile Shiny
+	// GolduckPetProjectile.DisplayName: Golduck Pet Projectile
+	// GolduckPetProjectileShiny.DisplayName: Golduck Pet Projectile Shiny
+	// GolemPetProjectile.DisplayName: Golem Pet Projectile
+	// GolemPetProjectileShiny.DisplayName: Golem Pet Projectile Shiny
+	// GravelerPetProjectile.DisplayName: Graveler Pet Projectile
+	// GravelerPetProjectileShiny.DisplayName: Graveler Pet Projectile Shiny
+	// GrimerPetProjectile.DisplayName: Grimer Pet Projectile
+	// GrimerPetProjectileShiny.DisplayName: Grimer Pet Projectile Shiny
+	// GrowlithePetProjectile.DisplayName: Growlithe Pet Projectile
+	// GrowlithePetProjectileShiny.DisplayName: Growlithe Pet Projectile Shiny
+	// GyaradosPetProjectile.DisplayName: Gyarados Pet Projectile
+	// GyaradosPetProjectileShiny.DisplayName: Gyarados Pet Projectile Shiny
+	// HitmonchanPetProjectile.DisplayName: Hitmonchan Pet Projectile
+	// HitmonchanPetProjectileShiny.DisplayName: Hitmonchan Pet Projectile Shiny
+	// HitmonleePetProjectile.DisplayName: Hitmonlee Pet Projectile
+	// HitmonleePetProjectileShiny.DisplayName: Hitmonlee Pet Projectile Shiny
+	// HorseaPetProjectile.DisplayName: Horsea Pet Projectile
+	// HorseaPetProjectileShiny.DisplayName: Horsea Pet Projectile Shiny
+	// HypnoPetProjectile.DisplayName: Hypno Pet Projectile
+	// HypnoPetProjectileShiny.DisplayName: Hypno Pet Projectile Shiny
+	// JigglypuffPetProjectile.DisplayName: Jigglypuff Pet Projectile
+	// JigglypuffPetProjectileShiny.DisplayName: Jigglypuff Pet Projectile Shiny
+	// JynxPetProjectile.DisplayName: Jynx Pet Projectile
+	// JynxPetProjectileShiny.DisplayName: Jynx Pet Projectile Shiny
+	// KabutoPetProjectile.DisplayName: Kabuto Pet Projectile
+	// KabutoPetProjectileShiny.DisplayName: Kabuto Pet Projectile Shiny
+	// KabutopsPetProjectile.DisplayName: Kabutops Pet Projectile
+	// KabutopsPetProjectileShiny.DisplayName: Kabutops Pet Projectile Shiny
+	// KadabraPetProjectile.DisplayName: Kadabra Pet Projectile
+	// KadabraPetProjectileShiny.DisplayName: Kadabra Pet Projectile Shiny
+	// KangaskhanPetProjectile.DisplayName: Kangaskhan Pet Projectile
+	// KangaskhanPetProjectileShiny.DisplayName: Kangaskhan Pet Projectile Shiny
+	// KinglerPetProjectile.DisplayName: Kingler Pet Projectile
+	// KinglerPetProjectileShiny.DisplayName: Kingler Pet Projectile Shiny
+	// KoffingPetProjectile.DisplayName: Koffing Pet Projectile
+	// KoffingPetProjectileShiny.DisplayName: Koffing Pet Projectile Shiny
+	// KrabbyPetProjectile.DisplayName: Krabby Pet Projectile
+	// KrabbyPetProjectileShiny.DisplayName: Krabby Pet Projectile Shiny
+	// LaprasPetProjectile.DisplayName: Lapras Pet Projectile
+	// LaprasPetProjectileShiny.DisplayName: Lapras Pet Projectile Shiny
+	// LickitungPetProjectile.DisplayName: Lickitung Pet Projectile
+	// LickitungPetProjectileShiny.DisplayName: Lickitung Pet Projectile Shiny
+	// MachampPetProjectile.DisplayName: Machamp Pet Projectile
+	// MachampPetProjectileShiny.DisplayName: Machamp Pet Projectile Shiny
+	// MachokePetProjectile.DisplayName: Machoke Pet Projectile
+	// MachokePetProjectileShiny.DisplayName: Machoke Pet Projectile Shiny
+	// MachopPetProjectile.DisplayName: Machop Pet Projectile
+	// MachopPetProjectileShiny.DisplayName: Machop Pet Projectile Shiny
+	// MagikarpPetProjectile.DisplayName: Magikarp Pet Projectile
+	// MagikarpPetProjectileShiny.DisplayName: Magikarp Pet Projectile Shiny
+	// MagmarPetProjectile.DisplayName: Magmar Pet Projectile
+	// MagmarPetProjectileShiny.DisplayName: Magmar Pet Projectile Shiny
+	// MankeyPetProjectile.DisplayName: Mankey Pet Projectile
+	// MankeyPetProjectileShiny.DisplayName: Mankey Pet Projectile Shiny
+	// MarowakPetProjectile.DisplayName: Marowak Pet Projectile
+	// MarowakPetProjectileShiny.DisplayName: Marowak Pet Projectile Shiny
+	// MeowthPetProjectile.DisplayName: Meowth Pet Projectile
+	// MeowthPetProjectileShiny.DisplayName: Meowth Pet Projectile Shiny
+	// MewPetProjectile.DisplayName: Mew Pet Projectile
+	// MewPetProjectileShiny.DisplayName: Mew Pet Projectile Shiny
+	// MewtwoPetProjectile.DisplayName: Mewtwo Pet Projectile
+	// MewtwoPetProjectileShiny.DisplayName: Mewtwo Pet Projectile Shiny
+	// MoltresPetProjectile.DisplayName: Moltres Pet Projectile
+	// MoltresPetProjectileShiny.DisplayName: Moltres Pet Projectile Shiny
+	// MrMimePetProjectile.DisplayName: Mr Mime Pet Projectile
+	// MrMimePetProjectileShiny.DisplayName: Mr Mime Pet Projectile Shiny
+	// MukPetProjectile.DisplayName: Muk Pet Projectile
+	// MukPetProjectileShiny.DisplayName: Muk Pet Projectile Shiny
+	// NinetalesPetProjectile.DisplayName: Ninetales Pet Projectile
+	// NinetalesPetProjectileShiny.DisplayName: Ninetales Pet Projectile Shiny
+	// OddishPetProjectile.DisplayName: Oddish Pet Projectile
+	// OddishPetProjectileShiny.DisplayName: Oddish Pet Projectile Shiny
+	// OmanytePetProjectile.DisplayName: Omanyte Pet Projectile
+	// OmanytePetProjectileShiny.DisplayName: Omanyte Pet Projectile Shiny
+	// OmastarPetProjectile.DisplayName: Omastar Pet Projectile
+	// OmastarPetProjectileShiny.DisplayName: Omastar Pet Projectile Shiny
+	// OnixPetProjectile.DisplayName: Onix Pet Projectile
+	// OnixPetProjectileShiny.DisplayName: Onix Pet Projectile Shiny
+	// ParasectPetProjectile.DisplayName: Parasect Pet Projectile
+	// ParasectPetProjectileShiny.DisplayName: Parasect Pet Projectile Shiny
+	// ParasPetProjectile.DisplayName: Paras Pet Projectile
+	// ParasPetProjectileShiny.DisplayName: Paras Pet Projectile Shiny
+	// PersianPetProjectile.DisplayName: Persian Pet Projectile
+	// PersianPetProjectileShiny.DisplayName: Persian Pet Projectile Shiny
+	// PinsirPetProjectile.DisplayName: Pinsir Pet Projectile
+	// PinsirPetProjectileShiny.DisplayName: Pinsir Pet Projectile Shiny
+	// PoliwagPetProjectile.DisplayName: Poliwag Pet Projectile
+	// PoliwagPetProjectileShiny.DisplayName: Poliwag Pet Projectile Shiny
+	// PoliwhirlPetProjectile.DisplayName: Poliwhirl Pet Projectile
+	// PoliwhirlPetProjectileShiny.DisplayName: Poliwhirl Pet Projectile Shiny
+	// PoliwrathPetProjectile.DisplayName: Poliwrath Pet Projectile
+	// PoliwrathPetProjectileShiny.DisplayName: Poliwrath Pet Projectile Shiny
+	// PonytaPetProjectile.DisplayName: Ponyta Pet Projectile
+	// PonytaPetProjectileShiny.DisplayName: Ponyta Pet Projectile Shiny
+	// PorygonPetProjectile.DisplayName: Porygon Pet Projectile
+	// PorygonPetProjectileShiny.DisplayName: Porygon Pet Projectile Shiny
+	// PrimeapePetProjectile.DisplayName: Primeape Pet Projectile
+	// PrimeapePetProjectileShiny.DisplayName: Primeape Pet Projectile Shiny
+	// PsyduckPetProjectile.DisplayName: Psyduck Pet Projectile
+	// PsyduckPetProjectileShiny.DisplayName: Psyduck Pet Projectile Shiny
+	// RapidashPetProjectile.DisplayName: Rapidash Pet Projectile
+	// RapidashPetProjectileShiny.DisplayName: Rapidash Pet Projectile Shiny
+	// RhydonPetProjectile.DisplayName: Rhydon Pet Projectile
+	// RhydonPetProjectileShiny.DisplayName: Rhydon Pet Projectile Shiny
+	// RhyhornPetProjectile.DisplayName: Rhyhorn Pet Projectile
+	// RhyhornPetProjectileShiny.DisplayName: Rhyhorn Pet Projectile Shiny
+	// ScytherPetProjectile.DisplayName: Scyther Pet Projectile
+	// ScytherPetProjectileShiny.DisplayName: Scyther Pet Projectile Shiny
+	// SeadraPetProjectile.DisplayName: Seadra Pet Projectile
+	// SeadraPetProjectileShiny.DisplayName: Seadra Pet Projectile Shiny
+	// SeakingPetProjectile.DisplayName: Seaking Pet Projectile
+	// SeakingPetProjectileShiny.DisplayName: Seaking Pet Projectile Shiny
+	// SeelPetProjectile.DisplayName: Seel Pet Projectile
+	// SeelPetProjectileShiny.DisplayName: Seel Pet Projectile Shiny
+	// ShellderPetProjectile.DisplayName: Shellder Pet Projectile
+	// ShellderPetProjectileShiny.DisplayName: Shellder Pet Projectile Shiny
+	// SlowbroPetProjectile.DisplayName: Slowbro Pet Projectile
+	// SlowbroPetProjectileShiny.DisplayName: Slowbro Pet Projectile Shiny
+	// SlowpokePetProjectile.DisplayName: Slowpoke Pet Projectile
+	// SlowpokePetProjectileShiny.DisplayName: Slowpoke Pet Projectile Shiny
+	// SnorlaxPetProjectile.DisplayName: Snorlax Pet Projectile
+	// SnorlaxPetProjectileShiny.DisplayName: Snorlax Pet Projectile Shiny
+	// StarmiePetProjectile.DisplayName: Starmie Pet Projectile
+	// StarmiePetProjectileShiny.DisplayName: Starmie Pet Projectile Shiny
+	// StaryuPetProjectile.DisplayName: Staryu Pet Projectile
+	// StaryuPetProjectileShiny.DisplayName: Staryu Pet Projectile Shiny
+	// TangelaPetProjectile.DisplayName: Tangela Pet Projectile
+	// TangelaPetProjectileShiny.DisplayName: Tangela Pet Projectile Shiny
+	// TaurosPetProjectile.DisplayName: Tauros Pet Projectile
+	// TaurosPetProjectileShiny.DisplayName: Tauros Pet Projectile Shiny
+	// TentacoolPetProjectile.DisplayName: Tentacool Pet Projectile
+	// TentacoolPetProjectileShiny.DisplayName: Tentacool Pet Projectile Shiny
+	// TentacruelPetProjectile.DisplayName: Tentacruel Pet Projectile
+	// TentacruelPetProjectileShiny.DisplayName: Tentacruel Pet Projectile Shiny
+	// VenomothPetProjectile.DisplayName: Venomoth Pet Projectile
+	// VenomothPetProjectileShiny.DisplayName: Venomoth Pet Projectile Shiny
+	// VenonatPetProjectile.DisplayName: Venonat Pet Projectile
+	// VenonatPetProjectileShiny.DisplayName: Venonat Pet Projectile Shiny
+	// VictreebelPetProjectile.DisplayName: Victreebel Pet Projectile
+	// VictreebelPetProjectileShiny.DisplayName: Victreebel Pet Projectile Shiny
+	// VileplumePetProjectile.DisplayName: Vileplume Pet Projectile
+	// VileplumePetProjectileShiny.DisplayName: Vileplume Pet Projectile Shiny
+	// VulpixPetProjectile.DisplayName: Vulpix Pet Projectile
+	// VulpixPetProjectileShiny.DisplayName: Vulpix Pet Projectile Shiny
+	// WeepinbellPetProjectile.DisplayName: Weepinbell Pet Projectile
+	// WeepinbellPetProjectileShiny.DisplayName: Weepinbell Pet Projectile Shiny
+	// WeezingPetProjectile.DisplayName: Weezing Pet Projectile
+	// WeezingPetProjectileShiny.DisplayName: Weezing Pet Projectile Shiny
+	// WigglytuffPetProjectile.DisplayName: Wigglytuff Pet Projectile
+	// WigglytuffPetProjectileShiny.DisplayName: Wigglytuff Pet Projectile Shiny
+	// ZapdosPetProjectile.DisplayName: Zapdos Pet Projectile
+	// ZapdosPetProjectileShiny.DisplayName: Zapdos Pet Projectile Shiny
+	// ZubatPetProjectile.DisplayName: Zubat Pet Projectile
+	// ZubatPetProjectileShiny.DisplayName: Zubat Pet Projectile Shiny
 }
 
 Items: {
@@ -1225,6 +1437,1066 @@ Buffs: {
 		// DisplayName: Sandslash Pet Buff Shiny
 		// Description: Mods.Pokemod.Buffs.SandslashPetBuffShiny.Description
 	}
+
+	ClefablePetBuff: {
+		// DisplayName: Clefable Pet Buff
+		// Description: Mods.Pokemod.Buffs.ClefablePetBuff.Description
+	}
+
+	ClefablePetBuffShiny: {
+		// DisplayName: Clefable Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ClefablePetBuffShiny.Description
+	}
+
+	ClefairyPetBuff: {
+		// DisplayName: Clefairy Pet Buff
+		// Description: Mods.Pokemod.Buffs.ClefairyPetBuff.Description
+	}
+
+	ClefairyPetBuffShiny: {
+		// DisplayName: Clefairy Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ClefairyPetBuffShiny.Description
+	}
+
+	AbraPetBuff: {
+		// DisplayName: Abra Pet Buff
+		// Description: Mods.Pokemod.Buffs.AbraPetBuff.Description
+	}
+
+	AbraPetBuffShiny: {
+		// DisplayName: Abra Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.AbraPetBuffShiny.Description
+	}
+
+	AerodactylPetBuff: {
+		// DisplayName: Aerodactyl Pet Buff
+		// Description: Mods.Pokemod.Buffs.AerodactylPetBuff.Description
+	}
+
+	AerodactylPetBuffShiny: {
+		// DisplayName: Aerodactyl Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.AerodactylPetBuffShiny.Description
+	}
+
+	AlakazamPetBuff: {
+		// DisplayName: Alakazam Pet Buff
+		// Description: Mods.Pokemod.Buffs.AlakazamPetBuff.Description
+	}
+
+	AlakazamPetBuffShiny: {
+		// DisplayName: Alakazam Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.AlakazamPetBuffShiny.Description
+	}
+
+	ArcaninePetBuff: {
+		// DisplayName: Arcanine Pet Buff
+		// Description: Mods.Pokemod.Buffs.ArcaninePetBuff.Description
+	}
+
+	ArcaninePetBuffShiny: {
+		// DisplayName: Arcanine Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ArcaninePetBuffShiny.Description
+	}
+
+	ArticunoPetBuff: {
+		// DisplayName: Articuno Pet Buff
+		// Description: Mods.Pokemod.Buffs.ArticunoPetBuff.Description
+	}
+
+	ArticunoPetBuffShiny: {
+		// DisplayName: Articuno Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ArticunoPetBuffShiny.Description
+	}
+
+	BellsproutPetBuff: {
+		// DisplayName: Bellsprout Pet Buff
+		// Description: Mods.Pokemod.Buffs.BellsproutPetBuff.Description
+	}
+
+	BellsproutPetBuffShiny: {
+		// DisplayName: Bellsprout Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.BellsproutPetBuffShiny.Description
+	}
+
+	CloysterPetBuff: {
+		// DisplayName: Cloyster Pet Buff
+		// Description: Mods.Pokemod.Buffs.CloysterPetBuff.Description
+	}
+
+	CloysterPetBuffShiny: {
+		// DisplayName: Cloyster Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.CloysterPetBuffShiny.Description
+	}
+
+	CubonePetBuff: {
+		// DisplayName: Cubone Pet Buff
+		// Description: Mods.Pokemod.Buffs.CubonePetBuff.Description
+	}
+
+	CubonePetBuffShiny: {
+		// DisplayName: Cubone Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.CubonePetBuffShiny.Description
+	}
+
+	DewgongPetBuff: {
+		// DisplayName: Dewgong Pet Buff
+		// Description: Mods.Pokemod.Buffs.DewgongPetBuff.Description
+	}
+
+	DewgongPetBuffShiny: {
+		// DisplayName: Dewgong Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DewgongPetBuffShiny.Description
+	}
+
+	DiglettPetBuff: {
+		// DisplayName: Diglett Pet Buff
+		// Description: Mods.Pokemod.Buffs.DiglettPetBuff.Description
+	}
+
+	DiglettPetBuffShiny: {
+		// DisplayName: Diglett Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DiglettPetBuffShiny.Description
+	}
+
+	DittoPetBuff: {
+		// DisplayName: Ditto Pet Buff
+		// Description: Mods.Pokemod.Buffs.DittoPetBuff.Description
+	}
+
+	DittoPetBuffShiny: {
+		// DisplayName: Ditto Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DittoPetBuffShiny.Description
+	}
+
+	DodrioPetBuff: {
+		// DisplayName: Dodrio Pet Buff
+		// Description: Mods.Pokemod.Buffs.DodrioPetBuff.Description
+	}
+
+	DodrioPetBuffShiny: {
+		// DisplayName: Dodrio Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DodrioPetBuffShiny.Description
+	}
+
+	DoduoPetBuff: {
+		// DisplayName: Doduo Pet Buff
+		// Description: Mods.Pokemod.Buffs.DoduoPetBuff.Description
+	}
+
+	DoduoPetBuffShiny: {
+		// DisplayName: Doduo Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DoduoPetBuffShiny.Description
+	}
+
+	DragonairPetBuff: {
+		// DisplayName: Dragonair Pet Buff
+		// Description: Mods.Pokemod.Buffs.DragonairPetBuff.Description
+	}
+
+	DragonairPetBuffShiny: {
+		// DisplayName: Dragonair Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DragonairPetBuffShiny.Description
+	}
+
+	DragonitePetBuff: {
+		// DisplayName: Dragonite Pet Buff
+		// Description: Mods.Pokemod.Buffs.DragonitePetBuff.Description
+	}
+
+	DragonitePetBuffShiny: {
+		// DisplayName: Dragonite Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DragonitePetBuffShiny.Description
+	}
+
+	DratiniPetBuff: {
+		// DisplayName: Dratini Pet Buff
+		// Description: Mods.Pokemod.Buffs.DratiniPetBuff.Description
+	}
+
+	DratiniPetBuffShiny: {
+		// DisplayName: Dratini Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DratiniPetBuffShiny.Description
+	}
+
+	DrowzeePetBuff: {
+		// DisplayName: Drowzee Pet Buff
+		// Description: Mods.Pokemod.Buffs.DrowzeePetBuff.Description
+	}
+
+	DrowzeePetBuffShiny: {
+		// DisplayName: Drowzee Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DrowzeePetBuffShiny.Description
+	}
+
+	DugtrioPetBuff: {
+		// DisplayName: Dugtrio Pet Buff
+		// Description: Mods.Pokemod.Buffs.DugtrioPetBuff.Description
+	}
+
+	DugtrioPetBuffShiny: {
+		// DisplayName: Dugtrio Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DugtrioPetBuffShiny.Description
+	}
+
+	ElectabuzzPetBuff: {
+		// DisplayName: Electabuzz Pet Buff
+		// Description: Mods.Pokemod.Buffs.ElectabuzzPetBuff.Description
+	}
+
+	ElectabuzzPetBuffShiny: {
+		// DisplayName: Electabuzz Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ElectabuzzPetBuffShiny.Description
+	}
+
+	ExeggcutePetBuff: {
+		// DisplayName: Exeggcute Pet Buff
+		// Description: Mods.Pokemod.Buffs.ExeggcutePetBuff.Description
+	}
+
+	ExeggcutePetBuffShiny: {
+		// DisplayName: Exeggcute Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ExeggcutePetBuffShiny.Description
+	}
+
+	ExeggutorPetBuff: {
+		// DisplayName: Exeggutor Pet Buff
+		// Description: Mods.Pokemod.Buffs.ExeggutorPetBuff.Description
+	}
+
+	ExeggutorPetBuffShiny: {
+		// DisplayName: Exeggutor Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ExeggutorPetBuffShiny.Description
+	}
+
+	FarfetchdPetBuff: {
+		// DisplayName: Farfetchd Pet Buff
+		// Description: Mods.Pokemod.Buffs.FarfetchdPetBuff.Description
+	}
+
+	FarfetchdPetBuffShiny: {
+		// DisplayName: Farfetchd Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.FarfetchdPetBuffShiny.Description
+	}
+
+	GengarPetBuff: {
+		// DisplayName: Gengar Pet Buff
+		// Description: Mods.Pokemod.Buffs.GengarPetBuff.Description
+	}
+
+	GengarPetBuffShiny: {
+		// DisplayName: Gengar Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GengarPetBuffShiny.Description
+	}
+
+	GeodudePetBuff: {
+		// DisplayName: Geodude Pet Buff
+		// Description: Mods.Pokemod.Buffs.GeodudePetBuff.Description
+	}
+
+	GeodudePetBuffShiny: {
+		// DisplayName: Geodude Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GeodudePetBuffShiny.Description
+	}
+
+	GloomPetBuff: {
+		// DisplayName: Gloom Pet Buff
+		// Description: Mods.Pokemod.Buffs.GloomPetBuff.Description
+	}
+
+	GloomPetBuffShiny: {
+		// DisplayName: Gloom Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GloomPetBuffShiny.Description
+	}
+
+	GolbatPetBuff: {
+		// DisplayName: Golbat Pet Buff
+		// Description: Mods.Pokemod.Buffs.GolbatPetBuff.Description
+	}
+
+	GolbatPetBuffShiny: {
+		// DisplayName: Golbat Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GolbatPetBuffShiny.Description
+	}
+
+	GoldeenPetBuff: {
+		// DisplayName: Goldeen Pet Buff
+		// Description: Mods.Pokemod.Buffs.GoldeenPetBuff.Description
+	}
+
+	GoldeenPetBuffShiny: {
+		// DisplayName: Goldeen Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GoldeenPetBuffShiny.Description
+	}
+
+	GolduckPetBuff: {
+		// DisplayName: Golduck Pet Buff
+		// Description: Mods.Pokemod.Buffs.GolduckPetBuff.Description
+	}
+
+	GolduckPetBuffShiny: {
+		// DisplayName: Golduck Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GolduckPetBuffShiny.Description
+	}
+
+	GolemPetBuff: {
+		// DisplayName: Golem Pet Buff
+		// Description: Mods.Pokemod.Buffs.GolemPetBuff.Description
+	}
+
+	GolemPetBuffShiny: {
+		// DisplayName: Golem Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GolemPetBuffShiny.Description
+	}
+
+	GravelerPetBuff: {
+		// DisplayName: Graveler Pet Buff
+		// Description: Mods.Pokemod.Buffs.GravelerPetBuff.Description
+	}
+
+	GravelerPetBuffShiny: {
+		// DisplayName: Graveler Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GravelerPetBuffShiny.Description
+	}
+
+	GrimerPetBuff: {
+		// DisplayName: Grimer Pet Buff
+		// Description: Mods.Pokemod.Buffs.GrimerPetBuff.Description
+	}
+
+	GrimerPetBuffShiny: {
+		// DisplayName: Grimer Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GrimerPetBuffShiny.Description
+	}
+
+	GrowlithePetBuff: {
+		// DisplayName: Growlithe Pet Buff
+		// Description: Mods.Pokemod.Buffs.GrowlithePetBuff.Description
+	}
+
+	GrowlithePetBuffShiny: {
+		// DisplayName: Growlithe Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GrowlithePetBuffShiny.Description
+	}
+
+	GyaradosPetBuff: {
+		// DisplayName: Gyarados Pet Buff
+		// Description: Mods.Pokemod.Buffs.GyaradosPetBuff.Description
+	}
+
+	GyaradosPetBuffShiny: {
+		// DisplayName: Gyarados Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.GyaradosPetBuffShiny.Description
+	}
+
+	HitmonchanPetBuff: {
+		// DisplayName: Hitmonchan Pet Buff
+		// Description: Mods.Pokemod.Buffs.HitmonchanPetBuff.Description
+	}
+
+	HitmonchanPetBuffShiny: {
+		// DisplayName: Hitmonchan Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.HitmonchanPetBuffShiny.Description
+	}
+
+	HitmonleePetBuff: {
+		// DisplayName: Hitmonlee Pet Buff
+		// Description: Mods.Pokemod.Buffs.HitmonleePetBuff.Description
+	}
+
+	HitmonleePetBuffShiny: {
+		// DisplayName: Hitmonlee Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.HitmonleePetBuffShiny.Description
+	}
+
+	HorseaPetBuff: {
+		// DisplayName: Horsea Pet Buff
+		// Description: Mods.Pokemod.Buffs.HorseaPetBuff.Description
+	}
+
+	HorseaPetBuffShiny: {
+		// DisplayName: Horsea Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.HorseaPetBuffShiny.Description
+	}
+
+	HypnoPetBuff: {
+		// DisplayName: Hypno Pet Buff
+		// Description: Mods.Pokemod.Buffs.HypnoPetBuff.Description
+	}
+
+	HypnoPetBuffShiny: {
+		// DisplayName: Hypno Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.HypnoPetBuffShiny.Description
+	}
+
+	JigglypuffPetBuff: {
+		// DisplayName: Jigglypuff Pet Buff
+		// Description: Mods.Pokemod.Buffs.JigglypuffPetBuff.Description
+	}
+
+	JigglypuffPetBuffShiny: {
+		// DisplayName: Jigglypuff Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.JigglypuffPetBuffShiny.Description
+	}
+
+	JynxPetBuff: {
+		// DisplayName: Jynx Pet Buff
+		// Description: Mods.Pokemod.Buffs.JynxPetBuff.Description
+	}
+
+	JynxPetBuffShiny: {
+		// DisplayName: Jynx Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.JynxPetBuffShiny.Description
+	}
+
+	KabutoPetBuff: {
+		// DisplayName: Kabuto Pet Buff
+		// Description: Mods.Pokemod.Buffs.KabutoPetBuff.Description
+	}
+
+	KabutoPetBuffShiny: {
+		// DisplayName: Kabuto Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.KabutoPetBuffShiny.Description
+	}
+
+	KabutopsPetBuff: {
+		// DisplayName: Kabutops Pet Buff
+		// Description: Mods.Pokemod.Buffs.KabutopsPetBuff.Description
+	}
+
+	KabutopsPetBuffShiny: {
+		// DisplayName: Kabutops Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.KabutopsPetBuffShiny.Description
+	}
+
+	KadabraPetBuff: {
+		// DisplayName: Kadabra Pet Buff
+		// Description: Mods.Pokemod.Buffs.KadabraPetBuff.Description
+	}
+
+	KadabraPetBuffShiny: {
+		// DisplayName: Kadabra Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.KadabraPetBuffShiny.Description
+	}
+
+	KangaskhanPetBuff: {
+		// DisplayName: Kangaskhan Pet Buff
+		// Description: Mods.Pokemod.Buffs.KangaskhanPetBuff.Description
+	}
+
+	KangaskhanPetBuffShiny: {
+		// DisplayName: Kangaskhan Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.KangaskhanPetBuffShiny.Description
+	}
+
+	KinglerPetBuff: {
+		// DisplayName: Kingler Pet Buff
+		// Description: Mods.Pokemod.Buffs.KinglerPetBuff.Description
+	}
+
+	KinglerPetBuffShiny: {
+		// DisplayName: Kingler Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.KinglerPetBuffShiny.Description
+	}
+
+	KoffingPetBuff: {
+		// DisplayName: Koffing Pet Buff
+		// Description: Mods.Pokemod.Buffs.KoffingPetBuff.Description
+	}
+
+	KoffingPetBuffShiny: {
+		// DisplayName: Koffing Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.KoffingPetBuffShiny.Description
+	}
+
+	KrabbyPetBuff: {
+		// DisplayName: Krabby Pet Buff
+		// Description: Mods.Pokemod.Buffs.KrabbyPetBuff.Description
+	}
+
+	KrabbyPetBuffShiny: {
+		// DisplayName: Krabby Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.KrabbyPetBuffShiny.Description
+	}
+
+	LaprasPetBuff: {
+		// DisplayName: Lapras Pet Buff
+		// Description: Mods.Pokemod.Buffs.LaprasPetBuff.Description
+	}
+
+	LaprasPetBuffShiny: {
+		// DisplayName: Lapras Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.LaprasPetBuffShiny.Description
+	}
+
+	LickitungPetBuff: {
+		// DisplayName: Lickitung Pet Buff
+		// Description: Mods.Pokemod.Buffs.LickitungPetBuff.Description
+	}
+
+	LickitungPetBuffShiny: {
+		// DisplayName: Lickitung Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.LickitungPetBuffShiny.Description
+	}
+
+	MachampPetBuff: {
+		// DisplayName: Machamp Pet Buff
+		// Description: Mods.Pokemod.Buffs.MachampPetBuff.Description
+	}
+
+	MachampPetBuffShiny: {
+		// DisplayName: Machamp Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MachampPetBuffShiny.Description
+	}
+
+	MachokePetBuff: {
+		// DisplayName: Machoke Pet Buff
+		// Description: Mods.Pokemod.Buffs.MachokePetBuff.Description
+	}
+
+	MachokePetBuffShiny: {
+		// DisplayName: Machoke Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MachokePetBuffShiny.Description
+	}
+
+	MachopPetBuff: {
+		// DisplayName: Machop Pet Buff
+		// Description: Mods.Pokemod.Buffs.MachopPetBuff.Description
+	}
+
+	MachopPetBuffShiny: {
+		// DisplayName: Machop Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MachopPetBuffShiny.Description
+	}
+
+	MagikarpPetBuff: {
+		// DisplayName: Magikarp Pet Buff
+		// Description: Mods.Pokemod.Buffs.MagikarpPetBuff.Description
+	}
+
+	MagikarpPetBuffShiny: {
+		// DisplayName: Magikarp Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MagikarpPetBuffShiny.Description
+	}
+
+	MagmarPetBuff: {
+		// DisplayName: Magmar Pet Buff
+		// Description: Mods.Pokemod.Buffs.MagmarPetBuff.Description
+	}
+
+	MagmarPetBuffShiny: {
+		// DisplayName: Magmar Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MagmarPetBuffShiny.Description
+	}
+
+	MankeyPetBuff: {
+		// DisplayName: Mankey Pet Buff
+		// Description: Mods.Pokemod.Buffs.MankeyPetBuff.Description
+	}
+
+	MankeyPetBuffShiny: {
+		// DisplayName: Mankey Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MankeyPetBuffShiny.Description
+	}
+
+	MarowakPetBuff: {
+		// DisplayName: Marowak Pet Buff
+		// Description: Mods.Pokemod.Buffs.MarowakPetBuff.Description
+	}
+
+	MarowakPetBuffShiny: {
+		// DisplayName: Marowak Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MarowakPetBuffShiny.Description
+	}
+
+	MeowthPetBuff: {
+		// DisplayName: Meowth Pet Buff
+		// Description: Mods.Pokemod.Buffs.MeowthPetBuff.Description
+	}
+
+	MeowthPetBuffShiny: {
+		// DisplayName: Meowth Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MeowthPetBuffShiny.Description
+	}
+
+	MewPetBuff: {
+		// DisplayName: Mew Pet Buff
+		// Description: Mods.Pokemod.Buffs.MewPetBuff.Description
+	}
+
+	MewPetBuffShiny: {
+		// DisplayName: Mew Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MewPetBuffShiny.Description
+	}
+
+	MewtwoPetBuff: {
+		// DisplayName: Mewtwo Pet Buff
+		// Description: Mods.Pokemod.Buffs.MewtwoPetBuff.Description
+	}
+
+	MewtwoPetBuffShiny: {
+		// DisplayName: Mewtwo Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MewtwoPetBuffShiny.Description
+	}
+
+	MoltresPetBuff: {
+		// DisplayName: Moltres Pet Buff
+		// Description: Mods.Pokemod.Buffs.MoltresPetBuff.Description
+	}
+
+	MoltresPetBuffShiny: {
+		// DisplayName: Moltres Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MoltresPetBuffShiny.Description
+	}
+
+	MrMimePetBuff: {
+		// DisplayName: Mr Mime Pet Buff
+		// Description: Mods.Pokemod.Buffs.MrMimePetBuff.Description
+	}
+
+	MrMimePetBuffShiny: {
+		// DisplayName: Mr Mime Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MrMimePetBuffShiny.Description
+	}
+
+	MukPetBuff: {
+		// DisplayName: Muk Pet Buff
+		// Description: Mods.Pokemod.Buffs.MukPetBuff.Description
+	}
+
+	MukPetBuffShiny: {
+		// DisplayName: Muk Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.MukPetBuffShiny.Description
+	}
+
+	NinetalesPetBuff: {
+		// DisplayName: Ninetales Pet Buff
+		// Description: Mods.Pokemod.Buffs.NinetalesPetBuff.Description
+	}
+
+	NinetalesPetBuffShiny: {
+		// DisplayName: Ninetales Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.NinetalesPetBuffShiny.Description
+	}
+
+	OddishPetBuff: {
+		// DisplayName: Oddish Pet Buff
+		// Description: Mods.Pokemod.Buffs.OddishPetBuff.Description
+	}
+
+	OddishPetBuffShiny: {
+		// DisplayName: Oddish Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.OddishPetBuffShiny.Description
+	}
+
+	OmanytePetBuff: {
+		// DisplayName: Omanyte Pet Buff
+		// Description: Mods.Pokemod.Buffs.OmanytePetBuff.Description
+	}
+
+	OmanytePetBuffShiny: {
+		// DisplayName: Omanyte Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.OmanytePetBuffShiny.Description
+	}
+
+	OmastarPetBuff: {
+		// DisplayName: Omastar Pet Buff
+		// Description: Mods.Pokemod.Buffs.OmastarPetBuff.Description
+	}
+
+	OmastarPetBuffShiny: {
+		// DisplayName: Omastar Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.OmastarPetBuffShiny.Description
+	}
+
+	OnixPetBuff: {
+		// DisplayName: Onix Pet Buff
+		// Description: Mods.Pokemod.Buffs.OnixPetBuff.Description
+	}
+
+	OnixPetBuffShiny: {
+		// DisplayName: Onix Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.OnixPetBuffShiny.Description
+	}
+
+	ParasectPetBuff: {
+		// DisplayName: Parasect Pet Buff
+		// Description: Mods.Pokemod.Buffs.ParasectPetBuff.Description
+	}
+
+	ParasectPetBuffShiny: {
+		// DisplayName: Parasect Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ParasectPetBuffShiny.Description
+	}
+
+	ParasPetBuff: {
+		// DisplayName: Paras Pet Buff
+		// Description: Mods.Pokemod.Buffs.ParasPetBuff.Description
+	}
+
+	ParasPetBuffShiny: {
+		// DisplayName: Paras Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ParasPetBuffShiny.Description
+	}
+
+	PersianPetBuff: {
+		// DisplayName: Persian Pet Buff
+		// Description: Mods.Pokemod.Buffs.PersianPetBuff.Description
+	}
+
+	PersianPetBuffShiny: {
+		// DisplayName: Persian Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.PersianPetBuffShiny.Description
+	}
+
+	PinsirPetBuff: {
+		// DisplayName: Pinsir Pet Buff
+		// Description: Mods.Pokemod.Buffs.PinsirPetBuff.Description
+	}
+
+	PinsirPetBuffShiny: {
+		// DisplayName: Pinsir Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.PinsirPetBuffShiny.Description
+	}
+
+	PoliwagPetBuff: {
+		// DisplayName: Poliwag Pet Buff
+		// Description: Mods.Pokemod.Buffs.PoliwagPetBuff.Description
+	}
+
+	PoliwagPetBuffShiny: {
+		// DisplayName: Poliwag Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.PoliwagPetBuffShiny.Description
+	}
+
+	PoliwhirlPetBuff: {
+		// DisplayName: Poliwhirl Pet Buff
+		// Description: Mods.Pokemod.Buffs.PoliwhirlPetBuff.Description
+	}
+
+	PoliwhirlPetBuffShiny: {
+		// DisplayName: Poliwhirl Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.PoliwhirlPetBuffShiny.Description
+	}
+
+	PoliwrathPetBuff: {
+		// DisplayName: Poliwrath Pet Buff
+		// Description: Mods.Pokemod.Buffs.PoliwrathPetBuff.Description
+	}
+
+	PoliwrathPetBuffShiny: {
+		// DisplayName: Poliwrath Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.PoliwrathPetBuffShiny.Description
+	}
+
+	PonytaPetBuff: {
+		// DisplayName: Ponyta Pet Buff
+		// Description: Mods.Pokemod.Buffs.PonytaPetBuff.Description
+	}
+
+	PonytaPetBuffShiny: {
+		// DisplayName: Ponyta Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.PonytaPetBuffShiny.Description
+	}
+
+	PorygonPetBuff: {
+		// DisplayName: Porygon Pet Buff
+		// Description: Mods.Pokemod.Buffs.PorygonPetBuff.Description
+	}
+
+	PorygonPetBuffShiny: {
+		// DisplayName: Porygon Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.PorygonPetBuffShiny.Description
+	}
+
+	PrimeapePetBuff: {
+		// DisplayName: Primeape Pet Buff
+		// Description: Mods.Pokemod.Buffs.PrimeapePetBuff.Description
+	}
+
+	PrimeapePetBuffShiny: {
+		// DisplayName: Primeape Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.PrimeapePetBuffShiny.Description
+	}
+
+	PsyduckPetBuff: {
+		// DisplayName: Psyduck Pet Buff
+		// Description: Mods.Pokemod.Buffs.PsyduckPetBuff.Description
+	}
+
+	PsyduckPetBuffShiny: {
+		// DisplayName: Psyduck Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.PsyduckPetBuffShiny.Description
+	}
+
+	RapidashPetBuff: {
+		// DisplayName: Rapidash Pet Buff
+		// Description: Mods.Pokemod.Buffs.RapidashPetBuff.Description
+	}
+
+	RapidashPetBuffShiny: {
+		// DisplayName: Rapidash Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.RapidashPetBuffShiny.Description
+	}
+
+	RhydonPetBuff: {
+		// DisplayName: Rhydon Pet Buff
+		// Description: Mods.Pokemod.Buffs.RhydonPetBuff.Description
+	}
+
+	RhydonPetBuffShiny: {
+		// DisplayName: Rhydon Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.RhydonPetBuffShiny.Description
+	}
+
+	RhyhornPetBuff: {
+		// DisplayName: Rhyhorn Pet Buff
+		// Description: Mods.Pokemod.Buffs.RhyhornPetBuff.Description
+	}
+
+	RhyhornPetBuffShiny: {
+		// DisplayName: Rhyhorn Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.RhyhornPetBuffShiny.Description
+	}
+
+	ScytherPetBuff: {
+		// DisplayName: Scyther Pet Buff
+		// Description: Mods.Pokemod.Buffs.ScytherPetBuff.Description
+	}
+
+	ScytherPetBuffShiny: {
+		// DisplayName: Scyther Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ScytherPetBuffShiny.Description
+	}
+
+	SeadraPetBuff: {
+		// DisplayName: Seadra Pet Buff
+		// Description: Mods.Pokemod.Buffs.SeadraPetBuff.Description
+	}
+
+	SeadraPetBuffShiny: {
+		// DisplayName: Seadra Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.SeadraPetBuffShiny.Description
+	}
+
+	SeakingPetBuff: {
+		// DisplayName: Seaking Pet Buff
+		// Description: Mods.Pokemod.Buffs.SeakingPetBuff.Description
+	}
+
+	SeakingPetBuffShiny: {
+		// DisplayName: Seaking Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.SeakingPetBuffShiny.Description
+	}
+
+	SeelPetBuff: {
+		// DisplayName: Seel Pet Buff
+		// Description: Mods.Pokemod.Buffs.SeelPetBuff.Description
+	}
+
+	SeelPetBuffShiny: {
+		// DisplayName: Seel Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.SeelPetBuffShiny.Description
+	}
+
+	ShellderPetBuff: {
+		// DisplayName: Shellder Pet Buff
+		// Description: Mods.Pokemod.Buffs.ShellderPetBuff.Description
+	}
+
+	ShellderPetBuffShiny: {
+		// DisplayName: Shellder Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ShellderPetBuffShiny.Description
+	}
+
+	SlowbroPetBuff: {
+		// DisplayName: Slowbro Pet Buff
+		// Description: Mods.Pokemod.Buffs.SlowbroPetBuff.Description
+	}
+
+	SlowbroPetBuffShiny: {
+		// DisplayName: Slowbro Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.SlowbroPetBuffShiny.Description
+	}
+
+	SlowpokePetBuff: {
+		// DisplayName: Slowpoke Pet Buff
+		// Description: Mods.Pokemod.Buffs.SlowpokePetBuff.Description
+	}
+
+	SlowpokePetBuffShiny: {
+		// DisplayName: Slowpoke Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.SlowpokePetBuffShiny.Description
+	}
+
+	SnorlaxPetBuff: {
+		// DisplayName: Snorlax Pet Buff
+		// Description: Mods.Pokemod.Buffs.SnorlaxPetBuff.Description
+	}
+
+	SnorlaxPetBuffShiny: {
+		// DisplayName: Snorlax Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.SnorlaxPetBuffShiny.Description
+	}
+
+	StarmiePetBuff: {
+		// DisplayName: Starmie Pet Buff
+		// Description: Mods.Pokemod.Buffs.StarmiePetBuff.Description
+	}
+
+	StarmiePetBuffShiny: {
+		// DisplayName: Starmie Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.StarmiePetBuffShiny.Description
+	}
+
+	StaryuPetBuff: {
+		// DisplayName: Staryu Pet Buff
+		// Description: Mods.Pokemod.Buffs.StaryuPetBuff.Description
+	}
+
+	StaryuPetBuffShiny: {
+		// DisplayName: Staryu Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.StaryuPetBuffShiny.Description
+	}
+
+	TangelaPetBuff: {
+		// DisplayName: Tangela Pet Buff
+		// Description: Mods.Pokemod.Buffs.TangelaPetBuff.Description
+	}
+
+	TangelaPetBuffShiny: {
+		// DisplayName: Tangela Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.TangelaPetBuffShiny.Description
+	}
+
+	TaurosPetBuff: {
+		// DisplayName: Tauros Pet Buff
+		// Description: Mods.Pokemod.Buffs.TaurosPetBuff.Description
+	}
+
+	TaurosPetBuffShiny: {
+		// DisplayName: Tauros Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.TaurosPetBuffShiny.Description
+	}
+
+	TentacoolPetBuff: {
+		// DisplayName: Tentacool Pet Buff
+		// Description: Mods.Pokemod.Buffs.TentacoolPetBuff.Description
+	}
+
+	TentacoolPetBuffShiny: {
+		// DisplayName: Tentacool Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.TentacoolPetBuffShiny.Description
+	}
+
+	TentacruelPetBuff: {
+		// DisplayName: Tentacruel Pet Buff
+		// Description: Mods.Pokemod.Buffs.TentacruelPetBuff.Description
+	}
+
+	TentacruelPetBuffShiny: {
+		// DisplayName: Tentacruel Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.TentacruelPetBuffShiny.Description
+	}
+
+	VenomothPetBuff: {
+		// DisplayName: Venomoth Pet Buff
+		// Description: Mods.Pokemod.Buffs.VenomothPetBuff.Description
+	}
+
+	VenomothPetBuffShiny: {
+		// DisplayName: Venomoth Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.VenomothPetBuffShiny.Description
+	}
+
+	VenonatPetBuff: {
+		// DisplayName: Venonat Pet Buff
+		// Description: Mods.Pokemod.Buffs.VenonatPetBuff.Description
+	}
+
+	VenonatPetBuffShiny: {
+		// DisplayName: Venonat Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.VenonatPetBuffShiny.Description
+	}
+
+	VictreebelPetBuff: {
+		// DisplayName: Victreebel Pet Buff
+		// Description: Mods.Pokemod.Buffs.VictreebelPetBuff.Description
+	}
+
+	VictreebelPetBuffShiny: {
+		// DisplayName: Victreebel Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.VictreebelPetBuffShiny.Description
+	}
+
+	VileplumePetBuff: {
+		// DisplayName: Vileplume Pet Buff
+		// Description: Mods.Pokemod.Buffs.VileplumePetBuff.Description
+	}
+
+	VileplumePetBuffShiny: {
+		// DisplayName: Vileplume Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.VileplumePetBuffShiny.Description
+	}
+
+	VulpixPetBuff: {
+		// DisplayName: Vulpix Pet Buff
+		// Description: Mods.Pokemod.Buffs.VulpixPetBuff.Description
+	}
+
+	VulpixPetBuffShiny: {
+		// DisplayName: Vulpix Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.VulpixPetBuffShiny.Description
+	}
+
+	WeepinbellPetBuff: {
+		// DisplayName: Weepinbell Pet Buff
+		// Description: Mods.Pokemod.Buffs.WeepinbellPetBuff.Description
+	}
+
+	WeepinbellPetBuffShiny: {
+		// DisplayName: Weepinbell Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.WeepinbellPetBuffShiny.Description
+	}
+
+	WeezingPetBuff: {
+		// DisplayName: Weezing Pet Buff
+		// Description: Mods.Pokemod.Buffs.WeezingPetBuff.Description
+	}
+
+	WeezingPetBuffShiny: {
+		// DisplayName: Weezing Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.WeezingPetBuffShiny.Description
+	}
+
+	WigglytuffPetBuff: {
+		// DisplayName: Wigglytuff Pet Buff
+		// Description: Mods.Pokemod.Buffs.WigglytuffPetBuff.Description
+	}
+
+	WigglytuffPetBuffShiny: {
+		// DisplayName: Wigglytuff Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.WigglytuffPetBuffShiny.Description
+	}
+
+	ZapdosPetBuff: {
+		// DisplayName: Zapdos Pet Buff
+		// Description: Mods.Pokemod.Buffs.ZapdosPetBuff.Description
+	}
+
+	ZapdosPetBuffShiny: {
+		// DisplayName: Zapdos Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ZapdosPetBuffShiny.Description
+	}
+
+	ZubatPetBuff: {
+		// DisplayName: Zubat Pet Buff
+		// Description: Mods.Pokemod.Buffs.ZubatPetBuff.Description
+	}
+
+	ZubatPetBuffShiny: {
+		// DisplayName: Zubat Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.ZubatPetBuffShiny.Description
+	}
 }
 
 NPCs: {
@@ -1332,6 +2604,226 @@ NPCs: {
 	// SandshrewCritterNPCShiny.DisplayName: Sandshrew Critter N P C Shiny
 	// SandslashCritterNPC.DisplayName: Sandslash Critter N P C
 	// SandslashCritterNPCShiny.DisplayName: Sandslash Critter N P C Shiny
+	// ClefairyCritterNPC.DisplayName: Clefairy Critter N P C
+	// ClefairyCritterNPCShiny.DisplayName: Clefairy Critter N P C Shiny
+	// ClefableCritterNPC.DisplayName: Clefable Critter N P C
+	// ClefableCritterNPCShiny.DisplayName: Clefable Critter N P C Shiny
+	// AbraCritterNPC.DisplayName: Abra Critter N P C
+	// AbraCritterNPCShiny.DisplayName: Abra Critter N P C Shiny
+	// AerodactylCritterNPC.DisplayName: Aerodactyl Critter N P C
+	// AerodactylCritterNPCShiny.DisplayName: Aerodactyl Critter N P C Shiny
+	// AlakazamCritterNPC.DisplayName: Alakazam Critter N P C
+	// AlakazamCritterNPCShiny.DisplayName: Alakazam Critter N P C Shiny
+	// ArcanineCritterNPC.DisplayName: Arcanine Critter N P C
+	// ArcanineCritterNPCShiny.DisplayName: Arcanine Critter N P C Shiny
+	// ArticunoCritterNPC.DisplayName: Articuno Critter N P C
+	// ArticunoCritterNPCShiny.DisplayName: Articuno Critter N P C Shiny
+	// BellsproutCritterNPC.DisplayName: Bellsprout Critter N P C
+	// BellsproutCritterNPCShiny.DisplayName: Bellsprout Critter N P C Shiny
+	// CloysterCritterNPC.DisplayName: Cloyster Critter N P C
+	// CloysterCritterNPCShiny.DisplayName: Cloyster Critter N P C Shiny
+	// CuboneCritterNPC.DisplayName: Cubone Critter N P C
+	// CuboneCritterNPCShiny.DisplayName: Cubone Critter N P C Shiny
+	// DewgongCritterNPC.DisplayName: Dewgong Critter N P C
+	// DewgongCritterNPCShiny.DisplayName: Dewgong Critter N P C Shiny
+	// DiglettCritterNPC.DisplayName: Diglett Critter N P C
+	// DiglettCritterNPCShiny.DisplayName: Diglett Critter N P C Shiny
+	// DittoCritterNPC.DisplayName: Ditto Critter N P C
+	// DittoCritterNPCShiny.DisplayName: Ditto Critter N P C Shiny
+	// DodrioCritterNPC.DisplayName: Dodrio Critter N P C
+	// DodrioCritterNPCShiny.DisplayName: Dodrio Critter N P C Shiny
+	// DoduoCritterNPC.DisplayName: Doduo Critter N P C
+	// DoduoCritterNPCShiny.DisplayName: Doduo Critter N P C Shiny
+	// DragonairCritterNPC.DisplayName: Dragonair Critter N P C
+	// DragonairCritterNPCShiny.DisplayName: Dragonair Critter N P C Shiny
+	// DragoniteCritterNPC.DisplayName: Dragonite Critter N P C
+	// DragoniteCritterNPCShiny.DisplayName: Dragonite Critter N P C Shiny
+	// DratiniCritterNPC.DisplayName: Dratini Critter N P C
+	// DratiniCritterNPCShiny.DisplayName: Dratini Critter N P C Shiny
+	// DrowzeeCritterNPC.DisplayName: Drowzee Critter N P C
+	// DrowzeeCritterNPCShiny.DisplayName: Drowzee Critter N P C Shiny
+	// DugtrioCritterNPC.DisplayName: Dugtrio Critter N P C
+	// DugtrioCritterNPCShiny.DisplayName: Dugtrio Critter N P C Shiny
+	// ElectabuzzCritterNPC.DisplayName: Electabuzz Critter N P C
+	// ElectabuzzCritterNPCShiny.DisplayName: Electabuzz Critter N P C Shiny
+	// ExeggcuteCritterNPC.DisplayName: Exeggcute Critter N P C
+	// ExeggcuteCritterNPCShiny.DisplayName: Exeggcute Critter N P C Shiny
+	// ExeggutorCritterNPC.DisplayName: Exeggutor Critter N P C
+	// ExeggutorCritterNPCShiny.DisplayName: Exeggutor Critter N P C Shiny
+	// FarfetchdCritterNPC.DisplayName: Farfetchd Critter N P C
+	// FarfetchdCritterNPCShiny.DisplayName: Farfetchd Critter N P C Shiny
+	// GengarCritterNPC.DisplayName: Gengar Critter N P C
+	// GengarCritterNPCShiny.DisplayName: Gengar Critter N P C Shiny
+	// GeodudeCritterNPC.DisplayName: Geodude Critter N P C
+	// GeodudeCritterNPCShiny.DisplayName: Geodude Critter N P C Shiny
+	// GloomCritterNPC.DisplayName: Gloom Critter N P C
+	// GloomCritterNPCShiny.DisplayName: Gloom Critter N P C Shiny
+	// GolbatCritterNPC.DisplayName: Golbat Critter N P C
+	// GolbatCritterNPCShiny.DisplayName: Golbat Critter N P C Shiny
+	// GoldeenCritterNPC.DisplayName: Goldeen Critter N P C
+	// GoldeenCritterNPCShiny.DisplayName: Goldeen Critter N P C Shiny
+	// GolduckCritterNPC.DisplayName: Golduck Critter N P C
+	// GolduckCritterNPCShiny.DisplayName: Golduck Critter N P C Shiny
+	// GolemCritterNPC.DisplayName: Golem Critter N P C
+	// GolemCritterNPCShiny.DisplayName: Golem Critter N P C Shiny
+	// GravelerCritterNPC.DisplayName: Graveler Critter N P C
+	// GravelerCritterNPCShiny.DisplayName: Graveler Critter N P C Shiny
+	// GrimerCritterNPC.DisplayName: Grimer Critter N P C
+	// GrimerCritterNPCShiny.DisplayName: Grimer Critter N P C Shiny
+	// GrowlitheCritterNPC.DisplayName: Growlithe Critter N P C
+	// GrowlitheCritterNPCShiny.DisplayName: Growlithe Critter N P C Shiny
+	// GyaradosCritterNPC.DisplayName: Gyarados Critter N P C
+	// GyaradosCritterNPCShiny.DisplayName: Gyarados Critter N P C Shiny
+	// HitmonchanCritterNPC.DisplayName: Hitmonchan Critter N P C
+	// HitmonchanCritterNPCShiny.DisplayName: Hitmonchan Critter N P C Shiny
+	// HitmonleeCritterNPC.DisplayName: Hitmonlee Critter N P C
+	// HitmonleeCritterNPCShiny.DisplayName: Hitmonlee Critter N P C Shiny
+	// HorseaCritterNPC.DisplayName: Horsea Critter N P C
+	// HorseaCritterNPCShiny.DisplayName: Horsea Critter N P C Shiny
+	// HypnoCritterNPC.DisplayName: Hypno Critter N P C
+	// HypnoCritterNPCShiny.DisplayName: Hypno Critter N P C Shiny
+	// JigglypuffCritterNPC.DisplayName: Jigglypuff Critter N P C
+	// JigglypuffCritterNPCShiny.DisplayName: Jigglypuff Critter N P C Shiny
+	// JynxCritterNPC.DisplayName: Jynx Critter N P C
+	// JynxCritterNPCShiny.DisplayName: Jynx Critter N P C Shiny
+	// KabutoCritterNPC.DisplayName: Kabuto Critter N P C
+	// KabutoCritterNPCShiny.DisplayName: Kabuto Critter N P C Shiny
+	// KabutopsCritterNPC.DisplayName: Kabutops Critter N P C
+	// KabutopsCritterNPCShiny.DisplayName: Kabutops Critter N P C Shiny
+	// KadabraCritterNPC.DisplayName: Kadabra Critter N P C
+	// KadabraCritterNPCShiny.DisplayName: Kadabra Critter N P C Shiny
+	// KangaskhanCritterNPC.DisplayName: Kangaskhan Critter N P C
+	// KangaskhanCritterNPCShiny.DisplayName: Kangaskhan Critter N P C Shiny
+	// KinglerCritterNPC.DisplayName: Kingler Critter N P C
+	// KinglerCritterNPCShiny.DisplayName: Kingler Critter N P C Shiny
+	// KoffingCritterNPC.DisplayName: Koffing Critter N P C
+	// KoffingCritterNPCShiny.DisplayName: Koffing Critter N P C Shiny
+	// KrabbyCritterNPC.DisplayName: Krabby Critter N P C
+	// KrabbyCritterNPCShiny.DisplayName: Krabby Critter N P C Shiny
+	// LaprasCritterNPC.DisplayName: Lapras Critter N P C
+	// LaprasCritterNPCShiny.DisplayName: Lapras Critter N P C Shiny
+	// LickitungCritterNPC.DisplayName: Lickitung Critter N P C
+	// LickitungCritterNPCShiny.DisplayName: Lickitung Critter N P C Shiny
+	// MachampCritterNPC.DisplayName: Machamp Critter N P C
+	// MachampCritterNPCShiny.DisplayName: Machamp Critter N P C Shiny
+	// MachokeCritterNPC.DisplayName: Machoke Critter N P C
+	// MachokeCritterNPCShiny.DisplayName: Machoke Critter N P C Shiny
+	// MachopCritterNPC.DisplayName: Machop Critter N P C
+	// MachopCritterNPCShiny.DisplayName: Machop Critter N P C Shiny
+	// MagikarpCritterNPC.DisplayName: Magikarp Critter N P C
+	// MagikarpCritterNPCShiny.DisplayName: Magikarp Critter N P C Shiny
+	// MagmarCritterNPC.DisplayName: Magmar Critter N P C
+	// MagmarCritterNPCShiny.DisplayName: Magmar Critter N P C Shiny
+	// MankeyCritterNPC.DisplayName: Mankey Critter N P C
+	// MankeyCritterNPCShiny.DisplayName: Mankey Critter N P C Shiny
+	// MarowakCritterNPC.DisplayName: Marowak Critter N P C
+	// MarowakCritterNPCShiny.DisplayName: Marowak Critter N P C Shiny
+	// MeowthCritterNPC.DisplayName: Meowth Critter N P C
+	// MeowthCritterNPCShiny.DisplayName: Meowth Critter N P C Shiny
+	// MewCritterNPC.DisplayName: Mew Critter N P C
+	// MewCritterNPCShiny.DisplayName: Mew Critter N P C Shiny
+	// MewtwoCritterNPC.DisplayName: Mewtwo Critter N P C
+	// MewtwoCritterNPCShiny.DisplayName: Mewtwo Critter N P C Shiny
+	// MoltresCritterNPC.DisplayName: Moltres Critter N P C
+	// MoltresCritterNPCShiny.DisplayName: Moltres Critter N P C Shiny
+	// MrMimeCritterNPC.DisplayName: Mr Mime Critter N P C
+	// MrMimeCritterNPCShiny.DisplayName: Mr Mime Critter N P C Shiny
+	// MukCritterNPC.DisplayName: Muk Critter N P C
+	// MukCritterNPCShiny.DisplayName: Muk Critter N P C Shiny
+	// NidokingCritterNPC.DisplayName: Nidoking Critter N P C
+	// NidokingCritterNPCShiny.DisplayName: Nidoking Critter N P C Shiny
+	// NidoqueenCritterNPC.DisplayName: Nidoqueen Critter N P C
+	// NidoqueenCritterNPCShiny.DisplayName: Nidoqueen Critter N P C Shiny
+	// NidoranFCritterNPC.DisplayName: Nidoran F Critter N P C
+	// NidoranFCritterNPCShiny.DisplayName: Nidoran F Critter N P C Shiny
+	// NidorinaCritterNPC.DisplayName: Nidorina Critter N P C
+	// NidorinaCritterNPCShiny.DisplayName: Nidorina Critter N P C Shiny
+	// NinetalesCritterNPC.DisplayName: Ninetales Critter N P C
+	// NinetalesCritterNPCShiny.DisplayName: Ninetales Critter N P C Shiny
+	// OddishCritterNPC.DisplayName: Oddish Critter N P C
+	// OddishCritterNPCShiny.DisplayName: Oddish Critter N P C Shiny
+	// OmanyteCritterNPC.DisplayName: Omanyte Critter N P C
+	// OmanyteCritterNPCShiny.DisplayName: Omanyte Critter N P C Shiny
+	// OmastarCritterNPC.DisplayName: Omastar Critter N P C
+	// OmastarCritterNPCShiny.DisplayName: Omastar Critter N P C Shiny
+	// OnixCritterNPC.DisplayName: Onix Critter N P C
+	// OnixCritterNPCShiny.DisplayName: Onix Critter N P C Shiny
+	// ParasCritterNPC.DisplayName: Paras Critter N P C
+	// ParasCritterNPCShiny.DisplayName: Paras Critter N P C Shiny
+	// ParasectCritterNPC.DisplayName: Parasect Critter N P C
+	// ParasectCritterNPCShiny.DisplayName: Parasect Critter N P C Shiny
+	// PersianCritterNPC.DisplayName: Persian Critter N P C
+	// PersianCritterNPCShiny.DisplayName: Persian Critter N P C Shiny
+	// PinsirCritterNPC.DisplayName: Pinsir Critter N P C
+	// PinsirCritterNPCShiny.DisplayName: Pinsir Critter N P C Shiny
+	// PoliwagCritterNPC.DisplayName: Poliwag Critter N P C
+	// PoliwagCritterNPCShiny.DisplayName: Poliwag Critter N P C Shiny
+	// PoliwhirlCritterNPC.DisplayName: Poliwhirl Critter N P C
+	// PoliwhirlCritterNPCShiny.DisplayName: Poliwhirl Critter N P C Shiny
+	// PoliwrathCritterNPC.DisplayName: Poliwrath Critter N P C
+	// PoliwrathCritterNPCShiny.DisplayName: Poliwrath Critter N P C Shiny
+	// PonytaCritterNPC.DisplayName: Ponyta Critter N P C
+	// PonytaCritterNPCShiny.DisplayName: Ponyta Critter N P C Shiny
+	// PorygonCritterNPC.DisplayName: Porygon Critter N P C
+	// PorygonCritterNPCShiny.DisplayName: Porygon Critter N P C Shiny
+	// PrimeapeCritterNPC.DisplayName: Primeape Critter N P C
+	// PrimeapeCritterNPCShiny.DisplayName: Primeape Critter N P C Shiny
+	// PsyduckCritterNPC.DisplayName: Psyduck Critter N P C
+	// PsyduckCritterNPCShiny.DisplayName: Psyduck Critter N P C Shiny
+	// RapidashCritterNPC.DisplayName: Rapidash Critter N P C
+	// RapidashCritterNPCShiny.DisplayName: Rapidash Critter N P C Shiny
+	// RhydonCritterNPC.DisplayName: Rhydon Critter N P C
+	// RhydonCritterNPCShiny.DisplayName: Rhydon Critter N P C Shiny
+	// RhyhornCritterNPC.DisplayName: Rhyhorn Critter N P C
+	// RhyhornCritterNPCShiny.DisplayName: Rhyhorn Critter N P C Shiny
+	// ScytherCritterNPC.DisplayName: Scyther Critter N P C
+	// ScytherCritterNPCShiny.DisplayName: Scyther Critter N P C Shiny
+	// SeadraCritterNPC.DisplayName: Seadra Critter N P C
+	// SeadraCritterNPCShiny.DisplayName: Seadra Critter N P C Shiny
+	// SeakingCritterNPC.DisplayName: Seaking Critter N P C
+	// SeakingCritterNPCShiny.DisplayName: Seaking Critter N P C Shiny
+	// SeelCritterNPC.DisplayName: Seel Critter N P C
+	// SeelCritterNPCShiny.DisplayName: Seel Critter N P C Shiny
+	// ShellderCritterNPC.DisplayName: Shellder Critter N P C
+	// ShellderCritterNPCShiny.DisplayName: Shellder Critter N P C Shiny
+	// SlowbroCritterNPC.DisplayName: Slowbro Critter N P C
+	// SlowbroCritterNPCShiny.DisplayName: Slowbro Critter N P C Shiny
+	// SlowpokeCritterNPC.DisplayName: Slowpoke Critter N P C
+	// SlowpokeCritterNPCShiny.DisplayName: Slowpoke Critter N P C Shiny
+	// SnorlaxCritterNPC.DisplayName: Snorlax Critter N P C
+	// SnorlaxCritterNPCShiny.DisplayName: Snorlax Critter N P C Shiny
+	// StarmieCritterNPC.DisplayName: Starmie Critter N P C
+	// StarmieCritterNPCShiny.DisplayName: Starmie Critter N P C Shiny
+	// StaryuCritterNPC.DisplayName: Staryu Critter N P C
+	// StaryuCritterNPCShiny.DisplayName: Staryu Critter N P C Shiny
+	// TangelaCritterNPC.DisplayName: Tangela Critter N P C
+	// TangelaCritterNPCShiny.DisplayName: Tangela Critter N P C Shiny
+	// TaurosCritterNPC.DisplayName: Tauros Critter N P C
+	// TaurosCritterNPCShiny.DisplayName: Tauros Critter N P C Shiny
+	// TentacoolCritterNPC.DisplayName: Tentacool Critter N P C
+	// TentacoolCritterNPCShiny.DisplayName: Tentacool Critter N P C Shiny
+	// TentacruelCritterNPC.DisplayName: Tentacruel Critter N P C
+	// TentacruelCritterNPCShiny.DisplayName: Tentacruel Critter N P C Shiny
+	// VenomothCritterNPC.DisplayName: Venomoth Critter N P C
+	// VenomothCritterNPCShiny.DisplayName: Venomoth Critter N P C Shiny
+	// VenonatCritterNPC.DisplayName: Venonat Critter N P C
+	// VenonatCritterNPCShiny.DisplayName: Venonat Critter N P C Shiny
+	// VictreebelCritterNPC.DisplayName: Victreebel Critter N P C
+	// VictreebelCritterNPCShiny.DisplayName: Victreebel Critter N P C Shiny
+	// VileplumeCritterNPC.DisplayName: Vileplume Critter N P C
+	// VileplumeCritterNPCShiny.DisplayName: Vileplume Critter N P C Shiny
+	// VulpixCritterNPC.DisplayName: Vulpix Critter N P C
+	// VulpixCritterNPCShiny.DisplayName: Vulpix Critter N P C Shiny
+	// WeepinbellCritterNPC.DisplayName: Weepinbell Critter N P C
+	// WeepinbellCritterNPCShiny.DisplayName: Weepinbell Critter N P C Shiny
+	// WeezingCritterNPC.DisplayName: Weezing Critter N P C
+	// WeezingCritterNPCShiny.DisplayName: Weezing Critter N P C Shiny
+	// WigglytuffCritterNPC.DisplayName: Wigglytuff Critter N P C
+	// WigglytuffCritterNPCShiny.DisplayName: Wigglytuff Critter N P C Shiny
+	// ZapdosCritterNPC.DisplayName: Zapdos Critter N P C
+	// ZapdosCritterNPCShiny.DisplayName: Zapdos Critter N P C Shiny
+	// ZubatCritterNPC.DisplayName: Zubat Critter N P C
+	// ZubatCritterNPCShiny.DisplayName: Zubat Critter N P C Shiny
 }
 
 Tiles: {
