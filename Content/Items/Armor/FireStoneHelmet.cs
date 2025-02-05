@@ -49,7 +49,7 @@ namespace Pokemod.Content.Items.Armor
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		public override void AddRecipes() {
 			CreateRecipe()
-				.AddIngredient(ModContent.ItemType<FireStoneItem>(), 15)
+				.AddIngredient(ModContent.ItemType<FireStoneItem>(), 10)
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}
