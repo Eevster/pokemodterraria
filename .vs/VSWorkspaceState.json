@@ -2,9 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Content",
-    "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs"
+    "\\Content\\Items",
+    "\\Content\\Items\\Armor"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\AerodactylCritter.cs",
+  "SelectedNode": "\\Content\\Items\\Armor\\WaterStoneLeggings.cs",
   "PreviewInSolutionExplorer": false
 }
