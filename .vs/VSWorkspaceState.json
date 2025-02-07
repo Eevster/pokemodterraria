@@ -2,7 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Content",
-    "\\Content\\Items"
+    "\\Content\\NPCs",
+    "\\Content\\NPCs\\PokemonNPCs"
   ],
+  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\AerodactylCritter.cs",
   "PreviewInSolutionExplorer": false
 }
