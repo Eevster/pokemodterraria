@@ -5,13 +5,9 @@ Contributers:
 -PriddyNeatGames (Discord) Developer
 
 Changelog:
--Christmas Pokemon Forms
--Pidgey and Rattata Lines
--Pokehealer
--More Healing Items
--Spanish Support
-
-1.1.2: Merry Christmas and Happy Holidays!
+-Fixed the healing machine again
+-Root files for all of gen 1 (will be accessible next update)
+-Christmas Pokemon are now set on an internal clock.
 
 Legal:
 This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 
