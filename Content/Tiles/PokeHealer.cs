@@ -91,7 +91,13 @@ namespace Pokemod.Content.Tiles
                     }
                 }
             }
-            if(item.currentHP < item.GetPokemonStats()[0]){
+            // Force revive if fainted
+            if (item.currentHP <= 0)
+            {
+                item.currentHP = item.GetPokemonStats()[0];
+            }
+            else if (item.currentHP < item.GetPokemonStats()[0])
+            {
                 item.currentHP = item.GetPokemonStats()[0];
             }
         }

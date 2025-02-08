@@ -24,7 +24,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
 				if (spawnInfo.Player.ZoneUndergroundDesert) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.DesertCave.Chance * 0.5f);
+					return GetSpawnChance(spawnInfo, SpawnCondition.DesertCave.Chance * 0.1f);
 			}
 			}
 

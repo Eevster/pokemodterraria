@@ -885,6 +885,22 @@ Items: {
 		// DisplayName: P C Chest
 		// Tooltip: ""
 	}
+
+	WaterStoneHelmet: {
+		// SetBonus: Mods.Pokemod.Items.WaterStoneHelmet.SetBonus
+		// DisplayName: Water Stone Helmet
+		// Tooltip: ""
+	}
+
+	WaterStoneBreastplate: {
+		// DisplayName: Water Stone Breastplate
+		// Tooltip: ""
+	}
+
+	WaterStoneLeggings: {
+		// DisplayName: Water Stone Leggings
+		// Tooltip: ""
+	}
 }
 
 Buffs: {
