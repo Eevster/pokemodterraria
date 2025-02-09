@@ -380,6 +380,8 @@ Projectiles: {
 	// AirSlash.DisplayName: Air Slash
 	// HyperFang.DisplayName: Hyper Fang
 	// Toxic.DisplayName: Toxic
+	// DoubleKick.DisplayName: Double Kick
+	// HealPulse.DisplayName: Heal Pulse
 }
 
 Items: {
@@ -2883,6 +2885,7 @@ PokemonInfo: {
 	AutoAttack: Auto ataque
 	NoAttack: No atacar
 	DirectedAttack: Ataque dirigido
+	RanAway: El pokemon huyó ...
 }
 
 // DamageClasses.PokemonDamageClass.DisplayName: Pokemon Damage Class

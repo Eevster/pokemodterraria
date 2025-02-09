@@ -268,6 +268,7 @@ namespace Pokemod.Content.Items.Pokeballs
 				targetPokemon.friendly = false;
 				targetPokemon.dontTakeDamageFromHostiles = false;
 				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PBOut"), Projectile.Center);
+				if(targetPokemon.life <= 0) ServerText.SendMessageToPlayer(Language.GetTextValue("Mods.Pokemod.PokemonInfo.RanAway"),Main.player[Projectile.owner]);
 				Projectile.Kill();
 			}
 		}

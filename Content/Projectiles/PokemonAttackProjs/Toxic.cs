@@ -53,7 +53,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			base.SetDefaults();
         }
 
-		public override void OnSpawn(IEntitySource source)
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return false;
+        }
+
+        public override void OnSpawn(IEntitySource source)
         {
 			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				SearchTarget(64f);
@@ -70,16 +75,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void AI()
         {
-			Lighting.AddLight(Projectile.Center, new Vector3(0.5f,0f,0.5f));
-
-			for (int i = 0; i < 1; i++)
+			for (int i = 0; i < 3; i++)
 			{
-				int dustIndex = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.CorruptTorch, 0, 0, 100, default(Color), 1f);
-				Main.dust[dustIndex].scale = 1f + (float)Main.rand.Next(3) * 0.2f;
+				int dustIndex = Dust.NewDust(Projectile.Center-0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.Venom, 0, 0, 0, default(Color), 1f);
+				Main.dust[dustIndex].scale = 1.2f + (float)Main.rand.Next(3) * 0.2f;
 				Main.dust[dustIndex].fadeIn = 1f + (float)Main.rand.Next(5) * 0.1f;
 				Main.dust[dustIndex].noGravity = true;
-				Main.dust[dustIndex].position = Projectile.Center + new Vector2(32,0).RotatedByRandom(MathHelper.TwoPi);
-				Main.dust[dustIndex].velocity = 0.1f*(Projectile.Center-Main.dust[dustIndex].position);
 			}
 
 			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
@@ -139,6 +140,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             return false;
         }
 
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if(target.CanBeChasedBy()){
+				target.AddBuff(BuffID.Venom, 5*60);
+			}
+            base.OnHitNPC(target, hit, damageDone);
+        }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            target.AddBuff(BuffID.Venom, 5*60);
+            base.OnHitPlayer(target, info);
+        }
+
         public override bool ShouldUpdatePosition() {
 			// Update Projectile.Center manually
 			return false;
@@ -150,7 +165,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             for (int i = 0; i < 20; i++)
             {
-                Dust.NewDust(Projectile.Center-new Vector2(8*Projectile.scale, 8*Projectile.scale), (int)(16*Projectile.scale), (int)(16*Projectile.scale), DustID.CorruptTorch, Main.rand.NextFloat(-3,3), Main.rand.NextFloat(-3,3), 100, default(Color), 2f);
+                int dustIndex = Dust.NewDust(Projectile.Center-new Vector2(8*Projectile.scale, 8*Projectile.scale), (int)(16*Projectile.scale), (int)(16*Projectile.scale), DustID.Venom, Main.rand.NextFloat(-3,3), Main.rand.NextFloat(-3,3), 0, default(Color), 2f);
+				Main.dust[dustIndex].scale = 1.6f + (float)Main.rand.Next(3) * 0.2f;
+				Main.dust[dustIndex].fadeIn = 1f + (float)Main.rand.Next(5) * 0.1f;
+				Main.dust[dustIndex].noGravity = true;
             }
         }
     }

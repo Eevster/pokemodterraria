@@ -23,32 +23,43 @@ namespace Pokemod.Content.Pets.NidorinoPet
 		public override int nAttackProjs => 3;
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 0;
-		public override int attackCooldown => 120;
+		public override int attackDuration => 36;
+		public override int attackCooldown => 64;
 		public override bool canMoveWhileAttack => true;
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
-			SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), GetPokemonDamage(60, true), 2f, Projectile.owner, i*MathHelper.TwoPi/3)];
+						currentStatus = (int)ProjStatus.Attack;
+						timer = attackDuration;
+						canAttack = false;
+						canAttackOutTimer = true;
+						break;
 					}
 				} 
 			}
-			timer = attackDuration;
-			canAttack = false;
 		}
 
-		public override void UpdateAttackProjs(int i, ref float maxFallSpeed){
-			if(attackProjs[i].ai[1] == 0){
-				attackProjs[i].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(attackProjs[i].ai[0]);
-			}
-		}
-
-		public override void UpdateNoAttackProjs(int i){
-			if(attackProjs[i].ai[1] != 0){
-				attackProjs[i] = null;
+		public override void AttackOutTimer(float distanceFromTarget, Vector2 targetCenter){
+			if(Projectile.owner == Main.myPlayer){
+				if(currentStatus == (int)ProjStatus.Attack && Projectile.frame>=13){
+					for(int i = 0; i < nAttackProjs; i++){
+						if(attackProjs[i] == null){
+							attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), targetCenter, Vector2.Zero, ModContent.ProjectileType<Toxic>(), GetPokemonDamage(special: true), 0f, Projectile.owner)];
+							SoundEngine.PlaySound(SoundID.Drown, Projectile.position);
+							for (int k = 0; k < 40; k++)
+							{
+								int dustIndex = Dust.NewDust(Projectile.Center-0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.Venom, 0, -4, 100, default(Color), 1f);
+								Main.dust[dustIndex].scale = 1f + (float)Main.rand.Next(3) * 0.2f;
+								Main.dust[dustIndex].fadeIn = 1f + (float)Main.rand.Next(5) * 0.1f;
+								Main.dust[dustIndex].noGravity = true;
+							}
+							canAttackOutTimer = false;
+							break;
+						}
+					} 
+				}
 			}
 		}
 	}
