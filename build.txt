@@ -1,4 +1,4 @@
-displayName = Pokemod V1.1.4 (Pokehealer Fix Again)
+displayName = Pokemod V1.1.5
 author = Eevster
-version = 1.1.4
+version = 1.1.5
 modReferences = SubworldLibrary

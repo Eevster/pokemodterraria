@@ -269,23 +269,11 @@ namespace Pokemod.Content.NPCs
 		public override string GetChat() {
 			WeightedRandom<string> chat = new WeightedRandom<string>();
 
-			int partyGirl = NPC.FindFirstNPC(NPCID.PartyGirl);
-			if (partyGirl >= 0) {
-				chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.ProfOakTravelingMerchant.PartyGirlDialogue", Main.npc[partyGirl].GivenName));
-			}
-
 			chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.ProfOakTravelingMerchant.StandardDialogue1"));
 			chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.ProfOakTravelingMerchant.StandardDialogue2"));
 			chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.ProfOakTravelingMerchant.StandardDialogue3"));
 
-			string hivePackDialogue = Language.GetTextValue("Mods.Pokemod.Dialogue.ProfOakTravelingMerchant.HiveBackpackDialogue");
-			chat.Add(hivePackDialogue);
-
 			string dialogueLine = chat; // chat is implicitly cast to a string.
-			if (hivePackDialogue.Equals(dialogueLine)) {
-				// Main.npcChatCornerItem shows a single item in the corner, like the Angler Quest chat.
-				Main.npcChatCornerItem = ItemID.HiveBackpack;
-			}
 
 			return dialogueLine;
 		}
