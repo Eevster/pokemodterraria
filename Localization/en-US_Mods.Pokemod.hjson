@@ -909,6 +909,11 @@ Items: {
 		DisplayName: Water Stone Leggings
 		Tooltip: ""
 	}
+
+	Everstone: {
+		DisplayName: Everstone
+		Tooltip: When equipped, any pokemon selected as favorite or equipped as a pet is prevented from evolving by level
+	}
 }
 
 Buffs: {

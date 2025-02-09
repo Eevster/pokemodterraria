@@ -27,7 +27,7 @@ namespace Pokemod.Common.Players
     public class PokemonPlayer : ModPlayer
 	{
 		public bool HasShinyCharm;
-		
+		public int HasEverstone;
 		public int attackMode;
 		public enum AttackMode
         {
@@ -96,8 +96,9 @@ namespace Pokemod.Common.Players
 					targetPlayer = null;
 				}
 			}
-			
+
 			HasShinyCharm = false;
+			if(HasEverstone > 0) HasEverstone--;
         }
 
         public void ChangeAttackMode(int mode){

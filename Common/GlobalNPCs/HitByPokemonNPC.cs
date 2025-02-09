@@ -51,7 +51,7 @@ namespace Pokemod.Common.GlobalNPCs
 
         public static int SetExpGained(NPC npc){
             //int exp = ((int)Math.Sqrt(5*npc.value));
-            int exp = (int)(4f*npc.lifeMax/15f);
+            int exp = (int)(4f*npc.lifeMax/12f);
             if(npc.value<=0) exp = (int)(0.2f*exp);
             if(exp < 1) exp = 1;
 

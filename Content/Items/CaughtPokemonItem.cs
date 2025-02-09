@@ -1,6 +1,7 @@
 using Humanizer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Common.Players;
 using Pokemod.Content.Items.Consumables;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
@@ -315,6 +316,21 @@ namespace Pokemod.Content.Items
 				}
 			}
 		}
+		private bool GetEvolutionRestricted(Player player = null){
+			if(player != null){
+				if(player.GetModPlayer<PokemonPlayer>().HasEverstone>0){
+					if(Item.favorited) return true;
+					if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
+						if(player.miscEquips[0].ModItem is CaughtPokemonItem){
+							if(player.miscEquips[0].ModItem == Item.ModItem){
+								return true;
+							}
+						}
+					}
+				}
+			}
+			return false;
+		}
 
 		public void AddExp(int amount, Player player = null){
 			exp += amount;
@@ -332,7 +348,7 @@ namespace Pokemod.Content.Items
 					if(level < 100){
 						SetExpToNextLevel();
 					}
-					UpdateProjLevel(true, player);
+					UpdateProjLevel(!GetEvolutionRestricted(player), player);
 				}
 				if(level >= 100 && exp> expToNextLevel){
 					exp = expToNextLevel;

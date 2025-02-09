@@ -909,6 +909,11 @@ Items: {
 		// DisplayName: Water Stone Leggings
 		// Tooltip: ""
 	}
+
+	Everstone: {
+		DisplayName: Everstone
+		Tooltip: Cuando está equipado cualquier Pokémon seleccionado como favorito o equipado como mascota no puede evolucionar por nivel
+	}
 }
 
 Buffs: {
