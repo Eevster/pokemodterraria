@@ -1,6 +1,7 @@
 ﻿using Terraria.GameContent.Bestiary;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
+using Pokemod.Common.Configs;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
@@ -19,6 +20,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It has the stamina to fly all day on its broad wings. It fights by using its sharp beak."));
+		}
+
+		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
+			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
+				if (spawnInfo.Player.ZoneForest) {
+					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
+			}
+			}
+
+			return 0f;
 		}
 
 		

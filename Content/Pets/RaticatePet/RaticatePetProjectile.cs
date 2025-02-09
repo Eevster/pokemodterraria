@@ -21,6 +21,7 @@ namespace Pokemod.Content.Pets.RaticatePet
 		public override int[] attackStartEnd => [0,3];
 
 		public override int nAttackProjs => 3;
+		public override int nAttackProjs => 3;
 		public override float enemySearchDistance => 1000;
 		public override float distanceToAttack => 400f;
 		public override bool canAttackThroughWalls => true;
