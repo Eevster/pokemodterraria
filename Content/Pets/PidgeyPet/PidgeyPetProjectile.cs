@@ -28,7 +28,6 @@ namespace Pokemod.Content.Pets.PidgeyPet
 		public override int[] attackFlyStartEnd => [12,15];
 
 		public override int nAttackProjs => 3;
-		public override int nAttackProjs => 3;
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => false;
 		public override int attackDuration => 30;

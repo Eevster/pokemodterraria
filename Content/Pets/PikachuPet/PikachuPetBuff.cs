@@ -10,25 +10,11 @@ namespace Pokemod.Content.Pets.PikachuPet
 	{
         public override string PokeName => "Pikachu";
         public override int ProjType => ModContent.ProjectileType<PikachuPetProjectile>();
-        public override void UpdateExtraChanges(Player player){
-            if (player.HasBuff(Type))
-            {
-                player.AddBuff(BuffID.Shine, 60); // Apply the first buff
-                player.AddBuff(BuffID.Swiftness, 60); // Apply the first buff
-            }
-        }
 	}
 
     public class PikachuPetBuffShiny : PokemonPetBuff
 	{
         public override string PokeName => "Pikachu";
         public override int ProjType => ModContent.ProjectileType<PikachuPetProjectileShiny>();
-        public override void UpdateExtraChanges(Player player){
-            if (player.HasBuff(Type))
-            {
-                player.AddBuff(BuffID.Shine, 60); // Apply the first buff
-                player.AddBuff(BuffID.Swiftness, 60); // Apply the first buff
-            }
-        }
 	}
 }

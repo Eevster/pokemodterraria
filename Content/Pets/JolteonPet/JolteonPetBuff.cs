@@ -8,25 +8,11 @@ namespace Pokemod.Content.Pets.JolteonPet
 	{
         public override string PokeName => "Jolteon";
         public override int ProjType => ModContent.ProjectileType<JolteonPetProjectile>();
-
-        public override void UpdateExtraChanges(Player player){
-            if (player.HasBuff(Type))
-            {
-                player.AddBuff(BuffID.Calm, 60); // Apply the first buff
-            }
-        }
     }
 
     public class JolteonPetBuffShiny : PokemonPetBuff
 	{
         public override string PokeName => "Jolteon";
         public override int ProjType => ModContent.ProjectileType<JolteonPetProjectileShiny>();
-
-        public override void UpdateExtraChanges(Player player){
-            if (player.HasBuff(Type))
-            {
-                player.AddBuff(BuffID.Calm, 60); // Apply the first buff
-            }
-        }
     }
 }

@@ -8,25 +8,11 @@ namespace Pokemod.Content.Pets.SquirtlePet
 	{
         public override string PokeName => "Squirtle";
         public override int ProjType => ModContent.ProjectileType<SquirtlePetProjectile>();
-
-        public override void UpdateExtraChanges(Player player){
-            if (player.HasBuff(Type))
-            {
-                player.AddBuff(BuffID.Flipper, 60); // Apply the first buff
-            }
-        }
 	}
 
     public class SquirtlePetBuffShiny : PokemonPetBuff
 	{
 		public override string PokeName => "Squirtle";
         public override int ProjType => ModContent.ProjectileType<SquirtlePetProjectileShiny>();
-
-        public override void UpdateExtraChanges(Player player){
-            if (player.HasBuff(Type))
-            {
-                player.AddBuff(BuffID.Flipper, 60); // Apply the first buff
-            }
-        }
 	}
 }

@@ -10,25 +10,11 @@ namespace Pokemod.Content.Pets.RaichuPet
 	{
         public override string PokeName => "Raichu";
         public override int ProjType => ModContent.ProjectileType<RaichuPetProjectile>();
-        public override void UpdateExtraChanges(Player player){
-            if (player.HasBuff(Type))
-            {
-                player.AddBuff(BuffID.Shine, 60); // Apply the first buff
-                player.AddBuff(BuffID.Swiftness, 60); // Apply the first buff
-            }
-        }
 	}
 
     public class RaichuPetBuffShiny : PokemonPetBuff
 	{
         public override string PokeName => "Raichu";
         public override int ProjType => ModContent.ProjectileType<RaichuPetProjectileShiny>();
-        public override void UpdateExtraChanges(Player player){
-            if (player.HasBuff(Type))
-            {
-                player.AddBuff(BuffID.Shine, 60); // Apply the first buff
-                player.AddBuff(BuffID.Swiftness, 60); // Apply the first buff
-            }
-        }
 	}
 }
