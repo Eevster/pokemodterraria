@@ -14,7 +14,7 @@ namespace Pokemod.Content.Items.Accessories
 			Item.width = 24;
 			Item.height = 24;
 			Item.maxStack = 1;
-			Item.value = Item.sellPrice(0, 1);
+			Item.value = Item.buyPrice(gold: 20);
 			Item.accessory = true;
 		}
 
