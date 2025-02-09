@@ -90,7 +90,7 @@ namespace Pokemod.Content.Items.Pokeballs
 		private ref float catchRate => ref Projectile.ai[0];
 		private int bounces = 3;
 		private int captureStage = -1;
-		private bool canCapture;
+		private ref float canCapture => ref Projectile.localAI[0];
 		public NPC targetPokemon;
 		private int moveTimer = 0;
 		public const int moveTime = 80;
@@ -102,7 +102,6 @@ namespace Pokemod.Content.Items.Pokeballs
 			writer.Write((double)captureStage);
 			writer.Write((double)moveTimer);
 			writer.Write(targetPokemon != null?(double)targetPokemon.whoAmI:-1);
-			writer.Write(canCapture);
             base.SendExtraAI(writer);
         }
 
@@ -114,7 +113,6 @@ namespace Pokemod.Content.Items.Pokeballs
 			moveTimer = (int)reader.ReadDouble();
 			int targetIndex = (int)reader.ReadDouble();
 			targetPokemon = targetIndex != -1?Main.npc[targetIndex]:null;
-			canCapture = reader.ReadBoolean();
             base.ReceiveExtraAI(reader);
         }
 		
@@ -163,9 +161,9 @@ namespace Pokemod.Content.Items.Pokeballs
 
 			if(Projectile.owner == Main.myPlayer){
 				if(targetPokemon != null){
-					canCapture = FailureProb(catchRate);
+					canCapture = FailureProb(catchRate)?1:0;
 				}else{
-					canCapture = false;
+					canCapture = 0;
 				}
 				Projectile.netUpdate = true;
 			}
@@ -174,7 +172,7 @@ namespace Pokemod.Content.Items.Pokeballs
 				Projectile.timeLeft = 10;
 				if(moveTimer <= 0){
 					captureStage++;
-					if(canCapture){
+					if(canCapture>0){
 						CaptureFailure();
 					}else{
 						if(captureStage > 3){

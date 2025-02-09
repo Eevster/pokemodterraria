@@ -100,6 +100,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
 		}
 
+		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
+			Vector2 start = Projectile.Center + Projectile.scale*new Vector2(50,0);
+				Vector2 end = Projectile.Center - Projectile.scale*new Vector2(50,0);
+			float collisionPoint = 0f; // Don't need that variable, but required as parameter
+
+			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, Projectile.scale*20f, ref collisionPoint);
+		}
+
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {
             overPlayers.Add(index);
