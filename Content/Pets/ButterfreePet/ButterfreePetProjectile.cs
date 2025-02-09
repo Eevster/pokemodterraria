@@ -33,7 +33,7 @@ namespace Pokemod.Content.Pets.ButterfreePet
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
-						SoundEngine.PlaySound(SoundID.Item6, Projectile.position);
+						SoundEngine.PlaySound(SoundID.Item6 with {Volume = 0.5f}, Projectile.position);
 						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), targetCenter, Vector2.Zero, ModContent.ProjectileType<Confusion>(), GetPokemonDamage(50, true), 2f, Projectile.owner)];
 						currentStatus = (int)ProjStatus.Attack;
 						timer = attackDuration;

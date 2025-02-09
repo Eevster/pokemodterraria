@@ -28,11 +28,13 @@ namespace Pokemod.Content.Pets.CharizardPet
 		public override int[] walkFlyStartEnd => [36,41];
 		public override int[] attackFlyStartEnd => [30,35];
 
+		public override float distanceToFly => 300f;
+
 		public override int nAttackProjs => 5;
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 40;
-		public override int attackCooldown => 40;
+		public override int attackCooldown => 80;
 
         public override void SetDefaults()
         {

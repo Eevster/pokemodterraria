@@ -62,15 +62,13 @@ namespace Pokemod.Content.Tiles
                 {
                     if (item.ModItem is CaughtPokemonItem pokeItem)
                     {
-                        HealPokemon(pokeItem);
-                        healed = true;
+                        HealPokemon(pokeItem, pokeItem.GetPokemonStats()[0], ref healed);
                     }
                 }
                 if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
                     if (player.miscEquips[0].ModItem is CaughtPokemonItem pokeItem)
                     {
-                        HealPokemon(pokeItem);
-                        healed = true;
+                        HealPokemon(pokeItem, pokeItem.GetPokemonStats()[0], ref healed);
                     }
                 }
 			}
@@ -83,16 +81,24 @@ namespace Pokemod.Content.Tiles
 			return true;
 		}
 
-        private void HealPokemon(CaughtPokemonItem item){
+        public static void HealPokemon(CaughtPokemonItem item, int finalHP, ref bool healed){
             if(item.proj != null){
                 if(item.proj.active){
                     if(item.proj.ModProjectile is PokemonPetProjectile proj){
-                        proj.currentHp = item.GetPokemonStats()[0];
+                        if(proj.currentHp < finalHP){
+                            proj.currentHp = finalHP;
+                            if(item.currentHP < finalHP){
+                                item.currentHP = finalHP;
+                            }
+                            healed = true;
+                        }
+                        return;
                     }
                 }
             }
-            if(item.currentHP < item.GetPokemonStats()[0]){
-                item.currentHP = item.GetPokemonStats()[0];
+            if(item.currentHP < finalHP){
+                item.currentHP = finalHP;
+                healed = true;
             }
         }
 

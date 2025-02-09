@@ -28,7 +28,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.friendly = true;
             Projectile.hostile = false;
 
-            Projectile.timeLeft = 60;
+            Projectile.timeLeft = 40;
             
             Projectile.knockBack = 4f;
 

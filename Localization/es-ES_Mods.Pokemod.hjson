@@ -154,6 +154,11 @@ Projectiles: {
 	// FearowPetProjectileShiny.DisplayName: Fearow Pet Projectile Shiny
 	// SpearowPetProjectile.DisplayName: Spearow Pet Projectile
 	// SpearowPetProjectileShiny.DisplayName: Spearow Pet Projectile Shiny
+	// Gust.DisplayName: Gust
+	// QuickAttack.DisplayName: Quick Attack
+	// WingAttack.DisplayName: Wing Attack
+	// AirSlash.DisplayName: Air Slash
+	// HyperFang.DisplayName: Hyper Fang
 }
 
 Items: {

@@ -47,6 +47,7 @@ namespace Pokemod.Content.Items
 			Item.buffType = 0;
 			Item.noUseGraphic = true;
 			Item.consumable = false;
+			Item.maxStack = 1;
 		}
 
 		public override void NetSend(BinaryWriter writer) {

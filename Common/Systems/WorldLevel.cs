@@ -20,17 +20,17 @@ namespace Pokemod.Common.Systems
         public override void PreUpdateEntities()
         {
             MaxWorldLevel = 5;
-            if(NPC.downedSlimeKing) MaxWorldLevel = 10;
-            if(NPC.downedBoss1) MaxWorldLevel = 15;
-			if(NPC.downedBoss2) MaxWorldLevel = 25;
-            if(NPC.downedQueenBee) MaxWorldLevel = 30;
-			if(NPC.downedBoss3) MaxWorldLevel = 40;
-			if(Main.hardMode) MaxWorldLevel = 50;
-			if(NPC.downedMechBossAny) MaxWorldLevel = 60;
-			if(NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3) MaxWorldLevel = 70;
-			if(NPC.downedPlantBoss || NPC.downedGolemBoss) MaxWorldLevel = 80;
-			if(NPC.downedAncientCultist) MaxWorldLevel = 90;
-			if(NPC.downedMoonlord) MaxWorldLevel = 100;
+            if(NPC.downedSlimeKing) MaxWorldLevel = 7;
+            if(NPC.downedBoss1) MaxWorldLevel = 10;
+			if(NPC.downedBoss2) MaxWorldLevel = 15;
+            if(NPC.downedQueenBee) MaxWorldLevel = 18;
+			if(NPC.downedBoss3) MaxWorldLevel = 20;
+			if(Main.hardMode) MaxWorldLevel = 25;
+			if(NPC.downedMechBossAny) MaxWorldLevel = 30;
+			if(NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3) MaxWorldLevel = 35;
+			if(NPC.downedPlantBoss || NPC.downedGolemBoss) MaxWorldLevel = 40;
+			if(NPC.downedAncientCultist) MaxWorldLevel = 45;
+			if(NPC.downedMoonlord) MaxWorldLevel = 50;
         }
 
         public override void SaveWorldData(TagCompound tag) {

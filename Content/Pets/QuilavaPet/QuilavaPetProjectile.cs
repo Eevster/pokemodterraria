@@ -70,7 +70,15 @@ namespace Pokemod.Content.Pets.QuilavaPet
 				}
 			}
 		}
-	}
+
+        public override void ExtraChanges()
+        {
+			if(!canAttack && timer > 0){
+				immune = true;
+			}
+            base.ExtraChanges();
+        }
+    }
 
 	public class QuilavaPetProjectileShiny : QuilavaPetProjectile{}
 }

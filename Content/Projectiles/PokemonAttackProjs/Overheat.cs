@@ -32,7 +32,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.penetrate = -1;
             Projectile.Opacity = 0.6f;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 6;
+            Projectile.localNPCHitCooldown = 12;
 
             Projectile.hide = true;
             base.SetDefaults();

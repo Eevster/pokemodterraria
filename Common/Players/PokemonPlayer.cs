@@ -20,6 +20,7 @@ using System.IO;
 using Pokemod.Content.Pets.ChikoritaPet;
 using Pokemod.Content.Pets.CyndaquilPet;
 using Pokemod.Content.Pets.TotodilePet;
+using Pokemod.Content.Tiles;
 
 namespace Pokemod.Common.Players
 {
@@ -200,6 +201,25 @@ namespace Pokemod.Common.Players
 				}
 			}
             base.DrawEffects(drawInfo, ref r, ref g, ref b, ref a, ref fullBright);
+        }
+
+        public override void UpdateDead()
+        {
+			bool healed = false;
+			foreach (Item item in Player.inventory)
+			{
+				if (item.ModItem is CaughtPokemonItem pokeItem)
+				{
+					PokeHealerTile.HealPokemon(pokeItem, 1, ref healed);
+				}
+			}
+			if(Player.miscEquips[0] != null && !Player.miscEquips[0].IsAir){
+				if (Player.miscEquips[0].ModItem is CaughtPokemonItem pokeItem)
+				{
+					PokeHealerTile.HealPokemon(pokeItem, 1, ref healed);
+				}
+			}
+            base.UpdateDead();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Pokemod.Content.Pets
 		public int[] EVs = [0,0,0,0,0,0];
 		public int[] finalStats = [0,0,0,0,0,0];
 
-		public bool canBeHurt = true;
+		public bool immune = true;
         public int hurtTime = 30;
         public int currentHp = 0;
 		public string variant = "";
@@ -44,6 +44,7 @@ namespace Pokemod.Content.Pets
 		public virtual int nAttackProjs => 1;
 		public Projectile[] attackProjs;
 		public virtual float distanceToAttack => 800f;
+		public virtual float distanceToFly => 100f;
 		public virtual float enemySearchDistance => 1000;
 		public virtual bool canAttackThroughWalls => false;
 
@@ -287,6 +288,7 @@ namespace Pokemod.Content.Pets
 			GetAllProjsExp();
 			EvolutionProcess();
 			Visuals();
+			ExtraChanges();
 
 			if(Main.myPlayer == Projectile.owner){
 				Projectile.netUpdate = true;
@@ -341,6 +343,8 @@ namespace Pokemod.Content.Pets
 				}
 			}
         }
+
+		public virtual void ExtraChanges(){}
 
 		public virtual void CheckActive(Player player) {
 			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff
@@ -537,6 +541,11 @@ namespace Pokemod.Content.Pets
 				}
 
 				if(distanceFromTarget < distanceToAttack){
+					if(moveStyle == (int)MovementStyle.Hybrid){
+						if(distanceFromTarget > distanceToFly){
+							isFlying = true;
+						}
+					}
 					if(timer <= 0){
 						if(canAttack){
 							Attack(distanceFromTarget, targetCenter);
@@ -613,6 +622,12 @@ namespace Pokemod.Content.Pets
 				else {
 					// Slow down the minion if closer to the player
 					speed = moveSpeed1;
+
+					if(moveStyle == (int)MovementStyle.Hybrid){
+						if(distanceToIdlePosition > distanceToFly){
+							isFlying = true;
+						}
+					}
 
 					if(distanceToIdlePosition < 60f && tangible){
 						Projectile.tileCollide = true;
@@ -836,7 +851,7 @@ namespace Pokemod.Content.Pets
             if(currentHp > finalStats[0]) { currentHp = finalStats[0]; }
             //cal damage versus defense for pokemon
 			//int dmg = npcdmg - finalStats[2]/2;
-			int dmg = 2 + (int)(Math.Clamp(npcdmg-2f,0f,9999f)/finalStats[2]);
+			int dmg = 2 + (int)(Math.Clamp(npcdmg-2f,0f,9999f)/(finalStats[2]+2));
 
             //if dmg is less than 1 deal at least 1
             if (dmg <= 0) dmg = 1;
@@ -885,24 +900,24 @@ namespace Pokemod.Content.Pets
                 npc = Main.npc[i];
 
                 if (npc.CanBeChasedBy() && npc.damage != 0){
-                    if (Projectile.Hitbox.Intersects(npc.getRect()) && !canBeHurt){
+                    if (Projectile.Hitbox.Intersects(npc.getRect()) && !immune){
                         int npcdmg = npc.defDamage;
                         if(currentHp != 0){
 							calIncomingDmg(npcdmg);
 						}
-                        canBeHurt = true;
+                        immune = true;
                     }
                 }
             }
         }
       
         public void hurtTimer(){
-            if (canBeHurt){
+            if (immune){
                 hurtTime--;
 
                 if (hurtTime <= 0){
                     hurtTime = 30;
-                    canBeHurt = false;
+                    immune = false;
                 }
             }
         }

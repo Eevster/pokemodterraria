@@ -36,7 +36,7 @@ namespace Pokemod.Common.GlobalNPCs
 
         public override void HitEffect(NPC npc, NPC.HitInfo hit)
         {
-            if(npc.life <= 0 && !npc.immortal){
+            if(npc.life <= 0 && !npc.immortal && npc.realLife == -1){
                 if(pokemonProj != null){
                     if(pokemonProj.active){
                         if(pokemonProj.ModProjectile is PokemonPetProjectile){
@@ -51,7 +51,8 @@ namespace Pokemod.Common.GlobalNPCs
 
         public static int SetExpGained(NPC npc){
             //int exp = ((int)Math.Sqrt(5*npc.value));
-            int exp = (int)(4f*npc.lifeMax/10f);
+            int exp = (int)(4f*npc.lifeMax/15f);
+            if(npc.value<=0) exp = (int)(0.2f*exp);
             if(exp < 1) exp = 1;
 
             return exp;
