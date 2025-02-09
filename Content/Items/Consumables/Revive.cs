@@ -43,8 +43,8 @@ namespace Pokemod.Content.Items.Consumables
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.Mushroom, 5)
-                .AddIngredient(ItemID.LifeCrystal, 1)
+                .AddIngredient(ItemID.GlowingMushroom, 20)
+                .AddIngredient(ItemID.Diamond, 2)
                 .AddTile(TileID.Bottles) // Making this recipe be crafted at bottles will automatically make Alchemy Table's effect apply to its ingredients.
                 .Register();
         }

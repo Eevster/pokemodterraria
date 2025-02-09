@@ -853,21 +853,7 @@ namespace Pokemod.Content.Pets
 			//int dmg = npcdmg - finalStats[2]/2;
 			int dmg = 2 + (int)(Math.Clamp(npcdmg-2f,0f,9999f)/(finalStats[2]+2));
 
-            //if dmg is less than 1 deal at least 1
-            if (dmg <= 0) dmg = 1;
-            //hurt pokemon
-            currentHp -= dmg;
-            //display damage done
-           // Main.NewText("HP: " + currentHp + "/" + getMaxHP());
-            CombatText.NewText(Projectile.Hitbox, new Color(255, 50, 50), dmg);
-            //if health is less than or equal to 0 despawn pokemon
-            if (currentHp <= 0) {
-				currentHp = 0;
-				Main.player[Projectile.owner].ClearBuff(PokemonBuff);
-				if(Projectile.owner == Main.myPlayer){
-					Main.NewText(Language.GetTextValue("Mods.Pokemod.PokemonInfo.FaintedMsg"), 255, 130, 130); 
-				}
-			}
+            manualDmg(dmg);
             
             return dmg;
         }
@@ -876,6 +862,8 @@ namespace Pokemod.Content.Pets
 			if (dmg <= 0) dmg = 1;
 
             currentHp -= dmg;
+			SoundEngine.PlaySound(SoundID.NPCHit1, Projectile.position);
+
             CombatText.NewText(Projectile.Hitbox, new Color(255, 50, 50), dmg);
 
             if (currentHp <= 0) {
@@ -904,6 +892,7 @@ namespace Pokemod.Content.Pets
                         int npcdmg = npc.defDamage;
                         if(currentHp != 0){
 							calIncomingDmg(npcdmg);
+							Projectile.velocity += 4f*(Projectile.Center - npc.Center).SafeNormalize(Vector2.Zero);
 						}
                         immune = true;
                     }

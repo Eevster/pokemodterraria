@@ -379,6 +379,7 @@ Projectiles: {
 	// WingAttack.DisplayName: Wing Attack
 	// AirSlash.DisplayName: Air Slash
 	// HyperFang.DisplayName: Hyper Fang
+	// Toxic.DisplayName: Toxic
 }
 
 Items: {

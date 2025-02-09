@@ -44,7 +44,7 @@ namespace Pokemod.Content.Items.Consumables
         {
             CreateRecipe()
                 .AddIngredient(ItemID.UnicornHorn, 5)
-                .AddIngredient(ItemID.LifeCrystal, 1)
+                .AddIngredient(ItemID.Diamond, 4)
                 .AddTile(TileID.Bottles) // Making this recipe be crafted at bottles will automatically make Alchemy Table's effect apply to its ingredients.
                 .Register();
         }

@@ -260,13 +260,7 @@ namespace Pokemod.Content.Items.Pokeballs
 
             base.OnHitNPC(target, hit, damageDone);
         }
-
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-			if(target.life<=0)target.life = 1;
-            base.ModifyHitNPC(target, ref modifiers);
-        }
-
+		
         public void CaptureFailure(){
 			if(targetPokemon != null){
 				targetPokemon.Center = Projectile.Center + new Vector2(0,-targetPokemon.height/2);
