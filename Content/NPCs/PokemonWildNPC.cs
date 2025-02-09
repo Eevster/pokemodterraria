@@ -125,6 +125,16 @@ namespace Pokemod.Content.NPCs
 			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, IVs, variant: variant);
         }
 
+        public override bool CanHitNPC(NPC target)
+        {
+            return false;
+        }
+
+        public override bool CanHitPlayer(Player target, ref int cooldownSlot)
+        {
+            return false;
+        }
+
         public override void ModifyTypeName(ref string typeName)
         {
 			typeName += " lvl " + lvl;

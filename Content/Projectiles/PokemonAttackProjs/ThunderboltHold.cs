@@ -112,7 +112,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
         }
 
-		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
+        public override bool? CanDamage()
+        {
+            return Projectile.timeLeft <= 25;
+        }
+
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"
 			// shootSpeed is 2.1f for reference, so this is basically plotting 12 pixels ahead from the center
 			Vector2 start = Projectile.Center + new Vector2(24,0);
