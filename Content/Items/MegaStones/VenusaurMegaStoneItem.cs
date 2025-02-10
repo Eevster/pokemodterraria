@@ -28,7 +28,7 @@ namespace Pokemod.Content.Items.MegaStones
 		}
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		public override void AddRecipes() {
+		/*public override void AddRecipes() {
 			CreateRecipe(1)
 				.AddIngredient<KeyStoneItem>()
 				.AddIngredient(ItemID.JungleGrassSeeds, 99)
@@ -37,6 +37,6 @@ namespace Pokemod.Content.Items.MegaStones
 				.AddTile(TileID.WorkBenches)
 				.AddCondition(Condition.PlayerCarriesItem(ModContent.ItemType<MegaCuffItem>()))
 				.Register();
-		}
+		}*/
 	}
 }

@@ -28,12 +28,12 @@ namespace Pokemod.Content.Items.MegaStones
 		}
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		public override void AddRecipes() {
+		/*public override void AddRecipes() {
 			CreateRecipe(1)
 				.AddIngredient<KeyStoneItem>(1)
 				.AddIngredient(ItemID.IronBar, 15)
 				.AddTile(TileID.WorkBenches)
 				.Register();
-		}
+		}*/
 	}
 }
