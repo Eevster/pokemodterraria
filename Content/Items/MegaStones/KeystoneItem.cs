@@ -28,7 +28,7 @@ namespace Pokemod.Content.Items.MegaStones
 		}
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		public override void AddRecipes() {
+		/*public override void AddRecipes() {
 			CreateRecipe(1)
 				.AddIngredient(ItemID.Ruby, 15)
 				.AddIngredient(ItemID.Emerald, 15)
@@ -36,6 +36,6 @@ namespace Pokemod.Content.Items.MegaStones
 				.AddIngredient(ItemID.Amethyst, 15)
 				.AddTile(TileID.WorkBenches)
 				.Register();
-		}
+		}*/
 	}
 }
