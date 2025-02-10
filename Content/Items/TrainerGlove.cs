@@ -72,7 +72,7 @@ namespace Pokemod.Content.Items
             CreateRecipe()
                 .AddIngredient(ItemID.Silk, 50)
                 .AddRecipeGroup(RecipeGroupID.IronBar, 5)
-                .AddTile(TileID.Bottles) // Making this recipe be crafted at bottles will automatically make Alchemy Table's effect apply to its ingredients.
+                .AddTile(TileID.WorkBenches) // Making this recipe be crafted at bottles will automatically make Alchemy Table's effect apply to its ingredients.
                 .Register();
         }
 	}

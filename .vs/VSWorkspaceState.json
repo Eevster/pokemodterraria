@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Content",
+    "\\Content\\Items",
+    "\\Content\\Items\\Accessories",
+    "\\Content\\NPCs"
   ],
-  "SelectedNode": "\\description.txt",
+  "SelectedNode": "\\Content\\NPCs\\ProfOakTravelingMerchant.cs",
   "PreviewInSolutionExplorer": false
 }

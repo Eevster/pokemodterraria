@@ -21,6 +21,7 @@ using Pokemod.Content.Pets.ChikoritaPet;
 using Pokemod.Content.Pets.CyndaquilPet;
 using Pokemod.Content.Pets.TotodilePet;
 using Pokemod.Content.Items.Pokeballs;
+using Pokemod.Content.Items.Accessories;
 
 namespace Pokemod.Content.NPCs
 {
@@ -65,17 +66,10 @@ namespace Pokemod.Content.NPCs
 			Shop.Add<PokeballItem>();
 			Shop.Add<GreatballItem>();
 			Shop.Add<UltraballItem>();
+			Shop.Add<Everstone>();
 
 			// Bring  Tools
-			Shop.AddPool("Grass", slots: 1)
-				.Add<BulbasaurPetItem>()
-				.Add<ChikoritaPetItem>();
-			Shop.AddPool("Fire", slots: 1)
-				.Add<CharmanderPetItem>()
-				.Add<CyndaquilPetItem>();
-			Shop.AddPool("Water", slots: 1)
-				.Add<SquirtlePetItem>()
-				.Add<TotodilePetItem>();
+			
 
 			Shop.Register();
 		}
