@@ -23,8 +23,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneForest) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
+				if (spawnInfo.Player.ZoneBeach) {
+					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.1f);
 			}
 			}
 

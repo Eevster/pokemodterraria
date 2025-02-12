@@ -1,12 +1,8 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Assets",
-    "\\Content",
-    "\\Content\\Items\\Accessories",
-    "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs"
+    "\\Content\\Items\\EvoStones",
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\Pets\\AbraPet"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\KinglerCritter.cs",
   "PreviewInSolutionExplorer": false
 }
