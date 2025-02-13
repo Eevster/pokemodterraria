@@ -19,10 +19,7 @@ namespace Pokemod.Content.Pets.OnixPet
 		public override int[] jumpStartEnd => [0,3];
 		public override int[] fallStartEnd => [0,3];
 
-		public override string[] evolutions => ["Clefable"];
-		public override int levelToEvolve => 20;
-		public override int levelEvolutionsNumber => 1;
-
+		
 		public override int nAttackProjs => 3;
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;

@@ -19,8 +19,8 @@ namespace Pokemod.Content.Pets.KrabbyPet
 		public override int[] jumpStartEnd => [0,3];
 		public override int[] fallStartEnd => [0,3];
 
-		public override string[] evolutions => ["Clefable"];
-		public override int levelToEvolve => 20;
+		public override string[] evolutions => ["Kingler"];
+		public override int levelToEvolve => 28;
 		public override int levelEvolutionsNumber => 1;
 
 		public override int nAttackProjs => 3;

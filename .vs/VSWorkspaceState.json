@@ -1,8 +1,16 @@
 {
   "ExpandedNodes": [
-    "\\Content\\Items\\EvoStones",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\Pets\\AbraPet"
+    "",
+    "\\Content",
+    "\\Content\\Pets",
+    "\\Content\\Pets\\WartortlePet",
+    "\\Content\\Pets\\WeedlePet",
+    "\\Content\\Pets\\WeepinbellPet",
+    "\\Content\\Pets\\WeezingPet",
+    "\\Content\\Pets\\WigglytuffPet",
+    "\\Content\\Pets\\ZapdosPet",
+    "\\Content\\Pets\\ZubatPet"
   ],
+  "SelectedNode": "\\Content\\Pets\\ZubatPet\\ZubatPetProjectile.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -19,7 +19,7 @@ namespace Pokemod.Content.Pets.PoliwhirlPet
 		public override int[] jumpStartEnd => [0,3];
 		public override int[] fallStartEnd => [0,3];
 
-		public override string[] evolutions => ["Clefable"];
+		public override string[] evolutions => ["Poliwrath"];
 		public override int levelToEvolve => 20;
 		public override int levelEvolutionsNumber => 1;
 

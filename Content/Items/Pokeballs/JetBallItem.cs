@@ -15,9 +15,9 @@ namespace Pokemod.Content.Items.Pokeballs
 		protected override float ThrowSpeed => 25f;
 		public override void AddRecipes() {
 			CreateRecipe(1)
-				.AddIngredient(ModContent.ItemType<BlueApricorn>(), 2)
-				.AddIngredient(ItemID.Feather, 3)
-				.AddRecipeGroup(RecipeGroupID.IronBar, 2)
+				.AddIngredient(ModContent.ItemType<BlueApricorn>(), 5)
+				.AddIngredient(ItemID.Feather, 10)
+				.AddRecipeGroup(RecipeGroupID.IronBar, 5)
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}

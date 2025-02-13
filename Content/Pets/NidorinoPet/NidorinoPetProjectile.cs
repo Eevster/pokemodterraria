@@ -20,7 +20,10 @@ namespace Pokemod.Content.Pets.NidorinoPet
 		public override int[] fallStartEnd => [9,9];
 		public override int[] attackStartEnd => [10,15];
 
-		public override int nAttackProjs => 3;
+        public override string[] evolutions => ["Nidoking"];
+        public override string[] itemToEvolve => ["MoonStoneItem"];
+
+        public override int nAttackProjs => 3;
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 36;

@@ -19,11 +19,10 @@ namespace Pokemod.Content.Pets.ExeggcutePet
 		public override int[] jumpStartEnd => [0,3];
 		public override int[] fallStartEnd => [0,3];
 
-		public override string[] evolutions => ["Clefable"];
-		public override int levelToEvolve => 20;
-		public override int levelEvolutionsNumber => 1;
+        public override string[] evolutions => ["Exeggutor"];
+        public override string[] itemToEvolve => ["LeafStoneItem"];
 
-		public override int nAttackProjs => 3;
+        public override int nAttackProjs => 3;
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 0;

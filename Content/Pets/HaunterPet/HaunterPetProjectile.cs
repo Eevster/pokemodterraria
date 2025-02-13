@@ -23,7 +23,11 @@ namespace Pokemod.Content.Pets.HaunterPet
 		public override int[] walkFlyStartEnd => [0,5];
 		public override int[] attackFlyStartEnd => [6,11];
 
-		public override int nAttackProjs => 1;
+        public override string[] evolutions => ["Gengar"];
+        public override int levelToEvolve => 45;
+        public override int levelEvolutionsNumber => 1;
+
+        public override int nAttackProjs => 1;
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;
 		public override int attackDuration => 30;
