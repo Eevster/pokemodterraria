@@ -914,6 +914,27 @@ Items: {
 		DisplayName: Everstone
 		Tooltip: Cuando está equipado cualquier Pokémon seleccionado como favorito o equipado como mascota no puede evolucionar por nivel
 	}
+
+	LeafStoneItem: {
+		// DisplayName: Leaf Stone Item
+		// Tooltip: ""
+	}
+
+	ThunderStoneHelmet: {
+		// SetBonus: Mods.Pokemod.Items.ThunderStoneHelmet.SetBonus
+		// DisplayName: Thunder Stone Helmet
+		// Tooltip: ""
+	}
+
+	ThunderStoneBreastplate: {
+		// DisplayName: Thunder Stone Breastplate
+		// Tooltip: ""
+	}
+
+	ThunderStoneLeggings: {
+		// DisplayName: Thunder Stone Leggings
+		// Tooltip: ""
+	}
 }
 
 Buffs: {

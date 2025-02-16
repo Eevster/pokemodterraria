@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	public class WaterStoneBreastplate : ModItem
 	{
 		public static readonly int MaxManaIncrease = 20;
-		public static readonly int AdditiveGenericDamageBonus = 20;
+		public static readonly int AdditiveGenericDamageBonus = 100;
 		public static readonly int MaxMinionIncrease = 1;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxManaIncrease, MaxMinionIncrease);

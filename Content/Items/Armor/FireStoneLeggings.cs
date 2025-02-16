@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	public class FireStoneLeggings : ModItem
 	{
 		public static readonly int MoveSpeedBonus = 5;
-		public static readonly int AdditiveGenericDamageBonus = 20;
+		public static readonly int AdditiveGenericDamageBonus = 200;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeedBonus);
 
@@ -26,7 +26,7 @@ namespace Pokemod.Content.Items.Armor
 		}
 
 		public override void UpdateEquip(Player player) {
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 100f; // Increase dealt damage for all weapon classes by 20%
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; // Increase dealt damage for all weapon classes by 20%
 		}
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.

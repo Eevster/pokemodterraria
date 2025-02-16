@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	[AutoloadEquip(EquipType.Head)]
 	public class WaterStoneHelmet : ModItem
 	{
-		public static readonly int AdditiveGenericDamageBonus = 20;
+		public static readonly int AdditiveGenericDamageBonus = 80;
 
 		public static LocalizedText SetBonusText { get; private set; }
 

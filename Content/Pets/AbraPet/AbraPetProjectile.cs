@@ -23,38 +23,31 @@ namespace Pokemod.Content.Pets.AbraPet
 		public override int levelToEvolve => 16;
 		public override int levelEvolutionsNumber => 1;
 
-		public override int nAttackProjs => 3;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 0;
-		public override int attackCooldown => 120;
-		public override bool canMoveWhileAttack => true;
+        public override int nAttackProjs => 1;
+        public override float enemySearchDistance => 1000;
+        public override bool canAttackThroughWalls => false;
+        public override int attackDuration => 56;
+        public override int attackCooldown => 34;
 
-		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
-			SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
-			if(Projectile.owner == Main.myPlayer){
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), GetPokemonDamage(60, true), 2f, Projectile.owner, i*MathHelper.TwoPi/3)];
-					}
-				} 
-			}
-			timer = attackDuration;
-			canAttack = false;
-		}
-
-		public override void UpdateAttackProjs(int i, ref float maxFallSpeed){
-			if(attackProjs[i].ai[1] == 0){
-				attackProjs[i].Center = Projectile.position + new Vector2(25,23) + 50*new Vector2(1,0).RotatedBy(attackProjs[i].ai[0]);
-			}
-		}
-
-		public override void UpdateNoAttackProjs(int i){
-			if(attackProjs[i].ai[1] != 0){
-				attackProjs[i] = null;
-			}
-		}
-	}
+        public override void Attack(float distanceFromTarget, Vector2 targetCenter)
+        {
+            if (Projectile.owner == Main.myPlayer)
+            {
+                for (int i = 0; i < nAttackProjs; i++)
+                {
+                    if (attackProjs[i] == null)
+                    {
+                        SoundEngine.PlaySound(SoundID.Item6 with { Volume = 0.5f }, Projectile.position);
+                        attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), targetCenter, Vector2.Zero, ModContent.ProjectileType<Confusion>(), GetPokemonDamage(50, true), 2f, Projectile.owner)];
+                        currentStatus = (int)ProjStatus.Attack;
+                        timer = attackDuration;
+                        canAttack = false;
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
 	public class AbraPetProjectileShiny : AbraPetProjectile{}
 }

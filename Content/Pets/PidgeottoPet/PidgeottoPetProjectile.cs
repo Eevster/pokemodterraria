@@ -37,7 +37,7 @@ namespace Pokemod.Content.Pets.PidgeottoPet
 		public override int attackCooldown => 90;
 
 		public override string[] evolutions => ["Pidgeot"];
-		public override int levelToEvolve => 32;
+		public override int levelToEvolve => 36;
 		public override int levelEvolutionsNumber => 1;
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){

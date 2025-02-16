@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	public class WaterStoneLeggings : ModItem
 	{
 		public static readonly int MoveSpeedBonus = 5;
-		public static readonly int AdditiveGenericDamageBonus = 20;
+		public static readonly int AdditiveGenericDamageBonus = 90;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeedBonus);
 

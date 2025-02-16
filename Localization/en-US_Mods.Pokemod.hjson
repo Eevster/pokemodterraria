@@ -914,6 +914,27 @@ Items: {
 		DisplayName: Everstone
 		Tooltip: When equipped, any pokemon selected as favorite or equipped as a pet is prevented from evolving by level
 	}
+
+	LeafStoneItem: {
+		DisplayName: Leaf Stone Item
+		Tooltip: ""
+	}
+
+	ThunderStoneHelmet: {
+		SetBonus: Mods.Pokemod.Items.ThunderStoneHelmet.SetBonus
+		DisplayName: Thunder Stone Helmet
+		Tooltip: ""
+	}
+
+	ThunderStoneBreastplate: {
+		DisplayName: Thunder Stone Breastplate
+		Tooltip: ""
+	}
+
+	ThunderStoneLeggings: {
+		DisplayName: Thunder Stone Leggings
+		Tooltip: ""
+	}
 }
 
 Buffs: {

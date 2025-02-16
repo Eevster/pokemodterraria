@@ -2,15 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Content",
-    "\\Content\\Pets",
-    "\\Content\\Pets\\WartortlePet",
-    "\\Content\\Pets\\WeedlePet",
-    "\\Content\\Pets\\WeepinbellPet",
-    "\\Content\\Pets\\WeezingPet",
-    "\\Content\\Pets\\WigglytuffPet",
-    "\\Content\\Pets\\ZapdosPet",
-    "\\Content\\Pets\\ZubatPet"
+    "\\Content\\Items",
+    "\\Content\\Items\\Armor"
   ],
-  "SelectedNode": "\\Content\\Pets\\ZubatPet\\ZubatPetProjectile.cs",
+  "SelectedNode": "\\Content\\Items\\Armor\\FireStoneLeggings.cs",
   "PreviewInSolutionExplorer": false
 }
