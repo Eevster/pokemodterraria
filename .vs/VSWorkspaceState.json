@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Assets",
+    "\\Assets\\Textures",
     "\\Content",
-    "\\Content\\Items",
-    "\\Content\\Items\\Armor"
+    "\\Content\\Tiles",
+    "\\Content\\TitleScreens"
   ],
-  "SelectedNode": "\\Content\\Items\\Armor\\FireStoneLeggings.cs",
+  "SelectedNode": "\\Assets\\Textures\\PokemodTitle.png",
   "PreviewInSolutionExplorer": false
 }

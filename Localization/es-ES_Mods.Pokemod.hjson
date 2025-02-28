@@ -935,6 +935,11 @@ Items: {
 		// DisplayName: Thunder Stone Leggings
 		// Tooltip: ""
 	}
+
+	AssaultVestItem: {
+		// DisplayName: Assault Vest Item
+		// Tooltip: ""
+	}
 }
 
 Buffs: {
