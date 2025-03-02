@@ -22,8 +22,10 @@ namespace Pokemod.Content.Items
 {
 	public class CaughtPokemonItem : ModItem
 	{
+		public string OriginalTrainerID;
+		public string CurrentTrainerID;
         public string PokemonName;
-		public int level;
+        public int level;
 		public int exp;
 		public int expToNextLevel;
 		public int currentHP;
@@ -32,12 +34,13 @@ namespace Pokemod.Content.Items
 		public bool Shiny;
 		public string BallType;
 		public string variant;
+		public int shouldDespawn = 3;
+		public bool canShoot = false;
 		public Projectile proj;
 
 		public override string Texture => "Pokemod/Assets/Textures/Pokeballs/PokeballItem";
 
-		public override void SetDefaults() {
-			Item.CloneDefaults(ItemID.ZephyrFish);
+        public override void SetDefaults() {
 			Item.useTime = 30;
 			Item.useAnimation = 30;
             Item.width = 14;
@@ -83,13 +86,13 @@ namespace Pokemod.Content.Items
 			currentHP = (int)reader.ReadDouble();
 		}
 
-        public override bool? UseItem(Player player)
+		public override bool? UseItem(Player player)
         {
 			if (player.whoAmI == Main.myPlayer) {
-				if(!player.HasBuff(Item.buffType)){
-					player.AddBuff(Item.buffType, 3600);
+				if(proj == null){
+					canShoot = true;
 				}else{
-					player.ClearBuff(Item.buffType);
+					canShoot = false;
 					proj?.Kill();
 					proj = null;
 				}
@@ -99,7 +102,7 @@ namespace Pokemod.Content.Items
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-			if(player.HasBuff(Item.buffType) && currentHP != 0){
+			if(canShoot && currentHP != 0){
 				int projIndex = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, currentHP);
 				proj = Main.projectile[projIndex];
 			}
@@ -146,7 +149,8 @@ namespace Pokemod.Content.Items
 					if(Shiny) line.OverrideColor = Main.DiscoColor;
 				}
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
-					line.Text = (variant != null?(variant!=""?("[c/23a462:"+variant+" variant]\n"):""):"")+Language.GetText("Mods.Pokemod.PokemonInfo.CaughtIn").WithFormatArgs(BallType.Replace("Item", "")).Value + "\n"+
+					line.Text = (variant != null?(variant!=""?("[c/23a462:"+variant+" variant]\n"):""):"")+
+					((OriginalTrainerID != null && OriginalTrainerID != "")?Language.GetText("Mods.Pokemod.PokemonInfo.CaughtInBy").WithFormatArgs(BallType.Replace("Item", ""), OriginalTrainerID.Remove(OriginalTrainerID.Length-9)).Value:Language.GetText("Mods.Pokemod.PokemonInfo.CaughtIn").WithFormatArgs(BallType.Replace("Item", "")).Value) + "\n"+
 					"[c/ffd51c:Lvl] "+level+"  [c/ffd51c:Exp:] "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level))+
 					"\n"+(currentHP>=0?"[c/ffd51c:HP:] "+(currentHP>0?(currentHP+"/"+fullStats[0]+" "):"[c/fa3e42:"+Language.GetTextValue("Mods.Pokemod.PokemonInfo.Fainted")+"] "):"")+
 					"\n[c/ffd51c:Atk:] "+fullStats[1]+"  [c/ffd51c:Def:] "+fullStats[2]+
@@ -179,28 +183,33 @@ namespace Pokemod.Content.Items
 
         public override void UpdateInventory(Player player)
         {
+			if(OriginalTrainerID == null || OriginalTrainerID == "") OriginalTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
+			if(CurrentTrainerID == null || CurrentTrainerID == "") CurrentTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
+
+			shouldDespawn = 3;
+
 			if(PokemonName != null && PokemonName != ""){
 				GetProjInfo(player);
 			}
 			if(proj != null){
-				if(((!player.HasBuff(Item.buffType) && Item.buffType != 0) || currentHP == 0) && proj.active){
-					player.ClearBuff(Item.buffType);
+				if(currentHP == 0 && proj.active){
 					proj?.Kill();
 					proj = null;
 				}
 			}
-			if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
-				if(player.miscEquips[0] != Item){
-					proj?.Kill();
-					proj = null;
-				}
-			}
+
 			SetPetInfo(player);
+
             base.UpdateInventory(player);
         }
 
         public override void HoldItem(Player player)
         {
+			if(OriginalTrainerID == null || OriginalTrainerID == "") OriginalTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
+			if(CurrentTrainerID == null || CurrentTrainerID == "") CurrentTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
+
+			shouldDespawn = 3;
+
 			if(PokemonName != null && PokemonName != ""){
 				GetProjInfo(player);
 				if(Main.mouseItem != null){
@@ -209,23 +218,29 @@ namespace Pokemod.Content.Items
 					}
 				}
 			}
+
 			if(proj != null){
-				if(((!player.HasBuff(Item.buffType) && Item.buffType != 0) || currentHP == 0) && proj.active){
-					player.ClearBuff(Item.buffType);
+				if(currentHP == 0 && proj.active){
 					proj?.Kill();
 					proj = null;
 				}
 			}
-			if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
-				if(player.miscEquips[0] != Item){
-					proj?.Kill();
-					proj = null;
+			if(Main.mouseItem != null){
+				if(Main.mouseItem.ModItem is CaughtPokemonItem ball){
+					if(ball.proj != null){
+						if(ball.currentHP == 0 && ball.proj.active){
+							ball.proj?.Kill();
+							ball.proj = null;
+						}
+					}
 				}
 			}
+
 			SetPetInfo(player);
 			if(Main.mouseItem != null){
 				if(Main.mouseItem.ModItem is CaughtPokemonItem ball){
 					ball.SetPetInfo(player);
+					ball.shouldDespawn = 3;
 				}
 			}
 
@@ -240,11 +255,7 @@ namespace Pokemod.Content.Items
 				UpdateLevel(player);
 				GetProjInfo(player);
 				if(currentHP == 0){
-					if(Item.buffType != 0 && player != null){
-						player.ClearBuff(Item.buffType);
-					}
 					Item.shoot = ProjectileID.None;
-					Item.buffType = 0;
 				}
 				if(variant != null){
 					if(variant != ""){
@@ -303,14 +314,9 @@ namespace Pokemod.Content.Items
 			if(newPokemonName != ""){
 				Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 				proj.Kill();
-				if(player != null){
-					player.ClearBuff(Item.buffType);
-				}
 				PokemonName = newPokemonName;
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
-				Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
 				if(player != null){
-					player.AddBuff(Item.buffType, 3600);
 					int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
 					proj = Main.projectile[projIndex];
 				}
@@ -385,6 +391,8 @@ namespace Pokemod.Content.Items
         // NOTE: The tag instance provided here is always empty by default.
         // Read https://github.com/tModLoader/tModLoader/wiki/Saving-and-loading-using-TagCompound to better understand Saving and Loading data.
         public override void SaveData(TagCompound tag) {
+			tag["OriginalTrainerID"] = OriginalTrainerID;
+			tag["CurrentTrainerID"] = CurrentTrainerID;
 			tag["PokemonName"] = PokemonName;
 			tag["Level"] = level;
 			tag["Exp"] = exp;
@@ -397,6 +405,8 @@ namespace Pokemod.Content.Items
 		}
 
 		public override void LoadData(TagCompound tag) {
+			OriginalTrainerID = tag.GetString("OriginalTrainerID");
+			CurrentTrainerID = tag.GetString("CurrentTrainerID");
 			PokemonName = tag.GetString("PokemonName");
 			level = tag.GetInt("Level");
 			exp = tag.GetInt("Exp");
@@ -415,6 +425,12 @@ namespace Pokemod.Content.Items
 			SetExpToNextLevel();
 		}
 
+        public override void PostUpdate()
+        {
+			DespawnPokemon();
+            base.PostUpdate();
+        }
+
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
 			if(BallType != null && BallType != ""){
@@ -429,15 +445,6 @@ namespace Pokemod.Content.Items
 					scale: scale,
 					SpriteEffects.None,
 					layerDepth: 0f);
-			}
-
-			if(proj != null){
-				if(proj.active){
-					GetProjHP();
-					proj.Kill();
-				}else{
-					proj = null;
-				}
 			}
 
             base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
@@ -471,8 +478,27 @@ namespace Pokemod.Content.Items
 					SpriteEffects.None,
 					layerDepth: 0f);
 			}
+
+			if(!Main.gamePaused){
+				if(--shouldDespawn<=0){
+					DespawnPokemon();
+				}
+			}else{
+				shouldDespawn = 3;
+			}
 				
             base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
         }
+
+		public void DespawnPokemon(){
+			if(proj != null){
+				if(proj.active){
+					GetProjHP();
+					proj.Kill();
+				}else{
+					proj = null;
+				}
+			}
+		}
     }
 }

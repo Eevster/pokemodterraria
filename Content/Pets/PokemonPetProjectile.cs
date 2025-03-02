@@ -23,7 +23,7 @@ namespace Pokemod.Content.Pets
 	public abstract class PokemonPetProjectile : ModProjectile
 	{
 		public override string Texture => "Pokemod/Assets/Textures/Pokesprites/Pets/"+GetType().Name;
-		public int PokemonBuff = 0;
+		//public int PokemonBuff = 0;
 		private int expGained = 0;
 		public int pokemonLvl;
 
@@ -82,6 +82,7 @@ namespace Pokemod.Content.Pets
 
 		public virtual bool tangible => true;
 		public virtual bool canRotate => false;
+		public bool canFall = false;
 
 		public enum MovementStyle
 		{
@@ -115,6 +116,7 @@ namespace Pokemod.Content.Pets
 			writer.Write((int)currentHp);
             writer.Write((double)currentStatus);
 			writer.Write((double)expGained);
+			writer.Write(canFall);
             base.SendExtraAI(writer);
         }
 
@@ -123,6 +125,7 @@ namespace Pokemod.Content.Pets
 			currentHp = reader.ReadInt32();
             currentStatus = (int)reader.ReadDouble();
 			expGained = (int)reader.ReadDouble();
+			canFall = reader.ReadBoolean();
             base.ReceiveExtraAI(reader);
         }
 
@@ -136,7 +139,7 @@ namespace Pokemod.Content.Pets
 
 		public override void SetStaticDefaults() {
 			Main.projFrames[Projectile.type] = totalFrames;
-			Main.projPet[Projectile.type] = true;
+			//Main.projPet[Projectile.type] = true;
 
 			// Basics of CharacterPreviewAnimations explained in ExamplePetProjectile
 			// Notice we define our own method to use in .WithCode() below. This technically allows us to animate the projectile manually using frameCounter and frame as well
@@ -162,7 +165,7 @@ namespace Pokemod.Content.Pets
         public override void OnSpawn(IEntitySource source)
         {
 			Player player = Main.player[Projectile.owner];
-			PokemonBuff = ModContent.Find<ModBuff>("Pokemod", GetType().Name.Replace("Projectile","Buff")).Type;
+			//PokemonBuff = ModContent.Find<ModBuff>("Pokemod", GetType().Name.Replace("Projectile","Buff")).Type;
 			attackProjs = new Projectile[nAttackProjs];
 			Projectile.Center += new Vector2(0,(player.height-Projectile.height)/2);
 			currentHp = (int)Projectile.ai[0];
@@ -348,9 +351,9 @@ namespace Pokemod.Content.Pets
 
 		public virtual void CheckActive(Player player) {
 			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff
-			if (!player.dead && player.HasBuff(PokemonBuff)) {
+			if (!player.dead /*&& player.HasBuff(PokemonBuff)*/) {
 				Projectile.timeLeft = 2;
-				player.AddBuff(PokemonBuff, 10);
+				//player.AddBuff(PokemonBuff, 10);
 			}
 			if(Main.myPlayer == Projectile.owner){
 				Projectile.netUpdate = true;
@@ -487,6 +490,8 @@ namespace Pokemod.Content.Pets
 
 			float maxFallSpeed = 10f;
 
+			canFall = false;
+
 			if(moveStyle == (int)MovementStyle.Fly){
 				isFlying = true;
 			}
@@ -557,6 +562,12 @@ namespace Pokemod.Content.Pets
 					}
 				}
 
+				if(!isFlying && !isSwimming && currentStatus != (int)ProjStatus.Attack){
+					if(targetCenter.Y > Projectile.Center.Y + 16){
+						canFall = true;
+					}
+				}
+
 				if(canAttackOutTimer){
 					AttackOutTimer(distanceFromTarget, targetCenter);
 				}
@@ -611,6 +622,12 @@ namespace Pokemod.Content.Pets
 				if(isFlying && distanceToIdlePosition > 1200f && tangible){
 					Projectile.tileCollide = false;
 				}
+
+				if(!isFlying && !isSwimming && currentStatus != (int)ProjStatus.Attack){
+					if(vectorToIdlePosition.Y > 16){
+						canFall = true;
+					}
+				}
 				// Minion doesn't have a target: return to player and idle
 				if (distanceToIdlePosition > 600f) {
 					// Speed up the minion if it's away from the player
@@ -658,6 +675,14 @@ namespace Pokemod.Content.Pets
 			}
 
 			if(isFlying || isSwimming){
+				canFall = true;
+
+				if(isSwimming){
+					if(Projectile.velocity.Y > float.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+						Jump();
+					}
+				}
+
 				if(currentStatus == (int)ProjStatus.Jump || currentStatus == (int)ProjStatus.Fall){
 					currentStatus = (int)ProjStatus.Idle;
 				}
@@ -756,7 +781,7 @@ namespace Pokemod.Content.Pets
 
 			if(jumpHeight != 0){
 				currentStatus = (int)ProjStatus.Jump;
-				Projectile.velocity.Y -= (int)Math.Sqrt(2*0.3f*jumpHeight*16f);
+				Projectile.velocity.Y -= (int)Math.Sqrt((isSwimming?4:2)*(Projectile.wet?0.5f:0.3f)*jumpHeight*16f);
 			}
 		}
 
@@ -868,7 +893,7 @@ namespace Pokemod.Content.Pets
 
             if (currentHp <= 0) {
 				currentHp = 0;
-				Main.player[Projectile.owner].ClearBuff(PokemonBuff);
+				//Main.player[Projectile.owner].ClearBuff(PokemonBuff);
 				if(Projectile.owner == Main.myPlayer){
 					Main.NewText(Language.GetTextValue("Mods.Pokemod.PokemonInfo.FaintedMsg"), 255, 130, 130); 
 				}
@@ -1017,7 +1042,7 @@ namespace Pokemod.Content.Pets
 
 		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
-            fallThrough = false;
+            fallThrough = canFall;
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }

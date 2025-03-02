@@ -14,47 +14,13 @@ namespace Pokemod.Content.Pets
         public virtual int ProjType => 0;
 		public override void SetStaticDefaults() {
 			Main.buffNoTimeDisplay[Type] = true;
-			Main.vanityPet[Type] = true;
 		}
 
 		public override void Update(Player player, ref int buffIndex)
         {
-            bool Shiny = false;
             bool noProj = false;
 
             if(player.whoAmI == Main.myPlayer){
-                if(GetType().Name.Contains("PetBuffShiny")) Shiny = true;
-
-                if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
-                    if(player.miscEquips[0].ModItem is CaughtPokemonItem){
-                        CaughtPokemonItem pokeItem = (CaughtPokemonItem)player.miscEquips[0].ModItem;
-                        if(pokeItem.proj == null || player.ownedProjectileCounts[ProjType] <= 0){
-                            if(pokeItem.PokemonName == PokeName && pokeItem.Shiny == Shiny && pokeItem.currentHP != 0){
-                                int proj = Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ProjType, 0, 0f, player.whoAmI, pokeItem.currentHP, 1);
-                                pokeItem.proj = Main.projectile[proj];
-                            }else{
-                                noProj = true;
-                            }
-                        }
-                    }
-                }
-                if(player.ownedProjectileCounts[ProjType] > 0){
-                    if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
-                        if(player.miscEquips[0].ModItem is CaughtPokemonItem){
-                            CaughtPokemonItem pokeItem = (CaughtPokemonItem)player.miscEquips[0].ModItem;
-                            if(pokeItem.proj != null){
-                                if(pokeItem.PokemonName == PokeName && pokeItem.Shiny == Shiny){
-                                    pokeItem.SetPetInfo(player);
-                                    player.buffTime[buffIndex] = 2;
-                                    if(pokeItem.currentHP == 0){
-                                        noProj = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                
                 if(player.ownedProjectileCounts[ProjType] <= 0){
                     noProj = true;
                 }

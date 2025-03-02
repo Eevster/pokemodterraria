@@ -85,7 +85,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
 			Projectile.rotation = Projectile.velocity.ToRotation();
 		
-			if(Projectile.timeLeft < 110){
+			if(Projectile.timeLeft < 115){
 				if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
 					foundTarget = true;
 				}else{
@@ -98,7 +98,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
 
 			if(foundTarget){
-				if(targetEnemy == null && targetPlayer == null){
+				if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
 					Projectile.velocity +=  0.2f*(Trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 
 					if(Projectile.velocity.Length() > projSpeed){

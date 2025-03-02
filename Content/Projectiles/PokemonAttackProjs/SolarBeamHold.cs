@@ -50,6 +50,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.localNPCHitCooldown = 10;
 
 			Projectile.light = 1f;
+
+            Projectile.hide = true;
             base.SetDefaults();
         }
 
@@ -141,5 +143,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 26f, ref collisionPoint);
 		}
+
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            overPlayers.Add(index);
+        }
     }
 }

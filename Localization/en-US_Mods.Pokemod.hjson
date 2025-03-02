@@ -2905,6 +2905,7 @@ WorldGen.PokeballItemTilePassMessage: Mods.Pokemod.WorldGen.PokeballItemTilePass
 PokemonInfo: {
 	Fainted: Fainted
 	CaughtIn: Caught in a {0}
+	CaughtInBy: Caught in a {0} by {1}
 	LevelUp: "{0} grew to lvl {1}"
 	FaintedMsg: Your pokemon fainted!
 	ItemUse: To use it, click on your pokemon or right click on the corresponding pokeball

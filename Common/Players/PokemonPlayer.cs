@@ -38,6 +38,8 @@ namespace Pokemod.Common.Players
 		public Vector2 attackPosition;
 		public NPC targetNPC;
 		public Player targetPlayer;
+		public string TrainerID { get; internal set; }
+
 		private static Asset<Texture2D> targetTexture;
 
 		public override void Load()
@@ -50,7 +52,38 @@ namespace Pokemod.Common.Players
             targetTexture = null;
         }
 
-		public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
+		public override void SaveData(TagCompound tag)
+        {
+			tag["TrainerID"] = TrainerID;
+        }
+
+        public override void LoadData(TagCompound tag)
+        {
+			TrainerID = tag.GetString("TrainerID");
+        }
+
+        public override void Initialize()
+        {
+			SetTrainerID();
+            base.Initialize();
+        }
+
+		private void SetTrainerID(){
+			if(Player.name == null){
+				return;
+			}else{
+				if(Player.name == "") return;
+			}
+
+			string id = Player.name;
+			for(int i = 0; i < 9; i++){
+				id += ""+Main.rand.Next(10);
+			}
+
+			TrainerID = id;
+		}
+
+        public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
             ModPacket packet = Mod.GetPacket();
             packet.Write((byte)PokemodMessageType.PokemonPlayerSync);
 			packet.Write((byte)Player.whoAmI);
@@ -81,6 +114,14 @@ namespace Pokemod.Common.Players
 
         public override void ResetEffects()
         {
+			if(TrainerID == null){
+				SetTrainerID();
+			}else{
+				if(TrainerID == ""){
+					SetTrainerID();
+				}
+			}
+
             if(targetNPC != null){
 				if(targetNPC.active){
 					attackPosition = targetNPC.Center;

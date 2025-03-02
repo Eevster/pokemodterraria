@@ -2905,6 +2905,7 @@ WorldGen.PokeballItemTilePassMessage: Mods.Pokemod.WorldGen.PokeballItemTilePass
 PokemonInfo: {
 	Fainted: Debilitado
 	CaughtIn: Capturado en una {0}
+	CaughtInBy: Capturado en una {0} por {1}
 	LevelUp: "{0} subió al nivel {1}"
 	FaintedMsg: ¡Tu pokemon se debilitó!
 	ItemUse: Para usar el objeto haz clic sobre tu pokemon o haz clic derecho en su pokeball

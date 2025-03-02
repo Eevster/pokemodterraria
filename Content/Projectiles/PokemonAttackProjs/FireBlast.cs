@@ -51,7 +51,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.friendly = true;
             Projectile.hostile = false;
 
-            Projectile.timeLeft = 120;
+            Projectile.timeLeft = 100;
 
             Projectile.tileCollide = false;  
             Projectile.penetrate = -1;
@@ -73,6 +73,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 return false;
             }
             return true;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            Projectile.damage = (int)(Projectile.damage*0.5f); 
+            base.OnSpawn(source);
         }
 
         public override void AI()
@@ -113,8 +119,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.frame = 0;
                 Projectile.velocity = Vector2.Zero;
                 Projectile.scale = 1.5f;
-                if(Projectile.timeLeft < 60){
-                    Projectile.timeLeft = 60;
+                if(Projectile.timeLeft < 40){
+                    Projectile.timeLeft = 40;
                 }
             }
             target.AddBuff(BuffID.OnFire, 8*60);
@@ -128,8 +134,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.frame = 0;
                 Projectile.velocity = Vector2.Zero;
                 Projectile.scale = 1.5f;
-                if(Projectile.timeLeft < 60){
-                    Projectile.timeLeft = 60;
+                if(Projectile.timeLeft < 40){
+                    Projectile.timeLeft = 40;
                 }
             }
 			target.AddBuff(BuffID.OnFire, 8*60);

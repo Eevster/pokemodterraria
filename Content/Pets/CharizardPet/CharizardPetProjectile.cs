@@ -30,6 +30,9 @@ namespace Pokemod.Content.Pets.CharizardPet
 
 		public override float distanceToFly => 300f;
 
+		public override float moveDistance1 => 800f;
+		public override float moveDistance2 => 500f;
+
 		public override int nAttackProjs => 5;
 		public override float enemySearchDistance => 1000;
 		public override bool canAttackThroughWalls => true;

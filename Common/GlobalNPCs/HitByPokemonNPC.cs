@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
 using Terraria;
 using Terraria.ModLoader;
@@ -14,6 +15,7 @@ namespace Pokemod.Common.GlobalNPCs
     {
         public override bool InstancePerEntity => true;
         public Projectile pokemonProj;
+        public bool canGiveExp = true;
 
         /*public override void OnKill(NPC npc)
         {
@@ -36,12 +38,30 @@ namespace Pokemod.Common.GlobalNPCs
 
         public override void HitEffect(NPC npc, NPC.HitInfo hit)
         {
-            if(npc.life <= 0 && !npc.immortal && npc.realLife == -1){
-                if(pokemonProj != null){
-                    if(pokemonProj.active){
-                        if(pokemonProj.ModProjectile is PokemonPetProjectile){
-                            PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
-                            pokemonMainProj?.SetExtraExp(SetExpGained(npc));
+            if(npc.realLife == -1){
+                if(npc.life <= 0 && !npc.immortal && canGiveExp){
+                    if(pokemonProj != null){
+                        if(pokemonProj.active){
+                            if(pokemonProj.ModProjectile is PokemonPetProjectile){
+                                PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
+                                pokemonMainProj?.SetExtraExp(SetExpGained(npc));
+                                canGiveExp = false;
+                            }
+                        }
+                    }
+                }
+            }else{
+                NPC realNpc = Main.npc?[npc.realLife];
+                if(realNpc != null){
+                    if(realNpc.life <= 0 && !realNpc.immortal && realNpc.GetGlobalNPC<HitByPokemonNPC>().canGiveExp){
+                        if(pokemonProj != null){
+                            if(pokemonProj.active){
+                                if(pokemonProj.ModProjectile is PokemonPetProjectile){
+                                    PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
+                                    pokemonMainProj?.SetExtraExp(SetExpGained(realNpc));
+                                    realNpc.GetGlobalNPC<HitByPokemonNPC>().canGiveExp = false;
+                                }
+                            }
                         }
                     }
                 }
@@ -50,8 +70,10 @@ namespace Pokemod.Common.GlobalNPCs
         }
 
         public static int SetExpGained(NPC npc){
-            //int exp = ((int)Math.Sqrt(5*npc.value));
-            int exp = (int)(4f*npc.lifeMax/12f);
+            int exp;
+            if(npc.ModNPC is PokemonWildNPC pokemonNPC) exp = (int)(100f*pokemonNPC.lvl/7f);
+            else exp = (int)Math.Sqrt(5*npc.value);
+
             if(npc.value<=0) exp = (int)(0.2f*exp);
             if(exp < 1) exp = 1;
 

@@ -48,18 +48,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         }
 
 		public override bool PreDraw(ref Color lightColor) {
-			Main.instance.LoadProjectile(Projectile.type);
-			Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
-
-			// Redraw the projectile with the color not influenced by light
-			Vector2 drawOrigin = new Vector2(texture.Width * 0.5f, Projectile.height * 0.5f);
-			for (int k = 0; k < Projectile.oldPos.Length; k++) {
-				Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
-				Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-				Main.EntitySpriteDraw(texture, drawPos, null, color, Projectile.rotation, drawOrigin, Projectile.scale*((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length), SpriteEffects.None, 0);
-			}
-
-			return true;
+			return false;
 		}
 
         public override void AI()
@@ -70,6 +59,17 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if(Projectile.timeLeft%20==0){
 				SoundEngine.PlaySound(SoundID.Item4 with {Volume = 0.5f}, Projectile.position);
+				for (int i = 0; i < 30; i++)
+				{
+					int dustIndex = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.DryadsWard, Projectile.velocity.X, Projectile.velocity.Y, 100, default(Color), Projectile.scale);
+					Main.dust[dustIndex].fadeIn = 1f + (float)Main.rand.Next(5) * 0.1f;
+					Main.dust[dustIndex].noGravity = true;
+					Vector2 posAux = new Vector2(12*Projectile.scale,0).RotatedBy(MathHelper.ToRadians(12*i));
+					posAux.Y *= 0.2f;
+					posAux = posAux.RotatedBy(Projectile.rotation);
+					Main.dust[dustIndex].position = Projectile.Center + posAux;
+					Main.dust[dustIndex].velocity = 0.4f*posAux;
+				}
 				Vector2 start = Projectile.Center + Projectile.scale*new Vector2(50,0);
 				Vector2 end = Projectile.Center - Projectile.scale*new Vector2(50,0);
 				for (int k = 0; k < Main.maxPlayers; k++) {

@@ -21,7 +21,7 @@ namespace Pokemod.Content.Pets.CharmeleonPet
 		public override int[] fallStartEnd => [12,12];
 		public override int[] attackStartEnd => [13,18];
 
-		public override int nAttackProjs => 1;
+		public override int nAttackProjs => 14;
 		public override float enemySearchDistance => 1000;
 		public override float distanceToAttack => 400f;
 		public override bool canAttackThroughWalls => false;
@@ -42,23 +42,30 @@ namespace Pokemod.Content.Pets.CharmeleonPet
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
 					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 20f*Vector2.Normalize(targetCenter-Projectile.Center), ModContent.ProjectileType<Flamethrower>(), GetPokemonDamage(90, true), 2f, Projectile.owner)];
 						currentStatus = (int)ProjStatus.Attack;
-						SoundEngine.PlaySound(SoundID.Item34, Projectile.position);
 						timer = attackDuration;
 						canAttack = false;
+						canAttackOutTimer = true;
 						break;
 					}
 				} 
 			}
 		}
 
-		public override void UpdateAttackProjs(int i, ref float maxFallSpeed){
-			attackProjs[i].Center = Projectile.Center+new Vector2(0,-4);
-		}
-
-		public override void UpdateNoAttackProjs(int i){
-			attackProjs[i].Center = Projectile.Center+new Vector2(0,-4);
+		public override void AttackOutTimer(float distanceFromTarget, Vector2 targetCenter){
+			if(Projectile.owner == Main.myPlayer){
+				if(currentStatus == (int)ProjStatus.Attack && timer%4==0){
+					for(int i = 0; i < nAttackProjs; i++){
+						if(attackProjs[i] == null){
+							attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 12f*Vector2.Normalize(targetCenter-Projectile.Center), ModContent.ProjectileType<Flamethrower>(), GetPokemonDamage(90, true), 4f, Projectile.owner)];
+							if(timer%8==0){
+								SoundEngine.PlaySound(SoundID.Item20, Projectile.position);
+							}
+							break;
+						}
+					} 
+				}
+			}
 		}
 	}
 	public class CharmeleonPetProjectileShiny : CharmeleonPetProjectile{}
