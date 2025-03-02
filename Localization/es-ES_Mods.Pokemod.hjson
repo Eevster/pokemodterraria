@@ -2572,6 +2572,8 @@ NPCs: {
 	ChikoritaCritterNPC.DisplayName: Chikorita
 	CharizardCritterNPC.DisplayName: Charizard
 	CharizardCritterNPCShiny.DisplayName: Charizard
+	// CharizardMegaXCritterNPC.DisplayName: Mega Charizard X
+	// CharizardMegaXCritterNPCShiny.DisplayName: Mega Charizard X Shiny
 	ChikoritaCritterNPCShiny.DisplayName: Chikorita
 	CyndaquilCritterNPC.DisplayName: Cyndaquil
 	CyndaquilCritterNPCShiny.DisplayName: Cyndaquil

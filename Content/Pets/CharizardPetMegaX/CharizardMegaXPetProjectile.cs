@@ -66,5 +66,5 @@ namespace Pokemod.Content.Pets.CharizardPet
 		}
 	}
 
-	public class CharizardMegaXPetProjectileShiny : CharizardPetProjectile{}
+	public class CharizardMegaXPetProjectileShiny : CharizardMegaXPetProjectile{}
 }

@@ -2563,20 +2563,22 @@ NPCs: {
 	CharmanderCritterNPC.DisplayName: Charmander
 	SquirtleCritterNPC.DisplayName: Squirtle
 	ProfOakTravelingMerchant.DisplayName: Prof Oak Traveling Merchant
-	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
-	CharmanderCritterNPCShiny.DisplayName: Charmander
-	SquirtleCritterNPCShiny.DisplayName: Squirtle
+	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur  Shiny
+	CharmanderCritterNPCShiny.DisplayName: Charmander  Shiny
+	SquirtleCritterNPCShiny.DisplayName: Squirtle  Shiny
 	BlacephalonCritterNPC.DisplayName: Blacephalon
-	EeveeCritterNPCShiny.DisplayName: Eevee
-	PikachuCritterNPCShiny.DisplayName: Pikachu
+	EeveeCritterNPCShiny.DisplayName: Eevee  Shiny
+	PikachuCritterNPCShiny.DisplayName: Pikachu  Shiny
 	ChikoritaCritterNPC.DisplayName: Chikorita
 	CharizardCritterNPC.DisplayName: Charizard
-	CharizardCritterNPCShiny.DisplayName: Charizard
-	ChikoritaCritterNPCShiny.DisplayName: Chikorita
+	CharizardCritterNPCShiny.DisplayName: Charizard  Shiny
+	CharizardMegaXCritterNPC.DisplayName: Mega Charizard X
+	CharizardMegaXCritterNPCShiny.DisplayName: Mega Charizard X Shiny
+	ChikoritaCritterNPCShiny.DisplayName: Chikorita  Shiny
 	CyndaquilCritterNPC.DisplayName: Cyndaquil
-	CyndaquilCritterNPCShiny.DisplayName: Cyndaquil
+	CyndaquilCritterNPCShiny.DisplayName: Cyndaquil  Shiny
 	BlastoiseCritterNPC.DisplayName: Blastoise
-	BayleefCritterNPCShiny.DisplayName: BayleefShiny
+	BayleefCritterNPCShiny.DisplayName: Bayleef Shiny
 	BayleefCritterNPC.DisplayName: Bayleef
 	BlastoiseCritterNPCShiny.DisplayName: Blastoise Shiny
 	CharmeleonCritterNPC.DisplayName: Charmeleon
