@@ -91,6 +91,7 @@ namespace Pokemod.Content.Pets
 			Hybrid
 		}
 
+		//Evolution
 		public bool isEvolving = false;
 		public int evolveTimer = 0;
 		public const int maxEvolveTimer = 2*60;
@@ -100,6 +101,16 @@ namespace Pokemod.Content.Pets
 		public virtual int levelToEvolve => -1;
 		public virtual int levelEvolutionsNumber => 0;
 		public virtual string[] itemToEvolve => [];
+
+		//Mega Evolution
+		public virtual bool isMega => false;
+		public bool isMegaEvolving = false;
+		public int megaEvolveTimer = 0;
+		public const int maxMegaEvolveTimer = 85;
+		public int canMegaEvolve = -1;
+		public virtual string[] megaEvolutions => [];
+		public virtual string[] megaEvolutionBase => [];
+		public virtual string[] itemToMegaEvolve => [];
 
 		public int currentStatus = 0;
 		public enum ProjStatus
@@ -176,6 +187,10 @@ namespace Pokemod.Content.Pets
 				return;
 			}
 
+			if(isMega){
+				megaEvolveTimer = 60;
+			}
+
 			SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
 			
             base.OnSpawn(source);
@@ -219,6 +234,7 @@ namespace Pokemod.Content.Pets
 			UpdateStats();
 		}
 
+		//Evolution methods
 		public virtual void SetEvolution(){
 			if(canEvolve == -1){
 				isEvolving = true;
@@ -275,6 +291,62 @@ namespace Pokemod.Content.Pets
 			return "";
 		}
 
+		//Mega Evolution Methods
+		public virtual void SetMegaEvolution(){
+			if(canMegaEvolve == -1){
+				isMegaEvolving = true;
+				megaEvolveTimer = maxMegaEvolveTimer;
+			}
+		}
+
+		public virtual void SetCanMegaEvolve(){
+			if(canMegaEvolve == -1){
+				if(megaEvolutions.Length > 0){
+					for(int i = 0; i < itemToMegaEvolve.Length; i++){
+						if(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().MegaStone == itemToMegaEvolve[i]){
+							SetMegaEvolution();
+							canMegaEvolve = i;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		public virtual void MegaEvolutionProcess(){
+			if(!isMega){
+				if(isMegaEvolving){
+					if(megaEvolveTimer>0){
+						megaEvolveTimer--;
+					}
+				}
+			}else{
+				if(megaEvolveTimer>0){
+					megaEvolveTimer--;
+				}
+			}
+		}
+
+		public virtual string GetCanMegaEvolve(){
+			if(!isMega){
+				if(canMegaEvolve != -1){
+					if(isMegaEvolving && megaEvolveTimer <= 0){
+						return megaEvolutions[canMegaEvolve];
+					}
+				}
+			}else{
+				if(megaEvolveTimer <= 0){
+					if(itemToMegaEvolve.Length>0 && megaEvolutionBase.Length>0){
+						if(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().MegaStone != itemToMegaEvolve[0]){
+							return megaEvolutionBase[0];
+						}
+					}
+				}
+			}
+			return "";
+		}
+
+		//General behavior
         public override void AI() {
 			Player player = Main.player[Projectile.owner];
 
@@ -290,6 +362,7 @@ namespace Pokemod.Content.Pets
 			Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
 			GetAllProjsExp();
 			EvolutionProcess();
+			MegaEvolutionProcess();
 			Visuals();
 			ExtraChanges();
 
@@ -298,6 +371,7 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
+		//Exp methods
 		public virtual void GetAllProjsExp(){
 			if(Projectile.owner == Main.myPlayer){
 				for(int i = 0; i < nAttackProjs; i++){
@@ -989,6 +1063,21 @@ namespace Pokemod.Content.Pets
 					DrawPrettyStarSparkle(Projectile.Opacity, SpriteEffects.None, drawPos2, new Color(255, 255, 255) * 0.5f, new Color(255, 255, 255), 0.5f, 0f, 0.5f, 0.5f, 1f, Projectile.rotation+ MathHelper.ToRadians(i*360f/10f) + MathHelper.ToRadians(Main.rand.Next(-8,9)), new Vector2(2f, Utils.Remap(0.5f, 0f, 1f, 4f, 1f)) * Projectile.scale * lightScale, 2*Vector2.One * Projectile.scale * lightScale);
 				}
 			}
+			if(megaEvolveTimer > 0){
+				if(isMegaEvolving){
+					Asset<Texture2D> megaEvolveAnimTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/MegaEvolveAnim");
+
+					Main.EntitySpriteDraw(megaEvolveAnimTexture.Value, Projectile.Center - Main.screenPosition,
+						megaEvolveAnimTexture.Frame(1, 17, 0, (int)((maxMegaEvolveTimer-megaEvolveTimer)/5)), Color.White, 0,
+						megaEvolveAnimTexture.Frame(1, 17).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
+				}else if(isMega){
+					Asset<Texture2D> megaEvolveSymbolTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/MegaEvolveSymbol");
+
+					Main.EntitySpriteDraw(megaEvolveSymbolTexture.Value, Projectile.Top + new Vector2(0,-0.5f*megaEvolveSymbolTexture.Frame(1, 15).Size().Y) - Main.screenPosition,
+						megaEvolveSymbolTexture.Frame(1, 15, 0, (int)((60-megaEvolveTimer)/4)), Color.White, 0,
+						megaEvolveSymbolTexture.Frame(1, 15).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
+				}
+			}
         }
 
         private static void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawPos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness) {
@@ -1022,7 +1111,7 @@ namespace Pokemod.Content.Pets
 						}
 					}
 				}
-				if(!(canEvolve != -1 && isEvolving && evolveTimer <= 0)){
+				if(!(canEvolve != -1 && isEvolving && evolveTimer <= 0) && !(canMegaEvolve != -1 && isMegaEvolving && megaEvolveTimer <= 0)){
 					Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<DespawnPokemon>(), 0, 0, Projectile.owner);
 				}
 			}

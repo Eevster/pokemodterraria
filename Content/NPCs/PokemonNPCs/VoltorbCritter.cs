@@ -28,7 +28,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneMarble) {
-				return GetSpawnChance(spawnInfo, 0.005f);
+				return GetSpawnChance(spawnInfo, 0.01f);
 			}
 
 			return 0f;

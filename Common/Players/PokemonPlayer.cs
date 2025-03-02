@@ -26,8 +26,13 @@ namespace Pokemod.Common.Players
 {
     public class PokemonPlayer : ModPlayer
 	{
+		//Accessories
+		public string MegaStone;
+		public int HasMegaStone;
 		public bool HasShinyCharm;
 		public int HasEverstone;
+
+		//Trainer Glove
 		public int attackMode;
 		public enum AttackMode
         {
@@ -38,6 +43,8 @@ namespace Pokemod.Common.Players
 		public Vector2 attackPosition;
 		public NPC targetNPC;
 		public Player targetPlayer;
+
+		//Player data
 		public string TrainerID { get; internal set; }
 
 		private static Asset<Texture2D> targetTexture;
@@ -140,6 +147,8 @@ namespace Pokemod.Common.Players
 
 			HasShinyCharm = false;
 			if(HasEverstone > 0) HasEverstone--;
+			if(HasMegaStone > 0) HasMegaStone--;
+			else MegaStone = "";
         }
 
         public void ChangeAttackMode(int mode){

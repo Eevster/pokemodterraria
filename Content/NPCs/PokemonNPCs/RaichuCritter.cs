@@ -17,7 +17,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [15,15];
 		public override int[] attackStartEnd => [18,18];
 
-		public override int minLevel => 25;
+		public override int minLevel => 40;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,

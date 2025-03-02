@@ -382,6 +382,8 @@ Projectiles: {
 	// Toxic.DisplayName: Toxic
 	// DoubleKick.DisplayName: Double Kick
 	// HealPulse.DisplayName: Heal Pulse
+	// CharizardMegaXPetProjectile.DisplayName: Charizard Mega X Pet Projectile
+	// CharizardMegaXPetProjectileShiny.DisplayName: Charizard Mega X Pet Projectile Shiny
 }
 
 Items: {

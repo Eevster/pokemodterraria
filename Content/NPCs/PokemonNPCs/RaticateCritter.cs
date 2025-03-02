@@ -17,6 +17,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [7,7];
 		public override int[] attackStartEnd => [4,7];
 
+		public override int minLevel => 25;
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It whittles down its constantly growing fangs by gnawing on hard things. It can chew apart cinder block walls."));

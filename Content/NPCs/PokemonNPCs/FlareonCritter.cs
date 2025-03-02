@@ -17,15 +17,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [15,15];
 		public override int[] attackStartEnd => [18,21];
 
-		public override int minLevel => 25;
+		public override int minLevel => 40;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
 				new FlavorTextBestiaryInfoElement("It has a flame sac in its body. Its body temperature tops 1,650 degrees Fahrenheit before battle."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneForest) {
+			if (spawnInfo.Player.ZoneDesert) {
 				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.001f);
 			}
 

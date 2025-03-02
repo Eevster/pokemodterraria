@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Pets.CharizardPet
 {
-	public class CharizardPetProjectile : PokemonPetProjectile
+	public class CharizardMegaXPetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 36;
 		public override int hitboxHeight => 56;
@@ -39,7 +39,9 @@ namespace Pokemod.Content.Pets.CharizardPet
 		public override int attackDuration => 40;
 		public override int attackCooldown => 80;
 
-		public override string[] megaEvolutions => ["CharizardMegaX"];
+        public override bool isMega => true;
+		
+		public override string[] megaEvolutionBase => ["Charizard"];
 		public override string[] itemToMegaEvolve => ["CharizardMegaStoneItemX"];
 
         public override void SetDefaults()
@@ -64,5 +66,5 @@ namespace Pokemod.Content.Pets.CharizardPet
 		}
 	}
 
-	public class CharizardPetProjectileShiny : CharizardPetProjectile{}
+	public class CharizardMegaXPetProjectileShiny : CharizardPetProjectile{}
 }

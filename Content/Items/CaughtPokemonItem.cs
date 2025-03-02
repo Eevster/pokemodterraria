@@ -250,10 +250,11 @@ namespace Pokemod.Content.Items
         public void SetPetInfo(Player player = null){
 			if(PokemonName != null && PokemonName != ""){
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
-				Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
+				//Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
 
 				UpdateLevel(player);
 				GetProjInfo(player);
+				
 				if(currentHP == 0){
 					Item.shoot = ProjectileID.None;
 				}
@@ -338,6 +339,22 @@ namespace Pokemod.Content.Items
 			return false;
 		}
 
+		private void GetCanMegaEvolve(Player player = null){
+			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
+
+			string newPokemonName = PokemonProj.GetCanMegaEvolve();
+			if(newPokemonName != ""){
+				Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
+				proj.Kill();
+				PokemonName = newPokemonName;
+				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
+				if(player != null){
+					int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
+					proj = Main.projectile[projIndex];
+				}
+			}
+		}
+
 		public void AddExp(int amount, Player player = null){
 			exp += amount;
 			UpdateLevel(player);
@@ -372,7 +389,9 @@ namespace Pokemod.Content.Items
 						if(canEvolve){
 							PokemonProj.SetCanEvolve();
 						}
+						PokemonProj.SetCanMegaEvolve();
 						GetCanEvolve(player);
+						GetCanMegaEvolve(player);
 					}
 				}else{
 					proj = null;

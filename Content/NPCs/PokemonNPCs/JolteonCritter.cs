@@ -16,15 +16,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] jumpStartEnd => [12,12];
 		public override int[] fallStartEnd => [15,15];
 
-		public override int minLevel => 25;
+		public override int minLevel => 40;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Granite,
 				new FlavorTextBestiaryInfoElement("It controls 10,000-volt power. When the fur covering its body stands on end, the fur is hard and sharp, like needles."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneForest) {
+			if (spawnInfo.Player.ZoneGranite) {
 				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.001f);
 			}
 

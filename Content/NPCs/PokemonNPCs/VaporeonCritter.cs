@@ -23,15 +23,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkSwimStartEnd => [9,17];
 		public override int[] attackSwimStartEnd => [18,18];
 
-		public override int minLevel => 25;
+		public override int minLevel => 40;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
 				new FlavorTextBestiaryInfoElement("It has evolved to be suited for an aquatic life. It can become invisible when it melts away into water."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneForest) {
+			if (spawnInfo.Player.ZoneBeach) {
 				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.001f);
 			}
 

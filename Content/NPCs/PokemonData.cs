@@ -245,6 +245,8 @@ namespace Pokemod.Content.NPCs
             {"Feraligatr", [85, 105, 100, 79, 83, 78]},
             //Gen 7
             {"Zeraora", [88, 112, 75, 102, 80, 143]},
+            //Megas
+            {"CharizardMegaX", [78, 130, 111, 130, 85, 100]},
         }; 
     }
 }
