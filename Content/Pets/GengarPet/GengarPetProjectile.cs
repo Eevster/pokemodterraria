@@ -28,6 +28,10 @@ namespace Pokemod.Content.Pets.GengarPet
 		public override int attackCooldown => 120;
 		public override bool canMoveWhileAttack => true;
 
+		
+
+        
+
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
 			if(Projectile.owner == Main.myPlayer){

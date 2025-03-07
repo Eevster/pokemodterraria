@@ -384,6 +384,8 @@ Projectiles: {
 	// HealPulse.DisplayName: Heal Pulse
 	// CharizardMegaXPetProjectile.DisplayName: Charizard Mega X Pet Projectile
 	// CharizardMegaXPetProjectileShiny.DisplayName: Charizard Mega X Pet Projectile Shiny
+	// GengarMegaPetProjectile.DisplayName: Gengar Mega Pet Projectile
+	// GengarMegaPetProjectileShiny.DisplayName: Gengar Mega Pet Projectile Shiny
 }
 
 Items: {
@@ -940,6 +942,11 @@ Items: {
 
 	AssaultVestItem: {
 		// DisplayName: Assault Vest Item
+		// Tooltip: ""
+	}
+
+	GengarMegaStoneItem: {
+		// DisplayName: Gengar Mega Stone Item
 		// Tooltip: ""
 	}
 }
