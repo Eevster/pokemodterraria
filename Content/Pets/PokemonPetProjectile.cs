@@ -122,6 +122,8 @@ namespace Pokemod.Content.Pets
 			Attack
 		}
 
+		public const float fallLimit = float.Epsilon;
+
 		public override void SendExtraAI(BinaryWriter writer)
         {
 			writer.Write((int)currentHp);
@@ -178,6 +180,19 @@ namespace Pokemod.Content.Pets
 			Player player = Main.player[Projectile.owner];
 			//PokemonBuff = ModContent.Find<ModBuff>("Pokemod", GetType().Name.Replace("Projectile","Buff")).Type;
 			attackProjs = new Projectile[nAttackProjs];
+
+			if(isMega){
+				megaEvolveTimer = 60;
+				
+				//Dynamax
+				/*Projectile.scale = 6f;
+				Asset<Texture2D> pokeTexture = ModContent.Request<Texture2D>(Texture);
+				Projectile.width = (int)(Projectile.scale*hitboxWidth);
+				DrawOffsetX = -(pokeTexture.Width() - Projectile.width)/2;
+				Projectile.height = (int)(Projectile.scale*hitboxHeight);
+				DrawOriginOffsetY = (int)((Projectile.scale-2)*(pokeTexture.Height()/(totalFrames)-hitboxHeight)) + (int)(4*Projectile.scale);*/
+			}
+
 			Projectile.Center += new Vector2(0,(player.height-Projectile.height)/2);
 			currentHp = (int)Projectile.ai[0];
 			if(currentHp == -1){
@@ -185,10 +200,6 @@ namespace Pokemod.Content.Pets
 			}else if(currentHp == 0){
 				Projectile.Kill();
 				return;
-			}
-
-			if(isMega){
-				megaEvolveTimer = 60;
 			}
 
 			SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
@@ -456,7 +467,7 @@ namespace Pokemod.Content.Pets
 			}
 
 			// If your minion is flying, you want to do this independently of any conditions
-			float overlapVelocity = 0.04f;
+			/*float overlapVelocity = 0.04f;
 
 			// Fix overlap with other minions
 			for (int i = 0; i < Main.maxProjectiles; i++) {
@@ -477,7 +488,7 @@ namespace Pokemod.Content.Pets
 						Projectile.velocity.Y += overlapVelocity;
 					}
 				}
-			}
+			}*/
 		}
 
 		public virtual void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter) {
@@ -591,7 +602,7 @@ namespace Pokemod.Content.Pets
 							Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
 
 							if((targetCenter - Projectile.Center).Y < 0 && -(targetCenter - Projectile.Center).Y > Math.Abs((targetCenter - Projectile.Center).X)){
-								if(Math.Abs(Projectile.velocity.Y) < float.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+								if(Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
 									currentStatus = (int)ProjStatus.Jump;
 									Projectile.velocity.Y -= (int)Math.Sqrt(2*0.3f*Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y),0,160));
 								}
@@ -752,7 +763,7 @@ namespace Pokemod.Content.Pets
 				canFall = true;
 
 				if(isSwimming){
-					if(Projectile.velocity.Y > float.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+					if(Projectile.velocity.Y > fallLimit && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
 						Jump();
 					}
 				}
@@ -777,11 +788,11 @@ namespace Pokemod.Content.Pets
 						}
 					}
 
-					if(Projectile.velocity.Y > float.Epsilon){
+					if(Projectile.velocity.Y > fallLimit){
 						currentStatus = (int)ProjStatus.Fall;
 					}
 
-					if(Math.Abs(Projectile.velocity.Y) < float.Epsilon && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+					if(Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
 						Jump();
 					}
 				}

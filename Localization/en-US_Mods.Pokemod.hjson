@@ -2883,6 +2883,8 @@ NPCs: {
 	ZapdosCritterNPCShiny.DisplayName: Zapdos Shiny
 	ZubatCritterNPC.DisplayName: Zubat
 	ZubatCritterNPCShiny.DisplayName: Zubat Shiny
+	JoltikCritterNPC.DisplayName: Joltik Critter N P C
+	JoltikCritterNPCShiny.DisplayName: Joltik Critter N P C Shiny
 }
 
 Dialogue: {

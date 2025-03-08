@@ -41,6 +41,7 @@ namespace Pokemod.Content.NPCs
 		public virtual int hitboxWidth => 0;
 		public virtual int hitboxHeight => 0;
 		public virtual float moveSpeed => 1f;
+		public virtual float maxJumpHeight => 7f;
 
 		/// <summary>
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
@@ -213,7 +214,8 @@ namespace Pokemod.Content.NPCs
 		{
 			Ground,
 			Fly,
-			Hybrid
+			Hybrid,
+			Jump
 		}
 
 		private enum NPCStatus
@@ -403,7 +405,9 @@ namespace Pokemod.Content.NPCs
 			else NPC.noGravity = false;
 
 			if (moveDirection != 0) {
-				NPC.velocity.X = speed*speedMultiplier*moveDirection;
+				if(moveStyle != (int)MovementStyle.Jump){
+					NPC.velocity.X = speed*speedMultiplier*moveDirection;
+				}
 			}else{
 				NPC.velocity.X = 0;
 			}
@@ -445,6 +449,14 @@ namespace Pokemod.Content.NPCs
 					}
 				}
 			}
+			if (moveDirection != 0 && AI_State != (int)NPCStatus.Jump && AI_State != (int)NPCStatus.Attack) {
+				if(moveStyle == (int)MovementStyle.Jump){
+					if(Math.Abs(NPC.velocity.Y) < float.Epsilon && !Collision.SolidCollision(NPC.Top-new Vector2(8,16), 16, 16)){
+						NPC.velocity.Y = -maxJumpHeight;
+						NPC.velocity.X = speed*speedMultiplier*moveDirection;
+					}
+				}
+			}
 
 			if(canRotate){
 				NPC.rotation -= NPC.spriteDirection*MathHelper.ToRadians(2f*NPC.velocity.Length());
@@ -467,7 +479,6 @@ namespace Pokemod.Content.NPCs
 			}
 
 			float jumpHeight = 0;
-			int maxJumpHeight = 7;
 
 			for(int i = 1; i < 4; i++){
 				jumpHeight = 0;
