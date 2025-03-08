@@ -23,8 +23,10 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkSwimStartEnd => [7,13];
 		public override int[] attackSwimStartEnd => [14,14];
 
+        public override string[] variants => ["SquirtleSquad"];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
 				new FlavorTextBestiaryInfoElement("It hides in its shell to protect itself, then strikes back with spouts of water at every opportunity."));
 		}

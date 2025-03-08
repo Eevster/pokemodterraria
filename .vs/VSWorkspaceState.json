@@ -1,12 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Assets",
-    "\\Assets\\Textures",
     "\\Content",
-    "\\Content\\Tiles",
-    "\\Content\\TitleScreens"
+    "\\Content\\NPCs",
+    "\\Content\\NPCs\\PokemonNPCs"
   ],
-  "SelectedNode": "\\Assets\\Textures\\PokemodTitle.png",
+  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\VoltorbCritter.cs",
   "PreviewInSolutionExplorer": false
 }
