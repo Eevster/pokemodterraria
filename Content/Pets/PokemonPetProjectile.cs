@@ -52,6 +52,8 @@ namespace Pokemod.Content.Pets
 		public virtual float moveSpeed2 => 8f;
 		public virtual float moveDistance1 => 400f;
 		public virtual float moveDistance2 => 200f;
+		public virtual float fallAccel => 0.2f;
+		public virtual float fallSpeed => 10f;
 		public virtual bool canMoveWhileAttack => false;
 
 		public virtual int hitboxWidth => 0;
@@ -88,7 +90,8 @@ namespace Pokemod.Content.Pets
 		{
 			Ground,
 			Fly,
-			Hybrid
+			Hybrid,
+			Jump
 		}
 
 		//Evolution
@@ -458,7 +461,7 @@ namespace Pokemod.Content.Pets
 			vectorToIdlePosition = idlePosition - Projectile.Center;
 			distanceToIdlePosition = vectorToIdlePosition.Length();
 
-			if (Main.myPlayer == owner.whoAmI && distanceToIdlePosition > 2000f) {
+			if (Main.myPlayer == owner.whoAmI && distanceToIdlePosition > 1400f) {
 				// Whenever you deal with non-regular events that change the behavior or position drastically, make sure to only run the code on the owner of the projectile,
 				// and then set netUpdate to true
 				Projectile.position = idlePosition;
@@ -779,6 +782,15 @@ namespace Pokemod.Content.Pets
 					}
 				}
 			}else{
+				if(moveStyle == (int)MovementStyle.Jump){
+					if(currentStatus != (int)ProjStatus.Jump && currentStatus != (int)ProjStatus.Fall){
+						if(Math.Abs(Projectile.velocity.X) > float.Epsilon && Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+							currentStatus = (int)ProjStatus.Jump;
+							Projectile.velocity.Y = -maxJumpHeight;
+						}
+					}
+				}
+
 				if(currentStatus != (int)ProjStatus.Attack){
 					if(currentStatus != (int)ProjStatus.Jump){
 						if(Math.Abs(Projectile.velocity.X) < float.Epsilon){
@@ -792,12 +804,12 @@ namespace Pokemod.Content.Pets
 						currentStatus = (int)ProjStatus.Fall;
 					}
 
-					if(Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+					if(moveStyle != (int)MovementStyle.Jump && Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
 						Jump();
 					}
 				}
 
-				Projectile.velocity.Y += 0.2f;
+				Projectile.velocity.Y += fallAccel;
 				if(Projectile.velocity.Y > maxFallSpeed){
 					Projectile.velocity.Y = maxFallSpeed;
 				}

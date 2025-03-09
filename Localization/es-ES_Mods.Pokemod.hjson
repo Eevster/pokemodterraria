@@ -386,6 +386,8 @@ Projectiles: {
 	// CharizardMegaXPetProjectileShiny.DisplayName: Charizard Mega X Pet Projectile Shiny
 	// GengarMegaPetProjectile.DisplayName: Gengar Mega Pet Projectile
 	// GengarMegaPetProjectileShiny.DisplayName: Gengar Mega Pet Projectile Shiny
+	// JoltikPetProjectile.DisplayName: Joltik Pet Projectile
+	// JoltikPetProjectileShiny.DisplayName: Joltik Pet Projectile Shiny
 }
 
 Items: {

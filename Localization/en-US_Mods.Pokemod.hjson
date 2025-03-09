@@ -386,6 +386,8 @@ Projectiles: {
 	CharizardMegaXPetProjectileShiny.DisplayName: Charizard Mega X Pet Projectile Shiny
 	GengarMegaPetProjectile.DisplayName: Gengar Mega Pet Projectile
 	GengarMegaPetProjectileShiny.DisplayName: Gengar Mega Pet Projectile Shiny
+	JoltikPetProjectile.DisplayName: Joltik Pet Projectile
+	JoltikPetProjectileShiny.DisplayName: Joltik Pet Projectile Shiny
 }
 
 Items: {
@@ -2890,8 +2892,8 @@ NPCs: {
 	ZapdosCritterNPCShiny.DisplayName: Zapdos Shiny
 	ZubatCritterNPC.DisplayName: Zubat
 	ZubatCritterNPCShiny.DisplayName: Zubat Shiny
-	JoltikCritterNPC.DisplayName: Joltik Critter N P C
-	JoltikCritterNPCShiny.DisplayName: Joltik Critter N P C Shiny
+	JoltikCritterNPC.DisplayName: Joltik
+	JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 }
 
 Dialogue: {

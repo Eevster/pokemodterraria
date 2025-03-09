@@ -233,6 +233,7 @@ namespace Pokemod.Content.NPCs
 
 		public override void AI() {
 			Movement();
+			ExtraEffects();
 		}
 
 		// Here in FindFrame, we want to set the animation frame our npc will use depending on what it is doing.
@@ -334,6 +335,9 @@ namespace Pokemod.Content.NPCs
 
 			return false;
 			// You could also return null here to apply vanilla behavior (which is the same as false for custom AI)
+		}
+
+		public virtual void ExtraEffects() {
 		}
 
 		public virtual void Movement() {
