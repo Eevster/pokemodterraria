@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Content",
-    "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs"
+    "\\Content\\Items\\Consumables",
+    "\\Content\\Items\\Pokeballs"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\VoltorbCritter.cs",
+  "SelectedNode": "\\Content",
   "PreviewInSolutionExplorer": false
 }

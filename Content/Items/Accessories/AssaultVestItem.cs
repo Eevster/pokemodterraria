@@ -3,6 +3,7 @@ using Pokemod.Content.DamageClasses;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace Pokemod.Content.Items.Accessories
 {
@@ -21,7 +22,20 @@ namespace Pokemod.Content.Items.Accessories
 		public override void UpdateAccessory(Player player, bool hideVisual) {
 			player.GetDamage<PokemonDamageClass>() += 0.25f;
 		}
-	}
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.DemoniteBar, 25)
+                .AddIngredient(ItemID.RedDye, 20)
+                .AddTile(TileID.TinkerersWorkbench)
+                .Register();
+            CreateRecipe()
+                .AddIngredient(ItemID.CrimtaneBar, 25)
+                .AddIngredient(ItemID.RedDye, 20)
+                .AddTile(TileID.TinkerersWorkbench)
+                .Register();
+        }
+    }
 
 	// Some movement effects are not suitable to be modified in ModItem.UpdateAccessory due to how the math is done.
 	// ModPlayer.PostUpdateRunSpeeds is suitable for these modifications.
