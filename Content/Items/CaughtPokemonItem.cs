@@ -54,7 +54,12 @@ namespace Pokemod.Content.Items
 			Item.maxStack = 1;
 		}
 
-		public override void NetSend(BinaryWriter writer) {
+        public override bool CanReforge()
+        {
+            return false;
+        }
+
+        public override void NetSend(BinaryWriter writer) {
 			writer.Write(PokemonName ?? "");
 			writer.Write(Shiny);
 			writer.Write(variant ?? "");
