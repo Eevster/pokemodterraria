@@ -1,9 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Content\\Items\\Consumables",
-    "\\Content\\Items\\Pokeballs"
+    "\\Assets",
+    "\\Assets\\Textures",
+    "\\Content",
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen1",
+    "\\Content\\Pets",
+    "\\Content\\Pets\\CharizardPet",
+    "\\Content\\Pets\\GengarPet"
   ],
-  "SelectedNode": "\\Content",
+  "SelectedNode": "\\Content\\Pets\\CharizardPet\\CharizardPetProjectile.cs",
   "PreviewInSolutionExplorer": false
 }
