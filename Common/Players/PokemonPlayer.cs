@@ -41,6 +41,8 @@ namespace Pokemod.Common.Players
             Directed_Attack
         }
 		public Vector2 attackPosition;
+		private int directedEmptyTimer;
+		private const int directedEmptyMaxTime = 3*60;
 		public NPC targetNPC;
 		public Player targetPlayer;
 
@@ -131,6 +133,7 @@ namespace Pokemod.Common.Players
 
             if(targetNPC != null){
 				if(targetNPC.active){
+					if(attackMode==(int)AttackMode.Directed_Attack) directedEmptyTimer = 0;
 					attackPosition = targetNPC.Center;
 				}else{
 					targetNPC = null;
@@ -139,9 +142,16 @@ namespace Pokemod.Common.Players
 
 			if(targetPlayer != null){
 				if(targetPlayer.active){
+					if(attackMode==(int)AttackMode.Directed_Attack) directedEmptyTimer = 0;
 					attackPosition = targetPlayer.Center;
 				}else{
 					targetPlayer = null;
+				}
+			}
+			if(attackMode==(int)AttackMode.Directed_Attack){
+				if(directedEmptyTimer > 0) directedEmptyTimer--;
+				if(targetPlayer == null && targetNPC == null){
+					if(directedEmptyTimer <= 0) ChangeAttackMode((int)AttackMode.Auto_Attack);
 				}
 			}
 
@@ -152,6 +162,7 @@ namespace Pokemod.Common.Players
         }
 
         public void ChangeAttackMode(int mode){
+			directedEmptyTimer = 0;
 			attackMode = mode;
 			SoundEngine.PlaySound(SoundID.Item1, Player.position);
 
@@ -161,6 +172,7 @@ namespace Pokemod.Common.Players
 			if(attackMode == (int)AttackMode.Directed_Attack){
 				attackPosition = Main.MouseWorld;
 				SearchNPCTarget(32);
+				directedEmptyTimer = directedEmptyMaxTime;
 			}
 		}
 

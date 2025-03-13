@@ -77,6 +77,7 @@ namespace Pokemod.Content.Pets
 		public virtual int[] attackSwimStartEnd => [-1,-1];
 
 		public bool canAttackOutTimer = false;
+		public virtual bool sideDiff => false;
 		public virtual int moveStyle => 0;
 		public virtual bool canSwim => false;
 		public bool isSwimming = false;
@@ -950,6 +951,11 @@ namespace Pokemod.Content.Pets
 						finalFrame = attackStartEnd[1];
 						break;
 				}
+			}
+
+			if(sideDiff && Projectile.spriteDirection<0){
+				initialFrame += totalFrames/2;
+				finalFrame += totalFrames/2;
 			}
 
 			if(Projectile.frame > finalFrame || Projectile.frame < initialFrame){

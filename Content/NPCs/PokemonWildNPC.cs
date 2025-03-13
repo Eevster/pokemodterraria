@@ -200,6 +200,8 @@ namespace Pokemod.Content.NPCs
 		public virtual int[] walkSwimStartEnd => [-1,-1];
 		public virtual int[] attackSwimStartEnd => [-1,-1];
 
+		public virtual bool sideDiff => false;
+
 		public virtual int moveStyle => 0;
 		public virtual bool canSwim => false;
 		public int moveDirection = 0;
@@ -306,6 +308,11 @@ namespace Pokemod.Content.NPCs
 						finalFrame = attackStartEnd[1];
 						break;
 				}
+			}
+
+			if(sideDiff && NPC.spriteDirection>0){
+				initialFrame += totalFrames/2;
+				finalFrame += totalFrames/2;
 			}
 
 			if(currentFrame > finalFrame || currentFrame < initialFrame){
