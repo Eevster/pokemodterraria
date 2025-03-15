@@ -16,6 +16,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Pokemod.Content.DamageClasses;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Terraria.Enums;
 
 
 namespace Pokemod.Content.Pets
@@ -77,6 +78,7 @@ namespace Pokemod.Content.Pets
 		public virtual int[] attackSwimStartEnd => [-1,-1];
 
 		public bool canAttackOutTimer = false;
+		public virtual bool sideDiff => false;
 		public virtual int moveStyle => 0;
 		public virtual bool canSwim => false;
 		public bool isSwimming = false;
@@ -461,9 +463,10 @@ namespace Pokemod.Content.Pets
 			vectorToIdlePosition = idlePosition - Projectile.Center;
 			distanceToIdlePosition = vectorToIdlePosition.Length();
 
-			if (Main.myPlayer == owner.whoAmI && distanceToIdlePosition > 1400f) {
+			if (Main.myPlayer == owner.whoAmI && distanceToIdlePosition > 1200f) {
 				// Whenever you deal with non-regular events that change the behavior or position drastically, make sure to only run the code on the owner of the projectile,
 				// and then set netUpdate to true
+				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKFainted") with {Volume = 0.7f}, Projectile.Center);
 				Projectile.position = idlePosition;
 				Projectile.velocity *= 0.1f;
 				Projectile.netUpdate = true;
@@ -950,6 +953,11 @@ namespace Pokemod.Content.Pets
 						finalFrame = attackStartEnd[1];
 						break;
 				}
+			}
+
+			if(sideDiff && Projectile.spriteDirection<0){
+				initialFrame += totalFrames/2;
+				finalFrame += totalFrames/2;
 			}
 
 			if(Projectile.frame > finalFrame || Projectile.frame < initialFrame){

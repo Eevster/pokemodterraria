@@ -59,6 +59,15 @@ namespace Pokemod.Content.Pets.KoffingPet
 				attackProjs[i] = null;
 			}
 		}
+
+		public override void ExtraChanges() {
+			if(Main.rand.NextBool(10)){
+				int goreIndex = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position, Vector2.Zero, Main.rand.Next(220, 223), 1f);
+				Main.gore[goreIndex].scale = 0.5f;
+				Main.gore[goreIndex].position = Projectile.position + 0.5f*hitboxWidth*Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
+				Main.gore[goreIndex].velocity = 0.05f*hitboxWidth*(Main.gore[goreIndex].position-Projectile.position).SafeNormalize(Vector2.UnitX);
+			}
+		}
 	}
 
 	public class KoffingPetProjectileShiny : KoffingPetProjectile{}

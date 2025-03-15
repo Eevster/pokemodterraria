@@ -15,6 +15,7 @@ using ReLogic.Content;
 using Pokemod.Common.Players;
 using Pokemod.Common.Systems;
 using System.IO;
+using Pokemod.Content.Dusts;
 
 namespace Pokemod.Content.NPCs
 {
@@ -94,6 +95,8 @@ namespace Pokemod.Content.NPCs
 			NPC.aiStyle = -1;
 
 			NPC.noTileCollide = !tangible;
+
+			if(shiny) NPC.rarity = 14;
 		}
 
 		public override void OnSpawn(IEntitySource source)
@@ -200,6 +203,8 @@ namespace Pokemod.Content.NPCs
 		public virtual int[] walkSwimStartEnd => [-1,-1];
 		public virtual int[] attackSwimStartEnd => [-1,-1];
 
+		public virtual bool sideDiff => false;
+
 		public virtual int moveStyle => 0;
 		public virtual bool canSwim => false;
 		public int moveDirection = 0;
@@ -234,6 +239,7 @@ namespace Pokemod.Content.NPCs
 		public override void AI() {
 			Movement();
 			ExtraEffects();
+			if(shiny) ShinyEffects();
 		}
 
 		// Here in FindFrame, we want to set the animation frame our npc will use depending on what it is doing.
@@ -308,6 +314,11 @@ namespace Pokemod.Content.NPCs
 				}
 			}
 
+			if(sideDiff && NPC.spriteDirection>0){
+				initialFrame += totalFrames/2;
+				finalFrame += totalFrames/2;
+			}
+
 			if(currentFrame > finalFrame || currentFrame < initialFrame){
 				currentFrame = initialFrame;
 			}
@@ -338,6 +349,14 @@ namespace Pokemod.Content.NPCs
 		}
 
 		public virtual void ExtraEffects() {
+		}
+
+		public virtual void ShinyEffects() {
+			if(Main.rand.NextBool(20)){
+				int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<Sparkle>());
+				Main.dust[dustIndex].noGravity = true;
+				Main.dust[dustIndex].velocity = 0.01f*hitboxWidth*(Main.dust[dustIndex].position-NPC.Center).SafeNormalize(Vector2.UnitX);
+			}
 		}
 
 		public virtual void Movement() {
