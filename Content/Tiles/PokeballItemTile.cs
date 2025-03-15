@@ -8,6 +8,7 @@ using Pokemod.Content.Items;
 using Pokemod.Content.Items.Consumables;
 using Pokemod.Content.Items.EvoStones;
 using Pokemod.Content.Items.Pokeballs;
+using Pokemod.Content.Items.Accessories;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -65,6 +66,7 @@ namespace Pokemod.Content.Tiles
                 ModContent.ItemType<UltraballItem>(),
                 ModContent.ItemType<VioletballItem>(),
                 ModContent.ItemType<WingballItem>(),
+                ModContent.ItemType<KingsRockItem>(),
             };
 
 			yield return new Item(items[Main.rand.Next(items.Length)], 1);

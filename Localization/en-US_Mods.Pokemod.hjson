@@ -526,12 +526,12 @@ Items: {
 	}
 
 	KeyStoneItem: {
-		DisplayName: Key Stone Item
+		DisplayName: Key Stone
 		Tooltip: ""
 	}
 
 	MegaCuffItem: {
-		DisplayName: Mega Cuff Item
+		DisplayName: Mega Cuff
 		Tooltip: ""
 	}
 
@@ -806,8 +806,8 @@ Items: {
 	}
 
 	PokeballItemTileItem: {
-		DisplayName: Pokeball Item
-		Tooltip: ""
+		DisplayName: Pokeloot
+		Tooltip: Break on the ground to recieve rewards!
 	}
 
 	Potion: {
@@ -922,7 +922,7 @@ Items: {
 	}
 
 	LeafStoneItem: {
-		DisplayName: Leaf Stone Item
+		DisplayName: Leaf Stone
 		Tooltip: ""
 	}
 
@@ -943,12 +943,22 @@ Items: {
 	}
 
 	AssaultVestItem: {
-		DisplayName: Assault Vest Item
+		DisplayName: Assault Vest
 		Tooltip: ""
 	}
 
 	GengarMegaStoneItem: {
-		DisplayName: Gengar Mega Stone Item
+		DisplayName: Gengar Mega Stone
+		Tooltip: ""
+	}
+
+	ExpertBeltItem: {
+		DisplayName: Expert Belt
+		Tooltip: ""
+	}
+
+	KingsRockItem: {
+		DisplayName: Kings Rock
 		Tooltip: ""
 	}
 }

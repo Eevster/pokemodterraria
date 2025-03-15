@@ -1,15 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Assets",
-    "\\Assets\\Textures",
     "\\Content",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen1",
-    "\\Content\\Pets",
-    "\\Content\\Pets\\CharizardPet",
-    "\\Content\\Pets\\GengarPet"
+    "\\Content\\Items\\Pokeballs",
+    "\\Localization"
   ],
-  "SelectedNode": "\\Content\\Pets\\CharizardPet\\CharizardPetProjectile.cs",
+  "SelectedNode": "\\Localization\\en-US_Mods.Pokemod.hjson",
   "PreviewInSolutionExplorer": false
 }
