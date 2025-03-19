@@ -38,9 +38,8 @@ namespace Pokemod.Content.Items.EvoStones
 		public override void AddRecipes() {
 			CreateRecipe(1)
 				.AddIngredient(ItemID.GoldOre, 40)
-				.AddIngredient(ItemID.FallenStar, 20)
-				.AddIngredient(ItemID.Wire, 20)
-				.AddTile(TileID.WorkBenches)
+				.AddIngredient(ItemID.LightningWhelkShell, 20)
+				.AddTile(TileID.Anvils)
 				.Register();
 	}
 }}

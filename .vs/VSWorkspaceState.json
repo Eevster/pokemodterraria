@@ -1,10 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Assets",
+    "\\Assets\\Textures",
     "\\Content",
-    "\\Content\\Items\\Pokeballs",
-    "\\Localization"
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\Pets",
+    "\\Content\\Pets\\AbraPet"
   ],
-  "SelectedNode": "\\Localization\\en-US_Mods.Pokemod.hjson",
+  "SelectedNode": "\\Content\\Pets\\NidorinoPet",
   "PreviewInSolutionExplorer": false
 }

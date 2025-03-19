@@ -10,7 +10,7 @@ using Pokemod.Content.Items.Consumables;
 
 namespace Pokemod.Content.Items.EvoStones
 {
-	public class LeafStoneItem : PokemonConsumableItem
+	public class MoonStoneItem : PokemonConsumableItem
 	{
 		public override void SetDefaults() {
 			Item.width = 24; // The item texture's width
@@ -40,7 +40,7 @@ namespace Pokemod.Content.Items.EvoStones
 				.AddIngredient(ItemID.JungleSpores, 40)
 				.AddIngredient(ItemID.LivingLeafWall, 20)
 				.AddIngredient(ItemID.Emerald, 10)
-				.AddTile(TileID.SkyMill)
+				.AddTile(TileID.Anvils)
 				.Register();
 	}
 	}

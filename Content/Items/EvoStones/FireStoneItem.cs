@@ -40,7 +40,7 @@ namespace Pokemod.Content.Items.EvoStones
 				.AddIngredient(ItemID.Hellstone, 40)
 				.AddIngredient(ItemID.Obsidian, 20)
 				.AddIngredient(ItemID.AshBlock, 20)
-				.AddTile(TileID.WorkBenches)
+				.AddTile(TileID.Anvils)
 				.Register();
 	}
 	}

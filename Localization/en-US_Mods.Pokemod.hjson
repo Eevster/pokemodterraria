@@ -388,6 +388,14 @@ Projectiles: {
 	GengarMegaPetProjectileShiny.DisplayName: Gengar Mega Pet Projectile Shiny
 	JoltikPetProjectile.DisplayName: Joltik Pet Projectile
 	JoltikPetProjectileShiny.DisplayName: Joltik Pet Projectile Shiny
+	NidokingPetProjectile.DisplayName: Nidoking Pet Projectile
+	NidokingPetProjectileShiny.DisplayName: Nidoking Pet Projectile Shiny
+	NidoqueenPetProjectile.DisplayName: Nidoqueen Pet Projectile
+	NidoqueenPetProjectileShiny.DisplayName: Nidoqueen Pet Projectile Shiny
+	NidoranFPetProjectile.DisplayName: Nidoran F Pet Projectile
+	NidoranFPetProjectileShiny.DisplayName: Nidoran F Pet Projectile Shiny
+	NidorinaPetProjectile.DisplayName: Nidorina Pet Projectile
+	NidorinaPetProjectileShiny.DisplayName: Nidorina Pet Projectile Shiny
 }
 
 Items: {
@@ -959,6 +967,11 @@ Items: {
 
 	KingsRockItem: {
 		DisplayName: Kings Rock
+		Tooltip: ""
+	}
+
+	MoonStoneItem: {
+		DisplayName: Moon Stone Item
 		Tooltip: ""
 	}
 }
@@ -2572,6 +2585,46 @@ Buffs: {
 	ZubatPetBuffShiny: {
 		DisplayName: Zubat Shiny
 		Description: Mods.Pokemod.Buffs.ZubatPetBuffShiny.Description
+	}
+
+	NidokingPetBuff: {
+		DisplayName: Nidoking Pet Buff
+		Description: Mods.Pokemod.Buffs.NidokingPetBuff.Description
+	}
+
+	NidokingPetBuffShiny: {
+		DisplayName: Nidoking Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.NidokingPetBuffShiny.Description
+	}
+
+	NidoqueenPetBuff: {
+		DisplayName: Nidoqueen Pet Buff
+		Description: Mods.Pokemod.Buffs.NidoqueenPetBuff.Description
+	}
+
+	NidoqueenPetBuffShiny: {
+		DisplayName: Nidoqueen Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.NidoqueenPetBuffShiny.Description
+	}
+
+	NidoranFPetBuff: {
+		DisplayName: Nidoran F Pet Buff
+		Description: Mods.Pokemod.Buffs.NidoranFPetBuff.Description
+	}
+
+	NidoranFPetBuffShiny: {
+		DisplayName: Nidoran F Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.NidoranFPetBuffShiny.Description
+	}
+
+	NidorinaPetBuff: {
+		DisplayName: Nidorina Pet Buff
+		Description: Mods.Pokemod.Buffs.NidorinaPetBuff.Description
+	}
+
+	NidorinaPetBuffShiny: {
+		DisplayName: Nidorina Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.NidorinaPetBuffShiny.Description
 	}
 }
 
