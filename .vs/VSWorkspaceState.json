@@ -3,11 +3,12 @@
     "",
     "\\Assets",
     "\\Assets\\Textures",
+    "\\Assets\\Textures\\Pokesprites",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
-    "\\Content\\NPCs\\PokemonNPCs",
     "\\Content\\Pets",
-    "\\Content\\Pets\\AbraPet"
+    "\\Localization"
   ],
-  "SelectedNode": "\\Content\\Pets\\NidorinoPet",
+  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets\\NidoqueenPetProjectileShiny.png",
   "PreviewInSolutionExplorer": false
 }
