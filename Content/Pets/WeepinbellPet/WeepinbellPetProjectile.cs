@@ -9,18 +9,16 @@ namespace Pokemod.Content.Pets.WeepinbellPet
 {
 	public class WeepinbellPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 64;
-		public override int hitboxHeight => 64;
+		public override int hitboxWidth => 30;
+		public override int hitboxHeight => 28;
 
-		public override int totalFrames => 4;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
+		public override int totalFrames => 8;
+		public override int animationSpeed => 6;
+		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
-
-        public override string[] evolutions => ["Victreebel"];
-        public override string[] itemToEvolve => ["LeafStoneItem"];
+		public override int[] jumpStartEnd => [2,2];
+		public override int[] fallStartEnd => [3,3];
+		public override int[] attackStartEnd => [4,7];
 
         public override int nAttackProjs => 3;
 		public override float enemySearchDistance => 1000;
@@ -28,6 +26,9 @@ namespace Pokemod.Content.Pets.WeepinbellPet
 		public override int attackDuration => 0;
 		public override int attackCooldown => 120;
 		public override bool canMoveWhileAttack => true;
+
+		public override string[] evolutions => ["Victreebel"];
+        public override string[] itemToEvolve => ["LeafStoneItem"];
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			SoundEngine.PlaySound(SoundID.Item4, Projectile.position);

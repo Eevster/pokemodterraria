@@ -863,9 +863,6 @@ namespace Pokemod.Content.Pets
 			for(int i = 1; i < 4; i++){
 				jumpHeight = 0;
                 for(int j = 0; j < maxJumpHeight; j++){
-					if(j == maxJumpHeight-1){
-						return;
-					}
                     Vector2 scanPosition = Projectile.Center + new Vector2(0,hitboxHeight/2) + new Vector2(moveDirection*16*i,8-16*(j+1));
 
                     if(Collision.SolidCollision(scanPosition - new Vector2(8,16), 16, 16) || Main.tile[(int)scanPosition.X/16-moveDirection, (int)scanPosition.Y/16+1].IsHalfBlock || Main.tile[(int)scanPosition.X/16, (int)scanPosition.Y/16].IsHalfBlock){

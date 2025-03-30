@@ -20,14 +20,12 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+				new FlavorTextBestiaryInfoElement("This Pokémon lives underground. Because of its dark habitat, it is repelled by bright sunlight."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			
-				if (spawnInfo.Player.ZoneNormalUnderground) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Underground.Chance * 0.5f);
+			if (spawnInfo.Player.ZoneNormalUnderground) {
+				return GetSpawnChance(spawnInfo, SpawnCondition.Underground.Chance * 0.5f);
 			}
-			
 
 			return 0f;
 		}

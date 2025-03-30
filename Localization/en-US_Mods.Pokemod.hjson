@@ -388,6 +388,8 @@ Projectiles: {
 	GengarMegaPetProjectileShiny.DisplayName: Gengar Mega Pet Projectile Shiny
 	JoltikPetProjectile.DisplayName: Joltik Pet Projectile
 	JoltikPetProjectileShiny.DisplayName: Joltik Pet Projectile Shiny
+	GalvantulaPetProjectile.DisplayName: Galvantula Pet Projectile
+	GalvantulaPetProjectileShiny.DisplayName: Galvantula Pet Projectile Shiny
 }
 
 Items: {
@@ -2894,6 +2896,8 @@ NPCs: {
 	ZubatCritterNPCShiny.DisplayName: Zubat Shiny
 	JoltikCritterNPC.DisplayName: Joltik
 	JoltikCritterNPCShiny.DisplayName: Joltik Shiny
+	GalvantulaCritterNPC.DisplayName: Galvantula
+	GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
 }
 
 Dialogue: {

@@ -19,7 +19,7 @@ namespace Pokemod.Content.Pets.DiglettPet
 		public override int[] jumpStartEnd => [0,3];
 		public override int[] fallStartEnd => [0,3];
 
-        public override int maxJumpHeight => 0;
+        public override int maxJumpHeight => 2;
 
         public override string[] evolutions => ["Dugtrio"];
 		public override int levelToEvolve => 20;

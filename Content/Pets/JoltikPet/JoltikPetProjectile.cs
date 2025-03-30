@@ -32,6 +32,10 @@ namespace Pokemod.Content.Pets.JoltikPet
 		public override int attackCooldown => 120;
 		public override bool canMoveWhileAttack => true;
 
+		public override string[] evolutions => ["Galvantula"];
+		public override int levelToEvolve => 36;
+		public override int levelEvolutionsNumber => 1;
+
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
 			if(Projectile.owner == Main.myPlayer){

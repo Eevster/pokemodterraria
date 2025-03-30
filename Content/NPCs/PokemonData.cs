@@ -245,6 +245,7 @@ namespace Pokemod.Content.NPCs
             {"Feraligatr", [85, 105, 100, 79, 83, 78]},
             //Gen 5
             {"Joltik", [50, 47, 50, 57, 50, 65]},
+            {"Galvantula", [70, 77, 60, 97, 60, 108]},
             //Gen 7
             {"Zeraora", [88, 112, 75, 102, 80, 143]},
             //Megas

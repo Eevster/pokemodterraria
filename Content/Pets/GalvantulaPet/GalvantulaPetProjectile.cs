@@ -5,19 +5,19 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.BellsproutPet
+namespace Pokemod.Content.Pets.GalvantulaPet
 {
-	public class BellsproutPetProjectile : PokemonPetProjectile
+	public class GalvantulaPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 20;
-		public override int hitboxHeight => 26;
+		public override int hitboxWidth => 60;
+		public override int hitboxHeight => 48;
 
-		public override int totalFrames => 12;
+		public override int totalFrames => 16;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [4,7];
-		public override int[] jumpStartEnd => [5,5];
-		public override int[] fallStartEnd => [7,7];
+		public override int[] jumpStartEnd => [4,4];
+		public override int[] fallStartEnd => [6,6];
 		public override int[] attackStartEnd => [8,11];
 
 		public override int nAttackProjs => 3;
@@ -26,10 +26,6 @@ namespace Pokemod.Content.Pets.BellsproutPet
 		public override int attackDuration => 0;
 		public override int attackCooldown => 120;
 		public override bool canMoveWhileAttack => true;
-
-		public override string[] evolutions => ["Weepinbell"];
-		public override int levelToEvolve => 21;
-		public override int levelEvolutionsNumber => 1;
 
 		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
 			SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
@@ -57,5 +53,5 @@ namespace Pokemod.Content.Pets.BellsproutPet
 		}
 	}
 
-	public class BellsproutPetProjectileShiny : BellsproutPetProjectile{}
+	public class GalvantulaPetProjectileShiny : GalvantulaPetProjectile{}
 }
