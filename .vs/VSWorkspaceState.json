@@ -3,13 +3,12 @@
     "",
     "\\Assets",
     "\\Assets\\Textures",
+    "\\Assets\\Textures\\Pokesprites",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen1",
     "\\Content\\Pets",
-    "\\Content\\Pets\\CharizardPet",
-    "\\Content\\Pets\\GengarPet"
+    "\\Localization"
   ],
-  "SelectedNode": "\\Content\\Pets\\CharizardPet\\CharizardPetProjectile.cs",
+  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets\\NidoqueenPetProjectileShiny.png",
   "PreviewInSolutionExplorer": false
 }

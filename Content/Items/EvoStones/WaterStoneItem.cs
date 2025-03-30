@@ -40,7 +40,7 @@ namespace Pokemod.Content.Items.EvoStones
 				.AddIngredient(ItemID.Waterleaf, 40)
 				.AddIngredient(ItemID.Coral, 20)
 				.AddIngredient(ItemID.SharkFin, 20)
-				.AddTile(TileID.WorkBenches)
+				.AddTile(TileID.Anvils)
 				.Register();
 	}
 	}
