@@ -1,7 +1,11 @@
+using Microsoft.Xna.Framework;
 using Pokemod.Content.NPCs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -32,6 +36,24 @@ namespace Pokemod.Common.Systems
 			ProfOakTravelingMerchant.shopItems.Clear();
 			ProfOakTravelingMerchant.spawnTime = double.MaxValue;
 		}
+
+        public override void PostWorldGen()
+        {
+			if (Main.netMode != NetmodeID.MultiplayerClient) {
+				var entitySource = new EntitySource_WorldGen("SpawnProfOak");
+				Vector2 position = new Vector2(16*Main.spawnTileX, 16*Main.spawnTileY);
+
+				int slot = NPC.NewNPC(entitySource, (int)position.X, (int)position.Y, ModContent.NPCType<ProfOakTravelingMerchant>());
+				NPC traveler = Main.npc[slot];
+				traveler.homeless = true;
+				traveler.direction = Main.spawnTileX >= WorldGen.bestX ? -1 : 1;
+				traveler.netUpdate = true;
+
+				if (Main.netMode == NetmodeID.Server && slot < Main.maxNPCs) {
+					NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, slot);
+				}
+			}
+        }
  
 		public override void NetSend(BinaryWriter writer) {
 			// Note that NetSend is called whenever WorldData packet is sent.

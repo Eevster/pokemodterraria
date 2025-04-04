@@ -22,6 +22,8 @@ using Pokemod.Content.Pets.CyndaquilPet;
 using Pokemod.Content.Pets.TotodilePet;
 using Pokemod.Content.Items.Pokeballs;
 using Pokemod.Content.Items.Accessories;
+using Pokemod.Common.UI.StarterPanelUI;
+using Pokemod.Common.Players;
 
 namespace Pokemod.Content.NPCs
 {
@@ -274,11 +276,14 @@ namespace Pokemod.Content.NPCs
 
 		public override void SetChatButtons(ref string button, ref string button2) {
 			button = Language.GetTextValue("LegacyInterface.28");
+			if(!Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().HasStarter) button2 = "Starter Pokemon";
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref string shop) {
 			if (firstButton) {
 				shop = Shop.Name; // Opens the shop
+			}else{
+				if(!Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().HasStarter) ModContent.GetInstance<StarterPanelUISystem>().ShowMyUI();
 			}
 		}
 

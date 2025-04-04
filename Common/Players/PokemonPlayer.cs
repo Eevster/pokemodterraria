@@ -26,6 +26,7 @@ namespace Pokemod.Common.Players
 {
     public class PokemonPlayer : ModPlayer
 	{
+		public bool HasStarter;
 		//Accessories
 		public string MegaStone;
 		public int HasMegaStone;
@@ -64,11 +65,13 @@ namespace Pokemod.Common.Players
 		public override void SaveData(TagCompound tag)
         {
 			tag["TrainerID"] = TrainerID;
+			tag["HasStarter"] = HasStarter;
         }
 
         public override void LoadData(TagCompound tag)
         {
 			TrainerID = tag.GetString("TrainerID");
+			HasStarter = tag.GetBool("HasStarter");
         }
 
         public override void Initialize()
@@ -260,6 +263,27 @@ namespace Pokemod.Common.Players
             }
             base.PostBuyItem(vendor, shopInventory, item);
         }
+
+		public void GenerateCaughtPokemon(string pokemonName){
+			int ballItem;
+			bool shiny = Main.rand.NextBool(4096);
+
+			if (Main.netMode == NetmodeID.SinglePlayer)
+			{
+				ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
+				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
+				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: "PokeballItem");
+			}
+			else
+			{
+				if (Main.netMode == NetmodeID.Server)
+				{
+					ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
+					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
+					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: "PokeballItem");
+				}
+			}
+		}
 
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {

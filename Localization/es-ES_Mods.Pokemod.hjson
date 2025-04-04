@@ -3014,4 +3014,33 @@ Configs: {
 			// Tooltip: ""
 		}
 	}
+
+	GameplayConfig: {
+		// DisplayName: Gameplay Config
+
+		Headers: {
+			// PokemonWorld: Pokemon World Header
+			// RuleChanges: Rule Changes Header
+		}
+
+		PokemonSpawnMultiplier: {
+			// Label: Pokemon Spawn Multiplier
+			// Tooltip: ""
+		}
+
+		RandomizedStarters: {
+			// Label: Randomized Starters
+			// Tooltip: ""
+		}
+
+		RandomizedEvolutions: {
+			// Label: Randomized Evolutions
+			// Tooltip: ""
+		}
+
+		ReleaseFaintedPokemon: {
+			// Label: Release Fainted Pokemon
+			// Tooltip: ""
+		}
+	}
 }

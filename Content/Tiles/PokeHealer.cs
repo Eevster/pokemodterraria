@@ -49,6 +49,14 @@ namespace Pokemod.Content.Tiles
 			offsetY = 2;
 		}*/
 
+        public override void MouseOver(int i, int j)
+        {
+            Player player = Main.LocalPlayer;
+            player.cursorItemIconEnabled = true;
+            player.cursorItemIconID = ItemID.Heart;
+            base.MouseOver(i, j);
+        }
+
         public override bool RightClick(int i, int j) {
             Player player = Main.LocalPlayer;
 

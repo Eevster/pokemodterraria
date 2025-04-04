@@ -42,12 +42,15 @@ namespace Pokemod.Content.Tiles
                 ModContent.ItemType<FireStoneItem>(),
                 ModContent.ItemType<WaterStoneItem>(),
                 ModContent.ItemType<ThunderStoneItem>(),
-                ModContent.ItemType<OranBerry>(),
+                ModContent.ItemType<MoonStoneItem>(),
+                ModContent.ItemType<LeafStoneItem>(),
+
                 ModContent.ItemType<Potion>(),
                 ModContent.ItemType<SuperPotion>(),
                 ModContent.ItemType<HyperPotion>(),
                 ModContent.ItemType<Revive>(),
                 ModContent.ItemType<MaxRevive>(),
+
                 ModContent.ItemType<PokeballItem>(),
                 ModContent.ItemType<AzureballItem>(),
                 ModContent.ItemType<BeastballItem>(),
@@ -66,6 +69,7 @@ namespace Pokemod.Content.Tiles
                 ModContent.ItemType<UltraballItem>(),
                 ModContent.ItemType<VioletballItem>(),
                 ModContent.ItemType<WingballItem>(),
+
                 ModContent.ItemType<KingsRockItem>(),
             };
 

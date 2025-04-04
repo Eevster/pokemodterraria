@@ -5,10 +5,7 @@ namespace Pokemod.Common.Configs
 {
 	public class BetaMonsConfig : ModConfig
 	{
-		
 		public override ConfigScope Mode => ConfigScope.ServerSide;
-
-		
 
 		[Header("Items")] 
 		

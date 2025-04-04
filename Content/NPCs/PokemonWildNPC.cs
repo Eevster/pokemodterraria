@@ -16,6 +16,7 @@ using Pokemod.Common.Players;
 using Pokemod.Common.Systems;
 using System.IO;
 using Pokemod.Content.Dusts;
+using Pokemod.Common.Configs;
 
 namespace Pokemod.Content.NPCs
 {
@@ -47,7 +48,7 @@ namespace Pokemod.Content.NPCs
 		/// <summary>
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
 		/// </summary>
-		public virtual int[] baseStats => PokemonNPCData.pokemonStats[pokemonName];
+		public virtual int[] baseStats => PokemonNPCData.pokemonInfo[pokemonName].pokemonStats;
 		public int[] finalStats;
 
 		public virtual string[] variants => [];
@@ -168,11 +169,15 @@ namespace Pokemod.Content.NPCs
 				}
 			}
 
+			if(Main.bloodMoon){
+				chance *= 0.05f;
+			}
+
 			if(minLevel > WorldLevel.MaxWorldLevel){
 				chance = 0;
 			}
 
-			return chance;
+			return chance * ModContent.GetInstance<GameplayConfig>().PokemonSpawnMultiplier;
 		}
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

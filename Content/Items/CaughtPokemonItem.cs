@@ -1,6 +1,7 @@
 using Humanizer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Common.Configs;
 using Pokemod.Common.Players;
 using Pokemod.Content.Items.Consumables;
 using Pokemod.Content.NPCs;
@@ -183,7 +184,7 @@ namespace Pokemod.Content.Items
         }
 
 		public int[] GetPokemonStats(){
-			return PokemonNPCData.CalcAllStats(level, PokemonNPCData.pokemonStats[PokemonName], IVs, EVs);
+			return PokemonNPCData.CalcAllStats(level, PokemonNPCData.pokemonInfo[PokemonName].pokemonStats, IVs, EVs);
 		}
 
         public override void UpdateInventory(Player player)
@@ -206,6 +207,10 @@ namespace Pokemod.Content.Items
 			SetPetInfo(player);
 
             base.UpdateInventory(player);
+
+			if(ModContent.GetInstance<GameplayConfig>().ReleaseFaintedPokemon){
+				if(currentHP <= 0) DeletePokemon();
+			}
         }
 
         public override void HoldItem(Player player)
@@ -250,7 +255,15 @@ namespace Pokemod.Content.Items
 			}
 
             base.HoldItem(player);
+
+			if(ModContent.GetInstance<GameplayConfig>().ReleaseFaintedPokemon){
+				if(currentHP <= 0) DeletePokemon();
+			}
         }
+
+		private void DeletePokemon(){
+			Item.TurnToAir();
+		}
 
         public void SetPetInfo(Player player = null){
 			if(PokemonName != null && PokemonName != ""){

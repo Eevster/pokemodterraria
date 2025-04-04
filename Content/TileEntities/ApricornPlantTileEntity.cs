@@ -26,7 +26,7 @@ namespace Pokemod.Content.TileEntities
     public class ApricornTileEntity : ModTileEntity
     {
         internal int apricornType = -1;
-        internal bool apricornChanged;
+        //internal bool apricornChanged;
         public override bool IsTileValidForEntity(int x, int y)
         {
             Tile tile = Main.tile[x, y];
@@ -36,16 +36,20 @@ namespace Pokemod.Content.TileEntities
 
         public void setApricorn(int type){
             apricornType = type;
-            apricornChanged = true;
+            //apricornChanged = true;
+            if (Main.netMode == NetmodeID.Server) {
+                // The TileEntitySharing message will trigger NetSend, manually syncing the changed data.
+                NetMessage.SendData(MessageID.TileEntitySharing, number: ID, number2: Position.X, number3: Position.Y);
+            }
         }
 
-        public override void Update() {
+        /*public override void Update() {
 			if (apricornChanged) {
 				// Sending 86 aka, TileEntitySharing, triggers NetSend. Think of it like manually calling sync.
-				NetMessage.SendData(MessageID.TileEntitySharing, -1, -1, null, ID, Position.X, Position.Y);
+				NetMessage.SendData(MessageID.TileEntitySharing, number: ID, number2: Position.X, number3: Position.Y);
 				apricornChanged = false;
 			}
-		}
+		}*/
 
         public override void NetReceive(BinaryReader reader)
         {

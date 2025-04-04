@@ -17,6 +17,7 @@ using Terraria.ModLoader;
 using Pokemod.Content.DamageClasses;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Terraria.Enums;
+using Pokemod.Common.Configs;
 
 
 namespace Pokemod.Content.Pets
@@ -31,7 +32,7 @@ namespace Pokemod.Content.Pets
 		/// <summary>
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
 		/// </summary>
-		public int[] baseStats => PokemonNPCData.pokemonStats[GetType().Name.Replace("PetProjectile","").Replace("Shiny","")];
+		public int[] baseStats => PokemonNPCData.pokemonInfo[GetType().Name.Replace("PetProjectile","").Replace("Shiny","")].pokemonStats;
 		public int[] IVs = [0,0,0,0,0,0];
 		public int[] EVs = [0,0,0,0,0,0];
 		public int[] finalStats = [0,0,0,0,0,0];
@@ -301,6 +302,7 @@ namespace Pokemod.Content.Pets
 		public virtual string GetCanEvolve(){
 			if(canEvolve != -1){
 				if(isEvolving && evolveTimer <= 0){
+					if(ModContent.GetInstance<GameplayConfig>().RandomizedEvolutions) return PokemonNPCData.GetRandomEvolution(GetType().Name.Replace("PetProjectile","").Replace("Shiny",""));
 					return evolutions[canEvolve];
 				}
 			}

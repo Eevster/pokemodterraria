@@ -232,6 +232,20 @@ namespace Pokemod.Content.Tiles
             return false;
         }
 
+        public override void MouseOver(int i, int j)
+        {
+            if (TileUtils.TryGetTileEntityAs(i, j, out ApricornTileEntity entity))
+            {
+                if(entity.apricornType != -1){
+                    Player player = Main.LocalPlayer;
+                    player.cursorItemIconEnabled = true;
+                    player.cursorItemIconID = chooseSpawnItem(i,j);
+                }
+            }
+
+            base.MouseOver(i, j);
+        }
+
         public override bool RightClick(int i, int j) {
             PlantStage stage = GetStage(i, j);
 
@@ -253,7 +267,7 @@ namespace Pokemod.Content.Tiles
                     int number = Item.NewItem(entitySource, (int)spawnX, (int)spawnY - 20, 0, 0, chooseSpawnItem(i,j), 1, false, -1);
 
                     if (Main.netMode == NetmodeID.MultiplayerClient){
-			            NetMessage.SendData(21, -1, -1, null, number, 1f);
+			            NetMessage.SendData(MessageID.SyncItem, -1, -1, null, number, 1f);
                     }
                     
                     entity.setApricorn(-1);
