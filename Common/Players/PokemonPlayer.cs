@@ -21,6 +21,7 @@ using Pokemod.Content.Pets.ChikoritaPet;
 using Pokemod.Content.Pets.CyndaquilPet;
 using Pokemod.Content.Pets.TotodilePet;
 using Pokemod.Content.Tiles;
+using Pokemod.Content.NPCs;
 
 namespace Pokemod.Common.Players
 {
@@ -47,19 +48,35 @@ namespace Pokemod.Common.Players
 		public NPC targetNPC;
 		public Player targetPlayer;
 
+		public int maxPokemon;
+		public const int defaultMaxPokemon = 1;
+		public List<int> currentActivePokemon = new List<int>();
+
 		//Player data
 		public string TrainerID { get; internal set; }
 
 		private static Asset<Texture2D> targetTexture;
 
+		private static Asset<Texture2D> noAttackTexture;
+		private static Asset<Texture2D> autoAttackTexture;
+		private static Asset<Texture2D> directedAttackTexture;
+
 		public override void Load()
         { 
             targetTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/PokemonTarget");
+
+			noAttackTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/CursorNoAttack");
+			autoAttackTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/CursorAutoAttack");
+			directedAttackTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/CursorDirectedAttack");
         }
 
         public override void Unload()
         { 
             targetTexture = null;
+
+			noAttackTexture = null;
+			autoAttackTexture = null;
+			directedAttackTexture = null;
         }
 
 		public override void SaveData(TagCompound tag)
@@ -162,7 +179,23 @@ namespace Pokemod.Common.Players
 			if(HasEverstone > 0) HasEverstone--;
 			if(HasMegaStone > 0) HasMegaStone--;
 			else MegaStone = "";
+
+			maxPokemon = defaultMaxPokemon;
+			currentActivePokemon ??= [];
+			
+			int i = 0;
+			while(i < currentActivePokemon.Count){
+				if(!Main.projectile[currentActivePokemon[i]].active){
+					currentActivePokemon.Remove(currentActivePokemon[i]);
+				}else{
+					i++;
+				}
+			}
         }
+
+		public int FreePokemonSlots(){
+			return maxPokemon - currentActivePokemon.Count;
+		}
 
         public void ChangeAttackMode(int mode){
 			directedEmptyTimer = 0;
@@ -174,7 +207,7 @@ namespace Pokemod.Common.Players
 
 			if(attackMode == (int)AttackMode.Directed_Attack){
 				attackPosition = Main.MouseWorld;
-				SearchNPCTarget(32);
+				SearchNPCTarget(48);
 				directedEmptyTimer = directedEmptyMaxTime;
 			}
 		}
@@ -209,7 +242,7 @@ namespace Pokemod.Common.Players
 				for (int k = 0; k < Main.maxNPCs; k++) {
 					NPC target = Main.npc[k];
 
-					if (target.CanBeChasedBy()) {
+					if (target.CanBeChasedBy() || target.ModNPC is PokemonWildNPC) {
 						// The DistanceSquared function returns a squared distance between 2 points, skipping relatively expensive square root calculations
 						float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, attackPosition);
 
@@ -290,6 +323,18 @@ namespace Pokemod.Common.Players
 			if(Player.whoAmI == Main.myPlayer){
 				if(Vector2.Distance(Player.Center,attackPosition) < 3000 && attackMode == (int)AttackMode.Directed_Attack){
 					Main.EntitySpriteDraw(targetTexture.Value, attackPosition - Main.screenPosition, targetTexture.Value.Bounds, Color.White*0.8f, 0, targetTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
+				}
+				if(Player.HeldItem.ModItem is TrainerGlove){
+					Asset<Texture2D> gloveIconTexture;
+					if(attackMode==(int)AttackMode.Directed_Attack){
+						gloveIconTexture = directedAttackTexture;
+					}else if(attackMode==(int)AttackMode.Auto_Attack){
+						gloveIconTexture = autoAttackTexture;
+					}else{
+						gloveIconTexture = noAttackTexture;
+					}
+					float cursorScale = Main.cursorScale/Main.GameZoomTarget;
+					Main.spriteBatch.Draw(gloveIconTexture.Value, Main.MouseWorld-Main.screenPosition + cursorScale*new Vector2(-gloveIconTexture.Width()/2, 8+gloveIconTexture.Height()/2), gloveIconTexture.Value.Bounds, Color.White, 0, gloveIconTexture.Size()*0.5f, cursorScale, SpriteEffects.None, 0);
 				}
 			}
             base.DrawEffects(drawInfo, ref r, ref g, ref b, ref a, ref fullBright);

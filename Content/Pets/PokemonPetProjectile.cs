@@ -385,6 +385,14 @@ namespace Pokemod.Content.Pets
 			ExtraChanges();
 
 			if(Main.myPlayer == Projectile.owner){
+				if(!player.GetModPlayer<PokemonPlayer>().currentActivePokemon.Contains(Projectile.whoAmI)){
+					player.GetModPlayer<PokemonPlayer>().currentActivePokemon.Add(Projectile.whoAmI);
+				}
+				if(player.GetModPlayer<PokemonPlayer>().FreePokemonSlots()<0){
+					Main.projectile[player.GetModPlayer<PokemonPlayer>().currentActivePokemon[0]].Kill();
+					player.GetModPlayer<PokemonPlayer>().currentActivePokemon.RemoveAt(0);
+				}
+
 				Projectile.netUpdate = true;
 			}
 		}

@@ -54,6 +54,9 @@ namespace Pokemod.Content.NPCs
 		public virtual string[] variants => [];
 		public string variant;
 
+		public string nature;
+		public bool hostilePokemon;
+
 		public override void SendExtraAI(BinaryWriter writer) {
 			writer.Write((double)moveDirection);
 			writer.Write((double)flyDirection);
@@ -242,6 +245,7 @@ namespace Pokemod.Content.NPCs
 		public ref float currentFrame => ref NPC.ai[2];
 
 		public override void AI() {
+			NPC.chaseable = hostilePokemon;
 			Movement();
 			ExtraEffects();
 			if(shiny) ShinyEffects();

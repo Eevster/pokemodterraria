@@ -2991,11 +2991,9 @@ PokemonInfo: {
 	LevelUp: "{0} grew to lvl {1}"
 	FaintedMsg: Your pokemon fainted!
 	ItemUse: To use it, click on your pokemon or right click on the corresponding pokeball
-	GloveTooltip:
-		'''
-		Left click to make your pokemon perform: {0}
-		Right click to switch modes
-		'''
+	GloveTooltip: "[c/ffd51c:Actual mode: {0}]"
+	GloveTooltipLeft: Left click to make your pokemon perform: {0}
+	GloveTooltipRight: Right click to make your pokemon perform: {0}
 	AutoAttack: Auto Attack
 	NoAttack: No Attack
 	DirectedAttack: Directed Attack

@@ -42,26 +42,60 @@ namespace Pokemod.Content.Items
 				return true;
 			}
 
+			attackType = player.GetModPlayer<PokemonPlayer>().attackMode;
+
 			if (player.altFunctionUse == 2) {
-				attackType = (attackType+1)%3;
-                CombatText.NewText(player.Hitbox, new Color(255, 255, 255), player.GetModPlayer<PokemonPlayer>().GetAttackModeText(attackType));
+				switch(attackType){
+					case 0:
+						attackType = 1;
+						break;
+					case 2:
+						attackType = 0;
+						break;
+				}
+				
                 SoundEngine.PlaySound(SoundID.MenuTick, player.position);
+				player.GetModPlayer<PokemonPlayer>().ChangeAttackMode(attackType);
 			}
 			else {
+				switch(attackType){
+					case 0:
+						attackType = 2;
+						break;
+					case 1:
+						attackType = 0;
+						break;
+				}
+
+				SoundEngine.PlaySound(SoundID.MenuTick, player.position);
 				player.GetModPlayer<PokemonPlayer>().ChangeAttackMode(attackType);
 			}
 
             return true;
         }
 
+        public override void UpdateInventory(Player player)
+        {
+            attackType = player.GetModPlayer<PokemonPlayer>().attackMode;
+        }
+
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
 			foreach (TooltipLine line in tooltips) {
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
-					string mode = "";
-					if(attackType == 0) mode = Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack");
-                    if(attackType == 1) mode = Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack");
-                    if(attackType == 2) mode = Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack");
-                    line.Text = Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(mode).Value;
+					if(attackType == 0){
+						line.Text = Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value
+						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
+						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipRight").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack")).Value;
+					}
+                    if(attackType == 1){
+						line.Text = Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack")).Value
+						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value;
+					}
+                    if(attackType == 2){
+						line.Text = Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
+						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
+						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipRight").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value;
+					}
 				}
 			}
 

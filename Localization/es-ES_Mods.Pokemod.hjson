@@ -2991,11 +2991,9 @@ PokemonInfo: {
 	LevelUp: "{0} subió al nivel {1}"
 	FaintedMsg: ¡Tu pokemon se debilitó!
 	ItemUse: Para usar el objeto haz clic sobre tu pokemon o haz clic derecho en su pokeball
-	GloveTooltip:
-		'''
-		Clic para que tu pokemon esté en modo: {0}
-		Clic derecho para cambiar modo
-		'''
+	GloveTooltip: "[c/ffd51c:Modo actual: {0}]"
+	GloveTooltipLeft: Clic izquierdo para que tu pokemon esté en modo: {0}
+	GloveTooltipRight: Clic derecho para que tu pokemon esté en modo: {0}
 	AutoAttack: Auto ataque
 	NoAttack: No atacar
 	DirectedAttack: Ataque dirigido

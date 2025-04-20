@@ -6,6 +6,7 @@ using Pokemod.Common.Players;
 using Pokemod.Content.Items.Consumables;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
+using Pokemod.Content.Projectiles;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace Pokemod.Content.Items
 		public string OriginalTrainerID;
 		public string CurrentTrainerID;
         public string PokemonName;
+		public string PokemonNick;
         public int level;
 		public int exp;
 		public int expToNextLevel;
@@ -35,6 +37,10 @@ namespace Pokemod.Content.Items
 		public bool Shiny;
 		public string BallType;
 		public string variant;
+
+		public string nature;
+		public int happiness;
+		public string pokeHeldItem;
 		public int shouldDespawn = 3;
 		public bool canShoot = false;
 		public Projectile proj;
@@ -62,11 +68,15 @@ namespace Pokemod.Content.Items
 
         public override void NetSend(BinaryWriter writer) {
 			writer.Write(PokemonName ?? "");
+			writer.Write(PokemonNick ?? "");
 			writer.Write(Shiny);
 			writer.Write(variant ?? "");
+			writer.Write(nature ?? "");
 			writer.Write(BallType ?? "");
+			writer.Write(pokeHeldItem ?? "");
 			writer.Write((double)level);
 			writer.Write((double)exp);
+			writer.Write((double)happiness);
 			foreach(int IV in IVs){
 				writer.Write((double)IV);
 			}
@@ -78,11 +88,15 @@ namespace Pokemod.Content.Items
 
 		public override void NetReceive(BinaryReader reader) {
 			PokemonName = reader.ReadString();
+			PokemonNick = reader.ReadString();
 			Shiny = reader.ReadBoolean();
 			variant = reader.ReadString();
+			nature = reader.ReadString();
 			BallType = reader.ReadString();
+			pokeHeldItem = reader.ReadString();
 			level = (int)reader.ReadDouble();
 			exp = (int)reader.ReadDouble();
+			happiness = (int)reader.ReadDouble();
 			for(int i = 0; i < IVs.Length; i++){
 				IVs[i] = (int)reader.ReadDouble();
 			}
@@ -95,6 +109,8 @@ namespace Pokemod.Content.Items
 		public override bool? UseItem(Player player)
         {
 			if (player.whoAmI == Main.myPlayer) {
+				//if(player.GetModPlayer<PokemonPlayer>().FreePokemonSlots() > 0) return true;
+
 				if(proj == null){
 					canShoot = true;
 				}else{
@@ -220,38 +236,38 @@ namespace Pokemod.Content.Items
 
 			shouldDespawn = 3;
 
-			if(PokemonName != null && PokemonName != ""){
-				GetProjInfo(player);
-				if(Main.mouseItem != null){
-					if(Main.mouseItem.ModItem is CaughtPokemonItem ball){
-						ball.GetProjInfo(player);
-					}
-				}
-			}
+			bool isHolding = false;
 
-			if(proj != null){
-				if(currentHP == 0 && proj.active){
-					proj?.Kill();
-					proj = null;
-				}
-			}
 			if(Main.mouseItem != null){
 				if(Main.mouseItem.ModItem is CaughtPokemonItem ball){
-					if(ball.proj != null){
-						if(ball.currentHP == 0 && ball.proj.active){
-							ball.proj?.Kill();
-							ball.proj = null;
+					if(ball.ComparePokemon(this)){
+						if(ball.PokemonName != null && ball.PokemonName != ""){
+							ball.GetProjInfo(player);
 						}
+						if(ball.proj != null){
+							if(ball.currentHP == 0 && ball.proj.active){
+								ball.proj?.Kill();
+								ball.proj = null;
+							}
+						}
+						ball.SetPetInfo(player);
+						ball.shouldDespawn = 3;
+						isHolding = true;
 					}
 				}
 			}
 
-			SetPetInfo(player);
-			if(Main.mouseItem != null){
-				if(Main.mouseItem.ModItem is CaughtPokemonItem ball){
-					ball.SetPetInfo(player);
-					ball.shouldDespawn = 3;
+			if(!isHolding){
+				if(PokemonName != null && PokemonName != ""){
+					GetProjInfo(player);
 				}
+				if(proj != null){
+					if(currentHP == 0 && proj.active){
+						proj?.Kill();
+						proj = null;
+					}
+				}
+				SetPetInfo(player);
 			}
 
             base.HoldItem(player);
@@ -331,11 +347,13 @@ namespace Pokemod.Content.Items
 			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
 			string newPokemonName = PokemonProj.GetCanEvolve();
 			if(newPokemonName != ""){
+				Main.NewText("GetCanEvolve newPokemonName != '' "+newPokemonName);
 				Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 				proj.Kill();
 				PokemonName = newPokemonName;
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				if(player != null){
+					Main.NewText("GetCanEvolve player != null "+ player.name);
 					int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
 					proj = Main.projectile[projIndex];
 				}
@@ -422,7 +440,38 @@ namespace Pokemod.Content.Items
 		}
 
 		private int GetExpToLevel(int lvl){
-			return (int)Math.Pow(lvl, 3);
+			switch(PokemonNPCData.pokemonInfo[PokemonName].expType){
+				case (int)ExpTypes.Slow:
+					return (int)(1.25f*Math.Pow(lvl, 3));
+				case (int)ExpTypes.MediumSlow:
+					return (int)((1.2f*Math.Pow(lvl, 3))-(15*Math.Pow(lvl, 2))+(100*lvl)-140);
+				case (int)ExpTypes.Fast:
+					return (int)(0.8f*Math.Pow(lvl, 3));
+				case (int)ExpTypes.Erratic:
+					if(lvl<50){
+						return (int)(Math.Pow(lvl, 3)*(100-lvl)/50);
+					}else if(lvl<68){
+						return (int)(Math.Pow(lvl, 3)*(150-lvl)/100);
+					}else if(lvl<98){
+						return (int)(Math.Pow(lvl, 3)*((1911-(10*lvl))/3)/500);
+					}else if(lvl<=100){
+						return (int)(Math.Pow(lvl, 3)*(160-lvl)/100);
+					}else{
+						return (int)(0.6f*Math.Pow(lvl, 3));
+					}
+				case (int)ExpTypes.Fluctuating:
+					if(lvl<15){
+						return (int)(Math.Pow(lvl, 3)*(((lvl+1)/3)+24)/50);
+					}else if(lvl<36){
+						return (int)(Math.Pow(lvl, 3)*(lvl+14)/50);
+					}else if(lvl<=100){
+						return (int)(Math.Pow(lvl, 3)*((lvl/2)+32)/50);
+					}else{
+						return (int)(1.64f*Math.Pow(lvl, 3));
+					}
+				default:
+					return (int)Math.Pow(lvl, 3);
+			}
 		}
 
         // NOTE: The tag instance provided here is always empty by default.
@@ -431,11 +480,15 @@ namespace Pokemod.Content.Items
 			tag["OriginalTrainerID"] = OriginalTrainerID;
 			tag["CurrentTrainerID"] = CurrentTrainerID;
 			tag["PokemonName"] = PokemonName;
+			tag["PokemonNick"] = PokemonNick;
 			tag["Level"] = level;
 			tag["Exp"] = exp;
 			tag["Shiny"] = Shiny;
 			tag["Variant"] = variant;
+			tag["Nature"] = nature;
+			tag["Happiness"] = happiness;
 			tag["BallType"] = BallType;
+			tag["PokeHeldItem"] = pokeHeldItem;
 			tag["CurrentHP"] = currentHP;
 			tag["IVs"] = IVs.ToList();
 			tag["EVs"] = EVs.ToList();
@@ -445,11 +498,15 @@ namespace Pokemod.Content.Items
 			OriginalTrainerID = tag.GetString("OriginalTrainerID");
 			CurrentTrainerID = tag.GetString("CurrentTrainerID");
 			PokemonName = tag.GetString("PokemonName");
+			PokemonNick = tag.GetString("PokemonNick");
 			level = tag.GetInt("Level");
 			exp = tag.GetInt("Exp");
 			Shiny = tag.GetBool("Shiny");
 			variant = tag.GetString("Variant");
+			nature = tag.GetString("Nature");
+			happiness = tag.GetInt("Happiness");
 			BallType = tag.GetString("BallType");
+			pokeHeldItem = tag.GetString("PokeHeldItem");
 			currentHP = tag.GetInt("CurrentHP");
 			if(tag.ContainsKey("IVs")){
 				IVs = [.. tag.GetList<int>("IVs")];
@@ -526,6 +583,14 @@ namespace Pokemod.Content.Items
 				
             base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
         }
+
+		public bool ComparePokemon(CaughtPokemonItem other){
+			if(OriginalTrainerID == other.OriginalTrainerID && CurrentTrainerID == other.CurrentTrainerID && PokemonName == other.PokemonName && PokemonNick == other.PokemonNick && exp == other.exp && Shiny == other.Shiny && variant == other.variant && BallType == other.BallType){
+				return true;
+			}
+
+			return false;
+		}
 
 		public void DespawnPokemon(){
 			if(proj != null){
