@@ -406,6 +406,7 @@ Projectiles: {
 	// NestballProj.DisplayName: Nestball Proj
 	// ShimmerballProj.DisplayName: Shimmerball Proj
 	// GalaxyballProj.DisplayName: Galaxyball Proj
+	// HealballProj.DisplayName: Healball Proj
 }
 
 Items: {
@@ -1023,6 +1024,11 @@ Items: {
 	GalaxyballItem: {
 		// DisplayName: Galaxy Ball
 		// Tooltip: ""
+	}
+
+	HealballItem: {
+		DisplayName: Sana Ball
+		Tooltip: ""
 	}
 }
 

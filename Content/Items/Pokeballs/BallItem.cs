@@ -285,12 +285,14 @@ namespace Pokemod.Content.Items.Pokeballs
 					item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
 					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"), lvl, variant: variant);
+					pokeItem.currentHP = targetPokemon.life;
 					SetExtraPokemonEffects(ref pokeItem);
 				}else{
 					if(Main.netMode == NetmodeID.Server){
 						item = player.QuickSpawnItem(Projectile.InheritSource(Projectile), ModContent.ItemType<CaughtPokemonItem>());
 						CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
 						pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"), lvl, variant: variant);
+						pokeItem.currentHP = targetPokemon.life;
 						SetExtraPokemonEffects(ref pokeItem);
 					}
 				}

@@ -23,7 +23,7 @@ namespace Pokemod.Content.Items.Pokeballs
 
 	public class DuskballProj : BallProj{
 		public override bool FailureProb(float catchRate){
-			if(!Main.dayTime) catchRate *= 3f;
+			if(!Main.dayTime || Main.player[Projectile.owner].ZoneRockLayerHeight) catchRate *= 3f;
 
 			return RegularProb(catchRate);
 		}

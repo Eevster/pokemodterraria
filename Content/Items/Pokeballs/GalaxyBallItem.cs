@@ -9,7 +9,7 @@ namespace Pokemod.Content.Items.Pokeballs
 		protected override int BallProj => ModContent.ProjectileType<GalaxyballProj>();
 		protected override int BallValue => 1000;
 		protected override float CatchRate => 3.0f;
-		protected override float ThrowSpeed => 25f;
+		protected override float ThrowSpeed => 18f;
 
 		public override void AddRecipes() {
 			CreateRecipe(1)
