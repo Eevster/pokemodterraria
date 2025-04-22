@@ -5,27 +5,26 @@ using Pokemod.Content.Items.Apricorns;
 
 namespace Pokemod.Content.Items.Pokeballs
 {
-	public class DuskballItem : BallItem
+	public class FriendballItem : BallItem
 	{
-		protected override int BallProj => ModContent.ProjectileType<DuskballProj>();
+		protected override int BallProj => ModContent.ProjectileType<FriendballProj>();
 		protected override int BallValue => 1000;
 		protected override float CatchRate => 1f;
 
         public override void AddRecipes() {
-			CreateRecipe(4)
+			CreateRecipe(1)
 				.AddIngredient(ModContent.ItemType<GreenApricorn>(), 2)
-				.AddIngredient(ItemID.Obsidian, 1)
+				.AddIngredient(ItemID.Ruby, 1)
 				.AddRecipeGroup(RecipeGroupID.IronBar, 1)
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }
 
-	public class DuskballProj : BallProj{
-		public override bool FailureProb(float catchRate){
-			if(!Main.dayTime) catchRate *= 3f;
-
-			return RegularProb(catchRate);
-		}
+	public class FriendballProj : BallProj{
+        public override void SetExtraPokemonEffects(ref CaughtPokemonItem pokeItem)
+        {
+            pokeItem.happiness = 150;
+        }
 	}
 }

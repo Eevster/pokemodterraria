@@ -398,6 +398,14 @@ Projectiles: {
 	NidoranFPetProjectileShiny.DisplayName: Nidoran F Pet Projectile Shiny
 	NidorinaPetProjectile.DisplayName: Nidorina Pet Projectile
 	NidorinaPetProjectileShiny.DisplayName: Nidorina Pet Projectile Shiny
+	FastballProj.DisplayName: Fastball Proj
+	FriendballProj.DisplayName: Friendball Proj
+	SafariballProj.DisplayName: Safariball Proj
+	LevelballProj.DisplayName: Levelball Proj
+	MoonballProj.DisplayName: Moonball Proj
+	NestballProj.DisplayName: Nestball Proj
+	ShimmerballProj.DisplayName: Shimmerball Proj
+	GalaxyballProj.DisplayName: Galaxyball Proj
 }
 
 Items: {
@@ -428,7 +436,7 @@ Items: {
 
 	PokeballItem: {
 		Tooltip: ""
-		DisplayName: Pokeball
+		DisplayName: Poke Ball
 	}
 
 	PikachuCritterItem: {
@@ -491,7 +499,7 @@ Items: {
 	}
 
 	GreatballItem: {
-		DisplayName: Greatball
+		DisplayName: Great Ball
 		Tooltip: ""
 	}
 
@@ -652,27 +660,27 @@ Items: {
 
 	UltraballItem: {
 		Tooltip: ""
-		DisplayName: Ultraball
+		DisplayName: Ultra Ball
 	}
 
 	MasterballItem: {
 		Tooltip: ""
-		DisplayName: Masterball
+		DisplayName: Master Ball
 	}
 
 	FeatherballItem: {
 		Tooltip: ""
-		DisplayName: Featherball
+		DisplayName: Feather Ball
 	}
 
 	DuskballItem: {
 		Tooltip: ""
-		DisplayName: Duskball
+		DisplayName: Dusk Ball
 	}
 
 	BeastballItem: {
 		Tooltip: ""
-		DisplayName: Beastball
+		DisplayName: Beast Ball
 	}
 
 	CaughtPokemonItem: {
@@ -691,32 +699,32 @@ Items: {
 	}
 
 	WingballItem: {
-		DisplayName: Wingball
+		DisplayName: Wing Ball
 		Tooltip: ""
 	}
 
 	CitrineballItem: {
-		DisplayName: Citrineball
+		DisplayName: Citrine Ball
 		Tooltip: ""
 	}
 
 	JetballItem: {
-		DisplayName: Jetball
+		DisplayName: Jet Ball
 		Tooltip: ""
 	}
 
 	PeridotballItem: {
-		DisplayName: Peridotball
+		DisplayName: Peridot Ball
 		Tooltip: ""
 	}
 
 	VioletballItem: {
-		DisplayName: Violetball
+		DisplayName: Violet Ball
 		Tooltip: ""
 	}
 
 	AzureballItem: {
-		DisplayName: Azureball
+		DisplayName: Azure Ball
 		Tooltip: ""
 	}
 
@@ -726,7 +734,7 @@ Items: {
 	}
 
 	HeavyballItem: {
-		DisplayName: Heavyball
+		DisplayName: Heavy Ball
 		Tooltip: ""
 	}
 
@@ -741,28 +749,28 @@ Items: {
 	}
 
 	GigatonballItem: {
-		DisplayName: Gigatonball
+		DisplayName: Gigaton Ball
 		Tooltip: ""
 	}
 
 	LeadenballItem: {
-		DisplayName: Leadenball
+		DisplayName: Leaden Ball
 		Tooltip: ""
 	}
 
 	StrangeballItem: {
-		DisplayName: Strangeball
+		DisplayName: Strange Ball
 		Tooltip: ""
 	}
 
 	CherishballItem: {
-		DisplayName: Cherishball
+		DisplayName: Cherish Ball
 		Tooltip: ""
 	}
 
 	PremierballItem: {
 		Tooltip: ""
-		DisplayName: Premierball
+		DisplayName: Premier Ball
 	}
 
 	RedApricorn: {
@@ -973,7 +981,47 @@ Items: {
 	}
 
 	MoonStoneItem: {
-		DisplayName: Moon Stone Item
+		DisplayName: Moon Stone
+		Tooltip: ""
+	}
+
+	FastballItem: {
+		DisplayName: Fast Ball
+		Tooltip: ""
+	}
+
+	FriendballItem: {
+		DisplayName: Friend Ball
+		Tooltip: ""
+	}
+
+	SafariballItem: {
+		DisplayName: Safari Ball
+		Tooltip: ""
+	}
+
+	LevelballItem: {
+		DisplayName: Level Ball
+		Tooltip: ""
+	}
+
+	MoonballItem: {
+		DisplayName: Moon Ball
+		Tooltip: ""
+	}
+
+	NestballItem: {
+		DisplayName: Nest Ball
+		Tooltip: ""
+	}
+
+	ShimmerballItem: {
+		DisplayName: Shimmer Ball
+		Tooltip: ""
+	}
+
+	GalaxyballItem: {
+		DisplayName: Galaxy Ball
 		Tooltip: ""
 	}
 }

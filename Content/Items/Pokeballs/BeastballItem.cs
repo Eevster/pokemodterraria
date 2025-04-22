@@ -1,8 +1,5 @@
 using Pokemod.Content.NPCs;
-using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Pokemod.Content.Items.Apricorns;
 

@@ -1,7 +1,4 @@
-using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Pokemod.Content.Items.Apricorns;
 
@@ -9,7 +6,7 @@ namespace Pokemod.Content.Items.Pokeballs
 {
 	public class JetballItem : BallItem
 	{
-		protected override int BallProj => ModContent.ProjectileType<WingballProj>();
+		protected override int BallProj => ModContent.ProjectileType<JetballProj>();
 		protected override int BallValue => 5000;
 		protected override float CatchRate => 2.0f;
 		protected override float ThrowSpeed => 25f;
