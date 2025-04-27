@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	[AutoloadEquip(EquipType.Body)]
 	public class FireStoneBreastplate : ModItem
 	{
-		public static readonly int MaxManaIncrease = 20;
+		public static readonly int MaxManaIncrease = 40;
 		public static readonly int AdditiveGenericDamageBonus = 210;
 		public static readonly int MaxMinionIncrease = 1;
 
@@ -28,10 +28,11 @@ namespace Pokemod.Content.Items.Armor
 		}
 
 		public override void UpdateEquip(Player player) {
-			player.buffImmune[BuffID.OnFire] = true; // Make the player immune to Fire
+			
 			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; // Increase dealt damage for all weapon classes by 20%
 			player.GetModPlayer<PokemonPlayer>().maxPokemon += 1;
-		}
+            player.statManaMax2 += MaxManaIncrease; // Increase how many mana points the player can have by 20
+        }
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		

@@ -28,8 +28,9 @@ namespace Pokemod.Content.Items.Armor
 
 		public override void UpdateEquip(Player player) {
 			
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; // Increase dealt damage for all weapon classes by 20%
-		}
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f;
+            player.GetDamage(DamageClass.Ranged) += AdditiveGenericDamageBonus / 40f;
+        }
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		

@@ -14,8 +14,9 @@ namespace Pokemod.Content.Items.Armor
 	public class FireStoneHelmet : ModItem
 	{
 		public static readonly int AdditiveGenericDamageBonus = 190;
+        public static readonly int MaxManaIncrease = 20;
 
-		public static LocalizedText SetBonusText { get; private set; }
+        public static LocalizedText SetBonusText { get; private set; }
 
 		public override void SetStaticDefaults() {
 			// If your head equipment should draw hair while drawn, use one of the following:
@@ -42,9 +43,10 @@ namespace Pokemod.Content.Items.Armor
 
 		// UpdateArmorSet allows you to give set bonuses to the armor.
 		public override void UpdateArmorSet(Player player) {
-			player.setBonus = SetBonusText.Value; // This is the setbonus tooltip: "Increases dealt damage by 20%"
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; // Increase dealt damage for all weapon classes by 20%
-		}
+			player.setBonus = SetBonusText.Value;
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f;
+            player.statManaMax2 += MaxManaIncrease;
+        }
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		

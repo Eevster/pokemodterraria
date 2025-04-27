@@ -2,13 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites",
-    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
-    "\\Content\\Pets",
-    "\\Localization"
+    "\\Content\\Items",
+    "\\Content\\Items\\Armor"
   ],
-  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets\\NidoqueenPetProjectileShiny.png",
+  "SelectedNode": "\\Content\\Items\\Armor\\WaterStoneBreastplate.cs",
   "PreviewInSolutionExplorer": false
 }
