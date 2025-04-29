@@ -30,59 +30,9 @@ namespace Pokemod.Content.Pets.PidgeottoPet
 		public override float moveSpeed1 => 6;
         public override float moveSpeed2 => 10;
 
-		public override int nAttackProjs => 1;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => false;
-		public override int attackDuration => 40;
-		public override int attackCooldown => 90;
-
 		public override string[] evolutions => ["Pidgeot"];
 		public override int levelToEvolve => 36;
 		public override int levelEvolutionsNumber => 1;
-
-		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
-			if(Projectile.owner == Main.myPlayer){
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<WingAttack>(), GetPokemonDamage(60), 0f, Projectile.owner)];
-						Projectile.velocity = 20*Vector2.Normalize(targetCenter-Projectile.Center);
-						SoundEngine.PlaySound(SoundID.Item1, Projectile.position);
-						timer = attackDuration;
-						canAttack = false;
-						isFlying = true;
-						break;
-					}
-				} 
-			}
-		}
-
-		public override void UpdateAttackProjs(int i, ref float maxFallSpeed){
-			attackProjs[i].Center = Projectile.Center;
-			if(Projectile.velocity.Length() < 1f){
-				attackProjs[i].Kill();
-				if(!canAttack){
-					timer = 0;
-				}
-			}
-		}
-
-		public override void UpdateNoAttackProjs(int i){
-			attackProjs[i].Center = Projectile.Center;
-			if(Projectile.velocity.Length() < 1f){
-				attackProjs[i].Kill();
-				if(!canAttack){
-					timer = 0;
-				}
-			}
-		}
-
-        public override void ExtraChanges()
-        {
-			if(!canAttack && timer > 0){
-				immune = true;
-			}
-            base.ExtraChanges();
-        }
 	}
 
 	public class PidgeottoPetProjectileShiny : PidgeottoPetProjectile{}

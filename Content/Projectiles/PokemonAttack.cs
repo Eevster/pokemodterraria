@@ -20,6 +20,10 @@ namespace Pokemod.Content.Projectiles
 {
 	public abstract class PokemonAttack : ModProjectile
 	{
+		//Attack Data
+		public int attackType;
+		public bool isSpecial;
+
 		private int expGained = 0;
 		public int attackMode = 0;
 
@@ -50,8 +54,30 @@ namespace Pokemod.Content.Projectiles
 			base.ReceiveExtraAI(reader);
 		}
 
+		public virtual void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+
+		}
+
+		public virtual void AttackOutTimer(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+
+		}
+
+		public virtual void UpdateAttackProjs(Projectile pokemon, int i, ref float maxFallSpeed){
+
+		}
+
+		public virtual void UpdateNoAttackProjs(Projectile pokemon, int i){
+
+		}
+
+		public virtual void ExtraChanges(Projectile pokemon){
+
+		}
+
         public override void OnSpawn(IEntitySource source)
         {
+			attackType = PokemonData.pokemonAttacks[GetType().Name.Replace("_Front", "")].attackType;
+			isSpecial = PokemonData.pokemonAttacks[GetType().Name.Replace("_Front", "")].isSpecial;
 			attackMode = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().attackMode;
             base.OnSpawn(source);
         }

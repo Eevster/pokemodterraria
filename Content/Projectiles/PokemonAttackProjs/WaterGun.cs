@@ -8,6 +8,7 @@ using Terraria.GameContent.Achievements;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using ReLogic.Content;
+using Pokemod.Content.Pets;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
@@ -48,6 +49,23 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.localNPCHitCooldown = 2;
             base.SetDefaults();
         }
+
+        public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+			var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+            
+			if(pokemon.owner == Main.myPlayer){
+				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+					if(pokemonOwner.attackProjs[i] == null){
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 18f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<WaterGun>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
+						SoundEngine.PlaySound(SoundID.Item21, pokemon.position);
+						pokemonOwner.timer = pokemonOwner.attackDuration;
+						pokemonOwner.canAttack = false;
+						break;
+					}
+				} 
+			}
+		}
 
         public override void AI()
         {

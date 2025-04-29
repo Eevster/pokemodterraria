@@ -15,7 +15,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles
 {
-	public class DespawnPokemon : PokemonAttack
+	public class DespawnPokemon : ModProjectile
 	{
 		public override string Texture => "Pokemod/Assets/Textures/PlayerVisuals/PokemonTarget";
 

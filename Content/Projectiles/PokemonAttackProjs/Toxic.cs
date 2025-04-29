@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using Pokemod.Common.Players;
 using Pokemod.Content.NPCs;
+using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -52,6 +53,46 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.stopsDealingDamageAfterPenetrateHits = true;
 			base.SetDefaults();
         }
+
+		public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+			var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+			if(pokemon.owner == Main.myPlayer){
+				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+					if(pokemonOwner.attackProjs[i] == null){
+						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
+						pokemonOwner.timer = pokemonOwner.attackDuration;
+						pokemonOwner.canAttack = false;
+						pokemonOwner.canAttackOutTimer = true;
+						break;
+					}
+				} 
+			}
+		}
+
+		public override void AttackOutTimer(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+			var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+			
+			if(pokemon.owner == Main.myPlayer){
+				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer <= 5){
+					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+						if(pokemonOwner.attackProjs[i] == null){
+							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetCenter, Vector2.Zero, ModContent.ProjectileType<Toxic>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
+							SoundEngine.PlaySound(SoundID.Drown, pokemon.position);
+							for (int k = 0; k < 40; k++)
+							{
+								int dustIndex = Dust.NewDust(pokemon.Center-0.5f*new Vector2(pokemon.width, pokemon.height), pokemon.width, pokemon.height, DustID.Venom, 0, -4, 100, default(Color), 1f);
+								Main.dust[dustIndex].scale = 1f + (float)Main.rand.Next(3) * 0.2f;
+								Main.dust[dustIndex].fadeIn = 1f + (float)Main.rand.Next(5) * 0.1f;
+								Main.dust[dustIndex].noGravity = true;
+							}
+							pokemonOwner.canAttackOutTimer = false;
+							break;
+						}
+					} 
+				}
+			}
+		}
 
         public override bool PreDraw(ref Color lightColor)
         {

@@ -29,7 +29,9 @@ Projectiles: {
 	Swift.DisplayName: Meteoros
 	VineWhipBack.DisplayName: Látigo cepa
 	VineWhipFront.DisplayName: Látigo cepa
+	// VineWhip.DisplayName: Vine Whip
 	ThunderboltHold.DisplayName: Rayo
+	// Thunderbolt.DisplayName: Thunderbolt
 	PikachuPetProjectileShiny.DisplayName: Pikachu Pet Projectile Shiny
 	PokeballProj.DisplayName: Pokeball Proj
 	UltraballProj.DisplayName: Ultraball Proj
@@ -49,6 +51,7 @@ Projectiles: {
 	RaichuPetProjectileShiny.DisplayName: Raichu Pet Projectile Shiny
 	PoisonPowder.DisplayName: Polvo veneno
 	SolarBeamHold.DisplayName: Rayo solar
+	// SolarBeam.DisplayName: Solar Beam
 	Ember.DisplayName: Ascuas
 	Flamethrower.DisplayName: Lanzallamas
 	FireBlast.DisplayName: Llamarada
@@ -111,6 +114,7 @@ Projectiles: {
 	Confusion.DisplayName: Confusión
 	PinMissile.DisplayName: Pin misil
 	ThunderWave.DisplayName: Onda trueno
+	// Thunder.DisplayName: Thunder
 	FlashCannon.DisplayName: Foco resplandor
 	ConfuseRay.DisplayName: Rayo confuso
 	Hex.DisplayName: Infortunio
@@ -407,6 +411,8 @@ Projectiles: {
 	// ShimmerballProj.DisplayName: Shimmerball Proj
 	// GalaxyballProj.DisplayName: Galaxyball Proj
 	// HealballProj.DisplayName: Healball Proj
+	// VineWhip_Front.DisplayName: Vine Whip_ Front
+	// Overheat.DisplayName: Overheat
 }
 
 Items: {
@@ -3054,6 +3060,35 @@ PokemonInfo: {
 	RanAway: El pokemon huyó ...
 }
 
+PokemonNatures: {
+	Nature: Naturaleza
+	Adamant: Firme
+	Bashful: Tímida
+	Bold: Osada
+	Brave: Audaz
+	Calm: Serena
+	Careful: Cauta
+	Docile: Dócil
+	Gentle: Amable
+	Hardy: Fuerte
+	Hasty: Activa
+	Impish: Agitada
+	Jolly: Alegre
+	Lax: Floja
+	Lonely: Huraña
+	Mild: Afable
+	Modest: Modesta
+	Naive: Ingenua
+	Naugthy: Pícara
+	Quiet: Mansa
+	Quirky: Rara
+	Rash: Alocada
+	Relaxed: Plácida
+	Sassy: Grosera
+	Serious: Seria
+	Timid: Miedosa
+}
+
 // DamageClasses.PokemonDamageClass.DisplayName: Pokemon Damage Class
 
 Configs: {
@@ -3062,7 +3097,7 @@ Configs: {
 		// Headers.Items: Items Header
 
 		BetaMonsToggle: {
-			// Label: Beta Mons Toggle
+			Label: Habilitar Beta Mons
 			// Tooltip: ""
 		}
 	}
@@ -3076,22 +3111,22 @@ Configs: {
 		}
 
 		PokemonSpawnMultiplier: {
-			// Label: Pokemon Spawn Multiplier
+			Label: Multiplicador de aparición de pokemon
 			// Tooltip: ""
 		}
 
 		RandomizedStarters: {
-			// Label: Randomized Starters
+			Label: Iniciales randomizados
 			// Tooltip: ""
 		}
 
 		RandomizedEvolutions: {
-			// Label: Randomized Evolutions
+			Label: Evoluciones randomizadas
 			// Tooltip: ""
 		}
 
 		ReleaseFaintedPokemon: {
-			// Label: Release Fainted Pokemon
+			Label: Liberar pokemon al ser debilitado
 			// Tooltip: ""
 		}
 	}

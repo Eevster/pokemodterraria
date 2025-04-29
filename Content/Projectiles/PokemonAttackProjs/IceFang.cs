@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Content.Pets;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -33,6 +34,23 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.localNPCHitCooldown = 10;
             base.SetDefaults();
         }
+
+        public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+            
+			if(pokemon.owner == Main.myPlayer){
+				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+					if(pokemonOwner.attackProjs[i] == null){
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetCenter - 18*Vector2.Normalize(targetCenter-pokemon.Center), Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<IceFang>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
+						SoundEngine.PlaySound(SoundID.Item27, pokemon.position);
+						pokemonOwner.timer = pokemonOwner.attackDuration;
+						pokemonOwner.canAttack = false;
+						break;
+					}
+				} 
+			}
+		}
 
 		public override bool PreDraw(ref Color lightColor) {
 			Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;

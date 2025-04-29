@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -47,6 +48,39 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.localNPCHitCooldown = 12;
             base.SetDefaults();
         }
+
+        public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+			if(pokemon.owner == Main.myPlayer){
+				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+					if(pokemonOwner.attackProjs[i] == null){
+						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
+						pokemonOwner.timer = pokemonOwner.attackDuration;
+						pokemonOwner.canAttack = false;
+						pokemonOwner.canAttackOutTimer = true;
+						break;
+					}
+				} 
+			}
+		}
+
+		public override void AttackOutTimer(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+            
+			if(pokemon.owner == Main.myPlayer){
+				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer <= 5){
+					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+						if(pokemonOwner.attackProjs[i] == null){
+							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetCenter + new Vector2(0,22), new Vector2(0,-10), ModContent.ProjectileType<Waterfall>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 6f, pokemon.owner)];
+							SoundEngine.PlaySound(SoundID.Item21, pokemon.position);
+							pokemonOwner.canAttackOutTimer = false; 
+							break;
+						}
+					}
+				}
+			}
+		}
 
         public override bool PreDraw(ref Color lightColor)
         {

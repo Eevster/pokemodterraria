@@ -29,7 +29,9 @@ Projectiles: {
 	Swift.DisplayName: Swift
 	VineWhipBack.DisplayName: Vine Whip
 	VineWhipFront.DisplayName: Vine Whip
+	VineWhip.DisplayName: Vine Whip
 	ThunderboltHold.DisplayName: Thunderbolt
+	Thunderbolt.DisplayName: Thunderbolt
 	PikachuPetProjectileShiny.DisplayName: Pikachu Pet Projectile Shiny
 	PokeballProj.DisplayName: Pokeball Proj
 	UltraballProj.DisplayName: Ultraball Proj
@@ -49,6 +51,7 @@ Projectiles: {
 	RaichuPetProjectileShiny.DisplayName: Raichu Pet Projectile Shiny
 	PoisonPowder.DisplayName: Poison Powder
 	SolarBeamHold.DisplayName: Solar Beam
+	SolarBeam.DisplayName: Solar Beam
 	Ember.DisplayName: Ember
 	Flamethrower.DisplayName: Flamethrower
 	FireBlast.DisplayName: Fire Blast
@@ -111,6 +114,7 @@ Projectiles: {
 	Confusion.DisplayName: Confusion
 	PinMissile.DisplayName: Pin Missile
 	ThunderWave.DisplayName: Thunder Wave
+	Thunder.DisplayName: Thunder
 	FlashCannon.DisplayName: Flash Cannon
 	ConfuseRay.DisplayName: Confuse Ray
 	Hex.DisplayName: Hex
@@ -407,6 +411,8 @@ Projectiles: {
 	ShimmerballProj.DisplayName: Shimmerball Proj
 	GalaxyballProj.DisplayName: Galaxyball Proj
 	HealballProj.DisplayName: Healball Proj
+	VineWhip_Front.DisplayName: Vine Whip_ Front
+	Overheat.DisplayName: Overheat
 }
 
 Items: {
@@ -3052,6 +3058,35 @@ PokemonInfo: {
 	NoAttack: No Attack
 	DirectedAttack: Directed Attack
 	RanAway: The pokemon ran away...
+}
+
+PokemonNatures: {
+	Nature: Nature
+	Adamant: Adamant
+	Bashful: Bashful
+	Bold: Bold
+	Brave: Brave
+	Calm: Calm
+	Careful: Careful
+	Docile: Docile
+	Gentle: Gentle
+	Hardy: Hardy
+	Hasty: Hasty
+	Impish: Impish
+	Jolly: Jolly
+	Lax: Lax
+	Lonely: Lonely
+	Mild: Mild
+	Modest: Modest
+	Naive: Naive
+	Naugthy: Naughty
+	Quiet: Quiet
+	Quirky: Quirky
+	Rash: Rash
+	Relaxed: Relaxed
+	Sassy: Sassy
+	Serious: Serious
+	Timid: Timid
 }
 
 DamageClasses.PokemonDamageClass.DisplayName: Pokemon Damage Class

@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Content.Pets;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-    public class OverHeat : PokemonAttack
+    public class Overheat : PokemonAttack
     {
         public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/LavaPlume";
 
@@ -37,6 +38,34 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.hide = true;
             base.SetDefaults();
         }
+
+        public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+			var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+			if(pokemon.owner == Main.myPlayer){
+				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+					if(pokemonOwner.attackProjs[i] == null){
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Overheat>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
+						SoundEngine.PlaySound(SoundID.Item20, pokemon.position);
+						pokemonOwner.timer = pokemonOwner.attackDuration;
+						pokemonOwner.canAttack = false;
+						break;
+					}
+				} 
+			}
+		}
+
+		public override void UpdateAttackProjs(Projectile pokemon, int i, ref float maxFallSpeed){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+			pokemonOwner.attackProjs[i].Center = pokemon.Center;
+		}
+
+		public override void UpdateNoAttackProjs(Projectile pokemon, int i){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+            
+			pokemonOwner.attackProjs[i].Center = pokemon.Center;
+		}
 
         public override bool PreDraw(ref Color lightColor)
         {

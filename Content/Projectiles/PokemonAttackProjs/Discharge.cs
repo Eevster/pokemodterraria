@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -56,6 +57,34 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.hide = true;
             base.SetDefaults();
         }
+
+        public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+			if(pokemon.owner == Main.myPlayer){
+				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+					if(pokemonOwner.attackProjs[i] == null){
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Discharge>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 4f, pokemon.owner)];
+						SoundEngine.PlaySound(SoundID.Item4, pokemon.position);
+						pokemonOwner.timer = pokemonOwner.attackDuration;
+						pokemonOwner.canAttack = false;
+						break;
+					}
+				} 
+			}
+		}
+
+		public override void UpdateAttackProjs(Projectile pokemon, int i, ref float maxFallSpeed){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+			pokemonOwner.attackProjs[i].Center = pokemon.Center;
+		}
+
+		public override void UpdateNoAttackProjs(Projectile pokemon, int i){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+            
+			pokemonOwner.attackProjs[i].Center = pokemon.Center;
+		}
 
         public override bool PreDrawExtras()
         {

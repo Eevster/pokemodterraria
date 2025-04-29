@@ -26,43 +26,44 @@ namespace Pokemod.Content.Pets.BlastoisePet
 		public override int[] walkSwimStartEnd => [9,16];
 		public override int[] attackSwimStartEnd => [17,23];
 
-		public override int nAttackProjs => 8;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 42;
-		public override int attackCooldown => 18;
-
-
-		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
-			if(Projectile.owner == Main.myPlayer){
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] == null){
-						currentStatus = (int)ProjStatus.Attack;
-						timer = attackDuration;
-						canAttack = false;
-						canAttackOutTimer = true;
-						break;
-					}
-				} 
+        public override void Attack(float distanceFromTarget, Vector2 targetCenter){
+			if(currentAttack == "HydroPump"){
+				if(Projectile.owner == Main.myPlayer){
+					for(int i = 0; i < nAttackProjs; i++){
+						if(attackProjs[i] == null){
+							currentStatus = (int)ProjStatus.Attack;
+							timer = attackDuration;
+							canAttack = false;
+							canAttackOutTimer = true;
+							break;
+						}
+					} 
+				}
+			}else{
+				base.Attack(distanceFromTarget, targetCenter);
 			}
 		}
 
 		public override void AttackOutTimer(float distanceFromTarget, Vector2 targetCenter){
-			if(Projectile.owner == Main.myPlayer){
-				if(currentStatus == (int)ProjStatus.Attack && Projectile.frame >= 21){
-					int remainProjs = 2;
-					for(int i = 0; i < nAttackProjs; i++){
-						if(attackProjs[i] == null){
-							attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center+new Vector2(Projectile.spriteDirection*(-18+50*(2-remainProjs)),-32), 20f*Vector2.Normalize(new Vector2(Projectile.spriteDirection*(2-remainProjs),-1)), ModContent.ProjectileType<HydroPump>(), GetPokemonDamage(110, true), 2f, Projectile.owner)];
-							SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
-							remainProjs--;
-							canAttackOutTimer = false;
-							if(remainProjs <= 0){
-								break;
+			if(currentAttack == "HydroPump"){
+				if(Projectile.owner == Main.myPlayer){
+					if(currentStatus == (int)ProjStatus.Attack && timer < (attackDuration/2)){
+						int remainProjs = 2;
+						for(int i = 0; i < nAttackProjs; i++){
+							if(attackProjs[i] == null){
+								attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center+new Vector2(Projectile.spriteDirection*(-18+50*(2-remainProjs)),-32), 20f*Vector2.Normalize(new Vector2(Projectile.spriteDirection*(2-remainProjs),-1)), ModContent.ProjectileType<HydroPump>(), (int)(0.5f*GetPokemonAttackDamage(currentAttack)), 2f, Projectile.owner)];
+								SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
+								remainProjs--;
+								canAttackOutTimer = false;
+								if(remainProjs <= 0){
+									break;
+								}
 							}
-						}
-					} 
+						} 
+					}
 				}
+			}else{
+				base.AttackOutTimer(distanceFromTarget, targetCenter);
 			}
 		}
 	}

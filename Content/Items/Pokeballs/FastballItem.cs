@@ -24,7 +24,7 @@ namespace Pokemod.Content.Items.Pokeballs
 
 	public class FastballProj : BallProj{
 		public override bool FailureProb(float catchRate){
-			if(PokemonNPCData.pokemonInfo[targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName].pokemonStats[5] >= 100) catchRate *= 4f;
+			if(PokemonData.pokemonInfo[targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName].pokemonStats[5] >= 100) catchRate *= 4f;
 
 			return RegularProb(catchRate);
 		}

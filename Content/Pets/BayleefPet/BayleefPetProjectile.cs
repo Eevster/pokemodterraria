@@ -20,30 +20,9 @@ namespace Pokemod.Content.Pets.BayleefPet
 		public override int[] fallStartEnd => [10,10];
 		public override int[] attackStartEnd => [11,11];
 
-		public override int nAttackProjs => 8;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 10;
-		public override int attackCooldown => 20;
-
 		public override string[] evolutions => ["Meganium"];
 		public override int levelToEvolve => 32;
 		public override int levelEvolutionsNumber => 1;
-
-		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
-			if(Projectile.owner == Main.myPlayer){
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] == null){
-						SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(Main.rand.NextFloat(-10,10),-10), ModContent.ProjectileType<MagicalLeaf>(), GetPokemonDamage(60, true), 2f, Projectile.owner)];
-						currentStatus = (int)ProjStatus.Attack;
-						timer = attackDuration;
-						canAttack = false;
-						break;
-					}
-				} 
-			}
-		}
 	}
 
 	public class BayleefPetProjectileShiny : BayleefPetProjectile{}

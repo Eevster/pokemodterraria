@@ -7,6 +7,7 @@ using MonoMod.Cil;
 using Pokemod.Common.Players;
 using Pokemod.Content.Buffs;
 using Pokemod.Content.NPCs;
+using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -33,6 +34,23 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.penetrate = 1;
             base.SetDefaults();
         }
+
+        public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+			if(pokemon.owner == Main.myPlayer){
+				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+					if(pokemonOwner.attackProjs[i] == null){
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 20f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<StringShot>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
+						SoundEngine.PlaySound(SoundID.Item17, pokemon.position);
+						pokemonOwner.timer = pokemonOwner.attackDuration;
+						pokemonOwner.canAttack = false;
+						break;
+					}
+				} 
+			}
+		}
 
         public override bool PreDrawExtras()
         {

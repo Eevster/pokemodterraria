@@ -33,12 +33,6 @@ namespace Pokemod.Content.Pets.CharizardPet
 		public override float moveDistance1 => 800f;
 		public override float moveDistance2 => 500f;
 
-		public override int nAttackProjs => 5;
-		public override float enemySearchDistance => 1000;
-		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 40;
-		public override int attackCooldown => 80;
-
         public override bool isMega => true;
 		
 		public override string[] megaEvolutionBase => ["Charizard"];
@@ -49,21 +43,6 @@ namespace Pokemod.Content.Pets.CharizardPet
             base.SetDefaults();
 			Projectile.light = 1f;
         }
-
-        public override void Attack(float distanceFromTarget, Vector2 targetCenter){
-			if(Projectile.owner == Main.myPlayer){
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 25f*Vector2.Normalize(targetCenter-Projectile.Center), ModContent.ProjectileType<FireBlast>(), GetPokemonDamage(110, true), 2f, Projectile.owner)];
-						currentStatus = (int)ProjStatus.Attack;
-						SoundEngine.PlaySound(SoundID.Item34, Projectile.position);
-						timer = attackDuration;
-						canAttack = false;
-						break;
-					}
-				} 
-			}
-		}
 	}
 
 	public class CharizardMegaXPetProjectileShiny : CharizardMegaXPetProjectile{}

@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -34,6 +35,39 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			Projectile.penetrate = -1;
 			base.SetDefaults();
+		}
+
+		public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+			var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+			
+			if(pokemon.owner == Main.myPlayer){
+				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+					if(pokemonOwner.attackProjs[i] == null){
+						float gravity = 0.25f;
+						float targetDistanceY = -targetCenter.Y+pokemon.Center.Y;
+						float throwSpeedY = System.Math.Clamp(targetDistanceY/20f,3f,30f);
+
+						double delta = throwSpeedY*throwSpeedY-2f*gravity*targetDistanceY;
+
+						if(delta<0){
+							break;
+						}
+
+						double timeToReach = (float)(2f*throwSpeedY+(-throwSpeedY+System.Math.Sqrt(delta)))/gravity;
+						float targetDistanceX = (float)(targetCenter.X-pokemon.Center.X);
+						float throwSpeedX = (float)(targetDistanceX/timeToReach);
+
+						Vector2 projSpeed = new Vector2(throwSpeedX,-throwSpeedY);
+
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, projSpeed, ModContent.ProjectileType<Smokescreen>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
+						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
+						SoundEngine.PlaySound(SoundID.Item20, pokemon.position);
+						pokemonOwner.timer = pokemonOwner.attackDuration;
+						pokemonOwner.canAttack = false;
+						break;
+					}
+				} 
+			}
 		}
 
 		public override void AI()

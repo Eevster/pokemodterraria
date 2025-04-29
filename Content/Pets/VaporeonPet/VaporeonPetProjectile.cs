@@ -27,39 +27,8 @@ namespace Pokemod.Content.Pets.VaporeonPet
 		public override int[] walkSwimStartEnd => [9,17];
 		public override int[] attackSwimStartEnd => [18,18];
 
-		public override int nAttackProjs => 1;
-		public override float enemySearchDistance => 1000;
-		public override float distanceToAttack => 100f;
-		public override bool canAttackThroughWalls => true;
-		public override int attackDuration => 90;
-		public override int attackCooldown => 60;
-		public override bool canMoveWhileAttack => false;
-
 		public override float moveDistance1 => 50f;
 		public override float moveDistance2 => 50f;
-
-		public override void Attack(float distanceFromTarget, Vector2 targetCenter){
-			if(Projectile.owner == Main.myPlayer){
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] == null){
-						attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AquaRing>(), GetPokemonDamage(special: true), 4f, Projectile.owner)];
-						currentStatus = (int)ProjStatus.Attack;
-						SoundEngine.PlaySound(SoundID.Item4, Projectile.position);
-						timer = attackDuration;
-						canAttack = false;
-						break;
-					}
-				} 
-			}
-		}
-
-		public override void UpdateAttackProjs(int i, ref float maxFallSpeed){
-			attackProjs[i].Center = Projectile.Center;
-		}
-
-		public override void UpdateNoAttackProjs(int i){
-			attackProjs[i].Center = Projectile.Center;
-		}
 	}
 
 	public class VaporeonPetProjectileShiny : VaporeonPetProjectile{}

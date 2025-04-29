@@ -48,13 +48,13 @@ namespace Pokemod.Content.NPCs
 		/// <summary>
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
 		/// </summary>
-		public virtual int[] baseStats => PokemonNPCData.pokemonInfo[pokemonName].pokemonStats;
+		public virtual int[] baseStats => PokemonData.pokemonInfo[pokemonName].pokemonStats;
 		public int[] finalStats;
 
 		public virtual string[] variants => [];
 		public string variant;
 
-		public string nature;
+		public int nature;
 		public bool hostilePokemon;
 
 		public override void SendExtraAI(BinaryWriter writer) {
@@ -106,6 +106,7 @@ namespace Pokemod.Content.NPCs
 		public override void OnSpawn(IEntitySource source)
         {
 			if(Main.netMode != NetmodeID.MultiplayerClient){
+				nature = 10*Main.rand.Next(5)+Main.rand.Next(5);
 				lvl = Main.rand.Next(minLevel,Math.Min(WorldLevel.MaxWorldLevel, maxLevel)+1);
 				//Probability of it being a variant
 				if(Main.rand.NextBool(10)){
@@ -126,11 +127,11 @@ namespace Pokemod.Content.NPCs
 				NPC.netUpdate = true;
 			}
 			int[] IVs = PokemonNPCData.GenerateIVs();
-            finalStats = PokemonNPCData.CalcAllStats(lvl, baseStats, IVs, [0,0,0,0,0,0]);
+            finalStats = PokemonNPCData.CalcAllStats(lvl, baseStats, IVs, [0,0,0,0,0,0], nature);
             NPC.lifeMax = finalStats[0];
 			NPC.life = NPC.lifeMax;
 			NPC.defense = finalStats[2];
-			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, IVs, variant: variant);
+			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, IVs, nature, variant: variant);
         }
 
         public override bool CanHitNPC(NPC target)

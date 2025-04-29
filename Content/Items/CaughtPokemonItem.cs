@@ -38,12 +38,15 @@ namespace Pokemod.Content.Items
 		public string BallType;
 		public string variant;
 
-		public string nature;
+		public int nature;
 		public int happiness;
 		public string pokeHeldItem;
+
 		public int shouldDespawn = 3;
 		public bool canShoot = false;
 		public Projectile proj;
+
+		private int timer;
 
 		public override string Texture => "Pokemod/Assets/Textures/Pokeballs/PokeballItem";
 
@@ -71,11 +74,11 @@ namespace Pokemod.Content.Items
 			writer.Write(PokemonNick ?? "");
 			writer.Write(Shiny);
 			writer.Write(variant ?? "");
-			writer.Write(nature ?? "");
 			writer.Write(BallType ?? "");
 			writer.Write(pokeHeldItem ?? "");
 			writer.Write((double)level);
 			writer.Write((double)exp);
+			writer.Write((double)nature);
 			writer.Write((double)happiness);
 			foreach(int IV in IVs){
 				writer.Write((double)IV);
@@ -91,11 +94,11 @@ namespace Pokemod.Content.Items
 			PokemonNick = reader.ReadString();
 			Shiny = reader.ReadBoolean();
 			variant = reader.ReadString();
-			nature = reader.ReadString();
 			BallType = reader.ReadString();
 			pokeHeldItem = reader.ReadString();
 			level = (int)reader.ReadDouble();
 			exp = (int)reader.ReadDouble();
+			nature = (int)reader.ReadDouble();
 			happiness = (int)reader.ReadDouble();
 			for(int i = 0; i < IVs.Length; i++){
 				IVs[i] = (int)reader.ReadDouble();
@@ -174,9 +177,10 @@ namespace Pokemod.Content.Items
 					line.Text = (variant != null?(variant!=""?("[c/23a462:"+variant+" variant]\n"):""):"")+
 					((OriginalTrainerID != null && OriginalTrainerID != "")?Language.GetText("Mods.Pokemod.PokemonInfo.CaughtInBy").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.Items."+BallType+".DisplayName"), OriginalTrainerID.Remove(OriginalTrainerID.Length-9)).Value:Language.GetText("Mods.Pokemod.PokemonInfo.CaughtIn").WithFormatArgs(BallType.Replace("Item", "")).Value) + "\n"+
 					"[c/ffd51c:Lvl] "+level+"  [c/ffd51c:Exp:] "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level))+
+					"\n[c/fa8140:"+Language.GetTextValue("Mods.Pokemod.PokemonNatures.Nature")+": "+Language.GetTextValue("Mods.Pokemod.PokemonNatures."+PokemonData.PokemonNatures[nature/10][nature%10])+"]"+
 					"\n"+(currentHP>=0?"[c/ffd51c:HP:] "+(currentHP>0?(currentHP+"/"+fullStats[0]+" "):"[c/fa3e42:"+Language.GetTextValue("Mods.Pokemod.PokemonInfo.Fainted")+"] "):"")+
-					"\n[c/ffd51c:Atk:] "+fullStats[1]+"  [c/ffd51c:Def:] "+fullStats[2]+
-					"\n[c/ffd51c:SpAtk:] "+fullStats[3]+"  [c/ffd51c:SpDef:] "+fullStats[4]+"  [c/ffd51c:Speed:] "+fullStats[5];
+					"\n[c/"+GetStatColor(1)+":Atk:] "+fullStats[1]+"  [c/"+GetStatColor(2)+":Def:] "+fullStats[2]+
+					"\n[c/"+GetStatColor(3)+":SpAtk:] "+fullStats[3]+"  [c/"+GetStatColor(4)+":SpDef:] "+fullStats[4]+"  [c/"+GetStatColor(5)+":Speed:] "+fullStats[5];
 				}
 			}
 
@@ -184,7 +188,20 @@ namespace Pokemod.Content.Items
 			tooltips.Add(tooltipLine);*/
 		}
 
-        public void SetPokemonData(string PokemonName, bool Shiny, string BallType, int level = 5, int[] IVs = null, string variant = ""){
+		private string GetStatColor(int statIndex){
+			statIndex = Math.Clamp(statIndex-1, 0, 4);
+			int result = 0;
+
+			if(statIndex == nature/10) result++;
+			if(statIndex == nature%10) result--;
+
+			if(result > 0) return "53fa40";
+			else if(result < 0) return "ff253f";
+
+			return "ffd51c";
+		}
+
+        public void SetPokemonData(string PokemonName, bool Shiny, string BallType, int level = 5, int[] IVs = null, int nature = -1, string variant = ""){
             this.PokemonName = PokemonName;
 			this.Shiny = Shiny;
 			this.BallType = BallType;
@@ -193,6 +210,8 @@ namespace Pokemod.Content.Items
 			if(IVs != null){
 				this.IVs = IVs;
 			}
+			if(nature < 0) nature = 10*Main.rand.Next(5)+Main.rand.Next(5);
+            this.nature = nature;
 			currentHP = GetPokemonStats()[0];
 			this.variant = variant;
 			
@@ -200,7 +219,7 @@ namespace Pokemod.Content.Items
         }
 
 		public int[] GetPokemonStats(){
-			return PokemonNPCData.CalcAllStats(level, PokemonNPCData.pokemonInfo[PokemonName].pokemonStats, IVs, EVs);
+			return PokemonNPCData.CalcAllStats(level, PokemonData.pokemonInfo[PokemonName].pokemonStats, IVs, EVs, nature);
 		}
 
         public override void UpdateInventory(Player player)
@@ -308,6 +327,7 @@ namespace Pokemod.Content.Items
 		private void GetProjInfo(Player player = null){
 			if(proj != null){
 				if(proj.active){
+					GetActiveHappiness(player);
 					GetProjExp(player);
 					GetUsedItems(player);
 					GetProjHP();
@@ -327,7 +347,23 @@ namespace Pokemod.Content.Items
 		private void GetProjHP(){
 			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
 			if(PokemonProj != null){
+				if(currentHP != 0 && PokemonProj.currentHp == 0){
+					AddHappiness(-3, -3, -5);
+				}
 				currentHP = PokemonProj.currentHp;
+			}
+		}
+
+		private void GetActiveHappiness(Player player = null){
+			if(player != null){
+				if(timer > 30*60){
+					AddHappiness(+1, +1, +0);
+					timer = 0;
+				}else{
+					if(player.velocity.Length() > float.Epsilon){
+						timer++;
+					}
+				}
 			}
 		}
 
@@ -347,13 +383,11 @@ namespace Pokemod.Content.Items
 			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
 			string newPokemonName = PokemonProj.GetCanEvolve();
 			if(newPokemonName != ""){
-				Main.NewText("GetCanEvolve newPokemonName != '' "+newPokemonName);
 				Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 				proj.Kill();
 				PokemonName = newPokemonName;
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				if(player != null){
-					Main.NewText("GetCanEvolve player != null "+ player.name);
 					int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
 					proj = Main.projectile[projIndex];
 				}
@@ -403,6 +437,7 @@ namespace Pokemod.Content.Items
 			SetExpToNextLevel();
 			if(PokemonName != null && PokemonName != "" && level > 0){
 				if(exp>= expToNextLevel && level < 100){
+					AddHappiness(+4, +3, +2);
 					level++;
 					if(level < 100){
 						SetExpToNextLevel();
@@ -421,7 +456,7 @@ namespace Pokemod.Content.Items
 				if(proj.active){
 					if(level > 0){
 						PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-						PokemonProj.SetPokemonLvl(level, IVs, EVs);
+						PokemonProj.SetPokemonLvl(level, IVs, EVs, nature);
 						if(canEvolve){
 							PokemonProj.SetCanEvolve();
 						}
@@ -440,7 +475,7 @@ namespace Pokemod.Content.Items
 		}
 
 		private int GetExpToLevel(int lvl){
-			switch(PokemonNPCData.pokemonInfo[PokemonName].expType){
+			switch(PokemonData.pokemonInfo[PokemonName].expType){
 				case (int)ExpTypes.Slow:
 					return (int)(1.25f*Math.Pow(lvl, 3));
 				case (int)ExpTypes.MediumSlow:
@@ -474,6 +509,22 @@ namespace Pokemod.Content.Items
 			}
 		}
 
+		public void AddHappiness(int add1, int add2, int add3){
+			if(happiness < 100){
+				happiness += add1;
+			}else if(happiness < 160){
+				happiness += add2;
+			}else if(happiness < 255){
+				happiness += add3;
+			}else if(happiness > 255){
+				happiness = 255;
+			}
+
+			//Main.NewText(PokemonName+" has "+happiness+" happiness");
+
+			happiness = Math.Clamp(happiness, 0, 255);
+		}
+
         // NOTE: The tag instance provided here is always empty by default.
         // Read https://github.com/tModLoader/tModLoader/wiki/Saving-and-loading-using-TagCompound to better understand Saving and Loading data.
         public override void SaveData(TagCompound tag) {
@@ -503,7 +554,11 @@ namespace Pokemod.Content.Items
 			exp = tag.GetInt("Exp");
 			Shiny = tag.GetBool("Shiny");
 			variant = tag.GetString("Variant");
-			nature = tag.GetString("Nature");
+			if(tag.TryGet<int>("Nature", out int natureAux)){
+				nature = natureAux;
+			}else{
+				nature = 10*Main.rand.Next(5)+Main.rand.Next(5);
+			}
 			happiness = tag.GetInt("Happiness");
 			BallType = tag.GetString("BallType");
 			pokeHeldItem = tag.GetString("PokeHeldItem");
@@ -585,7 +640,10 @@ namespace Pokemod.Content.Items
         }
 
 		public bool ComparePokemon(CaughtPokemonItem other){
-			if(OriginalTrainerID == other.OriginalTrainerID && CurrentTrainerID == other.CurrentTrainerID && PokemonName == other.PokemonName && PokemonNick == other.PokemonNick && exp == other.exp && Shiny == other.Shiny && variant == other.variant && BallType == other.BallType){
+			if(OriginalTrainerID == other.OriginalTrainerID && CurrentTrainerID == other.CurrentTrainerID
+			&& PokemonName == other.PokemonName && PokemonNick == other.PokemonNick && exp == other.exp
+			&& nature == other.nature && EVs == other.EVs && Shiny == other.Shiny && variant == other.variant
+			&& BallType == other.BallType){
 				return true;
 			}
 

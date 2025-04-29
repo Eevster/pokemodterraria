@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -42,6 +43,24 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.localNPCHitCooldown = 20;
 			base.SetDefaults();
         }
+
+		public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+			var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+			
+			if(pokemon.owner == Main.myPlayer){
+				for(int i = 0; i < pokemonOwner.nAttackProjs; i+=8){
+					if(pokemonOwner.attackProjs[i] == null){
+						SoundEngine.PlaySound(SoundID.Item14, pokemon.position);
+						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
+						for(int j = 0; j < 8; j++){
+							pokemonOwner.attackProjs[j] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 15*Vector2.Normalize(targetCenter-pokemon.Center).RotatedBy(MathHelper.ToRadians(j*45f)), ModContent.ProjectileType<LavaPlume>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+						}
+					}
+				} 
+			}
+			pokemonOwner.timer = pokemonOwner.attackDuration;
+			pokemonOwner.canAttack = false;
+		}
 
 		public override bool PreDraw(ref Color lightColor) {
 			Main.instance.LoadProjectile(Projectile.type);

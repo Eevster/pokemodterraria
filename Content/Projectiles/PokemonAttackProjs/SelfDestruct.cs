@@ -6,6 +6,7 @@ using System;
 using Terraria.Audio;
 using Terraria.GameContent.Achievements;
 using Terraria.DataStructures;
+using Pokemod.Content.Pets;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
@@ -31,6 +32,43 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.localNPCHitCooldown = 1;
             base.SetDefaults();
         }
+
+        public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+			var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+            
+			if(pokemon.owner == Main.myPlayer){
+				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+					if(pokemonOwner.attackProjs[i] == null){
+						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
+						pokemonOwner.timer = pokemonOwner.attackDuration;
+						pokemonOwner.canAttack = false;
+						pokemonOwner.canAttackOutTimer = true;
+						break;
+					}
+				} 
+			}
+		}
+
+		public override void AttackOutTimer(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+			if(pokemon.owner == Main.myPlayer){
+				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer <= 5){
+					int remainProjs = 1;
+					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+						if(pokemonOwner.attackProjs[i] == null){
+							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<SelfDestruct>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+							pokemonOwner.manualDmg(20);
+							remainProjs--;
+							pokemonOwner.canAttackOutTimer = false;
+							if(remainProjs <= 0){
+								break;
+							}
+						}
+					} 
+				}
+			}
+		}
 
         public override bool PreDraw(ref Color lightColor)
         {

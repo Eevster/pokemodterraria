@@ -18,6 +18,7 @@ using Pokemod.Content.DamageClasses;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Terraria.Enums;
 using Pokemod.Common.Configs;
+using System.Linq;
 
 
 namespace Pokemod.Content.Pets
@@ -29,12 +30,14 @@ namespace Pokemod.Content.Pets
 		private int expGained = 0;
 		public int pokemonLvl;
 
+		public string pokemonName => GetType().Name.Replace("PetProjectile","").Replace("Shiny","");
 		/// <summary>
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
 		/// </summary>
-		public int[] baseStats => PokemonNPCData.pokemonInfo[GetType().Name.Replace("PetProjectile","").Replace("Shiny","")].pokemonStats;
+		public int[] baseStats => PokemonData.pokemonInfo[GetType().Name.Replace("PetProjectile","").Replace("Shiny","")].pokemonStats;
 		public int[] IVs = [0,0,0,0,0,0];
 		public int[] EVs = [0,0,0,0,0,0];
+		public int nature;
 		public int[] finalStats = [0,0,0,0,0,0];
 
 		public bool immune = true;
@@ -43,12 +46,16 @@ namespace Pokemod.Content.Pets
 		public string variant = "";
         public bool showHp;
 
-		public virtual int nAttackProjs => 1;
+		public virtual int nAttackProjs => 16;
 		public Projectile[] attackProjs;
-		public virtual float distanceToAttack => 800f;
 		public virtual float distanceToFly => 100f;
 		public virtual float enemySearchDistance => 1000;
-		public virtual bool canAttackThroughWalls => false;
+
+		public float distanceToAttack = 800f;
+		public bool canAttackThroughWalls = false;
+		public bool canMoveWhileAttack = false;
+		public int attackDuration = 0;
+		public int attackCooldown = 0;
 
 		public virtual float moveSpeed1 => 5f;
 		public virtual float moveSpeed2 => 8f;
@@ -56,7 +63,6 @@ namespace Pokemod.Content.Pets
 		public virtual float moveDistance2 => 200f;
 		public virtual float fallAccel => 0.2f;
 		public virtual float fallSpeed => 10f;
-		public virtual bool canMoveWhileAttack => false;
 
 		public virtual int hitboxWidth => 0;
 		public virtual int hitboxHeight => 0;
@@ -130,6 +136,9 @@ namespace Pokemod.Content.Pets
 
 		public const float fallLimit = float.Epsilon;
 
+		//Attacks
+		public string currentAttack => PokemonData.pokemonInfo[pokemonName].movePool[0];
+
 		public override void SendExtraAI(BinaryWriter writer)
         {
 			writer.Write((int)currentHp);
@@ -150,8 +159,6 @@ namespace Pokemod.Content.Pets
 
 		public int timer = 0;
 		public bool canAttack = false;
-		public virtual int attackDuration => 0;
-		public virtual int attackCooldown => 0;
 
 		//Item effects
 		public bool rareCandy = false;
@@ -214,7 +221,7 @@ namespace Pokemod.Content.Pets
         }
 
 		public void UpdateStats(){
-            finalStats = PokemonNPCData.CalcAllStats(pokemonLvl, baseStats, IVs, EVs);
+            finalStats = PokemonNPCData.CalcAllStats(pokemonLvl, baseStats, IVs, EVs, nature);
 		}
 
         public int GetExpGained(){
@@ -231,22 +238,34 @@ namespace Pokemod.Content.Pets
 			return used;
 		}
 
-		public virtual int GetPokemonDamage(int power = 50, bool special = false){
-			
+		public virtual int GetPokemonDamage(int power = 50, bool special = false, float multiplier = 1f){
 			int atkStat = special?finalStats[3]:finalStats[1];
-			int pokemonDamage = 2+(int)((2+2f*pokemonLvl/5)*power*atkStat/(50f*10f));
+			int pokemonDamage = (int)((2+(int)((2+2f*pokemonLvl/5)*power*atkStat/(50f*10f)))*multiplier);
 			pokemonDamage = (int)(pokemonDamage*Main.player[Projectile.owner].GetTotalDamage<PokemonDamageClass>().ApplyTo(1f));
 
 			return pokemonDamage;
 		}
 
-		public void SetPokemonLvl(int lvl, int[] IVs = null, int[] EVs = null){
+		public virtual int GetPokemonAttackDamage(string attackName){
+			int power = PokemonData.pokemonAttacks[attackName].attackPower;
+			bool special = PokemonData.pokemonAttacks[attackName].isSpecial;
+			float multiplier = PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains(PokemonData.pokemonAttacks[attackName].attackType)?1.5f:1f;
+
+			return GetPokemonDamage(power, special, multiplier);
+		}
+
+		public virtual float GetPokemonCooldown(int cooldown){
+			return cooldown;
+		}
+
+		public void SetPokemonLvl(int lvl, int[] IVs = null, int[] EVs = null, int nature = 0){
 			if(pokemonLvl != 0 && pokemonLvl != lvl){
 				CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile",""), lvl).Value);
 			}
 			pokemonLvl = lvl;
 			if(IVs != null) this.IVs = IVs;
 			if(EVs != null) this.EVs = EVs;
+			this.nature = nature;
 
 			UpdateStats();
 		}
@@ -370,6 +389,8 @@ namespace Pokemod.Content.Pets
 
 			CheckActive(player);
 
+			SetAttackInfo();
+
 			setMaxHP();
 			hurtTimer();
             GetAllProjsExp();
@@ -446,8 +467,6 @@ namespace Pokemod.Content.Pets
 				}
 			}
         }
-
-		public virtual void ExtraChanges(){}
 
 		public virtual void CheckActive(Player player) {
 			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff
@@ -837,20 +856,47 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-		public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
+		public virtual void SetAttackInfo(){
+			attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
+			attackCooldown = PokemonData.pokemonAttacks[currentAttack].cooldown;
+			distanceToAttack = PokemonData.pokemonAttacks[currentAttack].distanceToAttack;
+			canMoveWhileAttack = PokemonData.pokemonAttacks[currentAttack].canMove;
+			canAttackThroughWalls = PokemonData.pokemonAttacks[currentAttack].canPassThroughWalls;
+		}
 
+		public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
+			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
+				var pokemonAttack = (PokemonAttack)modProjBase;
+				pokemonAttack.Attack(Projectile, distanceFromTarget, targetCenter);
+			}
 		}
 
 		public virtual void AttackOutTimer(float distanceFromTarget, Vector2 targetCenter){
-
+			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
+				var pokemonAttack = (PokemonAttack)modProjBase;
+				pokemonAttack.AttackOutTimer(Projectile, distanceFromTarget, targetCenter);
+			}
 		}
 
 		public virtual void UpdateAttackProjs(int i, ref float maxFallSpeed){
-
+			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
+				var pokemonAttack = (PokemonAttack)modProjBase;
+				pokemonAttack.UpdateAttackProjs(Projectile, i, ref maxFallSpeed);
+			}
 		}
 
 		public virtual void UpdateNoAttackProjs(int i){
+			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
+				var pokemonAttack = (PokemonAttack)modProjBase;
+				pokemonAttack.UpdateNoAttackProjs(Projectile, i);
+			}
+		}
 
+		public virtual void ExtraChanges(){
+			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
+				var pokemonAttack = (PokemonAttack)modProjBase;
+				pokemonAttack.ExtraChanges(Projectile);
+			}
 		}
 
 		public virtual void Jump(){
