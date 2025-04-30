@@ -14,8 +14,9 @@ namespace Pokemod.Content.Items.Armor
 	{
 		public static readonly int MoveSpeedBonus = 5;
 		public static readonly int AdditiveGenericDamageBonus = 200;
+        public static readonly int MaxManaIncrease = 35;
 
-		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeedBonus);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeedBonus);
 
 		public override void SetDefaults() {
 			Item.width = 18; // Width of the item
@@ -26,8 +27,9 @@ namespace Pokemod.Content.Items.Armor
 		}
 
 		public override void UpdateEquip(Player player) {
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; // Increase dealt damage for all weapon classes by 20%
-		}
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; 
+            player.statManaMax2 += MaxManaIncrease;
+        }
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		
