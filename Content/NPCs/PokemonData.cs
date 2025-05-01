@@ -160,6 +160,17 @@ namespace Pokemod.Content.NPCs
 
             return "";
         }
+
+        public static string GetTypeColor(int type){
+            string[] typeColors = ["ffffff", "ff7800", "79c3e8", "a004ff", "732400",
+            "957465", "95bf36", "522c57", "829ea9", "ff0f0f",
+            "009bff", "0db602", "f9ca0e", "ff27a0", "00f7ff",
+            "3450de", "514d3e", "ff73f0"];
+
+            type = Math.Clamp(type, 0, typeColors.Length);
+
+            return typeColors[type];
+        }
     }
 
     internal class PokemonData{

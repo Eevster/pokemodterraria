@@ -20,8 +20,8 @@ namespace Pokemod.Content.Pets.TyphlosionPet
 		public override int[] fallStartEnd => [9,9];
 		public override int[] attackStartEnd => [0,5];
 
-		public override float moveDistance1 => 50f;
-		public override float moveDistance2 => 50f;
+		public override float moveDistance1 => 200f;
+		public override float moveDistance2 => 140f;
 
 		public override void SetDefaults()
         {

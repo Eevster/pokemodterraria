@@ -60,7 +60,7 @@ namespace Pokemod.Content.Pets
 		public virtual float moveSpeed1 => 5f;
 		public virtual float moveSpeed2 => 8f;
 		public virtual float moveDistance1 => 400f;
-		public virtual float moveDistance2 => 200f;
+		public virtual float moveDistance2 => 140f;
 		public virtual float fallAccel => 0.2f;
 		public virtual float fallSpeed => 10f;
 
@@ -137,7 +137,7 @@ namespace Pokemod.Content.Pets
 		public const float fallLimit = float.Epsilon;
 
 		//Attacks
-		public string currentAttack => PokemonData.pokemonInfo[pokemonName].movePool[0];
+		public string currentAttack = "Swift";
 
 		public override void SendExtraAI(BinaryWriter writer)
         {

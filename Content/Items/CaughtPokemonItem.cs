@@ -34,6 +34,8 @@ namespace Pokemod.Content.Items
 		public int currentHP;
 		public int[] IVs = [0,0,0,0,0,0];
 		public int[] EVs = [0,0,0,0,0,0];
+		public string[] moves = [];
+		public int moveIndex;
 		public bool Shiny;
 		public string BallType;
 		public string variant;
@@ -86,6 +88,11 @@ namespace Pokemod.Content.Items
 			foreach(int EV in EVs){
 				writer.Write((double)EV);
 			}
+			writer.Write(moves.Length);
+			foreach(string move in moves){
+				writer.Write(move);
+			}
+			writer.Write((double)moveIndex);
 			writer.Write((double)currentHP);
 		}
 
@@ -106,6 +113,12 @@ namespace Pokemod.Content.Items
 			for(int i = 0; i < EVs.Length; i++){
 				EVs[i] = (int)reader.ReadDouble();
 			}
+			int nMoves = reader.ReadByte();
+			moves = new string[nMoves];
+			for(int i = 0; i < nMoves; i++){
+				moves[i] = reader.ReadString();
+			}
+			moveIndex = (int)reader.ReadDouble();
 			currentHP = (int)reader.ReadDouble();
 		}
 
@@ -143,7 +156,9 @@ namespace Pokemod.Content.Items
         public override void RightClick(Player player)
         {
 			if(player.ItemTimeIsZero){
-				if(player.HeldItem.ModItem is PokemonConsumableItem item){
+				if(Main.mouseItem.IsAir){
+					moveIndex = (moveIndex+1)%moves.Length;
+				}else if(player.HeldItem.ModItem is PokemonConsumableItem item){
 					if(item.OnItemInvUse(this, player)){
 						player.itemTime = 20;
 					}
@@ -175,12 +190,18 @@ namespace Pokemod.Content.Items
 				}
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
 					line.Text = (variant != null?(variant!=""?("[c/23a462:"+variant+" variant]\n"):""):"")+
-					((OriginalTrainerID != null && OriginalTrainerID != "")?Language.GetText("Mods.Pokemod.PokemonInfo.CaughtInBy").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.Items."+BallType+".DisplayName"), OriginalTrainerID.Remove(OriginalTrainerID.Length-9)).Value:Language.GetText("Mods.Pokemod.PokemonInfo.CaughtIn").WithFormatArgs(BallType.Replace("Item", "")).Value) + "\n"+
-					"[c/ffd51c:Lvl] "+level+"  [c/ffd51c:Exp:] "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level))+
-					"\n[c/fa8140:"+Language.GetTextValue("Mods.Pokemod.PokemonNatures.Nature")+": "+Language.GetTextValue("Mods.Pokemod.PokemonNatures."+PokemonData.PokemonNatures[nature/10][nature%10])+"]"+
+					((OriginalTrainerID != null && OriginalTrainerID != "")?Language.GetText("Mods.Pokemod.PokemonInfo.CaughtInBy").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.Items."+BallType+".DisplayName"), OriginalTrainerID.Remove(OriginalTrainerID.Length-9)).Value:Language.GetText("Mods.Pokemod.PokemonInfo.CaughtIn").WithFormatArgs(BallType.Replace("Item", "")).Value) +
+					PokemonTypeToString()+
+					"\n[c/ffd51c:Lvl] "+level+"  [c/ffd51c:Exp:] "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level))+
 					"\n"+(currentHP>=0?"[c/ffd51c:HP:] "+(currentHP>0?(currentHP+"/"+fullStats[0]+" "):"[c/fa3e42:"+Language.GetTextValue("Mods.Pokemod.PokemonInfo.Fainted")+"] "):"")+
+					"\n[c/fa8140:"+Language.GetTextValue("Mods.Pokemod.PokemonNatures.Nature")+": "+Language.GetTextValue("Mods.Pokemod.PokemonNatures."+PokemonData.PokemonNatures[nature/10][nature%10])+"]"+
 					"\n[c/"+GetStatColor(1)+":Atk:] "+fullStats[1]+"  [c/"+GetStatColor(2)+":Def:] "+fullStats[2]+
-					"\n[c/"+GetStatColor(3)+":SpAtk:] "+fullStats[3]+"  [c/"+GetStatColor(4)+":SpDef:] "+fullStats[4]+"  [c/"+GetStatColor(5)+":Speed:] "+fullStats[5];
+					"\n[c/"+GetStatColor(3)+":SpAtk:] "+fullStats[3]+"  [c/"+GetStatColor(4)+":SpDef:] "+fullStats[4]+"  [c/"+GetStatColor(5)+":Speed:] "+fullStats[5]+
+					"\n\nMoves:";
+					foreach(string move in moves){
+						line.Text += "\n- [c/"+PokemonNPCData.GetTypeColor(PokemonData.pokemonAttacks[move].attackType)+":"+Language.GetText("Mods.Pokemod.Projectiles."+move+".DisplayName")+"]";
+						if(move == moves[moveIndex]) line.Text += " <<<";
+					}
 				}
 			}
 
@@ -201,6 +222,20 @@ namespace Pokemod.Content.Items
 			return "ffd51c";
 		}
 
+		private string PokemonTypeToString(){
+			string typeString = "\n[";
+			int[] types = PokemonData.pokemonInfo[PokemonName].pokemonTypes;
+
+			if(types.Length > 0){
+				if(types[0] >= 0) typeString += "[c/"+PokemonNPCData.GetTypeColor(types[0])+":"+(TypeIndex)types[0]+"]";
+				if(types[1] >= 0) typeString += "/[c/"+PokemonNPCData.GetTypeColor(types[1])+":"+(TypeIndex)types[1]+"]";
+			}
+			
+			typeString += "]";
+
+			return typeString;
+		}
+
         public void SetPokemonData(string PokemonName, bool Shiny, string BallType, int level = 5, int[] IVs = null, int nature = -1, string variant = ""){
             this.PokemonName = PokemonName;
 			this.Shiny = Shiny;
@@ -216,6 +251,7 @@ namespace Pokemod.Content.Items
 			this.variant = variant;
 			
 			SetPetInfo();
+			GetPokemonMoves();
         }
 
 		public int[] GetPokemonStats(){
@@ -305,17 +341,21 @@ namespace Pokemod.Content.Items
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				//Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
 
+				if(moves.Length <= 0) GetPokemonMoves();
+
 				UpdateLevel(player);
 				GetProjInfo(player);
 				
 				if(currentHP == 0){
 					Item.shoot = ProjectileID.None;
 				}
-				if(variant != null){
-					if(variant != ""){
-						if(proj != null){
-							if(proj.active){
-								PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
+				if(proj != null){
+					if(proj.active){
+						PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
+						moveIndex = Math.Clamp(moveIndex, 0, moves.Length);
+						PokemonProj.currentAttack = moves[moveIndex];
+						if(variant != null){
+							if(variant != ""){
 								PokemonProj.variant = variant;
 							}
 						}
@@ -367,6 +407,16 @@ namespace Pokemod.Content.Items
 			}
 		}
 
+		private void GetPokemonMoves(){
+			List<string> newMoves = moves.ToList();
+			foreach(string move in PokemonData.pokemonInfo[PokemonName].movePool){
+				if(!newMoves.Contains(move)){
+					newMoves.Add(move);
+				}
+			}
+			moves = newMoves.ToArray();
+		}
+
 		private void GetUsedItems(Player player = null){
 			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
 			if(PokemonProj != null){
@@ -386,6 +436,7 @@ namespace Pokemod.Content.Items
 				Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 				proj.Kill();
 				PokemonName = newPokemonName;
+				GetPokemonMoves();
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				if(player != null){
 					int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
@@ -417,6 +468,7 @@ namespace Pokemod.Content.Items
 				Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 				proj.Kill();
 				PokemonName = newPokemonName;
+				GetPokemonMoves();
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				if(player != null){
 					int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
@@ -543,6 +595,8 @@ namespace Pokemod.Content.Items
 			tag["CurrentHP"] = currentHP;
 			tag["IVs"] = IVs.ToList();
 			tag["EVs"] = EVs.ToList();
+			tag["Moves"] = moves.ToList();
+			tag["MoveIndex"] = moveIndex;
 		}
 
 		public override void LoadData(TagCompound tag) {
@@ -569,6 +623,10 @@ namespace Pokemod.Content.Items
 			if(tag.ContainsKey("EVs")){
 				EVs = [.. tag.GetList<int>("EVs")];
 			}
+			if(tag.ContainsKey("Moves")){
+				moves = [.. tag.GetList<string>("Moves")];
+			}
+			moveIndex = Math.Clamp(tag.GetInt("MoveIndex"), 0, moves.Length);
 
 			SetPetInfo();
 			SetExpToNextLevel();

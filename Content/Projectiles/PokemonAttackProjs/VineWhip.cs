@@ -18,7 +18,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class VineWhip : PokemonAttack
 	{
-		private bool canDamage = true;
+		private bool canDamage = false;
 		private int projDirection = 1;
 		Vector2 vectorToTarget;
 		Vector2 positionAjust;
@@ -143,6 +143,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			Projectile.Center = positionAux+positionAjust;
 
+			if(!foundTarget) Projectile.Kill();
+
 			if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
 			}
@@ -159,18 +161,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 }
 
 				if(Projectile.Opacity != 0){
-					if(Projectile.frame <= 1 || Projectile.frame >= 6){
+					if(Projectile.frame < 1 || Projectile.frame >= 7){
 						canDamage = true;
 					}else{
 						canDamage = false;
 					}
+				}else{
+					canDamage = false;
 				}
 
 				if(Projectile.frame == 3){
 					if(Projectile.Opacity == 0){
 						Projectile.Opacity = 1f;
 					}
-					if(vectorToTarget.Length() > 20f){
+					if(vectorToTarget.Length() > float.Epsilon){
 						if(vectorToTarget.X>0){
 							Projectile.rotation = vectorToTarget.ToRotation();
 							Projectile.direction = Projectile.spriteDirection = projDirection = 1;
@@ -208,7 +212,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 	public class VineWhip_Front : PokemonAttack
 	{
-		private bool canDamage = true;
+		private bool canDamage = false;
 		private int projDirection = 1;
 		Vector2 vectorToTarget;
 		Vector2 positionAjust;
@@ -242,8 +246,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             Projectile.tileCollide = false;  
             Projectile.penetrate = -1;
-
-			Projectile.light = 1f;
 
 			Projectile.usesLocalNPCImmunity = true;
 			Projectile.localNPCHitCooldown = 20;
@@ -294,6 +296,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			Projectile.Center = positionAux+positionAjust;
 
+			if(!foundTarget) Projectile.Kill();
+			
 			if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
 			}
@@ -310,15 +314,17 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 }
 
 				if(Projectile.Opacity != 0){
-					if(Projectile.frame >= 2 && Projectile.frame <= 6){
+					if(Projectile.frame >= 3 && Projectile.frame < 6){
 						canDamage = true;
 					}else{
 						canDamage = false;
 					}
+				}else{
+					canDamage = false;
 				}
 
 				if(Projectile.frame == 8){
-					if(vectorToTarget.Length() > 20f){
+					if(vectorToTarget.Length() > float.Epsilon){
 						if(vectorToTarget.X>0){
 							Projectile.rotation = vectorToTarget.ToRotation();
 							Projectile.direction = Projectile.spriteDirection = projDirection = 1;

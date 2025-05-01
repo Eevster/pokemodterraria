@@ -92,18 +92,33 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			
 			if(pokemon.owner == Main.myPlayer){
 				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer < (pokemonOwner.attackDuration/2)){
-					int remainProjs = 1;
-					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
-						if(pokemonOwner.attackProjs[i] == null){
-							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 20*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<HydroPump>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
-							SoundEngine.PlaySound(SoundID.Item14, pokemon.position);
-							remainProjs--;
-							pokemonOwner.canAttackOutTimer = false;
-							if(remainProjs <= 0){
-								break;
+					if(pokemon.ModProjectile is PokemonPetProjectile petProj && (petProj.pokemonName == "Blastoise" || petProj.pokemonName == "BlastoiseMega")){
+						int remainProjs = 2;
+						for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+							if(pokemonOwner.attackProjs[i] == null){
+								pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center+new Vector2(pokemon.spriteDirection*(-18+50*(2-remainProjs)),-32), 20f*Vector2.Normalize(new Vector2(pokemon.spriteDirection*(2-remainProjs),-1)), ModContent.ProjectileType<HydroPump>(), (int)(0.5f*pokemonOwner.GetPokemonAttackDamage(GetType().Name)), 2f, pokemon.owner)];
+								SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
+								remainProjs--;
+								pokemonOwner.canAttackOutTimer = false;
+								if(remainProjs <= 0){
+									break;
+								}
 							}
-						}
-					} 
+						} 
+					}else{
+						int remainProjs = 1;
+						for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
+							if(pokemonOwner.attackProjs[i] == null){
+								pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 20*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<HydroPump>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+								SoundEngine.PlaySound(SoundID.Item14, pokemon.position);
+								remainProjs--;
+								pokemonOwner.canAttackOutTimer = false;
+								if(remainProjs <= 0){
+									break;
+								}
+							}
+						} 
+					}
 				}
 			}
 		}
