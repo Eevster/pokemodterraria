@@ -2,10 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
+    "\\Common",
+    "\\Common\\Players",
     "\\Content",
-    "\\Content\\Items",
-    "\\Content\\Items\\Armor"
+    "\\Content\\NPCs"
   ],
-  "SelectedNode": "\\Content\\Items\\Armor\\WaterStoneBreastplate.cs",
+  "SelectedNode": "\\Content\\NPCs\\PokemonData.cs",
   "PreviewInSolutionExplorer": false
 }

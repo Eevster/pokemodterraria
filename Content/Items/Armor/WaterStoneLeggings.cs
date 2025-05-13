@@ -4,6 +4,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Pokemod.Content.Items.EvoStones;
 using Pokemod.Content.DamageClasses;
+using Pokemod.Common.Players;
 
 namespace Pokemod.Content.Items.Armor
 {
@@ -29,6 +30,7 @@ namespace Pokemod.Content.Items.Armor
 		public override void UpdateEquip(Player player) {
 			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; // Increase dealt damage for all weapon classes by 20%
             player.maxMinions += MaxMinionIncrease;
+            player.GetModPlayer<PokemonPlayer>().maxPokemon += 1;
         }
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
