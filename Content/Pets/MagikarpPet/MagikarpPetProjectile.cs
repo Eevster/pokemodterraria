@@ -9,15 +9,22 @@ namespace Pokemod.Content.Pets.MagikarpPet
 {
 	public class MagikarpPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 64;
-		public override int hitboxHeight => 64;
+		public override int hitboxWidth => 40;
+		public override int hitboxHeight => 38;
 
-		public override int totalFrames => 4;
+		public override int totalFrames => 8;
 		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
+		public override int[] idleStartEnd => [1,3];
+		public override int[] walkStartEnd => [0,4];
+		public override int[] jumpStartEnd => [3,4];
+		public override int[] fallStartEnd => [5,7];
+		public override int[] attackStartEnd => [3, 7];
+
+		public override bool canSwim => true;
+
+		public override int[] idleSwimStartEnd => [6, 6];
+		public override int[] walkSwimStartEnd => [5, 7];
+		public override int[] attackSwimStartEnd => [3, 7];
 
 		public override string[] evolutions => ["Gyarados"];
 		public override int levelToEvolve => 21;
