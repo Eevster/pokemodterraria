@@ -345,6 +345,7 @@ namespace Pokemod.Content.NPCs
             {"Zeraora", new PokemonInfo([88, 112, 75, 102, 80, 143], [(int)TypeIndex.Electric], ["ThunderBolt"], (int)StageIndex.Basic, (int)ExpTypes.Slow, legendary: true, completed: false)},
             //Megas
             {"CharizardMegaX", new PokemonInfo([78, 130, 111, 130, 85, 100], [(int)TypeIndex.Fire,(int)TypeIndex.Dragon], ["LavaPlume"], (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
+            {"GyaradosMega", new PokemonInfo([95, 155, 109, 70, 130, 81], [(int)TypeIndex.Water,(int)TypeIndex.Dark], ["HydroPump"], (int)StageIndex.Mega, (int)ExpTypes.Slow, completed: false)},
         };
 
         public static string[][] PokemonNatures = [
