@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.GengarPet
 {
 	public class GengarPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 68;
-		public override int hitboxHeight => 72;
+		public override int hitboxWidth => 56;
+		public override int hitboxHeight => 60;
 
         public override int moveStyle => 2;
 
@@ -23,8 +23,8 @@ namespace Pokemod.Content.Pets.GengarPet
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [4,7];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
+		public override int[] jumpStartEnd => [8,8];
+		public override int[] fallStartEnd => [5,5];
 
         public override int[] attackStartEnd => [8, 11];
 
