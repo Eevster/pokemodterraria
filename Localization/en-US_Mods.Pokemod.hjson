@@ -413,6 +413,10 @@ Projectiles: {
 	HealballProj.DisplayName: Healball Proj
 	VineWhip_Front.DisplayName: Vine Whip_ Front
 	Overheat.DisplayName: Overheat
+	BlastoiseMegaPetProjectile.DisplayName: Blastoise Mega Pet Projectile
+	BlastoiseMegaPetProjectileShiny.DisplayName: Blastoise Mega Pet Projectile Shiny
+	VenusaurMegaPetProjectile.DisplayName: Venusaur Mega Pet Projectile
+	VenusaurMegaPetProjectileShiny.DisplayName: Venusaur Mega Pet Projectile Shiny
 }
 
 Items: {

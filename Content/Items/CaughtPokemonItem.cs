@@ -351,12 +351,14 @@ namespace Pokemod.Content.Items
 				}
 				if(proj != null){
 					if(proj.active){
-						PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
+						PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
 						moveIndex = Math.Clamp(moveIndex, 0, moves.Length);
-						PokemonProj.currentAttack = moves[moveIndex];
-						if(variant != null){
-							if(variant != ""){
-								PokemonProj.variant = variant;
+						if(PokemonProj != null){
+							PokemonProj.currentAttack = moves[moveIndex];
+							if(variant != null){
+								if(variant != ""){
+									PokemonProj.variant = variant;
+								}
 							}
 						}
 					}
@@ -378,14 +380,14 @@ namespace Pokemod.Content.Items
 		}
 
 		private void GetProjExp(Player player = null){
-			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
+			PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
 			if(PokemonProj != null){
 				AddExp(PokemonProj.GetExpGained(), player);
 			}
 		}
 
 		private void GetProjHP(){
-			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
+			PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
 			if(PokemonProj != null){
 				if(currentHP != 0 && PokemonProj.currentHp == 0){
 					AddHappiness(-3, -3, -5);
@@ -418,7 +420,8 @@ namespace Pokemod.Content.Items
 		}
 
 		private void GetUsedItems(Player player = null){
-			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
+			PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
+
 			if(PokemonProj != null){
 				if(PokemonProj.itemEvolve){
 					GetCanEvolve(player);
@@ -429,18 +432,31 @@ namespace Pokemod.Content.Items
 			}
 		}
 
+		private PokemonPetProjectile SafeGetPokemonProj(Projectile proj){
+			PokemonPetProjectile PokemonProj;
+			if(proj.ModProjectile is PokemonPetProjectile){
+				PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
+			}else{
+				PokemonProj = null;
+			}
+
+			return PokemonProj;
+		}
+
 		private void GetCanEvolve(Player player = null){
-			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-			string newPokemonName = PokemonProj.GetCanEvolve();
-			if(newPokemonName != ""){
-				Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
-				proj.Kill();
-				PokemonName = newPokemonName;
-				GetPokemonMoves();
-				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
-				if(player != null){
-					int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
-					proj = Main.projectile[projIndex];
+			PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
+			if(PokemonProj != null){
+				string newPokemonName = PokemonProj.GetCanEvolve();
+				if(newPokemonName != ""){
+					Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
+					proj.Kill();
+					PokemonName = newPokemonName;
+					GetPokemonMoves();
+					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
+					if(player != null){
+						int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
+						proj = Main.projectile[projIndex];
+					}
 				}
 			}
 		}
@@ -461,18 +477,19 @@ namespace Pokemod.Content.Items
 		}
 
 		private void GetCanMegaEvolve(Player player = null){
-			PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-
-			string newPokemonName = PokemonProj.GetCanMegaEvolve();
-			if(newPokemonName != ""){
-				Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
-				proj.Kill();
-				PokemonName = newPokemonName;
-				GetPokemonMoves();
-				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
-				if(player != null){
-					int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
-					proj = Main.projectile[projIndex];
+			PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
+			if(PokemonProj != null){
+				string newPokemonName = PokemonProj.GetCanMegaEvolve();
+				if(newPokemonName != ""){
+					Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
+					proj.Kill();
+					PokemonName = newPokemonName;
+					GetPokemonMoves();
+					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
+					if(player != null){
+						int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
+						proj = Main.projectile[projIndex];
+					}
 				}
 			}
 		}
@@ -507,12 +524,14 @@ namespace Pokemod.Content.Items
 			if(proj != null){
 				if(proj.active){
 					if(level > 0){
-						PokemonPetProjectile PokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-						PokemonProj.SetPokemonLvl(level, IVs, EVs, nature);
-						if(canEvolve){
-							PokemonProj.SetCanEvolve();
+						PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
+						if(PokemonProj != null){
+							PokemonProj.SetPokemonLvl(level, IVs, EVs, nature);
+							if(canEvolve){
+								PokemonProj.SetCanEvolve();
+							}
+							PokemonProj.SetCanMegaEvolve();
 						}
-						PokemonProj.SetCanMegaEvolve();
 						GetCanEvolve(player);
 						GetCanMegaEvolve(player);
 					}

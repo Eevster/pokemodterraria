@@ -343,7 +343,11 @@ namespace Pokemod.Content.NPCs
             //Gen 7
             {"Zeraora", new PokemonInfo([88, 112, 75, 102, 80, 143], [(int)TypeIndex.Electric], [], (int)StageIndex.Basic, (int)ExpTypes.Slow, legendary: true, completed: false)},
             //Megas
+            {"VenusaurMega", new PokemonInfo([80, 100, 123, 122, 120, 80], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [], (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
             {"CharizardMegaX", new PokemonInfo([78, 130, 111, 130, 85, 100], [(int)TypeIndex.Fire,(int)TypeIndex.Dragon], [], (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
+            {"CharizardMegaY", new PokemonInfo([78, 104, 78, 159, 115, 100], [(int)TypeIndex.Fire,(int)TypeIndex.Flying], [], (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
+            {"BlastoiseMega", new PokemonInfo([79, 103, 120, 135, 115, 78], [(int)TypeIndex.Water], [], (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
+            {"GengarMega", new PokemonInfo([60, 65, 80, 170, 95, 130], [(int)TypeIndex.Ghost,(int)TypeIndex.Poison], [], (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
         };
 
         public static string[][] PokemonNatures = [

@@ -9,19 +9,25 @@ namespace Pokemod.Content.Pets.PoliwhirlPet
 {
 	public class PoliwhirlPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 64;
-		public override int hitboxHeight => 64;
+		public override int hitboxWidth => 24;
+		public override int hitboxHeight => 32;
 
-		public override int totalFrames => 4;
+		public override int totalFrames => 16;
 		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
+		public override int[] idleStartEnd => [0,3];
+		public override int[] walkStartEnd => [4,7];
+		public override int[] jumpStartEnd => [5,5];
+		public override int[] fallStartEnd => [7,7];
+		public override int[] attackStartEnd => [8,11];
+		
+		public override bool canSwim => true;
+
+		public override int[] idleSwimStartEnd => [12,15];
+		public override int[] walkSwimStartEnd => [12,15];
+		public override int[] attackSwimStartEnd => [8,11];
 
 		public override string[] evolutions => ["Poliwrath"];
-		public override int levelToEvolve => 20;
-		public override int levelEvolutionsNumber => 1;
+		public override string[] itemToEvolve => ["WaterStoneItem"];
 	}
 
 	public class PoliwhirlPetProjectileShiny : PoliwhirlPetProjectile{}
