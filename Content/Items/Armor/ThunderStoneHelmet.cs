@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Pokemod.Content.Items.EvoStones;
 using Pokemod.Content.Items.Armor;
 using Pokemod.Content.DamageClasses;
+using Pokemod.Common.Players;
 
 namespace Pokemod.Content.Items.Armor
 {
@@ -37,7 +38,7 @@ namespace Pokemod.Content.Items.Armor
 
 		// IsArmorSet determines what armor pieces are needed for the setbonus to take effect
 		public override bool IsArmorSet(Item head, Item body, Item legs) {
-			return body.type == ModContent.ItemType<ThunderStoneBreastplate>() && legs.type == ModContent.ItemType<FireStoneLeggings>();
+			return body.type == ModContent.ItemType<ThunderStoneBreastplate>() && legs.type == ModContent.ItemType<ThunderStoneLeggings>();
 		}
 
 		// UpdateArmorSet allows you to give set bonuses to the armor.
@@ -45,6 +46,7 @@ namespace Pokemod.Content.Items.Armor
 			
 			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f;
             player.GetDamage(DamageClass.Ranged) += AdditiveGenericDamageBonus / 40f;
+            player.GetModPlayer<PokemonPlayer>().maxPokemon += 1;
         }
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.

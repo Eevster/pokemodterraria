@@ -7,16 +7,19 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class GravelerCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 64;
-		public override int hitboxHeight => 64;
+		public override int hitboxWidth => 48;
+		public override int hitboxHeight => 48;
 
-		public override int totalFrames => 4;
+		public override int totalFrames => 12;
 		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
+		public override int[] idleStartEnd => [0, 3];
+		public override int[] walkStartEnd => [4, 7];
+		public override int[] jumpStartEnd => [4, 4];
+		public override int[] fallStartEnd => [7, 7];
+		public override int[] attackStartEnd => [8,11];
 		public override float catchRate => 120;
+
+		public override int minLevel => 25;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
