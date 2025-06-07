@@ -8,15 +8,10 @@ namespace Pokemod.Content.Items.MegaStones
 {
 	public class BlastoiseMegaStoneItem : ModItem
 	{
-		public override void SetStaticDefaults() {
-			Item.ResearchUnlockCount = 100;
-		}
-
 		public override void SetDefaults() {
 			Item.width = 20;
 			Item.height = 20;
 
-			Item.maxStack = Item.CommonMaxStack;
 			Item.value = Item.buyPrice(silver: 1);
 			Item.accessory = true;
 		}

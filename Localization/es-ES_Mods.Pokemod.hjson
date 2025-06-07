@@ -417,6 +417,8 @@ Projectiles: {
 	// BlastoiseMegaPetProjectileShiny.DisplayName: Blastoise Mega Pet Projectile Shiny
 	// VenusaurMegaPetProjectile.DisplayName: Venusaur Mega Pet Projectile
 	// VenusaurMegaPetProjectileShiny.DisplayName: Venusaur Mega Pet Projectile Shiny
+	// GyaradosMegaPetProjectile.DisplayName: Gyarados Mega Pet Projectile
+	// GyaradosMegaPetProjectileShiny.DisplayName: Gyarados Mega Pet Projectile Shiny
 }
 
 Items: {
@@ -1039,6 +1041,11 @@ Items: {
 	HealballItem: {
 		DisplayName: Sana Ball
 		Tooltip: ""
+	}
+
+	GyaradosMegaStoneItem: {
+		// DisplayName: Gyarados Mega Stone Item
+		// Tooltip: ""
 	}
 }
 
