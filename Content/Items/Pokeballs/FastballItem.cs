@@ -9,7 +9,7 @@ namespace Pokemod.Content.Items.Pokeballs
 	public class FastballItem : BallItem
 	{
 		protected override int BallProj => ModContent.ProjectileType<FastballProj>();
-		protected override int BallValue => 1000;
+		protected override int BallValue => 5000;
 		protected override float CatchRate => 1f;
 
         public override void AddRecipes() {

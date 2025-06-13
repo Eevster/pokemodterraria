@@ -73,6 +73,10 @@ namespace Pokemod.Content.NPCs
 			Shop.Add<SafariballItem>();
 			Shop.Add<FastballItem>();
             Shop.Add<HealballItem>();
+			Shop.Add<FeatherballItem>();
+			Shop.Add<FriendballItem>();
+			Shop.Add<LevelballItem>();
+			Shop.Add<HeavyballItem>();
             Shop.Add<Everstone>();
 
 			// Bring  Tools

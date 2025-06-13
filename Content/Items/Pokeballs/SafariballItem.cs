@@ -7,7 +7,7 @@ namespace Pokemod.Content.Items.Pokeballs
 	public class SafariballItem : BallItem
 	{
 		protected override int BallProj => ModContent.ProjectileType<SafariballProj>();
-		protected override int BallValue => 1000;
+		protected override int BallValue => 3000;
 		protected override float CatchRate => 1f;
 
 		public override void AddRecipes() {
