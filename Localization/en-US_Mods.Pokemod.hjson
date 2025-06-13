@@ -1047,6 +1047,11 @@ Items: {
 		DisplayName: Gyarados Mega Stone Item
 		Tooltip: ""
 	}
+
+	MaxPotion: {
+		DisplayName: Max Potion
+		Tooltip: ""
+	}
 }
 
 Buffs: {
