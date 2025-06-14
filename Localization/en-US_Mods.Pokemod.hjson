@@ -419,6 +419,7 @@ Projectiles: {
 	VenusaurMegaPetProjectileShiny.DisplayName: Venusaur Mega Pet Projectile Shiny
 	GyaradosMegaPetProjectile.DisplayName: Gyarados Mega Pet Projectile
 	GyaradosMegaPetProjectileShiny.DisplayName: Gyarados Mega Pet Projectile Shiny
+	PokeBobber.DisplayName: Poke Bobber
 }
 
 Items: {
@@ -1045,6 +1046,31 @@ Items: {
 
 	GyaradosMegaStoneItem: {
 		DisplayName: Gyarados Mega Stone Item
+		Tooltip: ""
+	}
+
+	Repel: {
+		DisplayName: Repel
+		Tooltip: ""
+	}
+
+	GoodRod: {
+		DisplayName: Good Rod
+		Tooltip: ""
+	}
+
+	OldRod: {
+		DisplayName: Old Rod
+		Tooltip: ""
+	}
+
+	MaxRepel: {
+		DisplayName: Max Repel
+		Tooltip: ""
+	}
+
+	SuperRepel: {
+		DisplayName: Super Repel
 		Tooltip: ""
 	}
 }
@@ -2698,6 +2724,11 @@ Buffs: {
 	NidorinaPetBuffShiny: {
 		DisplayName: Nidorina Pet Buff Shiny
 		Description: Mods.Pokemod.Buffs.NidorinaPetBuffShiny.Description
+	}
+
+	PokemonRepel: {
+		DisplayName: Pokemon Repel
+		Description: Mods.Pokemod.Buffs.PokemonRepel.Description
 	}
 }
 

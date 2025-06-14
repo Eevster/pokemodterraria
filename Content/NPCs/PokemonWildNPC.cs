@@ -1,5 +1,4 @@
 ﻿using Pokemod.Content.Items;
-using Pokemod.Content.Pets.ChikoritaPet;
 using Microsoft.Xna.Framework;
 using MonoMod.Cil;
 using System;
@@ -17,6 +16,7 @@ using Pokemod.Common.Systems;
 using System.IO;
 using Pokemod.Content.Dusts;
 using Pokemod.Common.Configs;
+using Pokemod.Content.Buffs;
 
 namespace Pokemod.Content.NPCs
 {
@@ -178,6 +178,11 @@ namespace Pokemod.Content.NPCs
 			}
 
 			if(minLevel > WorldLevel.MaxWorldLevel){
+				chance = 0;
+			}
+
+			if (spawnInfo.Player.HasBuff(ModContent.BuffType<PokemonRepel>()))
+			{
 				chance = 0;
 			}
 

@@ -48,6 +48,7 @@ namespace Pokemod.Common.Players
 		public NPC targetNPC;
 		public Player targetPlayer;
 
+		//Active Pokemon
 		public int maxPokemon;
 		public const int defaultMaxPokemon = 1;
 		public List<int> currentActivePokemon = new List<int>();
@@ -55,6 +56,7 @@ namespace Pokemod.Common.Players
 		//Player data
 		public string TrainerID { get; internal set; }
 
+		//Textures
 		private static Asset<Texture2D> targetTexture;
 
 		private static Asset<Texture2D> noAttackTexture;
