@@ -1049,6 +1049,11 @@ Items: {
 		Tooltip: ""
 	}
 
+	MaxPotion: {
+		DisplayName: Max Potion
+		Tooltip: ""
+	}
+
 	Repel: {
 		DisplayName: Repel
 		Tooltip: ""

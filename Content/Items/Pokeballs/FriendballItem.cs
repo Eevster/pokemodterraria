@@ -8,7 +8,7 @@ namespace Pokemod.Content.Items.Pokeballs
 	public class FriendballItem : BallItem
 	{
 		protected override int BallProj => ModContent.ProjectileType<FriendballProj>();
-		protected override int BallValue => 1000;
+		protected override int BallValue => 4000;
 		protected override float CatchRate => 1f;
 
         public override void AddRecipes() {

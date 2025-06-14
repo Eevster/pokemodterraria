@@ -10,7 +10,7 @@ namespace Pokemod.Content.Items.Pokeballs
 	public class MoonballItem : BallItem
 	{
 		protected override int BallProj => ModContent.ProjectileType<MoonballProj>();
-		protected override int BallValue => 1000;
+		protected override int BallValue => 3000;
 		protected override float CatchRate => 1f;
 
         public override void AddRecipes() {
