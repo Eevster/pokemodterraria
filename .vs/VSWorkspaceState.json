@@ -2,12 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\Common",
-    "\\Common\\Players",
+    "\\Common\\Configs",
+    "\\Common\\Systems",
     "\\Content",
-    "\\Content\\Items",
-    "\\Content\\Items\\Consumables",
-    "\\Content\\Items\\Pokeballs"
+    "\\Content\\Items"
   ],
-  "SelectedNode": "\\Content\\Items\\Consumables\\RareCandyItem.cs",
+  "SelectedNode": "\\Content\\TileEntities",
   "PreviewInSolutionExplorer": false
 }

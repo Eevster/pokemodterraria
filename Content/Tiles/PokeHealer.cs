@@ -135,7 +135,7 @@ namespace Pokemod.Content.Tiles
         }
         public override void AddRecipes() {
 			CreateRecipe()
-				.AddIngredient(ItemID.LifeCrystal, 6)
+				.AddIngredient(ItemID.LifeCrystal, 3)
                 .AddIngredient(ItemID.ManaCrystal, 5)
                 .AddRecipeGroup(RecipeGroupID.IronBar, 10)
 				.AddTile(TileID.Anvils)
