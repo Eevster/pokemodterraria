@@ -1078,6 +1078,16 @@ Items: {
 		// DisplayName: Super Repel
 		// Tooltip: ""
 	}
+
+	RedApricornTileItem: {
+		// DisplayName: Red Apricorn Tile Item
+		// Tooltip: ""
+	}
+
+	BlueHealer: {
+		// DisplayName: Blue Healer
+		// Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -3087,6 +3097,8 @@ Tiles: {
 		// MapEntry0: Mods.Pokemod.Tiles.PCChest.MapEntry0
 		// MapEntry1: Mods.Pokemod.Tiles.PCChest.MapEntry1
 	}
+
+	// BlueHealerTile.MapEntry: Blue Healer Tile
 }
 
 WorldGen.PokeballItemTilePassMessage: Mods.Pokemod.WorldGen.PokeballItemTilePassMessage

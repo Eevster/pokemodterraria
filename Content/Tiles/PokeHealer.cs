@@ -57,15 +57,17 @@ namespace Pokemod.Content.Tiles
             base.MouseOver(i, j);
         }
 
-        public override bool RightClick(int i, int j) {
+        public override bool RightClick(int i, int j)
+        {
             Player player = Main.LocalPlayer;
 
-            if(player.HasBuff<PokeHealerDebuff>()) return false;
+            if (player.HasBuff<PokeHealerDebuff>()) return false;
 
             bool healed = false;
 
-			if (player.IsWithinSnappngRangeToTile(i, j, PlayerSittingHelper.ChairSittingMaxDistance)) { // Avoid being able to trigger it from long range
-				player.GamepadEnableGrappleCooldown();
+            if (player.IsWithinSnappngRangeToTile(i, j, PlayerSittingHelper.ChairSittingMaxDistance))
+            { // Avoid being able to trigger it from long range
+                player.GamepadEnableGrappleCooldown();
                 foreach (Item item in player.inventory)
                 {
                     if (item.ModItem is CaughtPokemonItem pokeItem)
@@ -73,29 +75,37 @@ namespace Pokemod.Content.Tiles
                         HealPokemon(pokeItem, pokeItem.GetPokemonStats()[0], ref healed);
                     }
                 }
-                if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
+                if (player.miscEquips[0] != null && !player.miscEquips[0].IsAir)
+                {
                     if (player.miscEquips[0].ModItem is CaughtPokemonItem pokeItem)
                     {
                         HealPokemon(pokeItem, pokeItem.GetPokemonStats()[0], ref healed);
                     }
                 }
-			}
-
-            if(healed){
-                SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKHealer") with {Volume = 0.5f}, player.position);
-                player.AddBuff(ModContent.BuffType<PokeHealerDebuff>(), 3*60*60);
             }
 
-			return true;
-		}
+            if (healed)
+            {
+                SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKHealer") with { Volume = 0.5f }, player.position);
+                player.AddBuff(ModContent.BuffType<PokeHealerDebuff>(), 3 * 60 * 60);
+            }
 
-        public static void HealPokemon(CaughtPokemonItem item, int finalHP, ref bool healed){
-            if(item.proj != null){
-                if(item.proj.active){
-                    if(item.proj.ModProjectile is PokemonPetProjectile proj){
-                        if(proj.currentHp < finalHP){
+            return true;
+        }
+
+        public static void HealPokemon(CaughtPokemonItem item, int finalHP, ref bool healed)
+        {
+            if (item.proj != null)
+            {
+                if (item.proj.active)
+                {
+                    if (item.proj.ModProjectile is PokemonPetProjectile proj)
+                    {
+                        if (proj.currentHp < finalHP)
+                        {
                             proj.currentHp = finalHP;
-                            if(item.currentHP < finalHP){
+                            if (item.currentHP < finalHP)
+                            {
                                 item.currentHP = finalHP;
                             }
                             healed = true;
@@ -104,15 +114,17 @@ namespace Pokemod.Content.Tiles
                     }
                 }
             }
-            if(item.currentHP < finalHP){
+            if (item.currentHP < finalHP)
+            {
                 item.currentHP = finalHP;
                 healed = true;
             }
         }
 
-        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings) {
-			return true;
-		}
+        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
+        {
+            return true;
+        }
     }
 
     public class PokeHealer : ModItem
@@ -133,13 +145,35 @@ namespace Pokemod.Content.Tiles
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.buyPrice(silver: 50);
         }
-        public override void AddRecipes() {
-			CreateRecipe()
-				.AddIngredient(ItemID.LifeCrystal, 3)
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.LifeCrystal, 3)
                 .AddIngredient(ItemID.ManaCrystal, 5)
                 .AddRecipeGroup(RecipeGroupID.IronBar, 10)
-				.AddTile(TileID.Anvils)
-				.Register();
-		}
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+    }
+    public class BlueHealerTile : PokeHealerTile
+    {
+
+    }
+    public class BlueHealer : ModItem
+    {
+        public override void SetDefaults()
+        {
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.BlueHealerTile>());
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.LifeCrystal, 3)
+                .AddIngredient(ItemID.ManaCrystal, 5)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 10)
+                .AddIngredient(ItemID.BlueDye, 1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
     }
 }
