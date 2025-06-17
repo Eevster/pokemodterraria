@@ -1,11 +1,29 @@
-Welcome to Pokemod! The first Terraria mod fully striving to add every single pokemon into your terraria world! Each Mon will have its own unique way of obtaining it! Be sure to join my Discord where I create Minecraft and now Terraria content! Discord Link: https://discord.gg/pT5UagAB3n
+Welcome to Pokemod! My take on the Pokemon X Terraria scene. Here you can catch, battle, and train Pokemon to your hearts content, all in Terraria! 
+
+Discord Link: https://discord.gg/pT5UagAB3n
 
 Contributers:
 -JACSMITH (Discord) Artist/Developer
 -PriddyNeatGames (Discord) Developer
+-RollinMan42 (Github) Contributer
 
 Changelog:
--General Fixes + Everstone Addition
+-Added a Starter System (Interact with Oak for the first time)
+-Added a Pokemon Fishing System (Old and Good Rods)
+-Added a Mega evolution system (Megas and mega stones for Charizard, Venusaur, Blastoise, Gengar, and Gyarados)
+-Fixed Many bugs
+-Added New Items (such as Repel, and Max potion)
+-Added more items to Oak's Shop
+-Added many new Pokemon
+-Beta Pokemon are now more stable and evolve correctly, get their own moves, and spawn in the correct biomes
+-Pokemon now keep moves when evolving (right click the item to swap moves)
+-Pokemon Item Descriptions were updated
+-Natures and Happiness were both added
+-Added Armor sets which boost the trainer class (eg. allow more summons, give boosts, etc.)
+-Added new config options
+-Players now start with 10 pokeballs
+-Shinies now emit sparkles
+-Added new accessories which boost the Trainer Class
 
 Legal:
 This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 
@@ -13,4 +31,4 @@ All Pokémon-related content, including names, designs, and concepts, is the int
 This mod is created by fans for fans, and no official affiliation with the Pokémon franchise is claimed. 
 We respect the original creators and encourage players to support official Pokémon games.
 We will also fully respect the decision to remove content posted at the disgretion of the Official Nintendo Company and/or the Official GameFreak Company.
-Impersonators will not be tolerated.
+Impersonators of said I.P Owners will not be tolerated.

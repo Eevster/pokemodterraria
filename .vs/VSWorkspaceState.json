@@ -1,14 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Assets",
-    "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Common",
-    "\\Common\\Players",
+    "\\Common\\Configs",
+    "\\Common\\Systems",
     "\\Content",
-    "\\Content\\NPCs"
+    "\\Content\\Items"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonData.cs",
+  "SelectedNode": "\\Content\\TileEntities",
   "PreviewInSolutionExplorer": false
 }
