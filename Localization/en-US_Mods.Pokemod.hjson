@@ -1051,32 +1051,56 @@ Items: {
 
 	MaxPotion: {
 		DisplayName: Max Potion
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemUse}
+			When used on a pokemon it recovers full HP
+			'''
 	}
 
 	Repel: {
 		DisplayName: Repel
-		Tooltip: ""
+		Tooltip: Prevents pokemon from appearing
 	}
 
 	GoodRod: {
 		DisplayName: Good Rod
-		Tooltip: ""
+		Tooltip: Allows you to fish for slightly stronger pokemon
 	}
 
 	OldRod: {
 		DisplayName: Old Rod
-		Tooltip: ""
+		Tooltip: Allows you to fish for pokemon
 	}
 
 	MaxRepel: {
 		DisplayName: Max Repel
-		Tooltip: ""
+		Tooltip: Prevents pokemon from appearing
 	}
 
 	SuperRepel: {
 		DisplayName: Super Repel
+		Tooltip: Prevents pokemon from appearing
+	}
+
+	Leftovers: {
+		DisplayName: Leftovers
+		Tooltip: Recovers 3 HP to your active pokemon every 10 seconds
+	}
+
+	LuckyEgg: {
+		DisplayName: Lucky Egg
+		Tooltip: Your pokemon gain 50% more exp
+	}
+
+	LinkingCordItem: {
+		DisplayName: Linking Cord
 		Tooltip: ""
+	}
+
+	BikeVoucher: {
+		DisplayName: Bike Voucher
+		Tooltip: A voucher for obtaining a bicycle from the Bike Shop
 	}
 }
 
@@ -2733,7 +2757,12 @@ Buffs: {
 
 	PokemonRepel: {
 		DisplayName: Pokemon Repel
-		Description: Mods.Pokemod.Buffs.PokemonRepel.Description
+		Description: Pokémon will no longer appear near you!
+	}
+
+	BikeBuff: {
+		DisplayName: Bike
+		Description: Not immune to electric type
 	}
 }
 

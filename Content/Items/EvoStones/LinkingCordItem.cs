@@ -6,7 +6,7 @@ using Pokemod.Content.Items.Consumables;
 
 namespace Pokemod.Content.Items.EvoStones
 {
-	public class MoonStoneItem : PokemonConsumableItem
+	public class LinkingCordItem : PokemonConsumableItem
 	{
 		public override void SetDefaults() {
 			Item.width = 24; // The item texture's width
@@ -31,13 +31,5 @@ namespace Pokemod.Content.Items.EvoStones
 			Item.consumable = false;
 			return false;
 		}
-		public override void AddRecipes() {
-			CreateRecipe(1)
-				.AddIngredient(ItemID.JungleSpores, 40)
-				.AddIngredient(ItemID.LivingLeafWall, 20)
-				.AddIngredient(ItemID.Emerald, 10)
-				.AddTile(TileID.Anvils)
-				.Register();
-	}
 	}
 }

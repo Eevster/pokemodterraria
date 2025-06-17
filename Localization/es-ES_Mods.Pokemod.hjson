@@ -1035,8 +1035,8 @@ Items: {
 	}
 
 	GalaxyballItem: {
-		// DisplayName: Galaxy Ball
-		// Tooltip: ""
+		DisplayName: Galaxia Ball
+		Tooltip: ""
 	}
 
 	HealballItem: {
@@ -1050,33 +1050,57 @@ Items: {
 	}
 
 	MaxPotion: {
-		// DisplayName: Max Potion
-		// Tooltip: ""
+		DisplayName: Poción Máxima
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemUse}
+			Cuando es usado en un pokemon recupera todo su HP
+			'''
 	}
 
 	Repel: {
-		// DisplayName: Repel
-		// Tooltip: ""
+		DisplayName: Repelente
+		Tooltip: Evita que aparezcan pokemon
 	}
 
 	GoodRod: {
-		// DisplayName: Good Rod
-		// Tooltip: ""
+		DisplayName: Caña buena
+		Tooltip: Permite pescar pokemon un poco más fuertes
 	}
 
 	OldRod: {
-		// DisplayName: Old Rod
-		// Tooltip: ""
+		DisplayName: Caña Vieja
+		Tooltip: Permite pescar pokemon
 	}
 
 	MaxRepel: {
-		// DisplayName: Max Repel
-		// Tooltip: ""
+		DisplayName: Repelente Máximo
+		Tooltip: Evita que aparezcan pokemon
 	}
 
 	SuperRepel: {
-		// DisplayName: Super Repel
-		// Tooltip: ""
+		DisplayName: Superrepelente
+		Tooltip: Evita que aparezcan pokemon
+	}
+
+	Leftovers: {
+		DisplayName: Restos
+		Tooltip: Recupera 3 hp a tus pokemon activos cada 10 segundos
+	}
+
+	LuckyEgg: {
+		DisplayName: Huevo Suerte
+		Tooltip: Tus pokemon ganan un 50% más de experiencia
+	}
+
+	LinkingCordItem: {
+		DisplayName: Cordón unión
+		Tooltip: ""
+	}
+
+	BikeVoucher: {
+		DisplayName: Bono Bici
+		Tooltip: ¡Cubre el precio completo de una bici!
 	}
 }
 
@@ -2732,8 +2756,13 @@ Buffs: {
 	}
 
 	PokemonRepel: {
-		// DisplayName: Pokemon Repel
-		// Description: Mods.Pokemod.Buffs.PokemonRepel.Description
+		DisplayName: Repelente de pokemon
+		Description: Ya no aparecerán pokemon cerca de ti
+	}
+
+	BikeBuff: {
+		DisplayName: Bici
+		Description: No es inmune al tipo eléctrico
 	}
 }
 

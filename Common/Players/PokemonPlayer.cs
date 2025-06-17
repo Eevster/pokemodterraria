@@ -34,6 +34,9 @@ namespace Pokemod.Common.Players
 		public bool HasShinyCharm;
 		public int HasEverstone;
 
+		public float ExpMult = 1f;
+		public int LeftoversTimer;
+
 		//Trainer Glove
 		public int attackMode;
 		public enum AttackMode
@@ -193,6 +196,9 @@ namespace Pokemod.Common.Players
 					i++;
 				}
 			}
+
+			ExpMult = 1f;
+			if(LeftoversTimer > 0) LeftoversTimer--;
         }
 
 		public int FreePokemonSlots(){
@@ -360,5 +366,24 @@ namespace Pokemod.Common.Players
 			}
             base.UpdateDead();
         }
+
+		public void LeftoversEffect()
+		{
+			if (LeftoversTimer <= 0) {
+				foreach (int index in currentActivePokemon)
+				{
+					if (Main.projectile[index].active)
+					{
+						PokemonPetProjectile PokemonProj;
+
+						if (Main.projectile[index].ModProjectile is PokemonPetProjectile) PokemonProj = (PokemonPetProjectile)Main.projectile[index]?.ModProjectile;
+						else PokemonProj = null;
+
+						PokemonProj?.regenHP(3);
+					}
+				}
+				LeftoversTimer = 10*60;
+			}
+		}
     }
 }

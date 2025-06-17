@@ -21,8 +21,7 @@ namespace Pokemod.Content.Pets.GravelerPet
 		public override int[] attackStartEnd => [8,11];
 
 		public override string[] evolutions => ["Golem"];
-		public override int levelToEvolve => 45;
-		public override int levelEvolutionsNumber => 1;
+		public override string[] itemToEvolve => ["LinkingCordItem"];
 	}
 
 	public class GravelerPetProjectileShiny : GravelerPetProjectile{}

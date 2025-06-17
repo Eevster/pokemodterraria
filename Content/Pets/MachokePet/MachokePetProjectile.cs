@@ -20,8 +20,7 @@ namespace Pokemod.Content.Pets.MachokePet
 		public override int[] fallStartEnd => [0,3];
 
 		public override string[] evolutions => ["Machamp"];
-		public override int levelToEvolve => 45;
-		public override int levelEvolutionsNumber => 1;
+		public override string[] itemToEvolve => ["LinkingCordItem"];
 	}
 
 	public class MachokePetProjectileShiny : MachokePetProjectile{}

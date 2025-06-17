@@ -449,6 +449,8 @@ namespace Pokemod.Content.Pets
 		}
 
 		public void SetExtraExp(int extraExp){
+			extraExp = (int)(extraExp*Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().ExpMult);
+			
 			if(Projectile.owner == Main.myPlayer){
 				if(extraExp > 0){
 					CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+extraExp+" Exp");

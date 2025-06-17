@@ -24,8 +24,7 @@ namespace Pokemod.Content.Pets.HaunterPet
 		public override int[] attackFlyStartEnd => [6,11];
 
         public override string[] evolutions => ["Gengar"];
-        public override int levelToEvolve => 45;
-        public override int levelEvolutionsNumber => 1;
+        public override string[] itemToEvolve => ["LinkingCordItem"];
 
         public override bool tangible => false;
 
