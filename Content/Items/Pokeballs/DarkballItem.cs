@@ -13,9 +13,10 @@ namespace Pokemod.Content.Items.Pokeballs
 
         public override void AddRecipes() {
 			CreateRecipe(8)
-				.AddIngredient(ModContent.ItemType<BlueApricorn>(), 1)
-				.AddRecipeGroup(RecipeGroupID.IronBar, 1)
-				.AddTile(TileID.WorkBenches)
+				.AddIngredient(ModContent.ItemType<PinkApricorn>(), 50)
+                .AddIngredient(ModContent.ItemType<BlueApricorn>(), 50)
+                .AddIngredient(ItemID.LunarBar, 100)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }
