@@ -420,6 +420,7 @@ Projectiles: {
 	// GyaradosMegaPetProjectile.DisplayName: Gyarados Mega Pet Projectile
 	// GyaradosMegaPetProjectileShiny.DisplayName: Gyarados Mega Pet Projectile Shiny
 	// PokeBobber.DisplayName: Poke Bobber
+	// DarkballProj.DisplayName: Darkball Proj
 }
 
 Items: {
@@ -1098,11 +1099,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	BikeVoucher: {
-		DisplayName: Bono Bici
-		Tooltip: ¡Cubre el precio completo de una bici!
-	}
-
 	RedApricornTileItem: {
 		// DisplayName: Red Apricorn Tile Item
 		// Tooltip: ""
@@ -1110,6 +1106,16 @@ Items: {
 
 	BlueHealer: {
 		// DisplayName: Blue Healer
+		// Tooltip: ""
+	}
+
+	BikeVoucher: {
+		DisplayName: Bono Bici
+		Tooltip: ¡Cubre el precio completo de una bici!
+	}
+
+	DarkballItem: {
+		// DisplayName: Darkball Item
 		// Tooltip: ""
 	}
 }

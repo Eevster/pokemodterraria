@@ -420,6 +420,7 @@ Projectiles: {
 	GyaradosMegaPetProjectile.DisplayName: Gyarados Mega Pet Projectile
 	GyaradosMegaPetProjectileShiny.DisplayName: Gyarados Mega Pet Projectile Shiny
 	PokeBobber.DisplayName: Poke Bobber
+	DarkballProj.DisplayName: Darkball Proj
 }
 
 Items: {
@@ -1111,6 +1112,11 @@ Items: {
 	BikeVoucher: {
 		DisplayName: Bike Voucher
 		Tooltip: A voucher for obtaining a bicycle from the Bike Shop
+	}
+
+	DarkballItem: {
+		DisplayName: Darkball Item
+		Tooltip: ""
 	}
 }
 

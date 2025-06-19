@@ -1,12 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Common",
-    "\\Common\\Configs",
-    "\\Common\\Systems",
     "\\Content",
-    "\\Content\\Items"
+    "\\Content\\NPCs"
   ],
-  "SelectedNode": "\\Content\\TileEntities",
+  "SelectedNode": "\\Content\\NPCs\\PokemonData.cs",
   "PreviewInSolutionExplorer": false
 }
