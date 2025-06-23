@@ -33,8 +33,8 @@ namespace Pokemod.Content.Pets.CharizardPet
 		public override float moveDistance1 => 800f;
 		public override float moveDistance2 => 500f;
 
-		public override string[] megaEvolutions => ["CharizardMegaX"];
-		public override string[] itemToMegaEvolve => ["CharizardMegaStoneItemX"];
+		public override string[] megaEvolutions => ["CharizardMegaX", "CharizardMegaY"];
+		public override string[] itemToMegaEvolve => ["CharizardMegaStoneItemX", "CharizardMegaStoneItemY"];
 
         public override void SetDefaults()
         {

@@ -18,8 +18,8 @@ namespace Pokemod.Content.Items.MegaStones
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual) {
-			//player.GetModPlayer<PokemonPlayer>().MegaStone = Name;
-			//player.GetModPlayer<PokemonPlayer>().HasMegaStone = 3;
+			player.GetModPlayer<PokemonPlayer>().MegaStone = Name;
+			player.GetModPlayer<PokemonPlayer>().HasMegaStone = 3;
 		}
 	}
 }

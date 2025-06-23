@@ -6,9 +6,9 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.CharizardPetMegaX
+namespace Pokemod.Content.Pets.CharizardPetMegaY
 {
-	public class CharizardMegaXPetProjectile : PokemonPetProjectile
+	public class CharizardMegaYPetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 36;
 		public override int hitboxHeight => 56;
@@ -36,7 +36,7 @@ namespace Pokemod.Content.Pets.CharizardPetMegaX
         public override bool isMega => true;
 		
 		public override string[] megaEvolutionBase => ["Charizard"];
-		public override string[] itemToMegaEvolve => ["CharizardMegaStoneItemX"];
+		public override string[] itemToMegaEvolve => ["CharizardMegaStoneItemY"];
 
         public override void SetDefaults()
         {
@@ -45,5 +45,5 @@ namespace Pokemod.Content.Pets.CharizardPetMegaX
         }
 	}
 
-	public class CharizardMegaXPetProjectileShiny : CharizardMegaXPetProjectile{}
+	public class CharizardMegaYPetProjectileShiny : CharizardMegaYPetProjectile{}
 }

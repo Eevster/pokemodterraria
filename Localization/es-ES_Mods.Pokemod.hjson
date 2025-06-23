@@ -420,6 +420,8 @@ Projectiles: {
 	// GyaradosMegaPetProjectile.DisplayName: Gyarados Mega Pet Projectile
 	// GyaradosMegaPetProjectileShiny.DisplayName: Gyarados Mega Pet Projectile Shiny
 	// PokeBobber.DisplayName: Poke Bobber
+	// CharizardMegaYPetProjectile.DisplayName: Charizard Mega Y Pet Projectile
+	// CharizardMegaYPetProjectileShiny.DisplayName: Charizard Mega Y Pet Projectile Shiny
 }
 
 Items: {
@@ -1098,11 +1100,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	BikeVoucher: {
-		DisplayName: Bono Bici
-		Tooltip: ¡Cubre el precio completo de una bici!
-	}
-
 	RedApricornTileItem: {
 		// DisplayName: Red Apricorn Tile Item
 		// Tooltip: ""
@@ -1111,6 +1108,11 @@ Items: {
 	BlueHealer: {
 		// DisplayName: Blue Healer
 		// Tooltip: ""
+	}
+
+	BikeVoucher: {
+		DisplayName: Bono Bici
+		Tooltip: ¡Cubre el precio completo de una bici!
 	}
 }
 
@@ -3107,6 +3109,7 @@ NPCs: {
 	// JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	// GalvantulaCritterNPC.DisplayName: Galvantula
 	// GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
+	// FishermanTrainer.DisplayName: Fisherman Trainer
 }
 
 Dialogue: {
