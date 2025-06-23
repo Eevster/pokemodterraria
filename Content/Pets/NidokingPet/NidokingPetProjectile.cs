@@ -13,7 +13,7 @@ namespace Pokemod.Content.Pets.NidokingPet
 		public override int hitboxHeight => 68;
 
 		public override int totalFrames => 12;
-		public override int animationSpeed => 5;
+		public override int animationSpeed => 8;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [4,7];
 		public override int[] jumpStartEnd => [5,5];

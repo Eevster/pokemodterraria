@@ -13,7 +13,7 @@ namespace Pokemod.Content.Pets.GolemPet
 		public override int hitboxHeight => 56;
 
 		public override int totalFrames => 12;
-		public override int animationSpeed => 4;
+		public override int animationSpeed => 8;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [4,7];
 		public override int[] jumpStartEnd => [9,9];
