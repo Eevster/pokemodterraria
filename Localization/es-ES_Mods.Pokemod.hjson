@@ -420,6 +420,7 @@ Projectiles: {
 	// GyaradosMegaPetProjectile.DisplayName: Gyarados Mega Pet Projectile
 	// GyaradosMegaPetProjectileShiny.DisplayName: Gyarados Mega Pet Projectile Shiny
 	// PokeBobber.DisplayName: Poke Bobber
+	// DarkballProj.DisplayName: Darkball Proj
 	// CharizardMegaYPetProjectile.DisplayName: Charizard Mega Y Pet Projectile
 	// CharizardMegaYPetProjectileShiny.DisplayName: Charizard Mega Y Pet Projectile Shiny
 }
@@ -1113,6 +1114,11 @@ Items: {
 	BikeVoucher: {
 		DisplayName: Bono Bici
 		Tooltip: ¡Cubre el precio completo de una bici!
+	}
+
+	DarkballItem: {
+		// DisplayName: Darkball Item
+		// Tooltip: ""
 	}
 }
 
