@@ -410,6 +410,7 @@ namespace Pokemod.Content.Pets
 			{
 				ManualMovement();
 			}
+			LimitPosition();
 			GetAllProjsExp();
 			EvolutionProcess();
 			MegaEvolutionProcess();
@@ -626,7 +627,7 @@ namespace Pokemod.Content.Pets
 
 			canFall = false;
 
-			if (moveStyle == (int)MovementStyle.Fly)
+			if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
 			{
 				isFlying = true;
 			}
@@ -977,7 +978,7 @@ namespace Pokemod.Content.Pets
 
 			canFall = false;
 
-			if (moveStyle == (int)MovementStyle.Fly)
+			if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
 			{
 				isFlying = true;
 			}
@@ -1020,7 +1021,14 @@ namespace Pokemod.Content.Pets
 					{
 						if (attackProjs[i].active)
 						{
-							UpdateNoAttackProjs(i);
+							if (currentStatus == (int)ProjStatus.Attack)
+							{
+								UpdateAttackProjs(i, ref maxFallSpeed);
+							}
+							else
+							{
+								UpdateNoAttackProjs(i);
+							}
 						}
 						else
 						{
@@ -1035,18 +1043,68 @@ namespace Pokemod.Content.Pets
 				canFall = true;
 			}
 
+			if (timer <= 0)
+			{
+				if (canAttack && Main.mouseLeft)
+				{
+					Attack((Main.MouseWorld-Projectile.Center).Length(), Main.MouseWorld);
+				}
+			}
+
+			if (canAttackOutTimer)
+			{
+				AttackOutTimer((Main.MouseWorld-Projectile.Center).Length(), Main.MouseWorld);
+			}
+
+			if (currentStatus == (int)ProjStatus.Attack)
+			{
+				Projectile.direction = Math.Sign(Main.MouseWorld.X - Projectile.Center.X);
+			}
+
+			if (Projectile.owner == Main.myPlayer)
+			{
+				for (int i = 0; i < nAttackProjs; i++)
+				{
+					if (attackProjs[i] != null)
+					{
+						if (attackProjs[i].active)
+						{
+							UpdateAttackProjs(i, ref maxFallSpeed);
+						}
+						else
+						{
+							attackProjs[i] = null;
+						}
+					}
+				}
+			}
+
+			if (timer <= 0)
+			{
+				if (!canAttack)
+				{
+					if (currentStatus == (int)ProjStatus.Attack)
+					{
+						currentStatus = (int)ProjStatus.Idle;
+					}
+					canAttack = true;
+					timer = attackCooldown;
+				}
+			}
+
 			float moveVelocity = speedMultiplier * speed;
 			Vector2 moveDirection = Vector2.Zero;
 
-			if (Main.player[Projectile.owner].controlLeft) moveDirection.X += -1;
-			if (Main.player[Projectile.owner].controlRight) moveDirection.X += 1;
-			if (isFlying || isSwimming)
+			if ((currentStatus != (int)ProjStatus.Attack && !canMoveWhileAttack) || canMoveWhileAttack)
 			{
-				if (Main.player[Projectile.owner].controlUp) moveDirection.Y += -1;
-				if (Main.player[Projectile.owner].controlDown) moveDirection.Y += 1;
+				if (Main.player[Projectile.owner].controlLeft) moveDirection.X += -1;
+				if (Main.player[Projectile.owner].controlRight) moveDirection.X += 1;
+				if (isFlying || isSwimming)
+				{
+					if (Main.player[Projectile.owner].controlUp) moveDirection.Y += -1;
+					if (Main.player[Projectile.owner].controlDown) moveDirection.Y += 1;
+				}
 			}
-
-
 
 			if (moveDirection.Length() != 0)
 			{
@@ -1172,6 +1230,15 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
+		public virtual void LimitPosition()
+		{
+			const float limitDistance = 500;
+			Projectile.Center = new Vector2(
+				Math.Clamp(Projectile.Center.X, Main.leftWorld+limitDistance, Main.rightWorld-limitDistance),
+				Math.Clamp(Projectile.Center.Y, Main.topWorld+limitDistance, Main.bottomWorld-limitDistance)
+			);
+		}
+
 		public virtual void SetAttackInfo()
 		{
 			attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
@@ -1286,17 +1353,17 @@ namespace Pokemod.Content.Pets
 			}else if(isFlying){
 				switch(currentStatus){
 					case (int)ProjStatus.Idle:
-						initialFrame = idleFlyStartEnd[0];
-						finalFrame = idleFlyStartEnd[1];
+						initialFrame = idleFlyStartEnd[0] >= 0 ? idleFlyStartEnd[0]:idleStartEnd[0];
+						finalFrame = idleFlyStartEnd[1] >= 0 ? idleFlyStartEnd[1]:idleStartEnd[1];
 						break;
 					case (int)ProjStatus.Walk:
-						initialFrame = walkFlyStartEnd[0];
-						finalFrame = walkFlyStartEnd[1];
+						initialFrame = walkFlyStartEnd[0] >= 0 ? walkFlyStartEnd[0]:idleStartEnd[0];
+						finalFrame = walkFlyStartEnd[1] >= 0 ? walkFlyStartEnd[1]:idleStartEnd[1];
 						frameSpeed = (int)(animationSpeed*3f/Math.Clamp(Math.Abs(Projectile.velocity.X/2), 2f, 10f));
 						break;
 					case (int)ProjStatus.Attack:
-						initialFrame = attackFlyStartEnd[0];
-						finalFrame = attackFlyStartEnd[1];
+						initialFrame = attackFlyStartEnd[0] >= 0 ? attackFlyStartEnd[0]:attackStartEnd[0];
+						finalFrame = attackFlyStartEnd[1] >= 0 ? attackFlyStartEnd[1]:attackStartEnd[1];
 						break;
 				}
 			}else{
@@ -1415,13 +1482,14 @@ namespace Pokemod.Content.Pets
         {
             if(variant != null){
 				if(variant != ""){
-					Asset<Texture2D> variantTexture = ModContent.Request<Texture2D>(Texture+"_"+variant);
+					if (ModContent.RequestIfExists<Texture2D>(Texture + "_" + variant, out Asset<Texture2D> variantTexture))
+					{
+						Main.EntitySpriteDraw(variantTexture.Value, Projectile.Center - Main.screenPosition,
+							variantTexture.Frame(1, totalFrames, 0, Projectile.frame), lightColor, Projectile.rotation,
+							variantTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 
-                    Main.EntitySpriteDraw(variantTexture.Value, Projectile.Center - Main.screenPosition,
-                        variantTexture.Frame(1, totalFrames, 0, Projectile.frame), lightColor, Projectile.rotation,
-                        variantTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection>=0?SpriteEffects.None:SpriteEffects.FlipHorizontally, 0);
-
-					return false;
+						return false;
+					}
                 }
             }
             
@@ -1430,10 +1498,17 @@ namespace Pokemod.Content.Pets
 
         public override bool PreDrawExtras()
         {
-            if(finalStats[0] != 0){
+			if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0)
+			{
+				Asset<Texture2D> balloonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/AirBalloon_Texture");
+
+				Main.EntitySpriteDraw(balloonTexture.Value, Entity.Top + new Vector2(0, 10) - Main.screenPosition, balloonTexture.Value.Bounds, Color.White, 0, new Vector2(balloonTexture.Width() * 0.5f, balloonTexture.Height()), 1, SpriteEffects.None, 0);
+			}
+            if (finalStats[0] != 0)
+			{
 				Asset<Texture2D> barTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/PokemonHPBar");
 
-				float quotient = (float)currentHp/ finalStats[0];// Creating a quotient that represents the difference of your currentResource vs your maximumResource, resulting in a float of 0-1f.
+				float quotient = (float)currentHp / finalStats[0];// Creating a quotient that represents the difference of your currentResource vs your maximumResource, resulting in a float of 0-1f.
 				quotient = Utils.Clamp(quotient, 0f, 1f); // Clamping it to 0-1f so it doesn't go over that.
 
 				if (currentHp < finalStats[0])
@@ -1449,7 +1524,7 @@ namespace Pokemod.Content.Pets
 						Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Entity.Top + new Vector2(left + i, -20) - Main.screenPosition, new Rectangle(0, 0, 1, 8), Color.Lerp(new Color(50, 255, 50), new Color(50, 255, 50), percent), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
 
 					}
-					Main.EntitySpriteDraw(barTexture.Value, Entity.Top + new Vector2(0,-20) - Main.screenPosition, barTexture.Value.Bounds, Color.White, 0, barTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
+					Main.EntitySpriteDraw(barTexture.Value, Entity.Top + new Vector2(0, -20) - Main.screenPosition, barTexture.Value.Bounds, Color.White, 0, barTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
 				}
 			}
             return true;

@@ -33,6 +33,9 @@ namespace Pokemod.Content.Pets.CharizardPetMegaY
 		public override float moveDistance1 => 800f;
 		public override float moveDistance2 => 500f;
 
+		public override float moveSpeed1 => 8;
+        public override float moveSpeed2 => 12;
+
         public override bool isMega => true;
 		
 		public override string[] megaEvolutionBase => ["Charizard"];

@@ -33,6 +33,7 @@ namespace Pokemod.Common.Players
 		public int HasMegaStone;
 		public bool HasShinyCharm;
 		public int HasEverstone;
+		public int HasAirBalloon;
 
 		public float ExpMult = 1f;
 		public int LeftoversTimer;
@@ -224,6 +225,17 @@ namespace Pokemod.Common.Players
 				else
 				{
 					i++;
+				}
+			}
+
+			if (manualControl)
+			{
+				if (currentActivePokemon.Count <= 0) manualControl = false;
+				else
+				{
+					PokemonPetProjectile pokemonProj = GetPokemonProjectile(0);
+
+					if (pokemonProj != null && !pokemonProj.manualControl) manualControl = false;
 				}
 			}
 

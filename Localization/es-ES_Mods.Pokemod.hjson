@@ -452,7 +452,7 @@ Items: {
 	}
 
 	PokeballItem: {
-		Tooltip: ""
+		Tooltip: Un dispositivo para atrapar pokemon salvajes
 		DisplayName: Poke Ball
 	}
 
@@ -511,13 +511,13 @@ Items: {
 	}
 
 	VenusaurMegaStoneItem: {
-		DisplayName: Venusaur Mega Stone Item
+		DisplayName: Venusaurita
 		Tooltip: ""
 	}
 
 	GreatballItem: {
 		DisplayName: Super Ball
-		Tooltip: ""
+		Tooltip: Poke Ball que proporciona una mayor tasa de éxito para atrapar pokemon que una Poke Ball estándar
 	}
 
 	ChikoritaPetItem: {
@@ -586,17 +586,17 @@ Items: {
 	}
 
 	BlastoiseMegaStoneItem: {
-		DisplayName: Blastoise Mega Stone Item
+		DisplayName: Blastoisita
 		Tooltip: ""
 	}
 
 	CharizardMegaStoneItemX: {
-		DisplayName: Charizard Mega Stone Item X
+		DisplayName: Charizardita X
 		Tooltip: ""
 	}
 
 	CharizardMegaStoneItemY: {
-		DisplayName: Charizard Mega Stone Item Y
+		DisplayName: Charizardita Y
 		Tooltip: ""
 	}
 
@@ -676,27 +676,27 @@ Items: {
 	}
 
 	UltraballItem: {
-		Tooltip: ""
+		Tooltip: Poke Ball que proporciona una mayor probabilidad de éxito para atrapar pokemon que una Super Ball
 		DisplayName: Ultra Ball
 	}
 
 	MasterballItem: {
-		Tooltip: ""
+		Tooltip: Una Poke Ball que captura cualquier pokemon salvaje sin fallar
 		DisplayName: Master Ball
 	}
 
 	FeatherballItem: {
-		Tooltip: ""
+		Tooltip: Una Poke Ball que no se ve afectada por la gravedad
 		DisplayName: Pluma Ball
 	}
 
 	DuskballItem: {
-		Tooltip: ""
+		Tooltip: Una Poke Ball que triplica su efectividad al atrapar pokemon de noche o en lugares oscuros, como cuevas
 		DisplayName: Ocaso Ball
 	}
 
 	BeastballItem: {
-		Tooltip: ""
+		Tooltip: Una Poke Ball especial diseñada para atrapar ultraentes. Tiene baja probabilidad de éxito al atrapar otros
 		DisplayName: Ente Ball
 	}
 
@@ -717,62 +717,74 @@ Items: {
 
 	WingballItem: {
 		DisplayName: Ala Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball que no se ve afectada por la gravedad
 	}
 
 	CitrineballItem: {
 		DisplayName: Citrine Ball
-		Tooltip: ""
+		Tooltip: Un dispositivo para atrapar pokemon salvajes
 	}
 
 	JetballItem: {
 		DisplayName: Jet Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball que no se ve afectada por la gravedad
 	}
 
 	PeridotballItem: {
 		DisplayName: Peridot Ball
-		Tooltip: ""
+		Tooltip: Un dispositivo para atrapar pokemon salvajes
 	}
 
 	VioletballItem: {
 		DisplayName: Violet Ball
-		Tooltip: ""
+		Tooltip: Un dispositivo para atrapar pokemon salvajes
 	}
 
 	AzureballItem: {
 		DisplayName: Azure Ball
-		Tooltip: ""
+		Tooltip: Un dispositivo para atrapar pokemon salvajes
 	}
 
 	ThunderStoneItem: {
 		DisplayName: Piedra trueno
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			Una piedra peculiar que puede hacer evolucionar a ciertas especies de pokemon. Tiene un patrón distintivo de rayos
+			'''
 	}
 
 	HeavyballItem: {
 		DisplayName: Peso Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball más pesada pero más efectiva que una Poke Ball normal
 	}
 
 	FireStoneItem: {
 		DisplayName: Piedra fuego
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			Una piedra peculiar que puede hacer evolucionar a ciertas especies de pokemon. Tiene un corazón de color naranja intenso
+			'''
 	}
 
 	WaterStoneItem: {
 		DisplayName: Piedra agua
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			Una piedra peculiar que puede hacer evolucionar a ciertas especies de pokemon. Es el azul claro de una piscina profunda
+			'''
 	}
 
 	GigatonballItem: {
 		DisplayName: Quintal Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball más pesada pero más efectiva que una Poke Ball normal
 	}
 
 	LeadenballItem: {
 		DisplayName: Kilo Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball más pesada pero más efectiva que una Poke Ball normal
 	}
 
 	StrangeballItem: {
@@ -782,11 +794,11 @@ Items: {
 
 	CherishballItem: {
 		DisplayName: Gloria Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball bastante rara hecha para conmemorar una ocasión especial de algún tipo
 	}
 
 	PremierballItem: {
-		Tooltip: ""
+		Tooltip: Una Poke Ball bastante rara hecha para conmemorar una ocasión especial de algún tipo
 		DisplayName: Honor Ball
 	}
 
@@ -953,12 +965,16 @@ Items: {
 
 	Everstone: {
 		DisplayName: Everstone
-		Tooltip: Cuando está equipado cualquier Pokémon seleccionado como favorito o equipado como mascota no puede evolucionar por nivel
+		Tooltip: Cuando está equipado cualquier Pokémon seleccionado como favorito no puede evolucionar por nivel
 	}
 
 	LeafStoneItem: {
-		// DisplayName: Leaf Stone
-		// Tooltip: ""
+		DisplayName: Piedra Hoja
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			Una piedra peculiar que puede hacer evolucionar a ciertas especies de pokemon. Tiene un inconfundible patrón de hojas
+			'''
 	}
 
 	ThunderStoneHelmet: {
@@ -978,38 +994,42 @@ Items: {
 	}
 
 	AssaultVestItem: {
-		// DisplayName: Assault Vest
-		// Tooltip: ""
+		DisplayName: Chaleco Asalto
+		Tooltip: ""
 	}
 
 	GengarMegaStoneItem: {
-		// DisplayName: Gengar Mega Stone
-		// Tooltip: ""
+		DisplayName: Gengarita
+		Tooltip: ""
 	}
 
 	ExpertBeltItem: {
-		// DisplayName: Expert Belt
-		// Tooltip: ""
+		DisplayName: Cinta Experto
+		Tooltip: ""
 	}
 
 	KingsRockItem: {
-		// DisplayName: Kings Rock
-		// Tooltip: ""
+		DisplayName: Roca del Rey
+		Tooltip: ""
 	}
 
 	MoonStoneItem: {
-		// DisplayName: Moon Stone
-		// Tooltip: ""
+		DisplayName: Piedra Lunar
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			Una piedra peculiar que puede hacer evolucionar a ciertas especies de pokemon. Es oscura como el cielo nocturno
+			'''
 	}
 
 	FastballItem: {
 		DisplayName: Rapid Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball que cuadruplica su efectividad al atrapar a un pokemon rápido
 	}
 
 	FriendballItem: {
 		DisplayName: Amigo Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball que hace que los pokemon capturados sean más amigables
 	}
 
 	SafariballItem: {
@@ -1019,37 +1039,37 @@ Items: {
 
 	LevelballItem: {
 		DisplayName: Nivel Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball para atrapar pokemon de un nivel inferior al tuyo
 	}
 
 	MoonballItem: {
 		DisplayName: Luna Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball que cuadruplica su efectividad al atrapar a un pokemon que evoluciona al usar una Piedra Lunar
 	}
 
 	NestballItem: {
 		DisplayName: Nido Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball un tanto diferente que funciona especialmente bien con pokemon más débiles
 	}
 
 	ShimmerballItem: {
 		DisplayName: Fulgor Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball que puede atravesar paredes
 	}
 
 	GalaxyballItem: {
 		DisplayName: Galaxia Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball que puede atravesar paredes y no se ve afectada por la gravedad
 	}
 
 	HealballItem: {
 		DisplayName: Sana Ball
-		Tooltip: ""
+		Tooltip: Una Poke Ball que restaura los HP de un pokemon capturado con ella
 	}
 
 	GyaradosMegaStoneItem: {
-		// DisplayName: Gyarados Mega Stone Item
-		// Tooltip: ""
+		DisplayName: Gyaradosita
+		Tooltip: ""
 	}
 
 	MaxPotion: {
@@ -1098,7 +1118,11 @@ Items: {
 
 	LinkingCordItem: {
 		DisplayName: Cordón unión
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			Una cuerda que emana una energía misteriosa que te hace sentir una extraña conexión. Es adorada por ciertos pokemon
+			'''
 	}
 
 	RedApricornTileItem: {
@@ -1117,23 +1141,23 @@ Items: {
 	}
 
 	DarkballItem: {
-		// DisplayName: Darkball Item
-		// Tooltip: ""
+		DisplayName: Dark Ball
+		Tooltip: ""
 	}
 
 	AirBalloon: {
-		// DisplayName: Air Balloon
-		// Tooltip: ""
+		DisplayName: Globo Helio
+		Tooltip: Este globo hace que tus pokemon floten en el aire
 	}
 
 	PokeFlute: {
-		// DisplayName: Poke Flute
-		// Tooltip: ""
+		DisplayName: Pokeflauta
+		Tooltip: Una flauta que puede tocar con un tono tan hermoso que incluso los pokemon dormidos se despiertan
 	}
 
 	SynchroMachine: {
-		// DisplayName: Synchro Machine
-		// Tooltip: ""
+		DisplayName: Sincromisor
+		Tooltip: Un dispositivo que sincroniza tu mente y sentimientos con los de tus pokemon para que puedan trabajar como uno solo
 	}
 }
 
@@ -3163,6 +3187,7 @@ PokemonInfo: {
 	LevelUp: "{0} subió al nivel {1}"
 	FaintedMsg: ¡Tu pokemon se debilitó!
 	ItemUse: Para usar el objeto haz clic sobre tu pokemon o haz clic derecho en su pokeball
+	ItemActiveUse: Para usar el objeto haz clic sobre tu pokemon activo
 	GloveTooltip: "[c/ffd51c:Modo actual: {0}]"
 	GloveTooltipLeft: Clic izquierdo para que tu pokemon esté en modo: {0}
 	GloveTooltipRight: Clic derecho para que tu pokemon esté en modo: {0}

@@ -143,8 +143,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			Projectile.Center = positionAux+positionAjust;
 
-			if(!foundTarget) Projectile.Kill();
-
 			if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
 			}
@@ -155,10 +153,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             if (++Projectile.frameCounter >= 5)
             {
                 Projectile.frameCounter = 0;
-                if (++Projectile.frame >=  Main.projFrames[Projectile.type])
-                {
-                    Projectile.frame = 0;
+				if (++Projectile.frame >= Main.projFrames[Projectile.type])
+				{
+					Projectile.frame = 0;
                 }
+				
 
 				if(Projectile.Opacity != 0){
 					if(Projectile.frame < 1 || Projectile.frame >= 7){
@@ -171,6 +170,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}
 
 				if(Projectile.frame == 3){
+					if(!foundTarget && attackMode != (int)PokemonPlayer.AttackMode.Directed_Attack) Projectile.Kill();
 					if(Projectile.Opacity == 0){
 						Projectile.Opacity = 1f;
 					}
@@ -295,8 +295,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			positionAjust = new Vector2(56,-18*projDirection).RotatedBy(positionRotation);
 
 			Projectile.Center = positionAux+positionAjust;
-
-			if(!foundTarget) Projectile.Kill();
 			
 			if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
@@ -308,9 +306,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             if (++Projectile.frameCounter >= 5)
             {
                 Projectile.frameCounter = 0;
-                if (++Projectile.frame >=  Main.projFrames[Projectile.type])
-                {
-                    Projectile.frame = 0;
+				if (++Projectile.frame >= Main.projFrames[Projectile.type])
+				{
+					Projectile.frame = 0;
+					if(!foundTarget && attackMode != (int)PokemonPlayer.AttackMode.Directed_Attack) Projectile.Kill();
                 }
 
 				if(Projectile.Opacity != 0){

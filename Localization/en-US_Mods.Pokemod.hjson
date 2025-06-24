@@ -452,7 +452,7 @@ Items: {
 	}
 
 	PokeballItem: {
-		Tooltip: ""
+		Tooltip: A device for catching wild pokemon
 		DisplayName: Poke Ball
 	}
 
@@ -511,13 +511,13 @@ Items: {
 	}
 
 	VenusaurMegaStoneItem: {
-		DisplayName: Venusaur Mega Stone Item
+		DisplayName: Venusaurite
 		Tooltip: ""
 	}
 
 	GreatballItem: {
 		DisplayName: Great Ball
-		Tooltip: ""
+		Tooltip: Poke Ball that provides a higher success rate for catching pokemon than a standard Poke Ball
 	}
 
 	ChikoritaPetItem: {
@@ -536,7 +536,7 @@ Items: {
 	}
 
 	VSSeekerItem: {
-		DisplayName: V S Seeker Item
+		DisplayName: VS Seeker Item
 		Tooltip: ""
 	}
 
@@ -586,17 +586,17 @@ Items: {
 	}
 
 	BlastoiseMegaStoneItem: {
-		DisplayName: Blastoise Mega Stone Item
+		DisplayName: Blastoisinite
 		Tooltip: ""
 	}
 
 	CharizardMegaStoneItemX: {
-		DisplayName: Charizard Mega Stone Item X
+		DisplayName: Charizardite X
 		Tooltip: ""
 	}
 
 	CharizardMegaStoneItemY: {
-		DisplayName: Charizard Mega Stone Item Y
+		DisplayName: Charizardite Y
 		Tooltip: ""
 	}
 
@@ -676,27 +676,27 @@ Items: {
 	}
 
 	UltraballItem: {
-		Tooltip: ""
+		Tooltip: Poke Ball that provides a higher success rate for catching pokemon than a Great Ball
 		DisplayName: Ultra Ball
 	}
 
 	MasterballItem: {
-		Tooltip: ""
+		Tooltip: A Ball that captures any wild pokemon without fail
 		DisplayName: Master Ball
 	}
 
 	FeatherballItem: {
-		Tooltip: ""
+		Tooltip: A Poke Ball that is not affected by gravity
 		DisplayName: Feather Ball
 	}
 
 	DuskballItem: {
-		Tooltip: ""
+		Tooltip: A Ball that triples its effectiveness when catching pokemon at night or in dark places, such as caves.
 		DisplayName: Dusk Ball
 	}
 
 	BeastballItem: {
-		Tooltip: ""
+		Tooltip: A special Poke Ball designed to catch Ultra Beasts. It has a low success rate for catching others
 		DisplayName: Beast Ball
 	}
 
@@ -717,62 +717,74 @@ Items: {
 
 	WingballItem: {
 		DisplayName: Wing Ball
-		Tooltip: ""
+		Tooltip: A Poke Ball that is not affected by gravity
 	}
 
 	CitrineballItem: {
 		DisplayName: Citrine Ball
-		Tooltip: ""
+		Tooltip: A device for catching wild pokemon
 	}
 
 	JetballItem: {
 		DisplayName: Jet Ball
-		Tooltip: ""
+		Tooltip: A Poke Ball that is not affected by gravity
 	}
 
 	PeridotballItem: {
 		DisplayName: Peridot Ball
-		Tooltip: ""
+		Tooltip: A device for catching wild pokemon
 	}
 
 	VioletballItem: {
 		DisplayName: Violet Ball
-		Tooltip: ""
+		Tooltip: A device for catching wild pokemon
 	}
 
 	AzureballItem: {
 		DisplayName: Azure Ball
-		Tooltip: ""
+		Tooltip: A device for catching wild pokemon
 	}
 
 	ThunderStoneItem: {
 		DisplayName: Thunder Stone
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			A peculiar stone that can make certain species of pokemon evolve. It has a distinct thunderbolt pattern
+			'''
 	}
 
 	HeavyballItem: {
 		DisplayName: Heavy Ball
-		Tooltip: ""
+		Tooltip: A heavier but more effective Ball than a regular Poke Ball
 	}
 
 	FireStoneItem: {
 		DisplayName: Fire Stone
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			A peculiar stone that can make certain species of pokemon evolve. It has a fiery orange heart
+			'''
 	}
 
 	WaterStoneItem: {
 		DisplayName: Water Stone
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			A peculiar stone that can make certain species of pokemon evolve. It is the clear blue of a deep pool
+			'''
 	}
 
 	GigatonballItem: {
 		DisplayName: Gigaton Ball
-		Tooltip: ""
+		Tooltip: A heavier but more effective Ball than a regular Poke Ball
 	}
 
 	LeadenballItem: {
 		DisplayName: Leaden Ball
-		Tooltip: ""
+		Tooltip: A heavier but more effective Ball than a regular Poke Ball
 	}
 
 	StrangeballItem: {
@@ -782,11 +794,11 @@ Items: {
 
 	CherishballItem: {
 		DisplayName: Cherish Ball
-		Tooltip: ""
+		Tooltip: A quite rare Poke Ball made to commemorate a special occasion of some sort
 	}
 
 	PremierballItem: {
-		Tooltip: ""
+		Tooltip: A quite rare Poke Ball made to commemorate a special occasion of some sort
 		DisplayName: Premier Ball
 	}
 
@@ -953,12 +965,16 @@ Items: {
 
 	Everstone: {
 		DisplayName: Everstone
-		Tooltip: When equipped, any pokemon selected as favorite or equipped as a pet is prevented from evolving by level
+		Tooltip: When equipped, any pokemon selected as favorite is prevented from evolving by level
 	}
 
 	LeafStoneItem: {
 		DisplayName: Leaf Stone
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			A peculiar stone that can make certain species of pokemon evolve. It has an unmistakable leaf pattern
+			'''
 	}
 
 	ThunderStoneHelmet: {
@@ -983,7 +999,7 @@ Items: {
 	}
 
 	GengarMegaStoneItem: {
-		DisplayName: Gengar Mega Stone
+		DisplayName: Gengarite
 		Tooltip: ""
 	}
 
@@ -999,17 +1015,21 @@ Items: {
 
 	MoonStoneItem: {
 		DisplayName: Moon Stone
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			A peculiar stone that can make certain species of pokemon evolve. It is dark like the night sky
+			'''
 	}
 
 	FastballItem: {
 		DisplayName: Fast Ball
-		Tooltip: ""
+		Tooltip: A Poke Ball that quadruples its effectiveness when catching a fast pokemon
 	}
 
 	FriendballItem: {
 		DisplayName: Friend Ball
-		Tooltip: ""
+		Tooltip: A Poke Ball that makes caught pokemon more friendly
 	}
 
 	SafariballItem: {
@@ -1019,36 +1039,36 @@ Items: {
 
 	LevelballItem: {
 		DisplayName: Level Ball
-		Tooltip: ""
+		Tooltip: A Poke Ball for catching pokemon that are a lower level than your own
 	}
 
 	MoonballItem: {
 		DisplayName: Moon Ball
-		Tooltip: ""
+		Tooltip: A Poke Ball that quadruples its effectiveness when catching a pokemon that evolves by using a Moon Stone
 	}
 
 	NestballItem: {
 		DisplayName: Nest Ball
-		Tooltip: ""
+		Tooltip: A somewhat different Ball that works especially well on weaker pokemon
 	}
 
 	ShimmerballItem: {
 		DisplayName: Shimmer Ball
-		Tooltip: ""
+		Tooltip: A Poke Ball that can go through walls
 	}
 
 	GalaxyballItem: {
 		DisplayName: Galaxy Ball
-		Tooltip: ""
+		Tooltip: A Poke Ball that can go through walls and is not affected by gravity
 	}
 
 	HealballItem: {
 		DisplayName: Heal Ball
-		Tooltip: ""
+		Tooltip: A remedial Poke Ball that restores the HP of a pokemon caught with it
 	}
 
 	GyaradosMegaStoneItem: {
-		DisplayName: Gyarados Mega Stone Item
+		DisplayName: Gyaradosite
 		Tooltip: ""
 	}
 
@@ -1098,7 +1118,11 @@ Items: {
 
 	LinkingCordItem: {
 		DisplayName: Linking Cord
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			A string exuding a mysterious energy that makes you feel a strange sense of connection. It’s loved by certain pokemon
+			'''
 	}
 
 	RedApricornTileItem: {
@@ -1117,23 +1141,23 @@ Items: {
 	}
 
 	DarkballItem: {
-		DisplayName: Darkball Item
+		DisplayName: Dark Ball
 		Tooltip: ""
 	}
 
 	AirBalloon: {
 		DisplayName: Air Balloon
-		Tooltip: ""
+		Tooltip: This balloon makes your pokemon float in the air
 	}
 
 	PokeFlute: {
 		DisplayName: Poke Flute
-		Tooltip: ""
+		Tooltip: A flute that can play with such a beautiful tone that even sleeping pokemon find themselves woken up
 	}
 
 	SynchroMachine: {
 		DisplayName: Synchro Machine
-		Tooltip: ""
+		Tooltip: A device that synchronizes your mind and feelings with your pokemon's so that you can work as one
 	}
 }
 
@@ -3163,6 +3187,7 @@ PokemonInfo: {
 	LevelUp: "{0} grew to lvl {1}"
 	FaintedMsg: Your pokemon fainted!
 	ItemUse: To use it, click on your pokemon or right click on the corresponding pokeball
+	ItemActiveUse: To use it, click on your active pokemon
 	GloveTooltip: "[c/ffd51c:Actual mode: {0}]"
 	GloveTooltipLeft: Left click to make your pokemon perform: {0}
 	GloveTooltipRight: Right click to make your pokemon perform: {0}

@@ -15,7 +15,7 @@ namespace Pokemod.Content.Items.Accessories
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual) {
-			player.GetModPlayer<PokemonPlayer>().LeftoversEffect();
+			player.GetModPlayer<PokemonPlayer>().HasAirBalloon = 3;
 		}
 	}
 }
