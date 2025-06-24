@@ -13,7 +13,7 @@ namespace Pokemod.Content.Pets.GyaradosPet
 		public override int hitboxHeight => 100;
 
 		public override int totalFrames => 9;
-		public override int animationSpeed => 6;
+		public override int animationSpeed => 8;
 		public override int moveStyle => 1;
 
 		public override int[] idleStartEnd => [0,3];

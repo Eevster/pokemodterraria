@@ -13,7 +13,7 @@ namespace Pokemod.Content.Pets.GeodudePet
 		public override int hitboxHeight => 38;
 
 		public override int totalFrames => 8;
-		public override int animationSpeed => 5;
+		public override int animationSpeed => 8;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [0,3];
 		public override int[] jumpStartEnd => [3,3];
