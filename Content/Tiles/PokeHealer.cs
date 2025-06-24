@@ -176,4 +176,67 @@ namespace Pokemod.Content.Tiles
                 .Register();
         }
     }
+    public class GreenHealerTile : PokeHealerTile
+    {
+
+    }
+    public class GreenHealer : ModItem
+    {
+        public override void SetDefaults()
+        {
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.GreenHealerTile>());
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.LifeCrystal, 3)
+                .AddIngredient(ItemID.ManaCrystal, 5)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 10)
+                .AddIngredient(ItemID.GreenDye, 1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+    }
+    public class OrangeHealerTile : PokeHealerTile
+    {
+
+    }
+    public class OrangeHealer : ModItem
+    {
+        public override void SetDefaults()
+        {
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.OrangeHealerTile>());
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.LifeCrystal, 3)
+                .AddIngredient(ItemID.ManaCrystal, 5)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 10)
+                .AddIngredient(ItemID.OrangeDye, 1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+    }
+    public class PinkHealerTile : PokeHealerTile
+    {
+
+    }
+    public class PinkHealer : ModItem
+    {
+        public override void SetDefaults()
+        {
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.PinkHealerTile>());
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.LifeCrystal, 3)
+                .AddIngredient(ItemID.ManaCrystal, 5)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 10)
+                .AddIngredient(ItemID.PinkDye, 1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+    }
 }

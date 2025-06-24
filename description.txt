@@ -24,6 +24,7 @@ Changelog:
 -Players now start with 10 pokeballs
 -Shinies now emit sparkles
 -Added new accessories which boost the Trainer Class
+-Added new Pokeballs
 
 Legal:
 This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 

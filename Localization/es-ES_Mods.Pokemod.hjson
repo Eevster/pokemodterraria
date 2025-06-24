@@ -1159,6 +1159,21 @@ Items: {
 		DisplayName: Sincromisor
 		Tooltip: Un dispositivo que sincroniza tu mente y sentimientos con los de tus pokemon para que puedan trabajar como uno solo
 	}
+
+	GreenHealer: {
+		// DisplayName: Green Healer
+		// Tooltip: ""
+	}
+
+	OrangeHealer: {
+		// DisplayName: Orange Healer
+		// Tooltip: ""
+	}
+
+	PinkHealer: {
+		// DisplayName: Pink Healer
+		// Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -3176,6 +3191,9 @@ Tiles: {
 	}
 
 	// BlueHealerTile.MapEntry: Blue Healer Tile
+	// GreenHealerTile.MapEntry: Green Healer Tile
+	// OrangeHealerTile.MapEntry: Orange Healer Tile
+	// PinkHealerTile.MapEntry: Pink Healer Tile
 }
 
 WorldGen.PokeballItemTilePassMessage: Mods.Pokemod.WorldGen.PokeballItemTilePassMessage

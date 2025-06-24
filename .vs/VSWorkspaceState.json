@@ -1,9 +1,15 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Assets",
+    "\\Assets\\Textures",
+    "\\Assets\\Textures\\Pokesprites",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
+    "\\Content\\Items",
+    "\\Content\\Items\\Pokeballs",
     "\\Content\\NPCs"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonData.cs",
+  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets\\CharizardMegaYPetProjectileShiny.png",
   "PreviewInSolutionExplorer": false
 }
