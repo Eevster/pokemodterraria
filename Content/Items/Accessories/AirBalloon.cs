@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.Accessories
 {
-    public class Leftovers : ModItem
+    public class AirBalloon : ModItem
 	{
 		public override void SetDefaults() {
 			Item.width = 24;

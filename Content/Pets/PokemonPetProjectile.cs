@@ -46,6 +46,8 @@ namespace Pokemod.Content.Pets
 		public string variant = "";
         public bool showHp;
 
+		public bool manualControl;
+
 		public virtual int nAttackProjs => 16;
 		public Projectile[] attackProjs;
 		public virtual float distanceToFly => 100f;
@@ -396,9 +398,18 @@ namespace Pokemod.Content.Pets
             GetAllProjsExp();
             TakeDamage();
 
-			GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
-			SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
-			Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
+			if (manualControl && !player.GetModPlayer<PokemonPlayer>().manualControl) manualControl = false;
+
+			if (!manualControl)
+			{
+				GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
+				SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
+				Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
+			}
+			else
+			{
+				ManualMovement();
+			}
 			GetAllProjsExp();
 			EvolutionProcess();
 			MegaEvolutionProcess();
@@ -604,7 +615,8 @@ namespace Pokemod.Content.Pets
 			Projectile.friendly = foundTarget;
 		}
 
-		public virtual void Movement(bool foundTarget, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition) {
+		public virtual void Movement(bool foundTarget, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition)
+		{
 			// Default movement parameters (here for attacking)
 			float speed = moveSpeed1;
 			float inertia = 20f;
@@ -614,105 +626,149 @@ namespace Pokemod.Content.Pets
 
 			canFall = false;
 
-			if(moveStyle == (int)MovementStyle.Fly){
+			if (moveStyle == (int)MovementStyle.Fly)
+			{
 				isFlying = true;
 			}
 
-			if(canSwim){
+			if (canSwim)
+			{
 				isSwimming = Projectile.wet && !Projectile.lavaWet && !Projectile.honeyWet && !Projectile.shimmerWet;
-			}else{
+			}
+			else
+			{
 				isSwimming = false;
 			}
 
-			if(isSwimming) speedMultiplier = 1.5f;
+			if (isSwimming) speedMultiplier = 1.5f;
 
-			if (foundTarget) {
-				if((currentStatus != (int)ProjStatus.Attack && !canMoveWhileAttack) || canMoveWhileAttack){
-					if(distanceFromTarget > moveDistance1){
+			if (foundTarget)
+			{
+				if ((currentStatus != (int)ProjStatus.Attack && !canMoveWhileAttack) || canMoveWhileAttack)
+				{
+					if (distanceFromTarget > moveDistance1)
+					{
 						Vector2 direction = targetCenter - Projectile.Center;
 						direction.Normalize();
-						direction *= speedMultiplier*speed;
+						direction *= speedMultiplier * speed;
 
-						if(isFlying || isSwimming){
+						if (isFlying || isSwimming)
+						{
 							Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
-						}else{
+						}
+						else
+						{
 							Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
 
-							if((targetCenter - Projectile.Center).Y < 0 && -(targetCenter - Projectile.Center).Y > Math.Abs((targetCenter - Projectile.Center).X)){
-								if(Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+							if ((targetCenter - Projectile.Center).Y < 0 && -(targetCenter - Projectile.Center).Y > Math.Abs((targetCenter - Projectile.Center).X))
+							{
+								if (Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
+								{
 									currentStatus = (int)ProjStatus.Jump;
-									Projectile.velocity.Y -= (int)Math.Sqrt(2*0.3f*Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y),0,160));
+									Projectile.velocity.Y -= (int)Math.Sqrt(2 * 0.3f * Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y), 0, 160));
 								}
 							}
 						}
-					}else{
-						if(distanceFromTarget > moveDistance2){
+					}
+					else
+					{
+						if (distanceFromTarget > moveDistance2)
+						{
 							Vector2 direction = targetCenter - Projectile.Center;
 							direction.Normalize();
-							direction *= speedMultiplier*speed/2;
+							direction *= speedMultiplier * speed / 2;
 
-							if(isFlying || isSwimming){
+							if (isFlying || isSwimming)
+							{
 								Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
-							}else{
+							}
+							else
+							{
 								Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
 							}
-						}else{
+						}
+						else
+						{
 							Projectile.velocity.X *= 0.95f;
-							if(distanceFromTarget < 100f && moveStyle == (int)MovementStyle.Hybrid){
+							if (distanceFromTarget < 100f && moveStyle == (int)MovementStyle.Hybrid)
+							{
 								isFlying = false;
 							}
 						}
 					}
-				}else{
+				}
+				else
+				{
 					Projectile.velocity.X *= 0.9f;
 				}
 
-				if(distanceFromTarget < distanceToAttack){
-					if(moveStyle == (int)MovementStyle.Hybrid){
-						if(distanceFromTarget > distanceToFly){
+				if (distanceFromTarget < distanceToAttack)
+				{
+					if (moveStyle == (int)MovementStyle.Hybrid)
+					{
+						if (distanceFromTarget > distanceToFly)
+						{
 							isFlying = true;
 						}
 					}
-					if(timer <= 0){
-						if(canAttack){
+					if (timer <= 0)
+					{
+						if (canAttack)
+						{
 							Attack(distanceFromTarget, targetCenter);
 						}
 					}
-				}else{
-					if(moveStyle == (int)MovementStyle.Hybrid){
+				}
+				else
+				{
+					if (moveStyle == (int)MovementStyle.Hybrid)
+					{
 						isFlying = true;
 					}
 				}
 
-				if(!isFlying && !isSwimming && currentStatus != (int)ProjStatus.Attack){
-					if(targetCenter.Y > Projectile.Center.Y + 16){
+				if (!isFlying && !isSwimming && currentStatus != (int)ProjStatus.Attack)
+				{
+					if (targetCenter.Y > Projectile.Center.Y + 16)
+					{
 						canFall = true;
 					}
 				}
 
-				if(canAttackOutTimer){
+				if (canAttackOutTimer)
+				{
 					AttackOutTimer(distanceFromTarget, targetCenter);
 				}
 
-				if(currentStatus == (int)ProjStatus.Attack){
-					Projectile.direction = Math.Sign(targetCenter.X-Projectile.Center.X);
+				if (currentStatus == (int)ProjStatus.Attack)
+				{
+					Projectile.direction = Math.Sign(targetCenter.X - Projectile.Center.X);
 				}
 
-				if(Projectile.owner == Main.myPlayer){
-					for(int i = 0; i < nAttackProjs; i++){
-						if(attackProjs[i] != null){
-							if(attackProjs[i].active){
+				if (Projectile.owner == Main.myPlayer)
+				{
+					for (int i = 0; i < nAttackProjs; i++)
+					{
+						if (attackProjs[i] != null)
+						{
+							if (attackProjs[i].active)
+							{
 								UpdateAttackProjs(i, ref maxFallSpeed);
-							}else{
+							}
+							else
+							{
 								attackProjs[i] = null;
 							}
 						}
 					}
 				}
 
-				if(timer <= 0){
-					if(!canAttack){
-						if(currentStatus == (int)ProjStatus.Attack){
+				if (timer <= 0)
+				{
+					if (!canAttack)
+					{
+						if (currentStatus == (int)ProjStatus.Attack)
+						{
 							currentStatus = (int)ProjStatus.Idle;
 						}
 						canAttack = true;
@@ -720,145 +776,404 @@ namespace Pokemod.Content.Pets
 					}
 				}
 			}
-			else {
-				if(timer <= 0){
-					if(!canAttack){
-						if(currentStatus == (int)ProjStatus.Attack){
+			else
+			{
+				if (timer <= 0)
+				{
+					if (!canAttack)
+					{
+						if (currentStatus == (int)ProjStatus.Attack)
+						{
 							currentStatus = (int)ProjStatus.Idle;
 						}
 						canAttack = true;
 						timer = attackCooldown;
 					}
 				}
-				if(Projectile.owner == Main.myPlayer){
-					for(int i = 0; i < nAttackProjs; i++){
-						if(attackProjs[i] != null){
-							if(attackProjs[i].active){
+				if (Projectile.owner == Main.myPlayer)
+				{
+					for (int i = 0; i < nAttackProjs; i++)
+					{
+						if (attackProjs[i] != null)
+						{
+							if (attackProjs[i].active)
+							{
 								UpdateNoAttackProjs(i);
-							}else{
+							}
+							else
+							{
 								attackProjs[i] = null;
 							}
 						}
 					}
 				}
-				if(isFlying && distanceToIdlePosition > 1200f && tangible){
+				if (isFlying && distanceToIdlePosition > 1200f && tangible)
+				{
 					Projectile.tileCollide = false;
 				}
 
-				if(!isFlying && !isSwimming && currentStatus != (int)ProjStatus.Attack){
-					if(vectorToIdlePosition.Y > 16){
+				if (!isFlying && !isSwimming && currentStatus != (int)ProjStatus.Attack)
+				{
+					if (vectorToIdlePosition.Y > 16)
+					{
 						canFall = true;
 					}
 				}
 				// Minion doesn't have a target: return to player and idle
-				if (distanceToIdlePosition > 600f) {
+				if (distanceToIdlePosition > 600f)
+				{
 					// Speed up the minion if it's away from the player
-					if(moveStyle == (int)MovementStyle.Hybrid){
+					if (moveStyle == (int)MovementStyle.Hybrid)
+					{
 						isFlying = true;
 					}
 					speed = moveSpeed2;
 				}
-				else {
+				else
+				{
 					// Slow down the minion if closer to the player
 					speed = moveSpeed1;
 
-					if(moveStyle == (int)MovementStyle.Hybrid){
-						if(distanceToIdlePosition > distanceToFly){
+					if (moveStyle == (int)MovementStyle.Hybrid)
+					{
+						if (distanceToIdlePosition > distanceToFly)
+						{
 							isFlying = true;
 						}
 					}
 
-					if(distanceToIdlePosition < 60f && tangible){
+					if (distanceToIdlePosition < 60f && tangible)
+					{
 						Projectile.tileCollide = true;
-						if(moveStyle == (int)MovementStyle.Hybrid){
+						if (moveStyle == (int)MovementStyle.Hybrid)
+						{
 							isFlying = false;
 						}
 					}
 				}
 
-				if (distanceToIdlePosition > 80f) {
+				if (distanceToIdlePosition > 80f)
+				{
 					// The immediate range around the player (when it passively floats about)
 
 					// This is a simple movement formula using the two parameters and its desired direction to create a "homing" movement
 					vectorToIdlePosition.Normalize();
-					vectorToIdlePosition *= speedMultiplier*speed;
-					if(isFlying || isSwimming){
+					vectorToIdlePosition *= speedMultiplier * speed;
+					if (isFlying || isSwimming)
+					{
 						Projectile.velocity = (Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia;
-					}else{
+					}
+					else
+					{
 						Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia).X;
 					}
-				}else{
-					if(Math.Abs(Projectile.velocity.X)>0.2f){
+				}
+				else
+				{
+					if (Math.Abs(Projectile.velocity.X) > 0.2f)
+					{
 						Projectile.velocity.X *= 0.9f;
-					}else{
+					}
+					else
+					{
 						Projectile.velocity.X = 0;
 					}
 				}
 			}
 
-			if(isFlying || isSwimming){
+			if (isFlying || isSwimming)
+			{
 				canFall = true;
 
-				if(isSwimming){
-					if(Projectile.velocity.Y > fallLimit && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+				if (isSwimming)
+				{
+					if (Projectile.velocity.Y > fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
+					{
 						Jump();
 					}
 				}
 
-				if(currentStatus == (int)ProjStatus.Jump || currentStatus == (int)ProjStatus.Fall){
+				if (currentStatus == (int)ProjStatus.Jump || currentStatus == (int)ProjStatus.Fall)
+				{
 					currentStatus = (int)ProjStatus.Idle;
 				}
-				if(currentStatus != (int)ProjStatus.Attack){
-					if(Math.Abs(Projectile.velocity.X) < 3){
+				if (currentStatus != (int)ProjStatus.Attack)
+				{
+					if (Math.Abs(Projectile.velocity.X) < 3)
+					{
 						currentStatus = (int)ProjStatus.Idle;
-					}else{
+					}
+					else
+					{
 						currentStatus = (int)ProjStatus.Walk;
 					}
 				}
-			}else{
-				if(moveStyle == (int)MovementStyle.Jump){
-					if(currentStatus != (int)ProjStatus.Jump && currentStatus != (int)ProjStatus.Fall){
-						if(Math.Abs(Projectile.velocity.X) > float.Epsilon && Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+			}
+			else
+			{
+				if (moveStyle == (int)MovementStyle.Jump)
+				{
+					if (currentStatus != (int)ProjStatus.Jump && currentStatus != (int)ProjStatus.Fall)
+					{
+						if (Math.Abs(Projectile.velocity.X) > float.Epsilon && Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
+						{
 							currentStatus = (int)ProjStatus.Jump;
 							Projectile.velocity.Y = -maxJumpHeight;
 						}
 					}
 				}
 
-				if(currentStatus != (int)ProjStatus.Attack){
-					if(currentStatus != (int)ProjStatus.Jump){
-						if(Math.Abs(Projectile.velocity.X) < float.Epsilon){
+				if (currentStatus != (int)ProjStatus.Attack)
+				{
+					if (currentStatus != (int)ProjStatus.Jump)
+					{
+						if (Math.Abs(Projectile.velocity.X) < float.Epsilon)
+						{
 							currentStatus = (int)ProjStatus.Idle;
-						}else{
+						}
+						else
+						{
 							currentStatus = (int)ProjStatus.Walk;
 						}
 					}
 
-					if(Projectile.velocity.Y > fallLimit){
+					if (Projectile.velocity.Y > fallLimit)
+					{
 						currentStatus = (int)ProjStatus.Fall;
 					}
 
-					if(moveStyle != (int)MovementStyle.Jump && Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top-new Vector2(8,16), 16, 16)){
+					if (moveStyle != (int)MovementStyle.Jump && Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
+					{
 						Jump();
 					}
 				}
 
 				Projectile.velocity.Y += fallAccel;
-				if(Projectile.velocity.Y > maxFallSpeed){
+				if (Projectile.velocity.Y > maxFallSpeed)
+				{
 					Projectile.velocity.Y = maxFallSpeed;
 				}
 			}
 
-			if(canRotate){
-				Projectile.rotation += Projectile.spriteDirection*MathHelper.ToRadians(1.5f*Projectile.velocity.Length());
+			if (canRotate)
+			{
+				Projectile.rotation += Projectile.spriteDirection * MathHelper.ToRadians(1.5f * Projectile.velocity.Length());
 			}
 
-			if(timer > 0){
+			if (timer > 0)
+			{
 				timer--;
 			}
 		}
 
-		public virtual void SetAttackInfo(){
+		public virtual void ManualMovement()
+		{
+			// Default movement parameters (here for attacking)
+			float speed = moveSpeed1;
+			float inertia = 20f;
+			float speedMultiplier = 1f;
+
+			float maxFallSpeed = 10f;
+
+			canFall = false;
+
+			if (moveStyle == (int)MovementStyle.Fly)
+			{
+				isFlying = true;
+			}
+
+			if (!isFlying && moveStyle == (int)MovementStyle.Hybrid && Main.player[Projectile.owner].controlUp)
+			{
+				isFlying = true;
+			}
+
+			if (canSwim)
+			{
+				isSwimming = Projectile.wet && !Projectile.lavaWet && !Projectile.honeyWet && !Projectile.shimmerWet;
+			}
+			else
+			{
+				isSwimming = false;
+			}
+
+			if (isSwimming) speedMultiplier = 1.5f;
+
+
+			if (timer <= 0)
+			{
+				if (!canAttack)
+				{
+					if (currentStatus == (int)ProjStatus.Attack)
+					{
+						currentStatus = (int)ProjStatus.Idle;
+					}
+					canAttack = true;
+					timer = attackCooldown;
+				}
+			}
+
+			if (Projectile.owner == Main.myPlayer)
+			{
+				for (int i = 0; i < nAttackProjs; i++)
+				{
+					if (attackProjs[i] != null)
+					{
+						if (attackProjs[i].active)
+						{
+							UpdateNoAttackProjs(i);
+						}
+						else
+						{
+							attackProjs[i] = null;
+						}
+					}
+				}
+			}
+
+			if (Main.player[Projectile.owner].controlDown)
+			{
+				canFall = true;
+			}
+
+			float moveVelocity = speedMultiplier * speed;
+			Vector2 moveDirection = Vector2.Zero;
+
+			if (Main.player[Projectile.owner].controlLeft) moveDirection.X += -1;
+			if (Main.player[Projectile.owner].controlRight) moveDirection.X += 1;
+			if (isFlying || isSwimming)
+			{
+				if (Main.player[Projectile.owner].controlUp) moveDirection.Y += -1;
+				if (Main.player[Projectile.owner].controlDown) moveDirection.Y += 1;
+			}
+
+
+
+			if (moveDirection.Length() != 0)
+			{
+				if (isFlying || isSwimming)
+				{
+					Projectile.velocity = (Projectile.velocity * (inertia - 1) + (moveVelocity * moveDirection)) / inertia;
+				}
+				else
+				{
+					Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + (moveVelocity * moveDirection)) / inertia).X;
+				}
+				/*switch (moveStyle)
+				{
+					case (int)MovementStyle.Ground:
+						break;
+					case (int)MovementStyle.Hybrid:
+						break;
+					case (int)MovementStyle.Fly:
+						break;
+					case (int)MovementStyle.Jump:
+						break;
+					default:
+						break;
+				}*/
+			}
+			else
+			{
+				if (isFlying || isSwimming)
+				{
+					if (Projectile.velocity.Length() > 0.2f)
+					{
+						Projectile.velocity *= 0.9f;
+					}
+					else
+					{
+						Projectile.velocity = Vector2.Zero;
+					}
+				}
+				else
+				{
+					if (Math.Abs(Projectile.velocity.X) > 0.2f)
+					{
+						Projectile.velocity.X *= 0.9f;
+					}
+					else
+					{
+						Projectile.velocity.X = 0;
+					}
+				}
+			}
+
+			if (isFlying || isSwimming)
+			{
+				canFall = true;
+
+				if (currentStatus == (int)ProjStatus.Jump || currentStatus == (int)ProjStatus.Fall)
+				{
+					currentStatus = (int)ProjStatus.Idle;
+				}
+				if (currentStatus != (int)ProjStatus.Attack)
+				{
+					if (Math.Abs(Projectile.velocity.X) < 3)
+					{
+						currentStatus = (int)ProjStatus.Idle;
+					}
+					else
+					{
+						currentStatus = (int)ProjStatus.Walk;
+					}
+				}
+			}
+			else
+			{
+				if (currentStatus != (int)ProjStatus.Attack)
+				{
+					if (currentStatus != (int)ProjStatus.Jump)
+					{
+						if (Math.Abs(Projectile.velocity.X) < float.Epsilon)
+						{
+							currentStatus = (int)ProjStatus.Idle;
+						}
+						else
+						{
+							currentStatus = (int)ProjStatus.Walk;
+						}
+					}
+
+					if (Projectile.velocity.Y > fallLimit)
+					{
+						currentStatus = (int)ProjStatus.Fall;
+					}
+
+					if (currentStatus != (int)ProjStatus.Jump && Math.Abs(Projectile.velocity.Y) < fallLimit && Main.player[Projectile.owner].controlJump)
+					{
+						Projectile.velocity.Y -= maxJumpHeight;
+						currentStatus = (int)ProjStatus.Jump;
+					}
+				}
+
+				if (!Main.player[Projectile.owner].controlJump)
+				{
+					if (currentStatus == (int)ProjStatus.Jump && Projectile.velocity.Y < -0.25f*maxJumpHeight){}
+					{
+						Projectile.velocity.Y += 2 * fallAccel;
+					}
+				}
+
+				Projectile.velocity.Y += fallAccel;
+				if (Projectile.velocity.Y > maxFallSpeed)
+				{
+					Projectile.velocity.Y = maxFallSpeed;
+				}
+			}
+
+			if (canRotate)
+			{
+				Projectile.rotation += Projectile.spriteDirection * MathHelper.ToRadians(1.5f * Projectile.velocity.Length());
+			}
+
+			if (timer > 0)
+			{
+				timer--;
+			}
+		}
+
+		public virtual void SetAttackInfo()
+		{
 			attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
 			attackCooldown = PokemonData.pokemonAttacks[currentAttack].cooldown;
 			distanceToAttack = PokemonData.pokemonAttacks[currentAttack].distanceToAttack;
@@ -1209,6 +1524,10 @@ namespace Pokemod.Content.Pets
 				Projectile.velocity.X = 0;
 			}
 			if (Projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f) {
+				if (manualControl && moveStyle == (int)MovementStyle.Hybrid)
+				{
+					if (Projectile.oldVelocity.Y > 0) isFlying = false;
+				}
 				Projectile.velocity.Y = 0;
 			}
 

@@ -1120,6 +1120,21 @@ Items: {
 		// DisplayName: Darkball Item
 		// Tooltip: ""
 	}
+
+	AirBalloon: {
+		// DisplayName: Air Balloon
+		// Tooltip: ""
+	}
+
+	PokeFlute: {
+		// DisplayName: Poke Flute
+		// Tooltip: ""
+	}
+
+	SynchroMachine: {
+		// DisplayName: Synchro Machine
+		// Tooltip: ""
+	}
 }
 
 Buffs: {

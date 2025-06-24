@@ -25,7 +25,7 @@ using Pokemod.Content.NPCs;
 
 namespace Pokemod.Common.Players
 {
-    public class PokemonPlayer : ModPlayer
+	public class PokemonPlayer : ModPlayer
 	{
 		public bool HasStarter;
 		//Accessories
@@ -40,14 +40,14 @@ namespace Pokemod.Common.Players
 		//Trainer Glove
 		public int attackMode;
 		public enum AttackMode
-        {
+		{
 			Auto_Attack,
-            No_Attack,
-            Directed_Attack
-        }
+			No_Attack,
+			Directed_Attack
+		}
 		public Vector2 attackPosition;
 		private int directedEmptyTimer;
-		private const int directedEmptyMaxTime = 3*60;
+		private const int directedEmptyMaxTime = 3 * 60;
 		public NPC targetNPC;
 		public Player targetPlayer;
 
@@ -55,6 +55,9 @@ namespace Pokemod.Common.Players
 		public int maxPokemon;
 		public const int defaultMaxPokemon = 1;
 		public List<int> currentActivePokemon = new List<int>();
+
+		//Manual Control
+		public bool manualControl;
 
 		//Player data
 		public string TrainerID { get; internal set; }
@@ -67,145 +70,174 @@ namespace Pokemod.Common.Players
 		private static Asset<Texture2D> directedAttackTexture;
 
 		public override void Load()
-        { 
-            targetTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/PokemonTarget");
+		{
+			targetTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/PokemonTarget");
 
 			noAttackTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/CursorNoAttack");
 			autoAttackTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/CursorAutoAttack");
 			directedAttackTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/CursorDirectedAttack");
-        }
+		}
 
-        public override void Unload()
-        { 
-            targetTexture = null;
+		public override void Unload()
+		{
+			targetTexture = null;
 
 			noAttackTexture = null;
 			autoAttackTexture = null;
 			directedAttackTexture = null;
-        }
+		}
 
 		public override void SaveData(TagCompound tag)
-        {
+		{
 			tag["TrainerID"] = TrainerID;
 			tag["HasStarter"] = HasStarter;
-        }
+		}
 
-        public override void LoadData(TagCompound tag)
-        {
+		public override void LoadData(TagCompound tag)
+		{
 			TrainerID = tag.GetString("TrainerID");
 			HasStarter = tag.GetBool("HasStarter");
-        }
+		}
 
-        public override void Initialize()
-        {
+		public override void Initialize()
+		{
 			SetTrainerID();
-            base.Initialize();
-        }
+			base.Initialize();
+		}
 
-		private void SetTrainerID(){
-			if(Player.name == null){
+		private void SetTrainerID()
+		{
+			if (Player.name == null)
+			{
 				return;
-			}else{
-				if(Player.name == "") return;
+			}
+			else
+			{
+				if (Player.name == "") return;
 			}
 
 			string id = Player.name;
-			for(int i = 0; i < 9; i++){
-				id += ""+Main.rand.Next(10);
+			for (int i = 0; i < 9; i++)
+			{
+				id += "" + Main.rand.Next(10);
 			}
 
 			TrainerID = id;
 		}
 
-        public override void SyncPlayer(int toWho, int fromWho, bool newPlayer) {
-            ModPacket packet = Mod.GetPacket();
-            packet.Write((byte)PokemodMessageType.PokemonPlayerSync);
+		public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
+		{
+			ModPacket packet = Mod.GetPacket();
+			packet.Write((byte)PokemodMessageType.PokemonPlayerSync);
 			packet.Write((byte)Player.whoAmI);
-            
-            packet.Write((byte)attackMode);
+
+			packet.Write((byte)attackMode);
 			packet.WriteVector2(attackPosition);
-            
+
 			packet.Send(toWho, fromWho);
 		}
 
-        public void ReceivePlayerSync(BinaryReader reader) {
+		public void ReceivePlayerSync(BinaryReader reader)
+		{
 			attackMode = reader.ReadByte();
-            attackPosition = reader.ReadVector2();
+			attackPosition = reader.ReadVector2();
 		}
 
-		public override void CopyClientState(ModPlayer targetCopy) {
-            PokemonPlayer clone = (PokemonPlayer)targetCopy;
-            clone.attackMode = attackMode;
-            clone.attackPosition = attackPosition;
+		public override void CopyClientState(ModPlayer targetCopy)
+		{
+			PokemonPlayer clone = (PokemonPlayer)targetCopy;
+			clone.attackMode = attackMode;
+			clone.attackPosition = attackPosition;
 		}
 
-		public override void SendClientChanges(ModPlayer clientPlayer) {
-            PokemonPlayer clone = (PokemonPlayer)clientPlayer;
+		public override void SendClientChanges(ModPlayer clientPlayer)
+		{
+			PokemonPlayer clone = (PokemonPlayer)clientPlayer;
 
 			if (clone.attackMode != attackMode || clone.attackPosition != attackPosition)
 				SyncPlayer(toWho: -1, fromWho: Main.myPlayer, newPlayer: false);
 		}
 
-        public override void ResetEffects()
-        {
-			if(TrainerID == null){
+		public override void ResetEffects()
+		{
+			if (TrainerID == null)
+			{
 				SetTrainerID();
-			}else{
-				if(TrainerID == ""){
+			}
+			else
+			{
+				if (TrainerID == "")
+				{
 					SetTrainerID();
 				}
 			}
 
-            if(targetNPC != null){
-				if(targetNPC.active){
-					if(attackMode==(int)AttackMode.Directed_Attack) directedEmptyTimer = 0;
+			if (targetNPC != null)
+			{
+				if (targetNPC.active)
+				{
+					if (attackMode == (int)AttackMode.Directed_Attack) directedEmptyTimer = 0;
 					attackPosition = targetNPC.Center;
-				}else{
+				}
+				else
+				{
 					targetNPC = null;
 				}
 			}
 
-			if(targetPlayer != null){
-				if(targetPlayer.active){
-					if(attackMode==(int)AttackMode.Directed_Attack) directedEmptyTimer = 0;
+			if (targetPlayer != null)
+			{
+				if (targetPlayer.active)
+				{
+					if (attackMode == (int)AttackMode.Directed_Attack) directedEmptyTimer = 0;
 					attackPosition = targetPlayer.Center;
-				}else{
+				}
+				else
+				{
 					targetPlayer = null;
 				}
 			}
-			if(attackMode==(int)AttackMode.Directed_Attack){
-				if(directedEmptyTimer > 0) directedEmptyTimer--;
-				if(targetPlayer == null && targetNPC == null){
-					if(directedEmptyTimer <= 0) ChangeAttackMode((int)AttackMode.Auto_Attack);
+			if (attackMode == (int)AttackMode.Directed_Attack)
+			{
+				if (directedEmptyTimer > 0) directedEmptyTimer--;
+				if (targetPlayer == null && targetNPC == null)
+				{
+					if (directedEmptyTimer <= 0) ChangeAttackMode((int)AttackMode.Auto_Attack);
 				}
 			}
 
 			HasShinyCharm = false;
-			if(HasEverstone > 0) HasEverstone--;
-			if(HasMegaStone > 0) HasMegaStone--;
+			if (HasEverstone > 0) HasEverstone--;
+			if (HasMegaStone > 0) HasMegaStone--;
 			else MegaStone = "";
 
 			maxPokemon = defaultMaxPokemon;
 			currentActivePokemon ??= [];
-			
+
 			int i = 0;
-			while(i < currentActivePokemon.Count){
-				if(!Main.projectile[currentActivePokemon[i]].active){
+			while (i < currentActivePokemon.Count)
+			{
+				if (!IsValidPokemon(Main.projectile[currentActivePokemon[i]]))
+				{
 					currentActivePokemon.Remove(currentActivePokemon[i]);
-				}else{
+				}
+				else
+				{
 					i++;
 				}
 			}
 
 			ExpMult = 1f;
-			if(LeftoversTimer > 0) LeftoversTimer--;
-        }
+			if (LeftoversTimer > 0) LeftoversTimer--;
+		}
 
-		public int FreePokemonSlots(){
+		public int FreePokemonSlots()
+		{
 			return maxPokemon - currentActivePokemon.Count;
 		}
 
-        public void ChangeAttackMode(int mode){
+		public void ChangeAttackMode(int mode)
+		{
 			directedEmptyTimer = 0;
 			attackMode = mode;
 			SoundEngine.PlaySound(SoundID.Item1, Player.position);
@@ -213,29 +245,37 @@ namespace Pokemod.Common.Players
 			targetNPC = null;
 			targetPlayer = null;
 
-			if(attackMode == (int)AttackMode.Directed_Attack){
+			if (attackMode == (int)AttackMode.Directed_Attack)
+			{
 				attackPosition = Main.MouseWorld;
 				SearchNPCTarget(48);
 				directedEmptyTimer = directedEmptyMaxTime;
 			}
 		}
 
-		public void SearchNPCTarget(float maxDetectDistance){
+		public void SearchNPCTarget(float maxDetectDistance)
+		{
 			float sqrMaxDetectDistance = maxDetectDistance * maxDetectDistance;
 
 			targetNPC = null;
 			targetPlayer = null;
 
-			for (int k = 0; k < Main.maxPlayers; k++) {
-				if(Main.player[k] != null){
+			for (int k = 0; k < Main.maxPlayers; k++)
+			{
+				if (Main.player[k] != null)
+				{
 					Player target = Main.player[k];
-					if(target.whoAmI != Player.whoAmI){
-						if(target.active && !target.dead){
+					if (target.whoAmI != Player.whoAmI)
+					{
+						if (target.active && !target.dead)
+						{
 							float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, attackPosition);
 
 							// Check if it is within the radius
-							if (sqrDistanceToTarget < sqrMaxDetectDistance) {
-								if(target.hostile){
+							if (sqrDistanceToTarget < sqrMaxDetectDistance)
+							{
+								if (target.hostile)
+								{
 									sqrMaxDetectDistance = sqrDistanceToTarget;
 									targetPlayer = target;
 									targetNPC = null;
@@ -246,16 +286,20 @@ namespace Pokemod.Common.Players
 				}
 			}
 			// This code is required either way, used for finding a target
-			if(targetPlayer == null){
-				for (int k = 0; k < Main.maxNPCs; k++) {
+			if (targetPlayer == null)
+			{
+				for (int k = 0; k < Main.maxNPCs; k++)
+				{
 					NPC target = Main.npc[k];
 
-					if (target.CanBeChasedBy() || target.ModNPC is PokemonWildNPC) {
+					if (target.CanBeChasedBy() || target.ModNPC is PokemonWildNPC)
+					{
 						// The DistanceSquared function returns a squared distance between 2 points, skipping relatively expensive square root calculations
 						float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, attackPosition);
 
 						// Check if it is within the radius
-						if (sqrDistanceToTarget < sqrMaxDetectDistance) {
+						if (sqrDistanceToTarget < sqrMaxDetectDistance)
+						{
 							sqrMaxDetectDistance = sqrDistanceToTarget;
 							targetNPC = target;
 							targetPlayer = null;
@@ -265,47 +309,49 @@ namespace Pokemod.Common.Players
 			}
 		}
 
-		public string GetAttackModeText(int mode){
-			return (""+(AttackMode)mode).Replace("_"," ");
+		public string GetAttackModeText(int mode)
+		{
+			return ("" + (AttackMode)mode).Replace("_", " ");
 		}
 
-        public override void PostBuyItem(NPC vendor, Item[] shopInventory, Item item)
-        {
-            if (item.type == ModContent.ItemType<CharmanderPetItem>() || item.type == ModContent.ItemType<BulbasaurPetItem>() || item.type == ModContent.ItemType<SquirtlePetItem>() ||
-            item.type == ModContent.ItemType<ChikoritaPetItem>() || item.type == ModContent.ItemType<CyndaquilPetItem>() || item.type == ModContent.ItemType<TotodilePetItem>())
-            {
-                int ballItem;
-                string pokemonName = "";
+		public override void PostBuyItem(NPC vendor, Item[] shopInventory, Item item)
+		{
+			if (item.type == ModContent.ItemType<CharmanderPetItem>() || item.type == ModContent.ItemType<BulbasaurPetItem>() || item.type == ModContent.ItemType<SquirtlePetItem>() ||
+			item.type == ModContent.ItemType<ChikoritaPetItem>() || item.type == ModContent.ItemType<CyndaquilPetItem>() || item.type == ModContent.ItemType<TotodilePetItem>())
+			{
+				int ballItem;
+				string pokemonName = "";
 
-                if (item.type == ModContent.ItemType<CharmanderPetItem>()) pokemonName = "Charmander";
-                if (item.type == ModContent.ItemType<BulbasaurPetItem>()) pokemonName = "Bulbasaur";
-                if (item.type == ModContent.ItemType<SquirtlePetItem>()) pokemonName = "Squirtle";
-                if (item.type == ModContent.ItemType<ChikoritaPetItem>()) pokemonName = "Chikorita";
-                if (item.type == ModContent.ItemType<CyndaquilPetItem>()) pokemonName = "Cyndaquil";
-                if (item.type == ModContent.ItemType<TotodilePetItem>()) pokemonName = "Totodile";
+				if (item.type == ModContent.ItemType<CharmanderPetItem>()) pokemonName = "Charmander";
+				if (item.type == ModContent.ItemType<BulbasaurPetItem>()) pokemonName = "Bulbasaur";
+				if (item.type == ModContent.ItemType<SquirtlePetItem>()) pokemonName = "Squirtle";
+				if (item.type == ModContent.ItemType<ChikoritaPetItem>()) pokemonName = "Chikorita";
+				if (item.type == ModContent.ItemType<CyndaquilPetItem>()) pokemonName = "Cyndaquil";
+				if (item.type == ModContent.ItemType<TotodilePetItem>()) pokemonName = "Totodile";
 
-                if (Main.netMode == NetmodeID.SinglePlayer)
-                {
-                    ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
-                    CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
-                    pokeItem.SetPokemonData(pokemonName, Shiny: false, BallType: "PokeballItem");
-                }
-                else
-                {
-                    if (Main.netMode == NetmodeID.Server)
-                    {
-                        ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
-                        CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
-                        pokeItem.SetPokemonData(pokemonName, Shiny: false, BallType: "PokeballItem");
-                    }
-                }
+				if (Main.netMode == NetmodeID.SinglePlayer)
+				{
+					ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
+					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
+					pokeItem.SetPokemonData(pokemonName, Shiny: false, BallType: "PokeballItem");
+				}
+				else
+				{
+					if (Main.netMode == NetmodeID.Server)
+					{
+						ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
+						CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
+						pokeItem.SetPokemonData(pokemonName, Shiny: false, BallType: "PokeballItem");
+					}
+				}
 
-                item.TurnToAir();
-            }
-            base.PostBuyItem(vendor, shopInventory, item);
-        }
+				item.TurnToAir();
+			}
+			base.PostBuyItem(vendor, shopInventory, item);
+		}
 
-		public void GenerateCaughtPokemon(string pokemonName){
+		public void GenerateCaughtPokemon(string pokemonName)
+		{
 			int ballItem;
 			bool shiny = Main.rand.NextBool(4096);
 
@@ -326,30 +372,38 @@ namespace Pokemod.Common.Players
 			}
 		}
 
-        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
-        {
-			if(Player.whoAmI == Main.myPlayer){
-				if(Vector2.Distance(Player.Center,attackPosition) < 3000 && attackMode == (int)AttackMode.Directed_Attack){
-					Main.EntitySpriteDraw(targetTexture.Value, attackPosition - Main.screenPosition, targetTexture.Value.Bounds, Color.White*0.8f, 0, targetTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
+		public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+		{
+			if (Player.whoAmI == Main.myPlayer)
+			{
+				if (Vector2.Distance(Player.Center, attackPosition) < 3000 && attackMode == (int)AttackMode.Directed_Attack)
+				{
+					Main.EntitySpriteDraw(targetTexture.Value, attackPosition - Main.screenPosition, targetTexture.Value.Bounds, Color.White * 0.8f, 0, targetTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
 				}
-				if(Player.HeldItem.ModItem is TrainerGlove){
+				if (Player.HeldItem.ModItem is TrainerGlove)
+				{
 					Asset<Texture2D> gloveIconTexture;
-					if(attackMode==(int)AttackMode.Directed_Attack){
+					if (attackMode == (int)AttackMode.Directed_Attack)
+					{
 						gloveIconTexture = directedAttackTexture;
-					}else if(attackMode==(int)AttackMode.Auto_Attack){
+					}
+					else if (attackMode == (int)AttackMode.Auto_Attack)
+					{
 						gloveIconTexture = autoAttackTexture;
-					}else{
+					}
+					else
+					{
 						gloveIconTexture = noAttackTexture;
 					}
-					float cursorScale = Main.cursorScale/Main.GameZoomTarget;
-					Main.spriteBatch.Draw(gloveIconTexture.Value, Main.MouseWorld-Main.screenPosition + cursorScale*new Vector2(-gloveIconTexture.Width()/2, 8+gloveIconTexture.Height()/2), gloveIconTexture.Value.Bounds, Color.White, 0, gloveIconTexture.Size()*0.5f, cursorScale, SpriteEffects.None, 0);
+					float cursorScale = Main.cursorScale / Main.GameZoomTarget;
+					Main.spriteBatch.Draw(gloveIconTexture.Value, Main.MouseWorld - Main.screenPosition + cursorScale * new Vector2(-gloveIconTexture.Width() / 2, 8 + gloveIconTexture.Height() / 2), gloveIconTexture.Value.Bounds, Color.White, 0, gloveIconTexture.Size() * 0.5f, cursorScale, SpriteEffects.None, 0);
 				}
 			}
-            base.DrawEffects(drawInfo, ref r, ref g, ref b, ref a, ref fullBright);
-        }
+			base.DrawEffects(drawInfo, ref r, ref g, ref b, ref a, ref fullBright);
+		}
 
-        public override void UpdateDead()
-        {
+		public override void UpdateDead()
+		{
 			bool healed = false;
 			foreach (Item item in Player.inventory)
 			{
@@ -358,18 +412,20 @@ namespace Pokemod.Common.Players
 					PokeHealerTile.HealPokemon(pokeItem, 1, ref healed);
 				}
 			}
-			if(Player.miscEquips[0] != null && !Player.miscEquips[0].IsAir){
+			if (Player.miscEquips[0] != null && !Player.miscEquips[0].IsAir)
+			{
 				if (Player.miscEquips[0].ModItem is CaughtPokemonItem pokeItem)
 				{
 					PokeHealerTile.HealPokemon(pokeItem, 1, ref healed);
 				}
 			}
-            base.UpdateDead();
-        }
+			base.UpdateDead();
+		}
 
 		public void LeftoversEffect()
 		{
-			if (LeftoversTimer <= 0) {
+			if (LeftoversTimer <= 0)
+			{
 				foreach (int index in currentActivePokemon)
 				{
 					if (Main.projectile[index].active)
@@ -382,8 +438,87 @@ namespace Pokemod.Common.Players
 						PokemonProj?.regenHP(3);
 					}
 				}
-				LeftoversTimer = 10*60;
+				LeftoversTimer = 10 * 60;
 			}
 		}
-    }
+
+		public PokemonPetProjectile GetPokemonProjectile(int i)
+		{
+			if (currentActivePokemon.Count > 0 && i < currentActivePokemon.Count)
+			{
+				if (IsValidPokemon(Main.projectile[currentActivePokemon[i]]))
+				{
+					return (PokemonPetProjectile)Main.projectile[currentActivePokemon[i]].ModProjectile;
+				}
+			}
+
+			return null;
+		}
+
+		public static bool IsValidPokemon(Projectile proj)
+		{
+			if (!proj.active)
+			{
+				return false;
+			}
+			else if (proj.ModProjectile is not PokemonPetProjectile)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public void SetManualControl()
+		{
+			if (!manualControl)
+			{
+				PokemonPetProjectile pokemonProj = GetPokemonProjectile(0);
+
+				if (pokemonProj != null)
+				{
+					pokemonProj.manualControl = true;
+					manualControl = true;
+				}
+			}
+			else
+			{
+				manualControl = false;
+			}
+		}
+
+		public override void PreUpdateMovement()
+		{
+			if (manualControl)
+			{
+				Player.velocity.X = 0;
+				if (Player.velocity.Y < 0) Player.velocity.Y = 0;
+			}
+			base.PreUpdateMovement();
+		}
+
+		public override void ModifyScreenPosition()
+		{
+			if (manualControl)
+			{
+				PokemonPetProjectile pokemonProj = GetPokemonProjectile(0);
+				if (pokemonProj != null)
+				{
+					Main.screenPosition = pokemonProj.Projectile.Center - new Vector2(Main.screenWidth / 2, Main.screenHeight / 2);
+				}
+			}
+		}
+
+        public override void PostUpdateBuffs()
+        {
+			if (manualControl)
+			{
+				if (Player.HeldItem.ModItem is not SynchroMachine)
+				{
+					Player.delayUseItem = true;
+					Player.controlUseTile = false;
+				}
+			}
+        }
+	}
 }
