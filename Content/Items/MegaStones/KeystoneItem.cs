@@ -16,14 +16,15 @@ namespace Pokemod.Content.Items.MegaStones
 		}
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		/*public override void AddRecipes() {
+		public override void AddRecipes() {
 			CreateRecipe(1)
-				.AddIngredient(ItemID.Ruby, 15)
-				.AddIngredient(ItemID.Emerald, 15)
-				.AddIngredient(ItemID.Sapphire, 15)
-				.AddIngredient(ItemID.Amethyst, 15)
-				.AddTile(TileID.WorkBenches)
+				.AddIngredient(ItemID.WhitePearl, 1)
+				.AddIngredient(ItemID.Ruby, 5)
+				.AddIngredient(ItemID.Emerald, 5)
+				.AddIngredient(ItemID.Sapphire, 5)
+				.AddIngredient(ItemID.Amethyst, 5)
+				.AddTile(TileID.Anvils)
 				.Register();
-		}*/
+		}
 	}
 }

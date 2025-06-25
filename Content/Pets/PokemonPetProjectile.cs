@@ -3,7 +3,6 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Players;
-using Pokemod.Content.Items;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Projectiles;
 using ReLogic.Content;
@@ -15,10 +14,9 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Pokemod.Content.DamageClasses;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Terraria.Enums;
 using Pokemod.Common.Configs;
 using System.Linq;
+using Pokemod.Content.Buffs;
 
 
 namespace Pokemod.Content.Pets
@@ -339,7 +337,7 @@ namespace Pokemod.Content.Pets
 		}
 
 		public virtual void SetCanMegaEvolve(){
-			if(canMegaEvolve == -1){
+			if(canMegaEvolve == -1 && Main.player[Projectile.owner].HasBuff<MegaEvolution>()){
 				if(megaEvolutions.Length > 0){
 					for(int i = 0; i < itemToMegaEvolve.Length; i++){
 						if(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().MegaStone == itemToMegaEvolve[i]){
@@ -376,7 +374,7 @@ namespace Pokemod.Content.Pets
 			}else{
 				if(megaEvolveTimer <= 0){
 					if(itemToMegaEvolve.Length>0 && megaEvolutionBase.Length>0){
-						if(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().MegaStone != itemToMegaEvolve[0]){
+						if(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().MegaStone != itemToMegaEvolve[0] || !Main.player[Projectile.owner].HasBuff<MegaEvolution>()){
 							return megaEvolutionBase[0];
 						}
 					}

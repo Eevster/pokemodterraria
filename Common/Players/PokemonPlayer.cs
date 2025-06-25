@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
@@ -22,6 +19,7 @@ using Pokemod.Content.Pets.CyndaquilPet;
 using Pokemod.Content.Pets.TotodilePet;
 using Pokemod.Content.Tiles;
 using Pokemod.Content.NPCs;
+using Pokemod.Content.Buffs;
 
 namespace Pokemod.Common.Players
 {
@@ -29,6 +27,7 @@ namespace Pokemod.Common.Players
 	{
 		public bool HasStarter;
 		//Accessories
+		public int CanMegaEvolve;
 		public string MegaStone;
 		public int HasMegaStone;
 		public bool HasShinyCharm;
@@ -92,12 +91,14 @@ namespace Pokemod.Common.Players
 		{
 			tag["TrainerID"] = TrainerID;
 			tag["HasStarter"] = HasStarter;
+			tag["CanMegaEvolve"] = CanMegaEvolve;
 		}
 
 		public override void LoadData(TagCompound tag)
 		{
 			TrainerID = tag.GetString("TrainerID");
 			HasStarter = tag.GetBool("HasStarter");
+			CanMegaEvolve = tag.GetInt("CanMegaEvolve");
 		}
 
 		public override void Initialize()
@@ -211,6 +212,15 @@ namespace Pokemod.Common.Players
 			if (HasEverstone > 0) HasEverstone--;
 			if (HasMegaStone > 0) HasMegaStone--;
 			else MegaStone = "";
+
+			if (CanMegaEvolve == 2 && !Main.dayTime)
+			{
+				CanMegaEvolve = 1;
+			}
+			if (CanMegaEvolve == 1 && Main.dayTime)
+			{
+				CanMegaEvolve = 0;
+			}
 
 			maxPokemon = defaultMaxPokemon;
 			currentActivePokemon ??= [];
@@ -497,6 +507,13 @@ namespace Pokemod.Common.Players
 			{
 				manualControl = false;
 			}
+		}
+
+		public void SetMegaEvolution(string megaName)
+		{
+			if (MegaStone != megaName) Player.ClearBuff(ModContent.BuffType<MegaEvolution>());
+			
+			MegaStone = megaName;
 		}
 
 		public override void PreUpdateMovement()

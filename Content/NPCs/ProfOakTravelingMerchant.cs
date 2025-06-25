@@ -78,9 +78,10 @@ namespace Pokemod.Content.NPCs
 			Shop.Add<LevelballItem>();
 			Shop.Add<HeavyballItem>();
             Shop.Add<Everstone>();
+			Shop.Add<SynchroMachine>();
 
 			// Bring  Tools
-			
+
 
 			Shop.Register();
 		}

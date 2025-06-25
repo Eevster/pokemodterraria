@@ -13,12 +13,14 @@ namespace Pokemod.Content.Items.Tools
 			ItemID.Sets.CanFishInLava[Item.type] = false;
 		}
 
-		public override void SetDefaults() {
+		public override void SetDefaults()
+		{
 			Item.CloneDefaults(ItemID.WoodFishingPole);
 
 			Item.fishingPole = 10; // Sets the poles fishing power
 			Item.shootSpeed = 12f; // Sets the speed in which the bobbers are launched. Wooden Fishing Pole is 9f and Golden Fishing Rod is 17f.
 			Item.shoot = ModContent.ProjectileType<PokeBobber>(); // The bobber projectile. Note that this will be overridden by Fishing Bobber accessories if present, so don't assume the bobber spawned is the specified projectile. https://terraria.wiki.gg/wiki/Fishing_Bobbers
+			Item.value = Item.buyPrice(gold: 6);
 		}
 
 		// Grants the High Test Fishing Line bool if holding the item.

@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
-using Pokemod.Content.Items.Apricorns;
+using Pokemod.Content.Items.Accessories;
 
 namespace Pokemod.Common.Systems
 {
     public class ChestItemWorldGen : ModSystem
     {
-
         public override void PostWorldGen()
         {
-            int[] itemsToPlaceInJungleChests = {ModContent.ItemType<RedApricorn>() };
+            int[] itemsToPlaceInJungleChests = {ModContent.ItemType<Leftovers>()};
             int itemsToPlaceInJungleChestsChoice = 0;
             int itemsPlaced = 0;
-            int maxItems = 0;
+            int maxItems = 3;
 
             for (int chestIndex = 0; chestIndex < Main.maxChests; chestIndex++)
             {
@@ -29,9 +23,8 @@ namespace Pokemod.Common.Systems
                 }
                 Tile chestTile = Main.tile[chest.x, chest.y];
 
-                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 8 * 36)
+                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 10 * 36)
                 {
-
                     if (WorldGen.genRand.NextBool(3))
                         continue;
 
@@ -50,15 +43,7 @@ namespace Pokemod.Common.Systems
                 {
                     break;
                 }
-
-
-
             }
-
-
-
         }
-
     }
-
 }

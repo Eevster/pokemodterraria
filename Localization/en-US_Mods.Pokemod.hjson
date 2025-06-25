@@ -562,12 +562,12 @@ Items: {
 
 	KeyStoneItem: {
 		DisplayName: Key Stone
-		Tooltip: ""
+		Tooltip: A stone of unexplained power that makes pokemon Mega Evolve
 	}
 
 	MegaCuffItem: {
 		DisplayName: Mega Cuff
-		Tooltip: ""
+		Tooltip: If you have a mega stone equipped, it allows you to mega evolve the respective pokemon once per day
 	}
 
 	VenusaurPetItemMega: {
@@ -2836,6 +2836,11 @@ Buffs: {
 		DisplayName: Bike
 		Description: Not immune to electric type
 	}
+
+	MegaEvolution: {
+		DisplayName: Mega Evolution
+		Description: Thanks to your strong bonds and the power of the mega stones your pokemon can reach a new evolution!
+	}
 }
 
 NPCs: {
@@ -3178,6 +3183,8 @@ Dialogue: {
 		StandardDialogue2: For some people, Pokémon are pets. Other use them for fights. Myself… I study Pokémon as a profession.
 		StandardDialogue3: I can give you everything you need to start your journey!
 	}
+
+	FishermanTrainer.StandardDialogue1: Hello, are you interested in fishing?
 }
 
 Tiles: {

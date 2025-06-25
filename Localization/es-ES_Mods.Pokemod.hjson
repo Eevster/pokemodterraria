@@ -562,12 +562,12 @@ Items: {
 
 	KeyStoneItem: {
 		DisplayName: Piedra activadora
-		Tooltip: ""
+		Tooltip: Una piedra de poder inexplicable que hace que los pokemon megaevolucionen
 	}
 
 	MegaCuffItem: {
-		DisplayName: Megapulsera
-		Tooltip: ""
+		DisplayName: Megabrazalete
+		Tooltip: Si tienes equipada una mega piedra te permite mega evolucionar al pokemon respectivo una vez por día
 	}
 
 	VenusaurPetItemMega: {
@@ -2836,6 +2836,11 @@ Buffs: {
 		DisplayName: Bici
 		Description: No es inmune al tipo eléctrico
 	}
+
+	MegaEvolution: {
+		DisplayName: Mega Evolución
+		Description: ¡Gracias a sus fuertes lazos y el poder de las mega piedras tu pokemon puede alcanzar una nueva evolución!
+	}
 }
 
 NPCs: {
@@ -3178,6 +3183,8 @@ Dialogue: {
 		StandardDialogue2: Para algunos, los Pokémon son mascotas. Pero otros los usan para pelear. En cuanto a mí... Estudio a los Pokémon como profesión.
 		StandardDialogue3: ¡Puedo darte todo lo que necesitas para comenzar tu viaje!
 	}
+
+	FishermanTrainer.StandardDialogue1: Hola, ¿te interesa la pesca?
 }
 
 Tiles: {

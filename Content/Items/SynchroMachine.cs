@@ -19,7 +19,7 @@ namespace Pokemod.Content.Items
 			Item.useAnimation = 10;
 			Item.useStyle = ItemUseStyleID.HoldUp;
 			Item.UseSound = SoundID.MenuTick;
-			Item.value = Item.buyPrice(platinum: 1);
+			Item.value = Item.buyPrice(platinum: 10);
 		}
 		
 		public override bool? UseItem(Player player)
