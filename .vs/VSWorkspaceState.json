@@ -2,14 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites",
-    "\\Assets\\Textures\\Pokesprites\\Pets",
+    "\\Common",
+    "\\Common\\UI\\StarterPanelUI",
     "\\Content",
     "\\Content\\Items",
-    "\\Content\\Items\\Pokeballs",
-    "\\Content\\NPCs"
+    "\\Content\\Items\\Accessories",
+    "\\Content\\NPCs",
+    "\\Content\\NPCs\\TrainerNPCs",
+    "\\Content\\Tiles"
   ],
-  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets\\CharizardMegaYPetProjectileShiny.png",
+  "SelectedNode": "\\Content\\Items\\Accessories\\AirBalloon.cs",
   "PreviewInSolutionExplorer": false
 }

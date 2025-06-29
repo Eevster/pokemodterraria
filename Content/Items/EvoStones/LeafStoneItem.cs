@@ -6,7 +6,7 @@ using Pokemod.Content.Items.Consumables;
 
 namespace Pokemod.Content.Items.EvoStones
 {
-	public class MoonStoneItem : PokemonConsumableItem
+	public class LeafStoneItem : PokemonConsumableItem
 	{
 		public override void SetDefaults() {
 			Item.width = 24; // The item texture's width
