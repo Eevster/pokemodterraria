@@ -18,8 +18,8 @@ namespace Pokemod.Common.Players
 		public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath) {
 			return new[] {
 				new Item(ModContent.ItemType<PokeballItem>(), 10),
-				new Item(ModContent.ItemType<Potion>(), 5)
-                new Item(ModContent.ItemType<Revive>(), 1)
+				new Item(ModContent.ItemType<Potion>(), 5),
+                new Item(ModContent.ItemType<Revive>(), 1),
             };
 		}
     }
