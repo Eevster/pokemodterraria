@@ -3,14 +3,11 @@
     "",
     "\\Assets",
     "\\Common",
-    "\\Common\\UI\\StarterPanelUI",
     "\\Content",
     "\\Content\\Items",
-    "\\Content\\Items\\Accessories",
-    "\\Content\\NPCs",
-    "\\Content\\NPCs\\TrainerNPCs",
-    "\\Content\\Tiles"
+    "\\Content\\Items\\EvoStones",
+    "\\Content\\NPCs\\TrainerNPCs"
   ],
-  "SelectedNode": "\\Content\\Items\\Accessories\\AirBalloon.cs",
+  "SelectedNode": "\\Content\\Items\\Mounts",
   "PreviewInSolutionExplorer": false
 }
