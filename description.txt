@@ -21,10 +21,11 @@ Changelog:
 -Natures and Happiness were both added
 -Added Armor sets which boost the trainer class (eg. allow more summons, give boosts, etc.)
 -Added new config options
--Players now start with 10 pokeballs
+-Players now start with 10 pokeballs, 5 potions, and a revive
 -Shinies now emit sparkles
 -Added new accessories which boost the Trainer Class
 -Added new Pokeballs
+-Added Synchro Machine
 
 Legal:
 This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 
