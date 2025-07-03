@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Content",
-    "\\libraries",
-    "\\Localization"
+    ""
   ],
-  "SelectedNode": "\\libraries\\SubworldLibrary.dll",
+  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }
