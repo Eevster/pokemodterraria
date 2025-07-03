@@ -3,7 +3,6 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using SubworldLibrary;
 using System;
 using Pokemod.Common.Players;
 using System.Collections.Generic;

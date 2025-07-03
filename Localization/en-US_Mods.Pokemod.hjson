@@ -190,6 +190,7 @@ Projectiles: {
 	DewgongPetProjectileShiny.DisplayName: Dewgong Pet Projectile Shiny
 	DiglettPetProjectile.DisplayName: Diglett Pet Projectile
 	DiglettPetProjectileShiny.DisplayName: Diglett Pet Projectile Shiny
+	Dig.DisplayName: Dig
 	DittoPetProjectile.DisplayName: Ditto Pet Projectile
 	DittoPetProjectileShiny.DisplayName: Ditto Pet Projectile Shiny
 	DodrioPetProjectile.DisplayName: Dodrio Pet Projectile
@@ -423,6 +424,10 @@ Projectiles: {
 	DarkballProj.DisplayName: Darkball Proj
 	CharizardMegaYPetProjectile.DisplayName: Charizard Mega Y Pet Projectile
 	CharizardMegaYPetProjectileShiny.DisplayName: Charizard Mega Y Pet Projectile Shiny
+	NightShade.DisplayName: Night Shade
+	Earthquake.DisplayName: Earthquake
+	RockThrow.DisplayName: Rock Throw
+	Splash.DisplayName: Splash
 }
 
 Items: {
