@@ -1,4 +1,3 @@
 displayName = Pokemod V1.1.6
 author = Eevster
 version = 1.1.6
-modReferences = SubworldLibrary

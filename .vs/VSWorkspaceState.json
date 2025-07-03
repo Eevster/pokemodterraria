@@ -1,13 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Assets",
-    "\\Common",
     "\\Content",
-    "\\Content\\Items",
-    "\\Content\\Items\\EvoStones",
-    "\\Content\\NPCs\\TrainerNPCs"
+    "\\libraries",
+    "\\Localization"
   ],
-  "SelectedNode": "\\Content\\Items\\Mounts",
+  "SelectedNode": "\\libraries\\SubworldLibrary.dll",
   "PreviewInSolutionExplorer": false
 }
