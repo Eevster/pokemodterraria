@@ -428,6 +428,8 @@ Projectiles: {
 	// Earthquake.DisplayName: Earthquake
 	// RockThrow.DisplayName: Rock Throw
 	// Splash.DisplayName: Splash
+	// Teleport.DisplayName: Teleport
+	// PsychoCut.DisplayName: Psycho Cut
 }
 
 Items: {
