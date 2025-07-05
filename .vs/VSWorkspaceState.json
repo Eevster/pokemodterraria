@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "\\Assets",
+    "\\Assets\\Textures",
+    "\\Common",
+    "\\Common\\UI\\StarterPanelUI",
+    "\\Content"
   ],
-  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }
