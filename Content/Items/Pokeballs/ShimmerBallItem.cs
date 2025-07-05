@@ -8,7 +8,7 @@ namespace Pokemod.Content.Items.Pokeballs
 	{
 		protected override int BallProj => ModContent.ProjectileType<ShimmerballProj>();
 		protected override int BallValue => 1000;
-		protected override float CatchRate => 1.0f;
+		protected override float CatchRate => 1.5f;
 	}
 
 	public class ShimmerballProj : BallProj{
