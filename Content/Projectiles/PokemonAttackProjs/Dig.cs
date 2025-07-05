@@ -38,7 +38,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if (pokemon.owner == Main.myPlayer)
 			{
-				if (Collision.SolidCollision(pokemon.Bottom, pokemon.width - 3, 3))
+				if (Collision.SolidCollision(pokemon.Bottom, pokemon.width - 3, 1))
 				{ //Grounded
 					for (int i = 0; i < pokemonOwner.nAttackProjs; i++)
 					{
@@ -64,7 +64,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             if (pokemon.owner == Main.myPlayer)
             {
-                if (pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer <= 20)
+                if (pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer <= 5)
                 {
                     int remainProjs = 1;
                     for (int i = 0; i < pokemonOwner.nAttackProjs; i++)
@@ -76,7 +76,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 							{
 								targetPosition = pokemon.Bottom;
 							}
-							Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetPosition, Vector2.Zero, ModContent.ProjectileType<Dig>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 10f, pokemon.owner);
+                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetPosition, Vector2.Zero, ModContent.ProjectileType<Dig>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 10f, pokemon.owner)];
                             pokemon.position = targetPosition - Vector2.UnitY * (16 + pokemon.height / 2);
                             SoundEngine.PlaySound(SoundID.Item70, pokemon.position);
                             DustBurst(pokemon.Bottom);
@@ -99,8 +99,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if (!pokemonOwner.canAttack && pokemonOwner.timer > 0)
 			{
 				pokemonOwner.immune = true;
-			}
-		}
+                pokemonOwner.hurtTime = 2;
+                pokemon.Opacity = 0;
+                pokemon.velocity = Vector2.Zero;
+            }
+
+            if (pokemonOwner.canAttack)
+            {
+                pokemon.Opacity = 1;
+            }
+        }
 
         public static Vector2 FindFloor(Vector2 target, out bool floorFound)
         {

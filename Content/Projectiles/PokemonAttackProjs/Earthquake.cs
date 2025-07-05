@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Pokemod.Content.Pets;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -12,13 +13,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
     internal class Earthquake : PokemonAttack
     {
-        const int explosionSize = 600;
-        int maxTargets = 10;
+        const int explosionSize = 500;
         public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
         public override void SetDefaults()
         {
             Projectile.width = 32;
-            Projectile.height = 2;
+            Projectile.height = 32;
             Projectile.hide = true;
 
             Projectile.friendly = true;
@@ -32,7 +32,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.penetrate = -1;
 
             Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 40;
+            Projectile.idStaticNPCHitCooldown = 20;
             base.SetDefaults();
         }
 
@@ -69,14 +69,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 						}
 					} 
 				}
-			}
+            }
 		}
 
         public override void OnSpawn(IEntitySource source)
         {
             if (Projectile.ai[0] == 1) //Sets child height to match the height of it's target so dust appears from the ground.
             {
-                Projectile.height = (int)Projectile.ai[2]; 
+                Projectile.height = (int)Projectile.ai[2];
+                Projectile.timeLeft = 1;
             }
             for (int i = 0; i < 10; i++)
             {
@@ -102,26 +103,33 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 return;
             }
 
-            int numTargets = 0;
+            List<NPC> targets = new List<NPC>();
 
-            if (Projectile.owner == Main.myPlayer){
-                for (int i = 0; i < Main.maxNPCs; i++){
+            if (Projectile.owner == Main.myPlayer)
+            {
+                for (int i = 0; i < Main.maxNPCs; i++)
+                {
                     NPC npc = Main.npc[i];
-                    if (npc.CanBeChasedBy() && npc.life > 0){
-                        if ((npc.Center - Projectile.Center).Length() < explosionSize){
-                            if (Collision.SolidCollision(npc.Bottom, npc.width, 6)){
-                                if (numTargets >= maxTargets)
-                                {
-                                    Projectile.Kill();
-                                    break;
-                                }
-                                numTargets++;
-                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), npc.Center, Vector2.Zero, ModContent.ProjectileType<Earthquake>(), (int)Projectile.ai[1], 2f, Projectile.owner, 1f, default, npc.height);
+                    if (npc.CanBeChasedBy() && npc.life > 0)
+                    {
+                        if ((npc.Center - Projectile.Center).Length() < explosionSize)
+                        {
+                            if (Collision.SolidCollision(npc.Bottom, npc.width, 6))
+                            {
+                                targets.Add(npc);
                             }
                         }
                     }
                 }
+                if (targets.Count > 0)
+                {
+                    int earthquakeDamage = (int)Projectile.ai[1];
 
+                    foreach (NPC npc in targets)
+                    {
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), npc.Bottom, Vector2.Zero, ModContent.ProjectileType<Earthquake>(), earthquakeDamage, 2f, Projectile.owner, 1f, default, npc.height);
+                    }
+                }
                 Projectile.netUpdate = true;
             }
         }

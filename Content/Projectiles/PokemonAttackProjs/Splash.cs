@@ -8,6 +8,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
     public class Splash : PokemonAttack
 	{
+        public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
+
         public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
 
@@ -32,18 +34,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					int remainProjs = 1;
 					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 						if(pokemonOwner.attackProjs[i] == null){
-                            
-							//Splash effect on pokemon
-                            SoundEngine.PlaySound(SoundID.Splash, pokemon.Center);
+                            //Splash effect on pokemon
                             float splashDirection = 5f * Vector2.Normalize(targetCenter - pokemon.Center).X;
-                            for (int j = 0; j < pokemon.width / 2; j++)
-							{
-                                Dust.NewDust(pokemon.Bottom, pokemon.width, 0, DustID.BreatheBubble, splashDirection, -pokemon.height / 4);
-                                Dust.NewDust(pokemon.Bottom, pokemon.width, 0, DustID.Water, splashDirection, -pokemon.height / 4);
-                                Dust.NewDust(pokemon.Bottom, pokemon.width, 0, DustID.Water_Snow, splashDirection, -pokemon.height / 4);
-                            }
-
-							remainProjs--;
+                            SplashEffect(pokemon.Bottom, splashDirection);
+                            remainProjs--;
 							pokemonOwner.canAttackOutTimer = false;
 							if(remainProjs <= 0){
 								break;
@@ -53,5 +47,17 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}
 			}
 		}
+
+        private void SplashEffect(Vector2 position, float direction)
+        {
+            SoundEngine.PlaySound(SoundID.Splash, position);
+
+            for (int j = 0; j < 32 / 2; j++)
+            {
+                Dust.NewDust(position, 32, 1, DustID.BreatheBubble, direction, -6);
+                Dust.NewDust(position, 32, 1, DustID.Water, direction, -6);
+                Dust.NewDust(position, 32, 1, DustID.Water_Snow, direction, -6);
+            }
+        }
     }
 }

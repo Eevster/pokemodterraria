@@ -24,13 +24,16 @@ namespace Pokemod.Common.UI.StarterPanelUI
 
         public override void PostSetupContent()
         {
-            // Create custom interface which can swap between different UIStates
+			if (!Main.dedServ)
+			{
+				// Create custom interface which can swap between different UIStates
 				StarterPanelUserInterface = new UserInterface();
 				// Creating custom UIState
 				StarterPanelUI = new StarterPanelUIState();
 
 				// Activate calls Initialize() on the UIState if not initialized, then calls OnActivate and then calls Activate on every child element
 				StarterPanelUI.Activate();
+			}
         }
 
 		public override void UpdateUI(GameTime gameTime) {
