@@ -19,6 +19,9 @@ namespace Pokemod.Content.Pets.AlakazamPet
         public override int[] jumpStartEnd => [9, 9];
         public override int[] fallStartEnd => [9, 9];
         public override int[] attackStartEnd => [9, 13];
+
+        public override string[] megaEvolutions => ["AlakazamMega"];
+        public override string[] itemToMegaEvolve => ["AlakazamMegaStoneItem"];
     }
 
 	public class AlakazamPetProjectileShiny : AlakazamPetProjectile{}

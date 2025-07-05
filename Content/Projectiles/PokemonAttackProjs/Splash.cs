@@ -50,14 +50,18 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         private void SplashEffect(Vector2 position, float direction)
         {
-            SoundEngine.PlaySound(SoundID.Splash, position);
-
-            for (int j = 0; j < 32 / 2; j++)
+            if (!Main.dedServ)
             {
-                Dust.NewDust(position, 32, 1, DustID.BreatheBubble, direction, -6);
-                Dust.NewDust(position, 32, 1, DustID.Water, direction, -6);
-                Dust.NewDust(position, 32, 1, DustID.Water_Snow, direction, -6);
+                SoundEngine.PlaySound(SoundID.Splash, position);
+
+                for (int j = 0; j < 32 / 2; j++)
+                {
+                    Dust.NewDust(position, 32, 1, DustID.BreatheBubble, direction, -6);
+                    Dust.NewDust(position, 32, 1, DustID.Water, direction, -6);
+                    Dust.NewDust(position, 32, 1, DustID.Water_Snow, direction, -6);
+                }
             }
+
         }
     }
 }

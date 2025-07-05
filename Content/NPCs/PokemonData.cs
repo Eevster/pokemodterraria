@@ -350,6 +350,7 @@ namespace Pokemod.Content.NPCs
             {"BlastoiseMega", new PokemonInfo([79, 103, 120, 135, 115, 78], [(int)TypeIndex.Water], ["Waterfall"], (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
             {"GengarMega", new PokemonInfo([60, 65, 80, 170, 95, 130], [(int)TypeIndex.Ghost,(int)TypeIndex.Poison], ["Toxic"], (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
             {"GyaradosMega", new PokemonInfo([95, 155, 109, 70, 130, 81], [(int)TypeIndex.Water,(int)TypeIndex.Dark], ["HydroPump"], (int)StageIndex.Mega, (int)ExpTypes.Slow)},
+            {"AlakazamMega", new PokemonInfo([55, 50, 65, 175, 95, 150], [(int)TypeIndex.Psychic], ["Psychic"], (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
         };
 
         public static string[][] PokemonNatures = [
@@ -371,7 +372,7 @@ namespace Pokemod.Content.NPCs
             {"DoubleKick", new PokemonAttackInfo(30,30,60,200f,false,false,(int)TypeIndex.Fighting)},
             {"Ember", new PokemonAttackInfo(40,30,60,800f,false,false,(int)TypeIndex.Fire, true)},
             {"Explosion", new PokemonAttackInfo(250,32,60,800f,false,false,(int)TypeIndex.Normal)},
-            {"Earthquake", new PokemonAttackInfo(100,32,90,800f,false,true,(int)TypeIndex.Ground)},
+            {"Earthquake", new PokemonAttackInfo(100,90,60,800f,false,true,(int)TypeIndex.Ground)},
             {"FireBlast", new PokemonAttackInfo(110,40,60,200f,true,true,(int)TypeIndex.Fire, true)},
             {"Flamethrower", new PokemonAttackInfo(90,90,60,400f,true,false,(int)TypeIndex.Fire, true)},
             {"FlameWheel", new PokemonAttackInfo(60,60,60,800f,false,false,(int)TypeIndex.Fire)},
@@ -391,6 +392,7 @@ namespace Pokemod.Content.NPCs
             {"PinMissile", new PokemonAttackInfo(25,30,60,800f,false,false,(int)TypeIndex.Bug)},
             {"PoisonPowder", new PokemonAttackInfo(0,20,60,800f,true,false,(int)TypeIndex.Poison, true)},
             {"PoisonSting", new PokemonAttackInfo(15,45,60,800f,false,false,(int)TypeIndex.Poison)},
+            {"Psychic", new PokemonAttackInfo(90,45,60,800f,false,true,(int)TypeIndex.Psychic, true)},
             {"PsychoCut", new PokemonAttackInfo(70,50,60,800f,true,true,(int)TypeIndex.Psychic)},
             {"QuickAttack", new PokemonAttackInfo(40,40,60,800f,false,false,(int)TypeIndex.Normal)},
             {"RazorLeaf", new PokemonAttackInfo(55,45,60,800f,false,false,(int)TypeIndex.Grass)},
@@ -401,7 +403,7 @@ namespace Pokemod.Content.NPCs
             {"Splash", new PokemonAttackInfo(0,30,60,800f,false,false,(int)TypeIndex.Water)},
             {"StringShot", new PokemonAttackInfo(0,60,60,800f,false,false,(int)TypeIndex.Bug)},
             {"Swift", new PokemonAttackInfo(60,0,120,800f,true,true,(int)TypeIndex.Normal, true)},
-            {"Teleport", new PokemonAttackInfo(0,90,60,600f,true,true,(int)TypeIndex.Psychic)},
+            {"Teleport", new PokemonAttackInfo(0,90,60,600f,false,true,(int)TypeIndex.Psychic)},
             {"Thunder", new PokemonAttackInfo(110,30,60,800f,false,false,(int)TypeIndex.Electric, true)},
             {"Thunderbolt", new PokemonAttackInfo(90,30,60,800f,true,false,(int)TypeIndex.Electric, true)},
             {"ThunderWave", new PokemonAttackInfo(0,40,60,800f,false,false,(int)TypeIndex.Electric, true)},

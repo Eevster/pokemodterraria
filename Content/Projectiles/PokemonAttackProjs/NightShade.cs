@@ -62,25 +62,37 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
 		}
 
-        public override void OnSpawn(IEntitySource source)
-        {
-			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+		public override void OnSpawn(IEntitySource source)
+		{
+			if (attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack)
+			{
 				SearchTarget(64f);
-			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				if(Trainer.targetPlayer != null){
+			}
+			else if (attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack)
+			{
+				if (Trainer.targetPlayer != null)
+				{
 					targetPlayer = Trainer.targetPlayer;
-				}else if(Trainer.targetNPC != null){
+				}
+				else if (Trainer.targetNPC != null)
+				{
 					targetEnemy = Trainer.targetNPC;
 				}
 			}
 
-            for (int j = 0; j < 20; j++)
-            {
-                Dust.NewDust(Projectile.Center, 64, 64, DustID.Shadowflame, 0, 0, 0, default, 1f);
-            }
+			if (!Main.dedServ)
+			{
+				for (int j = 0; j < 10; j++)
+				{
 
-            base.OnSpawn(source);
-        }
+					Dust newDust = Main.dust[Dust.NewDust(Projectile.Center, 64, 64, DustID.Shadowflame)];
+					newDust.noGravity = true;
+
+				}
+			}
+
+			base.OnSpawn(source);
+		}
 
         public override void AI()
         {

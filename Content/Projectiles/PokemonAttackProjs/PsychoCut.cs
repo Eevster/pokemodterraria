@@ -93,7 +93,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void AI()
         {
-				Dust.NewDust(Projectile.Center, Projectile.width, Projectile.width, DustID.PinkTorch);
+            if (!Main.dedServ)
+            {
+                if (Projectile.timeLeft % 5 == 0)
+                {
+                    Dust.NewDust(Projectile.Center, Projectile.width, Projectile.width, DustID.PinkTorch);
+                }
+            }
 
             if(Projectile.timeLeft < 10){
                 Projectile.Opacity = 0.6f*Projectile.timeLeft*0.1f;

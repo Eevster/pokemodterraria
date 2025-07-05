@@ -79,11 +79,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.height = (int)Projectile.ai[2];
                 Projectile.timeLeft = 1;
             }
-            for (int i = 0; i < 10; i++)
+            if (!Main.dedServ)
             {
-                Dust.NewDust(Projectile.Bottom, 10, 6, DustID.Dirt, 0, -3);
+                for (int i = 0; i < 10; i++)
+                {
+                    Dust.NewDust(Projectile.Bottom, 10, 6, DustID.Dirt, 0, -3);
+                }
             }
-
             if (Projectile.ai[0] == 0) //Parent creates sound and screen effects.
             {
                 SoundEngine.PlaySound(SoundID.Item70, Projectile.Center);

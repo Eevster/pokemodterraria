@@ -430,6 +430,10 @@ Projectiles: {
 	// Splash.DisplayName: Splash
 	// Teleport.DisplayName: Teleport
 	// PsychoCut.DisplayName: Psycho Cut
+	// AlakazamMegaPetProjectile.DisplayName: Alakazam Mega Pet Projectile
+	// AlakazamMegaPetProjectileShiny.DisplayName: Alakazam Mega Pet Projectile Shiny
+	// Psychic.DisplayName: Psychic
+	// PsychicBlast.DisplayName: Psychic Blast
 }
 
 Items: {
@@ -1179,6 +1183,11 @@ Items: {
 
 	PinkHealer: {
 		// DisplayName: Pink Healer
+		// Tooltip: ""
+	}
+
+	AlakazamMegaStoneItem: {
+		// DisplayName: Alakazam Mega Stone Item
 		// Tooltip: ""
 	}
 }
@@ -2872,6 +2881,8 @@ NPCs: {
 	CyndaquilCritterNPC.DisplayName: Cyndaquil
 	CyndaquilCritterNPCShiny.DisplayName: Cyndaquil
 	BlastoiseCritterNPC.DisplayName: Blastoise
+	BlastoiseMegaCritterNPC.DisplayName: Mega Blastoise
+	BlastoiseMegaCritterNPCShiny.DisplayName: Mega Blastoise Shiny
 	BayleefCritterNPCShiny.DisplayName: BayleefShiny
 	BayleefCritterNPC.DisplayName: Bayleef
 	BlastoiseCritterNPCShiny.DisplayName: Blastoise Shiny
@@ -2891,6 +2902,8 @@ NPCs: {
 	VaporeonCritterNPCShiny.DisplayName: Vaporeon Shiny
 	VenusaurCritterNPC.DisplayName: Venusaur
 	VenusaurCritterNPCShiny.DisplayName: Venusaur Shiny
+	VenusaurMegaCritterNPC.DisplayName: Mega Venusaur
+	VenusaurMegaCritterNPCShiny.DisplayName: Mega Venusaur Shiny
 	WartortleCritterNPC.DisplayName: Wartortle
 	WartortleCritterNPCShiny.DisplayName: Wartortle Shiny
 	CaterpieCritterNPC.DisplayName: Caterpie
@@ -2967,6 +2980,8 @@ NPCs: {
 	// AerodactylCritterNPCShiny.DisplayName: Aerodactyl Shiny
 	// AlakazamCritterNPC.DisplayName: Alakazam
 	// AlakazamCritterNPCShiny.DisplayName: Alakazam Shiny
+	// AlakazamMegaCritterNPC.DisplayName: Mega Alakazam
+	// AlakazamMegaCritterNPCShiny.DisplayName: Mega Alakazam Shiny
 	// ArcanineCritterNPC.DisplayName: Arcanine
 	// ArcanineCritterNPCShiny.DisplayName: Arcanine Shiny
 	// ArticunoCritterNPC.DisplayName: Articuno
@@ -3007,6 +3022,8 @@ NPCs: {
 	// FarfetchdCritterNPCShiny.DisplayName: Farfetchd Shiny
 	// GengarCritterNPC.DisplayName: Gengar
 	// GengarCritterNPCShiny.DisplayName: Gengar Shiny
+	// GengarMegaCritterNPC.DisplayName: Mega Gengar
+	// GengarMegaCritterNPCShiny.DisplayName: Mega Gengar Shiny
 	// GeodudeCritterNPC.DisplayName: Geodude
 	// GeodudeCritterNPCShiny.DisplayName: Geodude Shiny
 	// GloomCritterNPC.DisplayName: Gloom
@@ -3027,6 +3044,8 @@ NPCs: {
 	// GrowlitheCritterNPCShiny.DisplayName: Growlithe Shiny
 	// GyaradosCritterNPC.DisplayName: Gyarados
 	// GyaradosCritterNPCShiny.DisplayName: Gyarados Shiny
+	// GyaradosMegaCritterNPC.DisplayName: Mega Gyarados
+	// GyaradosMegaCritterNPCShiny.DisplayName: Mega Gyarados Shiny
 	// HitmonchanCritterNPC.DisplayName: Hitmonchan
 	// HitmonchanCritterNPCShiny.DisplayName: Hitmonchan Shiny
 	// HitmonleeCritterNPC.DisplayName: Hitmonlee

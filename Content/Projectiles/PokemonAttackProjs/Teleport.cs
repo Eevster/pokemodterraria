@@ -138,13 +138,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public void DustBurst(Vector2 position)
         {
-            for (int i = 0; i < 5; i++)
+            if (!Main.dedServ)
             {
-                Dust.NewDust(position, Projectile.width, Projectile.height, DustID.Confetti_Pink, 0, 0);
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                Dust.NewDust(position, Projectile.width, Projectile.height, DustID.PinkTorch, 0, 0);
+                for (int i = 0; i < 5; i++)
+                {
+                    Dust.NewDust(position, Projectile.width, Projectile.height, DustID.Confetti_Pink, 0, 0);
+                }
+                for (int i = 0; i < 10; i++)
+                {
+                    Dust.NewDust(position, Projectile.width, Projectile.height, DustID.PinkTorch, 0, 0);
+                }
             }
         }
 

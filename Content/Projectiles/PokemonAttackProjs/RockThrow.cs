@@ -32,7 +32,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.penetrate = 5;
 
             Projectile.aiStyle = -1; 
-            Projectile.usesLocalNPCImmunity = true; // Tile Collision is set to false, as it's handled in the AI.
+            Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 15;
             base.SetDefaults();
         }
