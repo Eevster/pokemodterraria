@@ -113,7 +113,7 @@ namespace Pokemod.Content.Items
 			for(int i = 0; i < EVs.Length; i++){
 				EVs[i] = (int)reader.ReadDouble();
 			}
-			int nMoves = reader.ReadByte();
+			int nMoves = reader.ReadInt32();
 			moves = new string[nMoves];
 			for(int i = 0; i < nMoves; i++){
 				moves[i] = reader.ReadString();
