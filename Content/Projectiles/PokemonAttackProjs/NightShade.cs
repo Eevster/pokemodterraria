@@ -108,24 +108,31 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			Projectile.Opacity = Projectile.timeLeft*0.025f;
 
-			if(targetEnemy != null || targetPlayer != null){
-				if(targetEnemy != null){
-					if(targetEnemy.active){
+			if (targetEnemy != null || targetPlayer != null)
+			{
+				if (targetEnemy != null)
+				{
+					if (targetEnemy.active)
+					{
 						targetPosition = targetEnemy.Center;
-					}else{
+					}
+					else
+					{
 						targetEnemy = null;
 					}
 				}
-				if(targetPlayer != null){
-					if(targetPlayer.active && !targetPlayer.dead){
+				if (targetPlayer != null)
+				{
+					if (targetPlayer.active && !targetPlayer.dead)
+					{
 						targetPosition = targetPlayer.Center;
-					}else{
+					}
+					else
+					{
 						targetPlayer = null;
 					}
 				}
-				if(targetEnemy != null || targetPlayer != null){
-					Projectile.Center = targetPosition;
-				}
+				Projectile.Center = targetPosition;
 			}
 
 			if(Projectile.owner == Main.myPlayer){

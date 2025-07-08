@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
     internal class Earthquake : PokemonAttack
     {
-        const int explosionSize = 500;
+        public List<NPC> targets = new List<NPC>();
+
         public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
         public override void SetDefaults()
         {
@@ -24,114 +26,120 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.friendly = true;
             Projectile.hostile = false;
 
-            Projectile.timeLeft = 10;
+            Projectile.timeLeft = 20;
 
             Projectile.ignoreWater = true;
-            Projectile.tileCollide = false;  
+            Projectile.tileCollide = false;
 
             Projectile.penetrate = -1;
 
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 20;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 30;
             base.SetDefaults();
         }
 
-        public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
+        public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter)
+        {
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
 
-			if(pokemon.owner == Main.myPlayer){
-				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
-					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
-						pokemonOwner.timer = pokemonOwner.attackDuration;
-						pokemonOwner.canAttack = false;
-						pokemonOwner.canAttackOutTimer = true;
-						break;
-					}
-				} 
-			}
-		}
-
-		public override void AttackOutTimer(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
-            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-
-			if(pokemon.owner == Main.myPlayer){
-				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer <= 5){
-					int remainProjs = 1;
-					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
-						if(pokemonOwner.attackProjs[i] == null){
-                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Bottom, Vector2.Zero, ModContent.ProjectileType<Earthquake>(), 0, 2f, pokemon.owner, 0f, pokemonOwner.GetPokemonAttackDamage(GetType().Name))];
-                            remainProjs--;
-							pokemonOwner.canAttackOutTimer = false;
-							if(remainProjs <= 0){
-								break;
-							}
-						}
-					} 
-				}
+            if (pokemon.owner == Main.myPlayer)
+            {
+                for (int i = 0; i < pokemonOwner.nAttackProjs; i++)
+                {
+                    if (pokemonOwner.attackProjs[i] == null)
+                    {
+                        pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
+                        pokemonOwner.timer = pokemonOwner.attackDuration;
+                        pokemonOwner.canAttack = false;
+                        pokemonOwner.canAttackOutTimer = true;
+                        break;
+                    }
+                }
             }
-		}
+        }
+
+        public override void AttackOutTimer(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter)
+        {
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+            if (pokemon.owner == Main.myPlayer)
+            {
+                if (pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer <= 5)
+                {
+                    int remainProjs = 1;
+                    for (int i = 0; i < pokemonOwner.nAttackProjs; i++)
+                    {
+                        if (pokemonOwner.attackProjs[i] == null)
+                        {
+                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Bottom, Vector2.Zero, ModContent.ProjectileType<Earthquake>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+                            remainProjs--;
+                            pokemonOwner.canAttackOutTimer = false;
+                            if (remainProjs <= 0)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         public override void OnSpawn(IEntitySource source)
         {
-            if (Projectile.ai[0] == 1) //Sets child height to match the height of it's target so dust appears from the ground.
+            for (int i = 0; i < Main.maxNPCs; i++)
             {
-                Projectile.height = (int)Projectile.ai[2];
-                Projectile.timeLeft = 1;
-            }
-            if (!Main.dedServ)
-            {
-                for (int i = 0; i < 10; i++)
+                NPC npc = Main.npc[i];
+                if (npc.CanBeChasedBy() && npc.life > 0)
                 {
-                    Dust.NewDust(Projectile.Bottom, 10, 6, DustID.Dirt, 0, -3);
+                    if ((npc.Center - Projectile.Center).Length() < PokemonData.pokemonAttacks["Psychic"].distanceToAttack)
+                    {
+                        if (Collision.SolidCollision(npc.Bottom, npc.width, 4))
+                        {
+                            targets.Add(npc);
+                        }
+                    }
                 }
             }
-            if (Projectile.ai[0] == 0) //Parent creates sound and screen effects.
-            {
-                SoundEngine.PlaySound(SoundID.Item70, Projectile.Center);
-                //Screen Shake
-                PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 7f, 5f, 25, explosionSize * 2f, FullName);
-                Main.instance.CameraModifiers.Add(modifier);
-            }
+
+            SoundEngine.PlaySound(SoundID.Item70, Projectile.Center);
+            PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 7f, 5f, 25, PokemonData.pokemonAttacks["Psychic"].distanceToAttack * 2f, FullName);
+            Main.instance.CameraModifiers.Add(modifier);
 
             base.OnSpawn(source);
         }
 
         public override void AI()
         {
-            //ai[0]: 0 = parent, 1 = child. Ensures only the parent can make child projectiles.
-            if (Projectile.ai[0] == 1f)
-            {
-                return;
-            }
+            bool targetsRemaining = false;
 
-            List<NPC> targets = new List<NPC>();
-
-            if (Projectile.owner == Main.myPlayer)
+            if (targets.Count > 0)
             {
-                for (int i = 0; i < Main.maxNPCs; i++)
-                {
-                    NPC npc = Main.npc[i];
-                    if (npc.CanBeChasedBy() && npc.life > 0)
+                foreach (NPC npc in targets) {
+                    if (npc != null)
                     {
-                        if ((npc.Center - Projectile.Center).Length() < explosionSize)
+                        targetsRemaining = true;
+                        if (Collision.SolidCollision(npc.Bottom, npc.width, 4))
                         {
-                            if (Collision.SolidCollision(npc.Bottom, npc.width, 6))
+                            Projectile.height = npc.height;
+                            Projectile.position = npc.Center - new Vector2(Projectile.width, Projectile.height) / 2f;
+
+                            for (int i = 0; i < 10; i++)
                             {
-                                targets.Add(npc);
+                                Dust.NewDust(Projectile.Bottom, 10, 6, DustID.Dirt, 0, -3);
                             }
+                            targets.Remove(npc);
+                            break;
                         }
                     }
                 }
-                if (targets.Count > 0)
-                {
-                    int earthquakeDamage = (int)Projectile.ai[1];
+            }
+            if (!targetsRemaining)
+            {
+                Projectile.Kill();
+            }
 
-                    foreach (NPC npc in targets)
-                    {
-                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), npc.Bottom, Vector2.Zero, ModContent.ProjectileType<Earthquake>(), earthquakeDamage, 2f, Projectile.owner, 1f, default, npc.height);
-                    }
-                }
+            if (Projectile.owner == Main.myPlayer)
+            {
                 Projectile.netUpdate = true;
             }
         }

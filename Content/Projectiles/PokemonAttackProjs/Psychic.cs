@@ -1,12 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoMod.Cil;
 using Pokemod.Common.Players;
 using Pokemod.Content.NPCs;
-using Pokemod.Content.NPCs.PokemonNPCs;
 using Pokemod.Content.Pets;
+using ReLogic.Content;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
@@ -15,144 +13,216 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-	public class Psychic : PokemonAttack
-	{
+    public class Psychic : PokemonAttack
+    {
+        bool exploded = false;
+        private static Asset<Texture2D> explosionTexture;
+        public int pokemonDamage;
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 5;
         }
 
+        public override void Load()
+        {
+            explosionTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/PsychicBlast");
+        }
+
+        public override void Unload()
+        {
+            explosionTexture = null;
+        }
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(exploded);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            exploded = reader.ReadBoolean();
+            base.ReceiveExtraAI(reader);
+        }
         public override void SetDefaults()
-		{
+        {
+            Projectile.timeLeft = 60;
 
-			Projectile.timeLeft = 60;
+            Projectile.width = 26;
+            Projectile.height = 26;
 
-			Projectile.width = 26;
-			Projectile.height = 26;
             Projectile.light = 0.2f;
 
-			Projectile.friendly = true;
-			Projectile.hostile = false;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
 
-			Projectile.tileCollide = false;
-			Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
+            Projectile.penetrate = 3;
 
-			Projectile.usesLocalNPCImmunity = true;
-			Projectile.localNPCHitCooldown = 10;
-			Projectile.stopsDealingDamageAfterPenetrateHits = true;
-			base.SetDefaults();
-		}
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 4;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
+            base.SetDefaults();
+        }
 
-		public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter)
-		{
-			var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+        public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter)
+        {
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
 
-			if (pokemon.owner == Main.myPlayer)
-			{
-				for (int i = 0; i < pokemonOwner.nAttackProjs; i++)
-				{
-					if (pokemonOwner.attackProjs[i] == null)
-					{
+            if (pokemon.owner == Main.myPlayer)
+            {
+                for (int i = 0; i < pokemonOwner.nAttackProjs; i++)
+                {
+                    if (pokemonOwner.attackProjs[i] == null)
+                    {
                         pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Psychic>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner, pokemonOwner.GetPokemonAttackDamage(GetType().Name))];
-                        SoundEngine.PlaySound(SoundID.Item9, pokemon.position);
                         pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
+                        SoundEngine.PlaySound(SoundID.Item42, pokemon.position);
                         pokemonOwner.timer = pokemonOwner.attackDuration;
                         pokemonOwner.canAttack = false;
-                        pokemonOwner.canAttackOutTimer = true;
                         break;
-					}
-				}
-			}
-		}
+                    }
+                }
+            }
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D texture = ModContent.Request<Texture2D>(Projectile.ModProjectile.Texture).Value;
+            if (!exploded)
+            {
+                Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition,
+                texture.Frame(1, 5, 0, Projectile.frame), Color.White, 0,
+                texture.Frame(1, 5).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
+
+                return false;
+            }
+            else
+            {
+                Main.EntitySpriteDraw(explosionTexture.Value, Projectile.Center - Main.screenPosition,
+                    explosionTexture.Frame(1, 8, 0, Projectile.frame), Color.White, 0,
+                    explosionTexture.Frame(1, 8).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
+
+                return false;
+            }
+
+        }
 
         public override void AI()
         {
-            Vector2 homingTarget = FindTarget();
-            float currentSpeed = 40f * (float)Math.Pow(1.0f - (float)Projectile.timeLeft / 60f, 1f);
-            float homingStrength = 0.03f + 0.3f * (1.0f - (float)Projectile.timeLeft / 60f);
-
-            if (!((Projectile.velocity == Vector2.Zero || Projectile.velocity.Length() <= float.Epsilon) && (homingTarget - Projectile.Center).Length() <= float.Epsilon))
+            if (Projectile.timeLeft == 1 && !exploded) //transition to explosion
             {
-                Projectile.velocity *= 1 - homingStrength;
-                Projectile.velocity += homingStrength * currentSpeed * Vector2.Normalize(homingTarget - Projectile.Center);
+                exploded = true;
+                Projectile.ResetLocalNPCHitImmunity();
+                Projectile.frame = 0;
+                Projectile.frameCounter = 0;
+                Projectile.timeLeft = 120;
+                Projectile.damage = (int)Projectile.ai[0]; //need to re-assign damage after "Projectile.stopsDealingDamageAfterPenetrateHits" triggers and sets damage to 0.
+                SoundEngine.PlaySound(SoundID.Item24, Projectile.position);
+            }
 
-                if (Projectile.velocity.Length() > (homingTarget - Projectile.Center).Length())
-                {
-                    Projectile.velocity = Vector2.Zero;
-                    Projectile.position = homingTarget - Vector2.One * Projectile.width / 2f;
-                }
+            if (!exploded)
+            {
+                HomingMovement();
+            }
+            else
+            {
+                Projectile.velocity = Vector2.Zero;
             }
 
             UpdateAnimation();
 
-            if (!Main.dedServ)
-            {
-                if (Projectile.timeLeft % 5 == 0)
-                {
-                    Dust newDust = Main.dust[Dust.NewDust(Projectile.Center, 10, 10, DustID.PinkTorch)];
-                    newDust.noGravity = true;
-                }
-            }
-
             if (Projectile.owner == Main.myPlayer)
             {
-                if (Projectile.timeLeft == 1)
-                {
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<PsychicBlast>(), 0, 2f, Projectile.owner, (int)Projectile.ai[0]);
-                }
-
                 Projectile.netUpdate = true;
             }
         }
 
-        private Vector2 FindTarget()
+        public void HomingMovement()
         {
-            Vector2 targetPosition = Vector2.Zero;
+            Vector2 homingTarget = Projectile.Center;
 
-            if (Projectile.owner == Main.myPlayer)
+            foundTarget = false;
+            if (attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack)
             {
-                PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
-                if (trainer.attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack)
+                SearchTarget((float)PokemonData.pokemonAttacks["Psychic"].distanceToAttack);
+                if (foundTarget)
                 {
-                    targetPosition = trainer.attackPosition;
+                    if (targetEnemy != null)
+                    {
+                        if (targetEnemy.active)
+                        {
+                            homingTarget = targetEnemy.Center;
+                        }
+                    }
+                    else if (targetPlayer != null)
+                    {
+                        if (targetPlayer.active)
+                        {
+                            homingTarget = targetPlayer.Center;
+                        }
+                    }
+                }
+            }
+            else if (attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack)
+            {
+                if (Trainer.targetPlayer != null)
+                {
+                    homingTarget = Trainer.targetPlayer.Center;
+                }
+                else if (Trainer.targetNPC != null)
+                {
+                    homingTarget = Trainer.targetNPC.Center;
                 }
                 else
                 {
-                    float runningClosestDistance = PokemonData.pokemonAttacks["Psychic"].distanceToAttack;
-
-                    for (int i = 0; i < Main.maxNPCs; i++)
-                    {
-                        NPC npc = Main.npc[i];
-                        if (npc.CanBeChasedBy() && npc.life > 0)
-                        {
-                            if ((npc.Center - Projectile.Center).Length() < runningClosestDistance)
-                            {
-                                runningClosestDistance = (npc.Center - Projectile.Center).Length();
-                                targetPosition = npc.Center;
-                            }
-                        }
-                    }
-
-                }
-                if (targetPosition == Vector2.Zero)
-                {
-                    targetPosition = Projectile.Center;
+                    homingTarget = Trainer.attackPosition;
                 }
             }
-            return targetPosition;
+
+            float currentSpeed = 40f * (float)Math.Pow(1.0f - (float)Projectile.timeLeft / 60f, 1f);
+            float homingStrength = 0.03f + 0.3f * (1.0f - (float)Projectile.timeLeft / 60f);
+            if (Projectile.velocity.Length() > 1f || (homingTarget - Projectile.Center).Length() > float.Epsilon)
+            {
+                Projectile.velocity *= 1 - homingStrength;
+                Projectile.velocity += homingStrength * currentSpeed * (homingTarget - Projectile.Center).SafeNormalize(Vector2.Zero);
+            }
+            else
+            {
+                Projectile.velocity = Vector2.Zero;
+            }
         }
 
-        public void UpdateAnimation()
+        private void UpdateAnimation()
         {
-            if (++Projectile.frameCounter >= 8)
+            if (++Projectile.frameCounter >= 4)
             {
                 Projectile.frameCounter = 0;
-                if (++Projectile.frame >= Main.projFrames[Projectile.type])
+                if (++Projectile.frame >= (exploded ? 8 : Main.projFrames[Projectile.type]))
                 {
+                    if (exploded)
+                    {
+                        Projectile.Kill();
+                    }
                     Projectile.frame = 0;
-                    
+                    int dustIndex = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Gastropod, 0f, 0f, 200, default(Color), 2f);
+                    Main.dust[dustIndex].noGravity = true;
                 }
             }
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            SoundEngine.PlaySound(SoundID.Item92, Projectile.position);
+        }
+
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            Vector2 start = Projectile.Center + new Vector2(exploded ? 62 : 26, 0);
+            Vector2 end = Projectile.Center - new Vector2(exploded ? 62 : 26, 0);
+            float collisionPoint = 0f; // Don't need that variable, but required as parameter
+
+            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, Projectile.scale * (exploded ? 124f : 52f), ref collisionPoint);
         }
     }
 }
+
