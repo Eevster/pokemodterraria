@@ -4,9 +4,7 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using Pokemod.Content.Pets;
-using Pokemod.Content.Dusts;
 using Terraria.GameContent;
 using Pokemod.Content.NPCs;
 
@@ -102,6 +100,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
 
             base.ModifyHitNPC(target, ref modifiers);
+        }
+
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+        {
+            float dmgMultiplier = (int)((Projectile.velocity.Length()-12)/1.5f);
+            dmgMultiplier = MathHelper.Clamp(dmgMultiplier, 0, 4);
+            dmgMultiplier = 1f + dmgMultiplier / 2f;
+            modifiers.FinalDamage *= dmgMultiplier;
+
+            base.ModifyHitPlayer(target, ref modifiers);
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)

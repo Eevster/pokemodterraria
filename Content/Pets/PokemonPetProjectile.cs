@@ -56,6 +56,7 @@ namespace Pokemod.Content.Pets
 		public bool canMoveWhileAttack = false;
 		public int attackDuration = 0;
 		public int attackCooldown = 0;
+		public int remainAttacks = 0;
 
 		public virtual float moveSpeed1 => 5f;
 		public virtual float moveSpeed2 => 8f;

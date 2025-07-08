@@ -435,6 +435,12 @@ Projectiles: {
 	// Psychic.DisplayName: Psychic
 	// BubbleBeam.DisplayName: Bubble Beam
 	// ElectroBall.DisplayName: Electro Ball
+	// FuryCutter.DisplayName: Fury Cutter
+	// LeafBlade.DisplayName: Leaf Blade
+	// BulletSeed.DisplayName: Bullet Seed
+	// LeafStorm.DisplayName: Leaf Storm
+	// Psybeam.DisplayName: Psybeam
+	// MegaDrain.DisplayName: Mega Drain
 }
 
 Items: {
