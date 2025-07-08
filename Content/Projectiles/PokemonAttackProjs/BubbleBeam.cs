@@ -6,10 +6,11 @@ using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Pokemod.Content.Pets;
+using Pokemod.Content.Dusts;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-    internal class WaterGun : PokemonAttack
+    internal class BubbleBeam : PokemonAttack
     {
         public override void SetStaticDefaults()
         {
@@ -21,7 +22,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         
         public override void Load()
         { 
-            trailTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/WaterGunTrail");
+            trailTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/BubbleBeamTrail");
         }
 
         public override void Unload()
@@ -37,13 +38,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.friendly = true;
             Projectile.hostile = false;
 
-            Projectile.timeLeft = 300;
+            Projectile.timeLeft = 120;
 
             Projectile.tileCollide = true;  
-            Projectile.penetrate = 2;
+            Projectile.penetrate = 3;
 
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 2;
+            Projectile.localNPCHitCooldown = 5;
             base.SetDefaults();
         }
 
@@ -53,9 +54,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(pokemon.owner == Main.myPlayer){
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 18f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<WaterGun>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 18f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<BubbleBeam>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
 						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
 						SoundEngine.PlaySound(SoundID.Item21, pokemon.position);
+                        SoundEngine.PlaySound(SoundID.Item85, pokemon.position);
 						pokemonOwner.timer = pokemonOwner.attackDuration;
 						pokemonOwner.canAttack = false;
 						break;
@@ -67,6 +69,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+
+            int dustIndex = Dust.NewDust(Projectile.Center - new Vector2(10, 10), 20, 20, DustID.BubbleBurst_Blue, 0.5f * Projectile.velocity.X, 0.5f * Projectile.velocity.Y, 50, default(Color), 2f);
+            Main.dust[dustIndex].noGravity = true;
+            dustIndex = Dust.NewDust(Projectile.Center-new Vector2(10,10), 20, 20, ModContent.DustType<BubbleDust>(), 0.5f * Projectile.velocity.X, 0.5f * Projectile.velocity.Y, 50, default(Color), 1f);
+            Main.dust[dustIndex].noGravity = true;
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
@@ -80,10 +87,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            Vector2 start = Projectile.Center-25f*Projectile.scale*new Vector2(0,-1).RotatedBy(Projectile.rotation);
+            Vector2 start = Projectile.Center-50f*Projectile.scale*new Vector2(0,-1).RotatedBy(Projectile.rotation);
             Vector2 end = Projectile.Center+25f*Projectile.scale*new Vector2(0,-1).RotatedBy(Projectile.rotation);
             float collisionPoint = 0f; // Don't need that variable, but required as parameter
-            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 10f*Projectile.scale, ref collisionPoint);
+            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 24f*Projectile.scale, ref collisionPoint);
         }
 
         public override void OnKill(int timeLeft)
@@ -92,7 +99,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             for (int i = 0; i < 20; i++)
             {
-                int dustIndex = Dust.NewDust(Projectile.Center, 20, 20, DustID.Water, 0f, 0f, 100, default(Color), 3f);
+                int dustIndex = Dust.NewDust(Projectile.Center, 20, 20, DustID.BubbleBurst_Blue, 0f, 0f, 50, default(Color), 2f);
                 
                 Main.dust[dustIndex].noGravity = true;
                 Main.dust[dustIndex].velocity *= 3f;

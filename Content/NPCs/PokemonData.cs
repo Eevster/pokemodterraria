@@ -72,10 +72,16 @@ namespace Pokemod.Content.NPCs
             return done;
         }
 
+        public int GetWildCalcStat(int index)
+        {
+            return StatFunc(index, baseStats[index], IVs[index], 0, lvl, nature);
+        }
+
         public static int[] GenerateIVs()
         {
-            int[] IVs = [0,0,0,0,0,0,0];
-            for(int i = 0; i < IVs.Length; i++){
+            int[] IVs = [0, 0, 0, 0, 0, 0, 0];
+            for (int i = 0; i < IVs.Length; i++)
+            {
                 IVs[i] = GenerateIV();
             }
 
@@ -202,7 +208,7 @@ namespace Pokemod.Content.NPCs
             {"Ekans", new PokemonInfo([35, 60, 44, 40, 54, 55], [(int)TypeIndex.Poison], ["Toxic"], (int)StageIndex.Basic, (int)ExpTypes.MediumFast, completed: false)},
             {"Arbok", new PokemonInfo([60, 95, 69, 65, 79, 80], [(int)TypeIndex.Poison], ["PoisonPowder"], (int)StageIndex.Stage1, (int)ExpTypes.MediumFast, completed: false)},
             {"Pikachu", new PokemonInfo([35, 55, 40, 50, 50, 90], [(int)TypeIndex.Electric], ["Thunderbolt"], (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
-            {"Raichu", new PokemonInfo([60, 90, 55, 90, 80, 110], [(int)TypeIndex.Electric], ["Thunder"], (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
+            {"Raichu", new PokemonInfo([60, 90, 55, 90, 80, 110], [(int)TypeIndex.Electric], ["Thunder","ElectroBall"], (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
             {"Sandshrew", new PokemonInfo([50, 75, 85, 20, 30, 40], [(int)TypeIndex.Ground], ["QuickAttack"], (int)StageIndex.Basic, (int)ExpTypes.MediumFast, completed: false)},
             {"Sandslash", new PokemonInfo([75, 100, 110, 45, 55, 65], [(int)TypeIndex.Ground], ["PinMissile"], (int)StageIndex.Stage1, (int)ExpTypes.MediumFast, completed: false)},
             {"NidoranM", new PokemonInfo([55, 47, 52, 40, 40, 41], [(int)TypeIndex.Poison], ["DoubleKick"], (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
@@ -237,7 +243,7 @@ namespace Pokemod.Content.NPCs
             {"Growlithe", new PokemonInfo([55, 70, 45, 70, 50, 60], [(int)TypeIndex.Fire], ["Ember"], (int)StageIndex.Basic, (int)ExpTypes.Slow, completed: false)},
             {"Arcanine", new PokemonInfo([90, 110, 80, 100, 80, 95], [(int)TypeIndex.Fire], ["FireBlast"], (int)StageIndex.Stage1, (int)ExpTypes.Slow, completed: false)},
             {"Poliwag", new PokemonInfo([40, 50, 40, 40, 40, 90], [(int)TypeIndex.Water], ["Bubble"], (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
-            {"Poliwhirl", new PokemonInfo([65, 65, 65, 50, 50, 90], [(int)TypeIndex.Water], ["Waterfall"], (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
+            {"Poliwhirl", new PokemonInfo([65, 65, 65, 50, 50, 90], [(int)TypeIndex.Water], ["BubbleBeam"], (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
             {"Poliwrath", new PokemonInfo([90, 95, 95, 70, 90, 70], [(int)TypeIndex.Water,(int)TypeIndex.Fighting], ["HydroPump"], (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
             {"Abra", new PokemonInfo([25, 20, 15, 105, 55, 90], [(int)TypeIndex.Psychic], ["Teleport"], (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
             {"Kadabra", new PokemonInfo([40, 35, 30, 120, 70, 105], [(int)TypeIndex.Psychic], ["Confusion"], (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
@@ -365,15 +371,17 @@ namespace Pokemod.Content.NPCs
             {"AirSlash", new PokemonAttackInfo(75,80,60,800f,true,true,(int)TypeIndex.Flying, true)},
             {"AquaRing", new PokemonAttackInfo(0,90,60,100f,true,false,(int)TypeIndex.Water, true)},
             {"Bubble", new PokemonAttackInfo(20,10,60,600f,false,false,(int)TypeIndex.Water, true)},
+            {"BubbleBeam", new PokemonAttackInfo(65,30,60,800f,false,false,(int)TypeIndex.Water, true)},
             {"ConfuseRay", new PokemonAttackInfo(0,30,60,800f,true,true,(int)TypeIndex.Ghost, true)},
             {"Confusion", new PokemonAttackInfo(50,56,60,800f,false,true,(int)TypeIndex.Psychic, true)},
             {"Dig", new PokemonAttackInfo(80,90,60,800f,false,true,(int)TypeIndex.Ground)},
             {"Discharge", new PokemonAttackInfo(80,60,60,200f,true,false,(int)TypeIndex.Electric, true)},
             {"DoubleKick", new PokemonAttackInfo(30,30,60,200f,false,false,(int)TypeIndex.Fighting)},
+            {"Earthquake", new PokemonAttackInfo(100,90,60,800f,false,true,(int)TypeIndex.Ground)},
+            {"ElectroBall", new PokemonAttackInfo(40,30,60,800f,false,false,(int)TypeIndex.Electric)},
             {"Ember", new PokemonAttackInfo(40,30,60,800f,false,false,(int)TypeIndex.Fire, true)},
             {"Explosion", new PokemonAttackInfo(250,32,60,800f,false,false,(int)TypeIndex.Normal)},
-            {"Earthquake", new PokemonAttackInfo(100,90,60,800f,false,true,(int)TypeIndex.Ground)},
-            {"FireBlast", new PokemonAttackInfo(110,40,60,200f,true,true,(int)TypeIndex.Fire, true)},
+            {"FireBlast", new PokemonAttackInfo(110,40,60,800f,true,true,(int)TypeIndex.Fire, true)},
             {"Flamethrower", new PokemonAttackInfo(90,90,60,400f,true,false,(int)TypeIndex.Fire, true)},
             {"FlameWheel", new PokemonAttackInfo(60,60,60,800f,false,false,(int)TypeIndex.Fire)},
             {"FlashCannon", new PokemonAttackInfo(80,40,60,800f,false,true,(int)TypeIndex.Steel, true)},

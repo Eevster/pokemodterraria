@@ -477,6 +477,21 @@ namespace Pokemod.Common.Players
 			return null;
 		}
 
+		public bool HasPokemonByName(string pokemonName)
+		{
+			for (int i = 0; i < currentActivePokemon.Count; i++)
+			{
+				PokemonPetProjectile currentPokemon = GetPokemonProjectile(i);
+
+				if (currentPokemon != null && currentPokemon.pokemonName == pokemonName)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		public static bool IsValidPokemon(Projectile proj)
 		{
 			if (!proj.active)

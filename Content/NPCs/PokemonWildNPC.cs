@@ -49,7 +49,7 @@ namespace Pokemod.Content.NPCs
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
 		/// </summary>
 		public virtual int[] baseStats => PokemonData.pokemonInfo[pokemonName].pokemonStats;
-		public int[] finalStats;
+		public int[] finalStats = [0,0,0,0,0,0];
 
 		public virtual string[] variants => [];
 		public string variant;
@@ -58,15 +58,29 @@ namespace Pokemod.Content.NPCs
 		public bool hostilePokemon;
 
 		public override void SendExtraAI(BinaryWriter writer) {
-			writer.Write((double)moveDirection);
-			writer.Write((double)flyDirection);
+			writer.Write(NPC.lifeMax);
+			writer.Write(NPC.life);
+			writer.Write(NPC.defense);
+			writer.Write(finalStats[2]);
+			writer.Write(finalStats[4]);
+			writer.Write(finalStats[5]);
+			writer.Write(moveDirection);
+			writer.Write(flyDirection);
 			writer.Write(isFlying);
+			writer.Write(isSwimming);
 		}
 
 		public override void ReceiveExtraAI(BinaryReader reader) {
-			moveDirection = (int)reader.ReadDouble();
-			flyDirection = (int)reader.ReadDouble();
+			NPC.lifeMax = reader.ReadInt32();
+			NPC.life = reader.ReadInt32();
+			NPC.defense = reader.ReadInt32();
+			finalStats[2] = reader.ReadInt32();
+			finalStats[4] = reader.ReadInt32();
+			finalStats[5] = reader.ReadInt32();
+			moveDirection = reader.ReadInt32();
+			flyDirection = reader.ReadInt32();
 			isFlying = reader.ReadBoolean();
+			isSwimming = reader.ReadBoolean();
 		}
 
 		public override void SetStaticDefaults() {
@@ -81,12 +95,13 @@ namespace Pokemod.Content.NPCs
 			NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 		}
 
-		public override void SetDefaults() {
+		public override void SetDefaults()
+		{
 			Asset<Texture2D> pokeTexture = ModContent.Request<Texture2D>(Texture);
-			
+
 			NPC.width = pokeTexture.Width();
-            NPC.height = pokeTexture.Height();
-            NPC.Hitbox = new Rectangle((int)(NPC.position.X+(NPC.width-hitboxWidth)/2), (int)(NPC.position.Y+(NPC.height-hitboxHeight)), hitboxWidth, hitboxHeight);
+			NPC.height = pokeTexture.Height();
+			NPC.Hitbox = new Rectangle((int)(NPC.position.X + (NPC.width - hitboxWidth) / 2), (int)(NPC.position.Y + (NPC.height - hitboxHeight)), hitboxWidth, hitboxHeight);
 
 			NPC.damage = 0;
 			NPC.lifeMax = 100;
@@ -100,39 +115,64 @@ namespace Pokemod.Content.NPCs
 
 			NPC.noTileCollide = !tangible;
 
-			if(shiny) NPC.rarity = 14;
+			if (shiny) NPC.rarity = 14;
 		}
 
 		public override void OnSpawn(IEntitySource source)
-        {
-			if(Main.netMode != NetmodeID.MultiplayerClient){
-				nature = 10*Main.rand.Next(5)+Main.rand.Next(5);
-				lvl = Main.rand.Next(minLevel,Math.Min(WorldLevel.MaxWorldLevel, maxLevel)+1);
-				//Probability of it being a variant
-				if(Main.rand.NextBool(10)){
-					if(variants.Length>0){
-						variant = variants[Main.rand.Next(variants.Length)];
-						//Remove the possibility of spawning with the "Christmas" variant if it is no longer Christmas
-						if(variant == "Christmas"){
-							if(!Main.xMas){
-								variant = "";
-							}
+		{
+			nature = 10 * Main.rand.Next(5) + Main.rand.Next(5);
+			lvl = Main.rand.Next(minLevel, Math.Min(WorldLevel.MaxWorldLevel, maxLevel) + 1);
+			//Probability of it being a variant
+			if (Main.rand.NextBool(10))
+			{
+				if (variants.Length > 0)
+				{
+					variant = variants[Main.rand.Next(variants.Length)];
+					//Remove the possibility of spawning with the "Christmas" variant if it is no longer Christmas
+					if (variant == "Christmas")
+					{
+						if (!Main.xMas)
+						{
+							variant = "";
 						}
-					}else{
-						variant = "";
 					}
-				}else{
+				}
+				else
+				{
 					variant = "";
 				}
-				NPC.netUpdate = true;
 			}
+			else
+			{
+				variant = "";
+			}
+
 			int[] IVs = PokemonNPCData.GenerateIVs();
-            finalStats = PokemonNPCData.CalcAllStats(lvl, baseStats, IVs, [0,0,0,0,0,0], nature);
-            NPC.lifeMax = finalStats[0];
-			NPC.life = NPC.lifeMax;
-			NPC.defense = finalStats[2];
+			finalStats = PokemonNPCData.CalcAllStats(lvl, baseStats, IVs, [0, 0, 0, 0, 0, 0], nature);
+
 			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, IVs, nature, variant: variant);
-        }
+
+			/*if (Main.netMode == NetmodeID.Server)
+			{
+				ModPacket packet = Mod.GetPacket();
+				packet.Write((byte)PokemodMessageType.SetNPCStats);
+				packet.Write((byte)NPC.whoAmI);
+				packet.Write(finalStats[0]);
+				packet.Write(finalStats[2]);
+				packet.Send();
+			}*/
+
+			NPC.lifeMax = finalStats[0];
+			NPC.life = NPC.lifeMax;
+			NPC.defense = Math.Max(finalStats[2], finalStats[4]);
+
+			if (Main.netMode == NetmodeID.Server)
+			{
+				NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+			}
+
+			NPC.netUpdate = true;
+		}
 
         public override bool CanHitNPC(NPC target)
         {
@@ -193,9 +233,13 @@ namespace Pokemod.Content.NPCs
         {
 			if(variant != null){
 				if(variant != ""){
-					Asset<Texture2D> variantTexture = ModContent.Request<Texture2D>(Texture+"_"+variant);
-					spriteBatch.Draw(variantTexture.Value, NPC.Center-screenPos, variantTexture.Frame(1, totalFrames, 0, (int)currentFrame), drawColor, NPC.rotation, variantTexture.Frame(1, totalFrames).Size() / 2f, NPC.scale, NPC.direction>=0?SpriteEffects.None:SpriteEffects.FlipHorizontally, 0f);
-					return false;
+					if (ModContent.RequestIfExists<Texture2D>(Texture + "_" + variant, out Asset<Texture2D> variantTexture))
+					{
+						spriteBatch.Draw(variantTexture.Value, NPC.Center - screenPos,
+							variantTexture.Frame(1, totalFrames, 0, (int)currentFrame), drawColor, NPC.rotation,
+							variantTexture.Frame(1, totalFrames).Size() / 2f, NPC.scale, NPC.direction >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+						return false;
+					}
 				}
 			}
 
@@ -378,44 +422,40 @@ namespace Pokemod.Content.NPCs
 			// Default movement parameters (here for attacking)
 			float speed = moveSpeed;
 			float speedMultiplier = 1f;
-
-			if(--AI_Timer <= 0){
-				if (Main.netMode != NetmodeID.MultiplayerClient) {
-					AI_Timer = Main.rand.Next(60,300);
-					/*if(moveDirection == 0){
-						moveDirection = 1+2*Main.rand.Next(-1,1);
-					}else{
-						moveDirection = 0;
-					}*/
-					moveDirection = Main.rand.Next(-1,2);
-				}
-
-				if(moveStyle == (int)MovementStyle.Hybrid){
-					if(!isFlying){
-						if (Main.netMode != NetmodeID.MultiplayerClient) {
-							isFlying = Main.rand.NextBool(3);
-						}
-					}
-				}
-
-				if(moveStyle == (int)MovementStyle.Hybrid || moveStyle == (int)MovementStyle.Fly){
-					if (Main.netMode != NetmodeID.MultiplayerClient) {
-						flyDirection = Main.rand.Next(-1,2);
-					}
-					if(flyDirection != 0){
-						NPC.velocity.Y = flyDirection;
-					}
-				}
-			}
-
-			if (Main.netMode != NetmodeID.MultiplayerClient) {
-				NPC.netUpdate = true;
-			}
-
+			
 			if(moveStyle == (int)MovementStyle.Hybrid){
 				if(flyDirection == 1 && NPC.velocity.Y == 0){
 					isFlying = false;
 				}
+			}
+			
+			AI_Timer--;
+
+			if(AI_Timer <= 0 && Main.netMode != NetmodeID.MultiplayerClient){
+				AI_Timer = Main.rand.Next(60, 300);
+				/*if(moveDirection == 0){
+					moveDirection = 1+2*Main.rand.Next(-1,1);
+				}else{
+					moveDirection = 0;
+				}*/
+				moveDirection = Main.rand.Next(-1, 2);
+				
+				NPC.netUpdate = true;
+
+				if(moveStyle == (int)MovementStyle.Hybrid){
+					if(!isFlying){
+						isFlying = Main.rand.NextBool(3);
+					}
+				}
+
+				if(moveStyle == (int)MovementStyle.Hybrid || moveStyle == (int)MovementStyle.Fly){
+					flyDirection = Main.rand.Next(-1,2);
+					
+					/*if(flyDirection != 0){
+						NPC.velocity.Y = flyDirection;
+					}*/
+				}
+				NPC.netUpdate = true;
 			}
 
 			if(moveStyle == (int)MovementStyle.Fly){
@@ -426,6 +466,10 @@ namespace Pokemod.Content.NPCs
 				isSwimming = NPC.wet && !NPC.lavaWet && !NPC.honeyWet && !NPC.shimmerWet;
 			}else{
 				isSwimming = false;
+			}
+			
+			if (Main.netMode != NetmodeID.MultiplayerClient) {
+				NPC.netUpdate = true;
 			}
 
 			if(isSwimming){

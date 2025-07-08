@@ -10,9 +10,10 @@ using Pokemod.Content;
 
 namespace Pokemod
 {
-    internal enum PokemodMessageType : byte
+	internal enum PokemodMessageType : byte
 	{
 		PokemonPlayerSync,
+		SetNPCStats,
     }
     public class Pokemod : Mod
     {
@@ -30,6 +31,16 @@ namespace Pokemod
 					if (Main.netMode == NetmodeID.Server) {
 						// Forward the changes to the other clients
 						pokemonPlayer.SyncPlayer(-1, whoAmI, false);
+					}
+					break;
+				case PokemodMessageType.SetNPCStats:
+					if (Main.npc[reader.ReadByte()] is NPC npc)
+					{
+						npc.lifeMax = reader.ReadInt32();
+						npc.life = npc.lifeMax;
+						npc.defense = reader.ReadInt32();
+
+						NetMessage.SendData(MessageID.SyncNPC, number: npc.whoAmI);
 					}
 					break;
 				default:

@@ -95,7 +95,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.damage = (int)(Projectile.damage*0.5f); 
+            Projectile.damage = (int)(Projectile.damage*0.5f);
+            if(Projectile.owner == Main.myPlayer){
+				Projectile.netUpdate = true;
+			}
             base.OnSpawn(source);
         }
 

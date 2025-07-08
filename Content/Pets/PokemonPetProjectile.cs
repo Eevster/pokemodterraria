@@ -1244,6 +1244,10 @@ namespace Pokemod.Content.Pets
 			distanceToAttack = PokemonData.pokemonAttacks[currentAttack].distanceToAttack;
 			canMoveWhileAttack = PokemonData.pokemonAttacks[currentAttack].canMove;
 			canAttackThroughWalls = PokemonData.pokemonAttacks[currentAttack].canPassThroughWalls;
+
+			if(Main.myPlayer == Projectile.owner){
+				Projectile.netUpdate = true;
+			}
 		}
 
 		public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){

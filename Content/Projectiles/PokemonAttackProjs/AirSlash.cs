@@ -95,6 +95,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void OnSpawn(IEntitySource source)
         {
             Projectile.rotation = Projectile.velocity.RotatedByRandom(MathHelper.ToRadians(45)).ToRotation();
+			Projectile.netUpdate = true;
             base.OnSpawn(source);
         }
 

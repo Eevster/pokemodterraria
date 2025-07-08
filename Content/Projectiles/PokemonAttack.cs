@@ -99,11 +99,11 @@ namespace Pokemod.Content.Projectiles
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-			if(target.ModNPC is PokemonWildNPC wildNPC){
+			if (target.ModNPC is PokemonWildNPC wildNPC)
+			{
 				modifiers.DefenseEffectiveness *= 0;
-				modifiers.FinalDamage -= 2f;
-				modifiers.FinalDamage /= wildNPC.finalStats[2]/10f;
-				modifiers.FinalDamage += 2f;
+				modifiers.FinalDamage /= (!isSpecial ? wildNPC.finalStats[2] : wildNPC.finalStats[4]) / 10f;
+				//modifiers.FinalDamage /= (!isSpecial ? wildNPC.NPC.GetGlobalNPC<PokemonNPCData>().GetWildCalcStat(2) : wildNPC.NPC.GetGlobalNPC<PokemonNPCData>().GetWildCalcStat(4)) / 10f;
 			}
 
             base.ModifyHitNPC(target, ref modifiers);

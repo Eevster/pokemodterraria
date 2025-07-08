@@ -434,6 +434,8 @@ Projectiles: {
 	// AlakazamMegaPetProjectileShiny.DisplayName: Alakazam Mega Pet Projectile Shiny
 	// Psychic.DisplayName: Psychic
 	// PsychicBlast.DisplayName: Psychic Blast
+	// BubbleBeam.DisplayName: Bubble Beam
+	// ElectroBall.DisplayName: Electro Ball
 }
 
 Items: {

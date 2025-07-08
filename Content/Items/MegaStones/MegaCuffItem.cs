@@ -4,6 +4,7 @@ using Pokemod.Common.Players;
 using Pokemod.Content.Buffs;
 using ReLogic.Content;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,7 +19,6 @@ namespace Pokemod.Content.Items.MegaStones
 			Item.useTime = 30;
 			Item.useAnimation = 30;
 			Item.useStyle = ItemUseStyleID.Shoot;
-			Item.UseSound = SoundID.Item6;
 			Item.noUseGraphic = true;
 			Item.maxStack = 1; // The item's max stack value
 			Item.value = Item.buyPrice(silver: 1); // The value of the item in copper coins. Item.buyPrice & Item.sellPrice are helper methods that returns costs in copper coins based on platinum/gold/silver/copper arguments provided to it.
@@ -32,12 +32,21 @@ namespace Pokemod.Content.Items.MegaStones
 
 			if (player.GetModPlayer<PokemonPlayer>().CanMegaEvolve != 0)
 			{
+				SoundEngine.PlaySound(SoundID.MenuTick, player.position);
 				CombatText.NewText(player.Hitbox, new Color(255, 255, 255), "Not Charged!");
+				return true;
+			}
+
+			if (!player.GetModPlayer<PokemonPlayer>().HasPokemonByName(player.GetModPlayer<PokemonPlayer>().MegaStone.Replace("MegaStoneItem","").Replace("MegaStoneItemX","").Replace("MegaStoneItemY","")))
+			{
+				SoundEngine.PlaySound(SoundID.MenuTick, player.position);
+				CombatText.NewText(player.Hitbox, new Color(255, 255, 255), "Incorrect Pokemon");
 				return true;
 			}
 
 			if (player.GetModPlayer<PokemonPlayer>().HasMegaStone > 0)
 			{
+				SoundEngine.PlaySound(SoundID.Item6, player.position);
 				player.AddBuff(ModContent.BuffType<MegaEvolution>(), 60 * 60);
 				player.GetModPlayer<PokemonPlayer>().CanMegaEvolve = 2;
 			}
