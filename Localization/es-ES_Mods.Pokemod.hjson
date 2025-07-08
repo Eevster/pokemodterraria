@@ -433,7 +433,6 @@ Projectiles: {
 	// AlakazamMegaPetProjectile.DisplayName: Alakazam Mega Pet Projectile
 	// AlakazamMegaPetProjectileShiny.DisplayName: Alakazam Mega Pet Projectile Shiny
 	// Psychic.DisplayName: Psychic
-	// PsychicBlast.DisplayName: Psychic Blast
 }
 
 Items: {

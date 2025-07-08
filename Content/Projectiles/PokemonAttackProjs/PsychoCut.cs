@@ -26,10 +26,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.friendly = true;
             Projectile.hostile = false;
 
-            Projectile.timeLeft = 30;
+            Projectile.timeLeft = 25;
 
             Projectile.tileCollide = false;  
-            Projectile.penetrate = 10;
+            Projectile.penetrate = 5;
 
 			Projectile.usesLocalNPCImmunity = true;
 			Projectile.localNPCHitCooldown = 25;
@@ -60,11 +60,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
             
 			if(pokemon.owner == Main.myPlayer){
-				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer%7 == 0 && pokemonOwner.timer <= 21)
+				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer%10 == 0 && pokemonOwner.timer <= 30)
                 {
 					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 						if(pokemonOwner.attackProjs[i] == null){
-							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 25f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<PsychoCut>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 15f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<PsychoCut>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
 							SoundEngine.PlaySound(SoundID.Item34, pokemon.position);
 							break;
 						}

@@ -1,6 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Pokemod.Common.GlobalNPCs;
 using Pokemod.Content.Pets;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -11,7 +12,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Teleport : PokemonAttack
 	{
-        private int fleeDistance = 800;
+        public static int fleeDistance = 300;
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 4;
@@ -43,7 +44,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 {
                     if (pokemonOwner.attackProjs[i] == null)
                     {
-                        pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Teleport>(), 0, 0f, pokemon.owner)];
+                        pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Teleport>(), 0, 0f, pokemon.owner, targetCenter.X, targetCenter.Y)];
                         pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
                         pokemonOwner.timer = pokemonOwner.attackDuration;
                         pokemonOwner.canAttack = false;
@@ -70,15 +71,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                         if (pokemonOwner.attackProjs[i] == null)
                         {
                             int fleeDirection = (Math.Sign(pokemon.Center.X - targetCenter.X));
-                            Vector2 targetPosition = FindAir(pokemon.TopLeft + Vector2.UnitX * fleeDirection * fleeDistance, out bool airFound) - Vector2.UnitY * pokemon.height;
-                            if (!airFound) targetPosition = pokemon.TopLeft;
-                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetPosition, Vector2.Zero, ModContent.ProjectileType<Teleport>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 10f, pokemon.owner)];
-                            pokemon.position = targetPosition;
-                            SoundEngine.PlaySound(SoundID.Item30, pokemon.position);
+                            Vector2 targetPosition = FindAir(pokemon.Center, fleeDirection, out bool airFound);
+                            if (!airFound) targetPosition = pokemon.Center;
+                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetPosition, Vector2.Zero, ModContent.ProjectileType<Teleport>(), 0, 0f, pokemon.owner, targetCenter.X, targetCenter.Y)];
+                            pokemon.position = targetPosition - new Vector2(pokemon.width, pokemon.height) * 0.5f;
                             DustBurst(pokemon.Center);
                             remainProjs--;
                             pokemonOwner.canAttackOutTimer = false;
-                            pokemonOwner.canAttack = true;
                             if (remainProjs <= 0)
                             {
                                 break;
@@ -107,31 +106,53 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
 		}
 
-        public static Vector2 FindAir(Vector2 target, out bool airFound)
+        public static Vector2 FindAir(Vector2 target, int fleeDirection, out bool airFound)
         {
-            int searchRange = 500;
+            int searchRange = (int)(fleeDistance / 16f);
             airFound = false;
-            Vector2 airPosition = Vector2.Zero;
+            bool groundFound = false;
+            Vector2 airPosition = target;
 
             int tileX = (int)(target.X / 16f);
             int tileY = (int)(target.Y / 16f);
 
-            int searchTarget = tileY - searchRange;
-            if (searchTarget < 0)
+            int searchTargetY = tileY - searchRange;
+            if (searchTargetY < 0)
             {
-                searchTarget = 0;
+                searchTargetY = 0;
             }
 
-            for (int y = tileY; y > searchTarget; y--)
+            for (int i = 0; i < searchRange; i++)
             {
-                Tile tile = Main.tile[tileX, y];
-                if (!tile.HasTile)
+                int x = tileX + i * fleeDirection;
+                Tile tileSolid = Main.tile[x, tileY];
+                if (tileSolid.HasTile && Main.tileSolid[tileSolid.TileType])
                 {
-                    airPosition = new Vector2(tileX * 16, y * 16);
-                    airFound = true;
-                    break;
-                }
+                    groundFound = true;
+                    for (int y = tileY; y > searchTargetY; y--)
+                    {
+                        Tile tileAir = Main.tile[x, y];
+                        if (!tileAir.HasTile || !Main.tileSolid[tileAir.TileType])
+                        {
+                            tileY = y;
+                            airPosition = new Vector2(x * 16, tileY * 16);
+                            airFound = true;
+                            groundFound = false;
+                            break;
+                        }
 
+                    }
+
+                    if ((target - airPosition).Length() >= fleeDistance)
+                    {
+                        break;
+                    }
+                }
+            }
+            if (!groundFound)
+            {
+                airPosition = target + Vector2.UnitX * fleeDistance * fleeDirection;
+                airFound = true;
             }
             return airPosition;
         }
@@ -142,7 +163,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Dust.NewDust(position, Projectile.width, Projectile.height, DustID.Confetti_Pink, 0, 0);
+                    Dust.NewDust(position, Projectile.width, Projectile.height, DustID.Gastropod, 0, 0);
                 }
                 for (int i = 0; i < 10; i++)
                 {
@@ -151,15 +172,64 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
         }
 
+        public bool SetExpTarget(out NPC target)
+        {
+            target = null;
+            if (Projectile.owner == Main.myPlayer)
+            {
+                Vector2 aimingTarget = new Vector2(Projectile.ai[0], Projectile.ai[1]);
+
+                for (int i = 0; i < Main.maxNPCs; i++)
+                {
+                    NPC npc = Main.npc[i];
+                    if (npc != null)
+                    {
+                        if (npc.CanBeChasedBy())
+                        {
+                            if ((new Rectangle((int)aimingTarget.X - 12, (int)aimingTarget.Y - 12, 24, 24)).Intersects(npc.getRect()))
+                            {
+                                target = npc;
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                if (target != null)
+                {
+                    if (pokemonProj != null)
+                    {
+                        if (pokemonProj.active)
+                        {
+                            if (target.life <= 0 && target.GetGlobalNPC<HitByPokemonNPC>().pokemonProj != pokemonProj)
+                            {
+                                PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
+                                pokemonMainProj?.SetExtraExp(HitByPokemonNPC.SetExpGained(target));
+                            }
+                            target.GetGlobalNPC<HitByPokemonNPC>().pokemonProj = pokemonProj;
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
         public override void AI()
 		{
+            if (Projectile.timeLeft == 18)
+            {
+                SetExpTarget(out NPC target);
+            }
+
             UpdateAnimation();
 
-			if (Projectile.owner == Main.myPlayer)
+            if (Projectile.owner == Main.myPlayer)
 			{
 				Projectile.netUpdate = true;
 			}
 		}
+
         private void UpdateAnimation()
         {
             if (++Projectile.frameCounter >= 4)
