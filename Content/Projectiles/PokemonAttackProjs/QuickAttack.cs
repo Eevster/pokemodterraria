@@ -45,7 +45,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
 						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<QuickAttack>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
-						pokemon.velocity = 18*Vector2.Normalize(targetCenter-pokemon.Center);
+						pokemon.velocity = 36*Vector2.Normalize(targetCenter-pokemon.Center);
 						SoundEngine.PlaySound(SoundID.Item1, pokemon.position);
 						pokemonOwner.timer = pokemonOwner.attackDuration;
 						pokemonOwner.canAttack = false;
@@ -84,7 +84,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if(!pokemonOwner.canAttack && pokemonOwner.timer > 0){
 				pokemonOwner.immune = true;
-			}
+                pokemon.velocity.Y *= 0.95f;
+            }
         }
 
         public override void AI()

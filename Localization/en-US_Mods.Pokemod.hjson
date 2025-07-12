@@ -441,6 +441,14 @@ Projectiles: {
 	LeafStorm.DisplayName: Leaf Storm
 	Psybeam.DisplayName: Psybeam
 	MegaDrain.DisplayName: Mega Drain
+	ShadowBall.DisplayName: Shadow Ball
+	Tackle.DisplayName: Tackle
+	Cut.DisplayName: Cut
+	FocusPunch.DisplayName: Focus Punch
+	MudShot.DisplayName: Mud Shot
+	SludgeBomb.DisplayName: Sludge Bomb
+	HyperBeam.DisplayName: Hyper Beam
+	DoubleEdge.DisplayName: Double Edge
 }
 
 Items: {

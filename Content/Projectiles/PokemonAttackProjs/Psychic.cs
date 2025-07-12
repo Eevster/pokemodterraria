@@ -32,6 +32,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             explosionTexture = null;
         }
+
         public override void SendExtraAI(BinaryWriter writer)
         {
             writer.Write(exploded);
@@ -45,7 +46,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         }
         public override void SetDefaults()
         {
-            Projectile.timeLeft = 60;
+            Projectile.timeLeft = 120;
 
             Projectile.width = 26;
             Projectile.height = 26;
@@ -56,10 +57,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.hostile = false;
 
             Projectile.tileCollide = false;
-            Projectile.penetrate = 3;
+            Projectile.penetrate = 4;
 
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 4;
+            Projectile.localNPCHitCooldown = 15;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             base.SetDefaults();
         }
@@ -74,16 +75,43 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 {
                     if (pokemonOwner.attackProjs[i] == null)
                     {
-                        pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Psychic>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner, pokemonOwner.GetPokemonAttackDamage(GetType().Name))];
                         pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
-                        SoundEngine.PlaySound(SoundID.Item42, pokemon.position);
                         pokemonOwner.timer = pokemonOwner.attackDuration;
                         pokemonOwner.canAttack = false;
+                        pokemonOwner.canAttackOutTimer = true;
                         break;
                     }
                 }
             }
         }
+
+        public override void AttackOutTimer(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter)
+        {
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+            if (pokemon.owner == Main.myPlayer)
+            {
+                if (pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer <= 20)
+                {
+                    int remainProjs = 1;
+                    for (int i = 0; i < pokemonOwner.nAttackProjs; i++)
+                    {
+                        if (pokemonOwner.attackProjs[i] == null)
+                        {
+                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Psychic>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner, pokemonOwner.GetPokemonAttackDamage(GetType().Name))];
+                            SoundEngine.PlaySound(SoundID.Item42, pokemon.position);
+                            remainProjs--;
+                            pokemonOwner.canAttackOutTimer = false;
+                            if (remainProjs <= 0)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
 
         public override bool PreDraw(ref Color lightColor)
         {
@@ -111,13 +139,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             if (Projectile.timeLeft == 1 && !exploded) //transition to explosion
             {
-                exploded = true;
-                Projectile.ResetLocalNPCHitImmunity();
-                Projectile.frame = 0;
-                Projectile.frameCounter = 0;
-                Projectile.timeLeft = 120;
-                Projectile.damage = (int)Projectile.ai[0]; //need to re-assign damage after "Projectile.stopsDealingDamageAfterPenetrateHits" triggers and sets damage to 0.
-                SoundEngine.PlaySound(SoundID.Item24, Projectile.position);
+                Explode();
             }
 
             if (!exploded)
@@ -135,6 +157,37 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             {
                 Projectile.netUpdate = true;
             }
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (target.life > damageDone) 
+            {
+                Explode();
+                Projectile.Center = target.Center;
+            }
+            base.OnHitNPC(target, hit, damageDone);
+        }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            if (target.statLife > info.Damage)
+            {
+                Explode();
+                Projectile.Center = target.Center;
+            }
+            base.OnHitPlayer(target, info);
+        }
+
+        private void Explode()
+        {
+            exploded = true;
+            Projectile.ResetLocalNPCHitImmunity();
+            Projectile.frame = 0;
+            Projectile.frameCounter = 0;
+            Projectile.timeLeft = 120;
+            Projectile.damage = (int)Projectile.ai[0]; //need to re-assign damage after "Projectile.stopsDealingDamageAfterPenetrateHits" triggers and sets damage to 0.
+            SoundEngine.PlaySound(SoundID.Item24, Projectile.position);
         }
 
         public void HomingMovement()
@@ -179,8 +232,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 }
             }
 
-            float currentSpeed = 40f * (float)Math.Pow(1.0f - (float)Projectile.timeLeft / 60f, 1f);
-            float homingStrength = 0.03f + 0.3f * (1.0f - (float)Projectile.timeLeft / 60f);
+            float currentSpeed = 20f * (float)Math.Pow(1.0f - (float)Projectile.timeLeft / 120f, 1f);
+            float homingStrength = 0.03f;
+            if(Projectile.timeLeft < 70f)
+            {
+                homingStrength = 0.1f;
+            }
+            if (Projectile.timeLeft < 40f)
+            {
+                homingStrength = 0.5f;
+            }
             if (Projectile.velocity.Length() > 1f || (homingTarget - Projectile.Center).Length() > float.Epsilon)
             {
                 Projectile.velocity *= 1 - homingStrength;
@@ -204,7 +265,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                         Projectile.Kill();
                     }
                     Projectile.frame = 0;
-                    int dustIndex = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Gastropod, 0f, 0f, 200, default(Color), 2f);
+                    int dustIndex = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Gastropod);
                     Main.dust[dustIndex].noGravity = true;
                 }
             }

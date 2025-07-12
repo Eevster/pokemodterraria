@@ -27,20 +27,22 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] walkFlyStartEnd => [14, 17];
         public override int[] attackFlyStartEnd => [10, 13];
 
+        public override float catchRate => 50;
+        public override int minLevel => 36;
+
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+				new FlavorTextBestiaryInfoElement("Lurking in the shadowy corners of rooms, it awaits chances to steal its prey's life force."));
 		}
-		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-                if (spawnInfo.Player.ZoneCorrupt || spawnInfo.Player.ZoneCrimson)
-                {
-                    return GetSpawnChance(spawnInfo, (SpawnCondition.Crimson.Chance + SpawnCondition.Corruption.Chance) * 0.2f);
-                }
+        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        {
+            if (spawnInfo.Player.ZoneCorrupt || spawnInfo.Player.ZoneCrimson)
+            {
+                return GetSpawnChance(spawnInfo, (SpawnCondition.Crimson.Chance + SpawnCondition.Corruption.Chance) * 0.2f);
             }
 
-			return 0f;
-		}
+            return 0f;
+        }
 		
 	}
 

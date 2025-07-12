@@ -26,8 +26,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackFlyStartEnd => [1,1];
 
 		public override float catchRate => 60;
+        public override int minLevel => 35;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
 				new FlavorTextBestiaryInfoElement("It grows by feeding on gases released by garbage. Though very rare, triplets have been found."));
 		}

@@ -17,19 +17,19 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] jumpStartEnd => [4, 4];
 		public override int[] fallStartEnd => [7, 7];
 		public override int[] attackStartEnd => [8,11];
-		public override float catchRate => 120;
 
+		public override float catchRate => 120;
 		public override int minLevel => 25;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+				new FlavorTextBestiaryInfoElement("It tumbles down slopes, heedless of any body parts chipping off. It eats a ton of rocks daily."));
 		}
-		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneNormalUnderground) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Underground.Chance * 0.25f);
-			}
+		public override float SpawnChance(NPCSpawnInfo spawnInfo)
+		{
+			if (spawnInfo.Player.ZoneNormalUnderground)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.Underground.Chance * 0.25f);
 			}
 
 			return 0f;
