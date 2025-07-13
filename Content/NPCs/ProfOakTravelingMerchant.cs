@@ -24,6 +24,7 @@ using Pokemod.Content.Items.Pokeballs;
 using Pokemod.Content.Items.Accessories;
 using Pokemod.Common.UI.StarterPanelUI;
 using Pokemod.Common.Players;
+using Pokemod.Content.Items.MegaStones;
 
 namespace Pokemod.Content.NPCs
 {
@@ -64,7 +65,6 @@ namespace Pokemod.Content.NPCs
 		public override void AddShops() {
 			Shop = new ProfOakTravelingMerchantShop(NPC.type);
 
-			// Always bring an ExampleItem
 			Shop.Add<PokeballItem>();
 			Shop.Add<GreatballItem>();
 			Shop.Add<UltraballItem>();
@@ -80,7 +80,14 @@ namespace Pokemod.Content.NPCs
             Shop.Add<Everstone>();
 			Shop.Add<SynchroMachine>();
 
-			// Bring  Tools
+			Shop.AddPool("MegaStones", slots: 1)
+				.Add<BlastoiseMegaStoneItem>(Condition.DownedMechBossAll)
+				.Add<CharizardMegaStoneItemX>(Condition.DownedMechBossAll, Condition.MoonPhasesOdd)
+				.Add<CharizardMegaStoneItemY>(Condition.DownedMechBossAll, Condition.MoonPhasesEven)
+				.Add<VenusaurMegaStoneItem>(Condition.DownedMechBossAll)
+				.Add<AlakazamMegaStoneItem>(Condition.DownedMechBossAll)
+                .Add<GengarMegaStoneItem>(Condition.DownedMechBossAll)
+                .Add<GyaradosMegaStoneItem>(Condition.DownedMechBossAll);
 
 
 			Shop.Register();

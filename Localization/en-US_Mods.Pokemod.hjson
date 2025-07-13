@@ -1202,7 +1202,7 @@ Items: {
 	}
 
 	AlakazamMegaStoneItem: {
-		DisplayName: Alakazam Mega Stone Item
+		DisplayName: Alakazite
 		Tooltip: ""
 	}
 }
