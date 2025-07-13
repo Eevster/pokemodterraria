@@ -5,7 +5,7 @@ Discord Link: https://discord.gg/pT5UagAB3n
 Contributers:
 -JACSMITH (Discord) Artist/Developer
 -PriddyNeatGames (Discord) Developer
--RollinMan42 (Github) Contributer
+-RollinMan (Discord) Artist/Developer
 
 Changelog:
 -Added a Starter System (Interact with Oak for the first time)
@@ -26,6 +26,7 @@ Changelog:
 -Added new accessories which boost the Trainer Class
 -Added new Pokeballs
 -Added Synchro Machine
+-Much more that I probably forgot over a 5 months span :D
 
 Legal:
 This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 
