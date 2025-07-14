@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "\\Assets",
-    "\\Assets\\Textures",
-    "\\Common",
-    "\\Common\\UI\\StarterPanelUI",
-    "\\Content"
+    ""
   ],
+  "SelectedNode": "\\build.txt",
   "PreviewInSolutionExplorer": false
 }

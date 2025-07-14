@@ -33,7 +33,13 @@ namespace Pokemod.Content.Items.Armor
             player.GetModPlayer<PokemonPlayer>().maxPokemon += 1;
         }
 
-		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		
-	}
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.PlatinumBar, 15)
+                .AddIngredient<WaterStoneItem>(10)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+    }
 }

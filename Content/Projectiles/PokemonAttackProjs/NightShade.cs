@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
@@ -33,10 +34,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.friendly = true;
             Projectile.ignoreWater= true;
             Projectile.tileCollide= false;
-            Projectile.timeLeft = 40;
+            Projectile.timeLeft = 50;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 30;
+            Projectile.localNPCHitCooldown = 20;
 			Projectile.light = 0.7f;
 			base.SetDefaults();
         }
@@ -50,9 +51,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
                         SoundEngine.PlaySound(SoundID.Item103 with { Volume = 0.6f }, pokemon.position);
 
-                        int nightShadeDmg = (int)(pokemonOwner.pokemonLvl * 7.5f);
-
-                        pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetCenter, Vector2.Zero, ModContent.ProjectileType<NightShade>(), nightShadeDmg, 2f, pokemon.owner)];
+                        pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetCenter, Vector2.Zero, ModContent.ProjectileType<NightShade>(), 1, 2f, pokemon.owner)];
 						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
 						pokemonOwner.timer = pokemonOwner.attackDuration;
 						pokemonOwner.canAttack = false;
@@ -62,7 +61,19 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
 		}
 
-		public override void OnSpawn(IEntitySource source)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+		{
+            CombatText.NewText(Projectile.Hitbox, Color.White, "?");
+            base.ModifyHitNPC(target, ref modifiers);
+			PokemonPetProjectile pokemonOwner = (PokemonPetProjectile)pokemonProj.ModProjectile;
+            
+            //modifiers.FinalDamage *= 1;
+            modifiers.FinalDamage += (int)(pokemonOwner.pokemonLvl * 10f) - 1;
+            CombatText.NewText(Projectile.Hitbox, Color.White, "Working");
+        }
+
+
+        public override void OnSpawn(IEntitySource source)
 		{
 			if (attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack)
 			{

@@ -48,7 +48,13 @@ namespace Pokemod.Content.Items.Armor
             player.statManaMax2 += MaxManaIncrease;
         }
 
-		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		
-	}
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.MeteoriteBar, 15)
+                .AddIngredient<FireStoneItem>(5)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+    }
 }
