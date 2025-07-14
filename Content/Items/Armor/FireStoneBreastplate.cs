@@ -40,7 +40,7 @@ namespace Pokemod.Content.Items.Armor
 		{
 			CreateRecipe()
 				.AddIngredient(ItemID.MeteoriteBar, 15)
-				.AddIngredient<FireStoneItem>(1)
+				.AddIngredient<FireStoneItem>(15)
 				.AddTile(TileID.Anvils)
 				.Register();
 		}

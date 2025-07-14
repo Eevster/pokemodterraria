@@ -37,8 +37,7 @@ namespace Pokemod.Content.Items.Armor
         {
             CreateRecipe()
                 .AddIngredient(ItemID.PlatinumBar, 15)
-                .AddIngredient(ItemID.Coral, 2)
-                .AddIngredient<WaterStoneItem>(1)
+                .AddIngredient<WaterStoneItem>(10)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

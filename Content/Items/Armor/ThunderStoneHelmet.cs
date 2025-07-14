@@ -52,8 +52,7 @@ namespace Pokemod.Content.Items.Armor
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.JungleSpores, 4)
-                .AddIngredient<ThunderStoneItem>(1)
+                .AddIngredient<ThunderStoneItem>(20)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

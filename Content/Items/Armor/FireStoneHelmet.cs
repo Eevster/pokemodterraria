@@ -51,8 +51,8 @@ namespace Pokemod.Content.Items.Armor
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.MeteoriteBar, 10)
-                .AddIngredient<FireStoneItem>(1)
+                .AddIngredient(ItemID.MeteoriteBar, 15)
+                .AddIngredient<FireStoneItem>(5)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
