@@ -14,6 +14,7 @@ namespace Pokemod.Content.Items.MegaStones
 			Item.height = 20;
 
 			Item.value = Item.buyPrice(silver: 1);
+			Item.rare = ItemRarityID.Pink;
 			Item.SetShopValues(Terraria.Enums.ItemRarityColor.Pink5, Item.buyPrice(gold: 50));
 			Item.accessory = true;
 		}

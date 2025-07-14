@@ -40,12 +40,18 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			return 0f;
 		}
 
-		public override void ExtraEffects() {
-			if(Main.rand.NextBool(10)){
-				int goreIndex = Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, Vector2.Zero, Main.rand.Next(220, 223), 1f);
-				Main.gore[goreIndex].scale = 0.5f;
-				Main.gore[goreIndex].position = NPC.position + 0.5f*hitboxWidth*Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
-				Main.gore[goreIndex].velocity = 0.05f*hitboxWidth*(Main.gore[goreIndex].position-NPC.position).SafeNormalize(Vector2.UnitX);
+		public override void ExtraEffects()
+		{
+			if (!NPC.hide)
+			{
+
+				if (Main.rand.NextBool(10))
+				{
+					int goreIndex = Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, Vector2.Zero, Main.rand.Next(220, 223), 1f);
+					Main.gore[goreIndex].scale = 0.5f;
+					Main.gore[goreIndex].position = NPC.position + 0.5f * hitboxWidth * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
+					Main.gore[goreIndex].velocity = 0.05f * hitboxWidth * (Main.gore[goreIndex].position - NPC.position).SafeNormalize(Vector2.UnitX);
+				}
 			}
 		}
 	}

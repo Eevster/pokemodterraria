@@ -31,8 +31,16 @@ namespace Pokemod.Content.Items.Armor
 			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; // Increase dealt damage for all weapon classes by 20%
             player.maxMinions += MaxMinionIncrease;
         }
-
-		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		
-	}
+        
+		public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.PlatinumBar, 15)
+				.AddIngredient(ItemID.Coral, 1)
+				.AddIngredient(ItemID.SharkFin, 1)
+                .AddIngredient<WaterStoneItem>(1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+    }
 }

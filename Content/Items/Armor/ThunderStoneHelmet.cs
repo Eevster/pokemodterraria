@@ -49,7 +49,13 @@ namespace Pokemod.Content.Items.Armor
             player.GetModPlayer<PokemonPlayer>().maxPokemon += 1;
         }
 
-		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		
-	}
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.JungleSpores, 4)
+                .AddIngredient<ThunderStoneItem>(1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+    }
 }

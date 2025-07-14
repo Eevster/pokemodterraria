@@ -137,7 +137,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                             tileY = y;
                             airPosition = new Vector2(x * 16, tileY * 16);
                             airFound = true;
-                            groundFound = false;
                             break;
                         }
 

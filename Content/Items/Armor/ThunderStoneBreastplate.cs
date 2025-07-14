@@ -32,7 +32,15 @@ namespace Pokemod.Content.Items.Armor
             player.GetDamage(DamageClass.Ranged) += AdditiveGenericDamageBonus / 40f;
         }
 
-		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		
-	}
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.JungleSpores, 12)
+                .AddIngredient(ItemID.Stinger, 6)
+                .AddIngredient<ThunderStoneItem>(1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+
+    }
 }

@@ -291,7 +291,7 @@ namespace Pokemod.Content.NPCs
             {"Hitmonlee", new PokemonInfo([50, 120, 53, 35, 110, 87], [(int)TypeIndex.Fighting], ["DoubleKick"], (int)StageIndex.Basic, (int)ExpTypes.MediumFast, completed: false)},
             {"Hitmonchan", new PokemonInfo([50, 105, 79, 35, 110, 76], [(int)TypeIndex.Fighting], ["DoubleKick"], (int)StageIndex.Basic, (int)ExpTypes.MediumFast, completed: false)},
             {"Lickitung", new PokemonInfo([90, 55, 75, 60, 75, 30], [(int)TypeIndex.Normal], ["Tackle"], (int)StageIndex.Basic, (int)ExpTypes.MediumFast, completed: false)},
-            {"Koffing", new PokemonInfo([40, 65, 95, 60, 45, 35], [(int)TypeIndex.Poison], ["PoisonPowder", "SmokeScreen"], (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
+            {"Koffing", new PokemonInfo([40, 65, 95, 60, 45, 35], [(int)TypeIndex.Poison], ["PoisonPowder", "Smokescreen"], (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
             {"Weezing", new PokemonInfo([65, 90, 120, 85, 70, 60], [(int)TypeIndex.Poison], ["Toxic", "SludgeBomb"], (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
             {"Rhyhorn", new PokemonInfo([80, 85, 95, 30, 30, 25], [(int)TypeIndex.Ground,(int)TypeIndex.Rock], ["Tackle"], (int)StageIndex.Basic, (int)ExpTypes.Slow, completed: false)},
             {"Rhydon", new PokemonInfo([105, 130, 120, 45, 45, 40], [(int)TypeIndex.Ground,(int)TypeIndex.Rock], ["RockThrow", "Earthquake"], (int)StageIndex.Stage1, (int)ExpTypes.Slow, completed: false)},
