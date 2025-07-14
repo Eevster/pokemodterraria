@@ -268,6 +268,11 @@ namespace Pokemod.Content.Items
 
 			shouldDespawn = despawnTime;
 
+			if (exp < GetExpToLevel(level))
+			{
+				exp = GetExpToLevel(level);
+			}
+
 			if (PokemonName != null && PokemonName != "")
 			{
 				GetProjInfo(player);
