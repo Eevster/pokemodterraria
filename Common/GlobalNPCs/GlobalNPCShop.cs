@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Pokemod.Content.Items.Accessories;
 using Pokemod.Content.Items.EvoStones;
+using Pokemod.Content.Items.Mounts;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -22,6 +23,7 @@ namespace Pokemod.Common.GlobalNPCs
             if (shop.NpcType == NPCID.Mechanic)
             {
                 shop.Add<LinkingCordItem>();
+                shop.Add<BikeVoucher>();
             }
         }
     }

@@ -114,7 +114,7 @@ namespace Pokemod.Content.NPCs
             }else{
                 string[] grassStarters = {"Eevee", "Bulbasaur","Chikorita"};
                 string[] fireStarters = {"Pikachu", "Charmander","Cyndaquil"};
-                string[] waterStarters = {"Clefairy", "Squirtle","Totodile"};
+                string[] waterStarters = {"Squirtle","Totodile"};
 
                 starters[0] = grassStarters[Main.rand.Next(grassStarters.Length)];
                 starters[1] = fireStarters[Main.rand.Next(fireStarters.Length)];
@@ -244,7 +244,7 @@ namespace Pokemod.Content.NPCs
             {"Arcanine", new PokemonInfo([90, 110, 80, 100, 80, 95], [(int)TypeIndex.Fire], ["FireBlast"], (int)StageIndex.Stage1, (int)ExpTypes.Slow, completed: false)},
             {"Poliwag", new PokemonInfo([40, 50, 40, 40, 40, 90], [(int)TypeIndex.Water], ["Bubble"], (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
             {"Poliwhirl", new PokemonInfo([65, 65, 65, 50, 50, 90], [(int)TypeIndex.Water], ["BubbleBeam", "MudShot"], (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
-            {"Poliwrath", new PokemonInfo([90, 95, 95, 70, 90, 70], [(int)TypeIndex.Water,(int)TypeIndex.Fighting], ["HydroPump"], (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
+            {"Poliwrath", new PokemonInfo([90, 95, 95, 70, 90, 70], [(int)TypeIndex.Water,(int)TypeIndex.Fighting], ["HydroPump","FocusPunch"], (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
             {"Abra", new PokemonInfo([25, 20, 15, 105, 55, 90], [(int)TypeIndex.Psychic], ["Teleport"], (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
             {"Kadabra", new PokemonInfo([40, 35, 30, 120, 70, 105], [(int)TypeIndex.Psychic], ["Psybeam"], (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
             {"Alakazam", new PokemonInfo([55, 50, 45, 135, 95, 120], [(int)TypeIndex.Psychic], ["PsychoCut"], (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
@@ -406,7 +406,7 @@ namespace Pokemod.Content.NPCs
             {"MegaDrain", new PokemonAttackInfo(40,56,60,600f,false,true,(int)TypeIndex.Grass, true)},
             {"MudShot", new PokemonAttackInfo(55,45,60,800f,false,false,(int)TypeIndex.Ground, true)},
             {"NightShade", new PokemonAttackInfo(0,30,40,800f,true,true,(int)TypeIndex.Ghost, true)},
-            {"Overheat", new PokemonAttackInfo(130,60,60,800f,true,true,(int)TypeIndex.Fire, true)},
+            {"Overheat", new PokemonAttackInfo(130,60,60,400f,true,true,(int)TypeIndex.Fire, true)},
             {"PinMissile", new PokemonAttackInfo(25,30,60,800f,false,false,(int)TypeIndex.Bug)},
             {"PoisonPowder", new PokemonAttackInfo(0,20,60,800f,true,false,(int)TypeIndex.Poison, true)},
             {"PoisonSting", new PokemonAttackInfo(15,45,60,800f,false,false,(int)TypeIndex.Poison)},

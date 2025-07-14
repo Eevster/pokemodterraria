@@ -94,10 +94,10 @@ namespace Pokemod.Content.Items.Consumables.TMs
 		public override string[] moves => [];
 	}
 
-	public abstract class TMFighting : TechnicalMachine
+	public class TMFighting : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Fighting;
-		public override string[] moves => [];
+		public override string[] moves => ["FocusPunch"];
 	}
 
 	public class TMFire : TechnicalMachine
@@ -115,7 +115,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 	public class TMGhost : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Ghost;
-		public override string[] moves => ["ConfuseRay","Hex","NightShade"];
+		public override string[] moves => ["ConfuseRay","Hex","NightShade","ShadowBall"];
 	}
 
 	public class TMGrass : TechnicalMachine
@@ -127,7 +127,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 	public class TMGround : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Ground;
-		public override string[] moves => ["Dig","Earthquake"];
+		public override string[] moves => ["Dig","Earthquake","MudShot"];
 	}
 
 	public class TMIce : TechnicalMachine
@@ -139,13 +139,13 @@ namespace Pokemod.Content.Items.Consumables.TMs
 	public class TMNormal : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Normal;
-		public override string[] moves => ["Swift"];
+		public override string[] moves => ["Swift","HyperBeam","DoubleEdge","Cut"];
 	}
 
 	public class TMPoison : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Poison;
-		public override string[] moves => ["Toxic"];
+		public override string[] moves => ["Toxic","SludgeBomb"];
 	}
 
 	public class TMPsychic : TechnicalMachine
