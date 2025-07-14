@@ -251,6 +251,7 @@ namespace Pokemod.Common.Players
 
 			ExpMult = 1f;
 			if (LeftoversTimer > 0) LeftoversTimer--;
+			if (HasAirBalloon > 0) HasAirBalloon--;
 		}
 
 		public int FreePokemonSlots()

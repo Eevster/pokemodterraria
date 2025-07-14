@@ -97,6 +97,7 @@ namespace Pokemod.Content.Items
 			}
 			writer.Write((double)moveIndex);
 			writer.Write((double)currentHP);
+			writer.Write(OriginalTrainerID ?? "");
 		}
 
 		public override void NetReceive(BinaryReader reader) {
@@ -123,6 +124,7 @@ namespace Pokemod.Content.Items
 			}
 			moveIndex = (int)reader.ReadDouble();
 			currentHP = (int)reader.ReadDouble();
+			OriginalTrainerID = reader.ReadString();
 		}
 
 		public override bool? UseItem(Player player)
@@ -267,6 +269,7 @@ namespace Pokemod.Content.Items
 			if(CurrentTrainerID == null || CurrentTrainerID == "") CurrentTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
 
 			shouldDespawn = despawnTime;
+			if (Main.netMode != NetmodeID.SinglePlayer && proj != null) proj.timeLeft = 10;
 
 			if (exp < GetExpToLevel(level))
 			{
@@ -282,6 +285,15 @@ namespace Pokemod.Content.Items
 					proj?.Kill();
 					proj = null;
 				}
+			}
+
+			if (proj != null)
+			{
+				Main.NewText("UpdateInventory: " +proj);
+			}
+			else
+			{
+				Main.NewText("UpdateInventory: " +"Proj null");
 			}
 
 			SetPetInfo(player);
@@ -313,6 +325,7 @@ namespace Pokemod.Content.Items
 			if(CurrentTrainerID == null || CurrentTrainerID == "") CurrentTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
 
 			shouldDespawn = despawnTime;
+			if (Main.netMode != NetmodeID.SinglePlayer && proj != null) proj.timeLeft = 10;
 
 			bool isHolding = false;
 
@@ -330,6 +343,7 @@ namespace Pokemod.Content.Items
 						}
 						ball.SetPetInfo(player);
 						ball.shouldDespawn = despawnTime;
+						if (Main.netMode != NetmodeID.SinglePlayer && ball.proj != null) ball.proj.timeLeft = 10;
 						isHolding = true;
 					}
 				}
@@ -713,19 +727,40 @@ namespace Pokemod.Content.Items
 			SetExpToNextLevel();
 		}
 
-        public override void PostUpdate()
+        /*public override void PostUpdate()
+        {
+			if (proj != null)
+			{
+				Main.NewText("PostUpdate: " +proj);
+			}
+			else
+			{
+				Main.NewText("PostUpdate: " +"Proj null");
+			}
+			if (shouldDespawn > 0) shouldDespawn--;
+			if (shouldDespawn <= 0)
+			{
+				DespawnPokemon();
+			}
+
+            base.PostUpdate();
+        }*/
+
+        public override void Update(ref float gravity, ref float maxFallSpeed)
         {
 			DespawnPokemon();
-            base.PostUpdate();
+
+            base.Update(ref gravity, ref maxFallSpeed);
         }
 
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
-        {
-			if(BallType != null && BallType != ""){
-				Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+BallType);
+		{
+			if (BallType != null && BallType != "")
+			{
+				Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/" + BallType);
 
 				spriteBatch.Draw(ballTexture.Value,
-					position: Item.position-Main.screenPosition,
+					position: Item.position - Main.screenPosition,
 					sourceRectangle: ballTexture.Value.Bounds,
 					lightColor,
 					rotation: 0f,
@@ -735,8 +770,8 @@ namespace Pokemod.Content.Items
 					layerDepth: 0f);
 			}
 
-            base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
-        }
+			base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
+		}
 
         public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
@@ -790,11 +825,15 @@ namespace Pokemod.Content.Items
 		}
 
 		public void DespawnPokemon(){
-			if(proj != null){
-				if(proj.active){
+			if (proj != null && Main.netMode != NetmodeID.Server)
+			{
+				if (proj.active)
+				{
 					GetProjHP();
 					proj.Kill();
-				}else{
+				}
+				else
+				{
 					proj = null;
 				}
 			}

@@ -483,9 +483,17 @@ namespace Pokemod.Content.Pets
 
 		public virtual void CheckActive(Player player) {
 			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff
-			if (!player.dead /*&& player.HasBuff(PokemonBuff)*/) {
-				Projectile.timeLeft = 2;
-				//player.AddBuff(PokemonBuff, 10);
+			if (Main.netMode == NetmodeID.SinglePlayer)
+			{
+				if (!player.dead /*&& player.HasBuff(PokemonBuff)*/)
+				{
+					Projectile.timeLeft = 2;
+					//player.AddBuff(PokemonBuff, 10);
+				}
+			}
+			else
+			{
+				if (Projectile.timeLeft > 10) Projectile.timeLeft = 10;
 			}
 			if(Main.myPlayer == Projectile.owner){
 				Projectile.netUpdate = true;
@@ -1595,22 +1603,29 @@ namespace Pokemod.Content.Pets
 		}
 
         public override void OnKill(int timeLeft)
-        {
-			if(Projectile.owner == Main.myPlayer){
-				for(int i = 0; i < nAttackProjs; i++){
-					if(attackProjs[i] != null){
-						if(attackProjs[i].active){
+		{
+			if (Projectile.owner == Main.myPlayer)
+			{
+				for (int i = 0; i < nAttackProjs; i++)
+				{
+					if (attackProjs[i] != null)
+					{
+						if (attackProjs[i].active)
+						{
 							attackProjs[i].Kill();
-						}else{
+						}
+						else
+						{
 							attackProjs[i] = null;
 						}
 					}
 				}
-				if(!(canEvolve != -1 && isEvolving && evolveTimer <= 0) && !(canMegaEvolve != -1 && isMegaEvolving && megaEvolveTimer <= 0)){
+				if (!(canEvolve != -1 && isEvolving && evolveTimer <= 0) && !(canMegaEvolve != -1 && isMegaEvolving && megaEvolveTimer <= 0))
+				{
 					Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<DespawnPokemon>(), 0, 0, Projectile.owner);
 				}
 			}
-        }
+		}
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
