@@ -8,7 +8,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace Pokemod.Common.UI.StarterPanelUI
+namespace Pokemod.Common.UI
 {
 	public class DraggableUIPanel : UIPanel
 	{

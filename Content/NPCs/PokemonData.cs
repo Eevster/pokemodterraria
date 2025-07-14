@@ -469,14 +469,25 @@ namespace Pokemod.Content.NPCs
 
         public bool completed;
 
-        public PokemonInfo(int[] pokemonStats, int[] pokemonTypes, string[] movePool, int pokemonStage = 0, int expType = 0, bool legendary = false, bool completed = true){
+        public PokemonInfo(int[] pokemonStats, int[] pokemonTypes, string[] movePool, int pokemonStage = 0, int expType = 0, bool legendary = false, bool completed = true)
+        {
             this.pokemonStats = pokemonStats;
-            this.pokemonTypes = [(pokemonTypes.Length<=0?-1:pokemonTypes[0]), (pokemonTypes.Length<=1?-1:pokemonTypes[1])];
-            this.movePool = (movePool.Length>0)?movePool:["Swift"];
+            this.pokemonTypes = [(pokemonTypes.Length <= 0 ? -1 : pokemonTypes[0]), (pokemonTypes.Length <= 1 ? -1 : pokemonTypes[1])];
+            this.movePool = (movePool.Length > 0) ? movePool : ["Swift"];
             this.pokemonStage = pokemonStage;
             this.expType = expType;
             this.legendary = legendary;
             this.completed = completed;
+        }
+
+        public bool HasType(TypeIndex type)
+        {
+            foreach (int pokemonType in pokemonTypes)
+            {
+                if (pokemonType == (int)type) return true;
+            }
+
+            return false;
         }
     }
 

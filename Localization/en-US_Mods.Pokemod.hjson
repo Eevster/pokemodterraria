@@ -1194,8 +1194,170 @@ Items: {
 	}
 
 	AlakazamMegaStoneItem: {
-		DisplayName: Alakazam Mega Stone Item
+		DisplayName: Alakazite
 		Tooltip: ""
+	}
+
+	TMBug: {
+		DisplayName: TM Bug
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random bug-type move
+			'''
+	}
+
+	TMDark: {
+		DisplayName: TM Dark
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random dark-type move
+			'''
+	}
+
+	TMDragon: {
+		DisplayName: TM Dragon
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random dragon-type move
+			'''
+	}
+
+	TMElectric: {
+		DisplayName: TM Electric
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random electric-type move
+			'''
+	}
+
+	TMFairy: {
+		DisplayName: TM Fairy
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random fairy-type move
+			'''
+	}
+
+	TMFighting: {
+		DisplayName: TM Fighting
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random fighting-type move
+			'''
+	}
+
+	TMFire: {
+		DisplayName: TM Fire
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random fire-type move
+			'''
+	}
+
+	TMFlying: {
+		DisplayName: TM Flying
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random flying-type move
+			'''
+	}
+
+	TMGhost: {
+		DisplayName: TM Ghost
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random ghost-type move
+			'''
+	}
+
+	TMGrass: {
+		DisplayName: TM Grass
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random grass-type move
+			'''
+	}
+
+	TMGround: {
+		DisplayName: TM Ground
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random ground-type move
+			'''
+	}
+
+	TMIce: {
+		DisplayName: TM Ice
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random ice-type move
+			'''
+	}
+
+	TMNormal: {
+		DisplayName: TM Normal
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random normal-type move
+			'''
+	}
+
+	TMPoison: {
+		DisplayName: TM Poison
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random poison-type move
+			'''
+	}
+
+	TMPsychic: {
+		DisplayName: TM Psychic
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random psychic-type move
+			'''
+	}
+
+	TMRock: {
+		DisplayName: TM Rock
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random rock-type move
+			'''
+	}
+
+	TMSteel: {
+		DisplayName: TM Steel
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random steel-type move
+			'''
+	}
+
+	TMWater: {
+		DisplayName: TM Water
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Use it to make your pokemon learn a random water-type move
+			'''
 	}
 }
 
@@ -2884,6 +3046,8 @@ NPCs: {
 	CharizardCritterNPCShiny.DisplayName: Charizard  Shiny
 	CharizardMegaXCritterNPC.DisplayName: Mega Charizard X
 	CharizardMegaXCritterNPCShiny.DisplayName: Mega Charizard X Shiny
+	CharizardMegaYritterNPC.DisplayName: Mega Charizard Y
+	CharizardMegaYCritterNPCShiny.DisplayName: Mega Charizard Y Shiny
 	ChikoritaCritterNPCShiny.DisplayName: Chikorita  Shiny
 	CyndaquilCritterNPC.DisplayName: Cyndaquil
 	CyndaquilCritterNPCShiny.DisplayName: Cyndaquil  Shiny
@@ -3246,6 +3410,7 @@ PokemonInfo: {
 	FaintedMsg: Your pokemon fainted!
 	ItemUse: To use it, click on your pokemon or right click on the corresponding pokeball
 	ItemActiveUse: To use it, click on your active pokemon
+	ItemNoActiveUse: To use it, right click on the corresponding pokeball
 	GloveTooltip: "[c/ffd51c:Actual mode: {0}]"
 	GloveTooltipLeft: Left click to make your pokemon perform: {0}
 	GloveTooltipRight: Right click to make your pokemon perform: {0}
@@ -3253,6 +3418,14 @@ PokemonInfo: {
 	NoAttack: No Attack
 	DirectedAttack: Directed Attack
 	RanAway: The pokemon ran away...
+	WrongType: Wrong type
+	NoMoveAvailable: No moves available
+}
+
+MoveLearnUI: {
+	MoveLearn: Your {0} wants to learn a new move, which one should it forget?
+	Forget: Forget selected
+	NotLearn: Not learn
 }
 
 PokemonNatures: {

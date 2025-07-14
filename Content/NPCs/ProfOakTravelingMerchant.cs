@@ -24,6 +24,7 @@ using Pokemod.Content.Items.Pokeballs;
 using Pokemod.Content.Items.Accessories;
 using Pokemod.Common.UI.StarterPanelUI;
 using Pokemod.Common.Players;
+using Pokemod.Common.UI.MoveLearnUI;
 
 namespace Pokemod.Content.NPCs
 {
@@ -293,7 +294,7 @@ namespace Pokemod.Content.NPCs
 			if (firstButton) {
 				shop = Shop.Name; // Opens the shop
 			}else{
-				if(!Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().HasStarter) ModContent.GetInstance<StarterPanelUISystem>().ShowMyUI();
+				if (!Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().HasStarter) ModContent.GetInstance<StarterPanelUISystem>().ShowMyUI();
 			}
 		}
 

@@ -23,7 +23,11 @@ namespace Pokemod.Common.UI
 		internal bool drawPanel = true;
 		internal float hoverUp;
 
-		public UIHoverImageButton(Asset<Texture2D> texture, string hoverText) : base(texture) {
+		internal bool canBeSelected;
+		internal bool selected;
+
+		public UIHoverImageButton(Asset<Texture2D> texture, string hoverText) : base(texture)
+		{
 			this.hoverText = hoverText;
 		}
 
@@ -38,7 +42,7 @@ namespace Pokemod.Common.UI
 			// This helps to keep the basic behavior of the UIElement
 			if(drawPanel) base.DrawSelf(spriteBatch);
 
-            if(image != null){
+            if(image != null && (!canBeSelected || (canBeSelected && (selected || IsMouseHovering)))){
                 CalculatedStyle innerDimensions = GetInnerDimensions();
                 float shopx = innerDimensions.X;
 			    float shopy = innerDimensions.Y;

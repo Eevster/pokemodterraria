@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Configs;
 using Pokemod.Common.Players;
+using Pokemod.Common.UI.MoveLearnUI;
 using Pokemod.Content.Items.Consumables;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
@@ -35,6 +36,7 @@ namespace Pokemod.Content.Items
 		public int[] IVs = [0,0,0,0,0,0];
 		public int[] EVs = [0,0,0,0,0,0];
 		public string[] moves = [];
+		private string[] toLearnMoves = [];
 		public int moveIndex;
 		public bool Shiny;
 		public string BallType;
@@ -44,7 +46,8 @@ namespace Pokemod.Content.Items
 		public int happiness;
 		public string pokeHeldItem;
 
-		public int shouldDespawn = 3;
+		public int shouldDespawn = 10;
+		const int despawnTime = 10;
 		public bool canShoot = false;
 		public Projectile proj;
 
@@ -263,9 +266,10 @@ namespace Pokemod.Content.Items
 			if(OriginalTrainerID == null || OriginalTrainerID == "") OriginalTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
 			if(CurrentTrainerID == null || CurrentTrainerID == "") CurrentTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
 
-			shouldDespawn = 3;
+			shouldDespawn = despawnTime;
 
-			if(PokemonName != null && PokemonName != ""){
+			if (PokemonName != null && PokemonName != "")
+			{
 				GetProjInfo(player);
 			}
 			if(proj != null){
@@ -276,6 +280,20 @@ namespace Pokemod.Content.Items
 			}
 
 			SetPetInfo(player);
+
+			if (toLearnMoves.Length > 0)
+			{
+				if (!ModContent.GetInstance<MoveLearnUISystem>().IsActive())
+				{
+					List<string> toLearnMovesAux = toLearnMoves.ToList();
+					if (!moves.Contains(toLearnMovesAux[0]))
+					{
+						LearnMove(toLearnMovesAux[0]);
+					}
+					toLearnMovesAux.RemoveAt(0);
+					toLearnMoves = toLearnMovesAux.ToArray();
+				}
+			}
 
             base.UpdateInventory(player);
 
@@ -289,7 +307,7 @@ namespace Pokemod.Content.Items
 			if(OriginalTrainerID == null || OriginalTrainerID == "") OriginalTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
 			if(CurrentTrainerID == null || CurrentTrainerID == "") CurrentTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
 
-			shouldDespawn = 3;
+			shouldDespawn = despawnTime;
 
 			bool isHolding = false;
 
@@ -306,7 +324,7 @@ namespace Pokemod.Content.Items
 							}
 						}
 						ball.SetPetInfo(player);
-						ball.shouldDespawn = 3;
+						ball.shouldDespawn = despawnTime;
 						isHolding = true;
 					}
 				}
@@ -409,14 +427,35 @@ namespace Pokemod.Content.Items
 			}
 		}
 
-		private void GetPokemonMoves(){
-			List<string> newMoves = moves.ToList();
-			foreach(string move in PokemonData.pokemonInfo[PokemonName].movePool){
-				if(!newMoves.Contains(move)){
-					newMoves.Add(move);
+		private void GetPokemonMoves(bool notLearn = false){
+			List<string> newMoveList = PokemonData.pokemonInfo[PokemonName].movePool.ToList();
+
+			if (moves.Length < 4) {
+				List<string> newMoves = moves.ToList();
+
+				while (newMoveList.Count > 0)
+				{
+					if (!newMoves.Contains(newMoveList[0]))
+					{
+						newMoves.Add(newMoveList[0]);
+					}
+					newMoveList.RemoveAt(0);
+					if (newMoves.Count >= 4) break;
 				}
+				moves = newMoves.ToArray();
 			}
-			moves = newMoves.ToArray();
+
+			if (notLearn) newMoveList = new List<string>();
+
+			if (newMoveList.Count > 0)
+			{
+				List<string> newToLearnMoves = toLearnMoves.ToList();
+				foreach (string move in newMoveList)
+				{
+					newToLearnMoves.Add(move);
+				}
+				toLearnMoves = newToLearnMoves.ToArray();
+			}
 		}
 
 		private void GetUsedItems(Player player = null){
@@ -484,7 +523,7 @@ namespace Pokemod.Content.Items
 					Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 					proj.Kill();
 					PokemonName = newPokemonName;
-					GetPokemonMoves();
+					GetPokemonMoves(true);
 					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 					if(player != null){
 						int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
@@ -577,6 +616,24 @@ namespace Pokemod.Content.Items
 					}
 				default:
 					return (int)Math.Pow(lvl, 3);
+			}
+		}
+
+		public void LearnMove(string newMove)
+		{
+			if (moves.Length >= 4)
+			{
+				ModContent.GetInstance<MoveLearnUISystem>().ShowMyUI(this, newMove);
+			}
+			else
+			{
+				List<string> existentMoves = moves.ToList();
+				if (!existentMoves.Contains(newMove))
+				{
+					existentMoves.Add(newMove);
+				}
+				
+				moves = existentMoves.ToArray();
 			}
 		}
 
@@ -710,7 +767,7 @@ namespace Pokemod.Content.Items
 					DespawnPokemon();
 				}
 			}else{
-				shouldDespawn = 3;
+				shouldDespawn = despawnTime;
 			}
 				
             base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);

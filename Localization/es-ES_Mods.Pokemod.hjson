@@ -1194,8 +1194,170 @@ Items: {
 	}
 
 	AlakazamMegaStoneItem: {
-		// DisplayName: Alakazam Mega Stone Item
-		// Tooltip: ""
+		DisplayName: Alakazamita
+		Tooltip: ""
+	}
+
+	TMBug: {
+		DisplayName: MT Bicho
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo bicho
+			'''
+	}
+
+	TMDark: {
+		DisplayName: MT Siniestro
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo siniestro
+			'''
+	}
+
+	TMDragon: {
+		DisplayName: MT Dragón
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo dragón
+			'''
+	}
+
+	TMElectric: {
+		DisplayName: MT Eléctrico
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo eléctrico
+			'''
+	}
+
+	TMFairy: {
+		DisplayName: MT Hada
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo hada
+			'''
+	}
+
+	TMFighting: {
+		DisplayName: MT Lucha
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo lucha
+			'''
+	}
+
+	TMFire: {
+		DisplayName: MT Fuego
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo fuego
+			'''
+	}
+
+	TMFlying: {
+		DisplayName: MT Volador
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo volador
+			'''
+	}
+
+	TMGhost: {
+		DisplayName: MT Fantasma
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo fantasma
+			'''
+	}
+
+	TMGrass: {
+		DisplayName: MT Planta
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo planta
+			'''
+	}
+
+	TMGround: {
+		DisplayName: MT Tierra
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo tierra
+			'''
+	}
+
+	TMIce: {
+		DisplayName: MT Hielo
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo hielo
+			'''
+	}
+
+	TMNormal: {
+		DisplayName: MT Normal
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo normal
+			'''
+	}
+
+	TMPoison: {
+		DisplayName: MT Veneno
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo veneno
+			'''
+	}
+
+	TMPsychic: {
+		DisplayName: MT Psíquico
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo psíquico
+			'''
+	}
+
+	TMRock: {
+		DisplayName: MT Roca
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo roca
+			'''
+	}
+
+	TMSteel: {
+		DisplayName: MT Acero
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo acero
+			'''
+	}
+
+	TMWater: {
+		DisplayName: MT Agua
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
+			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo agua
+			'''
 	}
 }
 
@@ -2884,6 +3046,8 @@ NPCs: {
 	CharizardCritterNPCShiny.DisplayName: Charizard
 	// CharizardMegaXCritterNPC.DisplayName: Mega Charizard X
 	// CharizardMegaXCritterNPCShiny.DisplayName: Mega Charizard X Shiny
+	// CharizardMegaYritterNPC.DisplayName: Mega Charizard Y
+	// CharizardMegaYCritterNPCShiny.DisplayName: Mega Charizard Y Shiny
 	ChikoritaCritterNPCShiny.DisplayName: Chikorita
 	CyndaquilCritterNPC.DisplayName: Cyndaquil
 	CyndaquilCritterNPCShiny.DisplayName: Cyndaquil
@@ -3246,13 +3410,22 @@ PokemonInfo: {
 	FaintedMsg: ¡Tu pokemon se debilitó!
 	ItemUse: Para usar el objeto haz clic sobre tu pokemon o haz clic derecho en su pokeball
 	ItemActiveUse: Para usar el objeto haz clic sobre tu pokemon activo
+	ItemNoActiveUse: Para usar el objeto haz clic derecho en la pokeball de uno de tus pokemon
 	GloveTooltip: "[c/ffd51c:Modo actual: {0}]"
 	GloveTooltipLeft: Clic izquierdo para que tu pokemon esté en modo: {0}
 	GloveTooltipRight: Clic derecho para que tu pokemon esté en modo: {0}
 	AutoAttack: Auto ataque
 	NoAttack: No atacar
 	DirectedAttack: Ataque dirigido
-	RanAway: El pokemon huyó ...
+	RanAway: El pokemon huyó...
+	WrongType: Tipo incorrecto
+	NoMoveAvailable: No hay movimientos disponibles
+}
+
+MoveLearnUI: {
+	MoveLearn: Tu {0} quiere aprender un nuevo movimiento, ¿cuál debería olvidar?
+	Forget: Olvidar seleccionado
+	NotLearn: No aprender
 }
 
 PokemonNatures: {

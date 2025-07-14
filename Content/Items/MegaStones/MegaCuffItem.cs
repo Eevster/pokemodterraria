@@ -37,7 +37,7 @@ namespace Pokemod.Content.Items.MegaStones
 				return true;
 			}
 
-			if (!player.GetModPlayer<PokemonPlayer>().HasPokemonByName(player.GetModPlayer<PokemonPlayer>().MegaStone.Replace("MegaStoneItem","").Replace("MegaStoneItemX","").Replace("MegaStoneItemY","")))
+			if (!player.GetModPlayer<PokemonPlayer>().HasPokemonByName(player.GetModPlayer<PokemonPlayer>().MegaStone.Replace("MegaStoneItemX","").Replace("MegaStoneItemY","").Replace("MegaStoneItem","")))
 			{
 				SoundEngine.PlaySound(SoundID.MenuTick, player.position);
 				CombatText.NewText(player.Hitbox, new Color(255, 255, 255), "Incorrect Pokemon");
