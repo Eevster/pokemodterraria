@@ -63,13 +63,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
 		{
-            CombatText.NewText(Projectile.Hitbox, Color.White, "?");
             base.ModifyHitNPC(target, ref modifiers);
 			PokemonPetProjectile pokemonOwner = (PokemonPetProjectile)pokemonProj.ModProjectile;
-            
             //modifiers.FinalDamage *= 1;
             modifiers.FinalDamage += (int)(pokemonOwner.pokemonLvl * 10f) - 1;
-            CombatText.NewText(Projectile.Hitbox, Color.White, "Working");
         }
 
 
