@@ -1,4 +1,4 @@
-displayName = Pokemod V1.2
+displayName = Pokemod V1.2.3 (Bug Fixes)
 author = Eevster
-version = 1.2.2
+version = 1.2.3
 modReferences = SubworldLibrary
