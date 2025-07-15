@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Content",
+    "\\Content\\Items",
+    "\\Content\\Items\\Armor"
   ],
-  "SelectedNode": "\\build.txt",
+  "SelectedNode": "\\Content\\Items\\Armor\\ThunderStoneLeggings.cs",
   "PreviewInSolutionExplorer": false
 }
