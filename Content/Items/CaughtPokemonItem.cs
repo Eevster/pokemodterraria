@@ -287,15 +287,6 @@ namespace Pokemod.Content.Items
 				}
 			}
 
-			if (proj != null)
-			{
-				Main.NewText("UpdateInventory: " +proj);
-			}
-			else
-			{
-				Main.NewText("UpdateInventory: " +"Proj null");
-			}
-
 			SetPetInfo(player);
 
 			if (toLearnMoves.Length > 0)
