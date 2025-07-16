@@ -19,6 +19,10 @@ namespace Pokemod.Content.Pets.NidoranFPet
         public override int[] jumpStartEnd => [7, 7];
         public override int[] fallStartEnd => [9, 9];
         public override int[] attackStartEnd => [10, 15];
+
+        public override string[] evolutions => ["Nidorina"];
+        public override int levelToEvolve => 16;
+        public override int levelEvolutionsNumber => 1;
     }
 
 	public class NidoranFPetProjectileShiny : NidoranFPetProjectile{}

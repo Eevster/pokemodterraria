@@ -28,7 +28,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackFlyStartEnd => [10, 13];
 
         public override float catchRate => 50;
-        public override int minLevel => 36;
+        public override int minLevel => 40;
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,

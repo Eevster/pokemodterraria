@@ -24,12 +24,16 @@ namespace Pokemod.Content.Items.Accessories
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.StoneBlock, 50)
-                .AddIngredient(ItemID.IronOre, 10)
-				.AddIngredient(ItemID.SilverOre, 10)
-                .AddIngredient(ItemID.PlatinumOre, 10)
-				.AddIngredient(ItemID.Obsidian, 10)
-                .AddTile(TileID.Anvils)
+                .AddIngredient(ItemID.PearlstoneBlock, 50)
+				.AddIngredient(ItemID.Seashell, 5)
+				.AddIngredient(ItemID.GoldCrown, 1)
+                .AddTile(TileID.TinkerersWorkbench)
+                .Register();
+            CreateRecipe()
+                .AddIngredient(ItemID.PearlstoneBlock, 50)
+                .AddIngredient(ItemID.Seashell, 5)
+                .AddIngredient(ItemID.PlatinumCrown, 1)
+                .AddTile(TileID.TinkerersWorkbench)
                 .Register();
         }
     }
