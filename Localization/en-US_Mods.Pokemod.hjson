@@ -3408,7 +3408,10 @@ Tiles: {
 	PinkHealerTile.MapEntry: Pink Healer Tile
 }
 
-WorldGen.PokeballItemTilePassMessage: Mods.Pokemod.WorldGen.PokeballItemTilePassMessage
+WorldGen: {
+	PokeballItemTilePassMessage: Mods.Pokemod.WorldGen.PokeballItemTilePassMessage
+	PokemonCenterPassMessage: Mods.Pokemod.WorldGen.PokemonCenterPassMessage
+}
 
 PokemonInfo: {
 	Fainted: Fainted

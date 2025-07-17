@@ -358,14 +358,13 @@ namespace Pokemod.Common.Players
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
 					pokeItem.SetPokemonData(pokemonName, Shiny: false, BallType: "PokeballItem");
 				}
-				else
+				else if (Main.netMode == NetmodeID.MultiplayerClient && Main.myPlayer == Player.whoAmI)
 				{
-					if (Main.netMode == NetmodeID.Server)
-					{
-						ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
-						CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
-						pokeItem.SetPokemonData(pokemonName, Shiny: false, BallType: "PokeballItem");
-					}
+					//ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
+					ballItem = Item.NewItem(Player.GetSource_FromThis(), (int)Player.position.X, (int)Player.position.Y, Player.width, Player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
+					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
+					pokeItem.SetPokemonData(pokemonName, Shiny: false, BallType: "PokeballItem");
+					NetMessage.SendData(21, -1, -1, null, ballItem, 1f);
 				}
 
 				item.TurnToAir();
@@ -384,14 +383,13 @@ namespace Pokemod.Common.Players
 				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
 				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: "PokeballItem");
 			}
-			else
+			else if (Main.netMode == NetmodeID.MultiplayerClient && Main.myPlayer == Player.whoAmI)
 			{
-				if (Main.netMode == NetmodeID.Server)
-				{
-					ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
-					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
-					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: "PokeballItem");
-				}
+				//ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
+				ballItem = Item.NewItem(Player.GetSource_FromThis(), (int)Player.position.X, (int)Player.position.Y, Player.width, Player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
+				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
+				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: "PokeballItem");
+				NetMessage.SendData(21, -1, -1, null, ballItem, 1f);
 			}
 		}
 

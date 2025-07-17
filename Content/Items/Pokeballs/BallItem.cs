@@ -281,20 +281,23 @@ namespace Pokemod.Content.Items.Pokeballs
 				int lvl = targetPokemon.GetGlobalNPC<PokemonNPCData>().lvl;
 				string variant = targetPokemon.GetGlobalNPC<PokemonNPCData>().variant;
 
-				if (Main.netMode == NetmodeID.SinglePlayer){
+				if (Main.netMode == NetmodeID.SinglePlayer)
+				{
 					item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"), lvl, variant: variant);
+					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), lvl, variant: variant);
 					pokeItem.currentHP = targetPokemon.life;
 					SetExtraPokemonEffects(ref pokeItem);
-				}else{
-					if(Main.netMode == NetmodeID.Server){
-						item = player.QuickSpawnItem(Projectile.InheritSource(Projectile), ModContent.ItemType<CaughtPokemonItem>());
-						CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-						pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj","Item"), lvl, variant: variant);
-						pokeItem.currentHP = targetPokemon.life;
-						SetExtraPokemonEffects(ref pokeItem);
-					}
+				}
+				else if (Main.netMode == NetmodeID.MultiplayerClient && Main.myPlayer == Projectile.owner)
+				{
+					//item = player.QuickSpawnItem(Projectile.InheritSource(Projectile), ModContent.ItemType<CaughtPokemonItem>());
+					item = Item.NewItem(Projectile.InheritSource(Projectile), (int)player.position.X, (int)player.position.Y, player.width, player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
+					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
+					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), lvl, variant: variant);
+					pokeItem.currentHP = targetPokemon.life;
+					SetExtraPokemonEffects(ref pokeItem);
+					NetMessage.SendData(21, -1, -1, null, item, 1f);
 				}
 
 				targetPokemon.StrikeInstantKill();
