@@ -24,7 +24,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkSwimStartEnd => [12,15];
 		public override int[] attackSwimStartEnd => [8,11];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override int minLevel => 40;
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("With its extremely tough muscles, it could keep swimming in the Pacific Ocean without resting."));
 		}

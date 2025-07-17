@@ -24,8 +24,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkSwimStartEnd => [12,15];
 		public override int[] attackSwimStartEnd => [8,11];
 		public override float catchRate => 120;
+        public override int minLevel => 25;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("The spiral pattern on its belly subtly undulates. Staring at it gradually causes drowsiness."));
 		}

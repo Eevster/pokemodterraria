@@ -16,8 +16,10 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkStartEnd => [0,3];
 		public override int[] jumpStartEnd => [0,3];
 		public override int[] fallStartEnd => [0,3];
+		public override float catchRate => 150;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
 		}

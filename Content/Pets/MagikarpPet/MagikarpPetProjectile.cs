@@ -27,7 +27,7 @@ namespace Pokemod.Content.Pets.MagikarpPet
 		public override int[] attackSwimStartEnd => [3, 7];
 
 		public override string[] evolutions => ["Gyarados"];
-		public override int levelToEvolve => 21;
+		public override int levelToEvolve => 20;
 		public override int levelEvolutionsNumber => 1;
 	}
 

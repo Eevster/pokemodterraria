@@ -18,7 +18,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [3,3];
 		public override int[] attackStartEnd => [4,7];
 
-		public override int minLevel => 25;
+		public override int minLevel => 21;
 		public override float catchRate => 120;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {

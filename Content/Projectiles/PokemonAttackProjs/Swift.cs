@@ -64,9 +64,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			SoundEngine.PlaySound(SoundID.Item4, pokemon.position);
 			if(pokemon.owner == Main.myPlayer){
+				int remainingProjs = 3;
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner, i*MathHelper.TwoPi/3)];
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Swift>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner, remainingProjs*MathHelper.TwoPi/3)];
+						remainingProjs--;
+						if (remainingProjs <= 0)
+						{
+							break;
+						}
 					}
 				} 
 			}
@@ -113,7 +119,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				if(Projectile.ai[1] == 0){
-					SearchTarget(300f);
+					SearchTarget(500f);
 				}
 
 				if(foundTarget){

@@ -1,10 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Common",
+    "\\Common\\GlobalNPCs",
     "\\Content",
     "\\Content\\Items",
-    "\\Content\\Items\\Armor"
+    "\\Content\\Items\\Pokeballs",
+    "\\Content\\NPCs"
   ],
-  "SelectedNode": "\\Content\\Items\\Armor\\ThunderStoneLeggings.cs",
+  "SelectedNode": "\\Content\\Items\\Pokeballs\\DarkballItem.cs",
   "PreviewInSolutionExplorer": false
 }

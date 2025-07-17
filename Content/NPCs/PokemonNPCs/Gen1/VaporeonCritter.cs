@@ -22,8 +22,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] idleSwimStartEnd => [0,8];
 		public override int[] walkSwimStartEnd => [9,17];
 		public override int[] attackSwimStartEnd => [18,18];
-
-		public override int minLevel => 40;
+        public override float catchRate => 120;
+        public override int minLevel => 40;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,

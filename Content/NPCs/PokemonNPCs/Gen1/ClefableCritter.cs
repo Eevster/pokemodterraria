@@ -17,8 +17,10 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] jumpStartEnd => [0,3];
 		public override int[] fallStartEnd => [0,3];
 		public override float catchRate => 25;
+		public override int minLevel => 40;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("Legend says that on clear, quiet nights, it listens for the voices of its kin living on the moon. I, too, often think of my homeland, so far away."));
 		}

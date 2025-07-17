@@ -96,16 +96,18 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(target.CanBeChasedBy() && !target.boss){
-                target.velocity += 4*(target.Center-Projectile.Center).SafeNormalize(Vector2.UnitX);
+            if(target.CanBeChasedBy() && !target.boss && pokemonProj != null){
+                target.velocity += 3*(target.Center-pokemonProj.Center).SafeNormalize(Vector2.UnitX);
             }
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.velocity += 4*(target.Center-Projectile.Center).SafeNormalize(Vector2.UnitX);
-            base.OnHitPlayer(target, info);
+            if (pokemonProj != null){
+                target.velocity += 3 * (target.Center - pokemonProj.Center).SafeNormalize(Vector2.UnitX);
+                base.OnHitPlayer(target, info);
+            }
         }
     }
 }

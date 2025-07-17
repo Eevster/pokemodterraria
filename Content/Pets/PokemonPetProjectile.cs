@@ -1476,19 +1476,25 @@ namespace Pokemod.Content.Pets
                     }
                 }
             }
+			if (Main.myPlayer == Projectile.owner)
+			{
+				Projectile bullet = null;
+				for (int j = 0; j < Main.maxProjectiles; j++)
+				{
+					bullet = Main.projectile[j];
 
-			Projectile bullet = null;
-			for (int j = 0; j < Main.maxProjectiles; j++){
-				bullet = Main.projectile[j];
-
-				if (bullet.hostile && bullet.damage > 0 && bullet.active){
-					if (Projectile.Hitbox.Intersects(bullet.getRect()) && !immune){
-						int bulletdmg = bullet.damage;
-						if (currentHp != 0){
-							calIncomingDmg(bulletdmg);
-							Projectile.velocity += bullet.knockBack * (Projectile.Center - bullet.Center).SafeNormalize(Vector2.Zero);
+					if (bullet.hostile && bullet.damage > 0 && bullet.active)
+					{
+						if (Projectile.Hitbox.Intersects(bullet.getRect()) && !immune)
+						{
+							int bulletdmg = bullet.damage;
+							if (currentHp != 0)
+							{
+								calIncomingDmg(bulletdmg);
+								Projectile.velocity += bullet.knockBack * (Projectile.Center - bullet.Center).SafeNormalize(Vector2.Zero);
+							}
+							immune = true;
 						}
-						immune = true;
 					}
 				}
 			}

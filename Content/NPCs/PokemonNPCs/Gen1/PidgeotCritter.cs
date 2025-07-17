@@ -25,7 +25,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float moveSpeed => 1.8f;
 
-		public override int minLevel => 36;
+        public override float catchRate => 90;
+        public override int minLevel => 36;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,

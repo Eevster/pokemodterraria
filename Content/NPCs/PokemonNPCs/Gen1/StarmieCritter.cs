@@ -16,7 +16,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkStartEnd => [0,3];
 		public override int[] jumpStartEnd => [0,3];
 		public override int[] fallStartEnd => [0,3];
-		public override float catchRate => 60;
+		public override float catchRate => 40;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,

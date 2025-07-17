@@ -25,8 +25,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackFlyStartEnd => [1,1];
 
 		public override float catchRate => 190;
+        public override int minLevel => 28;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
 				new FlavorTextBestiaryInfoElement("Lighter-than-air gases in its body keep it aloft. The gases not only smell; they are also explosive."));
 		}
