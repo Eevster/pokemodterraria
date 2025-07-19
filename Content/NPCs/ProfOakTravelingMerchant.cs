@@ -1,7 +1,12 @@
-using Pokemod.Content.Dusts;
-using Pokemod.Content.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Common.Players;
+using Pokemod.Common.UI.StarterPanelUI;
+using Pokemod.Content.Dusts;
+using Pokemod.Content.Items;
+using Pokemod.Content.Items.Accessories;
+using Pokemod.Content.Items.MegaStones;
+using Pokemod.Content.Items.Pokeballs;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -14,18 +19,6 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
-using Pokemod.Content.Pets.SquirtlePet;
-using Pokemod.Content.Pets.BulbasaurPet;
-using Pokemod.Content.Pets.CharmanderPet;
-using Pokemod.Content.Pets.ChikoritaPet;
-using Pokemod.Content.Pets.CyndaquilPet;
-using Pokemod.Content.Pets.TotodilePet;
-using Pokemod.Content.Items.Pokeballs;
-using Pokemod.Content.Items.Accessories;
-using Pokemod.Common.UI.StarterPanelUI;
-using Pokemod.Common.Players;
-using Pokemod.Content.Items.MegaStones;
-using Pokemod.Common.UI.MoveLearnUI;
 
 namespace Pokemod.Content.NPCs
 {
@@ -40,6 +33,9 @@ namespace Pokemod.Content.NPCs
 
 		// The list of items in the traveler's shop. Saved with the world and set when the traveler spawns. Synced by the server to clients in multi player
 		public readonly static List<Item> shopItems = new();
+
+		// The number of days since the Traveller last successfully spawned.
+		public static int daysAway = 0;
 
 		// A static instance of the declarative shop, defining all the items which can be brought. Used to create a new inventory when the NPC spawns
 		public static ProfOakTravelingMerchantShop Shop;
@@ -69,27 +65,29 @@ namespace Pokemod.Content.NPCs
 			Shop.Add<PokeballItem>();
 			Shop.Add<GreatballItem>();
 			Shop.Add<UltraballItem>();
-			Shop.Add<DuskballItem>();
-			Shop.Add<MoonballItem>();
-			Shop.Add<SafariballItem>();
-			Shop.Add<FastballItem>();
-            Shop.Add<HealballItem>();
-			Shop.Add<FeatherballItem>();
-			Shop.Add<FriendballItem>();
-			Shop.Add<LevelballItem>();
-			Shop.Add<HeavyballItem>();
+
+			Shop.AddPool("VarietyBalls", slots: 3, true)
+				.Add<DuskballItem>()
+				.Add<MoonballItem>()
+				.Add<SafariballItem>()
+				.Add<FastballItem>()
+				.Add<HealballItem>()
+				.Add<FeatherballItem>()
+				.Add<FriendballItem>()
+				.Add<LevelballItem>()
+				.Add<HeavyballItem>();
+
             Shop.Add<Everstone>();
 			Shop.Add<SynchroMachine>();
 
-			Shop.AddPool("MegaStones", slots: 1)
-				.Add<BlastoiseMegaStoneItem>(Condition.DownedMechBossAll)
-				.Add<CharizardMegaStoneItemX>(Condition.DownedMechBossAll, Condition.MoonPhasesOdd)
-				.Add<CharizardMegaStoneItemY>(Condition.DownedMechBossAll, Condition.MoonPhasesEven)
-				.Add<VenusaurMegaStoneItem>(Condition.DownedMechBossAll)
-				.Add<AlakazamMegaStoneItem>(Condition.DownedMechBossAll)
-                .Add<GengarMegaStoneItem>(Condition.DownedMechBossAll)
-                .Add<GyaradosMegaStoneItem>(Condition.DownedMechBossAll);
-
+			Shop.AddPool("MegaStones", slots: 1, true)
+				.Add<BlastoiseMegaStoneItem>(Condition.DownedMechBossAny)
+				.Add<CharizardMegaStoneItemX>(Condition.DownedMechBossAny)
+                .Add<CharizardMegaStoneItemY>(Condition.DownedMechBossAny)
+                .Add<VenusaurMegaStoneItem>(Condition.DownedMechBossAny)
+				.Add<AlakazamMegaStoneItem>(Condition.DownedMechBossAny)
+                .Add<GengarMegaStoneItem>(Condition.DownedMechBossAny)
+                .Add<GyaradosMegaStoneItem>(Condition.DownedMechBossAny);
 
 			Shop.Register();
 		}
@@ -103,12 +101,14 @@ namespace Pokemod.Content.NPCs
 				// You can also add a day counter here to prevent the merchant from possibly spawning multiple days in a row.
 
 				// NPC won't spawn today if it stayed all night
-				if (!travelerIsThere && Main.rand.NextBool(4)) { // 4 = 25% Chance
+				if (!travelerIsThere && (Main.rand.NextBool(4) || daysAway >= 5) && daysAway > 1) { // 4 = 25% Chance, and must be between 2 and 5 days since last visit.
 					// Here we can make it so the NPC doesn't spawn at the EXACT same time every time it does spawn
 					spawnTime = GetRandomSpawnTime(5400, 8100); // minTime = 6:00am, maxTime = 7:30am
+					daysAway = 0;
 				}
 				else {
 					spawnTime = double.MaxValue; // no spawn today
+					daysAway++;
 				}
 			}
 
@@ -276,7 +276,7 @@ namespace Pokemod.Content.NPCs
 
 		public override List<string> SetNPCNameList() {
 			return new List<string>() {
-				"Oak"
+				"Prof Oak"
 			};
 		}
 
@@ -299,7 +299,7 @@ namespace Pokemod.Content.NPCs
 
 		public override void OnChatButtonClicked(bool firstButton, ref string shop) {
 			if (firstButton) {
-				shop = Shop.Name; // Opens the shop
+                shop = Shop.Name; // Opens the shop
 			}else{
 				if (!Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().HasStarter) ModContent.GetInstance<StarterPanelUISystem>().ShowMyUI();
 			}
@@ -358,7 +358,7 @@ namespace Pokemod.Content.NPCs
 			public bool ConditionsMet() => Conditions.All(c => c.IsMet());
 		}
 
-		public record Pool(string Name, int Slots, List<Entry> Entries)
+		public record Pool(string Name, int Slots, List<Entry> Entries, bool Ordered = false)
 		{
 			public Pool Add(Item item, params Condition[] conditions) {
 				Entries.Add(new Entry(item, conditions.ToList()));
@@ -369,19 +369,19 @@ namespace Pokemod.Content.NPCs
 			public Pool Add(int item, params Condition[] conditions) => Add(ContentSamples.ItemsByType[item], conditions);
 
 			// Picks a number of items (up to Slots) from the entries list, provided conditions are met.
-			public IEnumerable<Item> PickItems() {
-				// This is not a fast way to pick items without replacement, but it's certainly easy. Be careful not to do this many many times per frame, or on huge lists of items.
+			public Item PickNextItem()	{
 				var list = Entries.Where(e => !e.Disabled && e.ConditionsMet()).ToList();
-				for (int i = 0; i < Slots; i++) {
-					if (list.Count == 0)
-						break;
+				int k = Main.rand.Next(list.Count);
 
-					int k = Main.rand.Next(list.Count);
-					yield return list[k].Item;
-
-					// remove the entry from the list so it can't be selected again this pick
-					list.RemoveAt(k);
+				if (Ordered) {
+					if (Order.TryGetValue(Name, out List<int> value)) { //Uses the orderd list until it runs out, using truely random values to fill the remainder of the slots.
+						if (value.Count > 0) {
+							k = value[0];
+							Order[Name].RemoveAt(0);
+						}
+					}
 				}
+				return list[k].Item;
 			}
 		}
 
@@ -391,8 +391,8 @@ namespace Pokemod.Content.NPCs
 
 		public override IEnumerable<Entry> ActiveEntries => Pools.SelectMany(p => p.Entries).Where(e => !e.Disabled);
 
-		public Pool AddPool(string name, int slots) {
-			var pool = new Pool(name, slots, new List<Entry>());
+		public Pool AddPool(string name, int slots, bool ordered = false) {
+			var pool = new Pool(name, slots, new List<Entry>(), ordered);
 			Pools.Add(pool);
 			return pool;
 		}
@@ -402,13 +402,43 @@ namespace Pokemod.Content.NPCs
 		public void Add<T>(params Condition[] conditions) where T : ModItem => Add(ModContent.ItemType<T>(), conditions);
 		public void Add(int item, params Condition[] conditions) => Add(ContentSamples.ItemsByType[item], conditions);
 
+        public static Dictionary<string, List<int>> Order = new();
+
+        public void RerollOrder(string Name = "") {
+            foreach (var pool in Pools) {
+                if (Name != "" && pool.Name != Name) 
+					continue;
+
+                if (pool.Ordered) {
+					Order.Remove(pool.Name);
+					Order.Add(pool.Name, []); // gets a new empty list
+                    for (var i = 0; i < pool.Entries.Count; i++) {
+                        Order[pool.Name].Add(i); //fills it with ordered integers
+                    }
+					for (var i = 0; i < Order[pool.Name].Count; i++)
+					{
+						int j = Main.rand.Next(i + 1);
+						(Order[pool.Name][i], Order[pool.Name][j]) = (Order[pool.Name][j], Order[pool.Name][i]);
+                    }
+                }
+            }
+        }
+
 		// Here is where we actually 'roll' the contents of the shop
 		public List<Item> GenerateNewInventoryList() {
 			var items = new List<Item>();
-			foreach (var pool in Pools) {
-				items.AddRange(pool.PickItems());
+			foreach (var pool in Pools)
+			{
+				for (int i = 0; i < pool.Slots; i++)
+				{
+					if (pool.Ordered && (!Order.TryGetValue(pool.Name, out List<int> value) || value.Count <= 0))
+					{  //Rerolls when it reaches the end of the ordered list
+						RerollOrder(pool.Name);
+					}
+					items.Add(pool.PickNextItem());
+				}
 			}
-			return items;
+            return items;
 		}
 
 		public override void FillShop(ICollection<Item> items, NPC npc) {

@@ -6,7 +6,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class WartortleCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 32;
+		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 36;
 
 		public override int totalFrames => 17;

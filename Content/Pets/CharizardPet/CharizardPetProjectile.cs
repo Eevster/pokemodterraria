@@ -10,10 +10,10 @@ namespace Pokemod.Content.Pets.CharizardPet
 {
 	public class CharizardPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 36;
-		public override int hitboxHeight => 56;
+        public override int hitboxWidth => 36;
+        public override int hitboxHeight => 46;
 
-		public override int totalFrames => 42;
+        public override int totalFrames => 42;
 		public override int animationSpeed => 7;
 
 		public override int moveStyle => 2;

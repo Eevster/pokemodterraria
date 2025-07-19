@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.GeodudePet
 {
 	public class GeodudePetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 42;
-		public override int hitboxHeight => 38;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 38;
 
-		public override int totalFrames => 8;
+        public override int totalFrames => 8;
 		public override int animationSpeed => 8;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [0,3];

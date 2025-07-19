@@ -9,7 +9,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class WeezingCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 56;
+		public override int hitboxWidth => 34;
 		public override int hitboxHeight => 40;
 
 		public override int totalFrames => 4;

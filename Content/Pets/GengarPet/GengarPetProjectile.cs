@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.GengarPet
 {
 	public class GengarPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 56;
-		public override int hitboxHeight => 60;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 46;
 
-		public override int moveStyle => 2;
+        public override int moveStyle => 2;
 
         public override float distanceToFly => 300f;
 

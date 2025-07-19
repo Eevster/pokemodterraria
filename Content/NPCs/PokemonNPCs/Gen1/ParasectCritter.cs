@@ -7,7 +7,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class ParasectCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 44;
+		public override int hitboxWidth => 34;
 		public override int hitboxHeight => 44;
 
 		public override int totalFrames => 14;

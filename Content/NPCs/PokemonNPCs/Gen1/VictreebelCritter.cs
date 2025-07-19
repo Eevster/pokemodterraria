@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class VictreebelCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 36;
-		public override int hitboxHeight => 50;
+		public override int hitboxWidth => 34;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 8;
 		public override int animationSpeed => 7;

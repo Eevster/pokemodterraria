@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.AlakazamPet
 {
 	public class AlakazamPetProjectile : PokemonPetProjectile
 	{
-        public override int hitboxWidth => 58;
-        public override int hitboxHeight => 60;
+        public override int hitboxWidth => 44;
+        public override int hitboxHeight => 46;
 
         public override int totalFrames => 14;
         public override int animationSpeed => 7;

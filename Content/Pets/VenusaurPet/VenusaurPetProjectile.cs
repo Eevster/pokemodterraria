@@ -10,10 +10,10 @@ namespace Pokemod.Content.Pets.VenusaurPet
 {
 	public class VenusaurPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 50;
-		public override int hitboxHeight => 40;
+        public override int hitboxWidth => 34;
+        public override int hitboxHeight => 40;
 
-		public override int totalFrames => 25;
+        public override int totalFrames => 25;
 		public override int animationSpeed => 7;
 		public override int[] idleStartEnd => [0, 5];
 		public override int[] walkStartEnd => [6, 14];

@@ -10,10 +10,10 @@ namespace Pokemod.Content.Pets.VaporeonPet
 {
 	public class VaporeonPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 32;
-		public override int hitboxHeight => 26;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 26;
 
-		public override int totalFrames => 19;
+        public override int totalFrames => 19;
 		public override int animationSpeed => 6;
 		public override int[] idleStartEnd => [0,8];
 		public override int[] walkStartEnd => [9,17];

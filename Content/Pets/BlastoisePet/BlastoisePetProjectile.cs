@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.BlastoisePet
 {
 	public class BlastoisePetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 26;
-		public override int hitboxHeight => 56;
+        public override int hitboxWidth => 42;
+        public override int hitboxHeight => 46;
 
-		public override int totalFrames => 24;
+        public override int totalFrames => 24;
 		public override int animationSpeed => 6;
 		public override int[] idleStartEnd => [0, 8];
 		public override int[] walkStartEnd => [9, 16];

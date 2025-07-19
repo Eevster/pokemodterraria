@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class BlastoiseCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 26;
-		public override int hitboxHeight => 56;
+		public override int hitboxWidth => 42;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 24;
 		public override int animationSpeed => 6;

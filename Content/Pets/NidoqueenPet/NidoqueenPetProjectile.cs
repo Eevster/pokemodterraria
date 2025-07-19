@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.NidoqueenPet
 {
 	public class NidoqueenPetProjectile : PokemonPetProjectile
 	{
-        public override int hitboxWidth => 72;
-        public override int hitboxHeight => 68;
+        public override int hitboxWidth => 34;
+        public override int hitboxHeight => 48;
 
         public override int totalFrames => 12;
         public override int animationSpeed => 8;

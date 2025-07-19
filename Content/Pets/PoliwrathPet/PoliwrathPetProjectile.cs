@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.PoliwrathPet
 {
 	public class PoliwrathPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 36;
-		public override int hitboxHeight => 48;
+        public override int hitboxWidth => 34;
+        public override int hitboxHeight => 46;
 
-		public override int totalFrames => 16;
+        public override int totalFrames => 16;
 		public override int animationSpeed => 7;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [4,7];

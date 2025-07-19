@@ -7,7 +7,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class KadabraCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 54;
+		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 13;

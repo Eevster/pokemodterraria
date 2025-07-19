@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class GolemCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 60;
-		public override int hitboxHeight => 56;
+		public override int hitboxWidth => 34;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 12;
 		public override int animationSpeed => 8;

@@ -10,10 +10,10 @@ namespace Pokemod.Content.Pets.JolteonPet
 {
 	public class JolteonPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 32;
-		public override int hitboxHeight => 24;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 24;
 
-		public override int totalFrames => 18;
+        public override int totalFrames => 18;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,8];
 		public override int[] walkStartEnd => [9,17];

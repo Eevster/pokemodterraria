@@ -10,10 +10,10 @@ namespace Pokemod.Content.Pets.BeedrillPet
 {
 	public class BeedrillPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 32;
-		public override int hitboxHeight => 48;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 46;
 
-		public override int totalFrames => 12;
+        public override int totalFrames => 12;
 		public override int animationSpeed => 5;
 		public override int moveStyle => 1;
 

@@ -317,6 +317,13 @@ namespace Pokemod.Content.Items.Pokeballs
 					Main.dust[dustIndex].noGravity = true;
 					Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Dirt, 0f, 0f, 100, default(Color), 1f);
 				}
+
+				if (Main.netMode != NetmodeID.MultiplayerClient) //Allows picking up pokeball after missing a throw.
+				{
+                    ModContent.TryFind<ModItem>("Pokemod", GetType().Name.Replace("Proj", "Item"), out ModItem item);
+                    Item.NewItem(Projectile.InheritSource(Projectile), Projectile.Hitbox, item.Type);
+				}
+
 			}else{
 				if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f) {
 					Projectile.velocity.X = 0;

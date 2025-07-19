@@ -6,8 +6,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class MagnetonCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 36;
-		public override int hitboxHeight => 48;
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 16;
 		public override int animationSpeed => 5;

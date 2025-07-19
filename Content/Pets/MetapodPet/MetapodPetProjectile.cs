@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.MetapodPet
 {
 	public class MetapodPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 32;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 28;
 
-		public override int totalFrames => 5;
+        public override int totalFrames => 5;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,0];
 		public override int[] walkStartEnd => [0,0];
