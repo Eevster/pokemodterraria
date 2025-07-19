@@ -493,9 +493,13 @@ namespace Pokemod.Content.Pets
 			}
 			else
 			{
-				if (Projectile.timeLeft > 10) Projectile.timeLeft = 10;
+				if (Main.myPlayer == Projectile.owner){
+					if (Projectile.timeLeft > 10) Projectile.timeLeft = 10;
+				}
 			}
-			if(Main.myPlayer == Projectile.owner){
+			
+			if (Main.myPlayer == Projectile.owner)
+			{
 				Projectile.netUpdate = true;
 			}
 		}

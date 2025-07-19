@@ -42,7 +42,7 @@ namespace Pokemod.Common.Systems
                 Tile chestTile = Main.tile[chest.x, chest.y];
 
                 // Surface Chest
-                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 0 * 36)
+                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 0 * 36 && itemsPlacedSurface < maxItemsSurface)
                 {
                     if (WorldGen.genRand.NextBool(3))
                         continue;
@@ -60,7 +60,7 @@ namespace Pokemod.Common.Systems
                 }
 
                 // Gold Chest
-                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 1 * 36)
+                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 1 * 36 && itemsPlacedGold < maxItemsGold)
                 {
                     if (WorldGen.genRand.NextBool(3))
                         continue;
@@ -78,7 +78,7 @@ namespace Pokemod.Common.Systems
                 }
 
                 // Jungle Chest
-                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 10 * 36)
+                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 10 * 36 && itemsPlacedJungle < maxItemsJungle)
                 {
                     if (WorldGen.genRand.NextBool(3))
                         continue;
