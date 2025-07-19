@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class AlakazamCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 58;
-		public override int hitboxHeight => 60;
+		public override int hitboxWidth => 44;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 14;
 		public override int animationSpeed => 7;

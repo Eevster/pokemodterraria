@@ -7,7 +7,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class WeepinbellCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 30;
+		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 28;
 
 		public override int totalFrames => 8;

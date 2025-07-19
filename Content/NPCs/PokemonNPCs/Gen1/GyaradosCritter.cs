@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class GyaradosCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 118;
-		public override int hitboxHeight => 100;
+		public override int hitboxWidth => 88;
+		public override int hitboxHeight => 80;
 
 		public override int totalFrames => 15;
 		public override int animationSpeed => 8;

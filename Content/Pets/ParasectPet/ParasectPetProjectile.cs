@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.ParasectPet
 {
 	public class ParasectPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 44;
-		public override int hitboxHeight => 44;
+        public override int hitboxWidth => 34;
+        public override int hitboxHeight => 44;
 
-		public override int totalFrames => 14;
+        public override int totalFrames => 14;
 		public override int animationSpeed => 6;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [4,7];

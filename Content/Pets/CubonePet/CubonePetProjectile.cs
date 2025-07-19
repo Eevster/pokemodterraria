@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.CubonePet
 {
 	public class CubonePetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 64;
-		public override int hitboxHeight => 64;
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 4;
 		public override int animationSpeed => 5;

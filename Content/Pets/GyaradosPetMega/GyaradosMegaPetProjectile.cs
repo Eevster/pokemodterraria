@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.GyaradosPet
 {
 	public class GyaradosMegaPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 118;
-		public override int hitboxHeight => 100;
+        public override int hitboxWidth => 88;
+        public override int hitboxHeight => 80;
 
-		public override int totalFrames => 9;
+        public override int totalFrames => 9;
 		public override int animationSpeed => 8;
 		public override int moveStyle => 1;
 

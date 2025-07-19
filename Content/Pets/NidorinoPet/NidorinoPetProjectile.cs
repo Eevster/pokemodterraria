@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.NidorinoPet
 {
 	public class NidorinoPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 44;
-		public override int hitboxHeight => 30;
+        public override int hitboxWidth => 32;
+        public override int hitboxHeight => 30;
 
-		public override int totalFrames => 16;
+        public override int totalFrames => 16;
 		public override int animationSpeed => 6;
 		public override int[] idleStartEnd => [0,4];
 		public override int[] walkStartEnd => [5,9];

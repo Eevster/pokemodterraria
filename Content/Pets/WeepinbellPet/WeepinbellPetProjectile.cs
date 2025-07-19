@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.WeepinbellPet
 {
 	public class WeepinbellPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 30;
-		public override int hitboxHeight => 28;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 28;
 
-		public override int totalFrames => 8;
+        public override int totalFrames => 8;
 		public override int animationSpeed => 6;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [0,3];

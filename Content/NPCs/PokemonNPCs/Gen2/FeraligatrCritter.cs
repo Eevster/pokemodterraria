@@ -6,8 +6,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class FeraligatrCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 40;
-		public override int hitboxHeight => 50;
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 18;
 		public override int animationSpeed => 7;

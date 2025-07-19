@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class AbraCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 64;
-		public override int hitboxHeight => 64;
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 7;
 		public override int animationSpeed => 8;

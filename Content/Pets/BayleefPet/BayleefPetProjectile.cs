@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.BayleefPet
 {
 	public class BayleefPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 40;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 40;
 
-		public override int totalFrames => 12;
+        public override int totalFrames => 12;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,5];
 		public override int[] walkStartEnd => [6,10];

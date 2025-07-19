@@ -6,7 +6,7 @@ namespace Pokemod.Content.Pets.VenusaurPetMega
 {
 	public class VenusaurMegaPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 64;
+		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 52;
 
 		public override int totalFrames => 25;

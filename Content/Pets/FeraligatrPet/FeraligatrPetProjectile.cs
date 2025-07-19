@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.FeraligatrPet
 {
 	public class FeraligatrPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 40;
-		public override int hitboxHeight => 50;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 46;
 
-		public override int totalFrames => 18;
+        public override int totalFrames => 18;
 		public override int animationSpeed => 7;
 		public override int[] idleStartEnd => [0,5];
 		public override int[] walkStartEnd => [6,11];

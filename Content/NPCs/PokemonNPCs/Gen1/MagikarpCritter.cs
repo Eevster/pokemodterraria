@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class MagikarpCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 40;
-		public override int hitboxHeight => 38;
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 28;
 
 		public override int totalFrames => 8;
 		public override int animationSpeed => 7;

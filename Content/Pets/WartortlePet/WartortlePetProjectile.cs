@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.WartortlePet
 {
 	public class WartortlePetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 32;
-		public override int hitboxHeight => 36;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 36;
 
-		public override int totalFrames => 17;
+        public override int totalFrames => 17;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,7];
 		public override int[] walkStartEnd => [8,15];

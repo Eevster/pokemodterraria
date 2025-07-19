@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.WeezingPet
 {
 	public class WeezingPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 56;
-		public override int hitboxHeight => 40;
+        public override int hitboxWidth => 34;
+        public override int hitboxHeight => 40;
 
-		public override int totalFrames => 4;
+        public override int totalFrames => 4;
 		public override int animationSpeed => 5;
 		public override int moveStyle => 1;
         public override bool sideDiff => true;

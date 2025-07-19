@@ -3042,7 +3042,7 @@ NPCs: {
 	BulbasaurCritterNPC.DisplayName: Bulbasaur
 	CharmanderCritterNPC.DisplayName: Charmander
 	SquirtleCritterNPC.DisplayName: Squirtle
-	ProfOakTravelingMerchant.DisplayName: Prof Oak Traveling Merchant
+	ProfOakTravelingMerchant.DisplayName: Pokemon Professor
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur  Shiny
 	CharmanderCritterNPCShiny.DisplayName: Charmander  Shiny
 	SquirtleCritterNPCShiny.DisplayName: Squirtle  Shiny

@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class GengarCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 56;
-		public override int hitboxHeight => 60;
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 46;
 
         public override int moveStyle => 2;
 

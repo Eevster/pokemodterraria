@@ -6,8 +6,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class ElectrodeCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 36;
-		public override int hitboxHeight => 36;
+		public override int hitboxWidth => 32;
+		public override int hitboxHeight => 34;
 
         public override float moveSpeed => 2.5f;
 

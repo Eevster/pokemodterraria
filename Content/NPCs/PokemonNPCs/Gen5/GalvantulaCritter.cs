@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class GalvantulaCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 60;
-		public override int hitboxHeight => 48;
+		public override int hitboxWidth => 46;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 16;
 		public override int animationSpeed => 5;

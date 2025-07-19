@@ -7,7 +7,7 @@ namespace Pokemod.Content.Pets.BlastoisePetMega
 	public class BlastoiseMegaPetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 52;
-		public override int hitboxHeight => 64;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 24;
 		public override int animationSpeed => 6;

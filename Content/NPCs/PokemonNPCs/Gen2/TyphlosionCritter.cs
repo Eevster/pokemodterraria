@@ -6,8 +6,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class TyphlosionCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 40;
-		public override int hitboxHeight => 48;
+		public override int hitboxWidth => 34;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 11;
 		public override int animationSpeed => 6;

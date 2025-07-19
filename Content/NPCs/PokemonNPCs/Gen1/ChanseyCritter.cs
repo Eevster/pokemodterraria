@@ -7,7 +7,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class ChanseyCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 32;
+		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 32;
 
 		public override int totalFrames => 22;

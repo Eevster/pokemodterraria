@@ -6,7 +6,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class NidorinoCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 44;
+		public override int hitboxWidth => 32;
 		public override int hitboxHeight => 30;
 
 		public override int totalFrames => 16;

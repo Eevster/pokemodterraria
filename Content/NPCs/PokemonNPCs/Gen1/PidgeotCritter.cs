@@ -6,8 +6,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class PidgeotCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 32;
-		public override int hitboxHeight => 52;
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 16;
 		public override int animationSpeed => 7;

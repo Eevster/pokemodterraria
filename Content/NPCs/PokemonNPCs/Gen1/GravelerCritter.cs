@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class GravelerCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 48;
-		public override int hitboxHeight => 48;
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 12;
 		public override int animationSpeed => 8;

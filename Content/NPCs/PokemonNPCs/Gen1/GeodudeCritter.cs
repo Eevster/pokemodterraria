@@ -7,7 +7,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class GeodudeCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 42;
+		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 38;
 
 		public override int totalFrames => 8;

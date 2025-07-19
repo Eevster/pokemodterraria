@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.KoffingPet
 {
 	public class KoffingPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 32;
-		public override int hitboxHeight => 32;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 32;
 
-		public override int totalFrames => 2;
+        public override int totalFrames => 2;
 		public override int animationSpeed => 5;
 		public override int moveStyle => 1;
 

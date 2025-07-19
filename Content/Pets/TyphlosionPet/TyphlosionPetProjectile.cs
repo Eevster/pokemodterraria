@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.TyphlosionPet
 {
 	public class TyphlosionPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 40;
-		public override int hitboxHeight => 48;
+        public override int hitboxWidth => 34;
+        public override int hitboxHeight => 46;
 
-		public override int totalFrames => 11;
+        public override int totalFrames => 11;
 		public override int animationSpeed => 7;
 		public override int[] idleStartEnd => [0,5];
 		public override int[] walkStartEnd => [6,10];

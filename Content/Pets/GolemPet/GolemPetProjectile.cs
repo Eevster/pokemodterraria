@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.GolemPet
 {
 	public class GolemPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 60;
-		public override int hitboxHeight => 56;
+        public override int hitboxWidth => 34;
+        public override int hitboxHeight => 46;
 
-		public override int totalFrames => 12;
+        public override int totalFrames => 12;
 		public override int animationSpeed => 8;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [4,7];

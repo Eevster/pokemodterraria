@@ -9,10 +9,10 @@ namespace Pokemod.Content.Pets.GravelerPet
 {
 	public class GravelerPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 48;
-		public override int hitboxHeight => 48;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 46;
 
-		public override int totalFrames => 12;
+        public override int totalFrames => 12;
 		public override int animationSpeed => 8;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [4,7];

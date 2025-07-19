@@ -6,7 +6,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class HaunterCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 36;
+		public override int hitboxWidth => 34;
 		public override int hitboxHeight => 40;
 
 		public override int totalFrames => 12;
