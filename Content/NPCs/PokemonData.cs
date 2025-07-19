@@ -24,19 +24,23 @@ namespace Pokemod.Content.NPCs
         public bool ultrabeast = false;
         public string variant = "";
 
-        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter) {
-			bitWriter.WriteBit(isPokemon);
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            bitWriter.WriteBit(isPokemon);
             bitWriter.WriteBit(shiny);
             bitWriter.WriteBit(ultrabeast);
             binaryWriter.Write(pokemonName);
+            binaryWriter.Write(lvl);
 		}
 
-		// Make sure you always read exactly as much data as you sent!
-		public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader) {
-			isPokemon = bitReader.ReadBit();
+        // Make sure you always read exactly as much data as you sent!
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            isPokemon = bitReader.ReadBit();
             shiny = bitReader.ReadBit();
             ultrabeast = bitReader.ReadBit();
             pokemonName = binaryReader.ReadString();
+            lvl = binaryReader.ReadInt32();
 		}
 
         public void SetPokemonNPCData(string pokemonName, bool shiny = false, int lvl = 5, int[] baseStats = null, int[] IVs = null, int nature = -1, bool ultrabeast = false, string variant = ""){
