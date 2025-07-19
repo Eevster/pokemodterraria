@@ -31,6 +31,12 @@ namespace Pokemod.Content.NPCs
             bitWriter.WriteBit(ultrabeast);
             binaryWriter.Write(pokemonName);
             binaryWriter.Write(lvl);
+            binaryWriter.Write(nature);
+            for (int i = 0; i < 6; i++)
+            {
+                if (i < IVs.Length) binaryWriter.Write(IVs[i]);
+                else binaryWriter.Write(0);
+			}
 		}
 
         // Make sure you always read exactly as much data as you sent!
@@ -41,7 +47,14 @@ namespace Pokemod.Content.NPCs
             ultrabeast = bitReader.ReadBit();
             pokemonName = binaryReader.ReadString();
             lvl = binaryReader.ReadInt32();
+            nature = binaryReader.ReadInt32();
+            IVs = [0,0,0,0,0,0];
+            for (int i = 0; i < IVs.Length; i++)
+            {
+                IVs[i] = binaryReader.ReadInt32();
+            }
 		}
+        
 
         public void SetPokemonNPCData(string pokemonName, bool shiny = false, int lvl = 5, int[] baseStats = null, int[] IVs = null, int nature = -1, bool ultrabeast = false, string variant = ""){
             isPokemon = true;

@@ -92,6 +92,7 @@ namespace Pokemod.Content.Items.Pokeballs
 		private int captureStage = -1;
 		private ref float canCapture => ref Projectile.localAI[0];
 		public NPC targetPokemon;
+		private int targetPokemonLife;
 		private int moveTimer = 0;
 		public const int moveTime = 80;
 
@@ -161,6 +162,7 @@ namespace Pokemod.Content.Items.Pokeballs
 
 			if(Projectile.owner == Main.myPlayer){
 				if(targetPokemon != null){
+					if (targetPokemon.life > 0) targetPokemonLife = targetPokemon.life;
 					canCapture = FailureProb(catchRate)?1:0;
 				}else{
 					canCapture = 0;
@@ -272,35 +274,38 @@ namespace Pokemod.Content.Items.Pokeballs
 			}
 		}
 
-		public void CaptureSuccess(){
-			if(targetPokemon != null){
+		public void CaptureSuccess()
+		{
+			if (targetPokemon != null)
+			{
 				Player player = Main.player[Projectile.owner];
 				int item;
 				string pokemonName = targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName;
 				bool shiny = targetPokemon.GetGlobalNPC<PokemonNPCData>().shiny;
 				int lvl = targetPokemon.GetGlobalNPC<PokemonNPCData>().lvl;
+				int[] IVs = targetPokemon.GetGlobalNPC<PokemonNPCData>().IVs;
+				int nature = targetPokemon.GetGlobalNPC<PokemonNPCData>().nature;
 				string variant = targetPokemon.GetGlobalNPC<PokemonNPCData>().variant;
 
 				if (Main.netMode == NetmodeID.SinglePlayer)
 				{
 					item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), lvl, variant: variant);
+					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), lvl, IVs, nature, variant: variant);
 					pokeItem.currentHP = targetPokemon.life;
 					SetExtraPokemonEffects(ref pokeItem);
 				}
 				else if (Main.netMode == NetmodeID.MultiplayerClient && Main.myPlayer == Projectile.owner)
 				{
 					//item = player.QuickSpawnItem(Projectile.InheritSource(Projectile), ModContent.ItemType<CaughtPokemonItem>());
-					item = Item.NewItem(targetPokemon.GetSource_Death(), (int)player.position.X, (int)player.position.Y, player.width, player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
+					item = Item.NewItem(Projectile.InheritSource(Projectile), (int)player.position.X, (int)player.position.Y, player.width, player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), lvl, variant: variant);
-					pokeItem.currentHP = targetPokemon.life;
+					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), lvl, IVs, nature, variant: variant);
+					pokeItem.currentHP = targetPokemonLife;
 					SetExtraPokemonEffects(ref pokeItem);
 					NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item, 1f);
 				}
-
-				targetPokemon.StrikeInstantKill();
+				if (Main.netMode != NetmodeID.MultiplayerClient) targetPokemon.StrikeInstantKill();
 			}
 			Projectile.Kill();
 		}

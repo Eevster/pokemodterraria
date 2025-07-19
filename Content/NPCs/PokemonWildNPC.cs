@@ -294,11 +294,12 @@ namespace Pokemod.Content.NPCs
 		public ref float AI_Timer => ref NPC.ai[1];
 		public ref float currentFrame => ref NPC.ai[2];
 
-		public override void AI() {
+		public override void AI()
+		{
 			NPC.chaseable = hostilePokemon;
 			Movement();
 			ExtraEffects();
-			if(shiny) ShinyEffects();
+			if (shiny) ShinyEffects();
 		}
 
 		// Here in FindFrame, we want to set the animation frame our npc will use depending on what it is doing.
@@ -542,6 +543,10 @@ namespace Pokemod.Content.NPCs
 
 			if(canRotate){
 				NPC.rotation -= NPC.spriteDirection*MathHelper.ToRadians(2f*NPC.velocity.Length());
+			}
+			
+			if (Main.netMode != NetmodeID.MultiplayerClient) {
+				NPC.netUpdate = true;
 			}
 		}
 
