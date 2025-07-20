@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	public class ThunderStoneLeggings : ModItem
 	{
 		public static readonly int MoveSpeedBonus = 5;
-		public static readonly int AdditiveGenericDamageBonus = 110;
+		public static readonly int AdditiveGenericDamageBonus = 10;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeedBonus);
 
@@ -26,14 +26,14 @@ namespace Pokemod.Content.Items.Armor
 		}
 
 		public override void UpdateEquip(Player player) {
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f;
-            player.GetDamage(DamageClass.Ranged) += AdditiveGenericDamageBonus / 32f;
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 100f;
+            player.GetDamage(DamageClass.Ranged) += AdditiveGenericDamageBonus / 200f;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient<ThunderStoneItem>(25)
+                .AddIngredient<ThunderStoneItem>(2)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

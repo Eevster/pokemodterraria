@@ -33,9 +33,9 @@ namespace Pokemod.Content.Items.EvoStones
 		}
 		public override void AddRecipes() {
 			CreateRecipe(1)
-				.AddIngredient(ItemID.Waterleaf, 40)
-				.AddIngredient(ItemID.Coral, 20)
-				.AddIngredient(ItemID.SharkFin, 20)
+				.AddIngredient(ItemID.PlatinumOre, 60)
+				.AddIngredient(ItemID.Coral, 15)
+				.AddIngredient(ItemID.Sapphire, 5)
 				.AddTile(TileID.Anvils)
 				.Register();
 	}

@@ -33,9 +33,9 @@ namespace Pokemod.Content.Items.EvoStones
 		}
 		public override void AddRecipes() {
 			CreateRecipe(1)
-				.AddIngredient(ItemID.JungleSpores, 40)
+				.AddIngredient(ItemID.JungleSpores, 15)
 				.AddIngredient(ItemID.LivingLeafWall, 20)
-				.AddIngredient(ItemID.Emerald, 10)
+				.AddIngredient(ItemID.Emerald, 5)
 				.AddTile(TileID.Anvils)
 				.Register();
 	}
