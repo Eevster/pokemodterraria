@@ -13,10 +13,10 @@ namespace Pokemod.Content.Items.Armor
 	public class ThunderStoneBreastplate : ModItem
 	{
 		public static readonly int MaxManaIncrease = 20;
-		public static readonly int AdditiveGenericDamageBonus = 150;
+		public static readonly int AdditiveGenericDamageBonus = 10;
 		public static readonly int MaxMinionIncrease = 1;
 
-		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxManaIncrease, MaxMinionIncrease);
+		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(AdditiveGenericDamageBonus, AdditiveGenericDamageBonus / 2);
 
 		public override void SetDefaults() {
 			Item.width = 18; // Width of the item
@@ -28,14 +28,14 @@ namespace Pokemod.Content.Items.Armor
 
 		public override void UpdateEquip(Player player) {
 			
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f;
-            player.GetDamage(DamageClass.Ranged) += AdditiveGenericDamageBonus / 40f;
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 100f;
+            player.GetDamage(DamageClass.Ranged) += AdditiveGenericDamageBonus / 200f;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient<ThunderStoneItem>(30)
+                .AddIngredient<ThunderStoneItem>(3)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

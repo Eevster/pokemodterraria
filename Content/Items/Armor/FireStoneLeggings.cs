@@ -13,10 +13,10 @@ namespace Pokemod.Content.Items.Armor
 	public class FireStoneLeggings : ModItem
 	{
 		public static readonly int MoveSpeedBonus = 5;
-		public static readonly int AdditiveGenericDamageBonus = 200;
+		public static readonly int AdditiveGenericDamageBonus = 10;
         public static readonly int MaxManaIncrease = 35;
 
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeedBonus);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeedBonus, AdditiveGenericDamageBonus, MaxManaIncrease);
 
 		public override void SetDefaults() {
 			Item.width = 18; // Width of the item
@@ -27,7 +27,7 @@ namespace Pokemod.Content.Items.Armor
 		}
 
 		public override void UpdateEquip(Player player) {
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; 
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 100f; 
             player.statManaMax2 += MaxManaIncrease;
         }
 
@@ -35,7 +35,7 @@ namespace Pokemod.Content.Items.Armor
         {
             CreateRecipe()
                 .AddIngredient(ItemID.MeteoriteBar, 10)
-                .AddIngredient<FireStoneItem>(15)
+                .AddIngredient<FireStoneItem>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

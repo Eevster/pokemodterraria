@@ -7,6 +7,7 @@ using Terraria.Audio;
 using Terraria.GameContent.Achievements;
 using Terraria.DataStructures;
 using Pokemod.Content.Pets;
+using Terraria.Graphics.Shaders;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
@@ -21,7 +22,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.friendly = true;
             Projectile.hostile = false;
 
-            Projectile.timeLeft = 40;
+            Projectile.timeLeft = 60;
 
             Projectile.tileCollide = true;  
 
@@ -29,6 +30,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 15;
+
+            Projectile.hide = true;
             base.SetDefaults();
         }
 
@@ -40,6 +43,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					if(pokemonOwner.attackProjs[i] == null){
 						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Harden>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 6f, pokemon.owner)];
 						SoundEngine.PlaySound(SoundID.Item37, pokemon.position);
+                        DustBurst(pokemon.Center);
                         pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
 						pokemonOwner.timer = pokemonOwner.attackDuration;
 						pokemonOwner.canAttack = false;
@@ -48,6 +52,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				} 
 			}
 		}
+
+        public void DustBurst(Vector2 position)
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                int dust = Dust.NewDust(position, 16, 16, 63, Main.rand.Next(-6, 7), Main.rand.Next(-6, 7), default, default, 2.5f);
+                Main.dust[dust].noGravity = true;
+                Main.dust[dust].noLight = true;
+            }
+        }
 
 		public override void UpdateAttackProjs(Projectile pokemon, int i, ref float maxFallSpeed){
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
@@ -61,9 +75,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			pokemonOwner.attackProjs[i].Center = pokemon.Center;
 		}
 
-        public override bool PreDraw(ref Color lightColor)
-        {
-            return false;
+        public override void ExtraChanges(Projectile pokemon){
+            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
+
+            if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && !pokemonOwner.canAttack) {
+                pokemonOwner.immune = true;
+                pokemonOwner.shader = GameShaders.Armor.GetShaderFromItemId(ItemID.ReflectiveSilverDye);
+                
+            }
         }
     }
 }

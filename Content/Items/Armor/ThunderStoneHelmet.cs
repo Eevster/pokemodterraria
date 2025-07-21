@@ -14,7 +14,7 @@ namespace Pokemod.Content.Items.Armor
 	[AutoloadEquip(EquipType.Head)]
 	public class ThunderStoneHelmet : ModItem
 	{
-		public static readonly int AdditiveGenericDamageBonus = 120;
+		public static readonly int AdditiveGenericDamageBonus = 20;
 
 		public static LocalizedText SetBonusText { get; private set; }
 
@@ -25,7 +25,7 @@ namespace Pokemod.Content.Items.Armor
 			// ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true; // Draw all hair as normal. Used by Mime Mask, Sunglasses
 			// ArmorIDs.Head.Sets.DrawsBackHairWithoutHeadgear[Item.headSlot] = true;
 
-			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(AdditiveGenericDamageBonus);
+			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(AdditiveGenericDamageBonus, AdditiveGenericDamageBonus / 2, 1);
 		}
 
 		public override void SetDefaults() {
@@ -44,15 +44,15 @@ namespace Pokemod.Content.Items.Armor
 		// UpdateArmorSet allows you to give set bonuses to the armor.
 		public override void UpdateArmorSet(Player player) {
 			
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f;
-            player.GetDamage(DamageClass.Ranged) += AdditiveGenericDamageBonus / 40f;
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 100f;
+            player.GetDamage(DamageClass.Ranged) += AdditiveGenericDamageBonus / 200f;
             player.GetModPlayer<PokemonPlayer>().maxPokemon += 1;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient<ThunderStoneItem>(20)
+                .AddIngredient<ThunderStoneItem>(2)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

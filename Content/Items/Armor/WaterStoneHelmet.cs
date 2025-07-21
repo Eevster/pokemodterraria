@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	[AutoloadEquip(EquipType.Head)]
 	public class WaterStoneHelmet : ModItem
 	{
-		public static readonly int AdditiveGenericDamageBonus = 80;
+		public static readonly int AdditiveGenericDamageBonus = 20;
         public static readonly int MaxMinionIncrease = 1;
 
         public static LocalizedText SetBonusText { get; private set; }
@@ -25,7 +25,7 @@ namespace Pokemod.Content.Items.Armor
 			// ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true; // Draw all hair as normal. Used by Mime Mask, Sunglasses
 			// ArmorIDs.Head.Sets.DrawsBackHairWithoutHeadgear[Item.headSlot] = true;
 
-			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(AdditiveGenericDamageBonus);
+			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(AdditiveGenericDamageBonus, MaxMinionIncrease);
 		}
 
 		public override void SetDefaults() {
@@ -44,14 +44,14 @@ namespace Pokemod.Content.Items.Armor
 		// UpdateArmorSet allows you to give set bonuses to the armor.
 		public override void UpdateArmorSet(Player player) {
 			player.setBonus = SetBonusText.Value; 
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f;
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 100f;
             player.maxMinions += MaxMinionIncrease;
         }
         public override void AddRecipes()
         {
             CreateRecipe()
                 .AddIngredient(ItemID.PlatinumBar, 10)
-                .AddIngredient<WaterStoneItem>(10)
+                .AddIngredient<WaterStoneItem>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

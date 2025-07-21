@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	[AutoloadEquip(EquipType.Head)]
 	public class FireStoneHelmet : ModItem
 	{
-		public static readonly int AdditiveGenericDamageBonus = 190;
+		public static readonly int AdditiveGenericDamageBonus = 20;
         public static readonly int MaxManaIncrease = 20;
 
         public static LocalizedText SetBonusText { get; private set; }
@@ -25,7 +25,7 @@ namespace Pokemod.Content.Items.Armor
 			// ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true; // Draw all hair as normal. Used by Mime Mask, Sunglasses
 			// ArmorIDs.Head.Sets.DrawsBackHairWithoutHeadgear[Item.headSlot] = true;
 
-			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(AdditiveGenericDamageBonus);
+			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(AdditiveGenericDamageBonus, MaxManaIncrease);
 		}
 
 		public override void SetDefaults() {
@@ -44,7 +44,7 @@ namespace Pokemod.Content.Items.Armor
 		// UpdateArmorSet allows you to give set bonuses to the armor.
 		public override void UpdateArmorSet(Player player) {
 			player.setBonus = SetBonusText.Value;
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f;
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 100f;
             player.statManaMax2 += MaxManaIncrease;
         }
 
@@ -52,7 +52,7 @@ namespace Pokemod.Content.Items.Armor
         {
             CreateRecipe()
                 .AddIngredient(ItemID.MeteoriteBar, 15)
-                .AddIngredient<FireStoneItem>(5)
+                .AddIngredient<FireStoneItem>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

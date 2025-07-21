@@ -19,7 +19,7 @@ namespace Pokemod.Content.NPCs
         public bool shiny = false;
         public int lvl;
         public int[] baseStats;
-        public int[] IVs;
+        public int[] IVs = new int[6];
         public int nature;
         public bool ultrabeast = false;
         public string variant = "";
@@ -409,7 +409,7 @@ namespace Pokemod.Content.NPCs
             {"FuryCutter", new PokemonAttackInfo(40,42,60,200f,false,false,(int)TypeIndex.Bug)},
             {"GigaDrain", new PokemonAttackInfo(75,56,60,800f,false,true,(int)TypeIndex.Grass, true)},
             {"Gust", new PokemonAttackInfo(40,30,60,800f,false,false,(int)TypeIndex.Flying, true)},
-            {"Harden", new PokemonAttackInfo(0,40,60,64f,false,false,(int)TypeIndex.Normal)},
+            {"Harden", new PokemonAttackInfo(0,60,60,64f,false,false,(int)TypeIndex.Normal)},
             {"HealPulse", new PokemonAttackInfo(0,30,60,200f,false,false,(int)TypeIndex.Normal, true)},
             {"Hex", new PokemonAttackInfo(65,30,60,800f,true,true,(int)TypeIndex.Ghost, true)},
             {"HydroPump", new PokemonAttackInfo(110,42,60,800f,false,true,(int)TypeIndex.Water, true)},

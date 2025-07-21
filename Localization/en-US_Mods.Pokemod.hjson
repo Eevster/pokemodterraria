@@ -538,7 +538,7 @@ Items: {
 
 	VenusaurMegaStoneItem: {
 		DisplayName: Venusaurite
-		Tooltip: ""
+		Tooltip: Allows the holder to mega evolve Venusaur, when a mega cuff is used
 	}
 
 	GreatballItem: {
@@ -613,17 +613,17 @@ Items: {
 
 	BlastoiseMegaStoneItem: {
 		DisplayName: Blastoisinite
-		Tooltip: ""
+		Tooltip: Allows the holder to mega evolve Blastoise, when a mega cuff is used
 	}
 
 	CharizardMegaStoneItemX: {
 		DisplayName: Charizardite X
-		Tooltip: ""
+		Tooltip: Allows the holder to mega evolve Charizard, when a mega cuff is used
 	}
 
 	CharizardMegaStoneItemY: {
 		DisplayName: Charizardite Y
-		Tooltip: ""
+		Tooltip: Allows the holder to mega evolve Charizard, when a mega cuff is used
 	}
 
 	BlastoisePetItemMega: {
@@ -953,19 +953,32 @@ Items: {
 	}
 
 	FireStoneHelmet: {
-		SetBonus: Mods.Pokemod.Items.FireStoneHelmet.SetBonus
+		SetBonus:
+			'''
+			{$CommonItemTooltip.IncreasesMaxManaBy@1}
+			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			'''
 		DisplayName: Fire Stone Helmet
 		Tooltip: ""
 	}
 
 	FireStoneBreastplate: {
 		DisplayName: Fire Stone Breastplate
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$CommonItemTooltip.IncreasesMaxManaBy}
+			{$Mods.Pokemod.PokemonInfo.PokemonMaxBoost@2}
+			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost@1}%
+			'''
 	}
 
 	FireStoneLeggings: {
 		DisplayName: Fire Stone Leggings
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$CommonItemTooltip.IncreasesMaxManaBy@2}
+			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost@1}%
+			'''
 	}
 
 	PCChest: {
@@ -974,19 +987,33 @@ Items: {
 	}
 
 	WaterStoneHelmet: {
-		SetBonus: Mods.Pokemod.Items.WaterStoneHelmet.SetBonus
+		SetBonus:
+			'''
+			{$CommonItemTooltip.IncreasesMaxMinionsBy@1}
+			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			'''
 		DisplayName: Water Stone Helmet
 		Tooltip: ""
 	}
 
 	WaterStoneBreastplate: {
 		DisplayName: Water Stone Breastplate
-		Tooltip: ""
+		Tooltip:
+			'''
+			Immunity to 'On Fire!'
+			{$CommonItemTooltip.IncreasesMaxMinionsBy@1}
+			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			'''
 	}
 
 	WaterStoneLeggings: {
 		DisplayName: Water Stone Leggings
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$CommonItemTooltip.IncreasesMaxMinionsBy@1}
+			{$Mods.Pokemod.PokemonInfo.PokemonMaxBoost@2}
+			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			'''
 	}
 
 	Everstone: {
@@ -1004,19 +1031,32 @@ Items: {
 	}
 
 	ThunderStoneHelmet: {
-		SetBonus: Mods.Pokemod.Items.ThunderStoneHelmet.SetBonus
+		SetBonus:
+			'''
+			{$Mods.Pokemod.PokemonInfo.PokemonMaxBoost@2}
+			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			{$CommonItemTooltip.PercentIncreasedRangedDamage@1}
+			'''
 		DisplayName: Thunder Stone Helmet
 		Tooltip: ""
 	}
 
 	ThunderStoneBreastplate: {
 		DisplayName: Thunder Stone Breastplate
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			{$CommonItemTooltip.PercentIncreasedRangedDamage@1}
+			'''
 	}
 
 	ThunderStoneLeggings: {
 		DisplayName: Thunder Stone Leggings
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			{$CommonItemTooltip.PercentIncreasedRangedDamage@1}
+			'''
 	}
 
 	AssaultVestItem: {
@@ -1026,7 +1066,7 @@ Items: {
 
 	GengarMegaStoneItem: {
 		DisplayName: Gengarite
-		Tooltip: ""
+		Tooltip: Allows the holder to mega evolve Gengar, when a mega cuff is used
 	}
 
 	ExpertBeltItem: {
@@ -1095,7 +1135,7 @@ Items: {
 
 	GyaradosMegaStoneItem: {
 		DisplayName: Gyaradosite
-		Tooltip: ""
+		Tooltip: Allows the holder to mega evolve Gyarados, when a mega cuff is used
 	}
 
 	MaxPotion: {
@@ -1203,7 +1243,7 @@ Items: {
 
 	AlakazamMegaStoneItem: {
 		DisplayName: Alakazite
-		Tooltip: ""
+		Tooltip: Allows the holder to mega evolve Alakazam, when a mega cuff is used
 	}
 
 	TMBug: {
@@ -3419,6 +3459,8 @@ PokemonInfo: {
 	CaughtInBy: Caught in a {0} by {1}
 	LevelUp: "{0} grew to lvl {1}"
 	FaintedMsg: Your pokemon fainted!
+	PokemonDamageBoost: Increases Pokemon damage by {0}
+	PokemonMaxBoost: Increases your max number of Pokemon by {0}
 	ItemUse: To use it, click on your pokemon or right click on the corresponding pokeball
 	ItemActiveUse: To use it, click on your active pokemon
 	ItemNoActiveUse: To use it, right click on the corresponding pokeball
