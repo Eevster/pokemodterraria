@@ -15,7 +15,7 @@ namespace Pokemod.Content.Items.Armor
 		public static readonly int MoveSpeedBonus = 5;
 		public static readonly int AdditiveGenericDamageBonus = 110;
 
-		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeedBonus);
+		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(AdditiveGenericDamageBonus, AdditiveGenericDamageBonus / 2);
 
 		public override void SetDefaults() {
 			Item.width = 18; // Width of the item

@@ -16,7 +16,7 @@ namespace Pokemod.Content.Items.Armor
 		public static readonly int AdditiveGenericDamageBonus = 150;
 		public static readonly int MaxMinionIncrease = 1;
 
-		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxManaIncrease, MaxMinionIncrease);
+		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(AdditiveGenericDamageBonus, AdditiveGenericDamageBonus / 2);
 
 		public override void SetDefaults() {
 			Item.width = 18; // Width of the item
