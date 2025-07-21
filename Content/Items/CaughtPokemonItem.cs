@@ -202,7 +202,7 @@ namespace Pokemod.Content.Items
 					"\n[c/fa8140:"+Language.GetTextValue("Mods.Pokemod.PokemonNatures.Nature")+": "+Language.GetTextValue("Mods.Pokemod.PokemonNatures."+PokemonData.PokemonNatures[nature/10][nature%10])+"]"+
 					"\n[c/"+GetStatColor(1)+":Atk:] "+fullStats[1]+"  [c/"+GetStatColor(2)+":Def:] "+fullStats[2]+
 					"\n[c/"+GetStatColor(3)+":SpAtk:] "+fullStats[3]+"  [c/"+GetStatColor(4)+":SpDef:] "+fullStats[4]+"  [c/"+GetStatColor(5)+":Speed:] "+fullStats[5]+
-					"\n\nMoves:";
+					"\n\nMoves: (Right Click to switch)";
 					foreach(string move in moves){
 						line.Text += "\n- [c/"+PokemonNPCData.GetTypeColor(PokemonData.pokemonAttacks[move].attackType)+":"+Language.GetText("Mods.Pokemod.Projectiles."+move+".DisplayName")+"]";
 						if(move == moves[moveIndex]) line.Text += " <<<";
@@ -382,6 +382,7 @@ namespace Pokemod.Content.Items
 						PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
 						moveIndex = Math.Clamp(moveIndex, 0, moves.Length);
 						if(PokemonProj != null){
+							if (moves[moveIndex] == "SmokeScreen") moves[moveIndex] = "Smokescreen";
 							PokemonProj.currentAttack = moves[moveIndex];
 							if(variant != null){
 								if(variant != ""){
