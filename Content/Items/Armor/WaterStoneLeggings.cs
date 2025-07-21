@@ -14,7 +14,7 @@ namespace Pokemod.Content.Items.Armor
 	public class WaterStoneLeggings : ModItem
 	{
 		public static readonly int MoveSpeedBonus = 5;
-		public static readonly int AdditiveGenericDamageBonus = 90;
+		public static readonly int AdditiveGenericDamageBonus = 10;
         public static readonly int MaxMinionIncrease = 1;
 
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(AdditiveGenericDamageBonus, MaxMinionIncrease, 1);
@@ -28,7 +28,7 @@ namespace Pokemod.Content.Items.Armor
 		}
 
 		public override void UpdateEquip(Player player) {
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; // Increase dealt damage for all weapon classes by 20%
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 100f; // Increase dealt damage for all weapon classes by 20%
             player.maxMinions += MaxMinionIncrease;
             player.GetModPlayer<PokemonPlayer>().maxPokemon += 1;
         }
@@ -37,7 +37,7 @@ namespace Pokemod.Content.Items.Armor
         {
             CreateRecipe()
                 .AddIngredient(ItemID.PlatinumBar, 15)
-                .AddIngredient<WaterStoneItem>(10)
+                .AddIngredient<WaterStoneItem>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

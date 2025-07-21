@@ -14,7 +14,7 @@ namespace Pokemod.Content.Items.Armor
 	public class FireStoneBreastplate : ModItem
 	{
 		public static readonly int MaxManaIncrease = 40;
-		public static readonly int AdditiveGenericDamageBonus = 20;
+		public static readonly int AdditiveGenericDamageBonus = 10;
 		public static readonly int MaxMinionIncrease = 1;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxManaIncrease, AdditiveGenericDamageBonus, MaxMinionIncrease);
@@ -40,7 +40,7 @@ namespace Pokemod.Content.Items.Armor
 		{
 			CreateRecipe()
 				.AddIngredient(ItemID.MeteoriteBar, 15)
-				.AddIngredient<FireStoneItem>(15)
+				.AddIngredient<FireStoneItem>(2)
 				.AddTile(TileID.Anvils)
 				.Register();
 		}

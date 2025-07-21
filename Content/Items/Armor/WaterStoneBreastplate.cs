@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	public class WaterStoneBreastplate : ModItem
 	{
 		public static readonly int MaxManaIncrease = 20;
-		public static readonly int AdditiveGenericDamageBonus = 100;
+		public static readonly int AdditiveGenericDamageBonus = 10;
 		public static readonly int MaxMinionIncrease = 1;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(AdditiveGenericDamageBonus, MaxMinionIncrease);
@@ -28,7 +28,7 @@ namespace Pokemod.Content.Items.Armor
 
 		public override void UpdateEquip(Player player) {
 			player.buffImmune[BuffID.OnFire] = true; // Make the player immune to Fire
-			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 20f; // Increase dealt damage for all weapon classes by 20%
+			player.GetDamage<PokemonDamageClass>() += AdditiveGenericDamageBonus / 100f; // Increase dealt damage for all weapon classes by 20%
             player.maxMinions += MaxMinionIncrease;
         }
         
@@ -36,7 +36,7 @@ namespace Pokemod.Content.Items.Armor
         {
             CreateRecipe()
                 .AddIngredient(ItemID.PlatinumBar, 15)
-                .AddIngredient<WaterStoneItem>(15)
+                .AddIngredient<WaterStoneItem>(2)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
