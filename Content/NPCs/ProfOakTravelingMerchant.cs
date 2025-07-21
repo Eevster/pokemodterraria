@@ -371,6 +371,10 @@ namespace Pokemod.Content.NPCs
 			// Picks a number of items (up to Slots) from the entries list, provided conditions are met.
 			public Item PickNextItem()	{
 				var list = Entries.Where(e => !e.Disabled && e.ConditionsMet()).ToList();
+
+				if (list.Count == 0)
+					return null;
+
 				int k = Main.rand.Next(list.Count);
 
 				if (Ordered) {
@@ -427,6 +431,9 @@ namespace Pokemod.Content.NPCs
 		// Here is where we actually 'roll' the contents of the shop
 		public List<Item> GenerateNewInventoryList() {
 			var items = new List<Item>();
+
+			if (Pools.Count == 0) return items;
+
 			foreach (var pool in Pools)
 			{
 				for (int i = 0; i < pool.Slots; i++)
@@ -435,7 +442,8 @@ namespace Pokemod.Content.NPCs
 					{  //Rerolls when it reaches the end of the ordered list
 						RerollOrder(pool.Name);
 					}
-					items.Add(pool.PickNextItem());
+					Item newItem = pool.PickNextItem();
+					if (newItem != null) items.Add(newItem);
 				}
 			}
             return items;
