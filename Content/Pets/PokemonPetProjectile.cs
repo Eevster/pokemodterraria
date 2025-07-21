@@ -1,22 +1,24 @@
-﻿using System;
-using System.IO;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Common.Configs;
 using Pokemod.Common.Players;
+using Pokemod.Content.Buffs;
+using Pokemod.Content.DamageClasses;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Projectiles;
 using ReLogic.Content;
+using System;
+using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Pokemod.Content.DamageClasses;
-using Pokemod.Common.Configs;
-using System.Linq;
-using Pokemod.Content.Buffs;
+using Terraria.WorldBuilding;
 
 
 namespace Pokemod.Content.Pets
@@ -24,6 +26,7 @@ namespace Pokemod.Content.Pets
 	public abstract class PokemonPetProjectile : ModProjectile
 	{
 		public override string Texture => "Pokemod/Assets/Textures/Pokesprites/Pets/"+GetType().Name;
+		public ArmorShaderData shader = null;
 		//public int PokemonBuff = 0;
 		private int expGained = 0;
 		public int pokemonLvl;
@@ -414,6 +417,7 @@ namespace Pokemod.Content.Pets
 			EvolutionProcess();
 			MegaEvolutionProcess();
 			Visuals();
+			if (shader != null) shader = null;
 			ExtraChanges();
 
 			if(Main.myPlayer == Projectile.owner){
@@ -1517,6 +1521,13 @@ namespace Pokemod.Content.Pets
 
         public override bool PreDraw(ref Color lightColor)
         {
+			if (shader != null)
+			{
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+                shader.Apply(Projectile);
+            }
+
             if(variant != null){
 				if(variant != ""){
 					if (ModContent.RequestIfExists<Texture2D>(Texture + "_" + variant, out Asset<Texture2D> variantTexture))

@@ -17,7 +17,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkStartEnd => [0,0];
 		public override int[] jumpStartEnd => [0,0];
 		public override int[] fallStartEnd => [0,0];
-		public override int[] attackStartEnd => [1,4];
+		public override int[] attackStartEnd => [0,0];
 
 		public override int minLevel => 7;
 		public override float catchRate => 120;
