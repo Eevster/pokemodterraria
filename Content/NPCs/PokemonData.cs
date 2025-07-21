@@ -19,7 +19,7 @@ namespace Pokemod.Content.NPCs
         public bool shiny = false;
         public int lvl;
         public int[] baseStats;
-        public int[] IVs;
+        public int[] IVs = new int[6];
         public int nature;
         public bool ultrabeast = false;
         public string variant = "";
