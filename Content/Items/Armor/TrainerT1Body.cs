@@ -1,0 +1,44 @@
+﻿using Pokemod.Content.Items.EvoStones;
+using Terraria;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
+using Pokemod.Content.DamageClasses;
+using Pokemod.Common.Players;
+
+namespace Pokemod.Content.Items.Armor
+{
+	// The AutoloadEquip attribute automatically attaches an equip texture to this item.
+	// Providing the EquipType.Body value here will result in TML expecting a X_Body.png file to be placed next to the item's main texture.
+	[AutoloadEquip(EquipType.Body)]
+	public class TrainerT1Body : ModItem
+	{
+		public static readonly int MaxPokemonLevelCap = 20;
+
+		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxPokemonLevelCap);
+
+		public override void SetDefaults()
+		{
+			Item.width = 18; // Width of the item
+			Item.height = 18; // Height of the item
+			Item.value = Item.sellPrice(gold: 1); // How many coins the item is worth
+			Item.rare = ItemRarityID.Green; // The rarity of the item
+			Item.defense = 4; // The amount of defense the item will give when equipped
+		}
+
+		public override void UpdateEquip(Player player)
+		{
+			if (player.GetModPlayer<PokemonPlayer>().levelCap < MaxPokemonLevelCap) player.GetModPlayer<PokemonPlayer>().levelCap = MaxPokemonLevelCap;
+		}
+
+		public override void AddRecipes()
+        {
+			CreateRecipe()
+				.AddIngredient(ItemID.Silk, 5)
+				.AddRecipeGroup(RecipeGroupID.IronBar, 5)
+				.AddRecipeGroup("Tier1GymBadges", 1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+	}
+}

@@ -56,10 +56,10 @@ namespace Pokemod.Content.DamageClasses
 			// This method allows you to make your damage class benefit from and be able to activate other classes' effects (e.g. Spectre bolts, Magma Stone) based on what returns true.
 			// Note that unlike our stat inheritance methods up above, you do not need to account for universal bonuses in this method.
 			// For this example, we'll make our class able to activate melee- and magic-specifically effects.
-			if (damageClass == DamageClass.Melee)
+			/*if (damageClass == DamageClass.Melee)
 				return true;
 			if (damageClass == DamageClass.Magic)
-				return true;
+				return true;*/
 
 			return false;
 		}
@@ -67,8 +67,8 @@ namespace Pokemod.Content.DamageClasses
 		public override void SetDefaultStats(Player player) {
 			// This method lets you set default statistical modifiers for your example damage class.
 			// Here, we'll make our example damage class have more critical strike chance and armor penetration than normal.
-			player.GetCritChance<PokemonDamageClass>() += 4;
-			player.GetArmorPenetration<PokemonDamageClass>() += 10;
+			//player.GetCritChance<PokemonDamageClass>() += 4;
+			//player.GetArmorPenetration<PokemonDamageClass>() += 10;
 			// These sorts of modifiers also exist for damage (GetDamage), knockback (GetKnockback), and attack speed (GetAttackSpeed).
 			// You'll see these used all around in reference to vanilla classes and our example class here. Familiarize yourself with them.
 		}

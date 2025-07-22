@@ -56,6 +56,10 @@ namespace Pokemod.Common.Players
 		public const int defaultMaxPokemon = 1;
 		public List<int> currentActivePokemon = new List<int>();
 
+		//Level Cap
+		public int levelCap;
+		public const int defaultLevelCap = 10;
+
 		//Manual Control
 		public bool manualControl;
 
@@ -237,6 +241,8 @@ namespace Pokemod.Common.Players
 					i++;
 				}
 			}
+
+			levelCap = defaultLevelCap;
 
 			if (manualControl)
 			{
@@ -556,7 +562,9 @@ namespace Pokemod.Common.Players
         {
 			if (manualControl)
 			{
-				if (Player.HeldItem.ModItem is not SynchroMachine)
+				Player.controlUseTile = false;
+
+				if (!Player.HeldItem.IsAir && Player.HeldItem.ModItem is not SynchroMachine)
 				{
 					Player.delayUseItem = true;
 					Player.controlUseTile = false;

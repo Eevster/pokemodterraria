@@ -956,7 +956,7 @@ Items: {
 		/* SetBonus:
 			'''
 			{$CommonItemTooltip.IncreasesMaxManaBy@1}
-			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			{$CommonItemTooltip.PokemonDamageBoost}
 			''' */
 		// DisplayName: Fire Stone Helmet
 		// Tooltip: ""
@@ -967,8 +967,8 @@ Items: {
 		/* Tooltip:
 			'''
 			{$CommonItemTooltip.IncreasesMaxManaBy}
-			{$Mods.Pokemod.PokemonInfo.PokemonMaxBoost@2}
-			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost@1}%
+			{$CommonItemTooltip.PokemonMaxBoost@2}
+			{$CommonItemTooltip.PokemonDamageBoost@1}
 			''' */
 	}
 
@@ -977,7 +977,7 @@ Items: {
 		/* Tooltip:
 			'''
 			{$CommonItemTooltip.IncreasesMaxManaBy@2}
-			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost@1}%
+			{$CommonItemTooltip.PokemonDamageBoost@1}
 			''' */
 	}
 
@@ -990,7 +990,7 @@ Items: {
 		/* SetBonus:
 			'''
 			{$CommonItemTooltip.IncreasesMaxMinionsBy@1}
-			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			{$CommonItemTooltip.PokemonDamageBoost}
 			''' */
 		// DisplayName: Water Stone Helmet
 		// Tooltip: ""
@@ -1002,7 +1002,7 @@ Items: {
 			'''
 			Immunity to 'On Fire!'
 			{$CommonItemTooltip.IncreasesMaxMinionsBy@1}
-			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			{$CommonItemTooltip.PokemonDamageBoost}
 			''' */
 	}
 
@@ -1011,8 +1011,8 @@ Items: {
 		/* Tooltip:
 			'''
 			{$CommonItemTooltip.IncreasesMaxMinionsBy@1}
-			{$Mods.Pokemod.PokemonInfo.PokemonMaxBoost@2}
-			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			{$CommonItemTooltip.PokemonMaxBoost@2}
+			{$CommonItemTooltip.PokemonDamageBoost}
 			''' */
 	}
 
@@ -1033,8 +1033,8 @@ Items: {
 	ThunderStoneHelmet: {
 		/* SetBonus:
 			'''
-			{$Mods.Pokemod.PokemonInfo.PokemonMaxBoost@2}
-			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			{$CommonItemTooltip.PokemonMaxBoost@2}
+			{$CommonItemTooltip.PokemonDamageBoost}
 			{$CommonItemTooltip.PercentIncreasedRangedDamage@1}
 			''' */
 		// DisplayName: Thunder Stone Helmet
@@ -1045,7 +1045,7 @@ Items: {
 		// DisplayName: Thunder Stone Breastplate
 		/* Tooltip:
 			'''
-			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			{$CommonItemTooltip.PokemonDamageBoost}
 			{$CommonItemTooltip.PercentIncreasedRangedDamage@1}
 			''' */
 	}
@@ -1054,7 +1054,7 @@ Items: {
 		// DisplayName: Thunder Stone Leggings
 		/* Tooltip:
 			'''
-			{$Mods.Pokemod.PokemonInfo.PokemonDamageBoost}%
+			{$CommonItemTooltip.PokemonDamageBoost}
 			{$CommonItemTooltip.PercentIncreasedRangedDamage@1}
 			''' */
 	}
@@ -1406,6 +1406,56 @@ Items: {
 			{$Mods.Pokemod.PokemonInfo.ItemNoActiveUse}
 			Úsalo para que tu pokemon aprenda un movimiento aleatorio de tipo agua
 			'''
+	}
+
+	TrainerT1Body: {
+		DisplayName: Camiseta de entrenador (Tier 1)
+		Tooltip: "{$CommonItemTooltip.PokemonLevelCapBoost}"
+	}
+
+	TrainerT1Legs: {
+		DisplayName: Pantalones de entrenador (Tier 1)
+		Tooltip: "{$CommonItemTooltip.PercentIncreasedMovementSpeed}"
+	}
+
+	TrainerT1Head: {
+		DisplayName: Gorra de entrenador (Tier 1)
+		Tooltip: ""
+		SetBonus: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+	}
+
+	TrainerT2Body: {
+		DisplayName: Camiseta de entrenador (Tier 2)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PokemonLevelCapBoost}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT2Legs: {
+		DisplayName: Pantalones de entrenador (Tier 2)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PercentIncreasedMovementSpeed}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT2Head: {
+		DisplayName: Gorra de entrenador (Tier 2)
+		Tooltip: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
+	}
+
+	BoulderBadge: {
+		DisplayName: Medalla Roca
+		Tooltip: Tooltip: "{$CommonItemTooltip.BadgesTier}"
+	}
+
+	CascadeBadge: {
+		DisplayName: Medalla Cascada
+		Tooltip: Tooltip: "{$CommonItemTooltip.BadgesTier}"
 	}
 }
 
@@ -3453,14 +3503,20 @@ WorldGen: {
 	// PokemonCenterPassMessage: Mods.Pokemod.WorldGen.PokemonCenterPassMessage
 }
 
+CommonItemTooltip: {
+	PokemonDamageBoost: Incrementa el daño de tus pokemon en {0}%
+	PokemonMaxBoost: Incrementa el número de pokemon que puedes invocar en {0}
+	PokemonLevelCapBoost: Hace que los pokemon de nivel {0} o menos siempre te obedezcan
+	PercentIncreasedPokemonCritChance: Incrementa la probabilidad de crítico de tus pokemon en {0}%
+	BadgesTier: Medalla de gimnasio de Tier {0}
+}
+
 PokemonInfo: {
 	Fainted: Debilitado
 	CaughtIn: Capturado en una {0}
 	CaughtInBy: Capturado en una {0} por {1}
 	LevelUp: "{0} subió al nivel {1}"
 	FaintedMsg: ¡Tu pokemon se debilitó!
-	// PokemonDamageBoost: Increases Pokemon damage by {0}
-	// PokemonMaxBoost: Increases your max number of Pokemon by {0}
 	ItemUse: Para usar el objeto haz clic sobre tu pokemon o haz clic derecho en su pokeball
 	ItemActiveUse: Para usar el objeto haz clic sobre tu pokemon activo
 	ItemNoActiveUse: Para usar el objeto haz clic derecho en la pokeball de uno de tus pokemon
@@ -3473,6 +3529,7 @@ PokemonInfo: {
 	RanAway: El pokemon huyó...
 	WrongType: Tipo incorrecto
 	NoMoveAvailable: No hay movimientos disponibles
+	Disobedience: *te ignora*
 }
 
 MoveLearnUI: {

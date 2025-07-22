@@ -1268,6 +1268,18 @@ namespace Pokemod.Content.Pets
 		}
 
 		public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
+			int levelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
+			if (pokemonLvl > levelCap)
+			{
+				int d = Math.Clamp((pokemonLvl-levelCap)/5, 2, 5);
+				if (!Main.rand.NextBool(d))
+				{
+					CombatText.NewText(Projectile.Hitbox, new Color(178, 178, 178), Language.GetTextValue("Mods.Pokemod.PokemonInfo.Disobedience"));
+					timer = 120;
+					return;
+				}
+			}
+			
 			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
 				var pokemonAttack = (PokemonAttack)modProjBase;
 				pokemonAttack.Attack(Projectile, distanceFromTarget, targetCenter);

@@ -18,7 +18,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.height = 98;
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
 
             Projectile.tileCollide = true; 
 

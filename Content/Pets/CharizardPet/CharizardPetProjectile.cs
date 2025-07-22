@@ -31,7 +31,7 @@ namespace Pokemod.Content.Pets.CharizardPet
 		public override float distanceToFly => 300f;
 
 		public override float moveDistance1 => 800f;
-		public override float moveDistance2 => 500f;
+		public override float moveDistance2 => 300f;
 
 		public override string[] megaEvolutions => ["CharizardMegaX", "CharizardMegaY"];
 		public override string[] itemToMegaEvolve => ["CharizardMegaStoneItemX", "CharizardMegaStoneItemY"];
