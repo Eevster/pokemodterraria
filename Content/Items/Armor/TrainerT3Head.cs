@@ -12,16 +12,19 @@ namespace Pokemod.Content.Items.Armor
 	// The AutoloadEquip attribute automatically attaches an equip texture to this item.
 	// Providing the EquipType.Head value here will result in TML expecting a X_Head.png file to be placed next to the item's main texture.
 	[AutoloadEquip(EquipType.Head)]
-	public class TrainerT2Head : ModItem
+	public class TrainerT3Head : ModItem
 	{
-		public static readonly int AdditivePokemonCritBonus = 3;
+		public static readonly int AdditivePokemonCritBonus = 5;
+		public static readonly int MaxPokemonIncrease = 1;
+
+		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(AdditivePokemonCritBonus);
 		public static LocalizedText SetBonusText { get; private set; }
 
 		public override void SetStaticDefaults() {
 			ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
 			ArmorIDs.Head.Sets.DrawsBackHairWithoutHeadgear[Item.headSlot] = true;
 
-			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(AdditivePokemonCritBonus);
+			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(MaxPokemonIncrease);
 		}
 
 		public override void SetDefaults() {
@@ -29,19 +32,24 @@ namespace Pokemod.Content.Items.Armor
 			Item.height = 18; // Height of the item
 			Item.value = Item.sellPrice(gold: 1); // How many coins the item is worth
 			Item.rare = ItemRarityID.Green; // The rarity of the item
-			Item.defense = 5; // The amount of defense the item will give when equipped
+			Item.defense = 7; // The amount of defense the item will give when equipped
 		}
 
 		// IsArmorSet determines what armor pieces are needed for the setbonus to take effect
 		public override bool IsArmorSet(Item head, Item body, Item legs) {
-			return body.type == ModContent.ItemType<TrainerT2Body>() && legs.type == ModContent.ItemType<TrainerT2Legs>();
+			return body.type == ModContent.ItemType<TrainerT3Body>() && legs.type == ModContent.ItemType<TrainerT3Legs>();
+		}
+
+		public override void UpdateEquip(Player player)
+		{
+			player.GetCritChance<PokemonDamageClass>() += AdditivePokemonCritBonus;
 		}
 
 		// UpdateArmorSet allows you to give set bonuses to the armor.
 		public override void UpdateArmorSet(Player player)
 		{
 			player.setBonus = SetBonusText.Value;
-			player.GetCritChance<PokemonDamageClass>() += AdditivePokemonCritBonus;
+			player.GetModPlayer<PokemonPlayer>().maxPokemon += MaxPokemonIncrease;
 		}
     }
 }

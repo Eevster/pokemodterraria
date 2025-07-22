@@ -1444,6 +1444,30 @@ Items: {
 
 	TrainerT2Head: {
 		DisplayName: Gorra de entrenador (Tier 2)
+		Tooltip: ""
+		SetBonus: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+	}
+
+	TrainerT3Body: {
+		DisplayName: Camiseta de entrenador (Tier 3)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PokemonLevelCapBoost}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT3Legs: {
+		DisplayName: Pantalones de entrenador (Tier 3)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PercentIncreasedMovementSpeed}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT3Head: {
+		DisplayName: Gorra de entrenador (Tier 3)
 		Tooltip: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
 		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
 	}
@@ -1456,6 +1480,11 @@ Items: {
 	CascadeBadge: {
 		DisplayName: Medalla Cascada
 		Tooltip: Tooltip: "{$CommonItemTooltip.BadgesTier}"
+	}
+
+	ThunderBadge: {
+		// DisplayName: Thunder Badge
+		// Tooltip: ""
 	}
 }
 
