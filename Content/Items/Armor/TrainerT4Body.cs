@@ -11,10 +11,10 @@ namespace Pokemod.Content.Items.Armor
 	// The AutoloadEquip attribute automatically attaches an equip texture to this item.
 	// Providing the EquipType.Body value here will result in TML expecting a X_Body.png file to be placed next to the item's main texture.
 	[AutoloadEquip(EquipType.Body)]
-	public class TrainerT3Body : ModItem
+	public class TrainerT4Body : ModItem
 	{
-		public static readonly int MaxPokemonLevelCap = 30;
-		public static readonly int AdditivePokemonCritBonus = 7;
+		public static readonly int MaxPokemonLevelCap = 35;
+		public static readonly int AdditivePokemonCritBonus = 10;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxPokemonLevelCap, AdditivePokemonCritBonus);
 
@@ -38,8 +38,8 @@ namespace Pokemod.Content.Items.Armor
 			CreateRecipe()
 				.AddIngredient(ItemID.JungleSpores, 10)
 				.AddIngredient(ItemID.MeteoriteBar, 5)
-				.AddIngredient<TrainerT2Body>(1)
-				.AddRecipeGroup("Tier3GymBadges", 1)
+				.AddIngredient<TrainerT3Body>(1)
+				.AddRecipeGroup("Tier4GymBadges", 1)
 				.AddTile(TileID.Anvils)
 				.Register();
         }

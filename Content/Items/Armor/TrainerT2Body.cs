@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	[AutoloadEquip(EquipType.Body)]
 	public class TrainerT2Body : ModItem
 	{
-		public static readonly int MaxPokemonLevelCap = 30;
+		public static readonly int MaxPokemonLevelCap = 25;
 		public static readonly int AdditivePokemonCritBonus = 3;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxPokemonLevelCap, AdditivePokemonCritBonus);

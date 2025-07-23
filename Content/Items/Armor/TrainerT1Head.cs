@@ -21,7 +21,6 @@ namespace Pokemod.Content.Items.Armor
 
 		public override void SetStaticDefaults() {
 			ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
-			ArmorIDs.Head.Sets.DrawsBackHairWithoutHeadgear[Item.headSlot] = true;
 
 			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(AdditivePokemonCritBonus);
 		}

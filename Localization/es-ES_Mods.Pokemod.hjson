@@ -1472,19 +1472,48 @@ Items: {
 		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
 	}
 
+	TrainerT4Body: {
+		DisplayName: Camiseta de entrenador (Tier 4)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PokemonLevelCapBoost}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT4Legs: {
+		DisplayName: Pantalones de entrenador (Tier 4)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PercentIncreasedMovementSpeed}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT4Head: {
+		DisplayName: Gorra de entrenador (Tier 4)
+		Tooltip: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
+	}
+
 	BoulderBadge: {
 		DisplayName: Medalla Roca
-		Tooltip: Tooltip: "{$CommonItemTooltip.BadgesTier}"
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
 	}
 
 	CascadeBadge: {
 		DisplayName: Medalla Cascada
-		Tooltip: Tooltip: "{$CommonItemTooltip.BadgesTier}"
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
 	}
 
 	ThunderBadge: {
-		// DisplayName: Thunder Badge
-		// Tooltip: ""
+		DisplayName: Medalla Trueno
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
+	}
+
+	RainbowBadge: {
+		DisplayName: Medalla Arcoíris
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
 	}
 }
 
