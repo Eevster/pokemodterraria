@@ -30,6 +30,15 @@ namespace Pokemod.Content.Pets.CharmeleonPet
             base.SetDefaults();
 			Projectile.light = 1f;
         }
-	}
+
+        public override void ExtraChanges()
+        {
+            if (variant == "Christmas")
+            {
+                ChangeAttackColor(new Color(42, 81, 247));
+            }
+            base.ExtraChanges();
+        }
+    }
 	public class CharmeleonPetProjectileShiny : CharmeleonPetProjectile{}
 }

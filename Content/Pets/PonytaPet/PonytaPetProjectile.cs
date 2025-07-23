@@ -24,5 +24,11 @@ namespace Pokemod.Content.Pets.PonytaPet
 		public override int levelEvolutionsNumber => 1;
 	}
 
-	public class PonytaPetProjectileShiny : PonytaPetProjectile{}
+	public class PonytaPetProjectileShiny : PonytaPetProjectile{
+        public override void ExtraChanges()
+        {
+            ChangeAttackColor(new Color(42, 81, 247));
+            base.ExtraChanges();
+        }
+    }
 }

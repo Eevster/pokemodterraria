@@ -26,7 +26,7 @@ namespace Pokemod.Content.Pets
 	public abstract class PokemonPetProjectile : ModProjectile
 	{
 		public override string Texture => "Pokemod/Assets/Textures/Pokesprites/Pets/"+GetType().Name;
-		public ArmorShaderData shader = null;
+		public ArmorShaderData pokemonShader = null;
 		//public int PokemonBuff = 0;
 		private int expGained = 0;
 		public int pokemonLvl;
@@ -417,7 +417,6 @@ namespace Pokemod.Content.Pets
 			EvolutionProcess();
 			MegaEvolutionProcess();
 			Visuals();
-			if (shader != null) shader = null;
 			ExtraChanges();
 
 			if(Main.myPlayer == Projectile.owner){
@@ -1314,7 +1313,24 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-		public virtual void Jump(){
+        public virtual void ChangeAttackColor(Color newColor, int type = (int)TypeIndex.Fire)
+        {
+			foreach (Projectile attack in attackProjs)
+			{
+				if (attack != null && attack.active)
+				{
+					var pokemonAttack = (PokemonAttack)attack.ModProjectile;
+
+					if (pokemonAttack.attackType == type)
+					{
+						pokemonAttack.effectColor = newColor;
+						pokemonAttack.shader = GameShaders.Armor.GetShaderFromItemId(ItemID.WispDye).UseColor(pokemonAttack.effectColor);
+					}
+				}
+			}
+        }
+
+        public virtual void Jump(){
 			int moveDirection = 0;
 			if (Projectile.velocity.X < 0f)
 			{
@@ -1442,7 +1458,9 @@ namespace Pokemod.Content.Pets
 					Projectile.frame = initialFrame;
 				}
 			}
-		}
+
+            if (pokemonShader != null) pokemonShader = null;
+        }
 
 		public int calIncomingDmg(int npcdmg){
             //calling Hp
@@ -1533,11 +1551,11 @@ namespace Pokemod.Content.Pets
 
         public override bool PreDraw(ref Color lightColor)
         {
-			if (shader != null)
+			if (pokemonShader != null)
 			{
                 Main.spriteBatch.End();
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
-                shader.Apply(Projectile);
+                pokemonShader.Apply(Projectile);
             }
 
             if(variant != null){
@@ -1552,7 +1570,10 @@ namespace Pokemod.Content.Pets
 					}
                 }
             }
-            
+
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+
             return true;
         }
 

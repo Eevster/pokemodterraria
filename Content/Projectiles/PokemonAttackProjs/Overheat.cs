@@ -69,9 +69,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override bool PreDraw(ref Color lightColor)
         {
+            Color fireColor = new Color(255, 77, 0);
+            if (effectColor != Color.White)
+            {
+                fireColor = effectColor * 0.7f;
+            }
             Vector2 drawPos2 = Projectile.Center - Main.screenPosition;
 			for(int i = 0; i < 20; i++){
-                DrawPrettyStarSparkle(Projectile.Opacity, SpriteEffects.None, drawPos2, new Color(255, 166, 45, 0) * 0.5f, new Color(255, 77, 0), 0.5f, 0f, 0.5f, 0.5f, 1f, Projectile.rotation+ MathHelper.ToRadians(i*360f/20f) + MathHelper.ToRadians(Main.rand.Next(-8,9)), 4*new Vector2(2f, Utils.Remap(0.5f, 0f, 1f, 4f, 1f)) * Projectile.scale, 8*Vector2.One * Projectile.scale);
+                DrawPrettyStarSparkle(Projectile.Opacity, SpriteEffects.None, drawPos2, new Color(255, 166, 45, 0) * 0.5f, fireColor, 0.5f, 0f, 0.5f, 0.5f, 1f, Projectile.rotation+ MathHelper.ToRadians(i*360f/20f) + MathHelper.ToRadians(Main.rand.Next(-8,9)), 4*new Vector2(2f, Utils.Remap(0.5f, 0f, 1f, 4f, 1f)) * Projectile.scale, 8*Vector2.One * Projectile.scale);
             }
 
             return false;

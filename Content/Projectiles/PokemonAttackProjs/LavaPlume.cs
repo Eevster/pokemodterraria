@@ -63,6 +63,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 		}
 
 		public override bool PreDraw(ref Color lightColor) {
+			base.PreDraw(ref lightColor);
+			
 			Main.instance.LoadProjectile(Projectile.type);
 			Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
 

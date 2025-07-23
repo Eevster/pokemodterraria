@@ -45,7 +45,13 @@ namespace Pokemod.Content.Pets.CharizardPetMegaX
         {
             base.SetDefaults();
 			Projectile.light = 1f;
-        }
+		}
+
+		public override void ExtraChanges()
+		{
+            ChangeAttackColor(new Color(42, 81, 247));
+            base.ExtraChanges();
+		}
 	}
 
 	public class CharizardMegaXPetProjectileShiny : CharizardMegaXPetProjectile{}

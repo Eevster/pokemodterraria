@@ -20,5 +20,12 @@ namespace Pokemod.Content.Pets.ArcaninePet
 		public override int[] fallStartEnd => [0,3];
 	}
 
-	public class ArcaninePetProjectileShiny : ArcaninePetProjectile{}
+	public class ArcaninePetProjectileShiny : ArcaninePetProjectile{
+        public override void ExtraChanges()
+        {
+            ChangeAttackColor(new Color(255, 200, 20));
+            base.ExtraChanges();
+        }
+		
+	}
 }

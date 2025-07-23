@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoMod.Cil;
 using Pokemod.Common.GlobalNPCs;
 using Pokemod.Common.Players;
+using Pokemod.Content.DamageClasses;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
-using ReLogic.Content;
+using System.IO;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Pokemod.Content.DamageClasses;
 
 namespace Pokemod.Content.Projectiles
 {
@@ -36,6 +32,9 @@ namespace Pokemod.Content.Projectiles
 
 		public Vector2 positionAux;
 		public Projectile pokemonProj;
+
+        public ArmorShaderData shader = null;
+		public Color effectColor = Color.White;
 
         public override void SetDefaults()
         {
@@ -190,5 +189,23 @@ namespace Pokemod.Content.Projectiles
 				}
 			}
 		}
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+			if (shader != null)
+            {
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+                shader.Apply(Projectile);
+			}
+			return base.PreDraw(ref lightColor);
+        }
+
+        public override void PostDraw(Color lightColor)
+        {
+            base.PostDraw(lightColor);
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+        }
     }
 }

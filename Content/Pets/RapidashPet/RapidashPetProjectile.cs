@@ -20,5 +20,11 @@ namespace Pokemod.Content.Pets.RapidashPet
 		public override int[] fallStartEnd => [0,3];
 	}
 
-	public class RapidashPetProjectileShiny : RapidashPetProjectile{}
+	public class RapidashPetProjectileShiny : RapidashPetProjectile{
+        public override void ExtraChanges()
+        {
+            ChangeAttackColor(new Color(100, 95, 105));
+            base.ExtraChanges();
+        }
+    }
 }

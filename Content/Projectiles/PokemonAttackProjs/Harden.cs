@@ -80,7 +80,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && !pokemonOwner.canAttack) {
                 pokemonOwner.immune = true;
-                pokemonOwner.shader = GameShaders.Armor.GetShaderFromItemId(ItemID.ReflectiveSilverDye);
+                pokemonOwner.pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.ReflectiveSilverDye);
                 
             }
         }

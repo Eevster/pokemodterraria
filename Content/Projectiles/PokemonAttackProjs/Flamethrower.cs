@@ -66,7 +66,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             scaleAux = 0.3f;
             Projectile.damage = (int)(Projectile.damage*0.25f); 
-            Projectile.Opacity = 0.2f;
+            Projectile.Opacity = 0.8f;
             Projectile.rotation = 0;
             base.OnSpawn(source);
         }

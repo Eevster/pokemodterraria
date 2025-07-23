@@ -83,6 +83,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override bool PreDraw(ref Color lightColor)
         {
+            base.PreDraw(ref lightColor);
             if(exploded){
                 Main.EntitySpriteDraw(explosionTexture.Value, Projectile.Center - Main.screenPosition,
                     explosionTexture.Frame(1, 8, 0, Projectile.frame), Color.White, 0,
@@ -110,7 +111,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 int dustIndex = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 200, default(Color), 2f);
                 Main.dust[dustIndex].noGravity = true;
                 Main.dust[dustIndex].position = Projectile.Center+new Vector2(0,-1).RotatedBy(Projectile.rotation)*Main.rand.Next(-20,21);
-            }else{
+            }
+            else{
                 Projectile.rotation = 0;
             }
 
