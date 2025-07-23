@@ -1496,6 +1496,30 @@ Items: {
 		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
 	}
 
+	TrainerT5Body: {
+		DisplayName: Trainer Shirt (Tier 5)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PokemonLevelCapBoost}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance@1}
+			'''
+	}
+
+	TrainerT5Legs: {
+		DisplayName: Trainer Pants (Tier 5)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PercentIncreasedMovementSpeed}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance@1}
+			'''
+	}
+
+	TrainerT5Head: {
+		DisplayName: Trainer Cap (Tier 5)
+		Tooltip: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
+	}
+
 	BoulderBadge: {
 		DisplayName: Boulder Badge
 		Tooltip: "{$CommonItemTooltip.BadgesTier}"
@@ -1513,6 +1537,11 @@ Items: {
 
 	RainbowBadge: {
 		DisplayName: Rainbow Badge
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
+	}
+
+	SoulBadge: {
+		DisplayName: Soul Badge
 		Tooltip: "{$CommonItemTooltip.BadgesTier}"
 	}
 }

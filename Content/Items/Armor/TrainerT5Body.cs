@@ -11,10 +11,10 @@ namespace Pokemod.Content.Items.Armor
 	// The AutoloadEquip attribute automatically attaches an equip texture to this item.
 	// Providing the EquipType.Body value here will result in TML expecting a X_Body.png file to be placed next to the item's main texture.
 	[AutoloadEquip(EquipType.Body)]
-	public class TrainerT4Body : ModItem
+	public class TrainerT5Body : ModItem
 	{
-		public static readonly int MaxPokemonLevelCap = 35;
-		public static readonly int AdditivePokemonCritBonus = 10;
+		public static readonly int MaxPokemonLevelCap = 40;
+		public static readonly int AdditivePokemonCritBonus = 12;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxPokemonLevelCap, AdditivePokemonCritBonus);
 
@@ -24,7 +24,7 @@ namespace Pokemod.Content.Items.Armor
 			Item.height = 18; // Height of the item
 			Item.value = Item.sellPrice(gold: 1); // How many coins the item is worth
 			Item.rare = ItemRarityID.Green; // The rarity of the item
-			Item.defense = 15; // The amount of defense the item will give when equipped
+			Item.defense = 20; // The amount of defense the item will give when equipped
 		}
 
 		public override void UpdateEquip(Player player)
@@ -36,10 +36,18 @@ namespace Pokemod.Content.Items.Armor
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient(ItemID.Shiverthorn, 10)
-				.AddIngredient(ItemID.HellstoneBar, 5)
-				.AddIngredient<TrainerT3Body>(1)
-				.AddRecipeGroup("Tier4GymBadges", 1)
+				.AddIngredient(ItemID.SoulofNight, 10)
+				.AddIngredient(ItemID.CobaltBar, 10)
+				.AddIngredient<TrainerT4Body>(1)
+				.AddRecipeGroup("Tier5GymBadges", 1)
+				.AddTile(TileID.Anvils)
+				.Register();
+
+			CreateRecipe()
+				.AddIngredient(ItemID.SoulofNight, 10)
+				.AddIngredient(ItemID.PalladiumBar, 10)
+				.AddIngredient<TrainerT4Body>(1)
+				.AddRecipeGroup("Tier5GymBadges", 1)
 				.AddTile(TileID.Anvils)
 				.Register();
         }
