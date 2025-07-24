@@ -79,7 +79,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 	public abstract class TMDragon : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Dragon;
-		public override string[] moves => [];
+		public override string[] moves => ["DragonBreath"];
 	}
 
 	public class TMElectric : TechnicalMachine

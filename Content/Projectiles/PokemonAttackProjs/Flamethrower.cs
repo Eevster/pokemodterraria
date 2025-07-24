@@ -21,6 +21,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.penetrate = 1;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
 
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 5;
+
             Projectile.tileCollide = true; 
 
             Projectile.timeLeft = 24;
