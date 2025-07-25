@@ -449,6 +449,7 @@ Projectiles: {
 	// SludgeBomb.DisplayName: Sludge Bomb
 	// HyperBeam.DisplayName: Hyper Beam
 	// DoubleEdge.DisplayName: Double Edge
+	// DragonBreath.DisplayName: Dragon Breath
 }
 
 Items: {
