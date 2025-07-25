@@ -20,6 +20,7 @@ using Pokemod.Content.Pets.TotodilePet;
 using Pokemod.Content.Tiles;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Buffs;
+using Pokemod.Common.Configs;
 
 namespace Pokemod.Common.Players
 {
@@ -532,8 +533,17 @@ namespace Pokemod.Common.Players
 		public void SetMegaEvolution(string megaName)
 		{
 			if (MegaStone != megaName) Player.ClearBuff(ModContent.BuffType<MegaEvolution>());
-			
+
 			MegaStone = megaName;
+		}
+
+		public int GetClampedLevel(int pokemonLvl)
+		{
+			if (!ModContent.GetInstance<GameplayConfig>().Disobedience) {
+				return System.Math.Clamp(pokemonLvl, 0, levelCap);
+			}
+
+			return pokemonLvl;
 		}
 
 		public override void PreUpdateMovement()
@@ -558,18 +568,31 @@ namespace Pokemod.Common.Players
 			}
 		}
 
-        public override void PostUpdateBuffs()
-        {
+		public override void PostUpdateBuffs()
+		{
 			if (manualControl)
 			{
 				Player.controlUseTile = false;
 
-				if (!Player.HeldItem.IsAir && Player.HeldItem.ModItem is not SynchroMachine)
+				/*if (!Player.HeldItem.IsAir && Player.HeldItem.ModItem is not SynchroMachine)
 				{
 					Player.delayUseItem = true;
 					Player.controlUseTile = false;
+				}*/
+			}
+		}
+
+        public override bool CanUseItem(Item item)
+        {
+			if (manualControl)
+			{
+				if (item.ModItem is not SynchroMachine)
+				{
+					return false;
 				}
 			}
+
+            return base.CanUseItem(item);
         }
 	}
 }

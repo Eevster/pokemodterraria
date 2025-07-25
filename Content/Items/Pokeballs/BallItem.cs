@@ -189,7 +189,7 @@ namespace Pokemod.Content.Items.Pokeballs
 			}
 
 			if(hasGravity || captureStage >= 0){
-				Projectile.velocity.Y += 0.2f*gravityScale;
+				Projectile.velocity.Y += 0.3f*gravityScale;
 			}
 
 			if(targetPokemon != null){
@@ -247,6 +247,7 @@ namespace Pokemod.Content.Items.Pokeballs
 			if(captureStage < 0){
 				Projectile.tileCollide = true;
 				targetPokemon = target;
+				targetPokemon.CanBeReplacedByOtherNPCs = false;
 				targetPokemon.hide = true;
 				targetPokemon.friendly = true;
 				targetPokemon.dontTakeDamageFromHostiles = true;

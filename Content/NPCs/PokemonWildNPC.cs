@@ -115,6 +115,8 @@ namespace Pokemod.Content.NPCs
 
 			NPC.noTileCollide = !tangible;
 
+			NPC.CanBeReplacedByOtherNPCs = true;
+
 			if (shiny) NPC.rarity = 14;
 		}
 

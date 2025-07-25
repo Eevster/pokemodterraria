@@ -48,11 +48,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
             
 			if(pokemon.owner == Main.myPlayer){
-				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer%4==0){
+				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer%5==0){
 					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 						if(pokemonOwner.attackProjs[i] == null){
 							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 12f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<Flamethrower>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 4f, pokemon.owner)];
-							if(pokemonOwner.timer%8==0){
+							if(pokemonOwner.timer%10==0){
 								SoundEngine.PlaySound(SoundID.Item20, pokemon.position);
 							}
 							break;

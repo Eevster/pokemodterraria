@@ -78,17 +78,24 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			return true;
 		}
+		
+		public override void OnSpawn(IEntitySource source)
+        {
+            Projectile.damage = (int)(Projectile.damage*0.4f);
+            base.OnSpawn(source);
+        }
 
         public override void AI()
-        {
+		{
 			UpdateAnimation();
 
-			Lighting.AddLight(Projectile.Center, new Vector3(0.5f,0.2f,0));
+			Lighting.AddLight(Projectile.Center, new Vector3(0.5f, 0.2f, 0));
 
-			if(Projectile.owner == Main.myPlayer){
+			if (Projectile.owner == Main.myPlayer)
+			{
 				Projectile.netUpdate = true;
 			}
-        }
+		}
 
 		private void UpdateAnimation()
         {

@@ -18,7 +18,6 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.WorldBuilding;
 
 
 namespace Pokemod.Content.Pets
@@ -30,8 +29,9 @@ namespace Pokemod.Content.Pets
 		//public int PokemonBuff = 0;
 		private int expGained = 0;
 		public int pokemonLvl;
+		private int currentLevelCap;
 
-		public string pokemonName => GetType().Name.Replace("PetProjectile","").Replace("Shiny","");
+		public string pokemonName => GetType().Name.Replace("PetProjectile", "").Replace("Shiny", "");
 		/// <summary>
 		/// [baseHP, baseAtk, baseDef, baseSpatk, baseSpdef, baseSpeed]
 		/// </summary>
@@ -140,6 +140,11 @@ namespace Pokemod.Content.Pets
 
 		public const float fallLimit = float.Epsilon;
 
+		//PokeballProj
+		public string ballType = "PokeballItem";
+		public bool isOut = false;
+		public int isOutTimer = 0;
+
 		//Attacks
 		public string currentAttack = "Swift";
 
@@ -219,13 +224,14 @@ namespace Pokemod.Content.Pets
 				return;
 			}
 
-			SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
+			if(isOut) SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
 			
             base.OnSpawn(source);
         }
 
 		public void UpdateStats(){
-            finalStats = PokemonNPCData.CalcAllStats(pokemonLvl, baseStats, IVs, EVs, nature);
+			currentLevelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
+            finalStats = PokemonNPCData.CalcAllStats(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().GetClampedLevel(pokemonLvl), baseStats, IVs, EVs, nature);
 		}
 
         public int GetExpGained(){
@@ -393,6 +399,8 @@ namespace Pokemod.Content.Pets
 
 			CheckActive(player);
 
+			if(!ModContent.GetInstance<GameplayConfig>().Disobedience && player.GetModPlayer<PokemonPlayer>().levelCap != currentLevelCap) UpdateStats();
+
 			SetAttackInfo();
 
 			setMaxHP();
@@ -402,15 +410,22 @@ namespace Pokemod.Content.Pets
 
 			if (manualControl && !player.GetModPlayer<PokemonPlayer>().manualControl) manualControl = false;
 
-			if (!manualControl)
+			if (isOut)
 			{
-				GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
-				SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
-				Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
+				if (!manualControl)
+				{
+					GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
+					SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
+					Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
+				}
+				else
+				{
+					ManualMovement();
+				}
 			}
 			else
 			{
-				ManualMovement();
+				BallMovement();
 			}
 			LimitPosition();
 			GetAllProjsExp();
@@ -628,6 +643,24 @@ namespace Pokemod.Content.Pets
 			// Both things depend on if it has a target or not, so it's just one assignment here
 			// You don't need this assignment if your minion is shooting things instead of dealing contact damage
 			Projectile.friendly = foundTarget;
+		}
+
+		public virtual void BallMovement()
+		{
+			Projectile.velocity.Y += 0.5f;
+
+			if (++isOutTimer > 20)
+			{
+				isOut = true;
+				for(int i = 0; i < 30; i++)
+                {
+					int dustIndex = Dust.NewDust(Projectile.Center, 2, 2, DustID.SilverFlame, 0f, 0f, 0, default(Color), 2.5f);
+					Main.dust[dustIndex].noGravity = true;
+                    Main.dust[dustIndex].position = Projectile.Center;
+                    Main.dust[dustIndex].velocity = Main.rand.NextFloat(2f, 6f) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
+                }
+				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
+			}
 		}
 
 		public virtual void Movement(bool foundTarget, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition)
@@ -1059,7 +1092,7 @@ namespace Pokemod.Content.Pets
 
 			if (timer <= 0)
 			{
-				if (canAttack && Main.mouseLeft)
+				if (canAttack && Main.player[Projectile.owner].controlUseItem)
 				{
 					Attack((Main.MouseWorld-Projectile.Center).Length(), Main.MouseWorld);
 				}
@@ -1268,7 +1301,7 @@ namespace Pokemod.Content.Pets
 
 		public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
 			int levelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
-			if (pokemonLvl > levelCap)
+			if (ModContent.GetInstance<GameplayConfig>().Disobedience && pokemonLvl > levelCap)
 			{
 				int d = Math.Clamp((pokemonLvl-levelCap)/5, 2, 5);
 				if (!Main.rand.NextBool(d))
@@ -1551,88 +1584,114 @@ namespace Pokemod.Content.Pets
 
         public override bool PreDraw(ref Color lightColor)
         {
-			if (pokemonShader != null)
+			if (isOut)
 			{
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
-                pokemonShader.Apply(Projectile);
-            }
+				if (pokemonShader != null)
+				{
+					Main.spriteBatch.End();
+					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+					pokemonShader.Apply(Projectile);
+				}
 
-            if(variant != null){
-				if(variant != ""){
-					if (ModContent.RequestIfExists<Texture2D>(Texture + "_" + variant, out Asset<Texture2D> variantTexture))
+				if (variant != null)
+				{
+					if (variant != "")
 					{
-						Main.EntitySpriteDraw(variantTexture.Value, Projectile.Center - Main.screenPosition,
-							variantTexture.Frame(1, totalFrames, 0, Projectile.frame), lightColor, Projectile.rotation,
-							variantTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+						if (ModContent.RequestIfExists<Texture2D>(Texture + "_" + variant, out Asset<Texture2D> variantTexture))
+						{
+							Main.EntitySpriteDraw(variantTexture.Value, Projectile.Center - Main.screenPosition,
+								variantTexture.Frame(1, totalFrames, 0, Projectile.frame), lightColor, Projectile.rotation,
+								variantTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 
-						return false;
+							return false;
+						}
 					}
-                }
-            }
+				}
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+				Main.spriteBatch.End();
+				Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+			}
+			else
+			{
+				Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+ballType);
+				Color drawColor = Lighting.GetColor((int)(Projectile.Center.X / 16), (int)(Projectile.Center.Y / 16));
+
+				Main.EntitySpriteDraw(ballTexture.Value, Projectile.Center - Main.screenPosition, ballTexture.Value.Bounds, drawColor, isOutTimer * MathHelper.ToRadians(2*Math.Clamp(Math.Abs(Projectile.velocity.X), 4, 30)) * (Projectile.velocity.X > 0 ? 1 : -1), ballTexture.Size() * 0.5f, 1f, SpriteEffects.None, 0);
+
+				return false;
+			}
 
             return true;
         }
 
         public override bool PreDrawExtras()
         {
-			if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0)
-			{
-				Asset<Texture2D> balloonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/AirBalloon_Texture");
-
-				Main.EntitySpriteDraw(balloonTexture.Value, Entity.Top + new Vector2(0, 10) - Main.screenPosition, balloonTexture.Value.Bounds, Color.White, 0, new Vector2(balloonTexture.Width() * 0.5f, balloonTexture.Height()), 1, SpriteEffects.None, 0);
-			}
-            if (finalStats[0] != 0)
-			{
-				Asset<Texture2D> barTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/PokemonHPBar");
-
-				float quotient = (float)currentHp / finalStats[0];// Creating a quotient that represents the difference of your currentResource vs your maximumResource, resulting in a float of 0-1f.
-				quotient = Utils.Clamp(quotient, 0f, 1f); // Clamping it to 0-1f so it doesn't go over that.
-
-				if (currentHp < finalStats[0])
+			if (isOut) {
+				if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0)
 				{
-					// Now, using this hitbox, we draw a gradient by drawing vertical lines while slowly interpolating between the 2 colors.
-					int left = -24;
-					int right = 24;
-					int steps = (int)((right - left) * quotient);
+					Asset<Texture2D> balloonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/AirBalloon_Texture");
 
-					for (int i = 0; i < steps; i += 1)
+					Main.EntitySpriteDraw(balloonTexture.Value, Entity.Top + new Vector2(0, 10) - Main.screenPosition, balloonTexture.Value.Bounds, Color.White, 0, new Vector2(balloonTexture.Width() * 0.5f, balloonTexture.Height()), 1, SpriteEffects.None, 0);
+				}
+				if (finalStats[0] != 0)
+				{
+					Asset<Texture2D> barTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/PokemonHPBar");
+
+					float quotient = (float)currentHp / finalStats[0];// Creating a quotient that represents the difference of your currentResource vs your maximumResource, resulting in a float of 0-1f.
+					quotient = Utils.Clamp(quotient, 0f, 1f); // Clamping it to 0-1f so it doesn't go over that.
+
+					if (currentHp < finalStats[0])
 					{
-						float percent = (float)i / (right - left);
-						Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Entity.Top + new Vector2(left + i, -20) - Main.screenPosition, new Rectangle(0, 0, 1, 8), Color.Lerp(new Color(50, 255, 50), new Color(50, 255, 50), percent), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
+						// Now, using this hitbox, we draw a gradient by drawing vertical lines while slowly interpolating between the 2 colors.
+						int left = -24;
+						int right = 24;
+						int steps = (int)((right - left) * quotient);
 
+						for (int i = 0; i < steps; i += 1)
+						{
+							float percent = (float)i / (right - left);
+							Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Entity.Top + new Vector2(left + i, -20) - Main.screenPosition, new Rectangle(0, 0, 1, 8), Color.Lerp(new Color(50, 255, 50), new Color(50, 255, 50), percent), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
+
+						}
+						Main.EntitySpriteDraw(barTexture.Value, Entity.Top + new Vector2(0, -20) - Main.screenPosition, barTexture.Value.Bounds, Color.White, 0, barTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
 					}
-					Main.EntitySpriteDraw(barTexture.Value, Entity.Top + new Vector2(0, -20) - Main.screenPosition, barTexture.Value.Bounds, Color.White, 0, barTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
 				}
 			}
+
             return true;
         }
 
         public override void PostDraw(Color lightColor)
         {
-			if(isEvolving && evolveTimer > 0){
-				Vector2 drawPos2 = Projectile.Center - Main.screenPosition;
-				float lightScale = (float)(0.1f*Math.Sqrt(maxEvolveTimer-evolveTimer));
-				for(int i = 0; i < 10; i++){
-					DrawPrettyStarSparkle(Projectile.Opacity, SpriteEffects.None, drawPos2, new Color(255, 255, 255) * 0.5f, new Color(255, 255, 255), 0.5f, 0f, 0.5f, 0.5f, 1f, Projectile.rotation+ MathHelper.ToRadians(i*360f/10f) + MathHelper.ToRadians(Main.rand.Next(-8,9)), new Vector2(2f, Utils.Remap(0.5f, 0f, 1f, 4f, 1f)) * Projectile.scale * lightScale, 2*Vector2.One * Projectile.scale * lightScale);
+			if (isOut)
+			{
+				if (isEvolving && evolveTimer > 0)
+				{
+					Vector2 drawPos2 = Projectile.Center - Main.screenPosition;
+					float lightScale = (float)(0.1f * Math.Sqrt(maxEvolveTimer - evolveTimer));
+					for (int i = 0; i < 10; i++)
+					{
+						DrawPrettyStarSparkle(Projectile.Opacity, SpriteEffects.None, drawPos2, new Color(255, 255, 255) * 0.5f, new Color(255, 255, 255), 0.5f, 0f, 0.5f, 0.5f, 1f, Projectile.rotation + MathHelper.ToRadians(i * 360f / 10f) + MathHelper.ToRadians(Main.rand.Next(-8, 9)), new Vector2(2f, Utils.Remap(0.5f, 0f, 1f, 4f, 1f)) * Projectile.scale * lightScale, 2 * Vector2.One * Projectile.scale * lightScale);
+					}
 				}
-			}
-			if(megaEvolveTimer > 0){
-				if(isMegaEvolving){
-					Asset<Texture2D> megaEvolveAnimTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/MegaEvolveAnim");
+				if (megaEvolveTimer > 0)
+				{
+					if (isMegaEvolving)
+					{
+						Asset<Texture2D> megaEvolveAnimTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/MegaEvolveAnim");
 
-					Main.EntitySpriteDraw(megaEvolveAnimTexture.Value, Projectile.Center - Main.screenPosition,
-						megaEvolveAnimTexture.Frame(1, 17, 0, (int)((maxMegaEvolveTimer-megaEvolveTimer)/5)), Color.White, 0,
-						megaEvolveAnimTexture.Frame(1, 17).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
-				}else if(isMega){
-					Asset<Texture2D> megaEvolveSymbolTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/MegaEvolveSymbol");
+						Main.EntitySpriteDraw(megaEvolveAnimTexture.Value, Projectile.Center - Main.screenPosition,
+							megaEvolveAnimTexture.Frame(1, 17, 0, (int)((maxMegaEvolveTimer - megaEvolveTimer) / 5)), Color.White, 0,
+							megaEvolveAnimTexture.Frame(1, 17).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
+					}
+					else if (isMega)
+					{
+						Asset<Texture2D> megaEvolveSymbolTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/MegaEvolveSymbol");
 
-					Main.EntitySpriteDraw(megaEvolveSymbolTexture.Value, Projectile.Top + new Vector2(0,-0.5f*megaEvolveSymbolTexture.Frame(1, 15).Size().Y) - Main.screenPosition,
-						megaEvolveSymbolTexture.Frame(1, 15, 0, (int)((60-megaEvolveTimer)/4)), Color.White, 0,
-						megaEvolveSymbolTexture.Frame(1, 15).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
+						Main.EntitySpriteDraw(megaEvolveSymbolTexture.Value, Projectile.Top + new Vector2(0, -0.5f * megaEvolveSymbolTexture.Frame(1, 15).Size().Y) - Main.screenPosition,
+							megaEvolveSymbolTexture.Frame(1, 15, 0, (int)((60 - megaEvolveTimer) / 4)), Color.White, 0,
+							megaEvolveSymbolTexture.Frame(1, 15).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
+					}
 				}
 			}
         }
@@ -1683,15 +1742,31 @@ namespace Pokemod.Content.Pets
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-			if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f) {
-				Projectile.velocity.X = 0;
-			}
-			if (Projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f) {
-				if (manualControl && moveStyle == (int)MovementStyle.Hybrid)
+			if (isOut)
+			{
+				if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f)
 				{
-					if (Projectile.oldVelocity.Y > 0) isFlying = false;
+					Projectile.velocity.X = 0;
 				}
-				Projectile.velocity.Y = 0;
+				if (Projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f)
+				{
+					if (manualControl && moveStyle == (int)MovementStyle.Hybrid)
+					{
+						if (Projectile.oldVelocity.Y > 0) isFlying = false;
+					}
+					Projectile.velocity.Y = 0;
+				}
+			}
+			else
+			{
+				if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f)
+				{
+					Projectile.velocity.X = -0.5f*oldVelocity.X;
+				}
+				if (Projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f)
+				{
+					Projectile.velocity.Y = -0.5f*oldVelocity.Y;
+				}
 			}
 
             return false;
@@ -1700,6 +1775,11 @@ namespace Pokemod.Content.Pets
 		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
             fallThrough = canFall;
+			if (!isOut)
+			{
+				width = 8;
+				height = 8;
+			}
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }

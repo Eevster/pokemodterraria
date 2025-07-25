@@ -15,6 +15,10 @@ namespace Pokemod.Common.Configs
 		[DefaultValue(1f)]
 		public float PokemonSpawnMultiplier;
 
+		[Header("GameplayChanges")]
+		[DefaultValue(false)]
+		public bool Disobedience;
+
 		[Header("RuleChanges")] 
 
 		[DefaultValue(false)]

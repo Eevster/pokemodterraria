@@ -402,7 +402,7 @@ namespace Pokemod.Content.NPCs
             {"Ember", new PokemonAttackInfo(40,30,60,800f,false,false,(int)TypeIndex.Fire, true)},
             {"Explosion", new PokemonAttackInfo(250,32,60,800f,false,false,(int)TypeIndex.Normal)},
             {"FireBlast", new PokemonAttackInfo(110,40,60,800f,true,true,(int)TypeIndex.Fire, true)},
-            {"Flamethrower", new PokemonAttackInfo(90,90,60,300f,true,false,(int)TypeIndex.Fire, true)},
+            {"Flamethrower", new PokemonAttackInfo(90,40,80,300f,true,false,(int)TypeIndex.Fire, true)},
             {"FlameWheel", new PokemonAttackInfo(60,60,60,800f,false,false,(int)TypeIndex.Fire)},
             {"FlashCannon", new PokemonAttackInfo(80,40,60,800f,false,true,(int)TypeIndex.Steel, true)},
             {"FocusPunch", new PokemonAttackInfo(150,90,60,800f,false,false,(int)TypeIndex.Fighting)},

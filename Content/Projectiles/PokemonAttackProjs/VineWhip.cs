@@ -264,6 +264,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void AI()
         {
 			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+				Projectile.Center = positionAux;
 				SearchTarget(160f);
 			}
 
