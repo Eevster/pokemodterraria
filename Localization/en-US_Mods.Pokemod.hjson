@@ -1521,6 +1521,78 @@ Items: {
 		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
 	}
 
+	TrainerT6Body: {
+		DisplayName: Trainer Shirt (Tier 6)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PokemonLevelCapBoost}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance@1}
+			'''
+	}
+
+	TrainerT6Legs: {
+		DisplayName: Trainer Pants (Tier 6)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PercentIncreasedMovementSpeed}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance@1}
+			'''
+	}
+
+	TrainerT6Head: {
+		DisplayName: Trainer Cap (Tier 6)
+		Tooltip: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
+	}
+
+	TrainerT7Body: {
+		DisplayName: Trainer Shirt (Tier 7)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PokemonLevelCapBoost}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance@1}
+			'''
+	}
+
+	TrainerT7Legs: {
+		DisplayName: Trainer Pants (Tier 7)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PercentIncreasedMovementSpeed}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance@1}
+			'''
+	}
+
+	TrainerT7Head: {
+		DisplayName: Trainer Cap (Tier 7)
+		Tooltip: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
+	}
+
+	TrainerT8Body: {
+		DisplayName: Trainer Shirt (Tier 8)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PokemonLevelCapBoost}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance@1}
+			'''
+	}
+
+	TrainerT8Legs: {
+		DisplayName: Trainer Pants (Tier 8)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PercentIncreasedMovementSpeed}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance@1}
+			'''
+	}
+
+	TrainerT8Head: {
+		DisplayName: Trainer Cap (Tier 8)
+		Tooltip: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
+	}
+
 	BoulderBadge: {
 		DisplayName: Boulder Badge
 		Tooltip: "{$CommonItemTooltip.BadgesTier}"
@@ -1543,6 +1615,21 @@ Items: {
 
 	SoulBadge: {
 		DisplayName: Soul Badge
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
+	}
+
+	MarshBadge: {
+		DisplayName: Marsh Badge
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
+	}
+
+	VolcanoBadge: {
+		DisplayName: Volcano Badge
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
+	}
+
+	EarthBadge: {
+		DisplayName: Earth Badge
 		Tooltip: "{$CommonItemTooltip.BadgesTier}"
 	}
 }

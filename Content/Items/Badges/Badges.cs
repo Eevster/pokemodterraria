@@ -48,9 +48,24 @@ namespace Pokemod.Content.Items.Badges
 	{
 		public override int badgeTier => 4;
 	}
-	
+
 	public class SoulBadge : GymBadge
 	{
-        public override int badgeTier => 5;
+		public override int badgeTier => 5;
+	}
+
+	public class MarshBadge : GymBadge
+	{
+		public override int badgeTier => 6;
+	}
+
+	public class VolcanoBadge : GymBadge
+	{
+		public override int badgeTier => 7;
+	}
+	
+	public class EarthBadge : GymBadge
+	{
+        public override int badgeTier => 8;
 	}
 }

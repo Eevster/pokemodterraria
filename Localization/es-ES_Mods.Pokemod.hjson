@@ -1521,6 +1521,78 @@ Items: {
 		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
 	}
 
+	TrainerT6Body: {
+		DisplayName: Camiseta de entrenador (Tier 6)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PokemonLevelCapBoost}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT6Legs: {
+		DisplayName: Pantalones de entrenador (Tier 6)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PercentIncreasedMovementSpeed}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT6Head: {
+		DisplayName: Gorra de entrenador (Tier 6)
+		Tooltip: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
+	}
+
+	TrainerT7Body: {
+		DisplayName: Camiseta de entrenador (Tier 7)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PokemonLevelCapBoost}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT7Legs: {
+		DisplayName: Pantalones de entrenador (Tier 7)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PercentIncreasedMovementSpeed}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT7Head: {
+		DisplayName: Gorra de entrenador (Tier 7)
+		Tooltip: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
+	}
+
+	TrainerT8Body: {
+		DisplayName: Camiseta de entrenador (Tier 8)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PokemonLevelCapBoost}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT8Legs: {
+		DisplayName: Pantalones de entrenador (Tier 8)
+		Tooltip:
+			'''
+			{$CommonItemTooltip.PercentIncreasedMovementSpeed}
+			{$CommonItemTooltip.PercentIncreasedPokemonCritChance}
+			'''
+	}
+
+	TrainerT8Head: {
+		DisplayName: Gorra de entrenador (Tier 8)
+		Tooltip: "{$CommonItemTooltip.PercentIncreasedPokemonCritChance}"
+		SetBonus: "{$CommonItemTooltip.PokemonMaxBoost}"
+	}
+
 	BoulderBadge: {
 		DisplayName: Medalla Roca
 		Tooltip: "{$CommonItemTooltip.BadgesTier}"
@@ -1543,6 +1615,21 @@ Items: {
 
 	SoulBadge: {
 		DisplayName: Medalla Alma
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
+	}
+
+	MarshBadge: {
+		DisplayName: Medalla Pantano
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
+	}
+
+	VolcanoBadge: {
+		DisplayName: Medalla Volcán
+		Tooltip: "{$CommonItemTooltip.BadgesTier}"
+	}
+
+	EarthBadge: {
+		DisplayName: Medalla Tierra
 		Tooltip: "{$CommonItemTooltip.BadgesTier}"
 	}
 }

@@ -27,6 +27,8 @@ namespace Pokemod.Common.UI.MoveLearnUI
 
 		public void OpenPanel()
 		{
+			RemoveAllChildren();
+
 			MoveLearnPanel = new DraggableUIPanel();
 			MoveLearnPanel.SetPadding(0);
 

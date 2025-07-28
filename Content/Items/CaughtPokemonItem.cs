@@ -29,6 +29,7 @@ namespace Pokemod.Content.Items
 		public string CurrentTrainerID;
         public string PokemonName;
 		public string PokemonNick;
+
         public int level;
 		public int exp;
 		public int expToNextLevel;
@@ -44,6 +45,8 @@ namespace Pokemod.Content.Items
 
 		public int nature;
 		public int happiness;
+		public bool didMegaEvolve;
+
 		public string pokeHeldItem;
 
 		public int shouldDespawn = 10;
@@ -386,8 +389,11 @@ namespace Pokemod.Content.Items
 						if(PokemonProj != null){
 							if (moves[moveIndex] == "SmokeScreen") moves[moveIndex] = "Smokescreen";
 							PokemonProj.currentAttack = moves[moveIndex];
-							if(variant != null){
-								if(variant != ""){
+							PokemonProj.ballType = BallType;
+							if (variant != null)
+							{
+								if (variant != "")
+								{
 									PokemonProj.variant = variant;
 								}
 							}
@@ -441,16 +447,16 @@ namespace Pokemod.Content.Items
 		}
 
 		private void GetPokemonMoves(bool notLearn = false){
-			List<string> newMoveList = PokemonData.pokemonInfo[PokemonName].movePool.ToList();
+			List<MoveLvl> newMoveList = PokemonData.pokemonInfo[PokemonName].movePool.ToList();
 
 			if (moves.Length < 4) {
 				List<string> newMoves = moves.ToList();
 
 				while (newMoveList.Count > 0)
 				{
-					if (!newMoves.Contains(newMoveList[0]))
+					if (newMoveList[0].levelToLearn <= 0 && !newMoves.Contains(newMoveList[0].moveName))
 					{
-						newMoves.Add(newMoveList[0]);
+						newMoves.Add(newMoveList[0].moveName);
 					}
 					newMoveList.RemoveAt(0);
 					if (newMoves.Count >= 4) break;
@@ -458,27 +464,61 @@ namespace Pokemod.Content.Items
 				moves = newMoves.ToArray();
 			}
 
-			if (notLearn) newMoveList = new List<string>();
+			if (notLearn) newMoveList = new List<MoveLvl>();
 
 			if (newMoveList.Count > 0)
 			{
 				List<string> newToLearnMoves = toLearnMoves.ToList();
-				foreach (string move in newMoveList)
+				foreach (MoveLvl move in newMoveList)
 				{
-					newToLearnMoves.Add(move);
+					if (move.levelToLearn <= 0)
+					{
+						newToLearnMoves.Add(move.moveName);
+					}
 				}
 				toLearnMoves = newToLearnMoves.ToArray();
 			}
 		}
 
-		private void GetUsedItems(Player player = null){
+		private void GetPokemonLvlMoves(int lvl)
+		{
+			List<MoveLvl> newMoveList = PokemonData.pokemonInfo[PokemonName].movePool.ToList();
+
 			PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
 
-			if(PokemonProj != null){
-				if(PokemonProj.itemEvolve){
+			if (PokemonProj != null)
+			{
+				if (PokemonProj.isMega && PokemonProj.megaEvolutionBase.Length > 0)
+				{
+					newMoveList = PokemonData.pokemonInfo[PokemonProj.megaEvolutionBase[0]].movePool.ToList();
+				}
+			}
+
+			if (newMoveList.Count > 0)
+			{
+				List<string> newToLearnMoves = toLearnMoves.ToList();
+				foreach (MoveLvl move in newMoveList)
+				{
+					if (move.levelToLearn == lvl) {
+						newToLearnMoves.Add(move.moveName);
+					}
+				}
+				toLearnMoves = newToLearnMoves.ToArray();
+			}
+		}
+
+		private void GetUsedItems(Player player = null)
+		{
+			PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
+
+			if (PokemonProj != null)
+			{
+				if (PokemonProj.itemEvolve)
+				{
 					GetCanEvolve(player);
 				}
-				if(PokemonProj.GetRareCandy()){
+				if (PokemonProj.GetRareCandy())
+				{
 					exp = expToNextLevel;
 				}
 			}
@@ -539,7 +579,8 @@ namespace Pokemod.Content.Items
 					Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 					proj.Kill();
 					PokemonName = newPokemonName;
-					GetPokemonMoves(true);
+					GetPokemonMoves(didMegaEvolve);
+					didMegaEvolve = true;
 					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 					if (player != null)
 					{
@@ -566,6 +607,7 @@ namespace Pokemod.Content.Items
 				if(exp>= expToNextLevel && level < 100){
 					AddHappiness(+4, +3, +2);
 					level++;
+					GetPokemonLvlMoves(level);
 					if(level < 100){
 						SetExpToNextLevel();
 					}
