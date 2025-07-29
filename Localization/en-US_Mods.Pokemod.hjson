@@ -450,6 +450,8 @@ Projectiles: {
 	HyperBeam.DisplayName: Hyper Beam
 	DoubleEdge.DisplayName: Double Edge
 	DragonBreath.DisplayName: Dragon Breath
+	Crunch.DisplayName: Crunch
+	AncientPower.DisplayName: Ancient Power
 }
 
 Items: {
