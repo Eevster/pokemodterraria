@@ -1599,7 +1599,9 @@ namespace Pokemod.Content.Pets
 					{
 						if (ModContent.RequestIfExists<Texture2D>(Texture + "_" + variant, out Asset<Texture2D> variantTexture))
 						{
-							Main.EntitySpriteDraw(variantTexture.Value, Projectile.Center - Main.screenPosition,
+							Vector2 positionOffset = (variantTexture.Frame(1, totalFrames).Size() * Vector2.UnitY * 0.5f) - Vector2.UnitY * 4f; //Anchors the sprite to the bottom of the hitbox correctly
+
+                            Main.EntitySpriteDraw(variantTexture.Value, Projectile.Bottom - Main.screenPosition - positionOffset,
 								variantTexture.Frame(1, totalFrames, 0, Projectile.frame), lightColor, Projectile.rotation,
 								variantTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 
