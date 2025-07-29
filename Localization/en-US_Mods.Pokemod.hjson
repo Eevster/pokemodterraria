@@ -1634,6 +1634,41 @@ Items: {
 		DisplayName: Earth Badge
 		Tooltip: "{$CommonItemTooltip.BadgesTier}"
 	}
+
+	OldAmberItem: {
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Old Amber
+	}
+
+	HelixFossilItem: {
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Helix Fossil
+	}
+
+	DomeFossilItem: {
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Dome Fossil
+	}
+
+	FossilBlockItem: {
+		DisplayName: Primordial Fossil
+		Tooltip: ""
+	}
+
+	PetrifiedAmberItem: {
+		DisplayName: Petrified Amber Item
+		Tooltip: ""
+	}
+
+	PetrifiedDomeItem: {
+		DisplayName: Petrified Dome Item
+		Tooltip: ""
+	}
+
+	PetrifiedHelixItem: {
+		DisplayName: Petrified Helix Item
+		Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -3647,6 +3682,37 @@ NPCs: {
 	GalvantulaCritterNPC.DisplayName: Galvantula
 	GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
 	FishermanTrainer.DisplayName: Fisherman Trainer
+
+	PokemonScientist: {
+		DisplayName: Scientist
+		Census.SpawnCondition: Have a genetic sample in your inventory.
+
+		TownNPCMood: {
+			Content: I've still got my glasses, so everything is okay.
+			NoHome: I really need a new laboratory. Science won't wait for anyone.
+			FarFromHome: I appear to be lost.
+			LoveSpace: There's enough space here to do all kinds of experiments!
+			DislikeCrowded: It's a little noisy here. I'd prefer a quiet place.
+			HateCrowded: With all these people, I can't even hear myself think!
+			LoveBiome: I love {BiomeName}, it's perfect for a quiet research session.
+			LikeBiome: "{BiomeName} has so many interesting things hidden beneath the sand."
+			DislikeBiome: I don't much care for {BiomeName}, it's too... alive.
+			HateBiome: I can't focus on my work with all the monsters in {BiomeName}.
+			LoveNPC: I truely admire the genius of {NPCName}!
+			LikeNPC: I can respect that {NPCName} is something of a scientist aswell.
+			DislikeNPC: "{NPCName} needs to keep their leaves to themselves."
+			HateNPC: "{NPCName} has no regard for the precision and delicate balance required for true science."
+			LikeNPC_Princess: "{NPCName} actually listens when I nerd out about rocks. I almost feel sorry."
+			Princess_LovesNPC: "{NPCName} knows so many interesting things!"
+		}
+	}
+}
+
+Bestiary: {
+	PokemonScientist: {
+		BestiaryEntry1: The brilliant mind at the frontier of Pokemon genetic research.
+		BestiaryEntry2: Can use Fossils and other Genetic Samples to Revitalise extinct species of Pokemon.
+	}
 }
 
 Dialogue: {
@@ -3657,6 +3723,23 @@ Dialogue: {
 	}
 
 	FishermanTrainer.StandardDialogue1: Hello, are you interested in fishing?
+
+	PokemonScientist: {
+		StandardDialogue1: You seem like someone that likes digging. I can only imagine the wonders that lay beneath us!
+		StandardDialogue2: Do you have anything interesting to show me? A rock perhaps? Maybe an old stone?!
+		StandardDialogue3: If you bring me genetic samples, I can revive extinct Pokemon!
+		Button: Process Samples
+		MissingSamples: " More Samples Needed."
+		MissingSamplesDialogue: I'm going to need more genetic information to revitalise an intact specimen.
+		NoSamples: No Samples in Inventory!
+		NoSamplesDialogue: If you can find me some genetic samples, I can do something incredible with them. You might find suitable fossils underground.
+		NoBall: No Pokeball in Inventory!
+		NoBallDialogue: I'll need a Pokeball to house the revitalised specimen.
+		LowLevel: World level too low
+		LowLevelDialogue: This sample contains powerful energy. I'll need do conduct further research before I'm ready to process it.
+		Success: Revival Successful!
+		SuccessDialogue: "We've created a living specimen! Take good care of your "
+	}
 }
 
 Tiles: {
@@ -3686,6 +3769,12 @@ CommonItemTooltip: {
 	PokemonLevelCapBoost: Makes Pokemon level {0} or lower obey your commands
 	PercentIncreasedPokemonCritChance: Increases Pokemon crit chance by {0}%
 	BadgesTier: Tier {0} Gym Badge
+	GeneticSample:
+		'''
+		Genetic Sample 
+		The remains of a {0} type Pokemon
+		A scientist might find it interesting
+		'''
 }
 
 PokemonInfo: {

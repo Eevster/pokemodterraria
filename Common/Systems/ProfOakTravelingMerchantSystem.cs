@@ -1,5 +1,5 @@
 using Microsoft.Xna.Framework;
-using Pokemod.Content.NPCs;
+using Pokemod.Content.NPCs.MerchantNPCs;
 using System;
 using System.Collections.Generic;
 using System.IO;
