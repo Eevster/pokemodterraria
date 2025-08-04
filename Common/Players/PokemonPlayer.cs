@@ -59,7 +59,7 @@ namespace Pokemod.Common.Players
 
 		//Level Cap
 		public int levelCap;
-		public const int defaultLevelCap = 100;
+		public const int defaultLevelCap = 10;
 
 		//Manual Control
 		public bool manualControl;

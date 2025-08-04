@@ -133,7 +133,7 @@ namespace Pokemod.Content.Tiles
 					}
 				}
 			}
-            Main.NewText(tileCount);
+            //Main.NewText(tileCount);
             return tileCount;
 		}
 

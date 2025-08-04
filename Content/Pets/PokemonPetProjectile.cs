@@ -652,13 +652,14 @@ namespace Pokemod.Content.Pets
 			if (++isOutTimer > 20)
 			{
 				isOut = true;
-				for(int i = 0; i < 30; i++)
-                {
+				Projectile.velocity = Vector2.Zero;
+				for (int i = 0; i < 30; i++)
+				{
 					int dustIndex = Dust.NewDust(Projectile.Center, 2, 2, DustID.SilverFlame, 0f, 0f, 0, default(Color), 2.5f);
 					Main.dust[dustIndex].noGravity = true;
-                    Main.dust[dustIndex].position = Projectile.Center;
-                    Main.dust[dustIndex].velocity = Main.rand.NextFloat(2f, 6f) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
-                }
+					Main.dust[dustIndex].position = Projectile.Center;
+					Main.dust[dustIndex].velocity = Main.rand.NextFloat(2f, 6f) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
+				}
 				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
 			}
 		}

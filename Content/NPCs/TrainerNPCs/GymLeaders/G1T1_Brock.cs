@@ -8,9 +8,9 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
-namespace Pokemod.Content.NPCs.TrainerNPCs
+namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 {
-	public class FishermanTrainer : ModNPC
+	public class G1T1_Brock : ModNPC
 	{
 		private static Profiles.StackedNPCProfile NPCProfile;
 
@@ -87,18 +87,15 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		public override List<string> SetNPCNameList()
 		{
 			return new List<string> {
-				"Andrew",
-				"Hank",
-				"Tylor",
-				"Wade"
+				"Brock",
 			};
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if ((spawnInfo.Player.ZoneBeach || spawnInfo.Player.ZoneSnow) && !NPC.AnyNPCs(Type))
+			if ((spawnInfo.Player.ZoneRockLayerHeight || spawnInfo.Player.ZoneDesert) && !NPC.AnyNPCs(Type))
 			{
-				return 0.15f;
+				return 0.1f;
 			}
 
 			return 0f;
@@ -115,7 +112,6 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{ // What the chat buttons are when you open up the chat UI
 			button = "Battle (WIP)";
-			button2 = Language.GetTextValue("LegacyInterface.28"); //This is the key to the word "Shop"
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref string shop)
@@ -124,17 +120,6 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			{
 
 			}
-			else
-			{
-				shop = "Shop";
-			}
-		}
-		
-		public override void AddShops() {
-			new NPCShop(Type)
-				.Add<OldRod>()
-				.Add<GoodRod>()
-				.Register();
 		}
 	}
 }
