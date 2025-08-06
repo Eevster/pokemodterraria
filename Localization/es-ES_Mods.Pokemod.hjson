@@ -1674,6 +1674,131 @@ Items: {
 		// DisplayName: Adamant Mint
 		// Tooltip: ""
 	}
+
+	BashfulMint: {
+		// DisplayName: Bashful Mint
+		// Tooltip: ""
+	}
+
+	BoldMint: {
+		// DisplayName: Bold Mint
+		// Tooltip: ""
+	}
+
+	BraveMint: {
+		// DisplayName: Brave Mint
+		// Tooltip: ""
+	}
+
+	CalmMint: {
+		// DisplayName: Calm Mint
+		// Tooltip: ""
+	}
+
+	CarefulMint: {
+		// DisplayName: Careful Mint
+		// Tooltip: ""
+	}
+
+	DocileMint: {
+		// DisplayName: Docile Mint
+		// Tooltip: ""
+	}
+
+	GentleMint: {
+		// DisplayName: Gentle Mint
+		// Tooltip: ""
+	}
+
+	HardyMint: {
+		// DisplayName: Hardy Mint
+		// Tooltip: ""
+	}
+
+	HastyMint: {
+		// DisplayName: Hasty Mint
+		// Tooltip: ""
+	}
+
+	ImpishMint: {
+		// DisplayName: Impish Mint
+		// Tooltip: ""
+	}
+
+	JollyMint: {
+		// DisplayName: Jolly Mint
+		// Tooltip: ""
+	}
+
+	LaxMint: {
+		// DisplayName: Lax Mint
+		// Tooltip: ""
+	}
+
+	LonelyMint: {
+		// DisplayName: Lonely Mint
+		// Tooltip: ""
+	}
+
+	MildMint: {
+		// DisplayName: Mild Mint
+		// Tooltip: ""
+	}
+
+	Mint: {
+		// DisplayName: Mint
+		// Tooltip: ""
+	}
+
+	ModestMint: {
+		// DisplayName: Modest Mint
+		// Tooltip: ""
+	}
+
+	NaiveMint: {
+		// DisplayName: Naive Mint
+		// Tooltip: ""
+	}
+
+	NaughtyMint: {
+		// DisplayName: Naughty Mint
+		// Tooltip: ""
+	}
+
+	QuietMint: {
+		// DisplayName: Quiet Mint
+		// Tooltip: ""
+	}
+
+	QuirkyMint: {
+		// DisplayName: Quirky Mint
+		// Tooltip: ""
+	}
+
+	RashMint: {
+		// DisplayName: Rash Mint
+		// Tooltip: ""
+	}
+
+	RelaxedMint: {
+		// DisplayName: Relaxed Mint
+		// Tooltip: ""
+	}
+
+	SassyMint: {
+		// DisplayName: Sassy Mint
+		// Tooltip: ""
+	}
+
+	SeriousMint: {
+		// DisplayName: Serious Mint
+		// Tooltip: ""
+	}
+
+	TimidMint: {
+		// DisplayName: Timid Mint
+		// Tooltip: ""
+	}
 }
 
 Buffs: {

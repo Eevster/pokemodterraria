@@ -1,12 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Common",
-    "\\Common\\GlobalNPCs",
     "\\Content",
     "\\Content\\Items",
-    "\\Content\\NPCs"
+    "\\Content\\Items\\Consumables",
+    "\\Content\\Items\\Consumables\\Mints"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonData.cs",
+  "SelectedNode": "\\Content\\Items\\Consumables\\Mints\\Mint.png",
   "PreviewInSolutionExplorer": false
 }
