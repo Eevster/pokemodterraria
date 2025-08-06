@@ -1,7 +1,9 @@
-﻿using Terraria.GameContent.Bestiary;
+﻿using Pokemod.Common.Configs;
+using Pokemod.Common.UI;
+using Pokemod.Content.Items.GeneticSamples;
+using Terraria.GameContent.Bestiary;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
-using Pokemod.Common.Configs;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
@@ -22,8 +24,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+			bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HelixFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+                new FlavorTextBestiaryInfoElement("Its heavy shell allowed it to reach only nearby food. This could be the reason it is extinct."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;

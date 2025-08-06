@@ -73,7 +73,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 	public abstract class TMDark : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Dark;
-		public override string[] moves => [];
+		public override string[] moves => ["Crunch"];
 	}
 
 	public abstract class TMDragon : TechnicalMachine

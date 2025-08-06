@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 
 namespace Pokemod.Content.Items.GeneticSamples
 {
-	public class PetrifiedAmberItem : GeneticSampleItem
+	public class InfernalAmberItem : GeneticSampleItem
     {
         public override void SetDefaults()
         {

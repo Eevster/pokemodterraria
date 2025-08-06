@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 
 namespace Pokemod.Content.Items.GeneticSamples
 {
-	public class PetrifiedHelixItem : GeneticSampleItem
+	public class EldritchHelixItem : GeneticSampleItem
     {
         public override void SetDefaults()
         {

@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 
 namespace Pokemod.Content.Items.GeneticSamples
 {
-	public class PetrifiedDomeItem : GeneticSampleItem
+	public class HauntedDomeItem : GeneticSampleItem
     {
         public override void SetDefaults()
         {

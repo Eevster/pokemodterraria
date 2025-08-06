@@ -1650,29 +1650,170 @@ Items: {
 		// DisplayName: Dome Fossil
 	}
 
-	FossilBlockItem: {
-		// DisplayName: Primordial Fossil
-		// Tooltip: ""
-	}
-
-	PetrifiedAmberItem: {
-		// DisplayName: Petrified Amber Item
-		// Tooltip: ""
-	}
-
-	PetrifiedDomeItem: {
-		// DisplayName: Petrified Dome Item
-		// Tooltip: ""
-	}
-
-	PetrifiedHelixItem: {
-		// DisplayName: Petrified Helix Item
-		// Tooltip: ""
-	}
-
 	AdamantMint: {
 		// DisplayName: Adamant Mint
 		// Tooltip: ""
+	}
+
+<<<<<<< HEAD
+	BashfulMint: {
+		// DisplayName: Bashful Mint
+		// Tooltip: ""
+	}
+
+	BoldMint: {
+		// DisplayName: Bold Mint
+		// Tooltip: ""
+	}
+
+	BraveMint: {
+		// DisplayName: Brave Mint
+		// Tooltip: ""
+	}
+
+	CalmMint: {
+		// DisplayName: Calm Mint
+		// Tooltip: ""
+	}
+
+	CarefulMint: {
+		// DisplayName: Careful Mint
+		// Tooltip: ""
+	}
+
+	DocileMint: {
+		// DisplayName: Docile Mint
+		// Tooltip: ""
+	}
+
+	GentleMint: {
+		// DisplayName: Gentle Mint
+		// Tooltip: ""
+	}
+
+	HardyMint: {
+		// DisplayName: Hardy Mint
+		// Tooltip: ""
+	}
+
+	HastyMint: {
+		// DisplayName: Hasty Mint
+		// Tooltip: ""
+	}
+
+	ImpishMint: {
+		// DisplayName: Impish Mint
+		// Tooltip: ""
+	}
+
+	JollyMint: {
+		// DisplayName: Jolly Mint
+		// Tooltip: ""
+	}
+
+	LaxMint: {
+		// DisplayName: Lax Mint
+		// Tooltip: ""
+	}
+
+	LonelyMint: {
+		// DisplayName: Lonely Mint
+		// Tooltip: ""
+	}
+
+	MildMint: {
+		// DisplayName: Mild Mint
+		// Tooltip: ""
+	}
+
+	Mint: {
+		// DisplayName: Mint
+		// Tooltip: ""
+	}
+
+	ModestMint: {
+		// DisplayName: Modest Mint
+		// Tooltip: ""
+	}
+
+	NaiveMint: {
+		// DisplayName: Naive Mint
+		// Tooltip: ""
+	}
+
+	NaughtyMint: {
+		// DisplayName: Naughty Mint
+		// Tooltip: ""
+	}
+
+	QuietMint: {
+		// DisplayName: Quiet Mint
+		// Tooltip: ""
+	}
+
+	QuirkyMint: {
+		// DisplayName: Quirky Mint
+		// Tooltip: ""
+	}
+
+	RashMint: {
+		// DisplayName: Rash Mint
+		// Tooltip: ""
+	}
+
+	RelaxedMint: {
+		// DisplayName: Relaxed Mint
+		// Tooltip: ""
+	}
+
+	SassyMint: {
+		// DisplayName: Sassy Mint
+		// Tooltip: ""
+	}
+
+	SeriousMint: {
+		// DisplayName: Serious Mint
+		// Tooltip: ""
+	}
+
+	TimidMint: {
+		// DisplayName: Timid Mint
+		// Tooltip: ""
+=======
+	SealedFossilItem: {
+		// Tooltip: ""
+		// DisplayName: Sealed Fossil
+	}
+
+	PrimordialFossilItem: {
+		// Tooltip: ""
+		// DisplayName: Primordial Fossil
+	}
+
+	IgneousFossilItem: {
+		// Tooltip: ""
+		// DisplayName: Igneous Fossil
+	}
+
+	FrozenFossilItem: {
+		// Tooltip: ""
+		// DisplayName: Frozen Fossil
+	}
+
+	InfernalAmberItem: {
+		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		// DisplayName: Infernal Amber
+	}
+
+	HauntedDomeItem: {
+		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		// DisplayName: Haunted Dome
+	}
+
+	EldritchHelixItem: {
+		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		// DisplayName: Eldritch Helix
+>>>>>>> c213b3250d013c557d9674b65696a2b16f1b408e
 	}
 }
 

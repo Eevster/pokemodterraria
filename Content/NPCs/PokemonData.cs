@@ -386,7 +386,7 @@ namespace Pokemod.Content.NPCs
 
         public static Dictionary<string, PokemonAttackInfo> pokemonAttacks = new(){
             {"AirSlash", new PokemonAttackInfo(75,80,60,800f,true,true,(int)TypeIndex.Flying, true)},
-            {"AncientPower", new PokemonAttackInfo(60,0,120,800f,true,false,(int)TypeIndex.Normal, true)},
+            {"AncientPower", new PokemonAttackInfo(60,0,120,800f,true,false,(int)TypeIndex.Rock, true)},
             {"AquaRing", new PokemonAttackInfo(0,90,60,100f,true,false,(int)TypeIndex.Water, true)},
             {"Bubble", new PokemonAttackInfo(20,10,60,600f,false,false,(int)TypeIndex.Water, true)},
             {"BubbleBeam", new PokemonAttackInfo(65,30,60,800f,false,false,(int)TypeIndex.Water, true)},
