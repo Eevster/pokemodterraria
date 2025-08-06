@@ -1650,29 +1650,44 @@ Items: {
 		// DisplayName: Dome Fossil
 	}
 
-	FossilBlockItem: {
-		// DisplayName: Primordial Fossil
-		// Tooltip: ""
-	}
-
-	PetrifiedAmberItem: {
-		// DisplayName: Petrified Amber Item
-		// Tooltip: ""
-	}
-
-	PetrifiedDomeItem: {
-		// DisplayName: Petrified Dome Item
-		// Tooltip: ""
-	}
-
-	PetrifiedHelixItem: {
-		// DisplayName: Petrified Helix Item
-		// Tooltip: ""
-	}
-
 	AdamantMint: {
 		// DisplayName: Adamant Mint
 		// Tooltip: ""
+	}
+
+	SealedFossilItem: {
+		// Tooltip: ""
+		// DisplayName: Sealed Fossil
+	}
+
+	PrimordialFossilItem: {
+		// Tooltip: ""
+		// DisplayName: Primordial Fossil
+	}
+
+	IgneousFossilItem: {
+		// Tooltip: ""
+		// DisplayName: Igneous Fossil
+	}
+
+	FrozenFossilItem: {
+		// Tooltip: ""
+		// DisplayName: Frozen Fossil
+	}
+
+	InfernalAmberItem: {
+		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		// DisplayName: Infernal Amber
+	}
+
+	HauntedDomeItem: {
+		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		// DisplayName: Haunted Dome
+	}
+
+	EldritchHelixItem: {
+		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		// DisplayName: Eldritch Helix
 	}
 }
 

@@ -66,8 +66,8 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			//NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<ExamplePersonEmote>();
 
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers() {
-				Velocity = 1f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
-				Direction = 1 // -1 is left and 1 is right. NPCs are drawn facing the left by default but ExamplePerson will be drawn facing the right
+				Velocity = 0.5f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+				Direction = -1 // -1 is left and 1 is right. NPCs are drawn facing the left by default but ExamplePerson will be drawn facing the right
 			};
 
 			NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
@@ -119,22 +119,6 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			]);
 		}
 
-		// The PreDraw hook is useful for drawing things before our sprite is drawn or running code before the sprite is drawn
-		// Returning false will allow you to manually draw your NPC
-		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor) {
-			// This code slowly rotates the NPC in the bestiary
-			// (simply checking NPC.IsABestiaryIconDummy and incrementing NPC.Rotation won't work here as it gets overridden by drawModifiers.Rotation each tick)
-			if (NPCID.Sets.NPCBestiaryDrawOffset.TryGetValue(Type, out NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers)) {
-				drawModifiers.Rotation += 0.001f;
-
-				// Replace the existing NPCBestiaryDrawModifiers with our new one with an adjusted rotation
-				NPCID.Sets.NPCBestiaryDrawOffset.Remove(Type);
-				NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
-			}
-
-			return true;
-		}
-
 		public override void HitEffect(NPC.HitInfo hit) {
 			int num = NPC.life > 0 ? 1 : 5;
 
@@ -178,13 +162,17 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 				return true;
 			}
 
-			foreach (var player in Main.ActivePlayers) {
-				// Player has to have either an ExampleItem or an ExampleBlock in order for the NPC to spawn
-				if (player.inventory.Any(item => item.type == ModContent.ItemType<GeneticSampleItem>())) {
-					return true;
+            var samplesList = ModContent.GetContent<GeneticSampleItem>();
+            foreach (var player in Main.ActivePlayers)
+			{
+				foreach (GeneticSampleItem sampleType in samplesList)
+				{
+					if (player.HasItem(sampleType.Type))
+					{
+                        return true;
+					}
 				}
 			}
-
 			return false;
 		}
 
@@ -349,12 +337,12 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 					}
 					if (lowLevel)
 					{
-						CombatText.NewText(player.Hitbox, errorColor, missingSamples + Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.LowLevel"));
+						CombatText.NewText(player.Hitbox, errorColor, Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.LowLevel"));
 						chatIndex = 3;
 						Main.npcChatText = GetChat();
 						return;
 					}
-					if (missingSamples != 100 && missingSamples != 0)
+					if (missingSamples != 9999 && missingSamples != 0)
 					{
 						CombatText.NewText(player.Hitbox, errorColor, missingSamples + Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.MissingSamples"));
 						chatIndex = 0;
@@ -388,18 +376,24 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 
             var entitySource = NPC.GetSource_GiftOrReward();
 
-            if (Main.netMode != NetmodeID.MultiplayerClient)
-            {
-                int item = Item.NewItem(entitySource, (int)player.position.X, (int)player.position.Y, player.width, player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
-                CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-                pokeItem.SetPokemonData(sampleItem.pokemonName, Shiny: shiny, BallType: ball.Name, lvl, IVs, nature);
-                pokeItem.currentHP = pokeItem.GetPokemonStats()[0];
+			if (Main.netMode != NetmodeID.MultiplayerClient)
+			{
+				int item = Item.NewItem(entitySource, (int)player.position.X, (int)player.position.Y, player.width, player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
+				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
+				pokeItem.SetPokemonData(sampleItem.pokemonName, Shiny: shiny, BallType: ball.Name, lvl, IVs, nature);
+				pokeItem.currentHP = pokeItem.GetPokemonStats()[0];
 
-                if (Main.netMode != NetmodeID.SinglePlayer)
-                {
-                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item, 1f);
-                }
-            }
+				// Manually Adds the pokemon to the Bestiary when obtained
+				string persistentId = "Pokemod/" + sampleItem.pokemonName + "CritterNPC" + (shiny ? "Shiny" : "");
+				NPCKillsTracker tracker = Main.BestiaryTracker.Kills;
+				int currentCount = tracker.GetKillCount(persistentId);
+				tracker.SetKillCountDirectly(persistentId, currentCount + 1);
+
+				if (Main.netMode != NetmodeID.SinglePlayer)
+				{
+					NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item, 1f);
+				}
+			}
 			for (int i = 0; i < sampleItem.sampleQuantity; i++)
 			{
 				int sampleIndex = player.FindItem(sampleItem.Type);
