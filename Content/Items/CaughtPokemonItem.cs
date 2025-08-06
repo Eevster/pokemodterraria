@@ -16,6 +16,7 @@ using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -543,6 +544,9 @@ namespace Pokemod.Content.Items
 					Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 					proj.Kill();
 					PokemonName = newPokemonName;
+
+					UnlockBestiary(PokemonName);
+
 					GetPokemonMoves();
 					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 					if (player != null)
@@ -555,6 +559,16 @@ namespace Pokemod.Content.Items
 				}
 			}
 		}
+
+		private void UnlockBestiary(string pokemonName)
+		{
+            // Manually Adds the pokemon to the Bestiary when obtained
+            string persistentId = "Pokemod/" + pokemonName + "CritterNPC" + (Shiny ? "Shiny" : "");
+            NPCKillsTracker tracker = Main.BestiaryTracker.Kills;
+            int currentCount = tracker.GetKillCount(persistentId);
+            tracker.SetKillCountDirectly(persistentId, currentCount + 1);
+        }
+
 		private bool GetEvolutionRestricted(Player player = null){
 			if(player != null){
 				if(player.GetModPlayer<PokemonPlayer>().HasEverstone>0){
