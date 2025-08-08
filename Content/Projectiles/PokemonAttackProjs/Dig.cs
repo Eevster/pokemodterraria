@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
 using Terraria;
 using Terraria.Audio;
@@ -71,7 +72,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     {
                         if (pokemonOwner.attackProjs[i] == null)
                         {
-							Vector2 targetPosition = FindFloor(targetCenter, out bool floorFound);
+                            if (PokemonData.pokemonAttacks.TryGetValue("Dig", out PokemonAttackInfo attackInfo))
+                            {
+                                if (distanceFromTarget > attackInfo.distanceToAttack)
+                                {
+                                    targetCenter = targetCenter.SafeNormalize(Vector2.Zero) * attackInfo.distanceToAttack;
+                                }
+                            }
+                            else targetCenter = pokemon.position;
+                                Vector2 targetPosition = FindFloor(targetCenter, out bool floorFound);
                             if (!floorFound)
 							{
 								targetPosition = pokemon.Bottom;

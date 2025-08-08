@@ -9,6 +9,9 @@ using Pokemod.Common.UI.MoveLearnUI;
 using System.Collections.Generic;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
+using rail;
+using System.Diagnostics;
+using Terraria.Audio;
 
 namespace Pokemod.Content.Items.Consumables.TMs
 {
@@ -31,12 +34,47 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			Item.maxStack = Item.CommonMaxStack;
 			Item.value = Item.buyPrice(gold: 1);
 
-			Item.consumable = true;
+			Item.consumable = false;
 		}
 
 		public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
 		{
-			if (PokemonData.pokemonInfo[item.PokemonName].HasType(moveType) || moveType == TypeIndex.Normal)
+			return UseTM(item, player);
+		}
+
+		public override bool OnItemUse(Projectile proj)
+		{
+			bool used = false;
+			Player player = Main.player[Main.myPlayer];
+			if (player != null)
+			{
+				CaughtPokemonItem item = null;
+
+				foreach (Item invItem in player.inventory)
+				{
+					if (invItem.ModItem is CaughtPokemonItem)
+					{
+						CaughtPokemonItem invPokemon = (CaughtPokemonItem)invItem?.ModItem;
+						if (invPokemon.proj != null)
+						{
+							if (invPokemon.proj == proj)
+							{
+								item = invPokemon;
+							}
+						}
+					}
+				}
+				if (item != null) used = UseTM(item, player);
+			}
+            Item.consumable = used;
+            return used;
+		}
+
+		public bool UseTM(CaughtPokemonItem item, Player player)
+		{
+			if (!MoveLearnUIState.hidden) return false;
+
+            if (PokemonData.pokemonInfo[item.PokemonName].HasType(moveType) || moveType == TypeIndex.Normal)
 			{
 				List<string> newMoves = moves.ToList();
 				foreach (string move in item.moves)
@@ -46,6 +84,8 @@ namespace Pokemod.Content.Items.Consumables.TMs
 
 				if (newMoves.Count > 0)
 				{
+					SoundEngine.PlaySound(SoundID.Grab);
+                    Item.consumable = true;
 					item.LearnMove(newMoves[Main.rand.Next(newMoves.Count)]);
 					ReduceStack(player, Item.type);
 					return true;

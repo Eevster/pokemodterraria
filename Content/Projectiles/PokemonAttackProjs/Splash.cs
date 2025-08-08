@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Pokemod.Common.GlobalNPCs;
+using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
 using Terraria;
 using Terraria.Audio;
@@ -98,7 +99,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     NPC npc = Main.npc[i];
                     if (npc != null)
                     {
-                        if (npc.CanBeChasedBy())
+                        if (npc.CanBeChasedBy() || npc.CountsAsACritter || npc.ModNPC is PokemonWildNPC)
                         {
                             if (Projectile.Hitbox.Intersects(npc.getRect()))
                             {

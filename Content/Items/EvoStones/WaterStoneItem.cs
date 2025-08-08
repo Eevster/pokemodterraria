@@ -24,13 +24,18 @@ namespace Pokemod.Content.Items.EvoStones
 
         public override bool OnItemUse(Projectile proj){
 			PokemonPetProjectile pokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-			if(pokemonProj.UseEvoItem(GetType().Name)){
-				Item.consumable = true;
-				return true;
-			}
-			Item.consumable = false;
+            if (!pokemonProj.isEvolving)
+            {
+                if (pokemonProj.UseEvoItem(GetType().Name))
+                {
+                    Item.consumable = true;
+                    return true;
+                }
+            }
+            Item.consumable = false;
 			return false;
 		}
+
 		public override void AddRecipes() {
 			CreateRecipe(1)
 				.AddIngredient(ItemID.PlatinumOre, 60)

@@ -678,6 +678,10 @@ namespace Pokemod.Content.Pets
 			{
 				isFlying = true;
 			}
+			else if(moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon <= 0)
+			{
+				isFlying = false;
+			}
 
 			if (canSwim)
 			{

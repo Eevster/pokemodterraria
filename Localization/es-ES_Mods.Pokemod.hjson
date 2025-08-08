@@ -1655,7 +1655,6 @@ Items: {
 		// Tooltip: ""
 	}
 
-<<<<<<< HEAD
 	BashfulMint: {
 		// DisplayName: Bashful Mint
 		// Tooltip: ""
@@ -1779,7 +1778,8 @@ Items: {
 	TimidMint: {
 		// DisplayName: Timid Mint
 		// Tooltip: ""
-=======
+	}
+
 	SealedFossilItem: {
 		// Tooltip: ""
 		// DisplayName: Sealed Fossil
@@ -1813,7 +1813,6 @@ Items: {
 	EldritchHelixItem: {
 		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
 		// DisplayName: Eldritch Helix
->>>>>>> c213b3250d013c557d9674b65696a2b16f1b408e
 	}
 }
 
