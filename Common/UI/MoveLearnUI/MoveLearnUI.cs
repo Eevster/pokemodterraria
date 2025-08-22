@@ -141,6 +141,7 @@ namespace Pokemod.Common.UI.MoveLearnUI
 
 		private void ConfirmButtonClicked(UIMouseEvent evt, UIElement listeningElement)
 		{
+			if (selectedMove == -1) return;
 
 			SoundEngine.PlaySound(SoundID.MenuOpen);
 

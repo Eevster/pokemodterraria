@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-    public class Cut : PokemonAttack
+    public class Slash : PokemonAttack
 	{
         private bool mirrored;
 
@@ -46,7 +46,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(pokemon.owner == Main.myPlayer){
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Cut>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Slash>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
 						pokemon.velocity = 30*Vector2.Normalize(targetCenter-pokemon.Center);
 						SoundEngine.PlaySound(SoundID.Item1, pokemon.position);
 						pokemonOwner.timer = pokemonOwner.attackDuration;
@@ -60,7 +60,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void UpdateAttackProjs(Projectile pokemon, int i, ref float maxFallSpeed)
         {
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-            Cut proj = (Cut)pokemonOwner.attackProjs[i].ModProjectile;
+            Slash proj = (Slash)pokemonOwner.attackProjs[i].ModProjectile;
 
             if (pokemonOwner.attackProjs[i].ai[0] == 0)
             {
@@ -84,7 +84,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void UpdateNoAttackProjs(Projectile pokemon, int i)
         {
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-            Cut proj = (Cut)pokemonOwner.attackProjs[i].ModProjectile;
+            Slash proj = (Slash)pokemonOwner.attackProjs[i].ModProjectile;
 
             if (pokemonOwner.attackProjs[i].ai[0] == 0)
             {

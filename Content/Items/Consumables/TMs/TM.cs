@@ -179,7 +179,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 	public class TMNormal : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Normal;
-		public override string[] moves => ["Swift","HyperBeam","DoubleEdge","Cut"];
+		public override string[] moves => ["Swift","HyperBeam","DoubleEdge","Slash"];
 	}
 
 	public class TMPoison : TechnicalMachine
