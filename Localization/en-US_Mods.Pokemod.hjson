@@ -452,6 +452,7 @@ Projectiles: {
 	DragonBreath.DisplayName: Dragon Breath
 	Crunch.DisplayName: Crunch
 	AncientPower.DisplayName: Ancient Power
+	Slash.DisplayName: Slash
 }
 
 Items: {
