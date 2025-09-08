@@ -668,7 +668,9 @@ namespace Pokemod.Content.Pets
 			// Default movement parameters (here for attacking)
 			float speed = moveSpeed1;
 			float inertia = 20f;
-			float speedMultiplier = 1f;
+            float speedMultiplier = 0.5f + (finalStats[5] / 250f);
+            float cooldownMult = Math.Clamp(450f - finalStats[5], 50, 450) / 250f;
+			int targetDelay = (int)(Math.Clamp(200f - finalStats[5], 0, 200) / 4f);
 
 			float maxFallSpeed = 10f;
 
@@ -676,6 +678,10 @@ namespace Pokemod.Content.Pets
 
 			if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
 			{
+				if (moveStyle != (int)MovementStyle.Fly)
+				{
+					speedMultiplier = Math.Min(0.65f, speedMultiplier);
+                }
 				isFlying = true;
 			}
 			else if(moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon <= 0)
@@ -690,12 +696,20 @@ namespace Pokemod.Content.Pets
 			else
 			{
 				isSwimming = false;
+				if(Projectile.wet || Projectile.lavaWet || Projectile.honeyWet || Projectile.shimmerWet)
+				{
+					speedMultiplier = Math.Min(0.65f, speedMultiplier);
+				}
 			}
 
-			if (isSwimming) speedMultiplier = 1.5f;
+			if (isSwimming) speedMultiplier *= 1.5f;
 
 			if (foundTarget)
 			{
+				if (timer <= -300)
+				{
+					timer = targetDelay;
+				}
 				if ((currentStatus != (int)ProjStatus.Attack && !canMoveWhileAttack) || canMoveWhileAttack)
 				{
 					if (distanceFromTarget > moveDistance1)
@@ -824,7 +838,7 @@ namespace Pokemod.Content.Pets
 							currentStatus = (int)ProjStatus.Idle;
 						}
 						canAttack = true;
-						timer = attackCooldown;
+						timer = (int)(attackCooldown * cooldownMult);
 					}
 				}
 			}
@@ -839,7 +853,11 @@ namespace Pokemod.Content.Pets
 							currentStatus = (int)ProjStatus.Idle;
 						}
 						canAttack = true;
-						timer = attackCooldown;
+						timer = (int)(attackCooldown * cooldownMult);
+					}
+					if (timer > -300)
+					{
+						timer--;
 					}
 				}
 				if (Projectile.owner == Main.myPlayer)
@@ -1023,7 +1041,8 @@ namespace Pokemod.Content.Pets
 			// Default movement parameters (here for attacking)
 			float speed = moveSpeed1;
 			float inertia = 20f;
-			float speedMultiplier = 1f;
+			float speedMultiplier = 0.5f + (finalStats[5] / 250f);
+            float cooldownMult = Math.Clamp(225f - finalStats[5], 25, 225) / 125f;
 
 			float maxFallSpeed = 10f;
 
@@ -1048,7 +1067,7 @@ namespace Pokemod.Content.Pets
 				isSwimming = false;
 			}
 
-			if (isSwimming) speedMultiplier = 1.5f;
+			if (isSwimming) speedMultiplier *= 1.5f;
 
 
 			if (timer <= 0)
@@ -1060,7 +1079,7 @@ namespace Pokemod.Content.Pets
 						currentStatus = (int)ProjStatus.Idle;
 					}
 					canAttack = true;
-					timer = attackCooldown;
+					timer = (int)(attackCooldown * cooldownMult);
 				}
 			}
 
@@ -1139,7 +1158,7 @@ namespace Pokemod.Content.Pets
 						currentStatus = (int)ProjStatus.Idle;
 					}
 					canAttack = true;
-					timer = attackCooldown;
+					timer = (int)(attackCooldown * cooldownMult);
 				}
 			}
 
@@ -1613,9 +1632,6 @@ namespace Pokemod.Content.Pets
 						}
 					}
 				}
-
-				Main.spriteBatch.End();
-				Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
 			}
 			else
 			{
@@ -1632,7 +1648,9 @@ namespace Pokemod.Content.Pets
 
         public override bool PreDrawExtras()
         {
-			if (isOut) {
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            if (isOut) {
 				if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0)
 				{
 					Asset<Texture2D> balloonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/AirBalloon_Texture");

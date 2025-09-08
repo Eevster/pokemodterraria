@@ -1783,7 +1783,7 @@ Items: {
 
 	SealedFossilItem: {
 		// Tooltip: ""
-		// DisplayName: Sealed Fossil
+		// DisplayName: Sealed Stone
 	}
 
 	PrimordialFossilItem: {
@@ -1793,7 +1793,7 @@ Items: {
 
 	IgneousFossilItem: {
 		// Tooltip: ""
-		// DisplayName: Igneous Fossil
+		// DisplayName: Igneous Geode
 	}
 
 	FrozenFossilItem: {
