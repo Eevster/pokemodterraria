@@ -65,10 +65,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
             
 			if(pokemon.owner == Main.myPlayer){
-				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer%10 == 0){
+				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer%9 == 0){
 					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 						if(pokemonOwner.attackProjs[i] == null){
-							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 22f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<AirSlash>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 22f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<AirSlash>(), (int)(pokemonOwner.GetPokemonAttackDamage(GetType().Name) / 3f), 2f, pokemon.owner)];
 							SoundEngine.PlaySound(SoundID.Item34, pokemon.position);
 							break;
 						}

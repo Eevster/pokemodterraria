@@ -14,6 +14,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.GameContent.Creative;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
@@ -250,7 +251,7 @@ namespace Pokemod.Content.Pets
 
 		public virtual int GetPokemonDamage(int power = 50, bool special = false, float multiplier = 1f){
 			int atkStat = special?finalStats[3]:finalStats[1];
-			int pokemonDamage = (int)((2+(int)((2+2f*pokemonLvl/5)*power*atkStat/(50f*10f)))*multiplier);
+			int pokemonDamage = (int)((2+(int)((2+2f*pokemonLvl/5)*power*atkStat/(50f*14f)))*multiplier);
 			pokemonDamage = (int)(pokemonDamage*Main.player[Projectile.owner].GetTotalDamage<PokemonDamageClass>().ApplyTo(1f));
 
 			return pokemonDamage;
@@ -761,6 +762,24 @@ namespace Pokemod.Content.Pets
 								isFlying = false;
 							}
 						}
+
+						if(distanceFromTarget < distanceToAttack * 0.5f)
+						{
+                            speed = moveSpeed2;
+                            Vector2 direction = targetCenter - Projectile.Center;
+                            direction.Normalize();
+                            direction *= speedMultiplier * speed;
+							direction *= -1;
+
+                            if (isFlying || isSwimming)
+                            {
+                                Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
+                            }
+                            else
+                            {
+                                Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
+                            }
+                        }
 					}
 				}
 				else
@@ -846,7 +865,11 @@ namespace Pokemod.Content.Pets
 			{
 				if (timer <= 0)
 				{
-					if (!canAttack)
+                    if (timer > -300)
+                    {
+                        timer--;
+                    }
+                    if (!canAttack)
 					{
 						if (currentStatus == (int)ProjStatus.Attack)
 						{
@@ -854,10 +877,6 @@ namespace Pokemod.Content.Pets
 						}
 						canAttack = true;
 						timer = (int)(attackCooldown * cooldownMult);
-					}
-					if (timer > -300)
-					{
-						timer--;
 					}
 				}
 				if (Projectile.owner == Main.myPlayer)
@@ -1518,15 +1537,26 @@ namespace Pokemod.Content.Pets
             if (pokemonShader != null) pokemonShader = null;
         }
 
-		public int calIncomingDmg(int npcdmg){
-            //calling Hp
-            if(currentHp > finalStats[0]) { currentHp = finalStats[0]; }
-            //cal damage versus defense for pokemon
+		public int CalcIncomingDmg(int npcdmg, bool physical, bool enemyPokemon = false)
+		{
+			//calling Hp
+			if (currentHp > finalStats[0]) { currentHp = finalStats[0]; }
+			//cal damage versus defense for pokemon
 			//int dmg = npcdmg - finalStats[2]/2;
-			int dmg = 2 + (int)(Math.Clamp(npcdmg-2f,0f,9999f)/(finalStats[2]+2));
+			int dmg = 0;
+			int defenceValue = physical ? finalStats[2] : finalStats[4];
 
-            manualDmg(dmg);
-            
+
+            if (!enemyPokemon) //apply a modifier to scale the pokemon's defence against vanilla enemy damage (also the minimum damage from mobs is 1 instead of 2 from enemy pokemon).
+			{
+				float defenceModVsTerrariaNPC = 0.2f * (1.4f * (float)Math.Pow(0.95f, defenceValue * 0.9f) + 0.3f);
+				dmg = 1 + (int)(Math.Clamp(npcdmg - 1, 0f, 9999f) / (defenceValue * defenceModVsTerrariaNPC));
+            }
+			else //scale the pokemon's defence normally against other pokemon (multiplied by 14 to reverse the assumed 14 defence of vanilla enemies)(Multiplied by 5 to account for the global health scaling)(divided by 3 as most pokemon attacks hit 3 times).
+			{
+				dmg = 2 + (int)(Math.Clamp((npcdmg - 2f) * 5f * 14f / 3f, 0f, 9999f) / (defenceValue + 2));
+            }
+			manualDmg(dmg);
             return dmg;
         }
 
@@ -1563,13 +1593,15 @@ namespace Pokemod.Content.Pets
                     if (Projectile.Hitbox.Intersects(npc.getRect()) && !immune){
                         int npcdmg = npc.defDamage;
                         if(currentHp != 0){
-							calIncomingDmg(npcdmg);
+							CalcIncomingDmg(npcdmg, true);
 							Projectile.velocity += 4f*(Projectile.Center - npc.Center).SafeNormalize(Vector2.Zero);
 						}
                         immune = true;
                     }
                 }
             }
+
+			// Projectile damage which goes against special defence (or based on isSpecial for pokemon attacks). 
 			if (Main.myPlayer == Projectile.owner)
 			{
 				Projectile bullet = null;
@@ -1582,9 +1614,32 @@ namespace Pokemod.Content.Pets
 						if (Projectile.Hitbox.Intersects(bullet.getRect()) && !immune)
 						{
 							int bulletdmg = bullet.damage;
-							if (currentHp != 0)
+							if (bullet.owner == 0) //if the bullet comes from an npc, it's damage needs to be manually scaled for the world difficulty. *Currently doesn't scale correctly in Journey mode* ----------------------------
+                            {
+								switch (Main.GameMode)
+								{
+									case 0:
+										bulletdmg *= 2;
+                                        break;
+									case 1:
+                                        bulletdmg *= 4;
+                                        break;
+									case 2:
+                                        bulletdmg *= 6;
+                                        break;
+								}
+							}
+                            if (currentHp != 0)
 							{
-								calIncomingDmg(bulletdmg);
+								bool enemyPokemon = false;
+								bool physical = false;
+								if (bullet.ModProjectile is PokemonAttack) 
+								{
+									enemyPokemon = true; 
+									var enemyPokemonAttack = (PokemonAttack)bullet.ModProjectile;
+									physical = !enemyPokemonAttack.isSpecial;
+								}
+								CalcIncomingDmg(bulletdmg, physical, enemyPokemon);
 								Projectile.velocity += bullet.knockBack * (Projectile.Center - bullet.Center).SafeNormalize(Vector2.Zero);
 							}
 							immune = true;

@@ -19,7 +19,7 @@ namespace Pokemod.Content.Pets.TentacoolPet
 		public override int[] jumpStartEnd => [0,3];
 		public override int[] fallStartEnd => [0,3];
 
-		public override string[] evolutions => ["Tentaruel"];
+		public override string[] evolutions => ["Tentacruel"];
 		public override int levelToEvolve => 30;
 		public override int levelEvolutionsNumber => 1;
 	}

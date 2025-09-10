@@ -892,7 +892,7 @@ Items: {
 		Tooltip:
 			'''
 			{$Mods.Pokemod.PokemonInfo.ItemUse}
-			Cuando es usado en un pokemon recupera 20 de HP
+			Cuando es usado en un pokemon recupera 100 de HP
 			'''
 	}
 
@@ -915,7 +915,7 @@ Items: {
 		Tooltip:
 			'''
 			{$Mods.Pokemod.PokemonInfo.ItemUse}
-			Cuando es usado en un pokemon recupera 120 de HP
+			Cuando es usado en un pokemon recupera 600 de HP
 			'''
 	}
 
@@ -933,7 +933,7 @@ Items: {
 		Tooltip:
 			'''
 			{$Mods.Pokemod.PokemonInfo.ItemUse}
-			Cuando es usado en un pokemon recupera 10 de HP
+			Cuando es usado en un pokemon recupera 50 de HP
 			'''
 	}
 
@@ -942,7 +942,7 @@ Items: {
 		Tooltip:
 			'''
 			{$Mods.Pokemod.PokemonInfo.ItemUse}
-			Cuando es usado en un pokemon recupera 60 de HP
+			Cuando es usado en un pokemon recupera 300 de HP
 			'''
 	}
 
@@ -1178,7 +1178,7 @@ Items: {
 
 	Leftovers: {
 		DisplayName: Restos
-		Tooltip: Recupera 3 hp a tus pokemon activos cada 10 segundos
+		Tooltip: Recupera 15 hp a tus pokemon activos cada 10 segundos
 	}
 
 	LuckyEgg: {

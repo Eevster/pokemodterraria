@@ -83,7 +83,7 @@ namespace Pokemod.Content.NPCs
         {
             int done;
 
-            if(index==0) done = ((2 * baseStat + IV + (EV/4)) * Level/100) + Level + 10;
+            if(index==0) done = (((2 * baseStat + IV + (EV/4)) * Level/100) + Level + 10) * 5;
             else done = (int)(((2 * (baseStat + IV + (EV / 4)) * Level / 100) + 5)*GetNatureMult(index, nature));
 
             return done;
@@ -455,7 +455,7 @@ namespace Pokemod.Content.NPCs
         ];
 
         public static Dictionary<string, PokemonAttackInfo> pokemonAttacks = new(){
-            {"AirSlash", new PokemonAttackInfo(75,80,60,800f,true,true,(int)TypeIndex.Flying, true)},
+            {"AirSlash", new PokemonAttackInfo(75,90,60,800f,true,true,(int)TypeIndex.Flying, true)},
             {"AncientPower", new PokemonAttackInfo(60,0,120,800f,true,false,(int)TypeIndex.Rock, true)},
             {"AquaRing", new PokemonAttackInfo(0,90,60,100f,true,false,(int)TypeIndex.Water, true)},
             {"Bubble", new PokemonAttackInfo(20,10,60,600f,false,false,(int)TypeIndex.Water, true)},
@@ -475,9 +475,9 @@ namespace Pokemod.Content.NPCs
             {"Explosion", new PokemonAttackInfo(250,32,60,800f,false,false,(int)TypeIndex.Normal)},
             {"FireBlast", new PokemonAttackInfo(110,40,60,800f,true,true,(int)TypeIndex.Fire, true)},
             {"Flamethrower", new PokemonAttackInfo(90,40,80,300f,true,false,(int)TypeIndex.Fire, true)},
-            {"FlameWheel", new PokemonAttackInfo(60,60,60,800f,false,false,(int)TypeIndex.Fire)},
+            {"FlameWheel", new PokemonAttackInfo(60,60,60,500f,false,false,(int)TypeIndex.Fire)},
             {"FlashCannon", new PokemonAttackInfo(80,40,60,800f,false,true,(int)TypeIndex.Steel, true)},
-            {"FocusPunch", new PokemonAttackInfo(150,90,60,800f,false,false,(int)TypeIndex.Fighting)},
+            {"FocusPunch", new PokemonAttackInfo(150,90,60,600f,false,false,(int)TypeIndex.Fighting)},
             {"FuryCutter", new PokemonAttackInfo(40,42,60,200f,false,false,(int)TypeIndex.Bug)},
             {"GigaDrain", new PokemonAttackInfo(75,56,60,800f,false,true,(int)TypeIndex.Grass, true)},
             {"Gust", new PokemonAttackInfo(40,30,60,800f,false,false,(int)TypeIndex.Flying, true)},
@@ -489,7 +489,7 @@ namespace Pokemod.Content.NPCs
             {"HyperFang", new PokemonAttackInfo(80,42,60,400f,false,false,(int)TypeIndex.Normal)},
             {"IceFang", new PokemonAttackInfo(65,30,60,200f,false,false,(int)TypeIndex.Ice)},
             {"LavaPlume", new PokemonAttackInfo(80,20,60,800f,true,true,(int)TypeIndex.Fire, true)},
-            {"LeafBlade", new PokemonAttackInfo(90,40,60,800f,false,false,(int)TypeIndex.Grass)},
+            {"LeafBlade", new PokemonAttackInfo(90,40,60,500f,false,false,(int)TypeIndex.Grass)},
             {"LeafStorm", new PokemonAttackInfo(130,40,60,800f,false,false,(int)TypeIndex.Grass, true)},
             {"MagicalLeaf", new PokemonAttackInfo(60,60,60,500f,false,true,(int)TypeIndex.Grass, true)},
             {"MegaDrain", new PokemonAttackInfo(40,56,60,600f,false,true,(int)TypeIndex.Grass, true)},
@@ -502,19 +502,19 @@ namespace Pokemod.Content.NPCs
             {"Psybeam", new PokemonAttackInfo(65,60,40,800f,false,true,(int)TypeIndex.Psychic, true)},
             {"Psychic", new PokemonAttackInfo(90,45,60,800f,false,true,(int)TypeIndex.Psychic, true)},
             {"PsychoCut", new PokemonAttackInfo(70,50,60,500f,true,true,(int)TypeIndex.Psychic)},
-            {"QuickAttack", new PokemonAttackInfo(40,40,60,800f,false,false,(int)TypeIndex.Normal)},
+            {"QuickAttack", new PokemonAttackInfo(40,40,60,400f,false,false,(int)TypeIndex.Normal)},
             {"RazorLeaf", new PokemonAttackInfo(55,45,60,800f,false,false,(int)TypeIndex.Grass)},
-            {"RockThrow", new PokemonAttackInfo(50,45,60,800f,false,false,(int)TypeIndex.Rock)},
+            {"RockThrow", new PokemonAttackInfo(50,45,60,700f,false,false,(int)TypeIndex.Rock)},
             {"SelfDestruct", new PokemonAttackInfo(200,32,60,100f,false,false,(int)TypeIndex.Normal)},
             {"ShadowBall", new PokemonAttackInfo(80,30,60,800f,false,false,(int)TypeIndex.Ghost, true)},
-            {"Slash", new PokemonAttackInfo(70,20,60,800f,false,false,(int)TypeIndex.Normal)},
+            {"Slash", new PokemonAttackInfo(70,20,60,400f,false,false,(int)TypeIndex.Normal)},
             {"SludgeBomb", new PokemonAttackInfo(90,45,60,800f,false,false,(int)TypeIndex.Poison, true)},
-            {"Smokescreen", new PokemonAttackInfo(0,60,60,800f,true,false,(int)TypeIndex.Normal, true)},
+            {"Smokescreen", new PokemonAttackInfo(0,60,60,600f,true,false,(int)TypeIndex.Normal, true)},
             {"SolarBeam", new PokemonAttackInfo(120,60,120,800f,false,true,(int)TypeIndex.Grass, true)},
-            {"Splash", new PokemonAttackInfo(0,30,60,800f,false,false,(int)TypeIndex.Water)},
+            {"Splash", new PokemonAttackInfo(0,30,60,600f,false,false,(int)TypeIndex.Water)},
             {"StringShot", new PokemonAttackInfo(0,60,60,800f,false,false,(int)TypeIndex.Bug)},
             {"Swift", new PokemonAttackInfo(60,0,120,500f,true,true,(int)TypeIndex.Normal, true)},
-            {"Tackle", new PokemonAttackInfo(40,20,60,400f,false,false,(int)TypeIndex.Normal)},
+            {"Tackle", new PokemonAttackInfo(40,20,60,300f,false,false,(int)TypeIndex.Normal)},
             {"Teleport", new PokemonAttackInfo(0,20,60,200f,false,false,(int)TypeIndex.Psychic)},
             {"Thunder", new PokemonAttackInfo(110,30,60,800f,false,false,(int)TypeIndex.Electric, true)},
             {"Thunderbolt", new PokemonAttackInfo(90,30,60,800f,true,false,(int)TypeIndex.Electric, true)},
@@ -524,7 +524,7 @@ namespace Pokemod.Content.NPCs
             {"Waterfall", new PokemonAttackInfo(80,42,60,600f,false,true,(int)TypeIndex.Water)},
             {"WaterGun", new PokemonAttackInfo(40,30,60,600f,false,false,(int)TypeIndex.Water, true)},
             {"WaterPulse", new PokemonAttackInfo(60,40,60,800f,false,true,(int)TypeIndex.Water, true)},
-            {"WingAttack", new PokemonAttackInfo(60,40,60,800f,false,false,(int)TypeIndex.Flying)},
+            {"WingAttack", new PokemonAttackInfo(60,40,60,600f,false,false,(int)TypeIndex.Flying)},
         };
     }
 
