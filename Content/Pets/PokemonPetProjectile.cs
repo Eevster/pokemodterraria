@@ -578,7 +578,10 @@ namespace Pokemod.Content.Pets
 
 			PokemonPlayer trainer = owner.GetModPlayer<PokemonPlayer>();
 
-			if(trainer.attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+			Vector2 playerPosition = trainer.Player.Center;
+			float distanceFromPlayer = enemySearchDistance;
+
+            if (trainer.attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				if (!foundTarget) {
 					// This code is required either way, used for finding a target
 					if(Main.netMode != NetmodeID.SinglePlayer){
@@ -595,10 +598,14 @@ namespace Pokemod.Content.Pets
 										// Check if it is within the radius
 										if (sqrDistanceToTarget < sqrMaxDetectDistance && (lineOfSight || closeThroughWall)) {
 											if(target.hostile){
-												sqrMaxDetectDistance = sqrDistanceToTarget;
-												distanceFromTarget = Vector2.Distance(target.Center, Projectile.Center);
-												targetCenter = target.Center;
-												foundTarget = true;
+												if (Vector2.Distance(target.Center, playerPosition) < distanceFromPlayer)
+												{
+													distanceFromPlayer = Vector2.Distance(target.Center, playerPosition);
+                                                    sqrMaxDetectDistance = sqrDistanceToTarget;
+													distanceFromTarget = Vector2.Distance(target.Center, Projectile.Center);
+													targetCenter = target.Center;
+													foundTarget = true;
+												}
 											}
 										}
 									}
@@ -626,9 +633,13 @@ namespace Pokemod.Content.Pets
 									foundTarget = true;
 									break;
 								}
-								distanceFromTarget = between;
-								targetCenter = npc.Center;
-								foundTarget = true;
+								if (Vector2.Distance(npc.Center, playerPosition) < distanceFromPlayer)
+								{
+									distanceFromPlayer = Vector2.Distance(npc.Center, playerPosition);
+									distanceFromTarget = between;
+									targetCenter = npc.Center;
+									foundTarget = true;
+								}
 							}
 						}
 					}
@@ -713,75 +724,54 @@ namespace Pokemod.Content.Pets
 				}
 				if ((currentStatus != (int)ProjStatus.Attack && !canMoveWhileAttack) || canMoveWhileAttack)
 				{
-					if (distanceFromTarget > moveDistance1)
+					float directionMod = 0f;
+					if (distanceFromTarget > distanceToAttack)
 					{
-						Vector2 direction = targetCenter - Projectile.Center;
-						direction.Normalize();
-						direction *= speedMultiplier * speed;
-
-						if (isFlying || isSwimming)
-						{
-							Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
-						}
-						else
-						{
-							Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
-
-							if ((targetCenter - Projectile.Center).Y < 0 && -(targetCenter - Projectile.Center).Y > Math.Abs((targetCenter - Projectile.Center).X))
-							{
-								if (Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
-								{
-									currentStatus = (int)ProjStatus.Jump;
-									Projectile.velocity.Y -= (int)Math.Sqrt(2 * 0.3f * Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y), 0, 160));
-								}
-							}
-						}
+						directionMod = 1f;
 					}
 					else
 					{
-						if (distanceFromTarget > moveDistance2)
+						if (distanceFromTarget > distanceToAttack * 0.75f)
 						{
-							Vector2 direction = targetCenter - Projectile.Center;
-							direction.Normalize();
-							direction *= speedMultiplier * speed / 2;
-
-							if (isFlying || isSwimming)
-							{
-								Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
-							}
-							else
-							{
-								Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
-							}
+							directionMod = 0.5f;
 						}
-						else
+						else if (distanceFromTarget < distanceToAttack * 0.5f)
 						{
-							Projectile.velocity.X *= 0.95f;
-							if (distanceFromTarget < 100f && moveStyle == (int)MovementStyle.Hybrid)
-							{
-								isFlying = false;
-							}
+							speed = moveSpeed2;
+							directionMod = -1f;
 						}
+					}
+                    Vector2 direction = targetCenter - Projectile.Center;
+                    direction.Normalize();
+                    direction *= speedMultiplier * speed * directionMod;
 
-						if(distanceFromTarget < distanceToAttack * 0.5f)
-						{
-                            speed = moveSpeed2;
-                            Vector2 direction = targetCenter - Projectile.Center;
-                            direction.Normalize();
-                            direction *= speedMultiplier * speed;
-							direction *= -1;
+                    if (isFlying || isSwimming)
+                    {
+                        Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
+                    }
+                    else
+                    {
+                        Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
 
-                            if (isFlying || isSwimming)
+                        if ((targetCenter - Projectile.Center).Y * directionMod < 0 && -(targetCenter - Projectile.Center).Y * directionMod > Math.Abs((targetCenter - Projectile.Center).X))
+                        {
+                            if (Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
                             {
-                                Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
-                            }
-                            else
-                            {
-                                Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
+                                currentStatus = (int)ProjStatus.Jump;
+                                Projectile.velocity.Y -= (int)Math.Sqrt(2 * 0.3f * Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y), 0, 160));
                             }
                         }
-					}
-				}
+                    }
+
+					if (directionMod == 0f)
+					{
+						Projectile.velocity.X *= 0.95f;
+                        if (distanceFromTarget < 100f && moveStyle == (int)MovementStyle.Hybrid)
+                        {
+                            isFlying = false;
+                        }
+                    }
+                }
 				else
 				{
 					Projectile.velocity.X *= 0.9f;

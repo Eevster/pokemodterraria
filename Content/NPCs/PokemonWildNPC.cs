@@ -207,6 +207,12 @@ namespace Pokemod.Content.NPCs
 			}
 		}
 
+        public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
+        {
+            base.ModifyIncomingHit(ref modifiers);
+			modifiers.FinalDamage *= 5;
+        }
+
 		public float GetSpawnChance(NPCSpawnInfo spawnInfo, float chance){
 			if(shiny){
 				chance *= 0.0024f;

@@ -101,7 +101,7 @@ namespace Pokemod.Content.Projectiles
 			if (target.ModNPC is PokemonWildNPC wildNPC)
 			{
 				modifiers.DefenseEffectiveness *= 0;
-				modifiers.FinalDamage *=  14f * 5f / ((!isSpecial ? wildNPC.finalStats[2] : wildNPC.finalStats[4]) * 3f);
+				modifiers.FinalDamage *=  14f / ((!isSpecial ? wildNPC.finalStats[2] : wildNPC.finalStats[4]) * 3f);
 				//modifiers.FinalDamage /= (!isSpecial ? wildNPC.NPC.GetGlobalNPC<PokemonNPCData>().GetWildCalcStat(2) : wildNPC.NPC.GetGlobalNPC<PokemonNPCData>().GetWildCalcStat(4)) / 10f;
 			}
 
