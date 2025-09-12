@@ -3898,10 +3898,10 @@ Tiles: {
 		MapEntry1: Mods.Pokemod.Tiles.PCChest.MapEntry1
 	}
 
-	BlueHealerTile.MapEntry: Blue Healer Tile
-	GreenHealerTile.MapEntry: Green Healer Tile
-	OrangeHealerTile.MapEntry: Orange Healer Tile
-	PinkHealerTile.MapEntry: Pink Healer Tile
+	BlueHealerTile.MapEntry: Poke Healer
+	GreenHealerTile.MapEntry: Poke Healer
+	OrangeHealerTile.MapEntry: Poke Healer
+	PinkHealerTile.MapEntry: Poke Healer
 }
 
 WorldGen: {

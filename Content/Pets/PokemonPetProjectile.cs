@@ -735,9 +735,8 @@ namespace Pokemod.Content.Pets
 						{
 							directionMod = 0.5f;
 						}
-						else if (distanceFromTarget < distanceToAttack * 0.5f)
+						else if (distanceFromTarget < distanceToAttack * 0.2f || distanceFromTarget < 120)
 						{
-							speed = moveSpeed2;
 							directionMod = -1f;
 						}
 					}
@@ -1539,7 +1538,7 @@ namespace Pokemod.Content.Pets
 
             if (!enemyPokemon) //apply a modifier to scale the pokemon's defence against vanilla enemy damage (also the minimum damage from mobs is 1 instead of 2 from enemy pokemon).
 			{
-				float defenceModVsTerrariaNPC = 0.2f * (1.4f * (float)Math.Pow(0.95f, defenceValue * 0.9f) + 0.3f);
+				float defenceModVsTerrariaNPC = 0.1f * (1.4f * (float)Math.Pow(0.95f, defenceValue * 0.9f) + 0.3f);
 				dmg = 1 + (int)(Math.Clamp(npcdmg - 1, 0f, 9999f) / (defenceValue * defenceModVsTerrariaNPC));
             }
 			else //scale the pokemon's defence normally against other pokemon (multiplied by 14 to reverse the assumed 14 defence of vanilla enemies)(Multiplied by 5 to account for the global health scaling)(divided by 3 as most pokemon attacks hit 3 times).
