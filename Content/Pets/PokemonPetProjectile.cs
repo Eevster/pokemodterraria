@@ -1377,7 +1377,7 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-        public virtual void ChangeAttackColor(Color newColor, int type = (int)TypeIndex.Fire)
+        public virtual void ChangeAttackColor(Color newColor, int type = (int)TypeIndex.Fire, int shaderID = ItemID.WispDye)
         {
 			foreach (Projectile attack in attackProjs)
 			{
@@ -1388,7 +1388,7 @@ namespace Pokemod.Content.Pets
 					if (pokemonAttack.attackType == type)
 					{
 						pokemonAttack.effectColor = newColor;
-						pokemonAttack.shader = GameShaders.Armor.GetShaderFromItemId(ItemID.WispDye).UseColor(pokemonAttack.effectColor);
+						pokemonAttack.shader = GameShaders.Armor.GetShaderFromItemId(shaderID).UseColor(pokemonAttack.effectColor);
 					}
 				}
 			}

@@ -453,6 +453,16 @@ Projectiles: {
 	Crunch.DisplayName: Crunch
 	AncientPower.DisplayName: Ancient Power
 	Slash.DisplayName: Slash
+	TerrarianKabutoPetProjectile.DisplayName: Terrarian Kabuto Pet Projectile
+	TerrarianKabutoPetProjectileShiny.DisplayName: Terrarian Kabuto Pet Projectile Shiny
+	TerrarianKabutopsPetProjectile.DisplayName: Terrarian Kabutops Pet Projectile
+	TerrarianKabutopsPetProjectileShiny.DisplayName: Terrarian Kabutops Pet Projectile Shiny
+	TerrarianAerodactylPetProjectile.DisplayName: Terrarian Aerodactyl Pet Projectile
+	TerrarianAerodactylPetProjectileShiny.DisplayName: Terrarian Aerodactyl Pet Projectile Shiny
+	TerrarianOmanytePetProjectile.DisplayName: Terrarian Omanyte Pet Projectile
+	TerrarianOmanytePetProjectileShiny.DisplayName: Terrarian Omanyte Pet Projectile Shiny
+	TerrarianOmastarPetProjectile.DisplayName: Terrarian Omastar Pet Projectile
+	TerrarianOmastarPetProjectileShiny.DisplayName: Terrarian Omastar Pet Projectile Shiny
 }
 
 Items: {
@@ -3827,6 +3837,16 @@ NPCs: {
 	JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	GalvantulaCritterNPC.DisplayName: Galvantula
 	GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
+	TerrarianKabutoCritterNPC.DisplayName: Terrarian Kabuto
+	TerrarianKabutoCritterNPCShiny.DisplayName: Terrarian Kabuto Shiny
+	TerrarianKabutopsCritterNPC.DisplayName: Terrarian Kabutops
+	TerrarianKabutopsCritterNPCShiny.DisplayName: Terrarian Kabutops Shiny
+	TerrarianAerodactylCritterNPC.DisplayName: Terrarian Aerodactyl
+	TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Critter Shiny
+	TerrarianOmanyteCritterNPC.DisplayName: Terrarian Omanyte
+	TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
+	TerrarianOmastarCritterNPC.DisplayName: Terrarian Omastar
+	TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
 	FishermanTrainer.DisplayName: Fisherman Trainer
 
 	PokemonScientist: {
