@@ -1655,7 +1655,6 @@ Items: {
 		// Tooltip: ""
 	}
 
-<<<<<<< HEAD
 	BashfulMint: {
 		// DisplayName: Bashful Mint
 		// Tooltip: ""
@@ -1779,7 +1778,8 @@ Items: {
 	TimidMint: {
 		// DisplayName: Timid Mint
 		// Tooltip: ""
-=======
+	}
+
 	SealedFossilItem: {
 		// Tooltip: ""
 		// DisplayName: Sealed Fossil
@@ -1813,7 +1813,6 @@ Items: {
 	EldritchHelixItem: {
 		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
 		// DisplayName: Eldritch Helix
->>>>>>> c213b3250d013c557d9674b65696a2b16f1b408e
 	}
 }
 
@@ -3827,7 +3826,6 @@ NPCs: {
 	// JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	// GalvantulaCritterNPC.DisplayName: Galvantula
 	// GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
-
 	FishermanTrainer.DisplayName: Pescador
 
 	PokemonScientist: {
@@ -3842,7 +3840,7 @@ NPCs: {
 			DislikeCrowded: Hay algo de ruido por aquí. Preferiría un lugar más tranquilo.
 			HateCrowded: ¡Con toda esta gente ni siquiera puedo escuchar mis pensamientos!
 			LoveBiome: Me encanta el {BiomeName}, es perfecto para una tranquila sesión de investigación.
-			LikeBiome: "El {BiomeName} tiene muchas cosas interesantes escondidas bajo la arena."
+			LikeBiome: El {BiomeName} tiene muchas cosas interesantes escondidas bajo la arena.
 			DislikeBiome: No me fascina el {BiomeName}, es muy... vivo.
 			HateBiome: No puedo concentrarme en mi trabajo con todos estos monstruos de la {BiomeName}.
 			LoveNPC: ¡Realmente admiro el genio de {NPCName}!
@@ -3850,7 +3848,7 @@ NPCs: {
 			DislikeNPC: "{NPCName} debe guardarse sus hojas para ella misma."
 			HateNPC: "{NPCName} no tiene ningún respeto por la precisión y el delicado equilibrio que requiere la verdadera ciencia."
 			LikeNPC_Princess: "{NPCName} de verdad me escucha cuando hablo de rocas. Casi me da pena."
-			Princess_LovesNPC: "¡{NPCName} sabe tantas cosas interesantes!"
+			Princess_LovesNPC: ¡{NPCName} sabe tantas cosas interesantes!
 		}
 	}
 
@@ -3871,9 +3869,7 @@ Dialogue: {
 		StandardDialogue3: ¡Puedo darte todo lo que necesitas para comenzar tu viaje!
 	}
 
-	FishermanTrainer:{
-		StandardDialogue1: Hola, ¿te interesa la pesca?
-	}
+	FishermanTrainer.StandardDialogue1: Hola, ¿te interesa la pesca?
 
 	PokemonScientist: {
 		StandardDialogue1: Pareces alguien a quien le gusta cavar. ¡Solo puedo imaginar las maravillas que yacen bajo nuestros pies!
@@ -3889,12 +3885,10 @@ Dialogue: {
 		LowLevel: Nivel de mundo demasiado bajo
 		LowLevelDialogue: Esta muestra contiene una energía poderosa. Necesitaré investigar más antes de poder procesarla.
 		Success: ¡Renacimiento exitoso!
-		SuccessDialogue: "¡Hemos creado un ejemplar vivo! Cuídalo bien."
+		SuccessDialogue: ¡Hemos creado un ejemplar vivo! Cuídalo bien.
 	}
 
-	G1T1_Brock:{
-		StandardDialogue1: ¡Creo en la defensa férrea y la determinación! ¿Estás listo para desafiarme?
-	}
+	G1T1_Brock.StandardDialogue1: ¡Creo en la defensa férrea y la determinación! ¿Estás listo para desafiarme?
 }
 
 Tiles: {

@@ -1655,7 +1655,6 @@ Items: {
 		Tooltip: ""
 	}
 
-<<<<<<< HEAD
 	BashfulMint: {
 		DisplayName: Bashful Mint
 		Tooltip: ""
@@ -1779,7 +1778,8 @@ Items: {
 	TimidMint: {
 		DisplayName: Timid Mint
 		Tooltip: ""
-=======
+	}
+
 	SealedFossilItem: {
 		Tooltip: ""
 		DisplayName: Sealed Fossil
@@ -1813,7 +1813,6 @@ Items: {
 	EldritchHelixItem: {
 		Tooltip: "{$CommonItemTooltip.GeneticSample}"
 		DisplayName: Eldritch Helix
->>>>>>> c213b3250d013c557d9674b65696a2b16f1b408e
 	}
 }
 
@@ -3827,7 +3826,6 @@ NPCs: {
 	JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	GalvantulaCritterNPC.DisplayName: Galvantula
 	GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
-
 	FishermanTrainer.DisplayName: Fisherman
 
 	PokemonScientist: {
@@ -3871,9 +3869,7 @@ Dialogue: {
 		StandardDialogue3: I can give you everything you need to start your journey!
 	}
 
-	FishermanTrainer:{
-		StandardDialogue1: Hello, are you interested in fishing?
-	}
+	FishermanTrainer.StandardDialogue1: Hello, are you interested in fishing?
 
 	PokemonScientist: {
 		StandardDialogue1: You seem like someone that likes digging. I can only imagine the wonders that lay beneath us!
@@ -3892,9 +3888,7 @@ Dialogue: {
 		SuccessDialogue: "We've created a living specimen! Take good care of your "
 	}
 
-	G1T1_Brock:{
-		StandardDialogue1: I believe in rock-hard defense and determination! Are you ready to challenge me?
-	}
+	G1T1_Brock.StandardDialogue1: I believe in rock-hard defense and determination! Are you ready to challenge me?
 }
 
 Tiles: {
