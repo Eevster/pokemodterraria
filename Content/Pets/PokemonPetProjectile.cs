@@ -1,13 +1,16 @@
-﻿using Microsoft.Xna.Framework;
+﻿using log4net.Core;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Configs;
 using Pokemod.Common.Players;
+using Pokemod.Common.Systems;
 using Pokemod.Content.Buffs;
 using Pokemod.Content.DamageClasses;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Projectiles;
 using ReLogic.Content;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Terraria;
@@ -400,7 +403,7 @@ namespace Pokemod.Content.Pets
 
 			CheckActive(player);
 
-			if(!ModContent.GetInstance<GameplayConfig>().Disobedience && player.GetModPlayer<PokemonPlayer>().levelCap != currentLevelCap) UpdateStats();
+			if(ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.LevelClamping && player.GetModPlayer<PokemonPlayer>().levelCap != currentLevelCap) UpdateStats();
 
 			SetAttackInfo();
 
@@ -478,9 +481,15 @@ namespace Pokemod.Content.Pets
 			expGained += exp;
 		}
 
-		public void SetExtraExp(int extraExp){
-			extraExp = (int)(extraExp*Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().ExpMult);
-			
+		public void SetExtraExp(int extraExp)
+		{
+			int levelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
+			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.ExpCutoff && pokemonLvl > levelCap)
+			{
+				return;
+			}
+			extraExp = (int)(extraExp * Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().ExpMult);
+
 			if(Projectile.owner == Main.myPlayer){
 				if(extraExp > 0){
 					CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+extraExp+" Exp");
@@ -573,7 +582,7 @@ namespace Pokemod.Content.Pets
 		public virtual void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter) {
 			// Starting search distance
 			distanceFromTarget = enemySearchDistance;
-			targetCenter = Projectile.position;
+			targetCenter = Projectile.Center;
 			foundTarget = false;
 
 			PokemonPlayer trainer = owner.GetModPlayer<PokemonPlayer>();
@@ -593,7 +602,8 @@ namespace Pokemod.Content.Pets
 									if(target.active && !target.dead){
 										float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, Projectile.Center);
 										bool lineOfSight = Collision.CanHitLine(Projectile.Center-Vector2.One, 2, 2, target.position, target.width, target.height);
-										bool closeThroughWall = Vector2.Distance(target.Center, Projectile.Center) < 100f || canAttackThroughWalls;
+                                        bool throughWallRange = Vector2.Distance(target.Center, Projectile.Center) < 500f;
+                                        bool closeThroughWall = Vector2.Distance(target.Center, Projectile.Center) < 100f || (canAttackThroughWalls && throughWallRange);
 
 										// Check if it is within the radius
 										if (sqrDistanceToTarget < sqrMaxDetectDistance && (lineOfSight || closeThroughWall)) {
@@ -624,10 +634,20 @@ namespace Pokemod.Content.Pets
 							bool lineOfSight = Collision.CanHitLine(Projectile.Center-Vector2.One, 2, 2, npc.position, npc.width, npc.height);
 							// Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
 							// The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
-							bool closeThroughWall = between < 100f;
+							bool closeThroughWall = between < 150f;
+							bool throughWallRange = between < 500f;
 
-							if (inRange && (closest || !foundTarget) && (lineOfSight || closeThroughWall || canAttackThroughWalls) && !npc.GetGlobalNPC<PokemonNPCData>().isPokemon) {
-								if(npc.boss){
+							if (inRange && (closest || !foundTarget) && (lineOfSight || closeThroughWall || (canAttackThroughWalls && throughWallRange)) && !npc.GetGlobalNPC<PokemonNPCData>().isPokemon)
+							{
+								if (Vector2.Distance(npc.Center, Projectile.Center) < 120) //Self-Defence Bubble.
+								{
+									distanceFromTarget = between;
+									targetCenter = npc.Center;
+									foundTarget = true;
+									break;
+								}
+								if (npc.boss)
+								{
 									distanceFromTarget = between;
 									targetCenter = npc.Center;
 									foundTarget = true;
@@ -672,6 +692,7 @@ namespace Pokemod.Content.Pets
                     Main.dust[dustIndex].velocity = Main.rand.NextFloat(2f, 6f) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
                 }
 				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
+				Projectile.position.Y -= 16;
 			}
 		}
 
@@ -1338,7 +1359,7 @@ namespace Pokemod.Content.Pets
 
 		public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
 			int levelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
-			if (ModContent.GetInstance<GameplayConfig>().Disobedience && pokemonLvl > levelCap)
+			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.Disobedience && pokemonLvl > levelCap)
 			{
 				int d = Math.Clamp((pokemonLvl-levelCap)/5, 2, 5);
 				if (!Main.rand.NextBool(d))
@@ -1401,6 +1422,11 @@ namespace Pokemod.Content.Pets
         }
 
         public virtual void Jump(){
+			if(CheckDoorCollide(Projectile.velocity, 32))
+			{
+				return;
+			}
+			
 			int moveDirection = 0;
 			if (Projectile.velocity.X < 0f)
 			{
@@ -1415,12 +1441,21 @@ namespace Pokemod.Content.Pets
 				return;
 			}
 
+			bool foundDoor = false;
 			float jumpHeight = 0;
 
 			for(int i = 1; i < 4; i++){
 				jumpHeight = 0;
                 for(int j = 0; j < maxJumpHeight; j++){
-                    Vector2 scanPosition = Projectile.Center + new Vector2(0,hitboxHeight/2) + new Vector2(moveDirection*16*i,8-16*(j+1));
+                    Vector2 scanPosition = Projectile.Bottom + Vector2.UnitX * (hitboxWidth / 2f) * moveDirection + new Vector2(moveDirection*(16*i - 8),8-16*(j+1));
+
+                    //Don't jump if approaching a door
+                    int tileType = Main.tile[(int)scanPosition.X / 16 + moveDirection, (int)scanPosition.Y / 16].TileType;
+                    if (tileType == TileID.ClosedDoor || tileType == TileID.TallGateClosed)
+					{
+						foundDoor = true;
+						break;
+					}
 
                     if(Collision.SolidCollision(scanPosition - new Vector2(8,16), 16, 16) || Main.tile[(int)scanPosition.X/16-moveDirection, (int)scanPosition.Y/16+1].IsHalfBlock || Main.tile[(int)scanPosition.X/16, (int)scanPosition.Y/16].IsHalfBlock){
                         jumpHeight += 1f;
@@ -1428,7 +1463,7 @@ namespace Pokemod.Content.Pets
 						break;
 					}
                 }
-				if(jumpHeight > 0){
+				if(jumpHeight > 0 || foundDoor){
 					break;
 				}
             }
@@ -1534,6 +1569,17 @@ namespace Pokemod.Content.Pets
 
 		public int CalcIncomingDmg(int npcdmg, bool physical, bool enemyPokemon = false)
 		{
+			// template for typeChart implementation (just need to correctly detect incoming attack type, which vanilla enemies currently don't have): ---------------------------+
+			int incomingDamageType = (int)TypeIndex.Normal;
+			int primaryDefence = PokemonData.pokemonInfo[pokemonName].pokemonTypes[0];
+			
+			int secondaryDefence = -1;
+			if (PokemonData.pokemonInfo[pokemonName].pokemonTypes.Length > 1) {
+				secondaryDefence = PokemonData.pokemonInfo[pokemonName].pokemonTypes[1];
+			}
+			float typeEffectiveness = PokemonTypeChart.GetTypeEffectiveness(incomingDamageType, primaryDefence, secondaryDefence);
+			// can then be used to multiply the final damage. --------------------------------------------------------------------------------------------------------------------+
+
 			//calling Hp
 			if (currentHp > finalStats[0]) { currentHp = finalStats[0]; }
 			//cal damage versus defense for pokemon
@@ -1816,11 +1862,48 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
+		public bool CheckDoorCollide(Vector2 velocity, int range = 16)
+		{
+            int direction = Math.Sign(velocity.X);
+            Vector2 topLeft = Projectile.TopLeft + Vector2.UnitX * range * direction + Vector2.UnitY * (hitboxHeight / 2f > 8 ? 8 : hitboxHeight / 2f);
+            Vector2 bottomRight = Projectile.BottomRight + Vector2.UnitX * 16 * direction - Vector2.UnitY; // some minor adjustments made to the checking range to ensure it's only checking horizontal collisions with doors
+
+            List<Point> collidingTiles = Collision.GetTilesIn(topLeft, bottomRight);
+            bool collidingDoorFound = false;
+            bool solidTileFound = false;
+            foreach (Point point in collidingTiles)
+            {
+                Tile tile = Main.tile[point];
+				if (tile.HasTile)
+				{
+                    // Checks if the sprites for the locked jungle temple door are being drawn
+                    bool lockedTempleDoor = (tile.TileFrameY == 594 || tile.TileFrameY == 612 || tile.TileFrameY == 630) && tile.TileFrameX <= 36;
+					if ((tile.TileType == TileID.ClosedDoor || tile.TileType == TileID.TallGateClosed) && !lockedTempleDoor)
+                    {
+                        collidingDoorFound = true;
+                        continue;
+                    }
+                    else if (Main.tileSolid[tile.TileType])
+                    {
+                        solidTileFound = true;
+                        break;
+                    }
+                }
+            }
+			return collidingDoorFound && !solidTileFound;
+        }
+
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-			if (isOut)
+			// Walk through closed doors (except for the locked jungle temple door)
+            if (CheckDoorCollide(oldVelocity))
+            {
+                Projectile.velocity.X = oldVelocity.X;
+            }
+
+            if (isOut)
 			{
-				if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f)
+                if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f)
 				{
 					Projectile.velocity.X = 0;
 				}

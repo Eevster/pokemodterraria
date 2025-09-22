@@ -154,7 +154,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             if (Projectile.velocity.Length() < 0.01f && !exploded)
             {
-                if (idleTimer++ > 15)
+                if (idleTimer++ > 15 && !exploded)
                 {
                     Explode();
                 }
@@ -194,13 +194,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         private void Explode()
         {
-            exploded = true;
-            Projectile.frame = 0;
-            Projectile.frameCounter = 0;
-            Projectile.timeLeft = 120;
-            Projectile.penetrate = -1;
-            Projectile.damage = (int)Projectile.ai[0]; //need to re-assign damage after "Projectile.stopsDealingDamageAfterPenetrateHits" triggers and sets damage to 0.
-            SoundEngine.PlaySound(SoundID.Item24, Projectile.position);
+            if (!exploded)
+            {
+                exploded = true;
+                Projectile.frame = 0;
+                Projectile.frameCounter = 0;
+                Projectile.timeLeft = 120;
+                Projectile.penetrate = -1;
+                Projectile.damage = (int)Projectile.ai[0]; //need to re-assign damage after "Projectile.stopsDealingDamageAfterPenetrateHits" triggers and sets damage to 0.
+                SoundEngine.PlaySound(SoundID.Item24, Projectile.position);
+            }
         }
 
         public void HomingMovement()

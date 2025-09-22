@@ -125,7 +125,12 @@ namespace Pokemod.Content.Projectiles
 		public void SearchTarget(float distanceFromTarget, bool canAttackThroughWalls = true){
 			Vector2 targetCenter = Projectile.Center;
 
-			foundTarget = false;
+            PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+
+            Vector2 playerPosition = trainer.Player.Center;
+            float distanceFromPlayer = 1500;
+
+            foundTarget = false;
 
 			targetEnemy = null;
 			targetPlayer = null;
@@ -144,10 +149,14 @@ namespace Pokemod.Content.Projectiles
 								// Check if it is within the radius
 								if (sqrDistanceToTarget < sqrMaxDetectDistance && (lineOfSight || closeThroughWall)) {
 									if(target.hostile){
-										sqrMaxDetectDistance = sqrDistanceToTarget;
-										targetCenter = target.Center;
-										targetPlayer = target;
-										foundTarget = true;
+										if (Vector2.Distance(target.Center, playerPosition) < distanceFromPlayer)
+										{
+											distanceFromPlayer = Vector2.Distance(target.Center, playerPosition);
+											sqrMaxDetectDistance = sqrDistanceToTarget;
+											targetCenter = target.Center;
+											targetPlayer = target;
+											foundTarget = true;
+										}
 									}
 								}
 							}
@@ -173,10 +182,14 @@ namespace Pokemod.Content.Projectiles
 							foundTarget = true;
 							break;
 						}
-						distanceFromTarget = between;
-						targetCenter = npc.Center;
-						targetEnemy = npc;
-						foundTarget = true;
+						if (Vector2.Distance(npc.Center, playerPosition) < distanceFromPlayer)
+						{
+							distanceFromPlayer = Vector2.Distance(npc.Center, playerPosition);
+							distanceFromTarget = between;
+							targetCenter = npc.Center;
+							targetEnemy = npc;
+							foundTarget = true;
+						}
 					}
 				}
 			}

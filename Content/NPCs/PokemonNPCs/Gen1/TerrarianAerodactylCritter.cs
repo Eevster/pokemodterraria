@@ -29,8 +29,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "InfernalAmberItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
-                new FlavorTextBestiaryInfoElement("In prehistoric times, this Pokémon flew freely and fearlessly through the skies."));
+			bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "InfernalAmberItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheUnderworld,
+                new FlavorTextBestiaryInfoElement("This Pokemon's fiery breath is cold to the touch, but still burns."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
