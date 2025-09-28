@@ -17,7 +17,7 @@ namespace Pokemod.Content.Items.GeneticSamples
         public string pokemonName;
         public int minLevel;
         public int maxLevel;
-        public int sampleQuantity = 5;
+        public int sampleQuantity = 3;
         public float dropChance = 1f;
 
         public override void SetDefaults() {

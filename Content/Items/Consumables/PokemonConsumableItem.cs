@@ -53,11 +53,13 @@ namespace Pokemod.Content.Items.Consumables
 								if(proj.ModProjectile.GetType().IsSubclassOf(typeof(PokemonPetProjectile))){
 									Vector2 mousePosition = Main.MouseWorld;
 									if (Collision.CheckAABBvAABBCollision(proj.Hitbox.TopLeft(), proj.Hitbox.Size(), mousePosition - new Vector2(1f, 1f), new Vector2(2f, 2f))){
-										var pokemon = (PokemonPetProjectile)proj.ModProjectile;
-										if (!pokemon.isEvolving){
-											OnItemUse(proj);
-											return true;
-										}
+										if (player.ItemTimeIsZero){
+											if (OnItemUse(proj))
+											{
+												//player.itemTime = 10;
+												return true;
+											}
+                                        }
 									}
 								}
 							}
@@ -66,7 +68,7 @@ namespace Pokemod.Content.Items.Consumables
 				}
 			}
 			Item.consumable = false;
-            return true;
+            return false;
         }
 
         public virtual bool OnItemUse(Projectile proj){

@@ -170,7 +170,7 @@ namespace Pokemod.Content.Items
 					moveIndex = (moveIndex+1)%moves.Length;
 				}else if(player.HeldItem.ModItem is PokemonConsumableItem item){
 					if(item.OnItemInvUse(this, player)){
-						player.itemTime = 20;
+						player.itemTime = 10;
 					}
 				}
 			}
@@ -262,7 +262,7 @@ namespace Pokemod.Content.Items
 			this.variant = variant;
 			
 			SetPetInfo();
-			GetPokemonMoves();
+			GetPokemonMoves(notLearn: true); // Pokemon caught in the wild shouldn't prompt the player to choose between moves. 
         }
 
 		public int[] GetPokemonStats(Player player = null){
@@ -375,7 +375,7 @@ namespace Pokemod.Content.Items
 				Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 				//Item.buffType = ModContent.Find<ModBuff>("Pokemod", PokemonName+(Shiny?"PetBuffShiny":"PetBuff")).Type;
 
-				if(moves.Length <= 0) GetPokemonMoves();
+				if(moves.Length <= 0) GetPokemonMoves(notLearn: true); //If in this situation (going from 0 moves to more than 4) the player should not also have the luxury of choice.
 
 				UpdateLevel(player);
 				GetProjInfo(player);
@@ -447,38 +447,39 @@ namespace Pokemod.Content.Items
 			}
 		}
 
-		private void GetPokemonMoves(bool notLearn = false){
+		private void GetPokemonMoves(bool notLearn = false)
+		{
 			List<MoveLvl> newMoveList = PokemonData.pokemonInfo[PokemonName].movePool.ToList();
 
-			if (moves.Length < 4) {
-				List<string> newMoves = moves.ToList();
+			int oldMoveCount = moves.Length;
+			List<string> newMoves = moves.ToList();
+			List<string> learningMoves = toLearnMoves.ToList();
 
-				while (newMoveList.Count > 0)
-				{
-					if (newMoveList[0].levelToLearn <= 0 && !newMoves.Contains(newMoveList[0].moveName))
-					{
-						newMoves.Add(newMoveList[0].moveName);
-					}
-					newMoveList.RemoveAt(0);
-					if (newMoves.Count >= 4) break;
-				}
-				moves = newMoves.ToArray();
-			}
-
-			if (notLearn) newMoveList = new List<MoveLvl>();
-
-			if (newMoveList.Count > 0)
+			while (newMoveList.Count > 0)
 			{
-				List<string> newToLearnMoves = toLearnMoves.ToList();
-				foreach (MoveLvl move in newMoveList)
+				if (newMoveList[0].levelToLearn > level) break;
+
+				if (!newMoves.Contains(newMoveList[0].moveName))
 				{
-					if (move.levelToLearn <= 0)
+                    if (newMoves.Count >= 4)
 					{
-						newToLearnMoves.Add(move.moveName);
+						if (oldMoveCount >= 4 || !notLearn) // Pokemon shouldn't naturally get the opportunity to learn lower level moves (except for moves intended for learning on evolution).
+						{
+                            if (newMoveList[0].levelToLearn == level || newMoveList[0].levelToLearn == 0) learningMoves.Add(newMoveList[0].moveName);
+                            newMoveList.RemoveAt(0);
+							continue;
+                        }
+						else // In the case of caught pokemon, or error pokemon (with no move pool), the pokemon should select the 4 moves in its pool with the highest level requirement possible for its level. If players want the earlier learnset, they will need to catch weaker pokemon or breed (when we add it).
+						{
+                            newMoves.RemoveAt(oldMoveCount);
+                        }
 					}
+					newMoves.Add(newMoveList[0].moveName);
 				}
-				toLearnMoves = newToLearnMoves.ToArray();
+				newMoveList.RemoveAt(0);
 			}
+			moves = newMoves.ToArray();
+			if (!notLearn) toLearnMoves = learningMoves.ToArray();
 		}
 
 		private void GetPokemonLvlMoves(int lvl)
@@ -547,7 +548,7 @@ namespace Pokemod.Content.Items
 
 					UnlockBestiary(PokemonName);
 
-					GetPokemonMoves();
+					GetPokemonMoves(); //When evolving the player can choose from any evolution moves (Learned at level "0") or any move learned at the current level.
 					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 					if (player != null)
 					{
@@ -593,7 +594,7 @@ namespace Pokemod.Content.Items
 					Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 					proj.Kill();
 					PokemonName = newPokemonName;
-					GetPokemonMoves(didMegaEvolve);
+					if (!didMegaEvolve) GetPokemonMoves(); //Like any evolution or level up, a pokemon should only ever get this opportunity once (previously it could theoretically re-learn a move from mega evolving if it somehow removed it and had less than 4 moves).
 					didMegaEvolve = true;
 					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 					if (player != null)

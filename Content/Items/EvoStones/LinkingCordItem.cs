@@ -24,9 +24,13 @@ namespace Pokemod.Content.Items.EvoStones
 
         public override bool OnItemUse(Projectile proj){
 			PokemonPetProjectile pokemonProj = (PokemonPetProjectile)proj.ModProjectile;
-			if(pokemonProj.UseEvoItem(GetType().Name)){
-				Item.consumable = true;
-				return true;
+			if (!pokemonProj.isEvolving)
+			{
+				if (pokemonProj.UseEvoItem(GetType().Name))
+				{
+					Item.consumable = true;
+					return true;
+				}
 			}
 			Item.consumable = false;
 			return false;

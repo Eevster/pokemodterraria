@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Pokemod.Content.Items.Consumables
 {
     public class HyperPotion : PokemonConsumableItem{
-        int healAmount = 120;
+        int healAmount = 120 * 5;
         public override void SetDefaults() {
 			Item.width = 24; // The item texture's width
 			Item.height = 24; // The item texture's height

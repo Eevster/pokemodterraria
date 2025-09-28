@@ -20,6 +20,12 @@ namespace Pokemod.Content.Pets.OmanytePet
 		public override int[] fallStartEnd => [8,8];
         public override int[] attackStartEnd => [8,13];
 
+        public override bool canSwim => true;
+
+        public override int[] idleSwimStartEnd => [0, 3];
+        public override int[] walkSwimStartEnd => [4, 7];
+        public override int[] attackSwimStartEnd => [8, 13];
+
         public override string[] evolutions => ["Omastar"];
 		public override int levelToEvolve => 40;
 		public override int levelEvolutionsNumber => 1;

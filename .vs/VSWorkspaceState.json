@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Content",
-    "\\Content\\Items",
-    "\\Content\\Items\\Consumables",
-    "\\Content\\Items\\Consumables\\Mints"
+    ""
   ],
-  "SelectedNode": "\\Content\\Items\\Consumables\\Mints\\Mint.png",
+  "SelectedNode": "\\Pokemod.cs",
   "PreviewInSolutionExplorer": false
 }

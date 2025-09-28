@@ -463,7 +463,7 @@ namespace Pokemod.Common.Players
 						if (Main.projectile[index].ModProjectile is PokemonPetProjectile) PokemonProj = (PokemonPetProjectile)Main.projectile[index]?.ModProjectile;
 						else PokemonProj = null;
 
-						PokemonProj?.regenHP(3);
+						PokemonProj?.regenHP(3 * 5);
 					}
 				}
 				LeftoversTimer = 10 * 60;

@@ -14,6 +14,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.GameContent.Creative;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
@@ -250,7 +251,7 @@ namespace Pokemod.Content.Pets
 
 		public virtual int GetPokemonDamage(int power = 50, bool special = false, float multiplier = 1f){
 			int atkStat = special?finalStats[3]:finalStats[1];
-			int pokemonDamage = (int)((2+(int)((2+2f*pokemonLvl/5)*power*atkStat/(50f*10f)))*multiplier);
+			int pokemonDamage = (int)((2+(int)((2+2f*pokemonLvl/5)*power*atkStat/(50f*14f)))*multiplier);
 			pokemonDamage = (int)(pokemonDamage*Main.player[Projectile.owner].GetTotalDamage<PokemonDamageClass>().ApplyTo(1f));
 
 			return pokemonDamage;
@@ -577,7 +578,10 @@ namespace Pokemod.Content.Pets
 
 			PokemonPlayer trainer = owner.GetModPlayer<PokemonPlayer>();
 
-			if(trainer.attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+			Vector2 playerPosition = trainer.Player.Center;
+			float distanceFromPlayer = enemySearchDistance;
+
+            if (trainer.attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				if (!foundTarget) {
 					// This code is required either way, used for finding a target
 					if(Main.netMode != NetmodeID.SinglePlayer){
@@ -594,10 +598,14 @@ namespace Pokemod.Content.Pets
 										// Check if it is within the radius
 										if (sqrDistanceToTarget < sqrMaxDetectDistance && (lineOfSight || closeThroughWall)) {
 											if(target.hostile){
-												sqrMaxDetectDistance = sqrDistanceToTarget;
-												distanceFromTarget = Vector2.Distance(target.Center, Projectile.Center);
-												targetCenter = target.Center;
-												foundTarget = true;
+												if (Vector2.Distance(target.Center, playerPosition) < distanceFromPlayer)
+												{
+													distanceFromPlayer = Vector2.Distance(target.Center, playerPosition);
+                                                    sqrMaxDetectDistance = sqrDistanceToTarget;
+													distanceFromTarget = Vector2.Distance(target.Center, Projectile.Center);
+													targetCenter = target.Center;
+													foundTarget = true;
+												}
 											}
 										}
 									}
@@ -625,9 +633,13 @@ namespace Pokemod.Content.Pets
 									foundTarget = true;
 									break;
 								}
-								distanceFromTarget = between;
-								targetCenter = npc.Center;
-								foundTarget = true;
+								if (Vector2.Distance(npc.Center, playerPosition) < distanceFromPlayer)
+								{
+									distanceFromPlayer = Vector2.Distance(npc.Center, playerPosition);
+									distanceFromTarget = between;
+									targetCenter = npc.Center;
+									foundTarget = true;
+								}
 							}
 						}
 					}
@@ -669,7 +681,9 @@ namespace Pokemod.Content.Pets
 			// Default movement parameters (here for attacking)
 			float speed = moveSpeed1;
 			float inertia = 20f;
-			float speedMultiplier = 1f;
+            float speedMultiplier = 0.5f + (finalStats[5] / 250f);
+            float cooldownMult = Math.Clamp(450f - finalStats[5], 50, 450) / 250f;
+			int targetDelay = (int)(Math.Clamp(200f - finalStats[5], 0, 200) / 4f);
 
 			float maxFallSpeed = 10f;
 
@@ -677,7 +691,15 @@ namespace Pokemod.Content.Pets
 
 			if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
 			{
+				if (moveStyle != (int)MovementStyle.Fly)
+				{
+					speedMultiplier = Math.Min(0.65f, speedMultiplier);
+                }
 				isFlying = true;
+			}
+			else if(moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon <= 0)
+			{
+				isFlying = false;
 			}
 
 			if (canSwim)
@@ -687,65 +709,75 @@ namespace Pokemod.Content.Pets
 			else
 			{
 				isSwimming = false;
+				if(Projectile.wet || Projectile.lavaWet || Projectile.honeyWet || Projectile.shimmerWet)
+				{
+					speedMultiplier = Math.Min(0.65f, speedMultiplier);
+				}
 			}
 
-			if (isSwimming) speedMultiplier = 1.5f;
+			if (isSwimming) speedMultiplier *= 1.5f;
 
 			if (foundTarget)
 			{
+				if (timer <= -300)
+				{
+					timer = targetDelay;
+				}
 				if ((currentStatus != (int)ProjStatus.Attack && !canMoveWhileAttack) || canMoveWhileAttack)
 				{
-					if (distanceFromTarget > moveDistance1)
+					float directionMod = 0f;
+					if (distanceFromTarget > distanceToAttack)
 					{
-						Vector2 direction = targetCenter - Projectile.Center;
-						direction.Normalize();
-						direction *= speedMultiplier * speed;
-
-						if (isFlying || isSwimming)
-						{
-							Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
-						}
-						else
-						{
-							Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
-
-							if ((targetCenter - Projectile.Center).Y < 0 && -(targetCenter - Projectile.Center).Y > Math.Abs((targetCenter - Projectile.Center).X))
-							{
-								if (Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
-								{
-									currentStatus = (int)ProjStatus.Jump;
-									Projectile.velocity.Y -= (int)Math.Sqrt(2 * 0.3f * Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y), 0, 160));
-								}
-							}
-						}
+						directionMod = 1f;
 					}
 					else
 					{
-						if (distanceFromTarget > moveDistance2)
+						if (distanceFromTarget > distanceToAttack * 0.75f)
 						{
-							Vector2 direction = targetCenter - Projectile.Center;
-							direction.Normalize();
-							direction *= speedMultiplier * speed / 2;
-
-							if (isFlying || isSwimming)
-							{
-								Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
-							}
-							else
-							{
-								Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
-							}
+							directionMod = 0.5f;
 						}
-						else
+<<<<<<< HEAD
+						else if (distanceFromTarget < distanceToAttack * 0.5f)
 						{
-							Projectile.velocity.X *= 0.95f;
-							if (distanceFromTarget < 100f && moveStyle == (int)MovementStyle.Hybrid)
-							{
-								isFlying = false;
-							}
+							speed = moveSpeed2;
+=======
+						else if (distanceFromTarget < distanceToAttack * 0.2f || distanceFromTarget < 120)
+						{
+>>>>>>> 4afbbed12359d5f3bd3f1ba61d7ae69500fcbbfd
+							directionMod = -1f;
 						}
 					}
-				}
+                    Vector2 direction = targetCenter - Projectile.Center;
+                    direction.Normalize();
+                    direction *= speedMultiplier * speed * directionMod;
+
+                    if (isFlying || isSwimming)
+                    {
+                        Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
+                    }
+                    else
+                    {
+                        Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
+
+                        if ((targetCenter - Projectile.Center).Y * directionMod < 0 && -(targetCenter - Projectile.Center).Y * directionMod > Math.Abs((targetCenter - Projectile.Center).X))
+                        {
+                            if (Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
+                            {
+                                currentStatus = (int)ProjStatus.Jump;
+                                Projectile.velocity.Y -= (int)Math.Sqrt(2 * 0.3f * Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y), 0, 160));
+                            }
+                        }
+                    }
+
+					if (directionMod == 0f)
+					{
+						Projectile.velocity.X *= 0.95f;
+                        if (distanceFromTarget < 100f && moveStyle == (int)MovementStyle.Hybrid)
+                        {
+                            isFlying = false;
+                        }
+                    }
+                }
 				else
 				{
 					Projectile.velocity.X *= 0.9f;
@@ -821,7 +853,7 @@ namespace Pokemod.Content.Pets
 							currentStatus = (int)ProjStatus.Idle;
 						}
 						canAttack = true;
-						timer = attackCooldown;
+						timer = (int)(attackCooldown * cooldownMult);
 					}
 				}
 			}
@@ -829,14 +861,18 @@ namespace Pokemod.Content.Pets
 			{
 				if (timer <= 0)
 				{
-					if (!canAttack)
+                    if (timer > -300)
+                    {
+                        timer--;
+                    }
+                    if (!canAttack)
 					{
 						if (currentStatus == (int)ProjStatus.Attack)
 						{
 							currentStatus = (int)ProjStatus.Idle;
 						}
 						canAttack = true;
-						timer = attackCooldown;
+						timer = (int)(attackCooldown * cooldownMult);
 					}
 				}
 				if (Projectile.owner == Main.myPlayer)
@@ -1020,7 +1056,8 @@ namespace Pokemod.Content.Pets
 			// Default movement parameters (here for attacking)
 			float speed = moveSpeed1;
 			float inertia = 20f;
-			float speedMultiplier = 1f;
+			float speedMultiplier = 0.5f + (finalStats[5] / 250f);
+            float cooldownMult = Math.Clamp(225f - finalStats[5], 25, 225) / 125f;
 
 			float maxFallSpeed = 10f;
 
@@ -1045,7 +1082,7 @@ namespace Pokemod.Content.Pets
 				isSwimming = false;
 			}
 
-			if (isSwimming) speedMultiplier = 1.5f;
+			if (isSwimming) speedMultiplier *= 1.5f;
 
 
 			if (timer <= 0)
@@ -1057,7 +1094,7 @@ namespace Pokemod.Content.Pets
 						currentStatus = (int)ProjStatus.Idle;
 					}
 					canAttack = true;
-					timer = attackCooldown;
+					timer = (int)(attackCooldown * cooldownMult);
 				}
 			}
 
@@ -1136,7 +1173,7 @@ namespace Pokemod.Content.Pets
 						currentStatus = (int)ProjStatus.Idle;
 					}
 					canAttack = true;
-					timer = attackCooldown;
+					timer = (int)(attackCooldown * cooldownMult);
 				}
 			}
 
@@ -1347,7 +1384,7 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-        public virtual void ChangeAttackColor(Color newColor, int type = (int)TypeIndex.Fire)
+        public virtual void ChangeAttackColor(Color newColor, int type = (int)TypeIndex.Fire, int shaderID = ItemID.WispDye)
         {
 			foreach (Projectile attack in attackProjs)
 			{
@@ -1358,7 +1395,7 @@ namespace Pokemod.Content.Pets
 					if (pokemonAttack.attackType == type)
 					{
 						pokemonAttack.effectColor = newColor;
-						pokemonAttack.shader = GameShaders.Armor.GetShaderFromItemId(ItemID.WispDye).UseColor(pokemonAttack.effectColor);
+						pokemonAttack.shader = GameShaders.Armor.GetShaderFromItemId(shaderID).UseColor(pokemonAttack.effectColor);
 					}
 				}
 			}
@@ -1496,15 +1533,30 @@ namespace Pokemod.Content.Pets
             if (pokemonShader != null) pokemonShader = null;
         }
 
-		public int calIncomingDmg(int npcdmg){
-            //calling Hp
-            if(currentHp > finalStats[0]) { currentHp = finalStats[0]; }
-            //cal damage versus defense for pokemon
+		public int CalcIncomingDmg(int npcdmg, bool physical, bool enemyPokemon = false)
+		{
+			//calling Hp
+			if (currentHp > finalStats[0]) { currentHp = finalStats[0]; }
+			//cal damage versus defense for pokemon
 			//int dmg = npcdmg - finalStats[2]/2;
-			int dmg = 2 + (int)(Math.Clamp(npcdmg-2f,0f,9999f)/(finalStats[2]+2));
+			int dmg = 0;
+			int defenceValue = physical ? finalStats[2] : finalStats[4];
 
-            manualDmg(dmg);
-            
+
+            if (!enemyPokemon) //apply a modifier to scale the pokemon's defence against vanilla enemy damage (also the minimum damage from mobs is 1 instead of 2 from enemy pokemon).
+			{
+<<<<<<< HEAD
+				float defenceModVsTerrariaNPC = 0.2f * (1.4f * (float)Math.Pow(0.95f, defenceValue * 0.9f) + 0.3f);
+=======
+				float defenceModVsTerrariaNPC = 0.1f * (1.4f * (float)Math.Pow(0.95f, defenceValue * 0.9f) + 0.3f);
+>>>>>>> 4afbbed12359d5f3bd3f1ba61d7ae69500fcbbfd
+				dmg = 1 + (int)(Math.Clamp(npcdmg - 1, 0f, 9999f) / (defenceValue * defenceModVsTerrariaNPC));
+            }
+			else //scale the pokemon's defence normally against other pokemon (multiplied by 14 to reverse the assumed 14 defence of vanilla enemies)(Multiplied by 5 to account for the global health scaling)(divided by 3 as most pokemon attacks hit 3 times).
+			{
+				dmg = 2 + (int)(Math.Clamp((npcdmg - 2f) * 5f * 14f / 3f, 0f, 9999f) / (defenceValue + 2));
+            }
+			manualDmg(dmg);
             return dmg;
         }
 
@@ -1541,13 +1593,15 @@ namespace Pokemod.Content.Pets
                     if (Projectile.Hitbox.Intersects(npc.getRect()) && !immune){
                         int npcdmg = npc.defDamage;
                         if(currentHp != 0){
-							calIncomingDmg(npcdmg);
+							CalcIncomingDmg(npcdmg, true);
 							Projectile.velocity += 4f*(Projectile.Center - npc.Center).SafeNormalize(Vector2.Zero);
 						}
                         immune = true;
                     }
                 }
             }
+
+			// Projectile damage which goes against special defence (or based on isSpecial for pokemon attacks). 
 			if (Main.myPlayer == Projectile.owner)
 			{
 				Projectile bullet = null;
@@ -1560,9 +1614,32 @@ namespace Pokemod.Content.Pets
 						if (Projectile.Hitbox.Intersects(bullet.getRect()) && !immune)
 						{
 							int bulletdmg = bullet.damage;
-							if (currentHp != 0)
+							if (bullet.owner == 0) //if the bullet comes from an npc, it's damage needs to be manually scaled for the world difficulty. *Currently doesn't scale correctly in Journey mode* ----------------------------
+                            {
+								switch (Main.GameMode)
+								{
+									case 0:
+										bulletdmg *= 2;
+                                        break;
+									case 1:
+                                        bulletdmg *= 4;
+                                        break;
+									case 2:
+                                        bulletdmg *= 6;
+                                        break;
+								}
+							}
+                            if (currentHp != 0)
 							{
-								calIncomingDmg(bulletdmg);
+								bool enemyPokemon = false;
+								bool physical = false;
+								if (bullet.ModProjectile is PokemonAttack) 
+								{
+									enemyPokemon = true; 
+									var enemyPokemonAttack = (PokemonAttack)bullet.ModProjectile;
+									physical = !enemyPokemonAttack.isSpecial;
+								}
+								CalcIncomingDmg(bulletdmg, physical, enemyPokemon);
 								Projectile.velocity += bullet.knockBack * (Projectile.Center - bullet.Center).SafeNormalize(Vector2.Zero);
 							}
 							immune = true;
@@ -1610,9 +1687,6 @@ namespace Pokemod.Content.Pets
 						}
 					}
 				}
-
-				Main.spriteBatch.End();
-				Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
 			}
 			else
 			{
@@ -1629,7 +1703,9 @@ namespace Pokemod.Content.Pets
 
         public override bool PreDrawExtras()
         {
-			if (isOut) {
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            if (isOut) {
 				if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0)
 				{
 					Asset<Texture2D> balloonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/AirBalloon_Texture");

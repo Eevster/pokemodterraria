@@ -66,8 +66,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					if(pokemonOwner.attackProjs[i] == null){
 						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center + 20f*Vector2.Normalize(targetCenter-pokemon.Center), 18f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<Psybeam>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
 						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
-						SoundEngine.PlaySound(SoundID.Item6, pokemon.position);
-						pokemonOwner.timer = pokemonOwner.attackDuration;
+						SoundEngine.PlaySound(SoundID.Item46 with { Pitch = 0.3f, Volume = 0.7f}, pokemon.position);
+                        SoundEngine.PlaySound(SoundID.Item75 with { Pitch = 0.4f, Volume = 0.8f }, pokemon.position);
+                        pokemonOwner.timer = pokemonOwner.attackDuration;
 						pokemonOwner.canAttack = false;
 						break;
 					}
@@ -130,6 +131,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.Opacity = 1f*Projectile.timeLeft/10;
                 Projectile.velocity *= 0.9f;
 			}
+
+            if(Projectile.timeLeft % 10 == 1)
+            {
+                SoundEngine.PlaySound(SoundID.Item46 with { Pitch = 0.2f, Volume = Projectile.timeLeft/140f }, Projectile.position);
+            }
 
             Projectile.rotation = Projectile.velocity.ToRotation();
 

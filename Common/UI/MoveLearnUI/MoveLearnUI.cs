@@ -22,6 +22,8 @@ namespace Pokemod.Common.UI.MoveLearnUI
 		UIText confirmButton;
 		public int selectedMove = -1;
 		public string newMove;
+
+		public static bool hidden = true;
 		
 		public CaughtPokemonItem pokemon;
 
@@ -78,7 +80,7 @@ namespace Pokemod.Common.UI.MoveLearnUI
 				MoveLearnPanel.Append(movesButtons[i]);
 			}
 
-			confirmButton = new UIText(Language.GetText("Mods.Pokemod.MoveLearnUI.Forget"), 1f)
+            confirmButton = new UIText(LocalizedText.Empty, 1f)
 			{
 				TextColor = Color.Yellow,
 				HAlign = 0.5f,
@@ -139,6 +141,8 @@ namespace Pokemod.Common.UI.MoveLearnUI
 
 		private void ConfirmButtonClicked(UIMouseEvent evt, UIElement listeningElement)
 		{
+			if (selectedMove == -1) return;
+
 			SoundEngine.PlaySound(SoundID.MenuOpen);
 
 			List<string> newMoves = pokemon.moves.ToList();

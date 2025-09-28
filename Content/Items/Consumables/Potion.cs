@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Pokemod.Content.Items.Consumables
 {
     public class Potion : PokemonConsumableItem{
-        int healAmount = 20;
+        int healAmount = 20 * 5;
         public override void SetDefaults() {
 			Item.width = 24; // The item texture's width
 			Item.height = 24; // The item texture's height

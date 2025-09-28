@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Pokemod.Common.GlobalNPCs;
+using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
 using System;
 using Terraria;
@@ -183,7 +184,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     NPC npc = Main.npc[i];
                     if (npc != null)
                     {
-                        if (npc.CanBeChasedBy())
+                        if (npc.CanBeChasedBy() || npc.CountsAsACritter || npc.ModNPC is PokemonWildNPC)
                         {
                             if ((new Rectangle((int)aimingTarget.X - 12, (int)aimingTarget.Y - 12, 24, 24)).Intersects(npc.getRect()))
                             {

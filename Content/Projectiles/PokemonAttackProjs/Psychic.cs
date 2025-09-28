@@ -16,6 +16,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
     public class Psychic : PokemonAttack
     {
         bool exploded = false;
+        private int idleTimer = 0;
         private static Asset<Texture2D> explosionTexture;
         public int pokemonDamage;
         public override void SetStaticDefaults()
@@ -57,10 +58,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.hostile = false;
 
             Projectile.tileCollide = false;
-            Projectile.penetrate = 4;
+            Projectile.penetrate = 6;
 
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 15;
+            Projectile.localNPCHitCooldown = 17;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             base.SetDefaults();
         }
@@ -151,6 +152,18 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.velocity = Vector2.Zero;
             }
 
+            if (Projectile.velocity.Length() < 0.01f && !exploded)
+            {
+                if (idleTimer++ > 15)
+                {
+                    Explode();
+                }
+            }
+            else
+            {
+                idleTimer = 0;
+            }
+
             UpdateAnimation();
 
             if (Projectile.owner == Main.myPlayer)
@@ -182,10 +195,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         private void Explode()
         {
             exploded = true;
-            Projectile.ResetLocalNPCHitImmunity();
             Projectile.frame = 0;
             Projectile.frameCounter = 0;
             Projectile.timeLeft = 120;
+            Projectile.penetrate = -1;
             Projectile.damage = (int)Projectile.ai[0]; //need to re-assign damage after "Projectile.stopsDealingDamageAfterPenetrateHits" triggers and sets damage to 0.
             SoundEngine.PlaySound(SoundID.Item24, Projectile.position);
         }
