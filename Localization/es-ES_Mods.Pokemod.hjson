@@ -190,7 +190,7 @@ Projectiles: {
 	// DewgongPetProjectileShiny.DisplayName: Dewgong Pet Projectile Shiny
 	// DiglettPetProjectile.DisplayName: Diglett Pet Projectile
 	// DiglettPetProjectileShiny.DisplayName: Diglett Pet Projectile Shiny
-	// Dig.DisplayName: Dig
+	Dig.DisplayName: Excavar
 	// DittoPetProjectile.DisplayName: Ditto Pet Projectile
 	// DittoPetProjectileShiny.DisplayName: Ditto Pet Projectile Shiny
 	// DodrioPetProjectile.DisplayName: Dodrio Pet Projectile
@@ -379,14 +379,14 @@ Projectiles: {
 	// ZapdosPetProjectileShiny.DisplayName: Zapdos Pet Projectile Shiny
 	// ZubatPetProjectile.DisplayName: Zubat Pet Projectile
 	// ZubatPetProjectileShiny.DisplayName: Zubat Pet Projectile Shiny
-	// Gust.DisplayName: Gust
-	// QuickAttack.DisplayName: Quick Attack
-	// WingAttack.DisplayName: Wing Attack
-	// AirSlash.DisplayName: Air Slash
-	// HyperFang.DisplayName: Hyper Fang
-	// Toxic.DisplayName: Toxic
-	// DoubleKick.DisplayName: Double Kick
-	// HealPulse.DisplayName: Heal Pulse
+	Gust.DisplayName: Tornado
+	QuickAttack.DisplayName: Ataque rápido
+	WingAttack.DisplayName: Ataque ala
+	AirSlash.DisplayName: Tajo aéreo
+	HyperFang.DisplayName: Hipercolmillo
+	Toxic.DisplayName: Tóxico
+	DoubleKick.DisplayName: Doble patada
+	HealPulse.DisplayName: Pulso cura
 	// CharizardMegaXPetProjectile.DisplayName: Charizard Mega X Pet Projectile
 	// CharizardMegaXPetProjectileShiny.DisplayName: Charizard Mega X Pet Projectile Shiny
 	// GengarMegaPetProjectile.DisplayName: Gengar Mega Pet Projectile
@@ -412,8 +412,8 @@ Projectiles: {
 	// ShimmerballProj.DisplayName: Shimmerball Proj
 	// GalaxyballProj.DisplayName: Galaxyball Proj
 	// HealballProj.DisplayName: Healball Proj
-	// VineWhip_Front.DisplayName: Vine Whip_ Front
-	// Overheat.DisplayName: Overheat
+	VineWhip_Front.DisplayName: Látigo cepa
+	Overheat.DisplayName: Sofoco
 	// BlastoiseMegaPetProjectile.DisplayName: Blastoise Mega Pet Projectile
 	// BlastoiseMegaPetProjectileShiny.DisplayName: Blastoise Mega Pet Projectile Shiny
 	// VenusaurMegaPetProjectile.DisplayName: Venusaur Mega Pet Projectile
@@ -424,35 +424,35 @@ Projectiles: {
 	// DarkballProj.DisplayName: Darkball Proj
 	// CharizardMegaYPetProjectile.DisplayName: Charizard Mega Y Pet Projectile
 	// CharizardMegaYPetProjectileShiny.DisplayName: Charizard Mega Y Pet Projectile Shiny
-	// NightShade.DisplayName: Night Shade
-	// Earthquake.DisplayName: Earthquake
-	// RockThrow.DisplayName: Rock Throw
-	// Splash.DisplayName: Splash
-	// Teleport.DisplayName: Teleport
-	// PsychoCut.DisplayName: Psycho Cut
+	NightShade.DisplayName: Tinieblas
+	Earthquake.DisplayName: Terremoto
+	RockThrow.DisplayName: Lanzarrocas
+	Splash.DisplayName: Salpicadura
+	Teleport.DisplayName: Teletransporte
+	PsychoCut.DisplayName: Psicocorte
 	// AlakazamMegaPetProjectile.DisplayName: Alakazam Mega Pet Projectile
 	// AlakazamMegaPetProjectileShiny.DisplayName: Alakazam Mega Pet Projectile Shiny
-	// Psychic.DisplayName: Psychic
-	// BubbleBeam.DisplayName: Bubble Beam
-	// ElectroBall.DisplayName: Electro Ball
-	// FuryCutter.DisplayName: Fury Cutter
-	// LeafBlade.DisplayName: Leaf Blade
-	// BulletSeed.DisplayName: Bullet Seed
-	// LeafStorm.DisplayName: Leaf Storm
-	// Psybeam.DisplayName: Psybeam
-	// MegaDrain.DisplayName: Mega Drain
-	// ShadowBall.DisplayName: Shadow Ball
-	// Tackle.DisplayName: Tackle
-	// Cut.DisplayName: Cut
-	// FocusPunch.DisplayName: Focus Punch
-	// MudShot.DisplayName: Mud Shot
-	// SludgeBomb.DisplayName: Sludge Bomb
-	// HyperBeam.DisplayName: Hyper Beam
-	// DoubleEdge.DisplayName: Double Edge
-	// DragonBreath.DisplayName: Dragon Breath
-	// Crunch.DisplayName: Crunch
-	// AncientPower.DisplayName: Ancient Power
-	// Slash.DisplayName: Slash
+	Psychic.DisplayName: Psíquico
+	BubbleBeam.DisplayName: Rayo burbuja
+	ElectroBall.DisplayName: Bola voltio
+	FuryCutter.DisplayName: Corte furia
+	LeafBlade.DisplayName: Hoja aguda
+	BulletSeed.DisplayName: Semilladora
+	LeafStorm.DisplayName: Lluevehojas
+	Psybeam.DisplayName: Psicorrayo
+	MegaDrain.DisplayName: Megaagotar
+	ShadowBall.DisplayName: Bola sombra
+	Tackle.DisplayName: Placaje
+	Cut.DisplayName: Corte
+	FocusPunch.DisplayName: Puño certero
+	MudShot.DisplayName: Disparo lodo
+	SludgeBomb.DisplayName: Bomba lodo
+	HyperBeam.DisplayName: Hiperrayo
+	DoubleEdge.DisplayName: Doble filo
+	DragonBreath.DisplayName: Dragoaliento
+	Crunch.DisplayName: Triturar
+	AncientPower.DisplayName: Poder pasado
+	Slash.DisplayName: Cuchillada
 	// TerrarianKabutoPetProjectile.DisplayName: Terrarian Kabuto Pet Projectile
 	// TerrarianKabutoPetProjectileShiny.DisplayName: Terrarian Kabuto Pet Projectile Shiny
 	// TerrarianKabutopsPetProjectile.DisplayName: Terrarian Kabutops Pet Projectile
@@ -1167,7 +1167,7 @@ Items: {
 	}
 
 	GoodRod: {
-		DisplayName: Caña buena
+		DisplayName: Caña Buena
 		Tooltip: Permite pescar pokemon un poco más fuertes
 	}
 
@@ -1647,92 +1647,92 @@ Items: {
 	}
 
 	OldAmberItem: {
-		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
-		// DisplayName: Old Amber
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Ámbar Viejo
 	}
 
 	HelixFossilItem: {
-		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
-		// DisplayName: Helix Fossil
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Fósil Hélix
 	}
 
 	DomeFossilItem: {
-		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
-		// DisplayName: Dome Fossil
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Fóxil Domo
 	}
 
 	AdamantMint: {
-		// DisplayName: Adamant Mint
+		DisplayName: Adamant Mint
 		// Tooltip: ""
 	}
 
 	BashfulMint: {
-		// DisplayName: Bashful Mint
+		DisplayName: Bashful Mint
 		// Tooltip: ""
 	}
 
 	BoldMint: {
-		// DisplayName: Bold Mint
+		DisplayName: Bold Mint
 		// Tooltip: ""
 	}
 
 	BraveMint: {
-		// DisplayName: Brave Mint
+		DisplayName: Brave Mint
 		// Tooltip: ""
 	}
 
 	CalmMint: {
-		// DisplayName: Calm Mint
+		DisplayName: Calm Mint
 		// Tooltip: ""
 	}
 
 	CarefulMint: {
-		// DisplayName: Careful Mint
+		DisplayName: Careful Mint
 		// Tooltip: ""
 	}
 
 	DocileMint: {
-		// DisplayName: Docile Mint
+		DisplayName: Docile Mint
 		// Tooltip: ""
 	}
 
 	GentleMint: {
-		// DisplayName: Gentle Mint
+		DisplayName: Gentle Mint
 		// Tooltip: ""
 	}
 
 	HardyMint: {
-		// DisplayName: Hardy Mint
+		DisplayName: Hardy Mint
 		// Tooltip: ""
 	}
 
 	HastyMint: {
-		// DisplayName: Hasty Mint
+		DisplayName: Hasty Mint
 		// Tooltip: ""
 	}
 
 	ImpishMint: {
-		// DisplayName: Impish Mint
+		DisplayName: Impish Mint
 		// Tooltip: ""
 	}
 
 	JollyMint: {
-		// DisplayName: Jolly Mint
+		DisplayName: Jolly Mint
 		// Tooltip: ""
 	}
 
 	LaxMint: {
-		// DisplayName: Lax Mint
+		DisplayName: Lax Mint
 		// Tooltip: ""
 	}
 
 	LonelyMint: {
-		// DisplayName: Lonely Mint
+		DisplayName: Lonely Mint
 		// Tooltip: ""
 	}
 
 	MildMint: {
-		// DisplayName: Mild Mint
+		DisplayName: Mild Mint
 		// Tooltip: ""
 	}
 
@@ -1742,88 +1742,93 @@ Items: {
 	}
 
 	ModestMint: {
-		// DisplayName: Modest Mint
+		DisplayName: Modest Mint
 		// Tooltip: ""
 	}
 
 	NaiveMint: {
-		// DisplayName: Naive Mint
+		DisplayName: Naive Mint
 		// Tooltip: ""
 	}
 
 	NaughtyMint: {
-		// DisplayName: Naughty Mint
+		DisplayName: Naughty Mint
 		// Tooltip: ""
 	}
 
 	QuietMint: {
-		// DisplayName: Quiet Mint
+		DisplayName: Quiet Mint
 		// Tooltip: ""
 	}
 
 	QuirkyMint: {
-		// DisplayName: Quirky Mint
+		DisplayName: Quirky Mint
 		// Tooltip: ""
 	}
 
 	RashMint: {
-		// DisplayName: Rash Mint
+		DisplayName: Rash Mint
 		// Tooltip: ""
 	}
 
 	RelaxedMint: {
-		// DisplayName: Relaxed Mint
+		DisplayName: Relaxed Mint
 		// Tooltip: ""
 	}
 
 	SassyMint: {
-		// DisplayName: Sassy Mint
+		DisplayName: Sassy Mint
 		// Tooltip: ""
 	}
 
 	SeriousMint: {
-		// DisplayName: Serious Mint
+		DisplayName: Serious Mint
 		// Tooltip: ""
 	}
 
 	TimidMint: {
-		// DisplayName: Timid Mint
+		DisplayName: Timid Mint
 		// Tooltip: ""
 	}
 
 	SealedFossilItem: {
-		// Tooltip: ""
-		// DisplayName: Sealed Stone
+		Tooltip: ""
+		DisplayName: Piedra Sellada
 	}
 
 	PrimordialFossilItem: {
-		// Tooltip: ""
-		// DisplayName: Primordial Fossil
+		Tooltip: ""
+		DisplayName: Fósil Primordial
 	}
 
 	IgneousFossilItem: {
-		// Tooltip: ""
-		// DisplayName: Igneous Geode
+		Tooltip: ""
+		DisplayName: Geoda Ígnea
 	}
 
 	FrozenFossilItem: {
-		// Tooltip: ""
-		// DisplayName: Frozen Fossil
+		Tooltip: ""
+		DisplayName: Fósil Congelado
 	}
 
 	InfernalAmberItem: {
-		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
-		// DisplayName: Infernal Amber
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Ámbar Infernal
 	}
 
 	HauntedDomeItem: {
-		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
-		// DisplayName: Haunted Dome
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Domo Encantado
 	}
 
 	EldritchHelixItem: {
-		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
-		// DisplayName: Eldritch Helix
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Hélix Misterioso
+	}
+
+	PokedexV1: {
+		// DisplayName: Pokedex
+		// Tooltip: ""
 	}
 }
 

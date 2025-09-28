@@ -130,6 +130,7 @@ namespace Pokemod.Content.NPCs
 				if (variants.Length > 0)
 				{
 					variant = variants[Main.rand.Next(variants.Length)];
+					
 					//Remove the possibility of spawning with the "Christmas" variant if it is no longer Christmas
 					if (variant == "Christmas")
 					{

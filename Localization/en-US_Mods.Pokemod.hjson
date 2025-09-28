@@ -1825,6 +1825,11 @@ Items: {
 		Tooltip: "{$CommonItemTooltip.GeneticSample}"
 		DisplayName: Eldritch Helix
 	}
+
+	PokedexV1: {
+		DisplayName: Pokedex
+		Tooltip: ""
+	}
 }
 
 Buffs: {
