@@ -16,8 +16,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] jumpStartEnd => [8,8];
 		public override int[] fallStartEnd => [10,10];
 		public override int[] attackStartEnd => [11,17];
+        public override string[] variants => ["Halloween"];
 
-		public override int minLevel => 32;
+        public override int minLevel => 32;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,

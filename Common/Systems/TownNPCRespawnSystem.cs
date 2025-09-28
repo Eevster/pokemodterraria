@@ -1,8 +1,9 @@
-﻿using System.IO;
-using Terraria.ModLoader.IO;
-using Terraria.ModLoader;
+﻿using Pokemod.Content.NPCs.MerchantNPCs;
+using System.IO;
 using Terraria;
-using Pokemod.Content.NPCs.MerchantNPCs;
+using Terraria.Localization;
+using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace Pokemod.Common.Systems;
 
@@ -12,31 +13,44 @@ public class TownNPCRespawnSystem : ModSystem
 {
 	// Tracks if ExamplePerson has ever been spawned in this world
 	public static bool unlockedScientistSpawn = false;
+	public static bool ScientistArrived = false;
 
-	// Town NPC rescued in the world would follow a similar implementation, the only difference being how the value is set to true.
-	// public static bool savedExamplePerson = false;
+    public static Condition scientistArrivedCondition = new Condition(
+    Language.GetText("Mods.Pokemod.Conditions.ScientistInTown"),
+    () => ScientistArrived
+    );
 
-	public override void ClearWorld() {
+    // Town NPC rescued in the world would follow a similar implementation, the only difference being how the value is set to true.
+    // public static bool savedExamplePerson = false;
+
+    public override void ClearWorld() {
 		unlockedScientistSpawn = false;
-	}
+        ScientistArrived = false;
+    }
 
 	public override void SaveWorldData(TagCompound tag) {
 		tag[nameof(unlockedScientistSpawn)] = unlockedScientistSpawn;
-	}
+        tag[nameof(ScientistArrived)] = ScientistArrived;
+    }
 
 	public override void LoadWorldData(TagCompound tag) {
 		unlockedScientistSpawn = tag.GetBool(nameof(unlockedScientistSpawn));
+        ScientistArrived = tag.GetBool(nameof(ScientistArrived));
 
-		// This line sets unlockedScientistSpawn to true if an ExamplePerson is already in the world. This is only needed because unlockedScientistSpawn was added in an update to this mod, meaning that existing users might have unlockedScientistSpawn incorrectly set to false.
-		// If you are tracking Town NPC unlocks from your initial mod release, then this isn't necessary.
-		unlockedScientistSpawn |= NPC.AnyNPCs(ModContent.NPCType<PokemonScientist>());
-	}
+        // This line sets unlockedScientistSpawn to true if an ExamplePerson is already in the world. This is only needed because unlockedScientistSpawn was added in an update to this mod, meaning that existing users might have unlockedScientistSpawn incorrectly set to false.
+        // If you are tracking Town NPC unlocks from your initial mod release, then this isn't necessary.
+        unlockedScientistSpawn |= NPC.AnyNPCs(ModContent.NPCType<PokemonScientist>());
+        ScientistArrived |= NPC.AnyNPCs(ModContent.NPCType<PokemonScientist>());
+    }
 
 	public override void NetSend(BinaryWriter writer) {
 		writer.WriteFlags(unlockedScientistSpawn);
-	}
+        writer.WriteFlags(ScientistArrived);
+    }
 
 	public override void NetReceive(BinaryReader reader) {
 		reader.ReadFlags(out unlockedScientistSpawn);
-	}
+        reader.ReadFlags(out ScientistArrived);
+    }
+
 }

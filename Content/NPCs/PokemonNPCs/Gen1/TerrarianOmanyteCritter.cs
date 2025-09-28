@@ -29,8 +29,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "EldritchHelixItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
-                new FlavorTextBestiaryInfoElement("In prehistoric times, it swam on the sea floor, eating plankton. Its fossils are sometimes found."));
+			bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "EldritchHelixItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.UndergroundSnow,
+                new FlavorTextBestiaryInfoElement("Those who first discovered this ancient Pokemon were said to have gone mad."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;

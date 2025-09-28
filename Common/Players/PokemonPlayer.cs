@@ -539,7 +539,7 @@ namespace Pokemod.Common.Players
 
 		public int GetClampedLevel(int pokemonLvl)
 		{
-			if (!ModContent.GetInstance<GameplayConfig>().Disobedience) {
+			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.LevelClamping) {
 				return System.Math.Clamp(pokemonLvl, 0, levelCap);
 			}
 

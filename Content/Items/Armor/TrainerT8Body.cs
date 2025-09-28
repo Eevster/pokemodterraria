@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.Armor
 	[AutoloadEquip(EquipType.Body)]
 	public class TrainerT8Body : ModItem
 	{
-		public static readonly int MaxPokemonLevelCap = 60;
+		public static readonly int MaxPokemonLevelCap = 100;
 		public static readonly int AdditivePokemonCritBonus = 20;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxPokemonLevelCap, AdditivePokemonCritBonus);
@@ -36,7 +36,7 @@ namespace Pokemod.Content.Items.Armor
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient(ItemID.BrokenHeroSword, 15)
+				.AddIngredient(ItemID.BrokenHeroSword, 1)
 				.AddIngredient(ItemID.SpectreBar, 10)
 				.AddIngredient<TrainerT7Body>(1)
 				.AddRecipeGroup("Tier8GymBadges", 1)
