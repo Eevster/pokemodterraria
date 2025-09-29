@@ -7,6 +7,7 @@ using System.Threading;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Pokemod.Content.Tiles.FossilBlocks
@@ -22,10 +23,11 @@ namespace Pokemod.Content.Tiles.FossilBlocks
 			MineResist = 2f;
 			MinPick = 110;
             Main.tileOreFinderPriority[Type] = 300;
+			TileID.Sets.IceSkateSlippery[Type] = true;
 
 			// Visuals
             DustType = DustID.Ice;
-            dustHighlight = DustID.BlueTorch;
+            dustHighlight = DustID.IceTorch;
 			dustChance = 200; //Higher values = slower rate
 			dustHighlightChance = 15; //Higher values = slower rate 
             HitSound = SoundID.Item127;
@@ -35,11 +37,14 @@ namespace Pokemod.Content.Tiles.FossilBlocks
 				fossilList.Add(ModContent.ItemType<EldritchHelixItem>());
 			fossilBlockChance = 5;
 				fossilBlock = ModContent.ItemType<FrozenFossilItem>();
-			commonItemChance = 3;
-				commonItem = ItemID.Bone;
 				defaultBlock = ItemID.IceBlock;
+            commonItemChance = 8;
+				commonItems.Add(ItemID.Sapphire);
+				commonItems.Add(ItemID.Sapphire);
+				commonItems.Add(ItemID.Emerald);
 
-            AddMapEntry(new Color(150, 115, 90));
+            LocalizedText name = Language.GetText("Mods.Pokemod.Items.FrozenFossilItem.DisplayName");
+            AddMapEntry(new Color(60, 110, 135), name);
 		}
 
 	}
@@ -53,7 +58,7 @@ namespace Pokemod.Content.Tiles.FossilBlocks
 
 			fossilBlockType = (ushort)ModContent.TileType<FrozenFossilBlock>();
 			numPerDay = 8;
-			maxTiles = 2500;
+			maxTiles = 2000;
 			replaceTiles = [TileID.IceBlock, TileID.SnowBlock];
 			priority = 2;
         }

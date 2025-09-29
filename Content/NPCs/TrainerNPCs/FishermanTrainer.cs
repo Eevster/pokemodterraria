@@ -98,7 +98,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		{
 			if ((spawnInfo.Player.ZoneBeach || spawnInfo.Player.ZoneSnow) && !NPC.AnyNPCs(Type))
 			{
-				return 0.2f;
+				return 0.15f;
 			}
 
 			return 0f;

@@ -9,8 +9,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class AerodactylCritterNPC : PokemonWildNPC
 	{
-        public override int hitboxWidth => 46;
-        public override int hitboxHeight => 46;
+        public override int hitboxWidth => 60;
+        public override int hitboxHeight => 64;
 
         public override int totalFrames => 15;
         public override int animationSpeed => 6;

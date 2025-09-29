@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Pokemod.Content.Pets;
-using Terraria.Localization;
-using Terraria.Enums;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 // 0: Hardy
 // 1: Lonely
 // 2: Adamant
@@ -38,7 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 // 44: Serious
 namespace Pokemod.Content.Items.Consumables.Mints
 {
-    public class Mint : PokemonConsumableItem
+    public abstract class Mint : PokemonConsumableItem
     {
         public override void SetDefaults()
         {

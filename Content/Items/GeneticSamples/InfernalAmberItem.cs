@@ -11,7 +11,7 @@ namespace Pokemod.Content.Items.GeneticSamples
     {
         public override void SetDefaults()
         {
-            pokemonName = "Aerodactyl";
+            pokemonName = "TerrarianAerodactyl";
             minLevel = 20;
             maxLevel = 100;
 

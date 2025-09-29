@@ -453,6 +453,16 @@ Projectiles: {
 	Crunch.DisplayName: Crunch
 	AncientPower.DisplayName: Ancient Power
 	Slash.DisplayName: Slash
+	TerrarianKabutoPetProjectile.DisplayName: Terrarian Kabuto Pet Projectile
+	TerrarianKabutoPetProjectileShiny.DisplayName: Terrarian Kabuto Pet Projectile Shiny
+	TerrarianKabutopsPetProjectile.DisplayName: Terrarian Kabutops Pet Projectile
+	TerrarianKabutopsPetProjectileShiny.DisplayName: Terrarian Kabutops Pet Projectile Shiny
+	TerrarianAerodactylPetProjectile.DisplayName: Terrarian Aerodactyl Pet Projectile
+	TerrarianAerodactylPetProjectileShiny.DisplayName: Terrarian Aerodactyl Pet Projectile Shiny
+	TerrarianOmanytePetProjectile.DisplayName: Terrarian Omanyte Pet Projectile
+	TerrarianOmanytePetProjectileShiny.DisplayName: Terrarian Omanyte Pet Projectile Shiny
+	TerrarianOmastarPetProjectile.DisplayName: Terrarian Omastar Pet Projectile
+	TerrarianOmastarPetProjectileShiny.DisplayName: Terrarian Omastar Pet Projectile Shiny
 }
 
 Items: {
@@ -892,7 +902,7 @@ Items: {
 		Tooltip:
 			'''
 			{$Mods.Pokemod.PokemonInfo.ItemUse}
-			When used on a pokemon it recovers 20 HP
+			When used on a pokemon it recovers 100 HP
 			'''
 	}
 
@@ -915,7 +925,7 @@ Items: {
 		Tooltip:
 			'''
 			{$Mods.Pokemod.PokemonInfo.ItemUse}
-			When used on a pokemon it recovers 120 HP
+			When used on a pokemon it recovers 600 HP
 			'''
 	}
 
@@ -933,7 +943,7 @@ Items: {
 		Tooltip:
 			'''
 			{$Mods.Pokemod.PokemonInfo.ItemUse}
-			When used on a pokemon it recovers 10 HP
+			When used on a pokemon it recovers 50 HP
 			'''
 	}
 
@@ -942,7 +952,7 @@ Items: {
 		Tooltip:
 			'''
 			{$Mods.Pokemod.PokemonInfo.ItemUse}
-			When used on a pokemon it recovers 60 HP
+			When used on a pokemon it recovers 300 HP
 			'''
 	}
 
@@ -1178,7 +1188,7 @@ Items: {
 
 	Leftovers: {
 		DisplayName: Leftovers
-		Tooltip: Recovers 3 HP to your active pokemon every 10 seconds
+		Tooltip: Recovers 15 HP to your active pokemon every 10 seconds
 	}
 
 	LuckyEgg: {
@@ -1783,7 +1793,7 @@ Items: {
 
 	SealedFossilItem: {
 		Tooltip: ""
-		DisplayName: Sealed Fossil
+		DisplayName: Sealed Stone
 	}
 
 	PrimordialFossilItem: {
@@ -1793,7 +1803,7 @@ Items: {
 
 	IgneousFossilItem: {
 		Tooltip: ""
-		DisplayName: Igneous Fossil
+		DisplayName: Igneous Geode
 	}
 
 	FrozenFossilItem: {
@@ -1814,6 +1824,35 @@ Items: {
 	EldritchHelixItem: {
 		Tooltip: "{$CommonItemTooltip.GeneticSample}"
 		DisplayName: Eldritch Helix
+	}
+
+	PokedexV1: {
+		DisplayName: Pokedex
+		Tooltip: ""
+	}
+	
+	GeoResonator: {
+		DisplayName: Geo Resonator
+		Tooltip:
+			'''
+			A machine designed by the scientist
+			Can only be placed underground
+			Scans the earth for fossils
+			'''
+		Activation: "Geo Resonator scan complete - Nearest fossil located at: "
+		Failure: Geo Resonator scan complete - No fossils detected nearby
+		East: "' East, "
+		West: "' West, "
+		Underground: "' Underground"
+	}
+
+	GeoResonatorBlueprint: {
+		DisplayName: Resonator Blueprint
+		Tooltip:
+			'''
+			Blueprints drawn by the scientist
+			They depict a machine to help with finding fossils
+			'''
 	}
 }
 
@@ -3490,7 +3529,31 @@ NPCs: {
 	BulbasaurCritterNPC.DisplayName: Bulbasaur
 	CharmanderCritterNPC.DisplayName: Charmander
 	SquirtleCritterNPC.DisplayName: Squirtle
-	ProfOakTravelingMerchant.DisplayName: Pokemon Professor
+
+	PokemonProfessor: {
+		DisplayName: Pokemon Professor
+		Census.SpawnCondition: Available immediately
+
+		TownNPCMood: {
+			Content: The wild Pokemon seem peaceful here.
+			NoHome: It'll be a challenge researching without a lab, but I'll manage.
+			FarFromHome: It's always an adventure out here.
+			LoveSpace: There's enough space here to do all kinds of experiments!
+			DislikeCrowded: The Pokemon get skittish with too many people around.
+			HateCrowded: This is such a busy place, the Pokemon are getting uneasy.
+			LoveBiome: The gentle breeze in {BiomeName} makes for the perfect place to conduct my research.
+			LikeBiome: "{BiomeName} is quite a pleasant place."
+			DislikeBiome: "{BiomeName} has quite an eerie tone. I'm not to sure about this."
+			HateBiome: It's far too cold out here in {BiomeName}. My poor Pokemon will freeze.
+			LoveNPC: "{NPCName} really understands the value of documenting these fascinating creatures!"
+			LikeNPC: "{NPCName} reminds me of someone I knew back home. She's so helpful."
+			DislikeNPC: I don't trust {NPCName}. He just rubs me the wrong way.
+			HateNPC: I can't believe {NPCName} sells weapons for a living. Couldn't he do something friendlier with his time?
+			LikeNPC_Princess: "{NPCName} is such a kind soul."
+			Princess_LovesNPC: "{NPCName} really knows his stuff, and his Pokemon are so cute!"
+		}
+	}
+
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur  Shiny
 	CharmanderCritterNPCShiny.DisplayName: Charmander  Shiny
 	SquirtleCritterNPCShiny.DisplayName: Squirtle  Shiny
@@ -3827,6 +3890,16 @@ NPCs: {
 	JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	GalvantulaCritterNPC.DisplayName: Galvantula
 	GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
+	TerrarianKabutoCritterNPC.DisplayName: Terrarian Kabuto
+	TerrarianKabutoCritterNPCShiny.DisplayName: Terrarian Kabuto Shiny
+	TerrarianKabutopsCritterNPC.DisplayName: Terrarian Kabutops
+	TerrarianKabutopsCritterNPCShiny.DisplayName: Terrarian Kabutops Shiny
+	TerrarianAerodactylCritterNPC.DisplayName: Terrarian Aerodactyl
+	TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
+	TerrarianOmanyteCritterNPC.DisplayName: Terrarian Omanyte
+	TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
+	TerrarianOmastarCritterNPC.DisplayName: Terrarian Omastar
+	TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
 	FishermanTrainer.DisplayName: Fisherman Trainer
 
 	PokemonScientist: {
@@ -3852,6 +3925,8 @@ NPCs: {
 			Princess_LovesNPC: "{NPCName} knows so many interesting things!"
 		}
 	}
+
+	G1T1_Brock.DisplayName: Rock-type Gym Leader
 }
 
 Bestiary: {
@@ -3862,7 +3937,7 @@ Bestiary: {
 }
 
 Dialogue: {
-	ProfOakTravelingMerchant: {
+	PokemonProfessor: {
 		StandardDialogue1: Hello there! Welcome to the world of Pokémod! My name is Oak! People call me the Pokémon Prof!
 		StandardDialogue2: For some people, Pokémon are pets. Other use them for fights. Myself… I study Pokémon as a profession.
 		StandardDialogue3: I can give you everything you need to start your journey!
@@ -3876,9 +3951,9 @@ Dialogue: {
 		StandardDialogue3: If you bring me genetic samples, I can revive extinct Pokemon!
 		Button: Process Samples
 		MissingSamples: " More Samples Needed."
-		MissingSamplesDialogue: I'm going to need more genetic information to revitalise an intact specimen.
+		MissingSamplesDialogue: I'm going to need more genetic samples to revitalise an intact specimen. A Geo Resonator could help you find fossils containing them. I've given its blueprints to the professor.
 		NoSamples: No Samples in Inventory!
-		NoSamplesDialogue: If you can find me some genetic samples, I can do something incredible with them. You might find suitable fossils underground.
+		NoSamplesDialogue: If you can find me some genetic samples, I can do something incredible with them. A Geo Resonator could help you find fossils containing them. I've given its blueprints to the professor.
 		NoBall: No Pokeball in Inventory!
 		NoBallDialogue: I'll need a Pokeball to house the revitalised specimen.
 		LowLevel: World level too low
@@ -3886,6 +3961,8 @@ Dialogue: {
 		Success: Revival Successful!
 		SuccessDialogue: "We've created a living specimen! Take good care of your "
 	}
+
+	G1T1_Brock.StandardDialogue1: I believe in rock-hard defense and determination! Are you ready to challenge me?
 }
 
 Tiles: {
@@ -3898,16 +3975,19 @@ Tiles: {
 		MapEntry1: Mods.Pokemod.Tiles.PCChest.MapEntry1
 	}
 
-	BlueHealerTile.MapEntry: Blue Healer Tile
-	GreenHealerTile.MapEntry: Green Healer Tile
-	OrangeHealerTile.MapEntry: Orange Healer Tile
-	PinkHealerTile.MapEntry: Pink Healer Tile
+	BlueHealerTile.MapEntry: Poke Healer
+	GreenHealerTile.MapEntry: Poke Healer
+	OrangeHealerTile.MapEntry: Poke Healer
+	PinkHealerTile.MapEntry: Poke Healer
+	GeoResonatorTile.MapEntry: Geo Resonator
 }
 
 WorldGen: {
 	PokeballItemTilePassMessage: Mods.Pokemod.WorldGen.PokeballItemTilePassMessage
 	PokemonCenterPassMessage: Mods.Pokemod.WorldGen.PokemonCenterPassMessage
 }
+
+Conditions.ScientistInTown: The Scientist has settled into town.
 
 CommonItemTooltip: {
 	PokemonDamageBoost: Increases Pokemon damage by {0}%
@@ -3996,9 +4076,9 @@ Configs: {
 		DisplayName: Gameplay Config
 
 		Headers: {
-			PokemonWorld: Pokemon World Header
-			RuleChanges: Rule Changes Header
-			GameplayChanges: Gameplay Changes Header
+			PokemonWorld: Pokemon World
+			RuleChanges: Rule Changes
+			GameplayChanges: Gameplay Changes
 		}
 
 		PokemonSpawnMultiplier: {
@@ -4021,9 +4101,24 @@ Configs: {
 			Tooltip: ""
 		}
 
-		Disobedience: {
-			Label: Disobedience
-			Tooltip: ""
+		LevelCapType: {
+			Label: Level Cap Type
+			Tooltip:
+				'''
+				Determines how a Pokemon will behave when leveled higher than the level cap.
+				Disobedience: Overleveled Pokemon will sometimes refuse to attack
+				Exp Cutoff: Overleveled Pokemon will not gain exp
+				Level Clamping: Overleveled Pokemon will have their stats scaled down to the level cap
+				None: No effect
+				'''
 		}
+	}
+
+	LevelCapOptions: {
+		Tooltip: ""
+		Disobedience.Label: Disobedience
+		ExpCutoff.Label: Exp Cutoff
+		LevelClamping.Label: Level Clamping
+		None.Label: None
 	}
 }

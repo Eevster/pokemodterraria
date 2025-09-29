@@ -98,8 +98,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
 
 			float projSpeed = 12f;
+			float homingMod = (float)Math.Pow(0.95f + Projectile.timeLeft / 2400, 1);
+			Projectile.velocity *= homingMod;
 
-			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+
+            if (attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				if(foundTarget){
 					if(targetPlayer != null){
 						if(targetPlayer.active && !targetPlayer.dead){

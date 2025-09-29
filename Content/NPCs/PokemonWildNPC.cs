@@ -130,6 +130,7 @@ namespace Pokemod.Content.NPCs
 				if (variants.Length > 0)
 				{
 					variant = variants[Main.rand.Next(variants.Length)];
+					
 					//Remove the possibility of spawning with the "Christmas" variant if it is no longer Christmas
 					if (variant == "Christmas")
 					{
@@ -138,7 +139,14 @@ namespace Pokemod.Content.NPCs
 							variant = "";
 						}
 					}
-				}
+                    if (variant == "Halloween")
+                    {
+                        if (!Main.halloween)
+                        {
+                            variant = "";
+                        }
+                    }
+                }
 				else
 				{
 					variant = "";
@@ -206,6 +214,12 @@ namespace Pokemod.Content.NPCs
 				}
 			}
 		}
+
+        public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
+        {
+            base.ModifyIncomingHit(ref modifiers);
+			modifiers.FinalDamage *= 5;
+        }
 
 		public float GetSpawnChance(NPCSpawnInfo spawnInfo, float chance){
 			if(shiny){

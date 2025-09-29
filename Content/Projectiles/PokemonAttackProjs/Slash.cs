@@ -21,7 +21,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 		public override void SetDefaults()
         {
             Projectile.width = 70;
-            Projectile.height = 20;
+            Projectile.height = 70;
 
             Projectile.friendly = true;
             Projectile.hostile = false;

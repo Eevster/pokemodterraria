@@ -5,6 +5,14 @@ namespace Pokemod.Common.Configs
 {
 	public class GameplayConfig : ModConfig
 	{
+		public enum LevelCapOptions
+		{
+			Disobedience,
+			ExpCutoff,
+			LevelClamping,
+			None
+		}
+
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 		[Header("PokemonWorld")] 
@@ -16,10 +24,10 @@ namespace Pokemod.Common.Configs
 		public float PokemonSpawnMultiplier;
 
 		[Header("GameplayChanges")]
-		[DefaultValue(false)]
-		public bool Disobedience;
+		[DefaultValue(LevelCapOptions.Disobedience)]
+		public LevelCapOptions LevelCapType;
 
-		[Header("RuleChanges")] 
+        [Header("RuleChanges")] 
 
 		[DefaultValue(false)]
 		public bool RandomizedStarters;

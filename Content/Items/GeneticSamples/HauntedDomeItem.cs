@@ -11,7 +11,7 @@ namespace Pokemod.Content.Items.GeneticSamples
     {
         public override void SetDefaults()
         {
-            pokemonName = "Kabuto";
+            pokemonName = "TerrarianKabuto";
             minLevel = 5;
             maxLevel = 35;
 
