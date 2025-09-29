@@ -100,6 +100,7 @@ namespace Pokemod.Content.Pets
 		public bool isFlying = false;
 
 		public virtual bool tangible => true;
+		public virtual bool ghostTangible => false;
 		public virtual bool canRotate => false;
 		public bool canFall = false;
 
@@ -108,7 +109,7 @@ namespace Pokemod.Content.Pets
 			Ground,
 			Fly,
 			Hybrid,
-			Jump
+			Jump,
 		}
 
 		//Evolution
@@ -710,7 +711,12 @@ namespace Pokemod.Content.Pets
 
 			canFall = false;
 
-			if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
+            if (ghostTangible && !Collision.SolidCollision(Projectile.position, hitboxWidth, hitboxHeight))
+            {
+                Projectile.tileCollide = true;
+            }
+
+            if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
 			{
 				if (moveStyle != (int)MovementStyle.Fly)
 				{
@@ -948,12 +954,16 @@ namespace Pokemod.Content.Pets
 						}
 					}
 
-					if (distanceToIdlePosition < 60f && tangible)
+					if (distanceToIdlePosition < 70f && tangible)
 					{
 						Projectile.tileCollide = true;
 						if (moveStyle == (int)MovementStyle.Hybrid)
 						{
-							isFlying = false;
+							Tile playerStanding = Main.tile[(int)(Main.player[Projectile.owner].Bottom.X / 16f), (int)((Main.player[Projectile.owner].Bottom.Y + 8) / 16f)]; //only lands if the player is on the ground.
+							if (playerStanding.HasTile && (playerStanding.IsHalfBlock || Main.tileSolid[playerStanding.TileType]))
+							{
+								isFlying = false;
+							}
 						}
 					}
 				}
@@ -1084,7 +1094,12 @@ namespace Pokemod.Content.Pets
 
 			canFall = false;
 
-			if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
+            if (ghostTangible && !Collision.SolidCollision(Projectile.position, hitboxWidth, hitboxHeight))
+            {
+                Projectile.tileCollide = true;
+            }
+
+            if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
 			{
 				isFlying = true;
 			}
@@ -1896,7 +1911,21 @@ namespace Pokemod.Content.Pets
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-			// Walk through closed doors (except for the locked jungle temple door)
+            if (ghostTangible && moveStyle == (int)MovementStyle.Hybrid && Projectile.velocity.X != oldVelocity.X)
+            {
+                Projectile.velocity.X = oldVelocity.X;
+				Projectile.tileCollide = false;
+				return false;
+            }
+
+            if (ghostTangible && moveStyle == (int)MovementStyle.Hybrid && Projectile.velocity.Y > oldVelocity.Y)
+            {
+                Projectile.velocity.Y = oldVelocity.Y;
+                Projectile.tileCollide = false;
+                return false;
+            }
+
+            // Walk through closed doors (except for the locked jungle temple door)
             if (CheckDoorCollide(oldVelocity))
             {
                 Projectile.velocity.X = oldVelocity.X;

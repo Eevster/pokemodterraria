@@ -129,49 +129,10 @@ namespace Pokemod.Content.Tiles
             base.PlaceInWorld(i, j, item);
         }
 
-        /*
-        public override void AnimateTile(ref int frame, ref int frameCounter)
+        public override IEnumerable<Item> GetItemDrops(int i, int j)
         {
-            if (++frameCounter >= 8)
-            {
-                Main.NewText(frame + " | " + frameCounter);
-                frameCounter = 0;
-                frame++;
-
-                switch (animState)
-                {
-                    case 0:
-                        frame = 10;
-                        animState = 3;
-                        break;
-                    case 1:
-                        if (frame >= 4) frame = 0;
-                        break;
-                    case 2:
-                        frame = 4;
-                        animState = 3;
-                        break;
-                    case 3:
-                        if (frame >= 23)
-                        {
-                            frame = 0;
-                            animState = 1;
-                            break;
-                        }
-                        break;
-                    default:
-                        frame = 10;
-                        animState = 0;
-                        break;
-                }
-                if (frame >= 23)
-                {
-                    frame = 0;
-                    animState = 1;
-                }
-            }
+            yield return new Item(ModContent.ItemType<GeoResonator>());
         }
-        */
 
         public Vector2 DetectFossil(int i, int j)
         {
