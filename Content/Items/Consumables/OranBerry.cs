@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Pokemod.Content.Items.Consumables
 {
     public class OranBerry : PokemonConsumableItem{
-        int healAmount = 10;
+        int healAmount = 10 * 5;
         public override void SetDefaults() {
 			Item.width = 24; // The item texture's width
 			Item.height = 24; // The item texture's height

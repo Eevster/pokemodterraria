@@ -7,6 +7,7 @@ using System.Threading;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Pokemod.Content.Tiles.FossilBlocks
@@ -31,16 +32,21 @@ namespace Pokemod.Content.Tiles.FossilBlocks
             HitSound = SoundID.Item127;
 			
 			// Item Drops
-			fossilChance = 90;
+			fossilChance = 45;
 				fossilList.Add(ModContent.ItemType<InfernalAmberItem>());
 			fossilBlockChance = 5;
 				fossilBlock = ModContent.ItemType<IgneousFossilItem>();
-			commonItemChance = 3;
-				commonItem = ItemID.Bone;
 				defaultBlock = ItemID.Obsidian;
+            commonItemChance = 6;
+				commonItems.Add(ItemID.Amber);
+				commonItems.Add(ItemID.Amber);
+				commonItems.Add(ItemID.Ruby);
+				commonItems.Add(ItemID.Topaz);
+            
 
-            AddMapEntry(new Color(150, 115, 90));
-		}
+            LocalizedText name = Language.GetText("Mods.Pokemod.Items.IgneousFossilItem.DisplayName");
+            AddMapEntry(new Color(40, 30, 50), name);
+        }
 
 	}
 
@@ -52,8 +58,8 @@ namespace Pokemod.Content.Tiles.FossilBlocks
 			base.SetStaticDefaults();
 
 			fossilBlockType = (ushort)ModContent.TileType<IgneousFossilBlock>();
-			numPerDay = 15;
-			maxTiles = 5000;
+			numPerDay = 10;
+			maxTiles = 4500;
             priority = 1;
         }
         public override void UpdateWorldData()

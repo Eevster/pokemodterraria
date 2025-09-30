@@ -59,7 +59,7 @@ namespace Pokemod.Common.Players
 
 		//Level Cap
 		public int levelCap;
-		public const int defaultLevelCap = 100;
+		public const int defaultLevelCap = 10;
 
 		//Manual Control
 		public bool manualControl;
@@ -463,7 +463,7 @@ namespace Pokemod.Common.Players
 						if (Main.projectile[index].ModProjectile is PokemonPetProjectile) PokemonProj = (PokemonPetProjectile)Main.projectile[index]?.ModProjectile;
 						else PokemonProj = null;
 
-						PokemonProj?.regenHP(3);
+						PokemonProj?.regenHP(3 * 5);
 					}
 				}
 				LeftoversTimer = 10 * 60;
@@ -539,7 +539,7 @@ namespace Pokemod.Common.Players
 
 		public int GetClampedLevel(int pokemonLvl)
 		{
-			if (!ModContent.GetInstance<GameplayConfig>().Disobedience) {
+			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.LevelClamping) {
 				return System.Math.Clamp(pokemonLvl, 0, levelCap);
 			}
 

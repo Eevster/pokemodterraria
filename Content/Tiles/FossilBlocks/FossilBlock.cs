@@ -20,7 +20,7 @@ namespace Pokemod.Content.Tiles.FossilBlocks
 		public int fossilBlockChance = 5; // 1 in 5 chance to be a Fossil Block
         public int fossilBlock;
         public int commonItemChance = 3; // 1 in 3 chance to be a Bone
-		public int commonItem;
+		public List<int> commonItems = [];
         public int defaultBlock;
 		
 		public int dustHighlight;
@@ -87,14 +87,18 @@ namespace Pokemod.Content.Tiles.FossilBlocks
                     yield return new Item(droppedItem);
                 }
             }
-            else if (Main.rand.NextBool(fossilBlockChance))
+            if (Main.rand.NextBool(commonItemChance))
             {
-
+                int commonItem = commonItems[Main.rand.Next(commonItems.Count)];
+                yield return new Item(commonItem);
+            }
+            if (Main.rand.NextBool(fossilBlockChance))
+            {
                 yield return new Item(fossilBlock);
             }
             else
             {
-                yield return new Item(Main.rand.NextBool(commonItemChance) ? commonItem : defaultBlock);
+                yield return new Item(defaultBlock);
             }
         }
     }

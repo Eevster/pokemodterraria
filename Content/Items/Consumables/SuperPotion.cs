@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Pokemod.Content.Items.Consumables
 {
     public class SuperPotion : PokemonConsumableItem{
-        int healAmount = 60;
+        int healAmount = 60 * 5;
         public override void SetDefaults() {
 			Item.width = 24; // The item texture's width
 			Item.height = 24; // The item texture's height

@@ -13,6 +13,7 @@ namespace Pokemod.Content.Pets.GengarPet
         public override int hitboxHeight => 46;
 
         public override int moveStyle => 2;
+        public override bool ghostTangible => true;
 
         public override float distanceToFly => 300f;
 

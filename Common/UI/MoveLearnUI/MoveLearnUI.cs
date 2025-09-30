@@ -34,7 +34,7 @@ namespace Pokemod.Common.UI.MoveLearnUI
 			MoveLearnPanel = new DraggableUIPanel();
 			MoveLearnPanel.SetPadding(0);
 
-			SetRectangleAlign(MoveLearnPanel, left: 0.5f, top: 0.6f, width: 600, height: 300);
+			SetRectangleAlign(MoveLearnPanel, left: 0.8f, top: 0.2f, width: 600, height: 300);
 
 			var panelText = new UIText(Language.GetText("Mods.Pokemod.MoveLearnUI.MoveLearn").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs."+pokemon?.PokemonName+"CritterNPC.DisplayName")), 1f)
 			{

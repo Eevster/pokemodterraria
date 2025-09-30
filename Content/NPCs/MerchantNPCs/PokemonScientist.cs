@@ -34,8 +34,6 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 	[AutoloadHead]
 	public class PokemonScientist : ModNPC
 	{
-		public const string ShopName = "Shop";
-
 		private static int ShimmerHeadIndex;
 		private static Profiles.StackedNPCProfile NPCProfile;
 
@@ -43,11 +41,13 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 		public bool isChatting = false;
 		public string lastPokemonName = "";
 
-        public override void Load() {
+		public override void Load()
+		{
 			ShimmerHeadIndex = Mod.AddNPCHeadTexture(Type, Texture + "_Shimmer_Head");
 		}
 
-		public override void SetStaticDefaults() {
+		public override void SetStaticDefaults()
+		{
 			Main.npcFrameCount[Type] = 25;
 
 			NPCID.Sets.ExtraFramesCount[Type] = 9; // Generally for Town NPCs, but this is how the NPC does extra things such as sitting in a chair and talking to other NPCs. This is the remaining frames after the walking frames.
@@ -56,16 +56,17 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			NPCID.Sets.AttackType[Type] = 0;
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 60;
-			NPCID.Sets.HatOffsetY[Type] = 4; 
+			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
-			NPCID.Sets.ShimmerTownTransform[Type] = true; 
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Connects this NPC with a custom emote.
 			// This makes it when the NPC is in the world, other NPCs will "talk about him".
 			// By setting this you don't have to override the PickEmote method for the emote to appear.
 			//NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<ExamplePersonEmote>();
 
-			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers() {
+			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
+			{
 				Velocity = 0.5f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
 				Direction = -1 // -1 is left and 1 is right. NPCs are drawn facing the left by default but ExamplePerson will be drawn facing the right
 			};
@@ -92,7 +93,8 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 
 		}
 
-		public override void SetDefaults() {
+		public override void SetDefaults()
+		{
 			NPC.townNPC = true; // Sets NPC to be a Town NPC
 			NPC.friendly = true; // NPC Will not attack player
 			NPC.width = 18;
@@ -108,7 +110,8 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			AnimationType = NPCID.Guide;
 		}
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			// We can use AddRange instead of calling Add multiple times in order to add multiple items at once
 			bestiaryEntry.Info.AddRange([
 
@@ -119,10 +122,12 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			]);
 		}
 
-		public override void HitEffect(NPC.HitInfo hit) {
+		public override void HitEffect(NPC.HitInfo hit)
+		{
 			int num = NPC.life > 0 ? 1 : 5;
 
-			for (int k = 0; k < num; k++) {
+			for (int k = 0; k < num; k++)
+			{
 				Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DirtSpray);
 			}
 			/*
@@ -149,38 +154,44 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			}*/
 		}
 
-		public override void OnSpawn(IEntitySource source) {
-			if(source is EntitySource_SpawnNPC) {
+
+        public override void OnSpawn(IEntitySource source)
+		{
+			if (source is EntitySource_SpawnNPC)
+			{
 				// A TownNPC is "unlocked" once it successfully spawns into the world.
 				TownNPCRespawnSystem.unlockedScientistSpawn = true;
-			}
+                TownNPCRespawnSystem.ScientistArrived = true;
+            }
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs) { // Requirements for the town NPC to spawn.
-			if (TownNPCRespawnSystem.unlockedScientistSpawn) {
-				// If Example Person has spawned in this world before, we don't require the user satisfying the ExampleItem/ExampleBlock inventory conditions for a respawn.
-				return true;
-			}
-
-            var samplesList = ModContent.GetContent<GeneticSampleItem>();
-            foreach (var player in Main.ActivePlayers)
+		public override bool CanTownNPCSpawn(int numTownNPCs) // Requirements for the town NPC to spawn.
+		{
+			var samplesList = ModContent.GetContent<GeneticSampleItem>();
+			foreach (var player in Main.ActivePlayers)
 			{
 				foreach (GeneticSampleItem sampleType in samplesList)
 				{
 					if (player.HasItem(sampleType.Type))
 					{
-                        return true;
+						TownNPCRespawnSystem.unlockedScientistSpawn = true;
 					}
 				}
+			}
+			if (TownNPCRespawnSystem.unlockedScientistSpawn)
+			{
+				return true;
 			}
 			return false;
 		}
 
-		public override ITownNPCProfile TownNPCProfile() {
+		public override ITownNPCProfile TownNPCProfile()
+		{
 			return NPCProfile;
 		}
 
-		public override List<string> SetNPCNameList() {
+		public override List<string> SetNPCNameList()
+		{
 			return new List<string>() {
 				"Jed",
 				"Connor",
@@ -196,45 +207,51 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			};
 		}
 
-        public override void AI()
-        {
-            base.AI();
-            if (Main.npcChatRelease) chatIndex = -1;
-        }
+		public override void AI()
+		{
+			base.AI();
+			if (Main.npcChatRelease) chatIndex = -1;
+			if (!TownNPCRespawnSystem.ScientistArrived)
+			{
+                TownNPCRespawnSystem.ScientistArrived = true;
+            }
+		}
 
-        public override string GetChat() {
+		public override string GetChat()
+		{
 
 			string chosenChat;
 
-            switch (chatIndex)
+			switch (chatIndex)
 			{
 				case 0:
 					chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.MissingSamplesDialogue");
 					break;
 				case 1:
-                    chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.NoSamplesDialogue");
-                    break;
-                case 2:
-                    chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.NoBallDialogue");
-                    break;
-                case 3:
-                    chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.LowLevelDialogue");
-                    break;
-                case 4:
-                    chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.SuccessDialogue") + lastPokemonName + ".";
-                    break;
-                default:
-                    WeightedRandom<string> chat = new WeightedRandom<string>();
-                    chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.StandardDialogue1"));
-                    chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.StandardDialogue2"));
-                    chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.StandardDialogue3"));
+					chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.NoSamplesDialogue");
+					break;
+				case 2:
+					chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.NoBallDialogue");
+					break;
+				case 3:
+					chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.LowLevelDialogue");
+					break;
+				case 4:
+					chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.SuccessDialogue") + lastPokemonName + ".";
+					break;
+				default:
+					WeightedRandom<string> chat = new WeightedRandom<string>();
+					chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.StandardDialogue1"));
+					chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.StandardDialogue2"));
+					chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.StandardDialogue3"));
 					chosenChat = chat;
 					break;
-            }
-            return chosenChat;
+			}
+			return chosenChat;
 		}
 
-		public override void SetChatButtons(ref string button, ref string button2) { // What the chat buttons are when you open up the chat UI
+		public override void SetChatButtons(ref string button, ref string button2)
+		{ // What the chat buttons are when you open up the chat UI
 			button = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.Button");
 		}
 
@@ -286,7 +303,7 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 						{
 							int itemCount = player.CountItem(sampleType.Type);
 
-                            if (itemCount >= sampleType.sampleQuantity)
+							if (itemCount >= sampleType.sampleQuantity)
 							{
 								if (sampleType.minLevel < WorldLevel.MaxWorldLevel)
 								{
@@ -302,8 +319,8 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 									{
 										missingSamples = sampleType.sampleQuantity - itemCount;
 										samplePick = sampleType;
-                                        pickSuccess = true;
-                                    }
+										pickSuccess = true;
+									}
 								}
 								else
 								{
@@ -359,22 +376,22 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 
 		public void ConstructPokemonFromSample(GeneticSampleItem sampleItem, Player player, BallItem ball)
 		{
-            int minlvl = sampleItem.minLevel;
-            int maxlvl = Math.Min(WorldLevel.MaxWorldLevel, sampleItem.maxLevel);
-            if (maxlvl < minlvl) maxlvl = minlvl;
-            int lvl = Main.rand.Next(minlvl, maxlvl + 1);
+			int minlvl = sampleItem.minLevel;
+			int maxlvl = Math.Min(WorldLevel.MaxWorldLevel, sampleItem.maxLevel);
+			if (maxlvl < minlvl) maxlvl = minlvl;
+			int lvl = Main.rand.Next(minlvl, maxlvl + 1);
 
-            int[] IVs = PokemonNPCData.GenerateIVs();
-            int nature = 10 * Main.rand.Next(5) + Main.rand.Next(5);
+			int[] IVs = PokemonNPCData.GenerateIVs();
+			int nature = 10 * Main.rand.Next(5) + Main.rand.Next(5);
 
-            float shinyChance = 0.0024f;
-            if (Main.LocalPlayer.GetModPlayer<PokemonPlayer>().HasShinyCharm)
-            {
-                shinyChance *= 3f;
-            }
-            bool shiny = Main.rand.NextBool((int)(1f / shinyChance));
+			float shinyChance = 0.0024f;
+			if (Main.LocalPlayer.GetModPlayer<PokemonPlayer>().HasShinyCharm)
+			{
+				shinyChance *= 3f;
+			}
+			bool shiny = Main.rand.NextBool((int)(1f / shinyChance));
 
-            var entitySource = NPC.GetSource_GiftOrReward();
+			var entitySource = NPC.GetSource_GiftOrReward();
 
 			if (Main.netMode != NetmodeID.MultiplayerClient)
 			{
@@ -400,37 +417,42 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 				if (sampleIndex < 0) continue;
 				GeneticSampleItem sample = (GeneticSampleItem)player.inventory[sampleIndex]?.ModItem;
 				sample.Item.stack--;
-            }
+			}
 			ball.Item.stack--;
-            return;
-        }
+			return;
+		}
 
-		public override void ModifyNPCLoot(NPCLoot npcLoot) {
+		public override void ModifyNPCLoot(NPCLoot npcLoot)
+		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Potion>()));
 		}
 
 		// Make this Town NPC teleport to the King and/or Queen statue when triggered. Return toKingStatue for only King Statues. Return !toKingStatue for only Queen Statues. Return true for both.
 		public override bool CanGoToStatue(bool toKingStatue) => toKingStatue;
 
-		public override void TownNPCAttackStrength(ref int damage, ref float knockback) {
+		public override void TownNPCAttackStrength(ref int damage, ref float knockback)
+		{
 			damage = 20;
 			knockback = 4f;
 		}
 
-		public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown) {
+		public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
+		{
 			cooldown = 30;
 			randExtraCooldown = 30;
 		}
 
-		public override void TownNPCAttackProj(ref int projType, ref int attackDelay) {
+		public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
+		{
 			projType = ProjectileID.Bone;
 			attackDelay = 1;
 		}
 
-		public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset) {
+		public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
+		{
 			multiplier = 12f;
 			randomOffset = 2f;
 			gravityCorrection = 2f;
 		}
-	}
+    }
 }

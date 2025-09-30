@@ -28,6 +28,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackFlyStartEnd => [10, 13];
 
         public override float catchRate => 50;
+        public override string[] variants => ["Halloween"];
         public override int minLevel => 40;
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {

@@ -6,6 +6,7 @@ using System.Threading;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Pokemod.Content.Tiles.FossilBlocks
@@ -31,18 +32,19 @@ namespace Pokemod.Content.Tiles.FossilBlocks
             HitSound = SoundID.Item127;
 			
 			// Item Drops
-			fossilChance = 18;
+			fossilChance = 15;
 				fossilList.Add(ModContent.ItemType<OldAmberItem>());
 				fossilList.Add(ModContent.ItemType<HelixFossilItem>());
 				fossilList.Add(ModContent.ItemType<DomeFossilItem>());
 			fossilBlockChance = 5;
 				fossilBlock = ModContent.ItemType<PrimordialFossilItem>();
-			commonItemChance = 3;
-				commonItem = ItemID.Bone;
 				defaultBlock = ItemID.DirtBlock;
-
-            AddMapEntry(new Color(150, 115, 90));
-		}
+            commonItemChance = 3;
+				commonItems.Add(ItemID.Bone);
+				
+            LocalizedText name = Language.GetText("Mods.Pokemod.Items.PrimordialFossilItem.DisplayName");
+            AddMapEntry(new Color(150, 115, 90), name);
+        }
 
 	}
 
@@ -55,7 +57,7 @@ namespace Pokemod.Content.Tiles.FossilBlocks
 
 			fossilBlockType = (ushort)ModContent.TileType<PrimordialFossilBlock>();
 			numPerDay = 30;
-			maxTiles = 10000;
+			maxTiles = 7500;
             priority = 4;
 			canSpawn = true;
         }
