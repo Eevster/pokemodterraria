@@ -21,7 +21,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+				new FlavorTextBestiaryInfoElement("As it digs through the ground, it absorbs many hard objects. This is what makes its body so solid."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {

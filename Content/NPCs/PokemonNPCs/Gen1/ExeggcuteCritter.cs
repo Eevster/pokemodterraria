@@ -20,7 +20,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+				new FlavorTextBestiaryInfoElement("Though it may look like it's just a bunch of eggs, it's a proper Pokémon. Exeggcute communicates with others of its kind via telepathy, apparently."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
