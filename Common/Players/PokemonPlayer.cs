@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
@@ -52,6 +53,9 @@ namespace Pokemod.Common.Players
 		public NPC targetNPC;
 		public Player targetPlayer;
 
+		//Registered Pokemon
+		public Dictionary<string, int> registeredPokemon = new Dictionary<string, int>();
+
 		//Active Pokemon
 		public int maxPokemon;
 		public const int defaultMaxPokemon = 1;
@@ -97,6 +101,9 @@ namespace Pokemod.Common.Players
 			tag["TrainerID"] = TrainerID;
 			tag["HasStarter"] = HasStarter;
 			tag["CanMegaEvolve"] = CanMegaEvolve;
+
+			tag["RegisteredPKKeys"] = registeredPokemon.Keys.ToList();
+			tag["RegisteredPKValues"] = registeredPokemon.Values.ToList();
 		}
 
 		public override void LoadData(TagCompound tag)
@@ -104,6 +111,16 @@ namespace Pokemod.Common.Players
 			TrainerID = tag.GetString("TrainerID");
 			HasStarter = tag.GetBool("HasStarter");
 			CanMegaEvolve = tag.GetInt("CanMegaEvolve");
+
+			List<string> auxKeys = tag.GetList<string>("RegisteredPKKeys").ToList();
+			List<int> auxValues = tag.GetList<int>("RegisteredPKValues").ToList();
+			
+			registeredPokemon = new Dictionary<string, int>();
+
+			for (int i = 0; i < auxKeys.Count; i++)
+			{
+				registeredPokemon.Add(auxKeys[i], i<auxValues.Count?auxValues[i]:0);
+			}
 		}
 
 		public override void Initialize()
@@ -384,6 +401,12 @@ namespace Pokemod.Common.Players
 			int ballItem;
 			bool shiny = Main.rand.NextBool(4096);
 
+			if (!registeredPokemon.Keys.Contains(pokemonName))
+			{
+				registeredPokemon.Add(pokemonName, 1);
+			}
+			else registeredPokemon[pokemonName] = 1;
+
 			if (Main.netMode == NetmodeID.SinglePlayer)
 			{
 				ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
@@ -545,6 +568,22 @@ namespace Pokemod.Common.Players
 
 			return pokemonLvl;
 		}
+
+		public override void OnHitAnything(float x, float y, Entity victim)
+        {
+            if(victim.GetType().ToString() == "Terraria.NPC"){
+				NPC target = (NPC)victim;
+				if (target.ModNPC is PokemonWildNPC nPC)
+				{
+					if (!registeredPokemon.Keys.Contains(nPC.pokemonName))
+					{
+						registeredPokemon.Add(nPC.pokemonName, 0);
+					}
+					//else registeredPokemon[nPC.pokemonName] = 1;
+				}
+			}
+            base.OnHitAnything(x, y, victim);
+        }
 
 		public override void PreUpdateMovement()
 		{

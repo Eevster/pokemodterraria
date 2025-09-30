@@ -810,6 +810,25 @@ namespace Pokemod.Content.Items
             base.Update(ref gravity, ref maxFallSpeed);
         }
 
+        public override bool OnPickup(Player player)
+        {
+			if (player != null)
+			{
+				PokemonPlayer trainer = player.GetModPlayer<PokemonPlayer>();
+
+				if (trainer.TrainerID == CurrentTrainerID)
+				{
+					if (!trainer.registeredPokemon.Keys.Contains(PokemonName))
+					{
+						trainer.registeredPokemon.Add(PokemonName, 1);
+					}
+					else trainer.registeredPokemon[PokemonName] = 1;
+				}
+			}
+
+            return base.OnPickup(player);
+        }
+
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
 			if (BallType != null && BallType != "")

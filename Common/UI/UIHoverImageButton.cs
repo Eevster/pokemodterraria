@@ -77,6 +77,7 @@ namespace Pokemod.Common.UI
 		private Asset<Texture2D> _borderTexture;
 		private Asset<Texture2D> _backgroundTexture;
 		private Asset<Texture2D> _Texture;
+		public Color ButtonColor = Color.White;
 		public Color BorderColor = Color.Black;
 		public Color BackgroundColor = new Color(63, 82, 151) * 0.7f;
 
@@ -121,8 +122,11 @@ namespace Pokemod.Common.UI
 			if (_borderTexture != null)
 				DrawPanel(spriteBatch, _borderTexture.Value, BorderColor);
 
-			CalculatedStyle dimensions = GetDimensions();
-			spriteBatch.Draw(_Texture.Value, dimensions.Center()-0.5f*_Texture.Size(), Color.White * (base.IsMouseHovering ? _visibilityActive : _visibilityInactive));
+			if (_Texture != null)
+			{
+				CalculatedStyle dimensions = GetDimensions();
+				spriteBatch.Draw(_Texture.Value, dimensions.Center()-0.5f*_Texture.Size(), ButtonColor * (base.IsMouseHovering ? _visibilityActive : _visibilityInactive));
+			}
 			
 			if (image != null && (!canBeSelected || (canBeSelected && (selected || IsMouseHovering))))
 			{

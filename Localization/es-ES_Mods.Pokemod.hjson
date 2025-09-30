@@ -3529,31 +3529,6 @@ NPCs: {
 	BulbasaurCritterNPC.DisplayName: Bulbasaur
 	CharmanderCritterNPC.DisplayName: Charmander
 	SquirtleCritterNPC.DisplayName: Squirtle
-
-	PokemonProfessor: {
-		DisplayName: Pokemon Profesor
-		// Census.SpawnCondition: Available immediately
-
-		TownNPCMood: {
-			// Content: The wild Pokemon seem peaceful here.
-			// NoHome: It'll be a challenge researching without a lab, but I'll manage.
-			// FarFromHome: It's always an adventure out here.
-			// LoveSpace: There's enough space here to do all kinds of experiments!
-			// DislikeCrowded: The Pokemon get skittish with too many people around.
-			// HateCrowded: This is such a busy place, the Pokemon are getting uneasy.
-			// LoveBiome: The gentle breeze in {BiomeName} makes for the perfect place to conduct my research.
-			// LikeBiome: "{BiomeName} is quite a pleasant place."
-			// DislikeBiome: "{BiomeName} has quite an eerie tone. I'm not to sure about this."
-			// HateBiome: It's far too cold out here in {BiomeName}. My poor Pokemon will freeze.
-			// LoveNPC: "{NPCName} really understands the value of documenting these fascinating creatures!"
-			// LikeNPC: "{NPCName} reminds me of someone I knew back home. She's so helpful."
-			// DislikeNPC: I don't trust {NPCName}. He just rubs me the wrong way.
-			// HateNPC: I can't believe {NPCName} sells weapons for a living. Couldn't he do something friendlier with his time?
-			// LikeNPC_Princess: "{NPCName} is such a kind soul."
-			// Princess_LovesNPC: "{NPCName} really knows his stuff, and his Pokemon are so cute!"
-		}
-	}
-
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
 	CharmanderCritterNPCShiny.DisplayName: Charmander
 	SquirtleCritterNPCShiny.DisplayName: Squirtle
@@ -3563,10 +3538,10 @@ NPCs: {
 	ChikoritaCritterNPC.DisplayName: Chikorita
 	CharizardCritterNPC.DisplayName: Charizard
 	CharizardCritterNPCShiny.DisplayName: Charizard
-	// CharizardMegaXCritterNPC.DisplayName: Mega Charizard X
-	// CharizardMegaXCritterNPCShiny.DisplayName: Mega Charizard X Shiny
-	// CharizardMegaYritterNPC.DisplayName: Mega Charizard Y
-	// CharizardMegaYCritterNPCShiny.DisplayName: Mega Charizard Y Shiny
+	CharizardMegaXCritterNPC.DisplayName: Mega Charizard X
+	CharizardMegaXCritterNPCShiny.DisplayName: Mega Charizard X Shiny
+	CharizardMegaYritterNPC.DisplayName: Mega Charizard Y
+	CharizardMegaYCritterNPCShiny.DisplayName: Mega Charizard Y Shiny
 	ChikoritaCritterNPCShiny.DisplayName: Chikorita
 	CyndaquilCritterNPC.DisplayName: Cyndaquil
 	CyndaquilCritterNPCShiny.DisplayName: Cyndaquil
@@ -3900,7 +3875,32 @@ NPCs: {
 	// TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	// TerrarianOmastarCritterNPC.DisplayName: Terrarian Omastar
 	// TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
-	// FishermanTrainer.DisplayName: Fisherman Trainer
+
+	PokemonProfessor: {
+		DisplayName: Profesor Pokemon
+		Census.SpawnCondition: Available immediately
+
+		TownNPCMood: {
+			Content: The wild Pokemon seem peaceful here.
+			NoHome: It'll be a challenge researching without a lab, but I'll manage.
+			FarFromHome: It's always an adventure out here.
+			LoveSpace: There's enough space here to do all kinds of experiments!
+			DislikeCrowded: The Pokemon get skittish with too many people around.
+			HateCrowded: This is such a busy place, the Pokemon are getting uneasy.
+			LoveBiome: The gentle breeze in {BiomeName} makes for the perfect place to conduct my research.
+			LikeBiome: "{BiomeName} is quite a pleasant place."
+			DislikeBiome: "{BiomeName} has quite an eerie tone. I'm not to sure about this."
+			HateBiome: It's far too cold out here in {BiomeName}. My poor Pokemon will freeze.
+			LoveNPC: "{NPCName} really understands the value of documenting these fascinating creatures!"
+			LikeNPC: "{NPCName} reminds me of someone I knew back home. She's so helpful."
+			DislikeNPC: I don't trust {NPCName}. He just rubs me the wrong way.
+			HateNPC: I can't believe {NPCName} sells weapons for a living. Couldn't he do something friendlier with his time?
+			LikeNPC_Princess: "{NPCName} is such a kind soul."
+			Princess_LovesNPC: "{NPCName} really knows his stuff, and his Pokemon are so cute!"
+		}
+	}
+
+	FishermanTrainer.DisplayName: Pescador Entrenador
 
 	PokemonScientist: {
 		DisplayName: Científico

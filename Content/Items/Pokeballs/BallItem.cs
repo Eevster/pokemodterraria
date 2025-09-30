@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Common.Players;
 using Pokemod.Content.NPCs;
 using ReLogic.Content;
 using Terraria;
@@ -287,6 +288,17 @@ namespace Pokemod.Content.Items.Pokeballs
 				int[] IVs = targetPokemon.GetGlobalNPC<PokemonNPCData>().IVs;
 				int nature = targetPokemon.GetGlobalNPC<PokemonNPCData>().nature;
 				string variant = targetPokemon.GetGlobalNPC<PokemonNPCData>().variant;
+
+				if (player != null)
+				{
+					PokemonPlayer trainer = player.GetModPlayer<PokemonPlayer>();
+
+					if (!trainer.registeredPokemon.Keys.Contains(pokemonName))
+					{
+						trainer.registeredPokemon.Add(pokemonName, 1);
+					}
+					else trainer.registeredPokemon[pokemonName] = 1;
+				}
 
 				if (Main.netMode == NetmodeID.SinglePlayer)
 				{
