@@ -11,7 +11,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 23;
-		public override int animationSpeed => 10;
+		public override int animationSpeed => 12;
 		public override int[] idleStartEnd => [0, 7];
 		public override int[] walkStartEnd => [8, 11];
 		public override int[] jumpStartEnd => [0, 0];
