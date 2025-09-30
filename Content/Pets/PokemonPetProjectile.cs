@@ -1514,8 +1514,8 @@ namespace Pokemod.Content.Pets
 						frameSpeed = (int)(animationSpeed*3f/Math.Clamp(Math.Abs(Projectile.velocity.X/2), 2f, 10f));
 						break;
 					case (int)ProjStatus.Attack:
-						initialFrame = attackSwimStartEnd[0];
-						finalFrame = attackSwimStartEnd[1];
+						initialFrame = attackSwimStartEnd[0] >= 0 ? attackSwimStartEnd[0]:(attackStartEnd[0] >= 0 ? attackStartEnd[0]:idleStartEnd[0]);
+						finalFrame = attackSwimStartEnd[1] >= 0 ? attackSwimStartEnd[1]:(attackStartEnd[1] >= 0 ? attackStartEnd[1]:idleStartEnd[1]);
 						break;
 				}
 			}else if(isFlying){
@@ -1530,8 +1530,8 @@ namespace Pokemod.Content.Pets
 						frameSpeed = (int)(animationSpeed*3f/Math.Clamp(Math.Abs(Projectile.velocity.X/2), 2f, 10f));
 						break;
 					case (int)ProjStatus.Attack:
-						initialFrame = attackFlyStartEnd[0] >= 0 ? attackFlyStartEnd[0]:attackStartEnd[0];
-						finalFrame = attackFlyStartEnd[1] >= 0 ? attackFlyStartEnd[1]:attackStartEnd[1];
+						initialFrame = attackFlyStartEnd[0] >= 0 ? attackFlyStartEnd[0]:(attackStartEnd[0] >= 0 ? attackStartEnd[0]:idleStartEnd[0]);
+						finalFrame = attackFlyStartEnd[1] >= 0 ? attackFlyStartEnd[1]:(attackStartEnd[1] >= 0 ? attackStartEnd[1]:idleStartEnd[1]);
 						break;
 				}
 			}else{
@@ -1554,8 +1554,8 @@ namespace Pokemod.Content.Pets
 						finalFrame = fallStartEnd[1];
 						break;
 					case (int)ProjStatus.Attack:
-						initialFrame = attackStartEnd[0];
-						finalFrame = attackStartEnd[1];
+						initialFrame = attackStartEnd[0] >= 0 ? attackStartEnd[0]:idleStartEnd[0];
+						finalFrame = attackStartEnd[1] >= 0 ? attackStartEnd[1]:idleStartEnd[1];
 						break;
 				}
 			}
