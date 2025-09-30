@@ -1832,27 +1832,27 @@ Items: {
 	}
 
 	GeoResonator: {
-		// DisplayName: Geo Resonator
-		/* Tooltip:
+		DisplayName: Geo Resonador
+		Tooltip:
 			'''
-			A machine designed by the scientist
-			Can only be placed underground
-			Scans the earth for fossils
-			''' */
-		// Activation: "Geo Resonator scan complete - Nearest fossil located at: "
-		// Failure: Geo Resonator scan complete - No fossils detected nearby
-		// East: "' East, "
-		// West: "' West, "
-		// Underground: "' Underground"
+			Una máquina diseñada por el científico
+			Solo puede colocarse en el subsuelo
+			Escanea la tierra en busca de fósiles
+			'''
+		Activation: "Escaneo del Geo Resonador completado - El fósil más cercano se encuentra en: "
+		Failure: Escaneo del Geo Resonador completad - No se detectaron fósiles cerca
+		East: "' Este, "
+		West: "' Oeste, "
+		Underground: "' Subsuelo"
 	}
 
 	GeoResonatorBlueprint: {
-		// DisplayName: Resonator Blueprint
-		/* Tooltip:
+		DisplayName: Plano del resonador
+		Tooltip:
 			'''
-			Blueprints drawn by the scientist
-			They depict a machine to help with finding fossils
-			''' */
+			Planos dibujados por el científico.
+			Representan una máquina que ayuda a encontrar fósiles.
+			'''
 	}
 }
 
