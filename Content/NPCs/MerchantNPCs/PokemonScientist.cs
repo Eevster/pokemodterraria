@@ -211,6 +211,10 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 		{
 			base.AI();
 			if (Main.npcChatRelease) chatIndex = -1;
+			if (!TownNPCRespawnSystem.ScientistArrived)
+			{
+                TownNPCRespawnSystem.ScientistArrived = true;
+            }
 		}
 
 		public override string GetChat()
