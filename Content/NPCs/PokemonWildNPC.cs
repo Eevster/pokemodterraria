@@ -17,6 +17,7 @@ using System.IO;
 using Pokemod.Content.Dusts;
 using Pokemod.Common.Configs;
 using Pokemod.Content.Buffs;
+using Terraria.Localization;
 
 namespace Pokemod.Content.NPCs
 {
@@ -130,7 +131,7 @@ namespace Pokemod.Content.NPCs
 				if (variants.Length > 0)
 				{
 					variant = variants[Main.rand.Next(variants.Length)];
-					
+
 					//Remove the possibility of spawning with the "Christmas" variant if it is no longer Christmas
 					if (variant == "Christmas")
 					{
@@ -139,14 +140,14 @@ namespace Pokemod.Content.NPCs
 							variant = "";
 						}
 					}
-                    if (variant == "Halloween")
-                    {
-                        if (!Main.halloween)
-                        {
-                            variant = "";
-                        }
-                    }
-                }
+					if (variant == "Halloween")
+					{
+						if (!Main.halloween)
+						{
+							variant = "";
+						}
+					}
+				}
 				else
 				{
 					variant = "";

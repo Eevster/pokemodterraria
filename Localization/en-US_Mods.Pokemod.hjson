@@ -3524,8 +3524,16 @@ Buffs: {
 }
 
 NPCs: {
-	EeveeCritterNPC.DisplayName: Eevee
-	PikachuCritterNPC.DisplayName: Pikachu
+	EeveeCritterNPC: {
+		DisplayName: Eevee
+		Description: Its ability to evolve into many forms allows it to adapt smoothly and perfectly to any environment.
+	}
+
+	PikachuCritterNPC: {
+		DisplayName: Pikachu
+		Description: When it is angered, it immediately discharges the energy stored in the pouches in its cheeks.
+	}
+
 	BulbasaurCritterNPC.DisplayName: Bulbasaur
 	CharmanderCritterNPC.DisplayName: Charmander
 	SquirtleCritterNPC.DisplayName: Squirtle
@@ -4028,6 +4036,27 @@ MoveLearnUI: {
 	MoveLearn: Your {0} wants to learn a new move, which one should it forget?
 	Forget: Forget selected
 	NotLearn: Not learn
+}
+
+PokemonTypes: {
+	Normal: Normal
+	Fighting: Fighting
+	Flying: Flying
+	Poison: Poison
+	Ground: Ground
+	Rock: Rock
+	Bug: Bug
+	Ghost: Ghost
+	Steel: Steel
+	Fire: Fire
+	Water: Water
+	Grass: Grass
+	Electric: Electric
+	Psychic: Psychic
+	Ice: Ice
+	Dragon: Dragon
+	Dark: Dark
+	Fairy: Fairy
 }
 
 PokemonNatures: {

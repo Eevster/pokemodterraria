@@ -238,8 +238,8 @@ namespace Pokemod.Content.Items
 			int[] types = PokemonData.pokemonInfo[PokemonName].pokemonTypes;
 
 			if(types.Length > 0){
-				if(types[0] >= 0) typeString += "[c/"+PokemonNPCData.GetTypeColor(types[0])+":"+(TypeIndex)types[0]+"]";
-				if(types[1] >= 0) typeString += "/[c/"+PokemonNPCData.GetTypeColor(types[1])+":"+(TypeIndex)types[1]+"]";
+				if(types[0] >= 0) typeString += "[c/"+PokemonNPCData.GetTypeColor(types[0])+":"+Language.GetTextValue("Mods.Pokemod.PokemonTypes."+(TypeIndex)types[0])+"]";
+				if(types[1] >= 0) typeString += "/[c/"+PokemonNPCData.GetTypeColor(types[1])+":"+Language.GetTextValue("Mods.Pokemod.PokemonTypes."+(TypeIndex)types[1])+"]";
 			}
 			
 			typeString += "]";
