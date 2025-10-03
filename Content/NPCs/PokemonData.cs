@@ -483,6 +483,13 @@ namespace Pokemod.Content.NPCs
 
         public static int maxID = 0807;
 
+        public static List<string> GetAllForms(string original)
+        {
+            List<string> forms = pokemonInfo.Keys.ToList().FindAll(x => pokemonInfo[x].pokemonID == pokemonInfo[original].pokemonID);
+
+            return forms;
+        }
+
         public static int GetMaxPokemonIndex()
         {
             return pokemonInfo.Values.ToList().FindIndex(x => x.pokemonID == maxID);

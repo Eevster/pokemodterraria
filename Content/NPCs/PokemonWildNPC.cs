@@ -184,11 +184,15 @@ namespace Pokemod.Content.NPCs
 
 			NPC.netUpdate = true;
 		}
+		
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+			bestiaryEntry.AddTags(new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.Description")));
+		}
 
         public override bool CanHitNPC(NPC target)
-        {
-            return false;
-        }
+		{
+			return false;
+		}
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {

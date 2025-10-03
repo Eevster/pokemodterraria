@@ -15,6 +15,7 @@ using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.ModLoader.UI;
 using Microsoft.Xna.Framework.Design;
+using Pokemod.Content.Pets;
 
 namespace Pokemod.Common.UI.PokedexUI
 {
@@ -148,7 +149,7 @@ namespace Pokemod.Common.UI.PokedexUI
 						TextOriginY = 1f
 					};
 
-					pokeButton.OnLeftClick += (a, b) => SelectPokemon(pokeNumber, phase);
+					pokeButton.OnLeftClick += (a, b) => SelectPokemon(PokemonName, phase);
 
 					pokeButton.Append(buttonText);
 
@@ -183,14 +184,12 @@ namespace Pokemod.Common.UI.PokedexUI
 			//SoundEngine.PlaySound(SoundID.MenuOpen);
 		}
 
-		public void SelectPokemon(int index, int phase = 0)
+		public void SelectPokemon(string pokemonName, int phase = 0)
 		{
 			InfoPanel.RemoveAllChildren();
 
 			UIPanel titlePanel = new UIPanel();
 			UIHelpers.SetRectangle(titlePanel, left: 0f, top: 0f, width: 420, height: 40);
-
-			string pokemonName = pokemonList[index];
 
 			var titleText = new UIText(phase == 0 ? "???" : Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName"), 1f)
 			{
@@ -229,9 +228,9 @@ namespace Pokemod.Common.UI.PokedexUI
 			}
 			else
 			{
-				if (ModContent.TryFind<ModNPC>("Pokemod", pokemonName + "CritterNPC", out var npcBase))
+				if (ModContent.RequestIfExists("Pokemod/Assets/Textures/Pokesprites/Pets/" + pokemonName + "PetProjectile", out Asset<Texture2D> pokeTexture))
 				{
-					if (ModContent.RequestIfExists("Pokemod/Assets/Textures/Pokesprites/Pets/" + pokemonName + "PetProjectile", out Asset<Texture2D> pokeTexture))
+					if (ModContent.TryFind<ModNPC>("Pokemod", pokemonName + "CritterNPC", out var npcBase))
 					{
 						PokemonWildNPC npc = (PokemonWildNPC)npcBase;
 						UIAnimImage pokeImage = new UIAnimImage(pokeTexture, npc.totalFrames, npc.walkStartEnd[0] != -1 ? npc.walkStartEnd[0] : npc.idleStartEnd[0], npc.walkStartEnd[1] != -1 ? npc.walkStartEnd[1] : npc.idleStartEnd[1])
@@ -243,13 +242,55 @@ namespace Pokemod.Common.UI.PokedexUI
 						UIHelpers.SetRectangleAlign(pokeImage, left: 0.5f, top: 0.5f, width: 345, height: 195);
 
 						imageFrame.Append(pokeImage);
-
-						pokeInfoDisplay = new UIPokedexInfoDisplay(npc, phase == 2);
-						UIHelpers.SetRectangle(pokeInfoDisplay, left: 0f, top: 275f, width: 420, height: 320);
-						pokeInfoDisplay.SetPadding(0);
-
-						InfoPanel.Append(pokeInfoDisplay);
 					}
+					else if (ModContent.TryFind<ModProjectile>("Pokemod", pokemonName + "PetProjectile", out var projBase))
+					{
+						PokemonPetProjectile proj = (PokemonPetProjectile)projBase;
+						UIAnimImage pokeImage = new UIAnimImage(pokeTexture, proj.totalFrames, proj.walkStartEnd[0] != -1 ? proj.walkStartEnd[0] : proj.idleStartEnd[0], proj.walkStartEnd[1] != -1 ? proj.walkStartEnd[1] : proj.idleStartEnd[1])
+						{
+							frameRate = proj.animationSpeed,
+							Color = phase == 1 ? Color.Black : Color.White,
+							ImageScale = 2f
+						};
+						UIHelpers.SetRectangleAlign(pokeImage, left: 0.5f, top: 0.5f, width: 345, height: 195);
+
+						imageFrame.Append(pokeImage);
+					}
+
+					pokeInfoDisplay = new UIPokedexInfoDisplay(pokemonName, phase == 2);
+					UIHelpers.SetRectangle(pokeInfoDisplay, left: 0f, top: 275f, width: 420, height: 320);
+					pokeInfoDisplay.SetPadding(0);
+
+					pokeInfoDisplay.formsPanel.RemoveAllChildren();
+
+					if (phase != 0)
+					{
+						List<string> nForms = PokemonData.GetAllForms(pokemonName);
+
+						for (int i = 0; i < nForms.Count; i++)
+						{
+							string formName = nForms[i];
+
+							int altPhase = 1;
+
+							if (Main.player[Main.myPlayer].TryGetModPlayer(out PokemonPlayer pkPlayer))
+							{
+								if (pkPlayer.registeredPokemon.Keys.ToList().Contains(formName))
+								{
+									if (pkPlayer.registeredPokemon[formName] > 0) altPhase = 2;
+								}
+							}
+
+							UIButton<string> formButton = new(Language.GetTextValue("Mods.Pokemod.NPCs." + formName + "CritterNPC.DisplayName"));
+							UIHelpers.SetRectangle(formButton, left: 0f, top: 45f * i, width: 360, height: 40);
+
+							formButton.OnLeftClick += (a, b) => SelectPokemon(formName, altPhase);
+
+							pokeInfoDisplay.formsPanel.Append(formButton);
+						}
+					}
+
+					InfoPanel.Append(pokeInfoDisplay);
 				}
 			}
 
@@ -275,9 +316,9 @@ namespace Pokemod.Common.UI.PokedexUI
 		public UIPanel areaPanel;
 		public UIPanel formsPanel;
 
-		public UIPokedexInfoDisplay(PokemonWildNPC npc, bool captured = true)
+		public UIPokedexInfoDisplay(string pokemonName, bool captured = true)
 		{
-			SetInfo(npc, captured);
+			SetInfo(pokemonName, captured);
 			SetInitialContent();
 			SetContent(infoPanel);
 		}
@@ -285,43 +326,15 @@ namespace Pokemod.Common.UI.PokedexUI
 		private void SetInitialContent()
 		{
 			UIButton<string> infoButton = new("Info");
-
 			UIHelpers.SetRectangle(infoButton, left: 0f, top: 0f, width: 100, height: 40);
-			var infoText = new UIText("Info", 1f)
-			{
-				TextColor = Color.White,
-				Width = new(80f, 0f),
-				Height = new(40f, 0f),
-				TextOriginX = 0.5f,
-				TextOriginY = 0.5f,
-			};
-			infoButton.Append(infoText);
 			infoButton.OnLeftClick += (a, b) => SetContent(infoPanel);
 
 			UIButton<string> areaButton = new("Area");
 			UIHelpers.SetRectangle(areaButton, left: 100f, top: 0f, width: 100, height: 40);
-			var areaText = new UIText("Area", 1f)
-			{
-				TextColor = Color.White,
-				Width = new(80f, 0f),
-				Height = new(40f, 0f),
-				TextOriginX = 0.5f,
-				TextOriginY = 0.5f,
-			};
-			areaButton.Append(areaText);
 			areaButton.OnLeftClick += (a, b) => SetContent(areaPanel);
 
 			UIButton<string> formsButton = new("Forms");
 			UIHelpers.SetRectangle(formsButton, left: 200f, top: 0f, width: 100, height: 40);
-			var formsText = new UIText("Forms", 1f)
-			{
-				TextColor = Color.White,
-				Width = new(80f, 0f),
-				Height = new(40f, 0f),
-				TextOriginX = 0.5f,
-				TextOriginY = 0.5f,
-			};
-			formsButton.Append(formsText);
 			formsButton.OnLeftClick += (a, b) => SetContent(formsPanel);
 
 			container = new UIElement();
@@ -340,13 +353,13 @@ namespace Pokemod.Common.UI.PokedexUI
 			container.Append(contentPanel);
 		}
 
-		public void SetInfo(PokemonWildNPC npc, bool captured = true)
+		public void SetInfo(string pokemonName, bool captured = true)
 		{
 			//INFO CONTENT
 			infoPanel = new UIPanel();
 			UIHelpers.SetRectangle(infoPanel, left: 0f, top: 0f, width: 420, height: 280);
 			infoPanel.SetPadding(20);
-			var descText = new UIText(captured?Language.GetTextValue("Mods.Pokemod.NPCs." + npc.pokemonName + "CritterNPC.Description"):"?????", 1f)
+			var descText = new UIText(captured?Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.Description"):"?????", 0.9f)
 			{
 				IsWrapped = true,
 				TextColor = Color.White,
@@ -365,7 +378,7 @@ namespace Pokemod.Common.UI.PokedexUI
 			UIHelpers.SetRectangle(typeContainer, left: 0f, top: 80f, width: 180, height: 40);
 			typeContainer.SetPadding(0);
 
-			PokemonInfo pokeInfo = PokemonData.pokemonInfo[npc.pokemonName];
+			PokemonInfo pokeInfo = PokemonData.pokemonInfo[pokemonName];
 
 			if (pokeInfo.pokemonTypes[0] != -1 && pokeInfo.pokemonTypes[1] != -1)
 			{
@@ -478,11 +491,11 @@ namespace Pokemod.Common.UI.PokedexUI
 
 			for (int i = 0; i < 6; i++)
 			{
-				ColorBarUIPanel statPanel = new ColorBarUIPanel(captured ? (npc.baseStats[i]/255f):0f) {BarColor = ColorConverter.HexToXnaColor(PokemonNPCData.GetStatColor(i))};
+				ColorBarUIPanel statPanel = new ColorBarUIPanel(captured ? (pokeInfo.pokemonStats[i]/255f):0f) {BarColor = ColorConverter.HexToXnaColor(PokemonNPCData.GetStatColor(i))};
 				UIHelpers.SetRectangle(statPanel, left: 0.5f * infoPanel.Width.Pixels - infoPanel.PaddingLeft + 10, top: infoPanel.Height.Pixels - 2 * infoPanel.PaddingTop - 25 * (6 - i), width: 180, height: 25);
 				statPanel.SetPadding(0);
 
-				var statText = new UIText((StatName)i + ": " + (captured ? npc.baseStats[i] : "???"), 0.8f)
+				var statText = new UIText((StatName)i + ": " + (captured ? pokeInfo.pokemonStats[i] : "???"), 0.8f)
 				{
 					TextColor = Color.White,
 					Width = new(180f, 0f),
@@ -514,19 +527,6 @@ namespace Pokemod.Common.UI.PokedexUI
 			formsPanel = new UIPanel();
 			UIHelpers.SetRectangle(formsPanel, left: 0f, top: 0f, width: 420, height: 280);
 			formsPanel.SetPadding(20);
-
-			
-
-			var formsText = new UIText("No alternative forms", 1f)
-			{
-				IsWrapped = true,
-				TextColor = Color.White,
-				Width = new(380f, 0f),
-				Height = new(220f, 0f),
-				TextOriginX = 0.5f,
-				TextOriginY = 0f,
-			};
-			formsPanel.Append(formsText);
 		}
 	}
 }

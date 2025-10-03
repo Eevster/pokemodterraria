@@ -818,11 +818,7 @@ namespace Pokemod.Content.Items
 
 				if (trainer.TrainerID == CurrentTrainerID)
 				{
-					if (!trainer.registeredPokemon.Keys.Contains(PokemonName))
-					{
-						trainer.registeredPokemon.Add(PokemonName, 1);
-					}
-					else trainer.registeredPokemon[PokemonName] = 1;
+					trainer.RegisterPokemon(PokemonName, true);
 				}
 			}
 

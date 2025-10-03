@@ -3534,354 +3534,1050 @@ NPCs: {
 		// Description: When it is angered, it immediately discharges the energy stored in the pouches in its cheeks.
 	}
 
-	BulbasaurCritterNPC.DisplayName: Bulbasaur
-	CharmanderCritterNPC.DisplayName: Charmander
-	SquirtleCritterNPC.DisplayName: Squirtle
+	BulbasaurCritterNPC: {
+		DisplayName: Bulbasaur
+		// Description: For some time after its birth, it grows by taking nourishment from the seed on its back.
+	}
+
+	CharmanderCritterNPC: {
+		DisplayName: Charmander
+		// Description: The fire on the tip of its tail is a measure of its life. If the Pokémon is healthy, its tail burns intensely.
+	}
+
+	SquirtleCritterNPC: {
+		DisplayName: Squirtle
+		// Description: It hides in its shell to protect itself, then strikes back with spouts of water at every opportunity.
+	}
+
+	BlacephalonCritterNPC: {
+		DisplayName: Blacephalon
+		// Description: ""
+	}
+
+	ChikoritaCritterNPC: {
+		DisplayName: Chikorita
+		// Description: It uses the leaf on its head to determine the air's temperature and humidity. It loves to sunbathe.
+	}
+
+	CharizardCritterNPC: {
+		DisplayName: Charizard
+		// Description: It is said that Charizard's fire burns hotter if it has experienced harsh battles.
+	}
+
+	CharizardMegaXCritterNPC: {
+		DisplayName: Mega Charizard X
+		// Description: ""
+	}
+
+	CharizardMegaYCritterNPC: {
+		// DisplayName: Mega Charizard Y
+		// Description: ""
+	}
+
+	CyndaquilCritterNPC: {
+		DisplayName: Cyndaquil
+		// Description: It has a timid nature. If it is startled, the flames on its back burn more vigorously.
+	}
+
+	BlastoiseCritterNPC: {
+		DisplayName: Blastoise
+		// Description: The jets of water it spouts from the rocket cannons on its shell can punch through thick steel.
+	}
+
+	BlastoiseMegaCritterNPC: {
+		DisplayName: Mega Blastoise
+		// Description: ""
+	}
+
+	BayleefCritterNPC: {
+		DisplayName: Bayleef
+		// Description: The buds that ring its neck give off a spicy aroma that perks people up.
+	}
+
+	CharmeleonCritterNPC: {
+		DisplayName: Charmeleon
+		// Description: In the rocky mountains where Charmeleon live, their fiery tails shine at night like stars.
+	}
+
+	FlareonCritterNPC: {
+		DisplayName: Flareon
+		// Description: It has a flame sac in its body. Its body temperature tops 1,650 degrees Fahrenheit before battle.
+	}
+
+	IvysaurCritterNPC: {
+		DisplayName: Ivysaur
+		// Description: When the bud on its back starts swelling, a sweet aroma wafts to indicate the flower's coming bloom.
+	}
+
+	JolteonCritterNPC: {
+		DisplayName: Jolteon
+		// Description: It controls 10,000-volt power. When the fur covering its body stands on end, the fur is hard and sharp, like needles.
+	}
+
+	MeganiumCritterNPC: {
+		DisplayName: Meganium
+		// Description: Its breath has the fantastic ability to revive dead plants and flowers.
+	}
+
+	RaichuCritterNPC: {
+		DisplayName: Raichu
+		// Description: When it is angered, it immediately discharges the energy stored in the pouches in its cheeks.
+	}
+
+	VaporeonCritterNPC: {
+		DisplayName: Vaporeon
+		// Description: It has evolved to be suited for an aquatic life. It can become invisible when it melts away into water.
+	}
+
+	VenusaurCritterNPC: {
+		DisplayName: Venusaur
+		// Description: After a rainy day, the flower on its back smells stronger. The scent attracts other Pokémon.
+	}
+
+	VenusaurMegaCritterNPC: {
+		DisplayName: Mega Venusaur
+		// Description: ""
+	}
+
+	WartortleCritterNPC: {
+		DisplayName: Wartortle
+		// Description: It is said to live 10,000 years. Its furry tail is popular as a symbol of longevity.
+	}
+
+	CaterpieCritterNPC: {
+		DisplayName: Caterpie
+		// Description: It releases a stench from its red antennae to repel enemies. It grows by molting repeatedly.
+	}
+
+	MetapodCritterNPC: {
+		DisplayName: Metapod
+		// Description: A steel-hard shell protects its tender body. The Pokémon quietly endures hardships while awaiting evolution.
+	}
+
+	KakunaCritterNPC: {
+		DisplayName: Kakuna
+		// Description: While awaiting evolution, it hides from predators under leaves and in nooks of branches.
+	}
+
+	WeedleCritterNPC: {
+		DisplayName: Weedle
+		// Description: It eats its weight in leaves every day. It fends off attackers with the needle on its head.
+	}
+
+	ButterfreeCritterNPC: {
+		DisplayName: Butterfree
+		// Description: It loves the nectar of flowers and can locate flower patches that have even tiny amounts of pollen.
+	}
+
+	BeedrillCritterNPC: {
+		DisplayName: Beedrill
+		// Description: Its best attack involves flying around at high speed, striking with poison needles, then flying off.
+	}
+
+	GastlyCritterNPC: {
+		DisplayName: Gastly
+		// Description: It's a Pokémon born from poison gases. It defeats even the largest foes by enveloping them in gas.
+	}
+
+	VoltorbCritterNPC: {
+		DisplayName: Voltorb
+		// Description: It looks just like a Poké Ball. It is dangerous because it may electrocute or explode on touch.
+	}
+
+	ElectrodeCritterNPC: {
+		DisplayName: Electrode
+		// Description: It is known to drift on winds if it is bloated to bursting with stored electricity.
+	}
+
+	MagnemiteCritterNPC: {
+		DisplayName: Magnemite
+		// Description: The units at its sides generate electromagnetic waves that keep it airborne. It feeds on electricity.
+	}
+
+	MagnetonCritterNPC: {
+		DisplayName: Magneton
+		// Description: A Magneton is actually three Magnemite linked by magnetism. A group of these Pokémon can set off a magnetic storm.
+	}
+
+	HaunterCritterNPC: {
+		DisplayName: Haunter
+		// Description: It licks with its gaseous tongue to steal its victim's life-force. It lurks in darkness, waiting for prey.
+	}
+
+	QuilavaCritterNPC: {
+		DisplayName: Quilava
+		// Description: It intimidates foes with the heat of its flames. The fire burns stronger as it prepares to fight.
+	}
+
+	TyphlosionCritterNPC: {
+		DisplayName: Typhlosion
+		// Description: It attacks using blasts of fire. It creates heat shimmers with intense fire to hide itself.
+	}
+
+	TotodileCritterNPC: {
+		DisplayName: Totodile
+		// Description: It has a habit of biting everything with its well-developed jaws. Even its Trainer needs to be careful.
+	}
+
+	CroconawCritterNPC: {
+		DisplayName: Croconaw
+		// Description: Once it bites down, it won't let go until it loses its fangs. New fangs quickly grow into place.
+	}
+
+	FeraligatrCritterNPC: {
+		DisplayName: Feraligatr
+		// Description: It usually moves slowly, but it goes at blinding speed when it attacks and bites prey.
+	}
+
+	PidgeotCritterNPC: {
+		DisplayName: Pidgeot
+		// Description: By flapping its wings with all its might, Pidgeot can make a gust of wind capable of bending tall trees.
+	}
+
+	PidgeottoCritterNPC: {
+		DisplayName: Pidgeotto
+		// Description: It flies over its wide territory in search of prey, downing it with its highly developed claws.
+	}
+
+	PidgeyCritterNPC: {
+		DisplayName: Pidgey
+		// Description: It is docile and prefers to avoid conflict. If disturbed, however, it can ferociously strike back.
+	}
+
+	RattataCritterNPC: {
+		DisplayName: Rattata
+		// Description: It's cautious in the extreme, and its hardy vitality lets it live in any kind of environment.
+	}
+
+	ZeraoraCritterNPC: {
+		// DisplayName: Zeraora
+		// Description: Zeraora creates a powerful magnetic field by emitting strong electric currents from the pads on its hands and feet. Unlike most Electric-type Pokémon, Zeraora doesn’t have an organ within its body that can produce electricity. However, it is able to gather and store electricity from outside sources, then use it as its own electric energy.
+	}
+
+	ChanseyCritterNPC: {
+		// DisplayName: Chansey
+		// Description: It is said to deliver happiness. Being compassionate, it shares its eggs with injured people.
+	}
+
+	NidoranMCritterNPC: {
+		// DisplayName: Nidoran♂
+		// Description: It scans its surroundings by raising its ears out of the grass. Its toxic horn is for protection.
+	}
+
+	NidorinoCritterNPC: {
+		// DisplayName: Nidorino
+		// Description: It has a violent disposition and stabs foes with its horn, which oozes venom upon impact.
+	}
+
+	RaticateCritterNPC: {
+		// DisplayName: Raticate
+		// Description: It whittles down its constantly growing fangs by gnawing on hard things. It can chew apart cinder block walls.
+	}
+
+	FearowCritterNPC: {
+		// DisplayName: Fearow
+		// Description: It has the stamina to fly all day on its broad wings. It fights by using its sharp beak.
+	}
+
+	SpearowCritterNPC: {
+		// DisplayName: Spearow
+		// Description: It flaps its small wings busily to fly. Using its beak, it searches in grass for prey.
+	}
+
+	ArbokCritterNPC: {
+		// DisplayName: Arbok
+		// Description: It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however.
+	}
+
+	EkansCritterNPC: {
+		// DisplayName: Ekans
+		// Description: ""
+	}
+
+	SandshrewCritterNPC: {
+		// DisplayName: Sandshrew
+		// Description: It digs deep burrows to live in. When in danger, it rolls up its body to withstand attacks.
+	}
+
+	SandslashCritterNPC: {
+		// DisplayName: Sandslash
+		// Description: ""
+	}
+
+	ClefairyCritterNPC: {
+		// DisplayName: Clefairy
+		// Description: It can be found in quiet mountain areas on a full moon’s night. Its dancing and its tiny, faintly glowing wings confer upon it a lovely fairylike quality.
+	}
+
+	ClefableCritterNPC: {
+		// DisplayName: Clefable
+		// Description: Legend says that on clear, quiet nights, it listens for the voices of its kin living on the moon. I, too, often think of my homeland, so far away.
+	}
+
+	AbraCritterNPC: {
+		// DisplayName: Abra
+		// Description: Even while asleep, it maintains a telepathic radar. It teleports when it is threatened.
+	}
+
+	AerodactylCritterNPC: {
+		// DisplayName: Aerodactyl
+		// Description: In prehistoric times, this Pokémon flew freely and fearlessly through the skies.
+	}
+
+	AlakazamCritterNPC: {
+		// DisplayName: Alakazam
+		// Description: Its superb memory lets it recall everything it has experienced from birth.
+	}
+
+	AlakazamMegaCritterNPC: {
+		// DisplayName: Mega Alakazam
+		// Description: ""
+	}
+
+	ArcanineCritterNPC: {
+		// DisplayName: Arcanine
+		// Description: ""
+	}
+
+	ArticunoCritterNPC: {
+		// DisplayName: Articuno
+		// Description: ""
+	}
+
+	BellsproutCritterNPC: {
+		// DisplayName: Bellsprout
+		// Description: It prefers hot and humid environments. It is quick at capturing prey with its vines.
+	}
+
+	CloysterCritterNPC: {
+		// DisplayName: Cloyster
+		// Description: ""
+	}
+
+	CuboneCritterNPC: {
+		// DisplayName: Cubone
+		// Description: ""
+	}
+
+	DewgongCritterNPC: {
+		// DisplayName: Dewgong
+		// Description: ""
+	}
+
+	DiglettCritterNPC: {
+		// DisplayName: Diglett
+		// Description: This Pokemon lives underground. Because of its dark habitat, it is repelled by bright sunlight.
+	}
+
+	DittoCritterNPC: {
+		// DisplayName: Ditto
+		// Description: ""
+	}
+
+	DodrioCritterNPC: {
+		// DisplayName: Dodrio
+		// Description: ""
+	}
+
+	DoduoCritterNPC: {
+		// DisplayName: Doduo
+		// Description: ""
+	}
+
+	DragonairCritterNPC: {
+		// DisplayName: Dragonair
+		// Description: ""
+	}
+
+	DragoniteCritterNPC: {
+		// DisplayName: Dragonite
+		// Description: ""
+	}
+
+	DratiniCritterNPC: {
+		// DisplayName: Dratini
+		// Description: ""
+	}
+
+	DrowzeeCritterNPC: {
+		// DisplayName: Drowzee
+		// Description: ""
+	}
+
+	DugtrioCritterNPC: {
+		// DisplayName: Dugtrio
+		// Description: Its three heads move alternately, driving it through tough soil to depths of over 60 miles.
+	}
+
+	ElectabuzzCritterNPC: {
+		// DisplayName: Electabuzz
+		// Description: ""
+	}
+
+	ExeggcuteCritterNPC: {
+		// DisplayName: Exeggcute
+		// Description: ""
+	}
+
+	ExeggutorCritterNPC: {
+		// DisplayName: Exeggutor
+		// Description: ""
+	}
+
+	FarfetchdCritterNPC: {
+		// DisplayName: Farfetchd
+		// Description: ""
+	}
+
+	GengarCritterNPC: {
+		// DisplayName: Gengar
+		// Description: Lurking in the shadowy corners of rooms, it awaits chances to steal its prey's life force.
+	}
+
+	GengarMegaCritterNPC: {
+		// DisplayName: Mega Gengar
+		// Description: ""
+	}
+
+	GeodudeCritterNPC: {
+		// DisplayName: Geodude
+		// Description: At rest, it looks just like a rock. Carelessly stepping on it will make it swing its fists angrily.
+	}
+
+	GloomCritterNPC: {
+		// DisplayName: Gloom
+		// Description: It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however.
+	}
+
+	GolbatCritterNPC: {
+		// DisplayName: Golbat
+		// Description: It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however.
+	}
+
+	GoldeenCritterNPC: {
+		// DisplayName: Goldeen
+		// Description: It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however.
+	}
+
+	GolduckCritterNPC: {
+		// DisplayName: Golduck
+		// Description: ""
+	}
+
+	GolemCritterNPC: {
+		// DisplayName: Golem
+		// Description: It sheds its hide once a year. Its boulderlike body is so tough, even dynamite can't harm it.
+	}
+
+	GravelerCritterNPC: {
+		// DisplayName: Graveler
+		// Description: It tumbles down slopes, heedless of any body parts chipping off. It eats a ton of rocks daily.
+	}
+
+	GrimerCritterNPC: {
+		// DisplayName: Grimer
+		// Description: ""
+	}
+
+	GrowlitheCritterNPC: {
+		// DisplayName: Growlithe
+		// Description: ""
+	}
+
+	GyaradosCritterNPC: {
+		// DisplayName: Gyarados
+		// Description: Once it appears, its rage never settles until it has razed the fields and mountains around it.
+	}
+
+	GyaradosMegaCritterNPC: {
+		// DisplayName: Mega Gyarados
+		// Description: ""
+	}
+
+	HitmonchanCritterNPC: {
+		// DisplayName: Hitmonchan
+		// Description: ""
+	}
+
+	HitmonleeCritterNPC: {
+		// DisplayName: Hitmonlee
+		// Description: ""
+	}
+
+	HorseaCritterNPC: {
+		// DisplayName: Horsea
+		// Description: ""
+	}
+
+	HypnoCritterNPC: {
+		// DisplayName: Hypno
+		// Description: ""
+	}
+
+	JigglypuffCritterNPC: {
+		// DisplayName: Jigglypuff
+		// Description: ""
+	}
+
+	JynxCritterNPC: {
+		// DisplayName: Jynx
+		// Description: ""
+	}
+
+	KabutoCritterNPC: {
+		// DisplayName: Kabuto
+		// Description: This Pokémon lived in ancient times. On rare occasions, it has been discovered as a living fossil.
+	}
+
+	KabutopsCritterNPC: {
+		// DisplayName: Kabutops
+		// Description: With sharp claws, this ferocious, ancient Pokémon rips apart prey and sucks their body fluids.
+	}
+
+	KadabraCritterNPC: {
+		// DisplayName: Kadabra
+		// Description: When it uses its psychic power, it emits strong alpha waves that can ruin precision devices.
+	}
+
+	KangaskhanCritterNPC: {
+		// DisplayName: Kangaskhan
+		// Description: ""
+	}
+
+	KinglerCritterNPC: {
+		// DisplayName: Kingler
+		// Description: ""
+	}
+
+	KoffingCritterNPC: {
+		// DisplayName: Koffing
+		// Description: Lighter-than-air gases in its body keep it aloft. The gases not only smell; they are also explosive.
+	}
+
+	KrabbyCritterNPC: {
+		// DisplayName: Krabby
+		// Description: ""
+	}
+
+	LaprasCritterNPC: {
+		// DisplayName: Lapras
+		// Description: ""
+	}
+
+	LickitungCritterNPC: {
+		// DisplayName: Lickitung
+		// Description: ""
+	}
+
+	MachampCritterNPC: {
+		// DisplayName: Machamp
+		// Description: ""
+	}
+
+	MachokeCritterNPC: {
+		// DisplayName: Machoke
+		// Description: ""
+	}
+
+	MachopCritterNPC: {
+		// DisplayName: Machop
+		// Description: ""
+	}
+
+	MagikarpCritterNPC: {
+		// DisplayName: Magikarp
+		// Description: It is said to be the world's weakest Pokémon. No one knows why it has managed to survive.
+	}
+
+	MagmarCritterNPC: {
+		// DisplayName: Magmar
+		// Description: ""
+	}
+
+	MankeyCritterNPC: {
+		// DisplayName: Mankey
+		// Description: ""
+	}
+
+	MarowakCritterNPC: {
+		// DisplayName: Marowak
+		// Description: ""
+	}
+
+	MeowthCritterNPC: {
+		// DisplayName: Meowth
+		// Description: ""
+	}
+
+	MewCritterNPC: {
+		// DisplayName: Mew
+		// Description: ""
+	}
+
+	MewtwoCritterNPC: {
+		// DisplayName: Mewtwo
+		// Description: ""
+	}
+
+	MoltresCritterNPC: {
+		// DisplayName: Moltres
+		// Description: ""
+	}
+
+	MrMimeCritterNPC: {
+		// DisplayName: Mr Mime
+		// Description: ""
+	}
+
+	MukCritterNPC: {
+		// DisplayName: Muk
+		// Description: ""
+	}
+
+	NidokingCritterNPC: {
+		// DisplayName: Nidoking
+		// Description: One swing of its mighty tail can snap a telephone pole as if it were a matchstick.
+	}
+
+	NidoqueenCritterNPC: {
+		// DisplayName: Nidoqueen
+		// Description: Its entire body is armored with hard scales. It will protect the young in its burrow with its life.
+	}
+
+	NidoranFCritterNPC: {
+		// DisplayName: Nidoran♀
+		// Description: While it does not prefer to fight, even one drop of the poison it secretes from barbs can be fatal.
+	}
+
+	NidorinaCritterNPC: {
+		// DisplayName: Nidorina
+		// Description: When it senses danger, it raises all the barbs on its body. These barbs grow slower than Nidorino's.
+	}
+
+	NinetalesCritterNPC: {
+		// DisplayName: Ninetales
+		// Description: ""
+	}
+
+	OddishCritterNPC: {
+		// DisplayName: Oddish
+		// Description: ""
+	}
+
+	OmanyteCritterNPC: {
+		// DisplayName: Omanyte
+		// Description: In prehistoric times, it swam on the sea floor, eating plankton. Its fossils are sometimes found.
+	}
+
+	OmastarCritterNPC: {
+		// DisplayName: Omastar
+		// Description: Its heavy shell allowed it to reach only nearby food. This could be the reason it is extinct.
+	}
+
+	OnixCritterNPC: {
+		// DisplayName: Onix
+		// Description: ""
+	}
+
+	ParasCritterNPC: {
+		// DisplayName: Paras
+		// Description: Mushrooms named tochukaso grow on its back. They grow along with the host Paras.
+	}
+
+	ParasectCritterNPC: {
+		// DisplayName: Parasect
+		// Description: Parasect is controlled by a mushroom that has grown larger than its host's body. The Pokémon scatters poisonous spores.
+	}
+
+	PersianCritterNPC: {
+		// DisplayName: Persian
+		// Description: ""
+	}
+
+	PinsirCritterNPC: {
+		// DisplayName: Pinsir
+		// Description: ""
+	}
+
+	PoliwagCritterNPC: {
+		// DisplayName: Poliwag
+		// Description: Its skin is so thin, its internal organs are visible. It has trouble walking on its newly grown feet.
+	}
+
+	PoliwhirlCritterNPC: {
+		// DisplayName: Poliwhirl
+		// Description: The spiral pattern on its belly subtly undulates. Staring at it gradually causes drowsiness.
+	}
+
+	PoliwrathCritterNPC: {
+		// DisplayName: Poliwrath
+		// Description: With its extremely tough muscles, it could keep swimming in the Pacific Ocean without resting.
+	}
+
+	PonytaCritterNPC: {
+		// DisplayName: Ponyta
+		// Description: ""
+	}
+
+	PorygonCritterNPC: {
+		// DisplayName: Porygon
+		// Description: ""
+	}
+
+	PrimeapeCritterNPC: {
+		// DisplayName: Primeape
+		// Description: ""
+	}
+
+	PsyduckCritterNPC: {
+		// DisplayName: Psyduck
+		// Description: ""
+	}
+
+	RapidashCritterNPC: {
+		// DisplayName: Rapidash
+		// Description: ""
+	}
+
+	RhydonCritterNPC: {
+		// DisplayName: Rhydon
+		// Description: ""
+	}
+
+	RhyhornCritterNPC: {
+		// DisplayName: Rhyhorn
+		// Description: ""
+	}
+
+	ScytherCritterNPC: {
+		// DisplayName: Scyther
+		// Description: ""
+	}
+
+	SeadraCritterNPC: {
+		// DisplayName: Seadra
+		// Description: ""
+	}
+
+	SeakingCritterNPC: {
+		// DisplayName: Seaking
+		// Description: ""
+	}
+
+	SeelCritterNPC: {
+		// DisplayName: Seel
+		// Description: ""
+	}
+
+	ShellderCritterNPC: {
+		// DisplayName: Shellder
+		// Description: ""
+	}
+
+	SlowbroCritterNPC: {
+		// DisplayName: Slowbro
+		// Description: ""
+	}
+
+	SlowpokeCritterNPC: {
+		// DisplayName: Slowpoke
+		// Description: ""
+	}
+
+	SnorlaxCritterNPC: {
+		// DisplayName: Snorlax
+		// Description: ""
+	}
+
+	StarmieCritterNPC: {
+		// DisplayName: Starmie
+		// Description: ""
+	}
+
+	StaryuCritterNPC: {
+		// DisplayName: Staryu
+		// Description: ""
+	}
+
+	TangelaCritterNPC: {
+		// DisplayName: Tangela
+		// Description: ""
+	}
+
+	TaurosCritterNPC: {
+		// DisplayName: Tauros
+		// Description: ""
+	}
+
+	TentacoolCritterNPC: {
+		// DisplayName: Tentacool
+		// Description: ""
+	}
+
+	TentacruelCritterNPC: {
+		// DisplayName: Tentacruel
+		// Description: ""
+	}
+
+	VenomothCritterNPC: {
+		// DisplayName: Venomoth
+		// Description: ""
+	}
+
+	VenonatCritterNPC: {
+		// DisplayName: Venonat
+		// Description: ""
+	}
+
+	VictreebelCritterNPC: {
+		// DisplayName: Victreebel
+		// Description: In its mouth, it pools a fragrant nectar-like fluid. The fluid is really an acid that dissolves anything.
+	}
+
+	VileplumeCritterNPC: {
+		// DisplayName: Vileplume
+		// Description: ""
+	}
+
+	VulpixCritterNPC: {
+		// DisplayName: Vulpix
+		// Description: ""
+	}
+
+	WeepinbellCritterNPC: {
+		// DisplayName: Weepinbell
+		// Description: This Pokémon has the appearance of a plant. It captures unwary prey by dousing them with a toxic powder.
+	}
+
+	WeezingCritterNPC: {
+		// DisplayName: Weezing
+		// Description: It grows by feeding on gases released by garbage. Though very rare, triplets have been found.
+	}
+
+	WigglytuffCritterNPC: {
+		// DisplayName: Wigglytuff
+		// Description: ""
+	}
+
+	ZapdosCritterNPC: {
+		// DisplayName: Zapdos
+		// Description: ""
+	}
+
+	ZubatCritterNPC: {
+		// DisplayName: Zubat
+		// Description: ""
+	}
+
+	JoltikCritterNPC: {
+		// DisplayName: Joltik
+		// Description: Since it can't generate its own electricity, it sticks onto large-bodied Pokémon and absorbs static electricity.
+	}
+
+	GalvantulaCritterNPC: {
+		// DisplayName: Galvantula
+		// Description: It launches electrified fur from its abdomen as its means of attack. Opponents hit by the fur could be in for three full days and nights of paralysis.
+	}
+
+	TerrarianKabutoCritterNPC: {
+		// DisplayName: Terrarian Kabuto
+		// Description: Sealed long ago within the dungeon, this Pokemon inhabits the bones of a Pokemon even more ancient.
+	}
+
+	TerrarianKabutopsCritterNPC: {
+		// DisplayName: Terrarian Kabutops
+		// Description: The phantom that inhabits these bones may not even be a Pokemon at all.
+	}
+
+	TerrarianAerodactylCritterNPC: {
+		// DisplayName: Terrarian Aerodactyl
+		// Description: This Pokemon's fiery breath is cold to the touch, but still burns.
+	}
+
+	TerrarianOmanyteCritterNPC: {
+		// DisplayName: Terrarian Omanyte
+		// Description: Those who first discovered this ancient Pokemon were said to have gone mad.
+	}
+
+	TerrarianOmastarCritterNPC: {
+		// DisplayName: Terrarian Omastar
+		// Description: This Pokemon's many eyes allow it to peer into deep space.
+	}
+
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
 	CharmanderCritterNPCShiny.DisplayName: Charmander
 	SquirtleCritterNPCShiny.DisplayName: Squirtle
-	BlacephalonCritterNPC.DisplayName: Blacephalon
 	EeveeCritterNPCShiny.DisplayName: Eevee
 	PikachuCritterNPCShiny.DisplayName: Pikachu
-	ChikoritaCritterNPC.DisplayName: Chikorita
-	CharizardCritterNPC.DisplayName: Charizard
 	CharizardCritterNPCShiny.DisplayName: Charizard
-	CharizardMegaXCritterNPC.DisplayName: Mega Charizard X
 	CharizardMegaXCritterNPCShiny.DisplayName: Mega Charizard X Shiny
-	CharizardMegaYritterNPC.DisplayName: Mega Charizard Y
 	CharizardMegaYCritterNPCShiny.DisplayName: Mega Charizard Y Shiny
 	ChikoritaCritterNPCShiny.DisplayName: Chikorita
-	CyndaquilCritterNPC.DisplayName: Cyndaquil
 	CyndaquilCritterNPCShiny.DisplayName: Cyndaquil
-	BlastoiseCritterNPC.DisplayName: Blastoise
-	BlastoiseMegaCritterNPC.DisplayName: Mega Blastoise
 	BlastoiseMegaCritterNPCShiny.DisplayName: Mega Blastoise Shiny
 	BayleefCritterNPCShiny.DisplayName: BayleefShiny
-	BayleefCritterNPC.DisplayName: Bayleef
 	BlastoiseCritterNPCShiny.DisplayName: Blastoise Shiny
-	CharmeleonCritterNPC.DisplayName: Charmeleon
 	CharmeleonCritterNPCShiny.DisplayName: Charmeleon Shiny
-	FlareonCritterNPC.DisplayName: Flareon
 	FlareonCritterNPCShiny.DisplayName: Flareon Shiny
-	IvysaurCritterNPC.DisplayName: Ivysaur
 	IvysaurCritterNPCShiny.DisplayName: Ivysaur Shiny
-	JolteonCritterNPC.DisplayName: Jolteon
 	JolteonCritterNPCShiny.DisplayName: Jolteon Shiny
-	MeganiumCritterNPC.DisplayName: Meganium
 	MeganiumCritterNPCShiny.DisplayName: Meganium Shiny
-	RaichuCritterNPC.DisplayName: Raichu
 	RaichuCritterNPCShiny.DisplayName: Raichu Shiny
-	VaporeonCritterNPC.DisplayName: Vaporeon
 	VaporeonCritterNPCShiny.DisplayName: Vaporeon Shiny
-	VenusaurCritterNPC.DisplayName: Venusaur
 	VenusaurCritterNPCShiny.DisplayName: Venusaur Shiny
-	VenusaurMegaCritterNPC.DisplayName: Mega Venusaur
 	VenusaurMegaCritterNPCShiny.DisplayName: Mega Venusaur Shiny
-	WartortleCritterNPC.DisplayName: Wartortle
 	WartortleCritterNPCShiny.DisplayName: Wartortle Shiny
-	CaterpieCritterNPC.DisplayName: Caterpie
 	CaterpieCritterNPCShiny.DisplayName: Caterpie Shiny
-	MetapodCritterNPC.DisplayName: Metapod
 	MetapodCritterNPCShiny.DisplayName: Metapod Shiny
-	KakunaCritterNPC.DisplayName: Kakuna
 	KakunaCritterNPCShiny.DisplayName: Kakuna Shiny
-	WeedleCritterNPC.DisplayName: Weedle
 	WeedleCritterNPCShiny.DisplayName: Weedle Shiny
-	ButterfreeCritterNPC.DisplayName: Butterfree
 	ButterfreeCritterNPCShiny.DisplayName: Butterfree Shiny
-	BeedrillCritterNPC.DisplayName: Beedrill
 	BeedrillCritterNPCShiny.DisplayName: Beedrill Shiny
-	GastlyCritterNPC.DisplayName: Gastly
 	GastlyCritterNPCShiny.DisplayName: Gastly Shiny
-	VoltorbCritterNPC.DisplayName: Voltorb
 	VoltorbCritterNPCShiny.DisplayName: Voltorb Shiny
-	ElectrodeCritterNPC.DisplayName: Electrode
 	ElectrodeCritterNPCShiny.DisplayName: Electrode Shiny
-	MagnemiteCritterNPC.DisplayName: Magnemite
 	MagnemiteCritterNPCShiny.DisplayName: Magnemite Shiny
-	MagnetonCritterNPC.DisplayName: Magneton
 	MagnetonCritterNPCShiny.DisplayName: Magneton Shiny
-	HaunterCritterNPC.DisplayName: Haunter
 	HaunterCritterNPCShiny.DisplayName: Haunter Shiny
-	QuilavaCritterNPC.DisplayName: Quilava
 	QuilavaCritterNPCShiny.DisplayName: Quilava Shiny
-	TyphlosionCritterNPC.DisplayName: Typhlosion
 	TyphlosionCritterNPCShiny.DisplayName: Typhlosion Shiny
 	TotodileCritterNPCShiny.DisplayName: Totodile Shiny
-	TotodileCritterNPC.DisplayName: Totodile
-	CroconawCritterNPC.DisplayName: Croconaw
 	CroconawCritterNPCShiny.DisplayName: Croconaw Shiny
-	FeraligatrCritterNPC.DisplayName: Feraligatr
 	FeraligatrCritterNPCShiny.DisplayName: Feraligatr Shiny
-	PidgeotCritterNPC.DisplayName: Pidgeot
 	PidgeotCritterNPCShiny.DisplayName: Pidgeot Shiny
-	PidgeottoCritterNPC.DisplayName: Pidgeotto
 	PidgeottoCritterNPCShiny.DisplayName: Pidgeotto Shiny
-	PidgeyCritterNPC.DisplayName: Pidgey
 	PidgeyCritterNPCShiny.DisplayName: Pidgey Shiny
-	RattataCritterNPC.DisplayName: Rattata
 	RattataCritterNPCShiny.DisplayName: Rattata Shiny
-	// ZeraoraCritterNPC.DisplayName: Zeraora
 	// ZeraoraCritterNPCShiny.DisplayName: Zeraora Shiny
-	// ChanseyCritterNPC.DisplayName: Chansey
 	// ChanseyCritterNPCShiny.DisplayName: Chansey Shiny
-	// NidoranMCritterNPC.DisplayName: Nidoran M
-	// NidoranMCritterNPCShiny.DisplayName: Nidoran M Shiny
-	// NidorinoCritterNPC.DisplayName: Nidorino
+	// NidoranMCritterNPCShiny.DisplayName: Nidoran♀ Shiny
 	// NidorinoCritterNPCShiny.DisplayName: Nidorino Shiny
-	// RaticateCritterNPC.DisplayName: Raticate
 	// RaticateCritterNPCShiny.DisplayName: Raticate Shiny
-	// FearowCritterNPC.DisplayName: Fearow
 	// FearowCritterNPCShiny.DisplayName: Fearow Shiny
-	// SpearowCritterNPC.DisplayName: Spearow
 	// SpearowCritterNPCShiny.DisplayName: Spearow Shiny
-	// ArbokCritterNPC.DisplayName: Arbok
 	// ArbokCritterNPCShiny.DisplayName: Arbok Shiny
-	// EkansCritterNPC.DisplayName: Ekans
 	// EkansCritterNPCShiny.DisplayName: Ekans Shiny
-	// SandshrewCritterNPC.DisplayName: Sandshrew
 	// SandshrewCritterNPCShiny.DisplayName: Sandshrew Shiny
-	// SandslashCritterNPC.DisplayName: Sandslash
 	// SandslashCritterNPCShiny.DisplayName: Sandslash Shiny
-	// ClefairyCritterNPC.DisplayName: Clefairy
 	// ClefairyCritterNPCShiny.DisplayName: Clefairy Shiny
-	// ClefableCritterNPC.DisplayName: Clefable
 	// ClefableCritterNPCShiny.DisplayName: Clefable Shiny
-	// AbraCritterNPC.DisplayName: Abra
 	// AbraCritterNPCShiny.DisplayName: Abra Shiny
-	// AerodactylCritterNPC.DisplayName: Aerodactyl
 	// AerodactylCritterNPCShiny.DisplayName: Aerodactyl Shiny
-	// AlakazamCritterNPC.DisplayName: Alakazam
 	// AlakazamCritterNPCShiny.DisplayName: Alakazam Shiny
-	// AlakazamMegaCritterNPC.DisplayName: Mega Alakazam
 	// AlakazamMegaCritterNPCShiny.DisplayName: Mega Alakazam Shiny
-	// ArcanineCritterNPC.DisplayName: Arcanine
 	// ArcanineCritterNPCShiny.DisplayName: Arcanine Shiny
-	// ArticunoCritterNPC.DisplayName: Articuno
 	// ArticunoCritterNPCShiny.DisplayName: Articuno Shiny
-	// BellsproutCritterNPC.DisplayName: Bellsprout
 	// BellsproutCritterNPCShiny.DisplayName: Bellsprout Shiny
-	// CloysterCritterNPC.DisplayName: Cloyster
 	// CloysterCritterNPCShiny.DisplayName: Cloyster Shiny
-	// CuboneCritterNPC.DisplayName: Cubone
 	// CuboneCritterNPCShiny.DisplayName: Cubone Shiny
-	// DewgongCritterNPC.DisplayName: Dewgong
 	// DewgongCritterNPCShiny.DisplayName: Dewgong Shiny
-	// DiglettCritterNPC.DisplayName: Diglett
 	// DiglettCritterNPCShiny.DisplayName: Diglett Shiny
-	// DittoCritterNPC.DisplayName: Ditto
 	// DittoCritterNPCShiny.DisplayName: Ditto Shiny
-	// DodrioCritterNPC.DisplayName: Dodrio
 	// DodrioCritterNPCShiny.DisplayName: Dodrio Shiny
-	// DoduoCritterNPC.DisplayName: Doduo
 	// DoduoCritterNPCShiny.DisplayName: Doduo Shiny
-	// DragonairCritterNPC.DisplayName: Dragonair
 	// DragonairCritterNPCShiny.DisplayName: Dragonair Shiny
-	// DragoniteCritterNPC.DisplayName: Dragonite
 	// DragoniteCritterNPCShiny.DisplayName: Dragonite Shiny
-	// DratiniCritterNPC.DisplayName: Dratini
 	// DratiniCritterNPCShiny.DisplayName: Dratini Shiny
-	// DrowzeeCritterNPC.DisplayName: Drowzee
 	// DrowzeeCritterNPCShiny.DisplayName: Drowzee Shiny
-	// DugtrioCritterNPC.DisplayName: Dugtrio
 	// DugtrioCritterNPCShiny.DisplayName: Dugtrio Shiny
-	// ElectabuzzCritterNPC.DisplayName: Electabuzz
 	// ElectabuzzCritterNPCShiny.DisplayName: Electabuzz Shiny
-	// ExeggcuteCritterNPC.DisplayName: Exeggcute
 	// ExeggcuteCritterNPCShiny.DisplayName: Exeggcute Shiny
-	// ExeggutorCritterNPC.DisplayName: Exeggutor
 	// ExeggutorCritterNPCShiny.DisplayName: Exeggutor Shiny
-	// FarfetchdCritterNPC.DisplayName: Farfetchd
 	// FarfetchdCritterNPCShiny.DisplayName: Farfetchd Shiny
-	// GengarCritterNPC.DisplayName: Gengar
 	// GengarCritterNPCShiny.DisplayName: Gengar Shiny
-	// GengarMegaCritterNPC.DisplayName: Mega Gengar
 	// GengarMegaCritterNPCShiny.DisplayName: Mega Gengar Shiny
-	// GeodudeCritterNPC.DisplayName: Geodude
 	// GeodudeCritterNPCShiny.DisplayName: Geodude Shiny
-	// GloomCritterNPC.DisplayName: Gloom
 	// GloomCritterNPCShiny.DisplayName: Gloom Shiny
-	// GolbatCritterNPC.DisplayName: Golbat
 	// GolbatCritterNPCShiny.DisplayName: Golbat Shiny
-	// GoldeenCritterNPC.DisplayName: Goldeen
 	// GoldeenCritterNPCShiny.DisplayName: Goldeen Shiny
-	// GolduckCritterNPC.DisplayName: Golduck
 	// GolduckCritterNPCShiny.DisplayName: Golduck Shiny
-	// GolemCritterNPC.DisplayName: Golem
 	// GolemCritterNPCShiny.DisplayName: Golem Shiny
-	// GravelerCritterNPC.DisplayName: Graveler
 	// GravelerCritterNPCShiny.DisplayName: Graveler Shiny
-	// GrimerCritterNPC.DisplayName: Grimer
 	// GrimerCritterNPCShiny.DisplayName: Grimer Shiny
-	// GrowlitheCritterNPC.DisplayName: Growlithe
 	// GrowlitheCritterNPCShiny.DisplayName: Growlithe Shiny
-	// GyaradosCritterNPC.DisplayName: Gyarados
 	// GyaradosCritterNPCShiny.DisplayName: Gyarados Shiny
-	// GyaradosMegaCritterNPC.DisplayName: Mega Gyarados
 	// GyaradosMegaCritterNPCShiny.DisplayName: Mega Gyarados Shiny
-	// HitmonchanCritterNPC.DisplayName: Hitmonchan
 	// HitmonchanCritterNPCShiny.DisplayName: Hitmonchan Shiny
-	// HitmonleeCritterNPC.DisplayName: Hitmonlee
 	// HitmonleeCritterNPCShiny.DisplayName: Hitmonlee Shiny
-	// HorseaCritterNPC.DisplayName: Horsea
 	// HorseaCritterNPCShiny.DisplayName: Horsea Shiny
-	// HypnoCritterNPC.DisplayName: Hypno
 	// HypnoCritterNPCShiny.DisplayName: Hypno Shiny
-	// JigglypuffCritterNPC.DisplayName: Jigglypuff
 	// JigglypuffCritterNPCShiny.DisplayName: Jigglypuff Shiny
-	// JynxCritterNPC.DisplayName: Jynx
 	// JynxCritterNPCShiny.DisplayName: Jynx Shiny
-	// KabutoCritterNPC.DisplayName: Kabuto
 	// KabutoCritterNPCShiny.DisplayName: Kabuto Shiny
-	// KabutopsCritterNPC.DisplayName: Kabutops
 	// KabutopsCritterNPCShiny.DisplayName: Kabutops Shiny
-	// KadabraCritterNPC.DisplayName: Kadabra
 	// KadabraCritterNPCShiny.DisplayName: Kadabra Shiny
-	// KangaskhanCritterNPC.DisplayName: Kangaskhan
 	// KangaskhanCritterNPCShiny.DisplayName: Kangaskhan Shiny
-	// KinglerCritterNPC.DisplayName: Kingler
 	// KinglerCritterNPCShiny.DisplayName: Kingler Shiny
-	// KoffingCritterNPC.DisplayName: Koffing
 	// KoffingCritterNPCShiny.DisplayName: Koffing Shiny
-	// KrabbyCritterNPC.DisplayName: Krabby
 	// KrabbyCritterNPCShiny.DisplayName: Krabby Shiny
-	// LaprasCritterNPC.DisplayName: Lapras
 	// LaprasCritterNPCShiny.DisplayName: Lapras Shiny
-	// LickitungCritterNPC.DisplayName: Lickitung
 	// LickitungCritterNPCShiny.DisplayName: Lickitung Shiny
-	// MachampCritterNPC.DisplayName: Machamp
 	// MachampCritterNPCShiny.DisplayName: Machamp Shiny
-	// MachokeCritterNPC.DisplayName: Machoke
 	// MachokeCritterNPCShiny.DisplayName: Machoke Shiny
-	// MachopCritterNPC.DisplayName: Machop
 	// MachopCritterNPCShiny.DisplayName: Machop Shiny
-	// MagikarpCritterNPC.DisplayName: Magikarp
 	// MagikarpCritterNPCShiny.DisplayName: Magikarp Shiny
-	// MagmarCritterNPC.DisplayName: Magmar
 	// MagmarCritterNPCShiny.DisplayName: Magmar Shiny
-	// MankeyCritterNPC.DisplayName: Mankey
 	// MankeyCritterNPCShiny.DisplayName: Mankey Shiny
-	// MarowakCritterNPC.DisplayName: Marowak
 	// MarowakCritterNPCShiny.DisplayName: Marowak Shiny
-	// MeowthCritterNPC.DisplayName: Meowth
 	// MeowthCritterNPCShiny.DisplayName: Meowth Shiny
-	// MewCritterNPC.DisplayName: Mew
 	// MewCritterNPCShiny.DisplayName: Mew Shiny
-	// MewtwoCritterNPC.DisplayName: Mewtwo
 	// MewtwoCritterNPCShiny.DisplayName: Mewtwo Shiny
-	// MoltresCritterNPC.DisplayName: Moltres
 	// MoltresCritterNPCShiny.DisplayName: Moltres Shiny
-	// MrMimeCritterNPC.DisplayName: Mr Mime
 	// MrMimeCritterNPCShiny.DisplayName: Mr Mime Shiny
-	// MukCritterNPC.DisplayName: Muk
 	// MukCritterNPCShiny.DisplayName: Muk Shiny
-	// NidokingCritterNPC.DisplayName: Nidoking
 	// NidokingCritterNPCShiny.DisplayName: Nidoking Shiny
-	// NidoqueenCritterNPC.DisplayName: Nidoqueen
 	// NidoqueenCritterNPCShiny.DisplayName: Nidoqueen Shiny
-	// NidoranFCritterNPC.DisplayName: Nidoran F
-	// NidoranFCritterNPCShiny.DisplayName: Nidoran F Shiny
-	// NidorinaCritterNPC.DisplayName: Nidorina
+	// NidoranFCritterNPCShiny.DisplayName: Nidoran♂ Shiny
 	// NidorinaCritterNPCShiny.DisplayName: Nidorina Shiny
-	// NinetalesCritterNPC.DisplayName: Ninetales
 	// NinetalesCritterNPCShiny.DisplayName: Ninetales Shiny
-	// OddishCritterNPC.DisplayName: Oddish
 	// OddishCritterNPCShiny.DisplayName: Oddish Shiny
-	// OmanyteCritterNPC.DisplayName: Omanyte
 	// OmanyteCritterNPCShiny.DisplayName: Omanyte Shiny
-	// OmastarCritterNPC.DisplayName: Omastar
 	// OmastarCritterNPCShiny.DisplayName: Omastar Shiny
-	// OnixCritterNPC.DisplayName: Onix
 	// OnixCritterNPCShiny.DisplayName: Onix Shiny
-	// ParasCritterNPC.DisplayName: Paras
 	// ParasCritterNPCShiny.DisplayName: Paras Shiny
-	// ParasectCritterNPC.DisplayName: Parasect
 	// ParasectCritterNPCShiny.DisplayName: Parasect Shiny
-	// PersianCritterNPC.DisplayName: Persian
 	// PersianCritterNPCShiny.DisplayName: Persian Shiny
-	// PinsirCritterNPC.DisplayName: Pinsir
 	// PinsirCritterNPCShiny.DisplayName: Pinsir Shiny
-	// PoliwagCritterNPC.DisplayName: Poliwag
 	// PoliwagCritterNPCShiny.DisplayName: Poliwag Shiny
-	// PoliwhirlCritterNPC.DisplayName: Poliwhirl
 	// PoliwhirlCritterNPCShiny.DisplayName: Poliwhirl Shiny
-	// PoliwrathCritterNPC.DisplayName: Poliwrath
 	// PoliwrathCritterNPCShiny.DisplayName: Poliwrath Shiny
-	// PonytaCritterNPC.DisplayName: Ponyta
 	// PonytaCritterNPCShiny.DisplayName: Ponyta Shiny
-	// PorygonCritterNPC.DisplayName: Porygon
 	// PorygonCritterNPCShiny.DisplayName: Porygon Shiny
-	// PrimeapeCritterNPC.DisplayName: Primeape
 	// PrimeapeCritterNPCShiny.DisplayName: Primeape Shiny
-	// PsyduckCritterNPC.DisplayName: Psyduck
 	// PsyduckCritterNPCShiny.DisplayName: Psyduck Shiny
-	// RapidashCritterNPC.DisplayName: Rapidash
 	// RapidashCritterNPCShiny.DisplayName: Rapidash Shiny
-	// RhydonCritterNPC.DisplayName: Rhydon
 	// RhydonCritterNPCShiny.DisplayName: Rhydon Shiny
-	// RhyhornCritterNPC.DisplayName: Rhyhorn
 	// RhyhornCritterNPCShiny.DisplayName: Rhyhorn Shiny
-	// ScytherCritterNPC.DisplayName: Scyther
 	// ScytherCritterNPCShiny.DisplayName: Scyther Shiny
-	// SeadraCritterNPC.DisplayName: Seadra
 	// SeadraCritterNPCShiny.DisplayName: Seadra Shiny
-	// SeakingCritterNPC.DisplayName: Seaking
 	// SeakingCritterNPCShiny.DisplayName: Seaking Shiny
-	// SeelCritterNPC.DisplayName: Seel
 	// SeelCritterNPCShiny.DisplayName: Seel Shiny
-	// ShellderCritterNPC.DisplayName: Shellder
 	// ShellderCritterNPCShiny.DisplayName: Shellder Shiny
-	// SlowbroCritterNPC.DisplayName: Slowbro
 	// SlowbroCritterNPCShiny.DisplayName: Slowbro Shiny
-	// SlowpokeCritterNPC.DisplayName: Slowpoke
 	// SlowpokeCritterNPCShiny.DisplayName: Slowpoke Shiny
-	// SnorlaxCritterNPC.DisplayName: Snorlax
 	// SnorlaxCritterNPCShiny.DisplayName: Snorlax Shiny
-	// StarmieCritterNPC.DisplayName: Starmie
 	// StarmieCritterNPCShiny.DisplayName: Starmie Shiny
-	// StaryuCritterNPC.DisplayName: Staryu
 	// StaryuCritterNPCShiny.DisplayName: Staryu Shiny
-	// TangelaCritterNPC.DisplayName: Tangela
 	// TangelaCritterNPCShiny.DisplayName: Tangela Shiny
-	// TaurosCritterNPC.DisplayName: Tauros
 	// TaurosCritterNPCShiny.DisplayName: Tauros Shiny
-	// TentacoolCritterNPC.DisplayName: Tentacool
 	// TentacoolCritterNPCShiny.DisplayName: Tentacool Shiny
-	// TentacruelCritterNPC.DisplayName: Tentacruel
 	// TentacruelCritterNPCShiny.DisplayName: Tentacruel Shiny
-	// VenomothCritterNPC.DisplayName: Venomoth
 	// VenomothCritterNPCShiny.DisplayName: Venomoth Shiny
-	// VenonatCritterNPC.DisplayName: Venonat
 	// VenonatCritterNPCShiny.DisplayName: Venonat Shiny
-	// VictreebelCritterNPC.DisplayName: Victreebel
 	// VictreebelCritterNPCShiny.DisplayName: Victreebel Shiny
-	// VileplumeCritterNPC.DisplayName: Vileplume
 	// VileplumeCritterNPCShiny.DisplayName: Vileplume Shiny
-	// VulpixCritterNPC.DisplayName: Vulpix
 	// VulpixCritterNPCShiny.DisplayName: Vulpix Shiny
-	// WeepinbellCritterNPC.DisplayName: Weepinbell
 	// WeepinbellCritterNPCShiny.DisplayName: Weepinbell Shiny
-	// WeezingCritterNPC.DisplayName: Weezing
 	// WeezingCritterNPCShiny.DisplayName: Weezing Shiny
-	// WigglytuffCritterNPC.DisplayName: Wigglytuff
 	// WigglytuffCritterNPCShiny.DisplayName: Wigglytuff Shiny
-	// ZapdosCritterNPC.DisplayName: Zapdos
 	// ZapdosCritterNPCShiny.DisplayName: Zapdos Shiny
-	// ZubatCritterNPC.DisplayName: Zubat
 	// ZubatCritterNPCShiny.DisplayName: Zubat Shiny
-	// JoltikCritterNPC.DisplayName: Joltik
 	// JoltikCritterNPCShiny.DisplayName: Joltik Shiny
-	// GalvantulaCritterNPC.DisplayName: Galvantula
 	// GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
-	// TerrarianKabutoCritterNPC.DisplayName: Terrarian Kabuto
 	// TerrarianKabutoCritterNPCShiny.DisplayName: Terrarian Kabuto Shiny
-	// TerrarianKabutopsCritterNPC.DisplayName: Terrarian Kabutops
 	// TerrarianKabutopsCritterNPCShiny.DisplayName: Terrarian Kabutops Shiny
-	// TerrarianAerodactylCritterNPC.DisplayName: Terrarian Aerodactyl
 	// TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
-	// TerrarianOmanyteCritterNPC.DisplayName: Terrarian Omanyte
 	// TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
-	// TerrarianOmastarCritterNPC.DisplayName: Terrarian Omastar
 	// TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
 
 	PokemonProfessor: {

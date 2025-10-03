@@ -19,14 +19,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackStartEnd => [18,18];
 		public override float catchRate => 190;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
-		{
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.Description")));
-		}
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
+            base.SetBestiary(database, bestiaryEntry);
+        }
 
-		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneForest) {
+		public override float SpawnChance(NPCSpawnInfo spawnInfo)
+		{
+			if (spawnInfo.Player.ZoneForest)
+			{
 				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.1f);
 			}
 

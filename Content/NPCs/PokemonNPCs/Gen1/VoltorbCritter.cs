@@ -1,4 +1,5 @@
 ﻿using Terraria.GameContent.Bestiary;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 
@@ -22,9 +23,10 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override bool canRotate => true;
 		public override float catchRate => 190;
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Marble,
-				new FlavorTextBestiaryInfoElement("It looks just like a Poké Ball. It is dangerous because it may electrocute or explode on touch."));
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Marble);
+			base.SetBestiary(database, bestiaryEntry);
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {

@@ -293,11 +293,7 @@ namespace Pokemod.Content.Items.Pokeballs
 				{
 					PokemonPlayer trainer = player.GetModPlayer<PokemonPlayer>();
 
-					if (!trainer.registeredPokemon.Keys.Contains(pokemonName))
-					{
-						trainer.registeredPokemon.Add(pokemonName, 1);
-					}
-					else trainer.registeredPokemon[pokemonName] = 1;
+					trainer.RegisterPokemon(pokemonName, true);
 				}
 
 				if (Main.netMode == NetmodeID.SinglePlayer)

@@ -2,6 +2,7 @@
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 using Pokemod.Common.Configs;
+using Terraria.Localization;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
@@ -20,9 +21,10 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override float catchRate => 200;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Even while asleep, it maintains a telepathic radar. It teleports when it is threatened."));
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
+			base.SetBestiary(database, bestiaryEntry);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{

@@ -401,11 +401,7 @@ namespace Pokemod.Common.Players
 			int ballItem;
 			bool shiny = Main.rand.NextBool(4096);
 
-			if (!registeredPokemon.Keys.Contains(pokemonName))
-			{
-				registeredPokemon.Add(pokemonName, 1);
-			}
-			else registeredPokemon[pokemonName] = 1;
+			RegisterPokemon(pokemonName, true);
 
 			if (Main.netMode == NetmodeID.SinglePlayer)
 			{
@@ -420,6 +416,20 @@ namespace Pokemod.Common.Players
 				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
 				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: "PokeballItem");
 				NetMessage.SendData(MessageID.SyncItem, -1, -1, null, ballItem, 1f);
+			}
+		}
+
+		public void RegisterPokemon(string pokemonName, bool captured)
+		{
+			List<string> allForms = PokemonData.GetAllForms(pokemonName);
+
+			foreach (string form in allForms)
+			{
+				if (!registeredPokemon.Keys.Contains(form))
+				{
+					registeredPokemon.Add(form, (captured && form == pokemonName) ? 1 : 0);
+				}
+				else if (captured && form == pokemonName) registeredPokemon[form] = 1;
 			}
 		}
 
@@ -575,11 +585,7 @@ namespace Pokemod.Common.Players
 				NPC target = (NPC)victim;
 				if (target.ModNPC is PokemonWildNPC nPC)
 				{
-					if (!registeredPokemon.Keys.Contains(nPC.pokemonName))
-					{
-						registeredPokemon.Add(nPC.pokemonName, 0);
-					}
-					//else registeredPokemon[nPC.pokemonName] = 1;
+					RegisterPokemon(nPC.pokemonName, false);
 				}
 			}
             base.OnHitAnything(x, y, victim);
