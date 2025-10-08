@@ -17,8 +17,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [11,11];
 		public override int[] attackStartEnd => [14,14];
 		public override float catchRate => 255;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It eats its weight in leaves every day. It fends off attackers with the needle on its head."));
 		}

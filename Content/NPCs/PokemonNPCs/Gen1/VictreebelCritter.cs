@@ -19,8 +19,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackStartEnd => [4,7];
 
 		public override int minLevel => 40;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Jungle, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.UndergroundJungle, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("In its mouth, it pools a fragrant nectar-like fluid. The fluid is really an acid that dissolves anything."));
 		}

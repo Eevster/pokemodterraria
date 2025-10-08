@@ -23,8 +23,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		
 		public override string[] variants => ["Christmas", "Halloween"];
 		public override float catchRate => 190;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.TheCorruption, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.TheCrimson, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
 				new FlavorTextBestiaryInfoElement("It's a Pokémon born from poison gases. It defeats even the largest foes by enveloping them in gas."));
 		}

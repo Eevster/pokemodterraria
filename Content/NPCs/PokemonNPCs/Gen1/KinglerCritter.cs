@@ -19,7 +19,6 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override float catchRate => 60;
         public override int minLevel => 28;
 
-
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));

@@ -19,8 +19,13 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 36;
 
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Desert, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
 				new FlavorTextBestiaryInfoElement("It attacks using blasts of fire. It creates heat shimmers with intense fire to hide itself."));
 		}

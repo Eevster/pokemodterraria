@@ -18,8 +18,13 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackStartEnd => [11,19];
         public override string[] variants => ["Halloween"];
 
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Jungle, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("It uses the leaf on its head to determine the air's temperature and humidity. It loves to sunbathe."));
 		}

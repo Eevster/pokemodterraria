@@ -26,13 +26,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] walkSwimStartEnd => [12, 15];
         public override int[] attackSwimStartEnd => [8, 11];
         public override float catchRate => 90;
+        
+        public override int[][] spawnConditions => [];
 
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
 
-            bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "DomeFossilItem"}, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+            bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "DomeFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
                 new FlavorTextBestiaryInfoElement("This Pokémon lived in ancient times. On rare occasions, it has been discovered as a living fossil."));
-		}
+        }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
 		}

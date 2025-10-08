@@ -24,8 +24,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override float catchRate => 120;
         public override int minLevel => 30;
         public override string[] variants => ["Christmas"];
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It loves the nectar of flowers and can locate flower patches that have even tiny amounts of pollen."));
 		}

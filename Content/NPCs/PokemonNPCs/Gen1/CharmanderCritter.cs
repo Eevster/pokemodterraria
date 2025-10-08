@@ -18,8 +18,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackStartEnd => [14,19];
 
 		public override string[] variants => ["Christmas"];
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Desert, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
 				new FlavorTextBestiaryInfoElement("The fire on the tip of its tail is a measure of its life. If the Pokémon is healthy, its tail burns intensely."));
 		}

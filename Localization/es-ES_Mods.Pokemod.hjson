@@ -4784,6 +4784,86 @@ PokemonNatures: {
 	Timid: Miedosa
 }
 
+PokemonEggGroups: {
+	GenderUnknown: Género Desconocido
+	Mineral: Mineral
+	Amorphous: Amorfo
+	Grass: Planta
+	Water3: Agua 3
+	Water2: Agua 2
+	Water1: Agua 1
+	Bug: Bicho
+	Dragon: Dragón
+	Flying: Volador
+	Field: Campo
+	HumanLike: Humanoide
+	Fairy: Hada
+	Monster: Monstruo
+	Ditto: Ditto
+	NoEggs: Ninguno
+}
+
+SpawnArea: {
+	Surface: Superficie
+	Underground: Subsuelo
+	Caverns: Cavernas
+	Desert: Desierto
+	UndergroundDesert: Desierto subterráneo
+	Snow: Tundra
+	UndergroundSnow: Tundra subterránea
+	TheCorruption: La corrupción
+	UndergroundCorruption: Corrupción subterránea
+	CorruptDesert: Desierto corrupto
+	CorruptUndergroundDesert: Desierto corrupto subterráneo
+	CorruptIce: Tundra corrupta
+	TheCrimson: El carmesí
+	UndergroundCrimson: Carmesí subterráneo
+	CrimsonDesert: Desierto carmesí
+	CrimsonUndergroundDesert: Desierto carmesí subterráneo
+	CrimsonIce: Tundra carmesí
+	TheHallow: La bendición
+	UndergroundHallow: Bendición subterránea
+	HallowDesert: Desierto bendito
+	HallowUndergroundDesert: Desierto bendito subterráneo
+	HallowIce: Tundra bendita
+	Jungle: Jungla
+	UndergroundJungle: Jungla subterránea
+	SurfaceMushroom: Champiñones
+	UndergroundMushroom: Champiñones subterráneos
+	Sky: Cielo
+	Beach: Playa
+	Ocean: Océano
+	Marble: Mármol
+	Granite: Granito
+	TheTemple: El templo
+	TheDungeon: El calabozo
+	TheUnderworld: El inframundo
+	SpiderNest: Nido de arañas
+	Graveyard: Cementerio
+	Meteor: Meteoro
+	SolarPillar: Pilar solar
+	VortexPillar: Pilar vórtex
+	NebulaPillar: Pilar nébula
+	StardustPillar: Pilar stardust
+}
+
+DayTimeStatus: {
+	All: Cualquier momento
+	Day: Día
+	Night: Noche
+	BloodMoon: Luna de sangre
+	Eclipse: Eclipse
+}
+
+WeatherStatus: {
+	All: Cualquier clima
+	Clear: Despejado
+	Raining: Lluvia
+	Windy: Viento
+	Snowing: Nieve
+	SandStorm: Tormenta arena
+}
+
 // DamageClasses.PokemonDamageClass.DisplayName: Pokemon Damage Class
 
 Configs: {
@@ -4840,10 +4920,10 @@ Configs: {
 	}
 
 	LevelCapOptions: {
-		// Tooltip: ""
-		// Disobedience.Label: Disobedience
-		// ExpCutoff.Label: Exp Cutoff
-		// LevelClamping.Label: Level Clamping
-		// None.Label: None
+		Tooltip: ""
+		Disobedience.Label: Desobediencia
+		ExpCutoff.Label: Recortar EXP
+		LevelClamping.Label: Limitar nivel
+		None.Label: Ninguno
 	}
 }

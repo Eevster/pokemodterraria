@@ -98,14 +98,14 @@ namespace Pokemod.Content.Items.Pokeballs
 		public const int moveTime = 80;
 
 		public override void SendExtraAI(BinaryWriter writer)
-        {
+		{
 			writer.Write((double)catchRate);
-            writer.Write((double)bounces);
+			writer.Write((double)bounces);
 			writer.Write((double)captureStage);
 			writer.Write((double)moveTimer);
-			writer.Write(targetPokemon != null?(double)targetPokemon.whoAmI:-1);
-            base.SendExtraAI(writer);
-        }
+			writer.Write(targetPokemon != null ? (double)targetPokemon.whoAmI : -1);
+			base.SendExtraAI(writer);
+		}
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
@@ -365,7 +365,7 @@ namespace Pokemod.Content.Items.Pokeballs
         {
             width = 6;
 			height = 6;
-            fallThrough = true;
+            fallThrough = captureStage < 0;
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }

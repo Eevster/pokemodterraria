@@ -35,6 +35,7 @@ namespace Pokemod.Common.UI.PokedexUI
 		const int nColumns = 6;
 
 		public Asset<Texture2D> notSeenIcon;
+		public Asset<Texture2D> spawnIcons;
 
 		public int page;
 
@@ -43,6 +44,7 @@ namespace Pokemod.Common.UI.PokedexUI
 		public override void OnInitialize()
 		{
 			notSeenIcon = ModContent.Request<Texture2D>("Terraria/Images/UI/Bestiary/Icon_Locked");
+			spawnIcons = ModContent.Request<Texture2D>("Terraria/Images/UI/Bestiary/Icon_Tags_Shadow");
 
 			page = 0;
 
@@ -228,11 +230,13 @@ namespace Pokemod.Common.UI.PokedexUI
 			}
 			else
 			{
+				PokemonWildNPC npc = null;
+
 				if (ModContent.RequestIfExists("Pokemod/Assets/Textures/Pokesprites/Pets/" + pokemonName + "PetProjectile", out Asset<Texture2D> pokeTexture))
 				{
 					if (ModContent.TryFind<ModNPC>("Pokemod", pokemonName + "CritterNPC", out var npcBase))
 					{
-						PokemonWildNPC npc = (PokemonWildNPC)npcBase;
+						npc = (PokemonWildNPC)npcBase;
 						UIAnimImage pokeImage = new UIAnimImage(pokeTexture, npc.totalFrames, npc.walkStartEnd[0] != -1 ? npc.walkStartEnd[0] : npc.idleStartEnd[0], npc.walkStartEnd[1] != -1 ? npc.walkStartEnd[1] : npc.idleStartEnd[1])
 						{
 							frameRate = npc.animationSpeed,
@@ -260,6 +264,98 @@ namespace Pokemod.Common.UI.PokedexUI
 					pokeInfoDisplay = new UIPokedexInfoDisplay(pokemonName, phase == 2);
 					UIHelpers.SetRectangle(pokeInfoDisplay, left: 0f, top: 275f, width: 420, height: 320);
 					pokeInfoDisplay.SetPadding(0);
+
+					pokeInfoDisplay.areaPanel.RemoveAllChildren();
+
+					if (npc != null)
+					{
+						if (npc.spawnConditions.Length == 0)
+						{
+							var areaText = new UIText("???", 0.8f)
+							{
+								TextColor = Color.White,
+								Width = new(360f, 0f),
+								Height = new(30f, 0f),
+								TextOriginX = 0.5f,
+								TextOriginY = 0.5f,
+							};
+
+							pokeInfoDisplay.areaPanel.Append(areaText);
+						}
+
+						for (int i = 0; i < npc.spawnConditions.Length; i++)
+						{
+							if (npc.spawnConditions[i].Length > 0){
+								UIPanel biomePanel = new UIPanel();
+								UIHelpers.SetRectangle(biomePanel, left: 0f, top: i * 40f, width: 126f, height: 40f);
+								biomePanel.HAlign = 0f;
+								biomePanel.SetPadding(0);
+
+								UIImage biomeImage = new UIImageSection(spawnIcons, 16, 5, npc.spawnConditions[i][0] % 16, (int)(npc.spawnConditions[i][0] / 16));
+								UIHelpers.SetRectangleAlign(biomeImage, left: 0f, top: 0.5f, width: 32, height: 32);
+								biomePanel.Append(biomeImage);
+
+								var biomeText = new UIText(Language.GetTextValue("Mods.Pokemod.SpawnArea." + (SpawnArea)npc.spawnConditions[i][0]), 0.7f)
+								{
+									TextColor = Color.White,
+									Width = new(126f, 0f),
+									Height = new(40f, 0f),
+									TextOriginX = 0.5f,
+									TextOriginY = 0.5f,
+								};
+								biomePanel.Append(biomeText);
+
+								pokeInfoDisplay.areaPanel.Append(biomePanel);
+
+								if (npc.spawnConditions[i].Length > 1)
+								{
+									UIPanel timePanel = new UIPanel();
+									UIHelpers.SetRectangle(timePanel, left: 0f, top: i * 40f, width: 126f, height: 40f);
+									timePanel.HAlign = 0.5f;
+									timePanel.SetPadding(0);
+
+									UIImage timeImage = new UIImageSection(spawnIcons, 16, 5, npc.spawnConditions[i][1] % 16, (int)(npc.spawnConditions[i][1] / 16));
+									UIHelpers.SetRectangleAlign(timeImage, left: 0f, top: 0.5f, width: 32, height: 32);
+									timePanel.Append(timeImage);
+
+									var timeText = new UIText(Language.GetTextValue("Mods.Pokemod.DayTimeStatus." + (DayTimeStatus)npc.spawnConditions[i][1]), 0.7f)
+									{
+										TextColor = Color.White,
+										Width = new(126f, 0f),
+										Height = new(40f, 0f),
+										TextOriginX = 0.5f,
+										TextOriginY = 0.5f,
+									};
+									timePanel.Append(timeText);
+
+									pokeInfoDisplay.areaPanel.Append(timePanel);
+								}
+
+								if (npc.spawnConditions[i].Length > 2) {
+									UIPanel weatherPanel = new UIPanel();
+									UIHelpers.SetRectangle(weatherPanel, left: 0f, top: i * 40f, width: 126f, height: 40f);
+									weatherPanel.HAlign = 1f;
+									weatherPanel.SetPadding(0);
+
+									UIImage weatherImage = new UIImageSection(spawnIcons, 16, 5, npc.spawnConditions[i][2] % 16, (int)(npc.spawnConditions[i][2] / 16));
+									UIHelpers.SetRectangleAlign(weatherImage, left: 0f, top: 0.5f, width: 32, height: 32);
+									weatherPanel.Append(weatherImage);
+
+									var weatherText = new UIText(Language.GetTextValue("Mods.Pokemod.WeatherStatus." + (WeatherStatus)npc.spawnConditions[i][2]), 0.7f)
+									{
+										TextColor = Color.White,
+										Width = new(126f, 0f),
+										Height = new(40f, 0f),
+										TextOriginX = 0.5f,
+										TextOriginY = 0.5f,
+									};
+									weatherPanel.Append(weatherText);
+
+									pokeInfoDisplay.areaPanel.Append(weatherPanel);
+								}
+							}
+						}
+					}
 
 					pokeInfoDisplay.formsPanel.RemoveAllChildren();
 
@@ -448,7 +544,7 @@ namespace Pokemod.Common.UI.PokedexUI
 			UIHelpers.SetRectangle(separator2, left: 0f, top: 120f, width: 180, height: 1);
 			infoPanel.Append(separator2);
 
-			var heightText = new UIText("???", 0.8f)
+			var heightText = new UIText(pokeInfo.height + " m", 0.8f)
 			{
 				Top = new(120f,0),
 				TextColor = Color.White,
@@ -463,7 +559,7 @@ namespace Pokemod.Common.UI.PokedexUI
 			UIHelpers.SetRectangle(separator3, left: 0f, top: 160f, width: 180, height: 1);
 			infoPanel.Append(separator3);
 
-			var weightText = new UIText("???", 0.8f)
+			var weightText = new UIText(pokeInfo.weight + " kg", 0.8f)
 			{
 				Top = new(160f,0),
 				TextColor = Color.White,
@@ -478,7 +574,14 @@ namespace Pokemod.Common.UI.PokedexUI
 			UIHelpers.SetRectangle(separator4, left: 0f, top: 200f, width: 180, height: 1);
 			infoPanel.Append(separator4);
 
-			var eggGroupText = new UIText("???", 0.8f)
+			string eggGroupTextContent = "";
+			if (pokeInfo.eggGroups.Length > 0)
+			{
+				eggGroupTextContent += Language.GetTextValue("Mods.Pokemod.PokemonEggGroups." + (EggGroups)pokeInfo.eggGroups[0]);
+				if(pokeInfo.eggGroups.Length > 1) eggGroupTextContent += " - " + Language.GetTextValue("Mods.Pokemod.PokemonEggGroups." + (EggGroups)pokeInfo.eggGroups[1]);
+			}
+
+			var eggGroupText = new UIText(eggGroupTextContent, 0.8f)
 			{
 				Top = new(200f,0),
 				TextColor = Color.White,
@@ -512,16 +615,6 @@ namespace Pokemod.Common.UI.PokedexUI
 			areaPanel = new UIPanel();
 			UIHelpers.SetRectangle(areaPanel, left: 0f, top: 0f, width: 420, height: 280);
 			areaPanel.SetPadding(20);
-			var areaText = new UIText("Unknown", 1f)
-			{
-				IsWrapped = true,
-				TextColor = Color.White,
-				Width = new(380f, 0f),
-				Height = new(220f, 0f),
-				TextOriginX = 0.5f,
-				TextOriginY = 0f,
-			};
-			areaPanel.Append(areaText);
 			
 			//FORMS CONTENT
 			formsPanel = new UIPanel();

@@ -26,12 +26,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] walkSwimStartEnd => [4, 7];
         public override int[] attackSwimStartEnd => [8, 13];
         public override float catchRate => 90;
+        
+        public override int[][] spawnConditions => [];
 
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HelixFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+                {
+                        bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HelixFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
                 new FlavorTextBestiaryInfoElement("In prehistoric times, it swam on the sea floor, eating plankton. Its fossils are sometimes found."));
-		}
+                }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
 		}

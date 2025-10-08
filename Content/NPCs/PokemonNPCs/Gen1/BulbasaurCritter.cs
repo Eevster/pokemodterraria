@@ -17,8 +17,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [9,9];
 		public override int[] attackStartEnd => [11,19];
         public override string[] variants => ["Halloween"];
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Jungle, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("For some time after its birth, it grows by taking nourishment from the seed on its back."));
 		}

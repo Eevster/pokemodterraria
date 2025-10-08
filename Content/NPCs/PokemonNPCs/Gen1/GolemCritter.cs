@@ -20,8 +20,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override float catchRate => 50;
         public override int minLevel => 40;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It sheds its hide once a year. Its boulderlike body is so tough, even dynamite can't harm it."));
 		}

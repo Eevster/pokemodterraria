@@ -17,8 +17,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] jumpStartEnd => [0,3];
 		public override int[] fallStartEnd => [0,3];
 		public override float catchRate => 255;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
 				new FlavorTextBestiaryInfoElement("This Pokémon lives underground. Because of its dark habitat, it is repelled by bright sunlight."));
 		}

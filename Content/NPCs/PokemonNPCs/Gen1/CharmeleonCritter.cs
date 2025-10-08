@@ -19,9 +19,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 16;
 		public override string[] variants => ["Christmas"];
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Desert, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
 				new FlavorTextBestiaryInfoElement("In the rocky mountains where Charmeleon live, their fiery tails shine at night like stars."));
 		}

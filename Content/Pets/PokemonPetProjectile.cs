@@ -198,7 +198,7 @@ namespace Pokemod.Content.Pets
 			DrawOriginOffsetY = -(pokeTexture.Height()/(totalFrames)-hitboxHeight-4);
 			Projectile.light = 0f;
 			Projectile.aiStyle = -1; // Use custom AI
-			Projectile.tileCollide = tangible;
+			Projectile.tileCollide = true;
 			Projectile.ignoreWater = false;
 		}
 
@@ -685,6 +685,7 @@ namespace Pokemod.Content.Pets
 			if (++isOutTimer > 20)
 			{
 				isOut = true;
+				Projectile.tileCollide = tangible;
 				Projectile.velocity = Vector2.Zero;
 				for (int i = 0; i < 30; i++)
 				{
@@ -694,7 +695,7 @@ namespace Pokemod.Content.Pets
 					Main.dust[dustIndex].velocity = Main.rand.NextFloat(2f, 6f) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
 				}
 				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
-				Projectile.position.Y -= 16;
+				Projectile.position.Y -= 16+4;
 			}
 		}
 
@@ -1874,6 +1875,10 @@ namespace Pokemod.Content.Pets
 				if (!(canEvolve != -1 && isEvolving && evolveTimer <= 0) && !(canMegaEvolve != -1 && isMegaEvolving && megaEvolveTimer <= 0))
 				{
 					Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<DespawnPokemon>(), 0, 0, Projectile.owner);
+				}
+				else
+				{
+					SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
 				}
 			}
 		}

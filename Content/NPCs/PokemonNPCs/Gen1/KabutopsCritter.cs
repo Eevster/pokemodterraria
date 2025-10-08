@@ -27,11 +27,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackSwimStartEnd => [19, 25];
         public override float catchRate => 25;
         public override int minLevel => 40;
+        
+        public override int[][] spawnConditions => [];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "DomeFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+                {
+                        bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "DomeFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
                 new FlavorTextBestiaryInfoElement("With sharp claws, this ferocious, ancient Pokémon rips apart prey and sucks their body fluids."));
-		}
+                }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
 		}

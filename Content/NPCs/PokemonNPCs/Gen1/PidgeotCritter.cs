@@ -28,7 +28,13 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override float catchRate => 90;
         public override int minLevel => 36;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Surface, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
+
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("By flapping its wings with all its might, Pidgeot can make a gust of wind capable of bending tall trees."));
 		}

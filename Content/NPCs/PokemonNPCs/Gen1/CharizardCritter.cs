@@ -25,9 +25,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 36;
 		public override string[] variants => ["Christmas"];
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Desert, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
 				new FlavorTextBestiaryInfoElement("It is said that Charizard's fire burns hotter if it has experienced harsh battles."));
 		}

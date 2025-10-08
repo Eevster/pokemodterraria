@@ -22,8 +22,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackFlyStartEnd => [8,15];
 		public override string[] variants => ["Christmas"];
 		public override float catchRate => 190;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Surface, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("The units at its sides generate electromagnetic waves that keep it airborne. It feeds on electricity."));
 		}

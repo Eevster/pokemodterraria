@@ -20,8 +20,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 21;
 		public override float catchRate => 120;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Jungle, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.UndergroundJungle, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("This Pokémon has the appearance of a plant. It captures unwary prey by dousing them with a toxic powder."));
 		}

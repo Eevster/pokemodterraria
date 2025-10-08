@@ -19,8 +19,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override string[] variants => ["Halloween"];
 
         public override int minLevel => 32;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Jungle, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("Its breath has the fantastic ability to revive dead plants and flowers."));
 		}

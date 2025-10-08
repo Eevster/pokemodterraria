@@ -12,8 +12,6 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override int moveStyle => 2;
 
-
-
         public override int totalFrames => 18;
         public override int animationSpeed => 7;
         public override int[] idleStartEnd => [0, 5];
@@ -30,11 +28,18 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override float catchRate => 50;
         public override string[] variants => ["Halloween"];
         public override int minLevel => 40;
+        
+        public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.TheCorruption, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.TheCrimson, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Lurking in the shadowy corners of rooms, it awaits chances to steal its prey's life force."));
-		}
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
+            bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+                new FlavorTextBestiaryInfoElement("Lurking in the shadowy corners of rooms, it awaits chances to steal its prey's life force."));
+        }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
             if (spawnInfo.Player.ZoneCorrupt || spawnInfo.Player.ZoneCrimson)

@@ -25,11 +25,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override bool tangible => false;
         public override float catchRate => 25;
         public override int minLevel => 40;
+        
+        public override int[][] spawnConditions => [];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HauntedDomeItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+                {
+                        bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HauntedDomeItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
                 new FlavorTextBestiaryInfoElement("The phantom that inhabits these bones may not even be a Pokemon at all."));
-		}
+                }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
 		}

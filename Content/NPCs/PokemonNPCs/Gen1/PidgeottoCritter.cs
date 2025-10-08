@@ -27,8 +27,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 18;
 		public override float catchRate => 120;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Surface, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It flies over its wide territory in search of prey, downing it with its highly developed claws."));
 		}

@@ -16,15 +16,21 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] jumpStartEnd => [5,5];
 		public override int[] fallStartEnd => [7,7];
 		public override float catchRate => 255;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It's cautious in the extreme, and its hardy vitality lets it live in any kind of environment."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.5f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
 			}
 
 			return 0f;

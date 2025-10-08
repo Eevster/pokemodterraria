@@ -55,8 +55,14 @@ namespace Pokemod.Content.NPCs
 		public virtual string[] variants => [];
 		public string variant;
 
+		public virtual int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
+
 		public int nature;
 		public bool hostilePokemon;
+		
 
 		public override void SendExtraAI(BinaryWriter writer) {
 			writer.Write(NPC.lifeMax);

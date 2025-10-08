@@ -21,8 +21,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 7;
 		public override float catchRate => 120;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("While awaiting evolution, it hides from predators under leaves and in nooks of branches."));
 		}

@@ -23,8 +23,13 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkSwimStartEnd => [6,11];
 		public override int[] attackSwimStartEnd => [12,12];
 
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Beach, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
 				new FlavorTextBestiaryInfoElement("It has a habit of biting everything with its well-developed jaws. Even its Trainer needs to be careful."));
 		}

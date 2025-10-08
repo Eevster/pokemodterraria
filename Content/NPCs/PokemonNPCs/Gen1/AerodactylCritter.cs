@@ -25,6 +25,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
                 public override int minLevel => 20;
 
+                public override int[][] spawnConditions => [];
 
                 public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
                 {

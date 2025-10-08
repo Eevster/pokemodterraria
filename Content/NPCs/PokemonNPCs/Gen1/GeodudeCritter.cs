@@ -19,8 +19,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackStartEnd => [4, 7];
 
 		public override float catchRate => 255;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("At rest, it looks just like a rock. Carelessly stepping on it will make it swing its fists angrily."));
 		}

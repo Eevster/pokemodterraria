@@ -4784,6 +4784,86 @@ PokemonNatures: {
 	Timid: Timid
 }
 
+PokemonEggGroups: {
+	GenderUnknown: Gender Unknown
+	Mineral: Mineral
+	Amorphous: Amorphous
+	Grass: Grass
+	Water3: Water 3
+	Water2: Water 2
+	Water1: Water 1
+	Bug: Bug
+	Dragon: Dragon
+	Flying: Flying
+	Field: Field
+	HumanLike: Human Like
+	Fairy: Fairy
+	Monster: Monster
+	Ditto: Ditto
+	NoEggs: No Eggs Discovered
+}
+
+SpawnArea: {
+	Surface: Surface
+	Underground: Underground
+	Caverns: Caverns
+	Desert: Desert
+	UndergroundDesert: Underground Desert
+	Snow: Snow
+	UndergroundSnow: Underground Snow
+	TheCorruption: The Corruption
+	UndergroundCorruption: Underground Corruption
+	CorruptDesert: Corrupt Desert
+	CorruptUndergroundDesert: Corrupt Underground Desert
+	CorruptIce: Corrupt Ice
+	TheCrimson: The Crimson
+	UndergroundCrimson: Underground Crimson
+	CrimsonDesert: Crimson Desert
+	CrimsonUndergroundDesert: Crimson Underground Desert
+	CrimsonIce: Crimson Ice
+	TheHallow: The Hallow
+	UndergroundHallow: Underground Hallow
+	HallowDesert: Hallow Desert
+	HallowUndergroundDesert: Hallow Underground Desert
+	HallowIce: Hallow Ice
+	Jungle: Jungle
+	UndergroundJungle: Underground Jungle
+	SurfaceMushroom: Surface Mushroom
+	UndergroundMushroom: Underground Mushroom
+	Sky: Sky
+	Beach: Beach
+	Ocean: Ocean
+	Marble: Marble
+	Granite: Granite
+	TheTemple: The Temple
+	TheDungeon: The Dungeon
+	TheUnderworld: The Underworld
+	SpiderNest: Spider Nest
+	Graveyard: Graveyard
+	Meteor: Meteor
+	SolarPillar: Solar Pillar
+	VortexPillar: Vortex Pillar
+	NebulaPillar: Nebula Pillar
+	StardustPillar: Stardust Pillar
+}
+
+DayTimeStatus: {
+	All: Any time
+	Day: Day
+	Night: Night
+	BloodMoon: Blood Moon
+	Eclipse: Eclipse
+}
+
+WeatherStatus: {
+	All: Any Weather
+	Clear: Clear
+	Raining: Raining
+	Windy: Windy
+	Snowing: Snowing
+	SandStorm: Sand Storm
+}
+
 DamageClasses.PokemonDamageClass.DisplayName: Pokemon Damage Class
 
 Configs: {

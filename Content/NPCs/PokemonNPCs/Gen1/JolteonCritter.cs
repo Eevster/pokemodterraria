@@ -18,8 +18,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override float catchRate => 120;
         public override int minLevel => 40;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Granite, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Granite,
 				new FlavorTextBestiaryInfoElement("It controls 10,000-volt power. When the fur covering its body stands on end, the fur is hard and sharp, like needles."));
 		}

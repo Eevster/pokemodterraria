@@ -17,8 +17,13 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [10,10];
 		public override int[] attackStartEnd => [11,13];
 
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Desert, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
 				new FlavorTextBestiaryInfoElement("It has a timid nature. If it is startled, the flames on its back burn more vigorously."));
 		}

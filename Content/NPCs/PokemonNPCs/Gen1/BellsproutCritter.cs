@@ -18,8 +18,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [7,7];
 		public override int[] attackStartEnd => [8,11];
 		public override float catchRate => 255;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Jungle, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.UndergroundJungle, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("It prefers hot and humid environments. It is quick at capturing prey with its vines."));
 		}

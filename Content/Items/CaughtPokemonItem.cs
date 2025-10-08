@@ -547,6 +547,7 @@ namespace Pokemod.Content.Items
 					PokemonName = newPokemonName;
 
 					UnlockBestiary(PokemonName);
+					RegisterPokemon(player);
 
 					GetPokemonMoves(); //When evolving the player can choose from any evolution moves (Learned at level "0") or any move learned at the current level.
 					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
@@ -570,13 +571,32 @@ namespace Pokemod.Content.Items
             tracker.SetKillCountDirectly(persistentId, currentCount + 1);
         }
 
-		private bool GetEvolutionRestricted(Player player = null){
-			if(player != null){
-				if(player.GetModPlayer<PokemonPlayer>().HasEverstone>0){
-					if(Item.favorited) return true;
-					if(player.miscEquips[0] != null && !player.miscEquips[0].IsAir){
-						if(player.miscEquips[0].ModItem is CaughtPokemonItem){
-							if(player.miscEquips[0].ModItem == Item.ModItem){
+		private void RegisterPokemon(Player player)
+		{
+			if (player != null)
+			{
+				PokemonPlayer trainer = player.GetModPlayer<PokemonPlayer>();
+
+				if (trainer.TrainerID == CurrentTrainerID)
+				{
+					trainer.RegisterPokemon(PokemonName, true);
+				}
+			}
+		}
+
+		private bool GetEvolutionRestricted(Player player = null)
+		{
+			if (player != null)
+			{
+				if (player.GetModPlayer<PokemonPlayer>().HasEverstone > 0)
+				{
+					if (Item.favorited) return true;
+					if (player.miscEquips[0] != null && !player.miscEquips[0].IsAir)
+					{
+						if (player.miscEquips[0].ModItem is CaughtPokemonItem)
+						{
+							if (player.miscEquips[0].ModItem == Item.ModItem)
+							{
 								return true;
 							}
 						}
@@ -594,6 +614,7 @@ namespace Pokemod.Content.Items
 					Vector2 pokePosition = proj.Center - new Vector2(0,(player.height-proj.height)/2);
 					proj.Kill();
 					PokemonName = newPokemonName;
+					RegisterPokemon(player);
 					if (!didMegaEvolve) GetPokemonMoves(); //Like any evolution or level up, a pokemon should only ever get this opportunity once (previously it could theoretically re-learn a move from mega evolving if it somehow removed it and had less than 4 moves).
 					didMegaEvolve = true;
 					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
@@ -812,15 +833,7 @@ namespace Pokemod.Content.Items
 
         public override bool OnPickup(Player player)
         {
-			if (player != null)
-			{
-				PokemonPlayer trainer = player.GetModPlayer<PokemonPlayer>();
-
-				if (trainer.TrainerID == CurrentTrainerID)
-				{
-					trainer.RegisterPokemon(PokemonName, true);
-				}
-			}
+			RegisterPokemon(player);
 
             return base.OnPickup(player);
         }

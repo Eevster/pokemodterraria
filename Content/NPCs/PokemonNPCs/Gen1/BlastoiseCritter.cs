@@ -25,8 +25,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackSwimStartEnd => [17,23];
 
 		public override int minLevel => 36;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
 				new FlavorTextBestiaryInfoElement("The jets of water it spouts from the rocket cannons on its shell can punch through thick steel."));
 		}

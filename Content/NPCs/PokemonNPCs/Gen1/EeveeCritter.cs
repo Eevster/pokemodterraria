@@ -15,8 +15,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkStartEnd => [9,17];
 		public override int[] jumpStartEnd => [12,12];
 		public override int[] fallStartEnd => [15,15];
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("Its ability to evolve into many forms allows it to adapt smoothly and perfectly to any environment."));
 		}

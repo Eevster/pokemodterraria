@@ -24,8 +24,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackSwimStartEnd => [18,18];
         public override float catchRate => 120;
         public override int minLevel => 40;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Beach, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
 				new FlavorTextBestiaryInfoElement("It has evolved to be suited for an aquatic life. It can become invisible when it melts away into water."));
 		}

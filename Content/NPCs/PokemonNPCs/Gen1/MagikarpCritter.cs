@@ -24,21 +24,25 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkSwimStartEnd => [5, 7];
 		public override int[] attackSwimStartEnd => [3, 7];
 		public override float catchRate => 255;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It is said to be the world's weakest Pokémon. No one knows why it has managed to survive."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if (spawnInfo.Player.ZoneBeach)
-			{
+			if (spawnInfo.Player.ZoneBeach) {
 				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
 			}
 
-			return 0f;
+			return GetSpawnChance(spawnInfo, SpawnCondition.WaterCritter.Chance * 0.5f);
 		}
-		
 	}
 
 	public class MagikarpCritterNPCShiny : MagikarpCritterNPC{}

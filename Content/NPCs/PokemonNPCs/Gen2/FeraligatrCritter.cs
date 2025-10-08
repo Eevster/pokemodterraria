@@ -24,8 +24,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackSwimStartEnd => [12,17];
 
 		public override int minLevel => 36;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Beach, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
 				new FlavorTextBestiaryInfoElement("It usually moves slowly, but it goes at blinding speed when it attacks and bites prey."));
 		}

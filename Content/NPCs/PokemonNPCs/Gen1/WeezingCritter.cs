@@ -27,8 +27,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float catchRate => 60;
         public override int minLevel => 35;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.TheCorruption, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.TheCrimson, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
 				new FlavorTextBestiaryInfoElement("It grows by feeding on gases released by garbage. Though very rare, triplets have been found."));
 		}

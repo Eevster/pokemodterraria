@@ -26,13 +26,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override bool tangible => false;
 
         public override float catchRate => 90;
+        
+        public override int[][] spawnConditions => [];
 
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
 
-            bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HauntedDomeItem"}, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+            bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HauntedDomeItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
                 new FlavorTextBestiaryInfoElement("Sealed long ago within the dungeon, this Pokemon inhabits the bones of a Pokemon even more ancient."));
-		}
+        }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
 		}

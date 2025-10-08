@@ -19,15 +19,21 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 25;
 		public override float catchRate => 127;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It whittles down its constantly growing fangs by gnawing on hard things. It can chew apart cinder block walls."));
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.5f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
 			}
 
 			return 0f;

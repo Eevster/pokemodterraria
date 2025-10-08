@@ -20,8 +20,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 24;
 		public override float catchRate => 75;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("Parasect is controlled by a mushroom that has grown larger than its host's body. The Pokémon scatters poisonous spores."));
 		}

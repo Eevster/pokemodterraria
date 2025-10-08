@@ -20,8 +20,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override int minLevel => 16;
         public override float catchRate => 50;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("When it uses its psychic power, it emits strong alpha waves that can ruin precision devices."));
 		}

@@ -20,8 +20,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override string[] variants => ["Halloween"];
 
         public override int minLevel => 16;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Jungle, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("The buds that ring its neck give off a spicy aroma that perks people up."));
 		}

@@ -26,8 +26,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override float catchRate => 50;
         public override int minLevel => 20;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("Once it appears, its rage never settles until it has razed the fields and mountains around it."));
 		}

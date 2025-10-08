@@ -20,8 +20,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float catchRate => 120;
 		public override int minLevel => 25;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It tumbles down slopes, heedless of any body parts chipping off. It eats a ton of rocks daily."));
 		}

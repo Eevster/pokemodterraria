@@ -28,12 +28,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override float catchRate => 25;
         public override int minLevel => 40;
+        
+        public override int[][] spawnConditions => [];
 
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "EldritchHelixItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.UndergroundSnow,
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+                {
+                        bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "EldritchHelixItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.UndergroundSnow,
                 new FlavorTextBestiaryInfoElement("This Pokemon's many eyes allow it to peer into deep space."));
-		}
+                }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
 		}

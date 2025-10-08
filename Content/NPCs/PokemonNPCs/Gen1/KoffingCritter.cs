@@ -26,8 +26,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float catchRate => 190;
         public override int minLevel => 15;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.TheCorruption, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.TheCrimson, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
 				new FlavorTextBestiaryInfoElement("Lighter-than-air gases in its body keep it aloft. The gases not only smell; they are also explosive."));
 		}

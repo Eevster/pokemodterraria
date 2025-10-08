@@ -24,8 +24,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override string[] variants => ["Christmas"];
 		public override float catchRate => 60;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Surface, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("A Magneton is actually three Magnemite linked by magnetism. A group of these Pokémon can set off a magnetic storm."));
 		}

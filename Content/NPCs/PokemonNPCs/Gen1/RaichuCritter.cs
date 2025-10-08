@@ -19,8 +19,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 40;
 		public override float catchRate => 75;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Surface, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("When it is angered, it immediately discharges the energy stored in the pouches in its cheeks."));
 		}

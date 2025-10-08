@@ -28,12 +28,15 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override float catchRate => 25;
         public override int minLevel => 40;
+        
+        public override int[][] spawnConditions => [];
 
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HelixFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+                {
+                        bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HelixFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
                 new FlavorTextBestiaryInfoElement("Its heavy shell allowed it to reach only nearby food. This could be the reason it is extinct."));
-		}
+                }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
 		}

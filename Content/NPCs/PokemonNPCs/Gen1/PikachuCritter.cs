@@ -18,12 +18,17 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [15,15];
 		public override int[] attackStartEnd => [18,18];
 		public override float catchRate => 190;
+		
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Surface, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
-        {
+		{
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
-            base.SetBestiary(database, bestiaryEntry);
-        }
+			base.SetBestiary(database, bestiaryEntry);
+		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
