@@ -11,7 +11,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int hitboxHeight => 46;
 
 		public override int totalFrames => 11;
-		public override int animationSpeed => 8;
+		public override int animationSpeed => 10;
 		public override int[] idleStartEnd => [0,3];
 		public override int[] walkStartEnd => [4,7];
 		public override int[] jumpStartEnd => [5,5];
@@ -21,7 +21,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+				new FlavorTextBestiaryInfoElement("It quickly swings its four arms to rock its opponents with ceaseless punches and chops from all angles."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
