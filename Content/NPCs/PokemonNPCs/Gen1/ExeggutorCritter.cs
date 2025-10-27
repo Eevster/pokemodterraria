@@ -16,22 +16,30 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkStartEnd => [3,8];
 		public override int[] jumpStartEnd => [3,3];
 		public override int[] fallStartEnd => [6,6];
-        public override float catchRate => 50;
-		public override int minLevel => 40;
+        public override float catchRate => 45;
+		public override int minLevel => 30;
 
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Jungle, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("When they work together, Exeggutor's three heads can put out powerful psychic energy. Cloudy days make this Pokémon sluggish."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneJungle) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
+			if (spawnInfo.Player.ZoneJungle)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
 			}
-			}
+            if (spawnInfo.Player.ZoneBeach)
+            {
+                return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.1f);
+            }
 
-			return 0f;
+            return 0f;
 		}
 		
 	}

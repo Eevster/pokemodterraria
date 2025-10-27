@@ -18,15 +18,19 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [4,4];
 		public override float catchRate => 180;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It hefts a Graveler repeatedly to strengthen its entire body. It uses every type of martial arts."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneForest) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.4f);
-			}
+			if (spawnInfo.Player.ZoneForest)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.4f);
 			}
 
 			return 0f;

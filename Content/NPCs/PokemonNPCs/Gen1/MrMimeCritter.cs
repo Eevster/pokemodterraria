@@ -22,18 +22,22 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int[] fallStartEnd => [11, 11];
 
-		public override float catchRate => 150;
+		public override float catchRate => 45;
+        public override int minLevel => 20;
 
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It is a pantomime expert that can create invisible but solid walls using miming gestures."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneForest) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.2f);
-			}
+			if (spawnInfo.Player.ZoneForest)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.2f);
 			}
 
 			return 0f;

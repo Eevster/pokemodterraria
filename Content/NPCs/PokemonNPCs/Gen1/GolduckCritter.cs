@@ -19,16 +19,20 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override float catchRate => 75;
 		public override int minLevel => 33;
 
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("Old tales tell of Golduck punishing those that defiled its river. The guilty were dragged into the water and taken away."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneBeach) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.1f);
-			}
+			if (spawnInfo.Player.ZoneBeach || spawnInfo.Player.ZoneForest)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.1f);
 			}
 
 			return 0f;

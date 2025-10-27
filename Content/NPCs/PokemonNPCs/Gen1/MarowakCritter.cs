@@ -20,19 +20,27 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override float catchRate => 75;
 		public override int minLevel => 28;
 
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Desert, (int)DayTimeStatus.Night, (int)WeatherStatus.All],
+            [(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
 				new FlavorTextBestiaryInfoElement("This Pokémon overcame its sorrow to evolve a sturdy new body. Marowak faces its opponents bravely, using a bone as a weapon."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneDesert) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.2f);
-			}
-			}
+            if (spawnInfo.Player.ZoneDesert)
+            {
+                return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.2f);
+            }
+            if (spawnInfo.Player.ZoneNormalUnderground)
+            {
+                return GetSpawnChance(spawnInfo, SpawnCondition.Underground.Chance * 0.1f);
+            }
 
-			return 0f;
+            return 0f;
 		}
 		
 	}

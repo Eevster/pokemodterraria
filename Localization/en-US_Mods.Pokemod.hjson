@@ -1854,6 +1854,11 @@ Items: {
 			They depict a machine to help with finding fossils
 			'''
 	}
+
+	MintSeed: {
+		DisplayName: Mint Seed
+		Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -4684,6 +4689,7 @@ Tiles: {
 	OrangeHealerTile.MapEntry: Poke Healer
 	PinkHealerTile.MapEntry: Poke Healer
 	GeoResonatorTile.MapEntry: Geo Resonator
+	MintPlant.MapEntry: Mint Shrub
 }
 
 WorldGen: {

@@ -18,17 +18,20 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [5, 5];
 		public override float catchRate => 60;
 		public override int minLevel => 40;
-
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+            [(int)SpawnArea.Snow, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("It fights by keeping its shell tightly shut for protection and by shooting spikes to repel foes."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneSnow) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.5f);
-			}
+			if (spawnInfo.Player.ZoneSnow || spawnInfo.Player.ZoneBeach)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.5f);
 			}
 
 			return 0f;

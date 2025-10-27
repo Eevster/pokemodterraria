@@ -28,8 +28,11 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override float catchRate => 25;
         public override int minLevel => 40;
-        
-        public override int[][] spawnConditions => [];
+
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)

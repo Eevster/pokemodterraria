@@ -27,7 +27,10 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackSwimStartEnd => [8, 13];
         public override float catchRate => 90;
         
-        public override int[][] spawnConditions => [];
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.UndergroundSnow, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)

@@ -21,19 +21,22 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int[] idleSwimStartEnd => [13,16];
 		public override int[] walkSwimStartEnd => [17,21];
-		public override float catchRate => 90;
+		public override float catchRate => 45;
         public override int minLevel => 20;
 
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("A smart and kindhearted Pokémon, it glides across the surface of the sea while its beautiful song echoes around it."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneBeach) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.3f);
-			}
+			if (spawnInfo.Player.ZoneBeach)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.3f);
 			}
 
 			return 0f;

@@ -19,16 +19,19 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override float catchRate => 90;
 		public override int minLevel => 28;
 
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("Machoke's boundless power is very dangerous, so it wears a belt that suppresses its energy."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneForest) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.2f);
-			}
+			if (spawnInfo.Player.ZoneForest)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.2f);
 			}
 
 			return 0f;

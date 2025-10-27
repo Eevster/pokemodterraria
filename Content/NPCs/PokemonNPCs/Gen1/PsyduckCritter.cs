@@ -18,15 +18,20 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [0, 0];
 		public override float catchRate => 190;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("As Psyduck gets stressed out, its headache gets progressively worse. It uses intense psychic energy to overwhelm those around it."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneBeach) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
-			}
+			if (spawnInfo.Player.ZoneBeach || spawnInfo.Player.ZoneForest)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
 			}
 
 			return 0f;

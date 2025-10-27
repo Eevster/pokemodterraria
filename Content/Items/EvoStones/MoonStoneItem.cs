@@ -37,8 +37,8 @@ namespace Pokemod.Content.Items.EvoStones
 		}
 		public override void AddRecipes() {
 			CreateRecipe(1)
-				.AddIngredient(ItemID.MoonCharm, 1)
-				.AddIngredient(ItemID.FallenStar, 10)
+				.AddIngredient(ItemID.Meteorite, 45)
+				.AddIngredient(ItemID.FallenStar, 5)
 				.AddIngredient(ItemID.Amethyst, 5)
 				.AddTile(TileID.Anvils)
 				.Register();
