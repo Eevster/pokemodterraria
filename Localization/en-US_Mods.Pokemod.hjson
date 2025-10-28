@@ -4732,6 +4732,7 @@ PokemonInfo: {
 	WrongType: Wrong type
 	NoMoveAvailable: No moves available
 	Disobedience: *ignores you*
+	DodgeAttack: Dodge
 }
 
 MoveLearnUI: {

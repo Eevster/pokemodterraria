@@ -46,6 +46,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                         DustBurst(pokemon.Center);
                         pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
 						pokemonOwner.timer = pokemonOwner.attackDuration;
+                        pokemonOwner.ApplyStatMod(1, 1);
 						pokemonOwner.canAttack = false;
 						break;
 					}
