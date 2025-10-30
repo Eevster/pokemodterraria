@@ -45,7 +45,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(pokemon.owner == Main.myPlayer){
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Tackle>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 7f, pokemon.owner)];
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Tackle>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name) * 2, 7f, pokemon.owner)];
 						pokemon.velocity = 20*Vector2.Normalize(targetCenter-pokemon.Center);
 						SoundEngine.PlaySound(SoundID.Item1, pokemon.position);
 						pokemonOwner.timer = pokemonOwner.attackDuration;
@@ -60,7 +60,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
 
 			pokemonOwner.attackProjs[i].Center = pokemon.Center;
-			if(pokemon.velocity.Length() < 1f){
+			if(pokemon.velocity.Length() < 0.1f){
 				pokemonOwner.attackProjs[i].Kill();
 				if(!pokemonOwner.canAttack){
 					pokemonOwner.timer = 0;
@@ -72,7 +72,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
 
 			pokemonOwner.attackProjs[i].Center = pokemon.Center;
-			if(pokemon.velocity.Length() < 1f){
+			if(pokemon.velocity.Length() < 0.1f){
 				pokemonOwner.attackProjs[i].Kill();
 				if(!pokemonOwner.canAttack){
 					pokemonOwner.timer = 0;

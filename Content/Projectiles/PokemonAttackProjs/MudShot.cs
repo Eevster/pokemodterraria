@@ -20,7 +20,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void SetDefaults()
         {
 
-            Projectile.timeLeft = 150;
+            Projectile.timeLeft = 60;
 			
 			Projectile.width = 30;
             Projectile.height = 30;
@@ -60,18 +60,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					int remainProjs = 1;
 					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 						if(pokemonOwner.attackProjs[i] == null){
-							float shootSpeed = 18f;
-							float timeToTarget = 0;
+							float shootSpeed = 20f;
                             Vector2 shootVelocity = shootSpeed * Vector2.Normalize(targetCenter - pokemon.Center);
-							if (shootVelocity.X != 0f)
-							{
-                                timeToTarget = (targetCenter - pokemon.Center).X / shootVelocity.X;
-							}
-							if (timeToTarget > pokemonOwner.distanceToAttack / shootSpeed || timeToTarget == 0)
-							{
-								timeToTarget = pokemonOwner.distanceToAttack / shootSpeed;
-							}
-							shootVelocity.Y -= timeToTarget * 0.35f;
 
                             pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, shootVelocity, ModContent.ProjectileType<MudShot>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 5f, pokemon.owner)];
 							SoundEngine.PlaySound(SoundID.Item21 with { Pitch = -0.5f }, pokemon.position);
@@ -90,13 +80,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void AI()
         {
-			//Gravity
-			Projectile.velocity.Y += 0.7f;
-            if (Projectile.velocity.Y > 20f)
-            {
-                Projectile.velocity.Y = 20f;
-            }
-
             //Rolling
             Projectile.rotation += MathHelper.ToRadians(Projectile.velocity.X);
 

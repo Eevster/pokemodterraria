@@ -93,7 +93,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
 
-            int dustindex = Dust.NewDust(Projectile.Center, 40, 40, Main.rand.NextBool() ? DustID.YellowTorch: DustID.PurpleTorch, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 0, default, 2f);
+            int dustindex = Dust.NewDust(Projectile.Center, 0, 0, Main.rand.NextBool() ? DustID.YellowTorch: DustID.PurpleTorch, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 0, default, 2f);
             Main.dust[dustindex].noGravity = true;
 
             if(Projectile.velocity.Length() < 3f && Projectile.timeLeft > 5)

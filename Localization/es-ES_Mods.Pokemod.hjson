@@ -463,6 +463,17 @@ Projectiles: {
 	// TerrarianOmanytePetProjectileShiny.DisplayName: Terrarian Omanyte Pet Projectile Shiny
 	// TerrarianOmastarPetProjectile.DisplayName: Terrarian Omastar Pet Projectile
 	// TerrarianOmastarPetProjectileShiny.DisplayName: Terrarian Omastar Pet Projectile Shiny
+	// NightSlash.DisplayName: Night Slash
+	// Bite.DisplayName: Bite
+	// RockSlide.DisplayName: Rock Slide
+	// StoneEdge.DisplayName: Stone Edge
+	// Slam.DisplayName: Slam
+	// DragonRush.DisplayName: Dragon Rush
+	// BrickBreak.DisplayName: Brick Break
+	// IceBeam.DisplayName: Ice Beam
+	// MudSlap.DisplayName: Mud Slap
+	// Blizzard.DisplayName: Blizzard
+	// IceShard.DisplayName: Ice Shard
 }
 
 Items: {
@@ -1853,6 +1864,11 @@ Items: {
 			Planos dibujados por el científico.
 			Representan una máquina que ayuda a encontrar fósiles.
 			'''
+	}
+
+	MintSeed: {
+		// DisplayName: Mint Seed
+		// Tooltip: ""
 	}
 }
 
@@ -4684,6 +4700,7 @@ Tiles: {
 	// OrangeHealerTile.MapEntry: Poke Healer
 	// PinkHealerTile.MapEntry: Poke Healer
 	// GeoResonatorTile.MapEntry: Geo Resonator
+	// MintPlant.MapEntry: Mint Shrub
 }
 
 WorldGen: {
@@ -4726,6 +4743,7 @@ PokemonInfo: {
 	WrongType: Tipo incorrecto
 	NoMoveAvailable: No hay movimientos disponibles
 	Disobedience: *te ignora*
+	// DodgeAttack: Dodge
 }
 
 MoveLearnUI: {
@@ -4753,6 +4771,18 @@ PokemonTypes: {
 	Dragon: Dragón
 	Dark: Siniestro
 	Fairy: Hada
+}
+
+PokemonStats: {
+	// HP: HP
+	// Attack: Attack
+	// Defence: Defence
+	// SpecialAttack: Sp.Atk
+	// SpecialDefence: Sp.Def
+	// Speed: Speed
+	// Accuracy: Accuracy
+	// Evasion: Evasion
+	// Reset: Stat Changes Reset
 }
 
 PokemonNatures: {

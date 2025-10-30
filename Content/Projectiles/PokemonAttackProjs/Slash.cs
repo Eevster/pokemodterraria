@@ -32,7 +32,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.penetrate = -1;
 
 			Projectile.usesLocalNPCImmunity = true;
-			Projectile.localNPCHitCooldown = 8;
+			Projectile.localNPCHitCooldown = 60;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
 
             Projectile.hide = false;
@@ -46,7 +46,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(pokemon.owner == Main.myPlayer){
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Slash>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Slash>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name) * 2, 0f, pokemon.owner)];
 						pokemon.velocity = 30*Vector2.Normalize(targetCenter-pokemon.Center);
 						SoundEngine.PlaySound(SoundID.Item1, pokemon.position);
 						pokemonOwner.timer = pokemonOwner.attackDuration;
@@ -64,19 +64,19 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             if (pokemonOwner.attackProjs[i].ai[0] == 0)
             {
-                pokemonOwner.attackProjs[i].Center = pokemon.Center + pokemon.velocity * 5f;
-                if (pokemon.velocity.Length() > float.Epsilon)
-                {
-                    proj.mirrored = pokemon.velocity.X < 0f;
-                    pokemonOwner.attackProjs[i].rotation = pokemon.velocity.ToRotation();
-                }
-                if (pokemon.velocity.Length() < 1f)
+                pokemonOwner.attackProjs[i].Center = pokemon.Center;
+                if (pokemon.velocity.Length() < 0.1f)
                 {
                     pokemonOwner.attackProjs[i].Kill();
                     if (!pokemonOwner.canAttack)
                     {
                         pokemonOwner.timer = 0;
                     }
+                }
+                else
+                {
+                    proj.mirrored = pokemon.velocity.X < 0f;
+                    pokemonOwner.attackProjs[i].rotation = pokemon.velocity.ToRotation();
                 }
             }
         }
@@ -88,19 +88,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             if (pokemonOwner.attackProjs[i].ai[0] == 0)
             {
-                pokemonOwner.attackProjs[i].Center = pokemon.Center + pokemon.velocity * 5f;
-                if (pokemon.velocity.Length() > float.Epsilon)
-                {
-                    proj.mirrored = pokemon.velocity.X < 0f;
-                    pokemonOwner.attackProjs[i].rotation = pokemon.velocity.ToRotation();
-                }
-                if (pokemon.velocity.Length() < 1f)
+                pokemonOwner.attackProjs[i].Center = pokemon.Center;
+                if (pokemon.velocity.Length() < 0.1f)
                 {
                     pokemonOwner.attackProjs[i].Kill();
                     if (!pokemonOwner.canAttack)
                     {
                         pokemonOwner.timer = 0;
                     }
+                }
+                else
+                {
+                    proj.mirrored = pokemon.velocity.X < 0f;
+                    pokemonOwner.attackProjs[i].rotation = pokemon.velocity.ToRotation();
+                    proj.Projectile.Opacity = pokemon.velocity.Length() / 2f;
                 }
             }
         }

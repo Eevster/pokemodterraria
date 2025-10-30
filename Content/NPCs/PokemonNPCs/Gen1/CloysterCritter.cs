@@ -10,25 +10,28 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 46;
 
-		public override int totalFrames => 4;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
+		public override int totalFrames => 14;
+		public override int animationSpeed => 8;
+		public override int[] idleStartEnd => [0,5];
+		public override int[] walkStartEnd => [0,5];
+		public override int[] jumpStartEnd => [1,1];
+		public override int[] fallStartEnd => [5, 5];
 		public override float catchRate => 60;
 		public override int minLevel => 40;
-
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+            [(int)SpawnArea.Snow, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+				new FlavorTextBestiaryInfoElement("It fights by keeping its shell tightly shut for protection and by shooting spikes to repel foes."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneSnow) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.5f);
-			}
+			if (spawnInfo.Player.ZoneSnow || spawnInfo.Player.ZoneBeach)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.5f);
 			}
 
 			return 0f;

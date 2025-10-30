@@ -10,23 +10,28 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 46;
 
-		public override int totalFrames => 4;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
+		public override int totalFrames => 12;
+		public override int animationSpeed => 8;
+		public override int[] idleStartEnd => [0,6];
+		public override int[] walkStartEnd => [7,10];
+		public override int[] jumpStartEnd => [2,2];
+		public override int[] fallStartEnd => [4, 4];
 		public override float catchRate => 190;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+            [(int)SpawnArea.Snow, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+				new FlavorTextBestiaryInfoElement("It swims backward by opening and closing its two shells. Its large tongue is always kept hanging out."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneSnow) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.4f);
-			}
+			if (spawnInfo.Player.ZoneSnow || spawnInfo.Player.ZoneBeach)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.4f);
 			}
 
 			return 0f;

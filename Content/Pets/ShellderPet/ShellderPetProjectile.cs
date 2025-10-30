@@ -12,13 +12,14 @@ namespace Pokemod.Content.Pets.ShellderPet
 		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 46;
 
-		public override int totalFrames => 4;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
-
+		public override int totalFrames => 12;
+		public override int animationSpeed => 8;
+		public override int[] idleStartEnd => [0,6];
+		public override int[] walkStartEnd => [7,10];
+		public override int[] jumpStartEnd => [2,2];
+		public override int[] fallStartEnd => [4, 4];
+		public override int[] attackStartEnd => [11, 11];
+		
         public override string[] evolutions => ["Cloyster"];
         public override string[] itemToEvolve => ["WaterStoneItem"];
 	}

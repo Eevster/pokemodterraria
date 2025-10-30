@@ -27,7 +27,7 @@ namespace Pokemod.Content.Pets.PonytaPet
 	public class PonytaPetProjectileShiny : PonytaPetProjectile{
         public override void ExtraChanges()
         {
-            ChangeAttackColor(new Color(42, 81, 247));
+            ChangeAttackColor(new Color(21, 40, 255));
             base.ExtraChanges();
         }
     }

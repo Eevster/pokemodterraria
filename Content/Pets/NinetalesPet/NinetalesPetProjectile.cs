@@ -20,5 +20,11 @@ namespace Pokemod.Content.Pets.NinetalesPet
 		public override int[] fallStartEnd => [0,3];
 	}
 
-	public class NinetalesPetProjectileShiny : NinetalesPetProjectile{}
+	public class NinetalesPetProjectileShiny : NinetalesPetProjectile{
+        public override void ExtraChanges()
+        {
+            ChangeAttackColor(new Color(21, 40, 255));
+            base.ExtraChanges();
+        }
+    }
 }

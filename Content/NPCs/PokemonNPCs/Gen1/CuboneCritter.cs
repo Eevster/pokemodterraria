@@ -18,18 +18,27 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [7,7];
 		public override float catchRate => 190;
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+        public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Desert, (int)DayTimeStatus.Night, (int)WeatherStatus.All],
+            [(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
+				new FlavorTextBestiaryInfoElement("When the memory of its departed mother brings it to tears, its cries echo mournfully within the skull it wears on its head."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneDesert) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.5f);
+			if (spawnInfo.Player.ZoneDesert)
+			{
+				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.5f);
 			}
-			}
+            if (spawnInfo.Player.ZoneNormalUnderground)
+            {
+                return GetSpawnChance(spawnInfo, SpawnCondition.Underground.Chance * 0.2f);
+            }
 
-			return 0f;
+            return 0f;
 		}
 		
 	}

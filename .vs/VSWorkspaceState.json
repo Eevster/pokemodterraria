@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Assets",
-    "\\Content",
-    "\\Content\\NPCs",
-    "\\Content\\NPCs\\TrainerNPCs"
+    "\\Content"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonData.cs",
   "PreviewInSolutionExplorer": false
 }

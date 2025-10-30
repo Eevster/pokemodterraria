@@ -12,12 +12,15 @@ namespace Pokemod.Content.Pets.CloysterPet
 		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 46;
 
-		public override int totalFrames => 4;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
+		public override int totalFrames => 14;
+		public override int animationSpeed => 8;
+		public override int[] idleStartEnd => [0,5];
+		public override int[] walkStartEnd => [0,5];
+		public override int[] jumpStartEnd => [1,1];
+		public override int[] fallStartEnd => [5, 5];
+		public override int[] attackStartEnd => [13, 13];
+		
+		
 	}
 
 	public class CloysterPetProjectileShiny : CloysterPetProjectile{}

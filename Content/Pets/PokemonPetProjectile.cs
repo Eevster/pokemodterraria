@@ -50,6 +50,10 @@ namespace Pokemod.Content.Pets
         public int currentHp = 0;
 		public string variant = "";
         public bool showHp;
+		public float[] statMods = [1,1,1,1,1,1,1]; //[attack, def, spatk, spdef, speed, accuracy, evasion]
+		public int statModTimer = 0;
+		//Currently, accuracy above 1, and evasion below 1, have no effect when they should act to oppose the opponent's evasion/accuracy.
+		//Harden has an example of using ApplyStatMod().
 
 		public bool manualControl;
 
@@ -254,7 +258,7 @@ namespace Pokemod.Content.Pets
 		}
 
 		public virtual int GetPokemonDamage(int power = 50, bool special = false, float multiplier = 1f){
-			int atkStat = special?finalStats[3]:finalStats[1];
+			int atkStat = special?(int)(finalStats[3] * statMods[2]): (int)(finalStats[1] * statMods[0]);
 			int pokemonDamage = (int)((2+(int)((2+2f*pokemonLvl/5)*power*atkStat/(50f*14f)))*multiplier);
 			pokemonDamage = (int)(pokemonDamage*Main.player[Projectile.owner].GetTotalDamage<PokemonDamageClass>().ApplyTo(1f));
 
@@ -417,16 +421,18 @@ namespace Pokemod.Content.Pets
 
 			if (isOut)
 			{
+                SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter, out bool hostilesNearby);
+                
 				if (!manualControl)
 				{
 					GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
-					SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
-					Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
+					Movement(foundTarget, hostilesNearby, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
 				}
 				else
 				{
-					ManualMovement();
+					ManualMovement(hostilesNearby);
 				}
+				RefreshStatMods(hostilesNearby);
 			}
 			else
 			{
@@ -580,18 +586,19 @@ namespace Pokemod.Content.Pets
 			}*/
 		}
 
-		public virtual void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter) {
+		public virtual void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter, out bool hostilesNearby) {
 			// Starting search distance
 			distanceFromTarget = enemySearchDistance;
 			targetCenter = Projectile.Center;
 			foundTarget = false;
+			hostilesNearby = false;
 
 			PokemonPlayer trainer = owner.GetModPlayer<PokemonPlayer>();
 
 			Vector2 playerPosition = trainer.Player.Center;
 			float distanceFromPlayer = enemySearchDistance;
 
-            if (trainer.attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+            if (trainer.attackMode != (int)PokemonPlayer.AttackMode.No_Attack){
 				if (!foundTarget) {
 					// This code is required either way, used for finding a target
 					if(Main.netMode != NetmodeID.SinglePlayer){
@@ -601,18 +608,21 @@ namespace Pokemod.Content.Pets
 								Player target = Main.player[k];
 								if(target.whoAmI != Projectile.owner){
 									if(target.active && !target.dead){
-										float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, Projectile.Center);
-										bool lineOfSight = Collision.CanHitLine(Projectile.Center-Vector2.One, 2, 2, target.position, target.width, target.height);
-                                        bool throughWallRange = Vector2.Distance(target.Center, Projectile.Center) < 500f;
-                                        bool closeThroughWall = Vector2.Distance(target.Center, Projectile.Center) < 100f || (canAttackThroughWalls && throughWallRange);
+										if (target.hostile)
+										{
+											float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, Projectile.Center);
+											bool lineOfSight = Collision.CanHitLine(Projectile.Center - Vector2.One, 2, 2, target.position, target.width, target.height);
+											bool throughWallRange = Vector2.Distance(target.Center, Projectile.Center) < 500f;
+											bool closeThroughWall = Vector2.Distance(target.Center, Projectile.Center) < 100f || (canAttackThroughWalls && throughWallRange);
 
-										// Check if it is within the radius
-										if (sqrDistanceToTarget < sqrMaxDetectDistance && (lineOfSight || closeThroughWall)) {
-											if(target.hostile){
+											// Check if it is within the radius
+											if (sqrDistanceToTarget < sqrMaxDetectDistance && (lineOfSight || closeThroughWall))
+											{
+												hostilesNearby = true;
 												if (Vector2.Distance(target.Center, playerPosition) < distanceFromPlayer)
 												{
 													distanceFromPlayer = Vector2.Distance(target.Center, playerPosition);
-                                                    sqrMaxDetectDistance = sqrDistanceToTarget;
+													sqrMaxDetectDistance = sqrDistanceToTarget;
 													distanceFromTarget = Vector2.Distance(target.Center, Projectile.Center);
 													targetCenter = target.Center;
 													foundTarget = true;
@@ -640,7 +650,8 @@ namespace Pokemod.Content.Pets
 
 							if (inRange && (closest || !foundTarget) && (lineOfSight || closeThroughWall || (canAttackThroughWalls && throughWallRange)) && !npc.GetGlobalNPC<PokemonNPCData>().isPokemon)
 							{
-								if (Vector2.Distance(npc.Center, Projectile.Center) < 120) //Self-Defence Bubble.
+                                hostilesNearby = true;
+                                if (Vector2.Distance(npc.Center, Projectile.Center) < 120) //Self-Defence Bubble.
 								{
 									distanceFromTarget = between;
 									targetCenter = npc.Center;
@@ -665,7 +676,9 @@ namespace Pokemod.Content.Pets
 						}
 					}
 				}
-			}else if(trainer.attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+			}
+
+			if(trainer.attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
 				targetCenter = trainer.attackPosition;
 				distanceFromTarget = Vector2.Distance(Projectile.Center, targetCenter);
 				foundTarget = true;
@@ -676,6 +689,13 @@ namespace Pokemod.Content.Pets
 			// Both things depend on if it has a target or not, so it's just one assignment here
 			// You don't need this assignment if your minion is shooting things instead of dealing contact damage
 			Projectile.friendly = foundTarget;
+
+			//Scrambles aiming if accuracy has been reduced.
+			if (Main.rand.NextFloat(1f) > statMods[5])
+			{
+				targetCenter += Main.rand.NextVector2Unit() * 150;
+				distanceFromTarget += Main.rand.Next(-100, 101);
+            }
 		}
 
 		public virtual void BallMovement()
@@ -699,14 +719,14 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-		public virtual void Movement(bool foundTarget, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition)
+		public virtual void Movement(bool foundTarget, bool hostilesNearby, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition)
 		{
 			// Default movement parameters (here for attacking)
 			float speed = moveSpeed1;
 			float inertia = 20f;
-            float speedMultiplier = 0.5f + (finalStats[5] / 250f);
-            float cooldownMult = Math.Clamp(450f - finalStats[5], 50, 450) / 250f;
-			int targetDelay = (int)(Math.Clamp(200f - finalStats[5], 0, 200) / 4f);
+            float speedMultiplier = 0.5f + ((int)(finalStats[5] * statMods[4]) / 250f);
+            float cooldownMult = Math.Clamp(450f - (int)(finalStats[5] * statMods[4]), 50, 450) / 250f;
+			int targetDelay = (int)(Math.Clamp(200f - (int)(finalStats[5] * statMods[4]), 0, 200) / 4f);
 
 			float maxFallSpeed = 10f;
 
@@ -769,9 +789,8 @@ namespace Pokemod.Content.Pets
 						{
 							speed = moveSpeed2;
 						}
-						else if (distanceFromTarget < distanceToAttack * 0.2f || distanceFromTarget < 120)
+						if (distanceFromTarget < distanceToAttack * 0.2f || distanceFromTarget < 120)
 						{
-
 							directionMod = -1f;
 						}
 					}
@@ -881,7 +900,7 @@ namespace Pokemod.Content.Pets
 							currentStatus = (int)ProjStatus.Idle;
 						}
 						canAttack = true;
-						timer = (int)(attackCooldown * cooldownMult);
+						timer = (int)Math.Clamp((attackCooldown * cooldownMult), 10, 240);
 					}
 				}
 			}
@@ -889,7 +908,7 @@ namespace Pokemod.Content.Pets
 			{
 				if (timer <= 0)
 				{
-                    if (timer > -300)
+                    if (timer > -300 || (timer > -600 && (statMods != new float[] { 1f, 1f, 1f, 1f, 1f, 1f, 1f }))) //out of combat timer for reaction time and stat mods reset
                     {
                         timer--;
                     }
@@ -900,7 +919,7 @@ namespace Pokemod.Content.Pets
 							currentStatus = (int)ProjStatus.Idle;
 						}
 						canAttack = true;
-						timer = (int)(attackCooldown * cooldownMult);
+						timer = (int)Math.Clamp((attackCooldown * cooldownMult), 10, 240);
 					}
 				}
 				if (Projectile.owner == Main.myPlayer)
@@ -1083,13 +1102,13 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-		public virtual void ManualMovement()
+		public virtual void ManualMovement(bool hostilesNearby)
 		{
 			// Default movement parameters (here for attacking)
 			float speed = moveSpeed1;
 			float inertia = 20f;
-			float speedMultiplier = 0.5f + (finalStats[5] / 250f);
-            float cooldownMult = Math.Clamp(225f - finalStats[5], 25, 225) / 125f;
+			float speedMultiplier = 0.5f + ((int)(finalStats[5] * statMods[4]) / 250f);
+            float cooldownMult = Math.Clamp(225f - (int)(finalStats[5] * statMods[4]), 25, 225) / 125f;
 
 			float maxFallSpeed = 10f;
 
@@ -1124,6 +1143,7 @@ namespace Pokemod.Content.Pets
 
 			if (timer <= 0)
 			{
+
 				if (!canAttack)
 				{
 					if (currentStatus == (int)ProjStatus.Attack)
@@ -1133,7 +1153,13 @@ namespace Pokemod.Content.Pets
 					canAttack = true;
 					timer = (int)(attackCooldown * cooldownMult);
 				}
-			}
+				else if (timer > -600)
+				{
+                    if (hostilesNearby){
+                        timer = 0;
+                    } else if (statMods != new float[]{ 1f, 1f, 1f, 1f, 1f, 1f, 1f }) timer--;
+				}
+            }
 
 			if (Projectile.owner == Main.myPlayer)
 			{
@@ -1361,6 +1387,121 @@ namespace Pokemod.Content.Pets
 			);
 		}
 
+		public virtual void RefreshStatMods(bool hostilesNearby) //Three conditions for the stat mods resetting: 10 seconds without seeing a hostile || 5 seconds since applying a stat mod while out of combat || 60 seconds without applying a stat mod.
+		{
+			bool empty = true;
+			foreach (float stat in statMods)
+			{
+                if (stat != 1) empty = false;            
+            }
+
+			if (!empty)
+			{
+				if (statModTimer > 0)
+				{
+					statModTimer--;
+				}
+				if ((timer <= -600 && !hostilesNearby) || statModTimer == 1)
+				{
+					statMods = [1, 1, 1, 1, 1, 1, 1];
+					if (statModTimer != 1) timer = -300;
+
+					//Visual Indicator
+					for (int i = 0; i < 4; i++)
+					{
+						int dust = Dust.NewDust(Projectile.Center, 0, 0, DustID.FireworksRGB, SpeedX: (i - 1.5f) * 3, Scale: 1f);
+						Main.dust[dust].noGravity = true;
+						Main.dust[dust].noLight = true;
+						Main.dust[dust].color = new Color(150, 150, 150);
+					}
+					SoundEngine.PlaySound(SoundID.Item92 with { Pitch = -0.5f, Volume = 0.4f }, Projectile.Bottom);
+
+					CombatText.NewText(Projectile.Hitbox, Color.White, Language.GetTextValue("Mods.Pokemod.PokemonStats.Reset"));
+				}
+			}
+		}
+
+		
+		public virtual void ApplyStatMod(int stat, int stageDifference) //stageDifference should be -2, -1, +1, or +2.
+        {
+			if (stat >= statMods.Length || stat < 0) return;
+			
+			int anchorValue = (statMods[stat] >= 5)? 3 : 2; //accounts for the difference in calcuations between the 5 main stats, and accuracy/evasion.
+            int direction = Math.Sign(stageDifference);
+            int evasionMod = stat == 6 ? -1 : 1;
+            //inverting direction of fraction growth for evasion
+
+			Color dustColor = Color.White;
+			string statName = "";
+			switch (stat)
+			{
+				case 0: 
+					dustColor = new Color(255, 50, 50);
+					statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Attack");
+                    break;
+                case 1: 
+					dustColor = new Color(60, 85, 255);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Defence");
+                    break;
+                case 2: 
+					dustColor = new Color(0, 209, 255);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.SpecialAttack");
+                    break;
+                case 3: 
+					dustColor = new Color(255, 30, 255);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.SpecialDefence");
+                    break;
+                case 4: 
+					dustColor = new Color(0, 255, 20);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Speed");
+                    break;
+                case 5: 
+					dustColor = new Color(255, 80, 0);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Accuracy");
+                    break;
+                case 6: 
+					dustColor = new Color(255, 234, 0);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Evasion");
+                    break;
+            }
+			Color textColor = new(dustColor.ToVector3() + new Color(50,50,50).ToVector3());
+            
+            for (int i = 0; i < Math.Abs(stageDifference); i++)
+			{
+                float newValue = statMods[stat];
+                if (statMods[stat] < 1 || (statMods[stat] == 1 && stageDifference * evasionMod < 0))
+                {
+					int denominator = (int)Math.Round(anchorValue / statMods[stat]);
+					newValue = (float)anchorValue / (float)(denominator - direction * evasionMod);
+                }
+                else
+                {
+					int numerator = (int)Math.Round(statMods[stat] * anchorValue);
+                    newValue = (float)(numerator + direction * evasionMod) / (float)anchorValue;
+                }
+                statMods[stat] = Math.Clamp(newValue, (float)anchorValue / (float)(anchorValue + 6), (float)(anchorValue + 6) / (float)anchorValue);
+
+				//Visual Indicator
+                float yOffset = Projectile.height * (0.7f * direction - 0.3f);
+                float xOffset = (Projectile.width * 2 * (i + 1) / (1 + Math.Abs(stageDifference))) - Projectile.width / 2;
+                int dust = Dust.NewDust(Projectile.Left + new Vector2(xOffset, yOffset), 0, 0, DustID.FireworksRGB, SpeedY: -direction * Projectile.height * 0.1f, Scale: 2f);
+				Main.dust[dust].noGravity = true;
+				Main.dust[dust].noLight = true;
+				Main.dust[dust].color = dustColor;
+            }
+
+			if (stageDifference != 0) {
+				CombatText.NewText(Projectile.Hitbox, textColor, statName + (direction > 0 ? " +" : " -") + Math.Abs(stageDifference));
+			}
+
+			statModTimer = 3600;
+
+            if (Main.myPlayer == Projectile.owner)
+            {
+                Projectile.netUpdate = true;
+            }
+        }
+
 		public virtual void SetAttackInfo()
 		{
 			attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
@@ -1586,6 +1727,14 @@ namespace Pokemod.Content.Pets
 
 		public int CalcIncomingDmg(int npcdmg, bool physical, bool enemyPokemon = false)
 		{
+			//Chance to Dodge incoming hit if evasion has been increased.
+			if (Main.rand.NextFloat(1f) > statMods[6])
+			{
+				string missText = Language.GetText("Mods.Pokemod.PokemonInfo.DodgeAttack").Value;
+                CombatText.NewText(Projectile.Hitbox, new Color(50, 255, 180), missText);
+                return 0;
+			}
+			
 			// template for typeChart implementation (just need to correctly detect incoming attack type, which vanilla enemies currently don't have): ---------------------------+
 			int incomingDamageType = (int)TypeIndex.Normal;
 			int primaryDefence = PokemonData.pokemonInfo[pokemonName].pokemonTypes[0];
@@ -1599,10 +1748,10 @@ namespace Pokemod.Content.Pets
 
 			//calling Hp
 			if (currentHp > finalStats[0]) { currentHp = finalStats[0]; }
-			//cal damage versus defense for pokemon
-			//int dmg = npcdmg - finalStats[2]/2;
-			int dmg = 0;
-			int defenceValue = physical ? finalStats[2] : finalStats[4];
+            //cal damage versus defense for pokemon
+            //int dmg = npcdmg - (int)(finalStats[2] * statMods[1])/2;
+            int dmg = 0;
+			int defenceValue = physical ? (int)(finalStats[2] * statMods[1]) : (int)(finalStats[4] * statMods[3]);
 
 
             if (!enemyPokemon) //apply a modifier to scale the pokemon's defence against vanilla enemy damage (also the minimum damage from mobs is 1 instead of 2 from enemy pokemon).

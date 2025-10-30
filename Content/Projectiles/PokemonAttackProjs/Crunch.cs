@@ -72,6 +72,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnSpawn(source);
         }
 
+        public override void AI()
+        {
+            CheckPokemonPetCollide();
+        }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.rand.NextBool(5)) //same 20% as the base games, using Weak as a proxy for Special Attack Down until stat mod stages are implemented.
@@ -88,6 +93,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 target.AddBuff(BuffID.Weak, 7 * 60);
             }
             base.OnHitPlayer(target, info);
+        }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            if (Main.rand.NextBool(5))
+            {
+                target.ApplyStatMod(2, -1); //Special Attack Down
+            }
+            base.OnHitPokemonPet(target, damageDone);
         }
 
         public override void OnKill(int timeLeft)
