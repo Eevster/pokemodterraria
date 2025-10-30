@@ -399,7 +399,8 @@ namespace Pokemod.Common.Players
 		public void GenerateCaughtPokemon(string pokemonName)
 		{
 			int ballItem;
-			bool shiny = Main.rand.NextBool(4096);
+			bool shiny = pokemonName.EndsWith("Shiny");
+			if (shiny) pokemonName = pokemonName[..^5];
 
 			RegisterPokemon(pokemonName, true);
 
