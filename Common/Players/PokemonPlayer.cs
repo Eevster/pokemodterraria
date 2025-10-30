@@ -68,6 +68,10 @@ namespace Pokemod.Common.Players
 		//Manual Control
 		public bool manualControl;
 
+		//Battle Mode
+
+		public bool onBattle = false;
+
 		//Player data
 		public string TrainerID { get; internal set; }
 
@@ -114,12 +118,12 @@ namespace Pokemod.Common.Players
 
 			List<string> auxKeys = tag.GetList<string>("RegisteredPKKeys").ToList();
 			List<int> auxValues = tag.GetList<int>("RegisteredPKValues").ToList();
-			
+
 			registeredPokemon = new Dictionary<string, int>();
 
 			for (int i = 0; i < auxKeys.Count; i++)
 			{
-				registeredPokemon.Add(auxKeys[i], i<auxValues.Count?auxValues[i]:0);
+				registeredPokemon.Add(auxKeys[i], i < auxValues.Count ? auxValues[i] : 0);
 			}
 		}
 
@@ -572,7 +576,8 @@ namespace Pokemod.Common.Players
 
 		public int GetClampedLevel(int pokemonLvl)
 		{
-			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.LevelClamping) {
+			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.LevelClamping)
+			{
 				return System.Math.Clamp(pokemonLvl, 0, levelCap);
 			}
 
@@ -580,23 +585,24 @@ namespace Pokemod.Common.Players
 		}
 
 		public override void OnHitAnything(float x, float y, Entity victim)
-        {
-            if(victim.GetType().ToString() == "Terraria.NPC"){
+		{
+			if (victim.GetType().ToString() == "Terraria.NPC")
+			{
 				NPC target = (NPC)victim;
 				if (target.ModNPC is PokemonWildNPC nPC)
 				{
 					RegisterPokemon(nPC.pokemonName, false);
 				}
 			}
-            base.OnHitAnything(x, y, victim);
-        }
+			base.OnHitAnything(x, y, victim);
+		}
 
 		public override void PreUpdateMovement()
 		{
 			if (manualControl)
 			{
 				Player.velocity.X = 0;
-				if (Player.velocity.Y < 0) Player.velocity.Y = 0;
+				if (Player.velocity.Y < 0 || onBattle) Player.velocity.Y = 0;
 			}
 			base.PreUpdateMovement();
 		}
@@ -627,8 +633,8 @@ namespace Pokemod.Common.Players
 			}
 		}
 
-        public override bool CanUseItem(Item item)
-        {
+		public override bool CanUseItem(Item item)
+		{
 			if (manualControl)
 			{
 				if (item.ModItem is not SynchroMachine)
@@ -637,7 +643,61 @@ namespace Pokemod.Common.Players
 				}
 			}
 
-            return base.CanUseItem(item);
-        }
+			return base.CanUseItem(item);
+		}
+
+		public bool SetBattle(bool active)
+		{
+			CaughtPokemonItem[] pokemonTeam = GetPokemonTeam(1);
+
+			if (pokemonTeam.Length > 0)
+			{
+				if (active)
+				{
+					if (pokemonTeam[0].proj == null)
+					{
+						pokemonTeam[0].UseItem(Player);
+						pokemonTeam[0].Shoot(Player, null, Player.Center, 10f * new Vector2(Player.direction > 0 ? 1 : -1, 0), pokemonTeam[0].Item.shoot, pokemonTeam[0].Item.damage, pokemonTeam[0].Item.knockBack);
+					}
+
+					onBattle = true;
+
+					if (pokemonTeam[0].proj.ModProjectile is PokemonPetProjectile pokemonProj)
+					{
+						Main.NewText("Battle manual control");
+						manualControl = true;
+						pokemonProj.manualControl = true;
+					}
+				}
+				else
+				{
+					onBattle = false;
+					manualControl = false;
+				}
+
+				return true;
+			}
+			return false;
+		}
+
+		public CaughtPokemonItem[] GetPokemonTeam(int amount) {
+			List<Item> pokemonItems = Player.inventory.ToList().FindAll(item => item.type == ModContent.ItemType<CaughtPokemonItem>());
+			List<CaughtPokemonItem> pokemonTeam = [];
+
+			for (int i = 0; i < amount; i++)
+			{
+				if (pokemonItems.Count > i)
+				{
+					Main.NewText("PokeItem");
+					pokemonTeam.Add(pokemonItems[i].ModItem as CaughtPokemonItem);
+				}
+				else
+				{
+					Main.NewText("Null");
+				}
+			}
+
+			return pokemonTeam.ToArray();
+		}
 	}
 }

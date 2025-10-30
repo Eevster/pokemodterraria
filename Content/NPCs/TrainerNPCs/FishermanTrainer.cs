@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Pokemod.Common.Players;
 using Pokemod.Content.Items.Tools;
 using Terraria;
 using Terraria.GameContent;
@@ -122,7 +123,11 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		{
 			if (firstButton)
 			{
+				Player player = Main.player[Main.myPlayer];
 
+				if (player.GetModPlayer<PokemonPlayer>().SetBattle(true))
+				{
+				}
 			}
 			else
 			{
