@@ -4,12 +4,13 @@ using Pokemod.Content.Dusts;
 using Pokemod.Content.Pets;
 using Terraria;
 using Terraria.Audio;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-    public class Slash : PokemonAttack
+    public class NightSlash : PokemonAttack
 	{
         private bool mirrored;
 
@@ -26,13 +27,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.friendly = true;
             Projectile.hostile = false;
 
-            Projectile.timeLeft = 60;
+            Projectile.timeLeft = 80;
 
             Projectile.tileCollide = false;  
             Projectile.penetrate = -1;
 
 			Projectile.usesLocalNPCImmunity = true;
-			Projectile.localNPCHitCooldown = 60;
+			Projectile.localNPCHitCooldown = 8;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
 
             Projectile.hide = false;
@@ -46,7 +47,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(pokemon.owner == Main.myPlayer){
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Slash>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name) * 2, 0f, pokemon.owner)];
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<NightSlash>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
 						pokemon.velocity = 30*Vector2.Normalize(targetCenter-pokemon.Center);
 						SoundEngine.PlaySound(SoundID.Item1, pokemon.position);
 						pokemonOwner.timer = pokemonOwner.attackDuration;
@@ -60,7 +61,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void UpdateAttackProjs(Projectile pokemon, int i, ref float maxFallSpeed)
         {
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-            Slash proj = (Slash)pokemonOwner.attackProjs[i].ModProjectile;
+            NightSlash proj = (NightSlash)pokemonOwner.attackProjs[i].ModProjectile;
 
             if (pokemonOwner.attackProjs[i].ai[0] == 0)
             {
@@ -84,7 +85,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void UpdateNoAttackProjs(Projectile pokemon, int i)
         {
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-            Slash proj = (Slash)pokemonOwner.attackProjs[i].ModProjectile;
+            NightSlash proj = (NightSlash)pokemonOwner.attackProjs[i].ModProjectile;
 
             if (pokemonOwner.attackProjs[i].ai[0] == 0)
             {
@@ -114,26 +115,31 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             {
                 pokemonOwner.immune = true;
                 pokemon.velocity.Y *= 0.95f;
+                if (pokemon.velocity.Length() > 1f)
+                {
+                    pokemonOwner.pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.ShadowDye);
+                }
             }
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = ModContent.Request<Texture2D>(Projectile.ModProjectile.Texture).Value;
-
-            Main.EntitySpriteDraw(
-                texture, 
-                Projectile.Center - Main.screenPosition,
-                texture.Frame(1, Main.projFrames[Projectile.type], 
-                0, 
-                Projectile.frame), 
-                new Color(lightColor.ToVector3() + Color.White.ToVector3() * 0.3f), 
-                Projectile.rotation, 
-                texture.Frame(1, Main.projFrames[Projectile.type]).Size() / 2f, 
-                Projectile.scale, 
-                mirrored? SpriteEffects.FlipVertically: SpriteEffects.None, 0
-                );
-
+            if (Projectile.ai[0] == 1f)
+            {
+                Main.EntitySpriteDraw(
+                    texture,
+                    Projectile.Center - Main.screenPosition,
+                    texture.Frame(1, Main.projFrames[Projectile.type],
+                    0,
+                    Projectile.frame),
+                    Color.White,
+                    Projectile.rotation,
+                    texture.Frame(1, Main.projFrames[Projectile.type]).Size() / 2f,
+                    Projectile.scale,
+                    mirrored ? SpriteEffects.FlipVertically : SpriteEffects.None, 0
+                    );
+            }
             return false;
         }
 
@@ -154,32 +160,33 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            StartCut();
+            StartCut(target.Center);
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            StartCut();
+            StartCut(target.Center);
             base.OnHitPlayer(target, info);
         }
 
-        public void StartCut()
+        public void StartCut(Vector2 position)
         {
             if (Projectile.ai[0] == 0f)
             {
                 Projectile.ai[0] = 1f;
                 Projectile.velocity = Vector2.Zero;
+                Projectile.Center = position;
 
                 Projectile.hide = false;
                 Projectile.frameCounter = 0;
                 Projectile.frame = 0;
 
-                Projectile.penetrate = 2;
-                Projectile.timeLeft = 21;
+                Projectile.penetrate = 3;
+                Projectile.timeLeft = 35;
 
                 Projectile.Opacity = 1f;
-                SoundEngine.PlaySound(SoundID.Item71, Projectile.position);
+                SoundEngine.PlaySound(SoundID.Item71, Projectile.Center);
             }
         }
 
@@ -187,7 +194,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             if (Projectile.ai[0] == 1f)
             {
-                if (++Projectile.frameCounter >= 3)
+                if (++Projectile.frameCounter >= 5)
                 {
                     Projectile.frameCounter = 0;
                     if (++Projectile.frame >= Main.projFrames[Projectile.type])
@@ -198,7 +205,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     {
                         for (int i = 0; i < 10; i++)
                         {
-                            Dust.NewDust(Projectile.Center, 4, 4, DustID.YellowTorch, Main.rand.Next(2, 15) * (mirrored? -1: 1), Main.rand.Next(-7, -3));
+                            Dust.NewDust(Projectile.Center, 4, 4, DustID.Shadowflame, Main.rand.Next(2, 15) * (mirrored? -1: 1), Main.rand.Next(-7, -3));
                         }
                     }
                 }

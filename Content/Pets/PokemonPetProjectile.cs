@@ -789,9 +789,8 @@ namespace Pokemod.Content.Pets
 						{
 							speed = moveSpeed2;
 						}
-						else if (distanceFromTarget < distanceToAttack * 0.2f || distanceFromTarget < 120)
+						if (distanceFromTarget < distanceToAttack * 0.2f || distanceFromTarget < 120)
 						{
-
 							directionMod = -1f;
 						}
 					}
@@ -901,7 +900,7 @@ namespace Pokemod.Content.Pets
 							currentStatus = (int)ProjStatus.Idle;
 						}
 						canAttack = true;
-						timer = (int)(attackCooldown * cooldownMult);
+						timer = (int)Math.Clamp((attackCooldown * cooldownMult), 10, 240);
 					}
 				}
 			}
@@ -909,7 +908,7 @@ namespace Pokemod.Content.Pets
 			{
 				if (timer <= 0)
 				{
-                    if (timer > -300 || (timer > -600 && (statMods != new float[] { 1f, 1f, 1f, 1f, 1f, 1f, 1f })))
+                    if (timer > -300 || (timer > -600 && (statMods != new float[] { 1f, 1f, 1f, 1f, 1f, 1f, 1f }))) //out of combat timer for reaction time and stat mods reset
                     {
                         timer--;
                     }
@@ -920,7 +919,7 @@ namespace Pokemod.Content.Pets
 							currentStatus = (int)ProjStatus.Idle;
 						}
 						canAttack = true;
-						timer = (int)(attackCooldown * cooldownMult);
+						timer = (int)Math.Clamp((attackCooldown * cooldownMult), 10, 240);
 					}
 				}
 				if (Projectile.owner == Main.myPlayer)
@@ -1390,44 +1389,117 @@ namespace Pokemod.Content.Pets
 
 		public virtual void RefreshStatMods(bool hostilesNearby) //Three conditions for the stat mods resetting: 10 seconds without seeing a hostile || 5 seconds since applying a stat mod while out of combat || 60 seconds without applying a stat mod.
 		{
-			if (statModTimer > 0)
+			bool empty = true;
+			foreach (float stat in statMods)
 			{
-				statModTimer--;
-			}
-			if ((timer <= -600 && !hostilesNearby) || statModTimer == 1)
+                if (stat != 1) empty = false;            
+            }
+
+			if (!empty)
 			{
-				statMods = [1, 1, 1, 1, 1, 1, 1];
-				if(statModTimer != 1) timer = -300;
+				if (statModTimer > 0)
+				{
+					statModTimer--;
+				}
+				if ((timer <= -600 && !hostilesNearby) || statModTimer == 1)
+				{
+					statMods = [1, 1, 1, 1, 1, 1, 1];
+					if (statModTimer != 1) timer = -300;
+
+					//Visual Indicator
+					for (int i = 0; i < 4; i++)
+					{
+						int dust = Dust.NewDust(Projectile.Center, 0, 0, DustID.FireworksRGB, SpeedX: (i - 1.5f) * 3, Scale: 1f);
+						Main.dust[dust].noGravity = true;
+						Main.dust[dust].noLight = true;
+						Main.dust[dust].color = new Color(150, 150, 150);
+					}
+					SoundEngine.PlaySound(SoundID.Item92 with { Pitch = -0.5f, Volume = 0.4f }, Projectile.Bottom);
+
+					CombatText.NewText(Projectile.Hitbox, Color.White, Language.GetTextValue("Mods.Pokemod.PokemonStats.Reset"));
+				}
 			}
 		}
 
 		
 		public virtual void ApplyStatMod(int stat, int stageDifference) //stageDifference should be -2, -1, +1, or +2.
         {
-			int anchorValue = (statMods[stat] >= 5)? 3 : 2; //accounts for the difference in calcuations between the 5 main stats, and accuracy/evasion.
-
-            //inverting direction of fraction growth for evasion
-            if (stat == 6)
-			{
-				stageDifference *= -1;
-			}
+			if (stat >= statMods.Length || stat < 0) return;
 			
-			for (int i = 0; i < Math.Abs(stageDifference); i++)
+			int anchorValue = (statMods[stat] >= 5)? 3 : 2; //accounts for the difference in calcuations between the 5 main stats, and accuracy/evasion.
+            int direction = Math.Sign(stageDifference);
+            int evasionMod = stat == 6 ? -1 : 1;
+            //inverting direction of fraction growth for evasion
+
+			Color dustColor = Color.White;
+			string statName = "";
+			switch (stat)
+			{
+				case 0: 
+					dustColor = new Color(255, 50, 50);
+					statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Attack");
+                    break;
+                case 1: 
+					dustColor = new Color(60, 85, 255);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Defence");
+                    break;
+                case 2: 
+					dustColor = new Color(0, 209, 255);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.SpecialAttack");
+                    break;
+                case 3: 
+					dustColor = new Color(255, 30, 255);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.SpecialDefence");
+                    break;
+                case 4: 
+					dustColor = new Color(0, 255, 20);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Speed");
+                    break;
+                case 5: 
+					dustColor = new Color(255, 80, 0);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Accuracy");
+                    break;
+                case 6: 
+					dustColor = new Color(255, 234, 0);
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Evasion");
+                    break;
+            }
+			Color textColor = new(dustColor.ToVector3() + new Color(50,50,50).ToVector3());
+            
+            for (int i = 0; i < Math.Abs(stageDifference); i++)
 			{
                 float newValue = statMods[stat];
-                if (statMods[stat] < 1 || (statMods[stat] == 1 && stageDifference < 0))
+                if (statMods[stat] < 1 || (statMods[stat] == 1 && stageDifference * evasionMod < 0))
                 {
 					int denominator = (int)Math.Round(anchorValue / statMods[stat]);
-					newValue = (float)anchorValue / (float)(denominator - Math.Sign(stageDifference));
+					newValue = (float)anchorValue / (float)(denominator - direction * evasionMod);
                 }
                 else
                 {
 					int numerator = (int)Math.Round(statMods[stat] * anchorValue);
-                    newValue = (float)(numerator + Math.Sign(stageDifference)) / (float)anchorValue;
+                    newValue = (float)(numerator + direction * evasionMod) / (float)anchorValue;
                 }
                 statMods[stat] = Math.Clamp(newValue, (float)anchorValue / (float)(anchorValue + 6), (float)(anchorValue + 6) / (float)anchorValue);
+
+				//Visual Indicator
+                float yOffset = Projectile.height * (0.7f * direction - 0.3f);
+                float xOffset = (Projectile.width * 2 * (i + 1) / (1 + Math.Abs(stageDifference))) - Projectile.width / 2;
+                int dust = Dust.NewDust(Projectile.Left + new Vector2(xOffset, yOffset), 0, 0, DustID.FireworksRGB, SpeedY: -direction * Projectile.height * 0.1f, Scale: 2f);
+				Main.dust[dust].noGravity = true;
+				Main.dust[dust].noLight = true;
+				Main.dust[dust].color = dustColor;
             }
+
+			if (stageDifference != 0) {
+				CombatText.NewText(Projectile.Hitbox, textColor, statName + (direction > 0 ? " +" : " -") + Math.Abs(stageDifference));
+			}
+
 			statModTimer = 3600;
+
+            if (Main.myPlayer == Projectile.owner)
+            {
+                Projectile.netUpdate = true;
+            }
         }
 
 		public virtual void SetAttackInfo()

@@ -32,8 +32,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 				new FlavorTextBestiaryInfoElement("Its three heads move alternately, driving it through tough soil to depths of over 60 miles."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneNormalUnderground) {
-				return GetSpawnChance(spawnInfo, SpawnCondition.Underground.Chance * 0.3f);
+			if (spawnInfo.Player.ZoneNormalUnderground || spawnInfo.Player.ZoneNormalCaverns) {
+				return GetSpawnChance(spawnInfo, (SpawnCondition.Underground.Chance + SpawnCondition.Cavern.Chance) * 0.3f);
 			}
 
 			return 0f;

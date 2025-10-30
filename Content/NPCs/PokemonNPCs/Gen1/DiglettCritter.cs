@@ -29,8 +29,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 				new FlavorTextBestiaryInfoElement("This Pokémon lives underground. Because of its dark habitat, it is repelled by bright sunlight."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneNormalUnderground) {
-				return GetSpawnChance(spawnInfo, SpawnCondition.Underground.Chance * 0.5f);
+			if (spawnInfo.Player.ZoneNormalUnderground || spawnInfo.Player.ZoneNormalCaverns) {
+				return GetSpawnChance(spawnInfo, (SpawnCondition.Underground.Chance + SpawnCondition.Cavern.Chance) * 0.5f);
 			}
 
 			return 0f;

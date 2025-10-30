@@ -81,6 +81,31 @@ namespace Pokemod.Content.Projectiles
             base.OnSpawn(source);
         }
 
+		public void CheckPokemonPetCollide()
+		{
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+				if (Main.projectile[i].ModProjectile is PokemonPetProjectile)
+				{
+					PokemonPetProjectile hostilePokemon = (PokemonPetProjectile)Main.projectile[i].ModProjectile as PokemonPetProjectile;
+					if (hostilePokemon != null)
+					{
+						if (hostilePokemon.Projectile.owner >= 0 && hostilePokemon.Projectile.owner < Main.maxPlayers)
+						{
+							Player targetOwner = Main.player[hostilePokemon.Projectile.owner];
+							if (targetOwner.hostile && (targetOwner.team == 0 || Owner.team == 0 || targetOwner.team != Owner.team)) //Pokemon is Hostile
+							{
+								if (Colliding(Projectile.Hitbox, hostilePokemon.Projectile.Hitbox) == true)
+								{
+									OnHitPokemonPet(hostilePokemon, Projectile.damage);
+								}
+							}
+						}
+					}
+				}
+            }
+        }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
 			//SetExpGained(target, hit);
@@ -94,7 +119,24 @@ namespace Pokemod.Content.Projectiles
 				}
 			}
             base.OnHitNPC(target, hit, damageDone);
+			AfterHitTarget(target, damageDone);
         }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            base.OnHitPlayer(target, info);
+			AfterHitTarget(target, info.SourceDamage);
+        }
+
+		public virtual void OnHitPokemonPet(PokemonPetProjectile target, int damageDone) //Requires that CheckPokemonPetCollide() is called in AI(). This is intentionally not always called, to save on wasted processing.
+		{
+			AfterHitTarget(target.Projectile, damageDone);
+		}
+
+		public virtual void AfterHitTarget(Entity target, int damageDone)
+		{
+
+		}
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {

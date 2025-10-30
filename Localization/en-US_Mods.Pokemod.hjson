@@ -463,6 +463,17 @@ Projectiles: {
 	TerrarianOmanytePetProjectileShiny.DisplayName: Terrarian Omanyte Pet Projectile Shiny
 	TerrarianOmastarPetProjectile.DisplayName: Terrarian Omastar Pet Projectile
 	TerrarianOmastarPetProjectileShiny.DisplayName: Terrarian Omastar Pet Projectile Shiny
+	NightSlash.DisplayName: Night Slash
+	Bite.DisplayName: Bite
+	RockSlide.DisplayName: Rock Slide
+	StoneEdge.DisplayName: Stone Edge
+	Slam.DisplayName: Slam
+	DragonRush.DisplayName: Dragon Rush
+	BrickBreak.DisplayName: Brick Break
+	IceBeam.DisplayName: Ice Beam
+	MudSlap.DisplayName: Mud Slap
+	Blizzard.DisplayName: Blizzard
+	IceShard.DisplayName: Ice Shard
 }
 
 Items: {
@@ -4760,6 +4771,18 @@ PokemonTypes: {
 	Dragon: Dragon
 	Dark: Dark
 	Fairy: Fairy
+}
+
+PokemonStats: {
+	HP: HP
+	Attack: Attack
+	Defence: Defence
+	SpecialAttack: Sp.Atk
+	SpecialDefence: Sp.Def
+	Speed: Speed
+	Accuracy: Accuracy
+	Evasion: Evasion
+	Reset: Stat Changes Reset
 }
 
 PokemonNatures: {

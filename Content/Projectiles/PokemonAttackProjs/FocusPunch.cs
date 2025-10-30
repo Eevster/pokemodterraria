@@ -127,6 +127,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 pokemonOwner.attackProjs[i].Center = pokemon.Center;
                 pokemonOwner.attackProjs[i].velocity = pokemon.velocity;
             }
+            if (pokemon.velocity.Length() < 0.1f)
+            {
+                pokemonOwner.attackProjs[i].Kill();
+                if (!pokemonOwner.canAttack)
+                {
+                    pokemonOwner.timer = 0;
+                }
+            }
         }
 
         public override void ExtraChanges(Projectile pokemon){

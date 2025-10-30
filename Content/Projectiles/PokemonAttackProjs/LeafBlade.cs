@@ -56,7 +56,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
 
 			if(pokemonOwner.attackProjs[i].ai[0] == 0) pokemonOwner.attackProjs[i].Center = pokemon.Center;
-			if(pokemon.velocity.Length() < 1f){
+			if(pokemon.velocity.Length() < 0.1f){
 				pokemonOwner.attackProjs[i].Kill();
 				if(!pokemonOwner.canAttack){
 					pokemonOwner.timer = 0;
@@ -68,7 +68,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
 
 			if(pokemonOwner.attackProjs[i].ai[0] == 0) pokemonOwner.attackProjs[i].Center = pokemon.Center;
-			if(pokemon.velocity.Length() < 1f){
+			if(pokemon.velocity.Length() < 0.1f){
 				pokemonOwner.attackProjs[i].Kill();
 				if(!pokemonOwner.canAttack){
 					pokemonOwner.timer = 0;

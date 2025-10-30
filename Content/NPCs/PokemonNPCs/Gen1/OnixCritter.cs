@@ -32,7 +32,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneNormalUnderground || spawnInfo.Player.ZoneNormalCaverns)
 			{
-				return GetSpawnChance(spawnInfo, SpawnCondition.Underground.Chance * 0.2f);
+				return GetSpawnChance(spawnInfo, (SpawnCondition.Underground.Chance + SpawnCondition.Cavern.Chance) * 0.2f);
 			}
             if (spawnInfo.Player.ZoneDesert)
             {

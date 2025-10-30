@@ -35,7 +35,7 @@ namespace Pokemod.Content.Pets.CharmeleonPet
         {
             if (variant == "Christmas")
             {
-                ChangeAttackColor(new Color(42, 81, 247));
+                ChangeAttackColor(new Color(21, 40, 255));
             }
             base.ExtraChanges();
         }

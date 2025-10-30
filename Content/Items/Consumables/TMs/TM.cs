@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework;
 using rail;
 using System.Diagnostics;
 using Terraria.Audio;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 
 namespace Pokemod.Content.Items.Consumables.TMs
 {
@@ -113,13 +114,13 @@ namespace Pokemod.Content.Items.Consumables.TMs
 	public abstract class TMDark : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Dark;
-		public override string[] moves => ["Crunch"];
+		public override string[] moves => ["Crunch", "NightSlash"];
 	}
 
 	public abstract class TMDragon : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Dragon;
-		public override string[] moves => ["DragonBreath"];
+		public override string[] moves => ["DragonBreath", "DragonRush"];
 	}
 
 	public class TMElectric : TechnicalMachine
@@ -137,7 +138,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 	public class TMFighting : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Fighting;
-		public override string[] moves => ["FocusPunch"];
+		public override string[] moves => ["FocusPunch", "BrickBreak"];
 	}
 
 	public class TMFire : TechnicalMachine
@@ -173,7 +174,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 	public class TMIce : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Ice;
-		public override string[] moves => ["IceFang"];
+		public override string[] moves => ["IceFang", "IceBeam", "Blizzard"];
 	}
 
 	public class TMNormal : TechnicalMachine
@@ -197,7 +198,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 	public abstract class TMRock : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Rock;
-		public override string[] moves => [];
+		public override string[] moves => ["RockSlide", "StoneEdge"];
 	}
 
 	public class TMSteel : TechnicalMachine
