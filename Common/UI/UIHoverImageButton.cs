@@ -181,7 +181,7 @@ namespace Pokemod.Common.UI
 
 		public void SetPokemon(string pokemonName)
 		{
-			this.pokemonName = pokemonName;
+            this.pokemonName = pokemonName.EndsWith("Shiny")? pokemonName[..^5] : pokemonName;
 			pokemonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokesprites/Icons/" + pokemonName);
 		}
 

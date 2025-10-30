@@ -147,6 +147,14 @@ namespace Pokemod.Content.NPCs
                 starters[2] = waterStarters[Main.rand.Next(waterStarters.Length)];
             }
 
+            for (int i = 0; i < starters.Length; i++)
+            {
+                if (Main.rand.NextBool(4096))
+                {
+                    starters[i] = starters[i] + "Shiny";
+                }
+            }
+
             return starters;
         }
 
