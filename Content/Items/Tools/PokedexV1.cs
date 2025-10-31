@@ -10,6 +10,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Pokemod.Content.Items.Apricorns;
 
 namespace Pokemod.Content.Items.Tools
 {
@@ -69,5 +70,13 @@ namespace Pokemod.Content.Items.Tools
 				
             base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
         }
-	}
+        public override void AddRecipes()
+        {
+            CreateRecipe(1)
+                .AddIngredient(ModContent.ItemType<RedApricorn>(), 5)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 20)
+                .AddTile(TileID.WorkBenches)
+                .Register();
+        }
+    }
 }

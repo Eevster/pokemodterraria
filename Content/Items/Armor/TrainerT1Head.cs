@@ -45,5 +45,13 @@ namespace Pokemod.Content.Items.Armor
 			player.GetCritChance<PokemonDamageClass>() += AdditivePokemonCritBonus;
 			//player.GetModPlayer<PokemonPlayer>().maxPokemon += MaxPokemonIncrease;
 		}
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.Silk, 5)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 5)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
     }
 }

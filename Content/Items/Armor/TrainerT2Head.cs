@@ -43,5 +43,19 @@ namespace Pokemod.Content.Items.Armor
 			player.setBonus = SetBonusText.Value;
 			player.GetCritChance<PokemonDamageClass>() += AdditivePokemonCritBonus;
 		}
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.DemoniteBar, 5)
+                .AddIngredient<TrainerT1Body>(1)
+                .AddTile(TileID.Anvils)
+                .Register();
+
+            CreateRecipe()
+                .AddIngredient(ItemID.CrimtaneBar, 5)
+                .AddIngredient<TrainerT1Body>(1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
     }
 }

@@ -27,5 +27,13 @@ namespace Pokemod.Content.Items.Armor
 		public override void UpdateEquip(Player player) {
 			player.moveSpeed += MoveSpeedBonus / 100f;
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.Silk, 5)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 5)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
     }
 }

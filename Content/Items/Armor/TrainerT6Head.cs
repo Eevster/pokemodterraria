@@ -50,5 +50,14 @@ namespace Pokemod.Content.Items.Armor
 			player.setBonus = SetBonusText.Value;
 			player.GetModPlayer<PokemonPlayer>().maxPokemon += MaxPokemonIncrease;
 		}
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.PixieDust, 15)
+                .AddIngredient(ItemID.HallowedBar, 10)
+                .AddIngredient<TrainerT5Body>(1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
     }
 }

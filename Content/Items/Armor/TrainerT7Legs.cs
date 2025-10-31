@@ -30,5 +30,14 @@ namespace Pokemod.Content.Items.Armor
 			player.moveSpeed += MoveSpeedBonus / 100f;
 			player.GetCritChance<PokemonDamageClass>() += AdditivePokemonCritBonus;
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.SunplateBlock, 15)
+                .AddIngredient(ItemID.ChlorophyteBar, 10)
+                .AddIngredient<TrainerT6Body>(1)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
     }
 }
