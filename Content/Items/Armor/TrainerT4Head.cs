@@ -55,7 +55,6 @@ namespace Pokemod.Content.Items.Armor
             CreateRecipe()
                 .AddIngredient(ItemID.Shiverthorn, 10)
                 .AddIngredient(ItemID.HellstoneBar, 5)
-                .AddIngredient<TrainerT3Body>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

@@ -55,7 +55,6 @@ namespace Pokemod.Content.Items.Armor
             CreateRecipe()
                 .AddIngredient(ItemID.SunplateBlock, 15)
                 .AddIngredient(ItemID.ChlorophyteBar, 10)
-                .AddIngredient<TrainerT6Body>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

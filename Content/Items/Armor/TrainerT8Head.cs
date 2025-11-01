@@ -55,7 +55,6 @@ namespace Pokemod.Content.Items.Armor
             CreateRecipe()
                 .AddIngredient(ItemID.BrokenHeroSword, 1)
                 .AddIngredient(ItemID.SpectreBar, 10)
-                .AddIngredient<TrainerT7Body>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

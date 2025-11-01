@@ -55,7 +55,6 @@ namespace Pokemod.Content.Items.Armor
             CreateRecipe()
                 .AddIngredient(ItemID.JungleSpores, 10)
                 .AddIngredient(ItemID.MeteoriteBar, 5)
-                .AddIngredient<TrainerT2Body>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

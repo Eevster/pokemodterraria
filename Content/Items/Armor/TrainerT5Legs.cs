@@ -35,14 +35,12 @@ namespace Pokemod.Content.Items.Armor
             CreateRecipe()
                 .AddIngredient(ItemID.SoulofNight, 10)
                 .AddIngredient(ItemID.CobaltBar, 10)
-                .AddIngredient<TrainerT4Body>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
 
             CreateRecipe()
                 .AddIngredient(ItemID.SoulofNight, 10)
                 .AddIngredient(ItemID.PalladiumBar, 10)
-                .AddIngredient<TrainerT4Body>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

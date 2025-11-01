@@ -55,7 +55,6 @@ namespace Pokemod.Content.Items.Armor
             CreateRecipe()
                 .AddIngredient(ItemID.PixieDust, 15)
                 .AddIngredient(ItemID.HallowedBar, 10)
-                .AddIngredient<TrainerT5Body>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

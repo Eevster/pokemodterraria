@@ -34,13 +34,11 @@ namespace Pokemod.Content.Items.Armor
         {
             CreateRecipe()
                 .AddIngredient(ItemID.DemoniteBar, 5)
-                .AddIngredient<TrainerT1Body>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
 
             CreateRecipe()
                 .AddIngredient(ItemID.CrimtaneBar, 5)
-                .AddIngredient<TrainerT1Body>(1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
