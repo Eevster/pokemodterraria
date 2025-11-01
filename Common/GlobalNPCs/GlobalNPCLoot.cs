@@ -16,10 +16,9 @@ namespace Pokemod.Common.GlobalNPCs
 		{
             switch (npc.type)
 			{
-
 				case NPCID.WyvernHead:
 					npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AirBalloon>(), 3));
-					break;
+                    break;
 
 				case NPCID.Mimic:
 					int[] TMs = {
@@ -42,6 +41,10 @@ namespace Pokemod.Common.GlobalNPCs
                     break;
 
                 case NPCID.QueenBee:
+                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Leftovers>(), 5));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ThunderBadge>(), 1, 1, 1, null));
+                    break;
+                    
                 case NPCID.Deerclops:
                     npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ThunderBadge>(), 1, 1, 1, null));
                     break;

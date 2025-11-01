@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Players;
+using Pokemod.Content.Items.Tools;
 using Pokemod.Content.NPCs;
 using ReLogic.Content;
 using System;
@@ -93,8 +94,10 @@ namespace Pokemod.Common.UI.StarterPanelUI
 		}
 
 		private void GetStarter(int option){
-			Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().GenerateCaughtPokemon(starters[option]);
-			Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().HasStarter = true;
+			Player localPlayer = Main.player[Main.myPlayer];
+			localPlayer.GetModPlayer<PokemonPlayer>().GenerateCaughtPokemon(starters[option]);
+			localPlayer.GetModPlayer<PokemonPlayer>().HasStarter = true;
+			localPlayer.QuickSpawnItem(localPlayer.GetSource_FromThis(), ModContent.ItemType<PokedexV1>());
 			ModContent.GetInstance<StarterPanelUISystem>().HideMyUI();
 		}
 

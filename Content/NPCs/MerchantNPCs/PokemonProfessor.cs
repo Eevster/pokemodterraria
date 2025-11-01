@@ -10,6 +10,7 @@ using Pokemod.Content.Items.Consumables.Mints;
 using Pokemod.Content.Items.GeneticSamples;
 using Pokemod.Content.Items.MegaStones;
 using Pokemod.Content.Items.Pokeballs;
+using Pokemod.Content.Items.Tools;
 using Pokemod.Content.Tiles;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,8 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 				.Add<HeavyballItem>();
 
             Shop.Add<MintSeed>();
-            Shop.Add<Everstone>();
+			Shop.Add<Everstone>();
+			Shop.Add<PokedexV1>();
 			Shop.Add<SynchroMachine>();
 			Shop.Add<GeoResonatorBlueprint>(TownNPCRespawnSystem.scientistArrivedCondition);
 
