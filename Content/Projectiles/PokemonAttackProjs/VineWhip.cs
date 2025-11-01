@@ -84,6 +84,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if(pokemonOwner.attackProjs[i].ModProjectile is PokemonAttack){
 				((PokemonAttack)pokemonOwner.attackProjs[i]?.ModProjectile).positionAux = pokemon.Center;
+				Projectile.timeLeft = 30;
 			}
 			pokemonOwner.attackProjs[i].netUpdate = true;
 		}
@@ -113,8 +114,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				SearchTarget(160f);
 			}
-
-			Projectile.timeLeft = 10;
 
 			Projectile.direction = Projectile.spriteDirection = projDirection;
 
@@ -204,9 +203,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 76, ref collisionPoint);
 		}
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindProjectiles.Add(index);
+		public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+		{
+			behindProjectiles.Add(index);
+		}
+		
+		public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+		{
+			modifiers.HitDirectionOverride = projDirection;
         }
     }
 
@@ -267,8 +271,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.Center = positionAux;
 				SearchTarget(160f);
 			}
-
-			Projectile.timeLeft = 10;
 
 			Projectile.direction = Projectile.spriteDirection = projDirection;
 
@@ -344,14 +346,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             return canDamage;
         }
 
-		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
+		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+		{
 			// "Hit anything between the player and the tip of the sword"
 			// shootSpeed is 2.1f for reference, so this is basically plotting 12 pixels ahead from the center
-			Vector2 start = Projectile.Center - new Vector2(78,0).RotatedBy(Projectile.rotation);
-			Vector2 end = Projectile.Center + new Vector2(78,0).RotatedBy(Projectile.rotation);
+			Vector2 start = Projectile.Center - new Vector2(78, 0).RotatedBy(Projectile.rotation);
+			Vector2 end = Projectile.Center + new Vector2(78, 0).RotatedBy(Projectile.rotation);
 			float collisionPoint = 0f; // Don't need that variable, but required as parameter
 
 			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 76, ref collisionPoint);
 		}
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+		{
+			modifiers.HitDirectionOverride = projDirection;
+        }
     }
 }

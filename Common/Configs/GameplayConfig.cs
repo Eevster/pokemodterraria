@@ -24,7 +24,7 @@ namespace Pokemod.Common.Configs
 		public float PokemonSpawnMultiplier;
 
 		[Header("GameplayChanges")]
-		[DefaultValue(LevelCapOptions.Disobedience)]
+		[DefaultValue(LevelCapOptions.LevelClamping)]
 		public LevelCapOptions LevelCapType;
 
         [Header("RuleChanges")] 

@@ -215,7 +215,7 @@ namespace Pokemod.Content.Items
 					((OriginalTrainerID != null && OriginalTrainerID != "") ? Language.GetText("Mods.Pokemod.PokemonInfo.CaughtInBy").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.Items." + BallType + ".DisplayName"), OriginalTrainerID.Remove(OriginalTrainerID.Length - 9)).Value : Language.GetText("Mods.Pokemod.PokemonInfo.CaughtIn").WithFormatArgs(BallType.Replace("Item", "")).Value) +
 					PokemonTypeToString() +
 					"\n[c/FFE270:Lvl] " + level + (clampedLevel < level ? (" (Capped to " + clampedLevel + ")") : "") + "  [c/FFE270:Exp:] " + (exp - GetExpToLevel(level)) + "/" + (expToNextLevel - GetExpToLevel(level)) +
-					"\n" + (currentHP >= 0 ? "[c/FFE270:HP:] " + (currentHP > 0 ? (currentHP + "/" + fullStats[0] + " " + GetTextHPBar((float)currentHP/fullStats[0])) : "[c/fa3e42:" + Language.GetTextValue("Mods.Pokemod.PokemonInfo.Fainted") + "] ") : "") +
+					"\n" + (currentHP >= 0 ? "[c/FFE270:HP:] " + (currentHP > 0 ? (currentHP + "/" + fullStats[0] + " " + GetTextHPBar((float)currentHP / fullStats[0])) : "[c/fa3e42:" + Language.GetTextValue("Mods.Pokemod.PokemonInfo.Fainted") + "] ") : "") +
 					"\n[c/fa8140:" + Language.GetTextValue("Mods.Pokemod.PokemonNatures.Nature") + ": " + Language.GetTextValue("Mods.Pokemod.PokemonNatures." + PokemonData.PokemonNatures[nature / 10][nature % 10]) + "]" +
 					"\n" + attackString + defenseString +
 					"\n" + spAtkString + spDefString +
@@ -237,13 +237,13 @@ namespace Pokemod.Content.Items
 		private string GetTextHPBar(float barFill)
 		{
 			string fillChar = "█";
-			int nfillChars = (int)(barFill / 0.1f);
+			int nfillChars = (int)Math.Round(barFill * 10f, 0, MidpointRounding.AwayFromZero);
 
 			string colorCode = "[c/1AFF4B:";
 			if (barFill <= 0.2f) colorCode = "[c/FF221A:";
 			else if (barFill <= 0.5f) colorCode = "[c/FFF41A:";
 
-			string textHPBar = "[" + colorCode + String.Concat(Enumerable.Repeat(fillChar, nfillChars)) + "][c/4A4A4A:" + String.Concat(Enumerable.Repeat(fillChar, 10-nfillChars)) + "]"+"]";
+			string textHPBar = "[" + ((nfillChars>0)?(colorCode + String.Concat(Enumerable.Repeat(fillChar, nfillChars)) + "]"):"")+((10-nfillChars > 0)?("[c/4A4A4A:" + String.Concat(Enumerable.Repeat(fillChar, 10-nfillChars)) + "]"):"")+"]";
 
 			return textHPBar;
         }
