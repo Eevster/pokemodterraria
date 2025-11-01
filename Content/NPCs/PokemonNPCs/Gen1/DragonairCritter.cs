@@ -7,29 +7,44 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class DragonairCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 40;
+		public override int hitboxHeight => 64;
 
-		public override int totalFrames => 4;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
+		public override int totalFrames => 23;
+		public override int animationSpeed => 6;
+		public override int moveStyle => 2;
+
+		public override int[] idleStartEnd => [0,3];
+		public override int[] walkStartEnd => [4,10];
+		public override int[] jumpStartEnd => [9,9];
+		public override int[] fallStartEnd => [10,10];
+		public override int[] attackStartEnd => [11, 14];
+
+		public override int[] idleFlyStartEnd => [15,18];
+		public override int[] walkFlyStartEnd => [15,18];
+		public override int[] attackFlyStartEnd => [19,22];
+		
+		public override bool canSwim => true;
+
+		public override int[] idleSwimStartEnd => [0,3];
+		public override int[] walkSwimStartEnd => [4,10];
+		public override int[] attackSwimStartEnd => [11, 14];
 
         public override float catchRate => 75;
 		public override int minLevel => 30;
 
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however."));
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
+				new FlavorTextBestiaryInfoElement("If its body takes on an aura, the weather changes instantly. It is said to live in seas and lakes."));
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneBeach) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.3f);
-			}
+			if (spawnInfo.Player.ZoneBeach) {
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.01f);
 			}
 
 			return 0f;

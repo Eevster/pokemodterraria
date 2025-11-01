@@ -54,6 +54,7 @@ namespace Pokemod.Content.NPCs
 
 		public virtual string[] variants => [];
 		public string variant;
+		public virtual int variantProbDenominator => 10;
 
 		public virtual int[][] spawnConditions =>
 		[
@@ -132,7 +133,7 @@ namespace Pokemod.Content.NPCs
 			nature = 10 * Main.rand.Next(5) + Main.rand.Next(5);
 			lvl = Main.rand.Next(minLevel, Math.Min(WorldLevel.MaxWorldLevel, maxLevel) + 1);
 			//Probability of it being a variant
-			if (Main.rand.NextBool(10))
+			if (Main.rand.NextBool(variantProbDenominator))
 			{
 				if (variants.Length > 0)
 				{

@@ -18,7 +18,8 @@ namespace Pokemod.Common.Players
 			
 			int[] pokemonList = {
 				ModContent.NPCType<MagikarpCritterNPC>(),
-				ModContent.NPCType<PoliwagCritterNPC>()
+				ModContent.NPCType<PoliwagCritterNPC>(),
+				ModContent.NPCType<ShellderCritterNPC>(),
 			};
 
 			if (isPokemonFishingRod && inWater)
@@ -31,7 +32,7 @@ namespace Pokemod.Common.Players
 				}
 				if (attempt.playerFishingConditions.PoleItemType == ModContent.ItemType<GoodRod>())
 				{
-					npc = pokemonList[Main.rand.Next(2)];
+					npc = pokemonList[Main.rand.Next(3)];
 				}
 
 				if (npc != -1)

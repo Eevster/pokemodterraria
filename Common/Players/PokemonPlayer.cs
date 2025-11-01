@@ -412,14 +412,14 @@ namespace Pokemod.Common.Players
 			{
 				ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
 				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
-				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: "PokeballItem");
+				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: shiny?"PremierballItem":"PokeballItem");
 			}
 			else if (Main.netMode == NetmodeID.MultiplayerClient && Main.myPlayer == Player.whoAmI)
 			{
 				//ballItem = Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<CaughtPokemonItem>());
 				ballItem = Item.NewItem(Player.GetSource_FromThis(), (int)Player.position.X, (int)Player.position.Y, Player.width, Player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
 				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[ballItem].ModItem;
-				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: "PokeballItem");
+				pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: shiny?"PremierballItem":"PokeballItem");
 				NetMessage.SendData(MessageID.SyncItem, -1, -1, null, ballItem, 1f);
 			}
 		}

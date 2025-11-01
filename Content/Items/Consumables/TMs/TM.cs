@@ -111,13 +111,13 @@ namespace Pokemod.Content.Items.Consumables.TMs
 		public override string[] moves => [];
 	}
 
-	public abstract class TMDark : TechnicalMachine
+	public class TMDark : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Dark;
 		public override string[] moves => ["Crunch", "NightSlash"];
 	}
 
-	public abstract class TMDragon : TechnicalMachine
+	public class TMDragon : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Dragon;
 		public override string[] moves => ["DragonBreath", "DragonRush"];
@@ -195,7 +195,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 		public override string[] moves => ["Psybeam","Psychic"];
 	}
 
-	public abstract class TMRock : TechnicalMachine
+	public class TMRock : TechnicalMachine
 	{
 		public override TypeIndex moveType => TypeIndex.Rock;
 		public override string[] moves => ["RockSlide", "StoneEdge"];

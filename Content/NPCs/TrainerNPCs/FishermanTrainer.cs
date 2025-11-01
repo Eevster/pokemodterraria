@@ -123,11 +123,9 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		{
 			if (firstButton)
 			{
-				Player player = Main.player[Main.myPlayer];
-
-				if (player.GetModPlayer<PokemonPlayer>().SetBattle(true))
+				/*if (player.GetModPlayer<PokemonPlayer>().SetBattle(true))
 				{
-				}
+				}*/
 			}
 			else
 			{

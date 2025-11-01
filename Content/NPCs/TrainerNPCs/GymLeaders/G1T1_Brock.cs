@@ -93,10 +93,10 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if ((spawnInfo.Player.ZoneRockLayerHeight || spawnInfo.Player.ZoneDesert) && !NPC.AnyNPCs(Type))
+			/*if ((spawnInfo.Player.ZoneRockLayerHeight || spawnInfo.Player.ZoneDesert) && !NPC.AnyNPCs(Type))
 			{
 				return 0.1f;
-			}
+			}*/
 
 			return 0f;
 		}

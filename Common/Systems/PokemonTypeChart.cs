@@ -388,13 +388,13 @@ namespace Pokemod.Common.Systems
 
             float effectiveness = 1;
             string attack = ((TypeIndex)attackType).ToString();
-            string defence1 = ((TypeIndex)defendingType1).ToString();
-            byte modifier1 = typeChart[defence1][attack];
+            string defense1 = ((TypeIndex)defendingType1).ToString();
+            byte modifier1 = typeChart[defense1][attack];
 
             byte modifier2 = 2;
             if (defendingType2 > -1){
-                string defence2 = ((TypeIndex)defendingType2).ToString();
-                modifier2 = typeChart[defence2][attack];
+                string defense2 = ((TypeIndex)defendingType2).ToString();
+                modifier2 = typeChart[defense2][attack];
             }
 
             effectiveness *= (modifier1 / 2f) * (modifier2 / 2f);

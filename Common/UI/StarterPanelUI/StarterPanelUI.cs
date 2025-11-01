@@ -35,28 +35,23 @@ namespace Pokemod.Common.UI.StarterPanelUI
 
 			SetRectangleAlign(StarterBoxPanel, left: 0.5f, top: 0.6f, width: 900, height: 600);
 
-			Asset<Texture2D> pokeballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/StarterPanelPokeball");
-
-			firstStarterButton = new UIHoverPokeballButton(pokeballTexture, pokeballTexture, Color.White, Language.GetTextValue("First Starter"));
+			firstStarterButton = new UIHoverPokeballButton(starters[0], Color.White, Language.GetTextValue("First Starter"));
 			firstStarterButton.drawPanel = false;
 			firstStarterButton.hoverUp = 40f;
-			firstStarterButton.SetPokemon(starters[0]);
 			SetRectangleAlign(firstStarterButton, left: 0.1f, top: 0.6f, width: 244f, height: 244f);
 			firstStarterButton.OnLeftClick +=  (a, b) => GetStarter(0);
 			StarterBoxPanel.Append(firstStarterButton);
 
-			secondStarterButton = new UIHoverPokeballButton(pokeballTexture, pokeballTexture, Color.White, Language.GetTextValue("Second Starter"));
+			secondStarterButton = new UIHoverPokeballButton(starters[1], Color.White, Language.GetTextValue("Second Starter"));
 			secondStarterButton.drawPanel = false;
 			secondStarterButton.hoverUp = 40f;
-			secondStarterButton.SetPokemon(starters[1]);
 			SetRectangleAlign(secondStarterButton, left: 0.5f, top: 0.47f, width: 244f, height: 244f);
 			secondStarterButton.OnLeftClick +=  (a, b) => GetStarter(1);
 			StarterBoxPanel.Append(secondStarterButton);
 
-			thirdStarterButton = new UIHoverPokeballButton(pokeballTexture, pokeballTexture, Color.White, Language.GetTextValue("Third Starter"));
+			thirdStarterButton = new UIHoverPokeballButton(starters[2], Color.White, Language.GetTextValue("Third Starter"));
 			thirdStarterButton.drawPanel = false;
 			thirdStarterButton.hoverUp = 40f;
-			thirdStarterButton.SetPokemon(starters[2]);
 			SetRectangleAlign(thirdStarterButton, left: 0.9f, top: 0.6f, width: 244f, height: 244f);
 			thirdStarterButton.OnLeftClick +=  (a, b) => GetStarter(2);
 			StarterBoxPanel.Append(thirdStarterButton);

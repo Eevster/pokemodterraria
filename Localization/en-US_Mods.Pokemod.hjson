@@ -474,6 +474,12 @@ Projectiles: {
 	MudSlap.DisplayName: Mud Slap
 	Blizzard.DisplayName: Blizzard
 	IceShard.DisplayName: Ice Shard
+	EspeonPetProjectile.DisplayName: Espeon Pet Projectile
+	EspeonPetProjectileShiny.DisplayName: Espeon Pet Projectile Shiny
+	UmbreonPetProjectile.DisplayName: Umbreon Pet Projectile
+	UmbreonPetProjectileShiny.DisplayName: Umbreon Pet Projectile Shiny
+	UnownPetProjectile.DisplayName: Unown Pet Projectile
+	UnownPetProjectileShiny.DisplayName: Unown Pet Projectile Shiny
 }
 
 Items: {
@@ -3902,7 +3908,7 @@ NPCs: {
 
 	DragonairCritterNPC: {
 		DisplayName: Dragonair
-		Description: ""
+		Description: If its body takes on an aura, the weather changes instantly. It is said to live in seas and lakes.
 	}
 
 	DragoniteCritterNPC: {
@@ -3912,7 +3918,7 @@ NPCs: {
 
 	DratiniCritterNPC: {
 		DisplayName: Dratini
-		Description: ""
+		Description: It is called the Mirage Pokémon because so few have seen it, but its shed skin has been found.
 	}
 
 	DrowzeeCritterNPC: {
@@ -4385,6 +4391,21 @@ NPCs: {
 		Description: ""
 	}
 
+	EspeonCritterNPC: {
+		DisplayName: Espeon
+		Description: Its fur has the look and feel of velvet. The orb on its forehead glows when it uses psychic power.
+	}
+
+	UmbreonCritterNPC: {
+		DisplayName: Umbreon
+		Description: The light of the moon changed Eevee's genetic structure. It lurks in the darkness, waiting for prey.
+	}
+
+	UnownCritterNPC: {
+		DisplayName: Unown
+		Description: Because the Pokémon is shaped like ancient writing, it is a huge mystery whether written language or Unown came first.
+	}
+
 	JoltikCritterNPC: {
 		DisplayName: Joltik
 		Description: Since it can't generate its own electricity, it sticks onto large-bodied Pokémon and absorbs static electricity.
@@ -4588,6 +4609,9 @@ NPCs: {
 	WigglytuffCritterNPCShiny.DisplayName: Wigglytuff Shiny
 	ZapdosCritterNPCShiny.DisplayName: Zapdos Shiny
 	ZubatCritterNPCShiny.DisplayName: Zubat Shiny
+	EspeonCritterNPCShiny.DisplayName: Espeon Shiny
+	UmbreonCritterNPCShiny.DisplayName: Umbreon Shiny
+	UnownCritterNPCShiny.DisplayName: Unown Shiny
 	JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
 	TerrarianKabutoCritterNPCShiny.DisplayName: Terrarian Kabuto Shiny
@@ -4776,9 +4800,9 @@ PokemonTypes: {
 PokemonStats: {
 	HP: HP
 	Attack: Attack
-	Defence: Defence
+	Defense: Defense
 	SpecialAttack: Sp.Atk
-	SpecialDefence: Sp.Def
+	SpecialDefense: Sp.Def
 	Speed: Speed
 	Accuracy: Accuracy
 	Evasion: Evasion

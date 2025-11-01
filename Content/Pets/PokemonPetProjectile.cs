@@ -43,6 +43,7 @@ namespace Pokemod.Content.Pets
 		public int[] IVs = [0,0,0,0,0,0];
 		public int[] EVs = [0,0,0,0,0,0];
 		public int nature;
+		public int happiness;
 		public int[] finalStats = [0,0,0,0,0,0];
 
 		public bool immune = true;
@@ -126,6 +127,7 @@ namespace Pokemod.Content.Pets
 		public virtual int levelToEvolve => -1;
 		public virtual int levelEvolutionsNumber => 0;
 		public virtual string[] itemToEvolve => [];
+		public virtual string[] specialConditionToEvolve => [];
 
 		//Mega Evolution
 		public virtual bool isMega => false;
@@ -277,7 +279,7 @@ namespace Pokemod.Content.Pets
 			return cooldown;
 		}
 
-		public void SetPokemonLvl(int lvl, int[] IVs = null, int[] EVs = null, int nature = 0){
+		public void SetPokemonLvl(int lvl, int[] IVs = null, int[] EVs = null, int nature = 0, int happiness = 0){
 			if(pokemonLvl != 0 && pokemonLvl != lvl){
 				CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile",""), lvl).Value);
 			}
@@ -285,6 +287,7 @@ namespace Pokemod.Content.Pets
 			if(IVs != null) this.IVs = IVs;
 			if(EVs != null) this.EVs = EVs;
 			this.nature = nature;
+			this.happiness = happiness;
 
 			UpdateStats();
 		}
@@ -312,8 +315,42 @@ namespace Pokemod.Content.Pets
 						canEvolve = Main.rand.Next(0,levelEvolutionsNumber);
 					}
 				}
+				if(specialConditionToEvolve.Length > 0)
+                {
+                    for(int i = 0; i < specialConditionToEvolve.Length; i++)
+                    {
+                        if (CheckEvoSpecialCondition(specialConditionToEvolve[i]))
+						{
+							SetEvolution();
+							canEvolve = levelEvolutionsNumber + itemToEvolve.Length + i;
+                        }
+                    }
+                }
 			}
 		}
+		
+		private bool CheckEvoSpecialCondition(string condition)
+		{
+			bool met = false;
+
+			if (condition.Contains("Happiness"))
+			{
+				if (happiness >= 160)
+				{
+					met = true;
+					if (condition.Contains("Day"))
+					{
+						met = met && Main.dayTime;
+					}
+					else if (condition.Contains("Night"))
+					{
+						met = met && !Main.dayTime;
+					}
+				}
+			}
+
+			return met;
+        }
 
 		public virtual bool UseEvoItem(string itemName){
 			if(itemToEvolve.Length>0){
@@ -651,7 +688,7 @@ namespace Pokemod.Content.Pets
 							if (inRange && (closest || !foundTarget) && (lineOfSight || closeThroughWall || (canAttackThroughWalls && throughWallRange)) && !npc.GetGlobalNPC<PokemonNPCData>().isPokemon)
 							{
                                 hostilesNearby = true;
-                                if (Vector2.Distance(npc.Center, Projectile.Center) < 120) //Self-Defence Bubble.
+                                if (Vector2.Distance(npc.Center, Projectile.Center) < 120) //Self-Defense Bubble.
 								{
 									distanceFromTarget = between;
 									targetCenter = npc.Center;
@@ -1441,7 +1478,7 @@ namespace Pokemod.Content.Pets
                     break;
                 case 1: 
 					dustColor = new Color(60, 85, 255);
-                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Defence");
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.Defense");
                     break;
                 case 2: 
 					dustColor = new Color(0, 209, 255);
@@ -1449,7 +1486,7 @@ namespace Pokemod.Content.Pets
                     break;
                 case 3: 
 					dustColor = new Color(255, 30, 255);
-                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.SpecialDefence");
+                    statName = Language.GetTextValue("Mods.Pokemod.PokemonStats.SpecialDefense");
                     break;
                 case 4: 
 					dustColor = new Color(0, 255, 20);
@@ -1737,13 +1774,13 @@ namespace Pokemod.Content.Pets
 			
 			// template for typeChart implementation (just need to correctly detect incoming attack type, which vanilla enemies currently don't have): ---------------------------+
 			int incomingDamageType = (int)TypeIndex.Normal;
-			int primaryDefence = PokemonData.pokemonInfo[pokemonName].pokemonTypes[0];
+			int primaryDefense = PokemonData.pokemonInfo[pokemonName].pokemonTypes[0];
 			
-			int secondaryDefence = -1;
+			int secondaryDefense = -1;
 			if (PokemonData.pokemonInfo[pokemonName].pokemonTypes.Length > 1) {
-				secondaryDefence = PokemonData.pokemonInfo[pokemonName].pokemonTypes[1];
+				secondaryDefense = PokemonData.pokemonInfo[pokemonName].pokemonTypes[1];
 			}
-			float typeEffectiveness = PokemonTypeChart.GetTypeEffectiveness(incomingDamageType, primaryDefence, secondaryDefence);
+			float typeEffectiveness = PokemonTypeChart.GetTypeEffectiveness(incomingDamageType, primaryDefense, secondaryDefense);
 			// can then be used to multiply the final damage. --------------------------------------------------------------------------------------------------------------------+
 
 			//calling Hp
@@ -1751,19 +1788,19 @@ namespace Pokemod.Content.Pets
             //cal damage versus defense for pokemon
             //int dmg = npcdmg - (int)(finalStats[2] * statMods[1])/2;
             int dmg = 0;
-			int defenceValue = physical ? (int)(finalStats[2] * statMods[1]) : (int)(finalStats[4] * statMods[3]);
+			int defenseValue = physical ? (int)(finalStats[2] * statMods[1]) : (int)(finalStats[4] * statMods[3]);
 
 
-            if (!enemyPokemon) //apply a modifier to scale the pokemon's defence against vanilla enemy damage (also the minimum damage from mobs is 1 instead of 2 from enemy pokemon).
+            if (!enemyPokemon) //apply a modifier to scale the pokemon's defense against vanilla enemy damage (also the minimum damage from mobs is 1 instead of 2 from enemy pokemon).
 			{
 
-				float defenceModVsTerrariaNPC = 0.1f * (1.4f * (float)Math.Pow(0.95f, defenceValue * 0.9f) + 0.3f);
+				float defenseModVsTerrariaNPC = 0.1f * (1.4f * (float)Math.Pow(0.95f, defenseValue * 0.9f) + 0.3f);
 
-				dmg = 1 + (int)(Math.Clamp(npcdmg - 1, 0f, 9999f) / (defenceValue * defenceModVsTerrariaNPC));
+				dmg = 1 + (int)(Math.Clamp(npcdmg - 1, 0f, 9999f) / (defenseValue * defenseModVsTerrariaNPC));
             }
-			else //scale the pokemon's defence normally against other pokemon (multiplied by 14 to reverse the assumed 14 defence of vanilla enemies)(Multiplied by 5 to account for the global health scaling)(divided by 3 as most pokemon attacks hit 3 times).
+			else //scale the pokemon's defense normally against other pokemon (multiplied by 14 to reverse the assumed 14 defense of vanilla enemies)(Multiplied by 5 to account for the global health scaling)(divided by 3 as most pokemon attacks hit 3 times).
 			{
-				dmg = 2 + (int)(Math.Clamp((npcdmg - 2f) * 5f * 14f / 3f, 0f, 9999f) / (defenceValue + 2));
+				dmg = 2 + (int)(Math.Clamp((npcdmg - 2f) * 5f * 14f / 3f, 0f, 9999f) / (defenseValue + 2));
             }
 			manualDmg(dmg);
             return dmg;
@@ -1810,7 +1847,7 @@ namespace Pokemod.Content.Pets
                 }
             }
 
-			// Projectile damage which goes against special defence (or based on isSpecial for pokemon attacks). 
+			// Projectile damage which goes against special defense (or based on isSpecial for pokemon attacks). 
 			if (Main.myPlayer == Projectile.owner)
 			{
 				Projectile bullet = null;

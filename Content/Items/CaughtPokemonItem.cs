@@ -188,39 +188,44 @@ namespace Pokemod.Content.Items
 			return clone;
 		}
 
-        public override void ModifyTooltips(List<TooltipLine> tooltips) {
+		public override void ModifyTooltips(List<TooltipLine> tooltips)
+		{
 			if (PokemonName == null || PokemonName == "") //colors may be null if spawned from other mods which don't call OnCreate
 				return;
 
 			int[] fullStats = GetPokemonStats(Main.player[Main.myPlayer]);
-			foreach (TooltipLine line in tooltips) {
-				if (line.Mod == "Terraria" && line.Name == "ItemName") {
-					line.Text = Language.GetTextValue("Mods.Pokemod.NPCs."+PokemonName+"CritterNPC.DisplayName");
-					if(Shiny) line.OverrideColor = Main.DiscoColor;
+			foreach (TooltipLine line in tooltips)
+			{
+				if (line.Mod == "Terraria" && line.Name == "ItemName")
+				{
+					line.Text = Language.GetTextValue("Mods.Pokemod.NPCs." + PokemonName + "CritterNPC.DisplayName");
+					if (Shiny) line.OverrideColor = Main.DiscoColor;
 				}
-				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
+				if (line.Mod == "Terraria" && line.Name == "Tooltip0")
+				{
 					int clampedLevel = Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().GetClampedLevel(level);
 
-                    string attackString = "[c/" + GetStatColor(1) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonStats.Attack") + ":] " + fullStats[1];
-                    string defenceString = " [c/" + GetStatColor(2) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonStats.Defence") + ":] " + fullStats[2];
-                    string spAtkString = "[c/" + GetStatColor(3) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonStats.SpecialAttack") + ":] " + fullStats[3];
-                    string spDefString = " [c/" + GetStatColor(4) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonStats.SpecialDefence") + ":] " + fullStats[4];
-                    string speedString = "[c/" + GetStatColor(5) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonStats.Speed") + ":] " + fullStats[5];
+					string attackString = "[c/" + GetStatColor(1) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonStats.Attack") + ":] " + fullStats[1];
+					string defenseString = " [c/" + GetStatColor(2) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonStats.Defense") + ":] " + fullStats[2];
+					string spAtkString = "[c/" + GetStatColor(3) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonStats.SpecialAttack") + ":] " + fullStats[3];
+					string spDefString = " [c/" + GetStatColor(4) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonStats.SpecialDefense") + ":] " + fullStats[4];
+					string speedString = "[c/" + GetStatColor(5) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonStats.Speed") + ":] " + fullStats[5];
 
-                    line.Text = (variant != null?(variant!=""?("[c/23a462:"+variant+" variant]\n"):""):"")+
-					((OriginalTrainerID != null && OriginalTrainerID != "")?Language.GetText("Mods.Pokemod.PokemonInfo.CaughtInBy").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.Items."+BallType+".DisplayName"), OriginalTrainerID.Remove(OriginalTrainerID.Length-9)).Value:Language.GetText("Mods.Pokemod.PokemonInfo.CaughtIn").WithFormatArgs(BallType.Replace("Item", "")).Value) +
-                    PokemonTypeToString()+
-                    "\n[c/FFE270:Lvl] " + level+(clampedLevel < level?(" (Capped to "+clampedLevel+")"):"")+"  [c/FFE270:Exp:] "+(exp-GetExpToLevel(level))+"/"+(expToNextLevel-GetExpToLevel(level))+
-					"\n"+(currentHP>=0?"[c/FFE270:HP:] "+(currentHP>0?(currentHP+"/"+fullStats[0]+" "):"[c/fa3e42:"+Language.GetTextValue("Mods.Pokemod.PokemonInfo.Fainted")+"] "):"")+
-					"\n[c/fa8140:"+Language.GetTextValue("Mods.Pokemod.PokemonNatures.Nature")+": "+Language.GetTextValue("Mods.Pokemod.PokemonNatures."+PokemonData.PokemonNatures[nature/10][nature%10])+"]"+
-					"\n" + attackString + defenceString +
+					line.Text = (variant != null ? (variant != "" ? ("[c/23a462:" + variant + " variant]\n") : "") : "") +
+					((OriginalTrainerID != null && OriginalTrainerID != "") ? Language.GetText("Mods.Pokemod.PokemonInfo.CaughtInBy").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.Items." + BallType + ".DisplayName"), OriginalTrainerID.Remove(OriginalTrainerID.Length - 9)).Value : Language.GetText("Mods.Pokemod.PokemonInfo.CaughtIn").WithFormatArgs(BallType.Replace("Item", "")).Value) +
+					PokemonTypeToString() +
+					"\n[c/FFE270:Lvl] " + level + (clampedLevel < level ? (" (Capped to " + clampedLevel + ")") : "") + "  [c/FFE270:Exp:] " + (exp - GetExpToLevel(level)) + "/" + (expToNextLevel - GetExpToLevel(level)) +
+					"\n" + (currentHP >= 0 ? "[c/FFE270:HP:] " + (currentHP > 0 ? (currentHP + "/" + fullStats[0] + " " + GetTextHPBar((float)currentHP/fullStats[0])) : "[c/fa3e42:" + Language.GetTextValue("Mods.Pokemod.PokemonInfo.Fainted") + "] ") : "") +
+					"\n[c/fa8140:" + Language.GetTextValue("Mods.Pokemod.PokemonNatures.Nature") + ": " + Language.GetTextValue("Mods.Pokemod.PokemonNatures." + PokemonData.PokemonNatures[nature / 10][nature % 10]) + "]" +
+					"\n" + attackString + defenseString +
 					"\n" + spAtkString + spDefString +
 					"\n" + speedString +
-					
+
 					"\n\nMoves: (Right Click to switch)";
-					foreach(string move in moves){
-						line.Text += "\n- [c/"+PokemonNPCData.GetTypeColor(PokemonData.pokemonAttacks[move].attackType)+":"+Language.GetText("Mods.Pokemod.Projectiles."+move+".DisplayName")+"]";
-						if(move == moves[moveIndex]) line.Text += " <<<";
+					foreach (string move in moves)
+					{
+						line.Text += "\n- [c/" + PokemonNPCData.GetTypeColor(PokemonData.pokemonAttacks[move].attackType) + ":" + Language.GetText("Mods.Pokemod.Projectiles." + move + ".DisplayName") + "]";
+						if (move == moves[moveIndex]) line.Text += " <<<";
 					}
 				}
 			}
@@ -228,6 +233,20 @@ namespace Pokemod.Content.Items
 			/*TooltipLine tooltipLine = new TooltipLine(Mod, "BallType", "Caught in a "+BallType.Replace("Item", ""));
 			tooltips.Add(tooltipLine);*/
 		}
+		
+		private string GetTextHPBar(float barFill)
+		{
+			string fillChar = "█";
+			int nfillChars = (int)(barFill / 0.1f);
+
+			string colorCode = "[c/1AFF4B:";
+			if (barFill <= 0.2f) colorCode = "[c/FF221A:";
+			else if (barFill <= 0.5f) colorCode = "[c/FFF41A:";
+
+			string textHPBar = "[" + colorCode + String.Concat(Enumerable.Repeat(fillChar, nfillChars)) + "][c/4A4A4A:" + String.Concat(Enumerable.Repeat(fillChar, 10-nfillChars)) + "]"+"]";
+
+			return textHPBar;
+        }
 
 		private string GetStatColor(int statIndex){
 			statIndex = Math.Clamp(statIndex-1, 0, 4);
@@ -671,7 +690,7 @@ namespace Pokemod.Content.Items
 					if(level > 0){
 						PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
 						if(PokemonProj != null){
-							PokemonProj.SetPokemonLvl(level, IVs, EVs, nature);
+							PokemonProj.SetPokemonLvl(level, IVs, EVs, nature, happiness);
 							if(canEvolve){
 								PokemonProj.SetCanEvolve();
 							}

@@ -20,8 +20,9 @@ namespace Pokemod.Content.Pets.EeveePet
 		public override int[] jumpStartEnd => [12,12];
 		public override int[] fallStartEnd => [15,15];
 
-		public override string[] evolutions => ["Flareon", "Jolteon", "Vaporeon"];
+		public override string[] evolutions => ["Flareon", "Jolteon", "Vaporeon", "Espeon", "Umbreon"];
 		public override string[] itemToEvolve => ["FireStoneItem", "ThunderStoneItem", "WaterStoneItem"];
+		public override string[] specialConditionToEvolve => ["HappinessDay", "HappinessNight"];
 	}
 
 	public class EeveePetProjectileShiny : EeveePetProjectile{}

@@ -172,17 +172,18 @@ namespace Pokemod.Common.UI
 		internal string pokemonName;
 		internal Asset<Texture2D> pokemonTexture;
 
-		public UIHoverPokeballButton(Asset<Texture2D> texture, Asset<Texture2D> image, Color color, string hoverText) : base(texture, image, color, hoverText)
+		public UIHoverPokeballButton(string pokemonName, Color color, string hoverText) : base(ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/StarterPanelPokeball"), null, color, hoverText)
 		{
 			this.hoverText = hoverText;
-			this.image = image;
 			this.color = color;
+			SetPokemon(pokemonName);
 		}
 
 		public void SetPokemon(string pokemonName)
 		{
-            this.pokemonName = pokemonName.EndsWith("Shiny")? pokemonName[..^5] : pokemonName;
+			image = pokemonName.EndsWith("Shiny") ? ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/StarterPanelPremierball") : ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/StarterPanelPokeball");
 			pokemonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokesprites/Icons/" + pokemonName);
+            this.pokemonName = pokemonName.EndsWith("Shiny")? pokemonName[..^5] : pokemonName;
 		}
 
 		protected override void DrawSelf(SpriteBatch spriteBatch)

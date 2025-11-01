@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -399,9 +400,9 @@ namespace Pokemod.Content.NPCs
             {"Rhydon", new PokemonInfo(0112, [105, 130, 120, 45, 45, 40], [(int)TypeIndex.Ground,(int)TypeIndex.Rock], [new MoveLvl("RockThrow"), new MoveLvl("Earthquake"), new MoveLvl("RockSlide", 25), new MoveLvl("StoneEdge", 50)], [(int)EggGroups.Monster, (int)EggGroups.Field], 1.9f, 120.0f, (int)StageIndex.Stage1, (int)ExpTypes.Slow, completed: false)},
 
             {"Chansey", new PokemonInfo(0113, [250, 5, 5, 35, 105, 50], [(int)TypeIndex.Normal], [new MoveLvl("Tackle"), new MoveLvl("Swift"), new MoveLvl("Harden", 8), new MoveLvl("DoubleKick", 16), new MoveLvl("Slash", 24), new MoveLvl("HealPulse", 32), new MoveLvl("DoubleEdge", 40)], [(int)EggGroups.Fairy], 1.1f, 34.6f, (int)StageIndex.Basic, (int)ExpTypes.Fast)},
-            
+
             {"Tangela", new PokemonInfo(0114, [65, 55, 115, 100, 40, 60], [(int)TypeIndex.Grass], [new MoveLvl("VineWhip"), new MoveLvl("MegaDrain", 8) , new MoveLvl("PoisonPowder", 16), new MoveLvl("AncientPower", 24), new MoveLvl("GigaDrain", 32), new MoveLvl("Slam", 40), new MoveLvl("LeafStorm", 48)], [(int)EggGroups.Grass], 1.0f, 35.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
-            
+
             {"Kangaskhan", new PokemonInfo(0115, [105, 95, 80, 40, 80, 90], [(int)TypeIndex.Normal], [new MoveLvl("Tackle"), new MoveLvl("Crunch", 36)], [(int)EggGroups.Monster], 2.2f, 80.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast, completed: false)},
 
             {"Horsea", new PokemonInfo(0116, [30, 40, 70, 70, 25, 60], [(int)TypeIndex.Water], [new MoveLvl("Bubble")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 0.4f, 8.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast, completed: false)},
@@ -447,9 +448,9 @@ namespace Pokemod.Content.NPCs
             {"Zapdos", new PokemonInfo(0145, [90, 90, 85, 125, 90, 100], [(int)TypeIndex.Electric,(int)TypeIndex.Flying], [new MoveLvl("Thunder"), new MoveLvl("Thunderbolt")], [(int)EggGroups.NoEggs], 1.6f, 52.6f, (int)StageIndex.Basic, (int)ExpTypes.Slow, legendary: true, completed: false)},
             {"Moltres", new PokemonInfo(0146, [90, 100, 90, 125, 85, 90], [(int)TypeIndex.Fire,(int)TypeIndex.Flying], [new MoveLvl("LavaPlume"), new MoveLvl("Flamethrower")], [(int)EggGroups.NoEggs], 2.0f, 60.0f, (int)StageIndex.Basic, (int)ExpTypes.Slow, legendary: true, completed: false)},
 
-            {"Dratini", new PokemonInfo(0147, [41, 64, 45, 50, 50, 50], [(int)TypeIndex.Dragon], [new MoveLvl("Swift")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 1.8f, 3.3f, (int)StageIndex.Basic, (int)ExpTypes.Slow, completed: false)},
-            {"Dragonair", new PokemonInfo(0148, [61, 84, 65, 70, 70, 70], [(int)TypeIndex.Dragon], [new MoveLvl("WingAttack")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 4.0f, 16.5f, (int)StageIndex.Stage1, (int)ExpTypes.Slow, completed: false)},
-            {"Dragonite", new PokemonInfo(0149, [91, 134, 95, 100, 100, 80], [(int)TypeIndex.Dragon,(int)TypeIndex.Flying], [new MoveLvl("DragonBreath"), new MoveLvl("HyperBeam")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 2.2f, 210.0f, (int)StageIndex.Stage2, (int)ExpTypes.Slow, completed: false)},
+            {"Dratini", new PokemonInfo(0147, [41, 64, 45, 50, 50, 50], [(int)TypeIndex.Dragon], [new MoveLvl("Swift")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 1.8f, 3.3f, (int)StageIndex.Basic, (int)ExpTypes.Slow)},
+            {"Dragonair", new PokemonInfo(0148, [61, 84, 65, 70, 70, 70], [(int)TypeIndex.Dragon], [new MoveLvl("WingAttack")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 4.0f, 16.5f, (int)StageIndex.Stage1, (int)ExpTypes.Slow)},
+            {"Dragonite", new PokemonInfo(0149, [91, 134, 95, 100, 100, 80], [(int)TypeIndex.Dragon,(int)TypeIndex.Flying], [new MoveLvl("DragonBreath"), new MoveLvl("HyperBeam")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 2.2f, 210.0f, (int)StageIndex.Stage2, (int)ExpTypes.Slow)},
 
             {"Mewtwo", new PokemonInfo(0150, [106, 110, 90, 154, 90, 130], [(int)TypeIndex.Psychic], [new MoveLvl("Psychic")], [(int)EggGroups.NoEggs], 2.0f, 122.0f, (int)StageIndex.Basic, (int)ExpTypes.Slow, legendary: true, completed: false)},
             {"Mew", new PokemonInfo(0151, [100, 100, 100, 100, 100, 100], [(int)TypeIndex.Psychic], [new MoveLvl("Psychic")], [(int)EggGroups.NoEggs], 0.4f, 4.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow, legendary: true, completed: false)},
@@ -466,7 +467,11 @@ namespace Pokemod.Content.NPCs
             {"Totodile", new PokemonInfo(0158, [50, 65, 64, 44, 48, 43], [(int)TypeIndex.Water], [new MoveLvl("Tackle"), new MoveLvl("WaterGun", 6), new MoveLvl("MudShot", 13), new MoveLvl("IceFang", 20), new MoveLvl("Crunch", 27), new MoveLvl("Slash", 34), new MoveLvl("Waterfall", 43), new MoveLvl("FocusPunch", 48), new MoveLvl("HydroPump", 50)], [(int)EggGroups.Monster, (int)EggGroups.Water1], 0.6f, 9.5f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
             {"Croconaw", new PokemonInfo(0159, [65, 80, 80, 59, 63, 58], [(int)TypeIndex.Water], [new MoveLvl("Tackle", 1), new MoveLvl("WaterGun", 6), new MoveLvl("MudShot", 13), new MoveLvl("IceFang", 21), new MoveLvl("Crunch", 30), new MoveLvl("Slash", 39), new MoveLvl("Waterfall", 48), new MoveLvl("FocusPunch", 57), new MoveLvl("HydroPump", 60)], [(int)EggGroups.Monster, (int)EggGroups.Water1], 1.1f, 25.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
             {"Feraligatr", new PokemonInfo(0160, [85, 105, 100, 79, 83, 78], [(int)TypeIndex.Water], [new MoveLvl("Tackle", 1), new MoveLvl("WaterGun", 6), new MoveLvl("MudShot", 13), new MoveLvl("IceFang", 21), new MoveLvl("Crunch", 32), new MoveLvl("Slash", 45), new MoveLvl("Waterfall", 58), new MoveLvl("FocusPunch", 71), new MoveLvl("HydroPump", 76)], [(int)EggGroups.Monster, (int)EggGroups.Water1], 2.3f, 88.8f, (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
-            
+
+            {"Espeon", new PokemonInfo(0196, [65, 65, 60, 130, 95, 110], [(int)TypeIndex.Psychic], [new MoveLvl("Confusion"), new MoveLvl("Tackle", 1), new MoveLvl("Bite", 1), new MoveLvl("QuickAttack", 10), new MoveLvl("Swift", 20), new MoveLvl("Psybeam", 25), new MoveLvl("Psychic", 40)], [(int)EggGroups.Field], 1.0f, 29.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
+            {"Umbreon", new PokemonInfo(0197, [95, 65, 110, 60, 130, 65], [(int)TypeIndex.Dark], [new MoveLvl("Crunch"), new MoveLvl("Tackle", 1), new MoveLvl("Bite", 1), new MoveLvl("Swift", 1), new MoveLvl("QuickAttack", 10), new MoveLvl("ConfuseRay", 20), new MoveLvl("Toxic", 25)], [(int)EggGroups.Field], 1.0f, 29.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
+            {"Unown", new PokemonInfo(0201, [48, 72, 48, 72, 48, 48], [(int)TypeIndex.Psychic], [new MoveLvl("Confusion", 1)], [(int)EggGroups.NoEggs], 0.5f, 5.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
+
             //Gen 5
             {"Joltik", new PokemonInfo(0595, [50, 47, 50, 57, 50, 65], [(int)TypeIndex.Bug,(int)TypeIndex.Electric], [new MoveLvl("FuryCutter"), new MoveLvl("StringShot", 8), new MoveLvl("ThunderWave", 16), new MoveLvl("ElectroBall", 20), new MoveLvl("Crunch", 26), new MoveLvl("Slash", 32), new MoveLvl("Discharge", 37), new MoveLvl("PinMissile", 44)], [(int)EggGroups.Bug], 0.1f, 0.6f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
             {"Galvantula", new PokemonInfo(0596, [70, 77, 60, 97, 60, 108], [(int)TypeIndex.Bug,(int)TypeIndex.Electric], [new MoveLvl("FuryCutter", 1), new MoveLvl("StringShot", 8), new MoveLvl("ThunderWave", 16), new MoveLvl("ElectroBall", 20), new MoveLvl("Crunch", 26), new MoveLvl("Slash", 32), new MoveLvl("Discharge", 39), new MoveLvl("PinMissile", 50)], [(int)EggGroups.Bug], 0.8f, 14.3f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
