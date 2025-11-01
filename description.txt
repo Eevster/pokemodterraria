@@ -8,25 +8,21 @@ Contributers:
 -RollinMan (Discord) Artist/Developer
 
 Changelog:
--Added a Starter System (Interact with Oak for the first time)
--Added a Pokemon Fishing System (Old and Good Rods)
--Added a Mega evolution system (Megas and mega stones for Charizard, Venusaur, Blastoise, Gengar, and Gyarados)
--Fixed Many bugs
--Added New Items (such as Repel, and Max potion)
--Added more items to Oak's Shop
--Added many new Pokemon
--Beta Pokemon are now more stable and evolve correctly, get their own moves, and spawn in the correct biomes
--Pokemon now keep moves when evolving (right click the item to swap moves)
--Pokemon Item Descriptions were updated
--Natures and Happiness were both added
--Added Armor sets which boost the trainer class (eg. allow more summons, give boosts, etc.)
--Added new config options
--Players now start with 10 pokeballs, 5 potions, and a revive
--Shinies now emit sparkles
--Added new accessories which boost the Trainer Class
--Added new Pokeballs
--Added Synchro Machine
--Much more that I probably forgot over a 5 months span :D
+-Shiny Starters now appear on starter selection
+-New Moves
+-Harden Buffs Defense
+-Mint Plants
+-Many Halloween Forms
+-New Pokemon
+-The Pokedex (Subject to change)!
+-Changed Nidoking and Gengar's Shinies
+-Professor Oak is now a town npc
+-Fossil System!
+-Scientist NPC
+-"Learn Moves By Level" system is now partially implemented
+-Level Cap config
+-Partial Trainer Suit implementation (Will have more of a use next update)
+
 
 Legal:
 This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 
