@@ -78,7 +78,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                         {
                             Vector2 spikeDirection = (targetCenter - pokemon.Center).SafeNormalize(Vector2.Zero);
 
-                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, spikeDirection * 25f, ModContent.ProjectileType<IceShard>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name) * 2, 12f, pokemon.owner)];
+                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, spikeDirection * 25f, ModContent.ProjectileType<IceShard>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name) * 2, 5f, pokemon.owner)];
                             SoundEngine.PlaySound(SoundID.Item48, pokemon.position);
                             remainProjs--;
                             pokemonOwner.canAttackOutTimer = false;

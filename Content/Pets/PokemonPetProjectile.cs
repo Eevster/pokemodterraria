@@ -158,6 +158,7 @@ namespace Pokemod.Content.Pets
 
 		//Attacks
 		public string currentAttack = "Swift";
+        public string oldAttack = "Swift";
 
 		public override void SendExtraAI(BinaryWriter writer)
         {
@@ -1541,18 +1542,38 @@ namespace Pokemod.Content.Pets
 
 		public virtual void SetAttackInfo()
 		{
-			attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
-			attackCooldown = PokemonData.pokemonAttacks[currentAttack].cooldown;
-			distanceToAttack = PokemonData.pokemonAttacks[currentAttack].distanceToAttack;
-			canMoveWhileAttack = PokemonData.pokemonAttacks[currentAttack].canMove;
-			canAttackThroughWalls = PokemonData.pokemonAttacks[currentAttack].canPassThroughWalls;
+			if (currentAttack != oldAttack)
+			{
+				oldAttack = currentAttack;
+				ClearOldMoves();
+				attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
+				attackCooldown = PokemonData.pokemonAttacks[currentAttack].cooldown;
+				distanceToAttack = PokemonData.pokemonAttacks[currentAttack].distanceToAttack;
+				canMoveWhileAttack = PokemonData.pokemonAttacks[currentAttack].canMove;
+				canAttackThroughWalls = PokemonData.pokemonAttacks[currentAttack].canPassThroughWalls;
 
-			if(Main.myPlayer == Projectile.owner){
-				Projectile.netUpdate = true;
+				if (Main.myPlayer == Projectile.owner)
+				{
+					Projectile.netUpdate = true;
+				}
 			}
 		}
 
-		public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
+        public void ClearOldMoves()
+        {
+			foreach (Projectile move in attackProjs)
+			{
+				if (move != null)
+				{
+					if (move.Name != currentAttack)
+					{
+						move.Kill();
+					}
+				}
+			}
+        }
+
+        public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
 			int levelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
 			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.Disobedience && pokemonLvl > levelCap)
 			{
