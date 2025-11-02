@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Common\\UI",
+    "\\Common\\UI\\StarterPanelUI",
+    "\\Content\\NPCs\\PokemonNPCs"
   ],
+  "SelectedNode": "\\build.txt",
   "PreviewInSolutionExplorer": false
 }
