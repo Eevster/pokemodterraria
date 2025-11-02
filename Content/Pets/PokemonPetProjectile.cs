@@ -526,23 +526,22 @@ namespace Pokemod.Content.Pets
 			expGained += exp;
 		}
 
-		public void SetExtraExp(int extraExp)
+		public void SetGainedExp(int newExp)
 		{
 			int levelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
 			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.ExpCutoff && pokemonLvl > levelCap)
 			{
 				return;
 			}
-			extraExp = (int)(extraExp * Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().ExpMult);
+			newExp = (int)(newExp * Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().ExpMult);
 
 			if(Projectile.owner == Main.myPlayer){
-				if(extraExp > 0){
-					CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+extraExp+" Exp");
+				if(newExp > 0){
+					CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+newExp+" Exp");
 				}
 				Projectile.netUpdate = true;
 			}
-
-			expGained += extraExp;
+            expGained += newExp;
 		}
 
 		public void setMaxHP()
@@ -1542,11 +1541,9 @@ namespace Pokemod.Content.Pets
 
 		public virtual void SetAttackInfo()
 		{
-			if (currentAttack != oldAttack)
-			{
-				oldAttack = currentAttack;
 				ClearOldMoves();
-				attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
+                
+                attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
 				attackCooldown = PokemonData.pokemonAttacks[currentAttack].cooldown;
 				distanceToAttack = PokemonData.pokemonAttacks[currentAttack].distanceToAttack;
 				canMoveWhileAttack = PokemonData.pokemonAttacks[currentAttack].canMove;
@@ -1556,20 +1553,25 @@ namespace Pokemod.Content.Pets
 				{
 					Projectile.netUpdate = true;
 				}
-			}
 		}
 
         public void ClearOldMoves()
         {
-			foreach (Projectile move in attackProjs)
+			if (currentAttack != oldAttack)
 			{
-				if (move != null)
+				for (int i = 0; i < attackProjs.Length; i++)
 				{
-					if (move.Name != currentAttack)
+					Projectile move = attackProjs[i];
+					if (move != null)
 					{
-						move.Kill();
+						if (move.Name != currentAttack)
+						{
+                            move.Kill();
+							attackProjs[i] = null;
+						}
 					}
 				}
+				oldAttack = currentAttack;
 			}
         }
 

@@ -6,6 +6,7 @@ using Pokemod.Content.DamageClasses;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
 using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
@@ -110,12 +111,17 @@ namespace Pokemod.Content.Projectiles
         {
 			//SetExpGained(target, hit);
 			if(pokemonProj != null){
-				if(pokemonProj.active){
-					if(target.life <= 0 && target.GetGlobalNPC<HitByPokemonNPC>().pokemonProj != pokemonProj){
-						PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
-						pokemonMainProj?.SetExtraExp(HitByPokemonNPC.SetExpGained(target));
+				if (pokemonProj.active)
+				{
+					if (!target.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Contains(pokemonProj))
+					{
+						if (target.life <= 0)
+						{
+							PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
+							pokemonMainProj?.SetGainedExp(HitByPokemonNPC.SetExpGained(target, target.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Count));
+						}
+						target.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Add(pokemonProj);
 					}
-					target.GetGlobalNPC<HitByPokemonNPC>().pokemonProj = pokemonProj;
 				}
 			}
             base.OnHitNPC(target, hit, damageDone);

@@ -590,7 +590,7 @@ namespace Pokemod.Content.NPCs
             {"SelfDestruct", new PokemonAttackInfo(200,32,60,100f,false,false,(int)TypeIndex.Normal)},
             {"ShadowBall", new PokemonAttackInfo(80,30,60,800f,false,true,(int)TypeIndex.Ghost, true)},
             {"Slam", new PokemonAttackInfo(80,30,60,300f,false,false,(int)TypeIndex.Normal)},
-            {"Slash", new PokemonAttackInfo(70,20,50,400f,false,false,(int)TypeIndex.Normal)},
+            {"Slash", new PokemonAttackInfo(70,20,50,350f,false,false,(int)TypeIndex.Normal)},
             {"SludgeBomb", new PokemonAttackInfo(90,45,60,800f,false,false,(int)TypeIndex.Poison, true)},
             {"Smokescreen", new PokemonAttackInfo(0,60,60,600f,true,false,(int)TypeIndex.Normal, true)},
             {"SolarBeam", new PokemonAttackInfo(120,60,120,800f,false,true,(int)TypeIndex.Grass, true)},

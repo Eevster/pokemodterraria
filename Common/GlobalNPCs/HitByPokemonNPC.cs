@@ -20,7 +20,7 @@ namespace Pokemod.Common.GlobalNPCs
     public class HitByPokemonNPC : GlobalNPC
     {
         public override bool InstancePerEntity => true;
-        public Projectile pokemonProj;
+        public List<Projectile> pokemonProjs = [];
         public bool canGiveExp = true;
 
         private static Asset<Texture2D> buffVisualTexture;
@@ -56,21 +56,30 @@ namespace Pokemod.Common.GlobalNPCs
 
         public override void HitEffect(NPC npc, NPC.HitInfo hit)
         {
+            pokemonProjs = pokemonProjs.Distinct().ToList();
+
             if (npc.realLife == -1)
             {
                 if (npc.life <= 0 && !npc.immortal && canGiveExp)
                 {
-                    if (pokemonProj != null)
+                    if (pokemonProjs.Count > 0)
                     {
-                        if (pokemonProj.active)
+                        for (int i = 0; i < pokemonProjs.Count; i++)
                         {
-                            if (pokemonProj.ModProjectile is PokemonPetProjectile)
+                            Projectile proj = pokemonProjs[i];
+                            if (proj != null)
                             {
-                                PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
-                                pokemonMainProj?.SetExtraExp(SetExpGained(npc));
-                                canGiveExp = false;
+                                if (proj.active)
+                                {
+                                    if (proj.ModProjectile is PokemonPetProjectile)
+                                    {
+                                        PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)proj?.ModProjectile;
+                                        pokemonMainProj?.SetGainedExp(SetExpGained(npc, pokemonProjs.Count));
+                                    }
+                                }
                             }
                         }
+                        canGiveExp = false;
                     }
                 }
             }
@@ -81,17 +90,24 @@ namespace Pokemod.Common.GlobalNPCs
                 {
                     if (realNpc.life <= 0 && !realNpc.immortal && realNpc.GetGlobalNPC<HitByPokemonNPC>().canGiveExp)
                     {
-                        if (pokemonProj != null)
+                        if (pokemonProjs.Count > 0)
                         {
-                            if (pokemonProj.active)
+                            for (int i = 0; i < pokemonProjs.Count; i++)
                             {
-                                if (pokemonProj.ModProjectile is PokemonPetProjectile)
+                                Projectile proj = pokemonProjs[i];
+                                if (proj != null)
                                 {
-                                    PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
-                                    pokemonMainProj?.SetExtraExp(SetExpGained(realNpc));
-                                    realNpc.GetGlobalNPC<HitByPokemonNPC>().canGiveExp = false;
+                                    if (proj.active)
+                                    {
+                                        if (proj.ModProjectile is PokemonPetProjectile)
+                                        {
+                                            PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)proj?.ModProjectile;
+                                            pokemonMainProj?.SetGainedExp(SetExpGained(realNpc, pokemonProjs.Count));
+                                        }
+                                    }
                                 }
                             }
+                            realNpc.GetGlobalNPC<HitByPokemonNPC>().canGiveExp = false;
                         }
                     }
                 }
@@ -99,11 +115,13 @@ namespace Pokemod.Common.GlobalNPCs
             base.HitEffect(npc, hit);
         }
 
-        public static int SetExpGained(NPC npc)
+        public static int SetExpGained(NPC npc, int split)
         {
             int exp;
             if (npc.ModNPC is PokemonWildNPC pokemonNPC) exp = (int)(100f * pokemonNPC.lvl / 7f);
             else exp = (int)Math.Sqrt(5 * npc.value);
+
+            exp = (int)Math.Ceiling((double)exp / split);
 
             if (npc.value <= 0) exp = (int)(0.2f * exp);
             if (exp < 1) exp = 1;
@@ -113,27 +131,43 @@ namespace Pokemod.Common.GlobalNPCs
 
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if (pokemonProj != null && pokemonProj.active)
+            bool marked = false;
+
+            if (pokemonProjs.Count > 0)
             {
-                buffVisualPosition = Vector2.UnitY * (npc.boss ? 40 : 27) - Main.screenPosition;
-                if (npc.realLife == npc.whoAmI) //Worm Head
+                foreach (Projectile pokemon in pokemonProjs)
                 {
-                    buffVisualPosition += npc.Center + FindWormCenter(npc);
-                }
-                else if (npc.realLife != -1) //Worm Segment
-                {
-                    NPC realNPC = Main.npc[npc.realLife];
-                    if (realNPC.GetGlobalNPC<HitByPokemonNPC>().pokemonProj != pokemonProj)
+                    if (pokemon != null && pokemon.active)
                     {
-                        realNPC.GetGlobalNPC<HitByPokemonNPC>().pokemonProj = pokemonProj;
+                        marked = true;
                     }
-                    pokemonProj = null;
                 }
-                else buffVisualPosition += npc.Bottom;
-            
-                Color fadeColor = drawColor;
-                fadeColor.A = (Byte)(drawColor.ToVector3().Length() / (255 * Math.Sqrt(3d)));
-                Main.EntitySpriteDraw(buffVisualTexture.Value, buffVisualPosition, buffVisualTexture.Frame(), fadeColor, 0, buffVisualTexture.Frame().Size() / 2f, 1f, SpriteEffects.None);
+
+                if (marked)
+                {
+                    buffVisualPosition = Vector2.UnitY * (npc.boss ? 40 : 27) - Main.screenPosition;
+                    if (npc.realLife == npc.whoAmI) //Worm Head
+                    {
+                        buffVisualPosition += npc.Center + FindWormCenter(npc);
+                    }
+                    else if (npc.realLife != -1) //Worm Segment
+                    {
+                        NPC realNPC = Main.npc[npc.realLife];
+
+                        foreach (Projectile myMark in pokemonProjs)
+                        {
+                            if (!realNPC.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Contains(myMark))
+                            {
+                                realNPC.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Add(myMark);
+                            }
+                        }
+                    }
+                    else buffVisualPosition += npc.Bottom;
+
+                    Color fadeColor = drawColor;
+                    fadeColor.A = (Byte)(drawColor.ToVector3().Length() / (255 * Math.Sqrt(3d)));
+                    Main.EntitySpriteDraw(buffVisualTexture.Value, buffVisualPosition, buffVisualTexture.Frame(), fadeColor, 0, buffVisualTexture.Frame().Size() / 2f, 1f, SpriteEffects.None);
+                }
             }
             base.PostDraw(npc, spriteBatch, screenPos, drawColor);
         }

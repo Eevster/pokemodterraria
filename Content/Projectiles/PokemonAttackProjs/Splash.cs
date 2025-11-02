@@ -2,6 +2,7 @@
 using Pokemod.Common.GlobalNPCs;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -115,14 +116,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     {
                         if (pokemonProj.active)
                         {
-                            if (target.life <= 0 && target.GetGlobalNPC<HitByPokemonNPC>().pokemonProj != pokemonProj)
+                            if (!target.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Contains(pokemonProj))
                             {
-                                PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
-                                pokemonMainProj?.SetExtraExp(HitByPokemonNPC.SetExpGained(target));
+                                if (target.life <= 0)
+                                {
+                                    PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)pokemonProj?.ModProjectile;
+                                    pokemonMainProj?.SetGainedExp(HitByPokemonNPC.SetExpGained(target, target.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Count));
+                                }
+                                target.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Add(pokemonProj);
+                                return true;
                             }
-                            target.GetGlobalNPC<HitByPokemonNPC>().pokemonProj = pokemonProj;
-
-                            return true;
                         }
                     }
                 }   
