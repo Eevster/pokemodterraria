@@ -57,7 +57,7 @@ namespace Pokemod.Content.Tiles.FossilBlocks
 
 			fossilBlockType = (ushort)ModContent.TileType<PrimordialFossilBlock>();
 			numPerDay = 30;
-			maxTiles = 7500;
+			maxTiles = 7000;
             priority = 4;
 			canSpawn = true;
         }
