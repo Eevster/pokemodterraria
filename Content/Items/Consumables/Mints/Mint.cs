@@ -1,5 +1,10 @@
-﻿using Terraria;
+﻿using Pokemod.Content.NPCs;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
+using Terraria.Localization;
 // 0: Hardy
 // 1: Lonely
 // 2: Adamant
@@ -29,6 +34,7 @@ namespace Pokemod.Content.Items.Consumables.Mints
 {
     public abstract class Mint : PokemonConsumableItem
     {
+        public virtual int MintNature => 0;
         public override void SetDefaults()
         {
             Item.width = 24; // The item texture's width
@@ -45,231 +51,173 @@ namespace Pokemod.Content.Items.Consumables.Mints
 
             Item.consumable = true;
         }
+
+        public override bool OnItemUse(Projectile proj)
+        {
+            bool used = false;
+            Player player = Main.LocalPlayer;
+            if (player != null)
+            {
+                CaughtPokemonItem item = null;
+
+                foreach (Item invItem in player.inventory)
+                {
+                    if (invItem.ModItem is CaughtPokemonItem invPokemon)
+                    {
+                        if (invPokemon.proj != null)
+                        {
+                            if (invPokemon.proj == proj)
+                            {
+                                item = invPokemon;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (item != null) used = UseMint(item, player);
+            }
+            Item.consumable = used;
+            return used;
+        }
+
+        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
+        {
+            return UseMint(item, player);
+        }
+
+        public bool UseMint(CaughtPokemonItem item, Player player)
+        {
+            if (item.nature == MintNature)
+            {
+                string message = Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoEffect");
+                CombatText.NewText(player.Hitbox, Color.White, message);
+                return false;
+            }
+            else
+            {
+                item.nature = MintNature;
+                SoundEngine.PlaySound(SoundID.Item2);
+                DustBurst(item, player);
+                Item.consumable = true;
+                ReduceStack(player, Item.type);
+                return true;
+            }
+        }
+
+        public void DustBurst(CaughtPokemonItem item, Player player)
+        {
+            Vector2 position = player.Center;
+            if(item.proj != null)
+            {
+                position = item.proj.Center;
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                Dust.NewDust(position, 0, 0, DustID.SeaSnail);
+            }
+        }
     }
 
 
     public class HardyMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player){
-            item.nature = 0;
-            
-            return false;
-        }
+        public override int MintNature => 0;
     }
     public class LonelyMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 1;
-
-            return false;
-        }
+        public override int MintNature => 1;
     }
     public class AdamantMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 2;
-
-            return false;
-        }
+        public override int MintNature => 2;
     }
     public class NaughtyMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 3;
-
-            return false;
-        }
+        public override int MintNature => 3;
     }
     public class BraveMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 4;
-
-            return false;
-        }
+        public override int MintNature => 4;
     }
     public class BoldMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 10;
-
-            return false;
-        }
+        public override int MintNature => 10;
     }
     public class DocileMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 11;
-
-            return false;
-        }
+        public override int MintNature => 11;
     }
     public class ImpishMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 12;
-
-            return false;
-        }
+        public override int MintNature => 12;
     }
     public class LaxMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 13;
-
-            return false;
-        }
+        public override int MintNature => 13;
     }
     public class RelaxedMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 14;
-
-            return false;
-        }
+        public override int MintNature => 14;
     }
     public class ModestMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 20;
-
-            return false;
-        }
+        public override int MintNature => 20;
     }
     public class MildMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 21;
-
-            return false;
-        }
+        public override int MintNature => 21;
     }
     public class BashfulMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 22;
-
-            return false;
-        }
+        public override int MintNature => 22;
     }
     public class RashMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 23;
-
-            return false;
-        }
+        public override int MintNature => 23;
     }
     public class QuietMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 24;
-
-            return false;
-        }
+        public override int MintNature => 24;
     }
     public class CalmMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 30;
-
-            return false;
-        }
+        public override int MintNature => 30;
     }
     public class GentleMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 31;
-
-            return false;
-        }
+        public override int MintNature => 31;
     }
     public class CarefulMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 32;
-
-            return false;
-        }
+        public override int MintNature => 32;
     }
     public class QuirkyMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 33;
-
-            return false;
-        }
+        public override int MintNature => 33;
     }
     public class SassyMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 34;
-
-            return false;
-        }
+        public override int MintNature => 34;
     }
     public class TimidMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 40;
-
-            return false;
-        }
+        public override int MintNature => 40;
     }
     public class HastyMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 41;
-
-            return false;
-        }
+        public override int MintNature => 41;
     }
     public class JollyMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 42;
-
-            return false;
-        }
+        public override int MintNature => 42;
     }
     public class NaiveMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 43;
-
-            return false;
-        }
+        public override int MintNature => 43;
     }
     public class SeriousMint : Mint
     {
-        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
-        {
-            item.nature = 44;
-
-            return false;
-        }
+        public override int MintNature => 44;
     }
 }

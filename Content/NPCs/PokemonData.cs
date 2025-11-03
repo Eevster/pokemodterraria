@@ -594,7 +594,7 @@ namespace Pokemod.Content.NPCs
             {"SludgeBomb", new PokemonAttackInfo(90,45,60,800f,false,false,(int)TypeIndex.Poison, true)},
             {"Smokescreen", new PokemonAttackInfo(0,60,60,600f,true,false,(int)TypeIndex.Normal, true)},
             {"SolarBeam", new PokemonAttackInfo(120,60,120,800f,false,true,(int)TypeIndex.Grass, true)},
-            {"Splash", new PokemonAttackInfo(0,30,60,600f,false,false,(int)TypeIndex.Water)},
+            {"Splash", new PokemonAttackInfo(0,30,60,800f,false,false,(int)TypeIndex.Water)},
             {"StoneEdge", new PokemonAttackInfo(100,45,90,800f,false,false,(int)TypeIndex.Rock)},
             {"StringShot", new PokemonAttackInfo(0,60,60,800f,false,false,(int)TypeIndex.Bug)},
             {"Swift", new PokemonAttackInfo(60,45,60,500f,true,true,(int)TypeIndex.Normal, true)},

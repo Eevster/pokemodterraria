@@ -117,6 +117,7 @@ namespace Pokemod.Common.GlobalNPCs
 
         public static int SetExpGained(NPC npc, int split)
         {
+            split = Math.Clamp(split, 1, 10);
             int exp;
             if (npc.ModNPC is PokemonWildNPC pokemonNPC) exp = (int)(100f * pokemonNPC.lvl / 7f);
             else exp = (int)Math.Sqrt(5 * npc.value);
