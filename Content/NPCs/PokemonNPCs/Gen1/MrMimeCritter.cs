@@ -12,7 +12,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int totalFrames => 15;
 
-		public override int animationSpeed => 10;
+		public override int animationSpeed => 7;
 
 		public override int[] idleStartEnd => [0, 7];
 

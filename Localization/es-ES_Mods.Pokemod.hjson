@@ -4487,7 +4487,7 @@ NPCs: {
 	RattataCritterNPCShiny.DisplayName: Rattata Shiny
 	// ZeraoraCritterNPCShiny.DisplayName: Zeraora Shiny
 	// ChanseyCritterNPCShiny.DisplayName: Chansey Shiny
-	// NidoranMCritterNPCShiny.DisplayName: Nidoran♀ Shiny
+	// NidoranMCritterNPCShiny.DisplayName: Nidoran♂ Shiny
 	// NidorinoCritterNPCShiny.DisplayName: Nidorino Shiny
 	// RaticateCritterNPCShiny.DisplayName: Raticate Shiny
 	// FearowCritterNPCShiny.DisplayName: Fearow Shiny
@@ -4564,7 +4564,7 @@ NPCs: {
 	// MukCritterNPCShiny.DisplayName: Muk Shiny
 	// NidokingCritterNPCShiny.DisplayName: Nidoking Shiny
 	// NidoqueenCritterNPCShiny.DisplayName: Nidoqueen Shiny
-	// NidoranFCritterNPCShiny.DisplayName: Nidoran♂ Shiny
+	// NidoranFCritterNPCShiny.DisplayName: Nidoran♀ Shiny
 	// NidorinaCritterNPCShiny.DisplayName: Nidorina Shiny
 	// NinetalesCritterNPCShiny.DisplayName: Ninetales Shiny
 	// OddishCritterNPCShiny.DisplayName: Oddish Shiny
