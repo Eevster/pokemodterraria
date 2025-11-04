@@ -418,6 +418,7 @@ namespace Pokemod.Content.Items
 						if(PokemonProj != null){
 							if (moves[moveIndex] == "SmokeScreen") moves[moveIndex] = "Smokescreen";
 							PokemonProj.currentAttack = moves[moveIndex];
+							PokemonProj.ClearOldMoves();
 							PokemonProj.ballType = BallType;
 							if (variant != null)
 							{

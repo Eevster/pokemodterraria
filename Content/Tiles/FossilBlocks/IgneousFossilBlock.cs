@@ -59,7 +59,7 @@ namespace Pokemod.Content.Tiles.FossilBlocks
 
 			fossilBlockType = (ushort)ModContent.TileType<IgneousFossilBlock>();
 			numPerDay = 10;
-			maxTiles = 4500;
+			maxTiles = 3000;
             priority = 1;
         }
         public override void UpdateWorldData()

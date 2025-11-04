@@ -83,7 +83,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.damage = (int)(Projectile.damage*0.25f); 
+            Projectile.damage = (int)(Projectile.damage*0.5f); 
             Projectile.Opacity = 1f;
             Projectile.rotation = Projectile.velocity.ToRotation();
             base.OnSpawn(source);

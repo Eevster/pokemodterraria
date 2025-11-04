@@ -69,6 +69,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             modifiers.FinalDamage += (int)(pokemonOwner.pokemonLvl * 10f) - 1;
         }
 
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+        {
+            base.ModifyHitPlayer(target, ref modifiers);
+            PokemonPetProjectile pokemonOwner = (PokemonPetProjectile)pokemonProj.ModProjectile;
+            //modifiers.FinalDamage *= 1;
+            modifiers.FinalDamage += (int)(pokemonOwner.pokemonLvl * 4f) - 1;
+        }
+
 
         public override void OnSpawn(IEntitySource source)
 		{
@@ -147,64 +155,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.netUpdate = true;
 			}
         }
-
-		/*private void SearchTarget(){
-			if(attackMode == (int)PokemonPlayer.AttackMode.No_Attack) return;
-
-			float distanceFromTarget = 16f;
-			Vector2 targetCenter = Projectile.Center;
-			bool foundTarget = false;
-
-			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				return;
-			}
-
-			if (true) {
-				float sqrMaxDetectDistance = distanceFromTarget*distanceFromTarget;
-				for (int k = 0; k < Main.maxPlayers; k++) {
-					if(Main.player[k] != null){
-						Player target = Main.player[k];
-						if(target.whoAmI != Projectile.owner){
-							if(target.active && !target.dead){
-								float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, Projectile.Center);
-
-								// Check if it is within the radius
-								if (sqrDistanceToTarget < sqrMaxDetectDistance) {
-									if(target.hostile){
-										sqrMaxDetectDistance = sqrDistanceToTarget;
-										targetPlayer = target;
-									}
-								}
-							}
-						}
-					}
-				}
-				// This code is required either way, used for finding a target
-				if(targetPlayer == null){
-					for (int i = 0; i < Main.maxNPCs; i++) {
-						NPC npc = Main.npc[i];
-
-						if (npc.CanBeChasedBy()) {
-							float between = Vector2.Distance(npc.Center, Projectile.Center);
-							bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-							bool inRange = between < distanceFromTarget;
-
-							if(npc.boss){
-								targetEnemy = npc;
-								break;
-							}
-
-							if ((closest && inRange) || !foundTarget) {
-								foundTarget = true;
-								distanceFromTarget = between;
-								targetCenter = npc.Center;
-								targetEnemy = npc;
-							}
-						}
-					}
-				}
-			}
-		}*/
 
 		public override bool? CanHitNPC(NPC target)
         {

@@ -393,20 +393,27 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 
 			var entitySource = NPC.GetSource_GiftOrReward();
 
-			if (Main.netMode != NetmodeID.MultiplayerClient)
+			if (!Main.dedServ && Main.LocalPlayer == player)
 			{
 				int item = Item.NewItem(entitySource, (int)player.position.X, (int)player.position.Y, player.width, player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
 				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
 				pokeItem.SetPokemonData(sampleItem.pokemonName, Shiny: shiny, BallType: ball.Name, lvl, IVs, nature);
 				pokeItem.currentHP = pokeItem.GetPokemonStats()[0];
+				if (ModContent.TryFind<ModProjectile>("Pokemod", ball.Name.Replace("Item", "Proj"), out ModProjectile proj))
+				{
+                    if (proj is BallProj ballProj)
+                    {
+                        ballProj.SetExtraPokemonEffects(ref pokeItem);
+                    }
+                }
 
-				// Manually Adds the pokemon to the Bestiary when obtained
-				string persistentId = "Pokemod/" + sampleItem.pokemonName + "CritterNPC" + (shiny ? "Shiny" : "");
+                // Manually Adds the pokemon to the Bestiary when obtained
+                string persistentId = "Pokemod/" + sampleItem.pokemonName + "CritterNPC" + (shiny ? "Shiny" : "");
 				NPCKillsTracker tracker = Main.BestiaryTracker.Kills;
 				int currentCount = tracker.GetKillCount(persistentId);
 				tracker.SetKillCountDirectly(persistentId, currentCount + 1);
 
-				if (Main.netMode != NetmodeID.SinglePlayer)
+				if (Main.netMode == NetmodeID.MultiplayerClient)
 				{
 					NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item, 1f);
 				}

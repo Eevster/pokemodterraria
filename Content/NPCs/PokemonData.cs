@@ -423,7 +423,7 @@ namespace Pokemod.Content.NPCs
             {"Tauros", new PokemonInfo(0128, [75, 100, 95, 40, 70, 110], [(int)TypeIndex.Normal], [new MoveLvl("Tackle"), new MoveLvl("DoubleEdge")], [(int)EggGroups.Field], 1.4f, 88.4f, (int)StageIndex.Basic, (int)ExpTypes.Slow, completed: false)},
 
             {"Magikarp", new PokemonInfo(0129, [20, 10, 55, 15, 20, 80], [(int)TypeIndex.Water], [new MoveLvl("Splash"), new MoveLvl("Tackle", 15)], [(int)EggGroups.Water2, (int)EggGroups.Dragon], 0.9f, 10.0f, (int)StageIndex.Basic, (int)ExpTypes.Slow)},
-            {"Gyarados", new PokemonInfo(0130, [95, 125, 79, 60, 100, 81], [(int)TypeIndex.Water,(int)TypeIndex.Flying], [new MoveLvl("Bite"), new MoveLvl("IceFang", 8), new MoveLvl("WaterPulse", 12), new MoveLvl("WaterFall", 18), new MoveLvl("Crunch", 24), new MoveLvl("Slam", 32), new MoveLvl("HydroPump", 42), new MoveLvl("DoubleEdge", 48), new MoveLvl("HyperBeam", 52)], [(int)EggGroups.Water2, (int)EggGroups.Dragon], 6.5f, 235.0f, (int)StageIndex.Stage1, (int)ExpTypes.Slow)},
+            {"Gyarados", new PokemonInfo(0130, [95, 125, 79, 60, 100, 81], [(int)TypeIndex.Water,(int)TypeIndex.Flying], [new MoveLvl("Bite"), new MoveLvl("IceFang", 8), new MoveLvl("WaterPulse", 12), new MoveLvl("Waterfall", 18), new MoveLvl("Crunch", 24), new MoveLvl("Slam", 32), new MoveLvl("HydroPump", 42), new MoveLvl("DoubleEdge", 48), new MoveLvl("HyperBeam", 52)], [(int)EggGroups.Water2, (int)EggGroups.Dragon], 6.5f, 235.0f, (int)StageIndex.Stage1, (int)ExpTypes.Slow)},
 
             {"Lapras", new PokemonInfo(0131, [130, 85, 80, 85, 95, 60], [(int)TypeIndex.Water,(int)TypeIndex.Ice], [new MoveLvl("WaterGun"), new MoveLvl("Harden", 12), new MoveLvl("IceShard", 20), new MoveLvl("ConfuseRay", 25), new MoveLvl("WaterPulse", 30), new MoveLvl("IceFang", 35), new MoveLvl("Slam", 40), new MoveLvl("IceBeam", 45), new MoveLvl("WaterFall", 50), new MoveLvl("HydroPump", 55), new MoveLvl("Blizzard", 60)], [(int)EggGroups.Monster, (int)EggGroups.Water1], 2.5f, 220.0f, (int)StageIndex.Basic, (int)ExpTypes.Slow)},
             {"Ditto", new PokemonInfo(0132, [48, 48, 48, 48, 48, 48], [(int)TypeIndex.Normal], [new MoveLvl("Swift")], [(int)EggGroups.Ditto], 0.3f, 4.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast, completed: false)},
@@ -448,9 +448,9 @@ namespace Pokemod.Content.NPCs
             {"Zapdos", new PokemonInfo(0145, [90, 90, 85, 125, 90, 100], [(int)TypeIndex.Electric,(int)TypeIndex.Flying], [new MoveLvl("Thunder"), new MoveLvl("Thunderbolt")], [(int)EggGroups.NoEggs], 1.6f, 52.6f, (int)StageIndex.Basic, (int)ExpTypes.Slow, legendary: true, completed: false)},
             {"Moltres", new PokemonInfo(0146, [90, 100, 90, 125, 85, 90], [(int)TypeIndex.Fire,(int)TypeIndex.Flying], [new MoveLvl("LavaPlume"), new MoveLvl("Flamethrower")], [(int)EggGroups.NoEggs], 2.0f, 60.0f, (int)StageIndex.Basic, (int)ExpTypes.Slow, legendary: true, completed: false)},
 
-            {"Dratini", new PokemonInfo(0147, [41, 64, 45, 50, 50, 50], [(int)TypeIndex.Dragon], [new MoveLvl("Swift")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 1.8f, 3.3f, (int)StageIndex.Basic, (int)ExpTypes.Slow)},
-            {"Dragonair", new PokemonInfo(0148, [61, 84, 65, 70, 70, 70], [(int)TypeIndex.Dragon], [new MoveLvl("WingAttack")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 4.0f, 16.5f, (int)StageIndex.Stage1, (int)ExpTypes.Slow)},
-            {"Dragonite", new PokemonInfo(0149, [91, 134, 95, 100, 100, 80], [(int)TypeIndex.Dragon,(int)TypeIndex.Flying], [new MoveLvl("DragonBreath"), new MoveLvl("HyperBeam")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 2.2f, 210.0f, (int)StageIndex.Stage2, (int)ExpTypes.Slow)},
+            {"Dratini", new PokemonInfo(0147, [41, 64, 45, 50, 50, 50], [(int)TypeIndex.Dragon], [new MoveLvl("Tackle"), new MoveLvl("ThunderWave", 5), new MoveLvl("Gust", 10), new MoveLvl("DragonBreath", 15), new MoveLvl("Slam", 25), new MoveLvl("WaterPulse", 35), new MoveLvl("DragonRush", 45), new MoveLvl("HyperBeam", 55)], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 1.8f, 3.3f, (int)StageIndex.Basic, (int)ExpTypes.Slow)},
+            {"Dragonair", new PokemonInfo(0148, [61, 84, 65, 70, 70, 70], [(int)TypeIndex.Dragon], [new MoveLvl("Tackle", 1), new MoveLvl("ThunderWave", 5), new MoveLvl("Gust", 10), new MoveLvl("DragonBreath", 15), new MoveLvl("Slam", 25), new MoveLvl("WaterPulse", 36), new MoveLvl("DragonRush", 48), new MoveLvl("HyperBeam", 60)], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 4.0f, 16.5f, (int)StageIndex.Stage1, (int)ExpTypes.Slow)},
+            {"Dragonite", new PokemonInfo(0149, [91, 134, 95, 100, 100, 80], [(int)TypeIndex.Dragon,(int)TypeIndex.Flying], [new MoveLvl("AirSlash"), new MoveLvl("Tackle", 1), new MoveLvl("ThunderWave", 5), new MoveLvl("Gust", 10), new MoveLvl("DragonBreath", 15), new MoveLvl("Slam", 25), new MoveLvl("WaterPulse", 36), new MoveLvl("DragonRush", 48), new MoveLvl("HyperBeam", 64)], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 2.2f, 210.0f, (int)StageIndex.Stage2, (int)ExpTypes.Slow)},
 
             {"Mewtwo", new PokemonInfo(0150, [106, 110, 90, 154, 90, 130], [(int)TypeIndex.Psychic], [new MoveLvl("Psychic")], [(int)EggGroups.NoEggs], 2.0f, 122.0f, (int)StageIndex.Basic, (int)ExpTypes.Slow, legendary: true, completed: false)},
             {"Mew", new PokemonInfo(0151, [100, 100, 100, 100, 100, 100], [(int)TypeIndex.Psychic], [new MoveLvl("Psychic")], [(int)EggGroups.NoEggs], 0.4f, 4.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow, legendary: true, completed: false)},
@@ -590,11 +590,11 @@ namespace Pokemod.Content.NPCs
             {"SelfDestruct", new PokemonAttackInfo(200,32,60,100f,false,false,(int)TypeIndex.Normal)},
             {"ShadowBall", new PokemonAttackInfo(80,30,60,800f,false,true,(int)TypeIndex.Ghost, true)},
             {"Slam", new PokemonAttackInfo(80,30,60,300f,false,false,(int)TypeIndex.Normal)},
-            {"Slash", new PokemonAttackInfo(70,20,50,400f,false,false,(int)TypeIndex.Normal)},
+            {"Slash", new PokemonAttackInfo(70,20,50,350f,false,false,(int)TypeIndex.Normal)},
             {"SludgeBomb", new PokemonAttackInfo(90,45,60,800f,false,false,(int)TypeIndex.Poison, true)},
             {"Smokescreen", new PokemonAttackInfo(0,60,60,600f,true,false,(int)TypeIndex.Normal, true)},
             {"SolarBeam", new PokemonAttackInfo(120,60,120,800f,false,true,(int)TypeIndex.Grass, true)},
-            {"Splash", new PokemonAttackInfo(0,30,60,600f,false,false,(int)TypeIndex.Water)},
+            {"Splash", new PokemonAttackInfo(0,30,60,800f,false,false,(int)TypeIndex.Water)},
             {"StoneEdge", new PokemonAttackInfo(100,45,90,800f,false,false,(int)TypeIndex.Rock)},
             {"StringShot", new PokemonAttackInfo(0,60,60,800f,false,false,(int)TypeIndex.Bug)},
             {"Swift", new PokemonAttackInfo(60,45,60,500f,true,true,(int)TypeIndex.Normal, true)},

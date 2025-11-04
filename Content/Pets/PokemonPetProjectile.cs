@@ -158,6 +158,7 @@ namespace Pokemod.Content.Pets
 
 		//Attacks
 		public string currentAttack = "Swift";
+        public string oldAttack = "Swift";
 
 		public override void SendExtraAI(BinaryWriter writer)
         {
@@ -525,23 +526,22 @@ namespace Pokemod.Content.Pets
 			expGained += exp;
 		}
 
-		public void SetExtraExp(int extraExp)
+		public void SetGainedExp(int newExp)
 		{
 			int levelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
 			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.ExpCutoff && pokemonLvl > levelCap)
 			{
 				return;
 			}
-			extraExp = (int)(extraExp * Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().ExpMult);
+			newExp = (int)(newExp * Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().ExpMult);
 
 			if(Projectile.owner == Main.myPlayer){
-				if(extraExp > 0){
-					CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+extraExp+" Exp");
+				if(newExp > 0){
+					CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), "+"+newExp+" Exp");
 				}
 				Projectile.netUpdate = true;
 			}
-
-			expGained += extraExp;
+            expGained += newExp;
 		}
 
 		public void setMaxHP()
@@ -1541,18 +1541,41 @@ namespace Pokemod.Content.Pets
 
 		public virtual void SetAttackInfo()
 		{
-			attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
-			attackCooldown = PokemonData.pokemonAttacks[currentAttack].cooldown;
-			distanceToAttack = PokemonData.pokemonAttacks[currentAttack].distanceToAttack;
-			canMoveWhileAttack = PokemonData.pokemonAttacks[currentAttack].canMove;
-			canAttackThroughWalls = PokemonData.pokemonAttacks[currentAttack].canPassThroughWalls;
+				ClearOldMoves();
+                
+                attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
+				attackCooldown = PokemonData.pokemonAttacks[currentAttack].cooldown;
+				distanceToAttack = PokemonData.pokemonAttacks[currentAttack].distanceToAttack;
+				canMoveWhileAttack = PokemonData.pokemonAttacks[currentAttack].canMove;
+				canAttackThroughWalls = PokemonData.pokemonAttacks[currentAttack].canPassThroughWalls;
 
-			if(Main.myPlayer == Projectile.owner){
-				Projectile.netUpdate = true;
-			}
+				if (Main.myPlayer == Projectile.owner)
+				{
+					Projectile.netUpdate = true;
+				}
 		}
 
-		public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
+        public void ClearOldMoves()
+        {
+			if (currentAttack != oldAttack)
+			{
+				for (int i = 0; i < attackProjs.Length; i++)
+				{
+					Projectile move = attackProjs[i];
+					if (move != null)
+					{
+						if (move.Name != currentAttack)
+						{
+                            move.Kill();
+							attackProjs[i] = null;
+						}
+					}
+				}
+				oldAttack = currentAttack;
+			}
+        }
+
+        public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
 			int levelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
 			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.Disobedience && pokemonLvl > levelCap)
 			{

@@ -58,7 +58,7 @@ namespace Pokemod.Content.Tiles.FossilBlocks
 
 			fossilBlockType = (ushort)ModContent.TileType<FrozenFossilBlock>();
 			numPerDay = 8;
-			maxTiles = 2000;
+			maxTiles = 1000;
 			replaceTiles = [TileID.IceBlock, TileID.SnowBlock];
 			priority = 2;
         }
