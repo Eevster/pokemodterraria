@@ -242,7 +242,8 @@ namespace Pokemod.Content.Pets
 
 		public void UpdateStats(){
 			currentLevelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
-            finalStats = PokemonNPCData.CalcAllStats(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().GetClampedLevel(pokemonLvl), baseStats, IVs, EVs, nature);
+			finalStats = PokemonNPCData.CalcAllStats(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().GetClampedLevel(pokemonLvl), baseStats, IVs, EVs, nature);
+			//Main.NewText("LevelCap: "+currentLevelCap+"  ["+finalStats[0]+","+finalStats[1]+","+finalStats[2]+","+finalStats[3]+","+finalStats[4]+","+finalStats[5]+"]"); 
 		}
 
         public int GetExpGained(){
@@ -288,8 +289,6 @@ namespace Pokemod.Content.Pets
 			if(EVs != null) this.EVs = EVs;
 			this.nature = nature;
 			this.happiness = happiness;
-
-			UpdateStats();
 		}
 
 		//Evolution methods
@@ -445,7 +444,8 @@ namespace Pokemod.Content.Pets
 
 			CheckActive(player);
 
-			if(ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.LevelClamping && player.GetModPlayer<PokemonPlayer>().levelCap != currentLevelCap) UpdateStats();
+			//if(ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.LevelClamping && player.GetModPlayer<PokemonPlayer>().levelCap != currentLevelCap) UpdateStats();
+			UpdateStats();
 
 			SetAttackInfo();
 
@@ -1827,7 +1827,8 @@ namespace Pokemod.Content.Pets
             // heal hp
             currentHp += amount;
             if(showText) CombatText.NewText(Projectile.Hitbox, new Color(50, 255, 50), "+" + amount);
-			if(currentHp > finalStats[0]) { currentHp = finalStats[0]; }
+			if (currentHp > finalStats[0]) { currentHp = finalStats[0]; }
+			//Main.NewText(currentHp+"/"+finalStats[0]); 
         }
         
         public void TakeDamage(){
