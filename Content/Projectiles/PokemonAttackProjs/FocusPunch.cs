@@ -31,14 +31,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.hostile = false;
 
             Projectile.timeLeft = 90;
-            
-            Projectile.knockBack = 4f;
 
             Projectile.tileCollide = false;  
             Projectile.penetrate = 1;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
 
-            positionOffset = new Vector2(0, 10);
+            //positionOffset = new Vector2(0, 10);
 
             base.SetDefaults();
         }
@@ -127,7 +125,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 pokemonOwner.attackProjs[i].Center = pokemon.Center;
                 pokemonOwner.attackProjs[i].velocity = pokemon.velocity;
             }
-            if (pokemon.velocity.Length() < 0.1f)
+            if (pokemon.velocity.Length() < 0.1f && pokemonOwner.timer < 15)
             {
                 pokemonOwner.attackProjs[i].Kill();
                 if (!pokemonOwner.canAttack)

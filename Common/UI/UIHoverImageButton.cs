@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
+using Terraria.ModLoader.UI;
 using Terraria.UI;
 
 namespace Pokemod.Common.UI
@@ -17,7 +18,8 @@ namespace Pokemod.Common.UI
 	internal class UIHoverImageButton : UIImageButton
 	{
 		// Tooltip text that will be shown on hover
-		internal string hoverText;
+		internal string tooltipText;
+		internal bool tooltipSolid = false;
 		internal Asset<Texture2D> image;
 		internal Color color;
 		internal bool drawPanel = true;
@@ -28,12 +30,12 @@ namespace Pokemod.Common.UI
 
 		public UIHoverImageButton(Asset<Texture2D> texture, string hoverText) : base(texture)
 		{
-			this.hoverText = hoverText;
+			this.tooltipText = hoverText;
 		}
 
 		public UIHoverImageButton(Asset<Texture2D> texture, Asset<Texture2D> image, Color color, string hoverText) : base(texture)
 		{
-			this.hoverText = hoverText;
+			this.tooltipText = hoverText;
 			this.image = image;
 			this.color = color;
 		}
@@ -55,7 +57,8 @@ namespace Pokemod.Common.UI
 			// IsMouseHovering becomes true when the mouse hovers over the current UIElement
 			if (IsMouseHovering)
 			{
-				Main.hoverItemName = hoverText;
+				if (tooltipSolid) UICommon.TooltipMouseText(tooltipText);
+				else Main.hoverItemName = tooltipText;
 			}
 		}
 
@@ -139,7 +142,7 @@ namespace Pokemod.Common.UI
 			// IsMouseHovering becomes true when the mouse hovers over the current UIElement
 			if (IsMouseHovering)
 			{
-				Main.hoverItemName = hoverText;
+				Main.hoverItemName = tooltipText;
 			}
 		}
 
@@ -174,7 +177,7 @@ namespace Pokemod.Common.UI
 
 		public UIHoverPokeballButton(string pokemonName, Color color, string hoverText) : base(ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/StarterPanelPokeball"), null, color, hoverText)
 		{
-			this.hoverText = hoverText;
+			this.tooltipText = hoverText;
 			this.color = color;
 			SetPokemon(pokemonName);
 		}

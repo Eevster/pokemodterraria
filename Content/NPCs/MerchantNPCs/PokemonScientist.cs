@@ -237,8 +237,8 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 					chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.LowLevelDialogue");
 					break;
 				case 4:
-					chosenChat = Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.SuccessDialogue") + lastPokemonName + ".";
-					break;
+                    chosenChat = Language.GetText("Mods.Pokemod.Dialogue.PokemonScientist.SuccessDialogue").WithFormatArgs(lastPokemonName).ToString();
+                    break;
 				default:
 					WeightedRandom<string> chat = new WeightedRandom<string>();
 					chat.Add(Language.GetTextValue("Mods.Pokemod.Dialogue.PokemonScientist.StandardDialogue1"));

@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
@@ -504,6 +505,7 @@ namespace Pokemod.Content.Items
                         }
 					}
 					newMoves.Add(newMoveList[0].moveName);
+					if (!notLearn) MoveLearnEffects(newMoveList[0].moveName);
 				}
 				newMoveList.RemoveAt(0);
 			}
@@ -760,7 +762,29 @@ namespace Pokemod.Content.Items
 				}
 				
 				moves = existentMoves.ToArray();
+				MoveLearnEffects(newMove);
 			}
+		}
+
+		public void MoveLearnEffects(string move)
+		{
+			Player player = Main.LocalPlayer;
+			if (player == Main.player[Item.playerIndexTheItemIsReservedFor]) {
+				Color typeColor = ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor(PokemonData.pokemonAttacks[move].attackType));
+                Main.NewText(Language.GetText("Mods.Pokemod.MoveLearnUI.Success").WithFormatArgs(PokemonName, move).ToString(), color: typeColor);
+				
+				Vector2 effectPosition = proj != null && proj.active ? proj.Center : player.Center;
+
+				SoundEngine.PlaySound(SoundID.Item28 with { Pitch = -1f , Volume = 0.5f }, effectPosition);
+
+				for (int i = 0; i < 10; i++)
+				{
+					int dust = Dust.NewDust(effectPosition, 0, 0, DustID.PortalBolt, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 2), Scale: 2f);
+					Main.dust[dust].noGravity = true;
+                    Main.dust[dust].noLight = true;
+                    Main.dust[dust].color = typeColor;
+                }
+            }
 		}
 
 		public void AddHappiness(int add1, int add2, int add3){

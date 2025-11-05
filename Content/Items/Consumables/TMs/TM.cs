@@ -1,25 +1,33 @@
 
-using Terraria;
-using Terraria.ID;
-using Pokemod.Content.Pets;
-using Pokemod.Content.NPCs;
-using System.Linq;
-using Terraria.ModLoader;
-using Pokemod.Common.UI.MoveLearnUI;
-using System.Collections.Generic;
-using Terraria.Localization;
+using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
-using rail;
-using System.Diagnostics;
-using Terraria.Audio;
+using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Common.UI.MoveLearnUI;
+using Pokemod.Content.NPCs;
+using Pokemod.Content.Pets;
 using Pokemod.Content.Projectiles.PokemonAttackProjs;
+using rail;
+using ReLogic.Content;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.Consumables.TMs
 {
 	public abstract class TechnicalMachine : PokemonConsumableItem
 	{
-		public virtual TypeIndex moveType => TypeIndex.Normal;
-		public virtual string[] moves => [];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMNormal";
+
+		public bool singleMove = false;
+        public TypeIndex moveType = TypeIndex.Normal;
+		public string[] moves = [];
+        public Asset<Texture2D> tmTexture;
 
 		public override void SetDefaults()
 		{
@@ -35,10 +43,38 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			Item.maxStack = Item.CommonMaxStack;
 			Item.value = Item.buyPrice(gold: 1);
 
-			Item.consumable = false;
+			Item.consumable = true;
+
+            if (Name[..2] != "TM") singleMove = true;
+			if (singleMove)
+			{
+				SetMove();
+			}
+		}
+		public void SetMove()
+		{
+			string moveName = Name.Replace("TM", "");
+			if (PokemonData.pokemonAttacks.TryGetValue(moveName, out PokemonAttackInfo value))
+			{
+				moves = [moveName];
+                moveType = (TypeIndex)value.attackType;
+            }
 		}
 
-		public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+			if (singleMove)
+			{
+				string tooltip =
+                    Language.GetTextValue("Mods.Pokemod.PokemonInfo.ItemActiveUse") + "\n" +
+					Language.GetTextValue("Mods.Pokemod.PokemonInfo.TMContains") + Name.Replace("TM", "") + "\n" +
+					"[" + "[c/" + PokemonNPCData.GetTypeColor((int)moveType) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonTypes." + moveType) + "]" + "]";
+				tooltips.Add(new(Mod, Name + "Tooltip", tooltip));
+			}
+        }
+
+
+        public override bool OnItemInvUse(CaughtPokemonItem item, Player player)
 		{
 			return UseTM(item, player);
 		}
@@ -61,21 +97,22 @@ namespace Pokemod.Content.Items.Consumables.TMs
 							if (invPokemon.proj == proj)
 							{
 								item = invPokemon;
+								break;
 							}
 						}
 					}
 				}
 				if (item != null) used = UseTM(item, player);
 			}
-            Item.consumable = used;
-            return used;
+			Item.consumable = used;
+			return used;
 		}
 
 		public bool UseTM(CaughtPokemonItem item, Player player)
 		{
 			if (!MoveLearnUIState.hidden) return false;
 
-            if (PokemonData.pokemonInfo[item.PokemonName].HasType(moveType) || moveType == TypeIndex.Normal)
+			if (PokemonData.pokemonInfo[item.PokemonName].HasType(moveType) || moveType == TypeIndex.Normal)
 			{
 				List<string> newMoves = moves.ToList();
 				foreach (string move in item.moves)
@@ -86,7 +123,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 				if (newMoves.Count > 0)
 				{
 					SoundEngine.PlaySound(SoundID.Grab);
-                    Item.consumable = true;
+					Item.consumable = true;
 					item.LearnMove(newMoves[Main.rand.Next(newMoves.Count)]);
 					ReduceStack(player, Item.type);
 					return true;
@@ -103,113 +140,299 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			}
 			return false;
 		}
-	}
 
-	public abstract class TMBug : TechnicalMachine
+        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+        {
+            if (singleMove)
+            {
+                tmTexture = ModContent.Request<Texture2D>("Pokemod/Content/Items/Consumables/TMs/TM" + moveType.ToString());
+
+                spriteBatch.Draw(tmTexture.Value,
+                    position: position - scale * new Vector2(tmTexture.Value.Width / 2, tmTexture.Value.Height / 2),
+                    sourceRectangle: tmTexture.Value.Bounds,
+                    drawColor,
+                    rotation: 0f,
+                    origin: Vector2.Zero,
+                    scale: scale,
+                    SpriteEffects.None,
+                    layerDepth: 0f);
+                return false;
+            }
+            return true;
+        }
+
+        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        {
+            if (singleMove)
+            {
+                tmTexture = ModContent.Request<Texture2D>("Pokemod/Content/Items/Consumables/TMs/TM" + moveType.ToString());
+
+                spriteBatch.Draw(tmTexture.Value,
+                    position: Item.position - Main.screenPosition,
+                    sourceRectangle: tmTexture.Value.Bounds,
+                    lightColor,
+                    rotation: 0f,
+                    origin: Vector2.Zero,
+                    scale: scale,
+                    SpriteEffects.None,
+                    layerDepth: 0f);
+				return false;
+			}
+            return true;
+        }
+    }
+
+    public class AirSlashTM : TechnicalMachine { }
+    public class BlizzardTM : TechnicalMachine { }
+    public class BrickBreakTM : TechnicalMachine { }
+    public class BulletSeedTM : TechnicalMachine { }
+    public class CrunchTM : TechnicalMachine { }
+    public class DigTM : TechnicalMachine { }
+    public class DragonBreathTM : TechnicalMachine { }
+    public class DragonRushTM : TechnicalMachine { }
+    public class EarthquakeTM : TechnicalMachine { }
+    public class ExplosionTM : TechnicalMachine { }
+    public class FireBlastTM : TechnicalMachine { }
+    public class FlamethrowerTM : TechnicalMachine { }
+    public class FlashCannonTM : TechnicalMachine { }
+    public class FocusPunchTM : TechnicalMachine { }
+    public class FuryCutterTM : TechnicalMachine { }
+    public class GigaDrainTM : TechnicalMachine { }
+    public class HexTM : TechnicalMachine { }
+    public class HydroPumpTM : TechnicalMachine { }
+    public class HyperBeamTM : TechnicalMachine { }
+    public class IceBeamTM : TechnicalMachine { }
+    public class NightSlashTM : TechnicalMachine { }
+    public class OverheatTM : TechnicalMachine { }
+    public class PinMissileTM : TechnicalMachine { }
+    public class PsychicTM : TechnicalMachine { }
+    public class PsychoCutTM : TechnicalMachine { }
+    public class RockSlideTM : TechnicalMachine { }
+    public class ShadowBallTM: TechnicalMachine { }
+    public class SludgeBombTM: TechnicalMachine { }
+    public class SolarBeamTM : TechnicalMachine { }
+    public class StoneEdgeTM: TechnicalMachine { }
+    public class SwiftTM : TechnicalMachine { }
+    public class ThunderTM : TechnicalMachine { }
+    public class ThunderboltTM : TechnicalMachine { }
+    public class ToxicTM : TechnicalMachine { }
+    public class WaterPulseTM: TechnicalMachine { }
+    public class WingAttackTM: TechnicalMachine { }
+
+
+
+    public abstract class TMBug : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Bug;
-		public override string[] moves => [];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMBug";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Bug;
+			moves = [];
+		}
 	}
 
 	public class TMDark : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Dark;
-		public override string[] moves => ["Crunch", "NightSlash"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMDark";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Dark;
+			moves = ["Crunch", "NightSlash"];
+		}
 	}
 
 	public class TMDragon : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Dragon;
-		public override string[] moves => ["DragonBreath", "DragonRush"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMDragon";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Dragon;
+			moves = ["DragonBreath", "DragonRush"];
+		}
 	}
 
 	public class TMElectric : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Electric;
-		public override string[] moves => ["ElectroBall","ThunderWave","Thunderbolt","Thunder"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMElectric";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Electric;
+			moves = ["ElectroBall", "ThunderWave", "Thunderbolt", "Thunder"];
+		}
 	}
 
 	public abstract class TMFairy : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Fairy;
-		public override string[] moves => [];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMFairy";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Fairy;
+			moves = [];
+		}
 	}
 
 	public class TMFighting : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Fighting;
-		public override string[] moves => ["FocusPunch", "BrickBreak"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMFighting";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Fighting;
+			moves = ["FocusPunch", "BrickBreak"];
+		}
 	}
 
 	public class TMFire : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Fire;
-		public override string[] moves => ["Flamethrower","FireBlast","Overheat"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMFire";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Fire;
+			moves = ["Flamethrower", "FireBlast", "Overheat"];
+		}
 	}
 
 	public class TMFlying : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Flying;
-		public override string[] moves => ["AirSlash"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMFlying";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Flying;
+			moves = ["AirSlash"];
+		}
 	}
 
 	public class TMGhost : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Ghost;
-		public override string[] moves => ["ConfuseRay","Hex","NightShade","ShadowBall"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMGhost";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Ghost;
+			moves = ["ConfuseRay", "Hex", "NightShade", "ShadowBall"];
+		}
 	}
 
 	public class TMGrass : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Grass;
-		public override string[] moves => ["MagicalLeaf","BulletSeed","GigaDrain","LeafStorm","SolarBeam"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMGrass";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Grass;
+			moves = ["MagicalLeaf", "BulletSeed", "GigaDrain", "LeafStorm", "SolarBeam"];
+		}
 	}
 
 	public class TMGround : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Ground;
-		public override string[] moves => ["Dig","Earthquake","MudShot"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMGround";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Ground;
+			moves = ["Dig", "Earthquake", "MudShot"];
+		}
 	}
 
 	public class TMIce : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Ice;
-		public override string[] moves => ["IceFang", "IceBeam", "Blizzard"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMIce";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Ice;
+			moves = ["IceFang", "IceBeam", "Blizzard"];
+		}
 	}
 
 	public class TMNormal : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Normal;
-		public override string[] moves => ["Swift","HyperBeam","DoubleEdge","Slash"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMNormal";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Normal;
+			moves = ["Swift", "HyperBeam", "DoubleEdge", "Slash"];
+		}
 	}
 
 	public class TMPoison : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Poison;
-		public override string[] moves => ["Toxic","SludgeBomb"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMPoison";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Poison;
+			moves = ["Toxic", "SludgeBomb"];
+		}
 	}
 
 	public class TMPsychic : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Psychic;
-		public override string[] moves => ["Psybeam","Psychic"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMPsychic";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Psychic;
+			moves = ["Psybeam", "Psychic"];
+		}
 	}
 
 	public class TMRock : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Rock;
-		public override string[] moves => ["RockSlide", "StoneEdge"];
-	}
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMRock";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
 
+			moveType = TypeIndex.Rock;
+			moves = ["RockSlide", "StoneEdge"];
+		}
+	}
 	public class TMSteel : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Steel;
-		public override string[] moves => ["FlashCannon"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMSteel";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Steel;
+			moves = ["FlashCannon"];
+		}
 	}
 
 	public class TMWater : TechnicalMachine
 	{
-		public override TypeIndex moveType => TypeIndex.Water;
-		public override string[] moves => ["WaterPulse","Waterfall","HydroPump"];
+        public override string Texture => "Pokemod/Content/Items/Consumables/TMs/TMWater";
+        public override void SetDefaults()
+		{
+			base.SetDefaults();
+
+			moveType = TypeIndex.Water;
+			moves = ["WaterPulse", "Waterfall", "HydroPump"];
+		}
 	}
 }

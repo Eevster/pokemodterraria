@@ -1,9 +1,11 @@
-﻿using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria;
-using Pokemod.Content.Items.Accessories;
-using Pokemod.Content.Items.Mounts;
+﻿using Pokemod.Content.Items.Accessories;
 using Pokemod.Content.Items.Consumables.TMs;
+using Pokemod.Content.Items.Mounts;
+using Pokemod.Content.NPCs;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Pokemod.Common.Systems
 {
@@ -16,13 +18,26 @@ namespace Pokemod.Common.Systems
             int itemsPlacedSurface = 0;
             int maxItemsSurface = 2;
 
-            int[] itemsToPlaceInGoldChests = {
+            List<int> TMs = [];
+            foreach (TechnicalMachine TM in ModContent.GetContent<TechnicalMachine>())
+            {
+                if (TM.singleMove)
+                {
+                    int movePower = PokemonData.pokemonAttacks[TM.moves[0]].attackPower;
+                    if (movePower <= 70)
+                    {
+                        TMs.Add(TM.Type);
+                    }
+                }
+            }
+            int[] itemsToPlaceInGoldChests = TMs.ToArray();
+                /*{
                 ModContent.ItemType<TMElectric>(), ModContent.ItemType<TMFighting>(), ModContent.ItemType<TMFire>(),
                 ModContent.ItemType<TMFlying>(), ModContent.ItemType<TMGhost>(), ModContent.ItemType<TMGrass>(),
                 ModContent.ItemType<TMGround>(), ModContent.ItemType<TMIce>(), ModContent.ItemType<TMNormal>(),
                 ModContent.ItemType<TMPoison>(), ModContent.ItemType<TMPsychic>(), ModContent.ItemType<TMSteel>(),
                 ModContent.ItemType<TMWater>()
-            };
+            };*/
             int itemsToPlaceInGoldChestsChoice = 0;
             int itemsPlacedGold = 0;
             int maxItemsGold = 24;

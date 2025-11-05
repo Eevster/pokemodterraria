@@ -26,6 +26,12 @@ namespace Pokemod.Common.UI.MoveLearnUI
             MoveLearnUserInterface?.SetState(null);
 		}
 
+		public void CatchUIState(MoveLearnUIState state)
+		{
+            MoveLearnUIState.hidden = false;
+            MoveLearnUserInterface?.SetState(state);
+        }
+
 		public bool IsActive()
 		{
 			return MoveLearnUserInterface?.CurrentState != null;

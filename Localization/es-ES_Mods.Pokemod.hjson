@@ -1876,6 +1876,186 @@ Items: {
 		// DisplayName: Mint Seed
 		// Tooltip: ""
 	}
+
+	FocusPunchTM: {
+		// Tooltip: ""
+		// DisplayName: TM01
+	}
+
+	ToxicTM: {
+		// Tooltip: ""
+		// DisplayName: TM02
+	}
+
+	HyperBeamTM: {
+		// Tooltip: ""
+		// DisplayName: TM03
+	}
+
+	WingAttackTM: {
+		// Tooltip: ""
+		// DisplayName: TM04
+	}
+
+	ThunderboltTM: {
+		// Tooltip: ""
+		// DisplayName: TM05
+	}
+
+	ThunderTM: {
+		// Tooltip: ""
+		// DisplayName: TM06
+	}
+
+	RockSlideTM: {
+		// Tooltip: ""
+		// DisplayName: TM07
+	}
+
+	StoneEdgeTM: {
+		// Tooltip: ""
+		// DisplayName: TM08
+	}
+
+	CrunchTM: {
+		// Tooltip: ""
+		// DisplayName: TM09
+	}
+
+	SludgeBombTM: {
+		// Tooltip: ""
+		// DisplayName: TM10
+	}
+
+	PinMissileTM: {
+		// Tooltip: ""
+		// DisplayName: TM11
+	}
+
+	SwiftTM: {
+		// Tooltip: ""
+		// DisplayName: TM12
+	}
+
+	PsychoCutTM: {
+		// Tooltip: ""
+		// DisplayName: TM13
+	}
+
+	PsychicTM: {
+		// Tooltip: ""
+		// DisplayName: TM14
+	}
+
+	ShadowBallTM: {
+		// Tooltip: ""
+		// DisplayName: TM15
+	}
+
+	OverheatTM: {
+		// Tooltip: ""
+		// DisplayName: TM16
+	}
+
+	NightSlashTM: {
+		// Tooltip: ""
+		// DisplayName: TM17
+	}
+
+	DragonBreathTM: {
+		// Tooltip: ""
+		// DisplayName: TM18
+	}
+
+	WaterPulseTM: {
+		// Tooltip: ""
+		// DisplayName: TM19
+	}
+
+	HydroPumpTM: {
+		// Tooltip: ""
+		// DisplayName: TM20
+	}
+
+	FlashCannonTM: {
+		// Tooltip: ""
+		// DisplayName: TM21
+	}
+
+	GigaDrainTM: {
+		// Tooltip: ""
+		// DisplayName: TM22
+	}
+
+	FuryCutterTM: {
+		// Tooltip: ""
+		// DisplayName: TM23
+	}
+
+	AirSlashTM: {
+		// Tooltip: ""
+		// DisplayName: TM24
+	}
+
+	HexTM: {
+		// Tooltip: ""
+		// DisplayName: TM25
+	}
+
+	FlamethrowerTM: {
+		// Tooltip: ""
+		// DisplayName: TM26
+	}
+
+	FireBlastTM: {
+		// Tooltip: ""
+		// DisplayName: TM27
+	}
+
+	ExplosionTM: {
+		// Tooltip: ""
+		// DisplayName: TM28
+	}
+
+	EarthquakeTM: {
+		// Tooltip: ""
+		// DisplayName: TM29
+	}
+
+	DragonRushTM: {
+		// Tooltip: ""
+		// DisplayName: TM30
+	}
+
+	DigTM: {
+		// Tooltip: ""
+		// DisplayName: TM31
+	}
+
+	BrickBreakTM: {
+		// Tooltip: ""
+		// DisplayName: TM32
+	}
+
+	BulletSeedTM: {
+		// Tooltip: ""
+		// DisplayName: TM33
+	}
+
+	SolarBeamTM: {
+		// Tooltip: ""
+		// DisplayName: TM34
+	}
+
+	IceBeamTM: {
+		// Tooltip: ""
+		// DisplayName: TM35
+	}
+
+	BlizzardTM: {
+		// Tooltip: ""
+		// DisplayName: TM36
+	}
 }
 
 Buffs: {
@@ -4703,7 +4883,7 @@ Dialogue: {
 		LowLevel: Nivel de mundo demasiado bajo
 		LowLevelDialogue: Esta muestra contiene una energía poderosa. Necesitaré investigar más antes de poder procesarla.
 		Success: ¡Renacimiento exitoso!
-		SuccessDialogue: ¡Hemos creado un ejemplar vivo! Cuídalo bien.
+		SuccessDialogue: ¡Hemos creado un ejemplar vivo de {0}! Cuídalo bien.
 	}
 
 	G1T1_Brock.StandardDialogue1: ¡Creo en la defensa férrea y la determinación! ¿Estás listo para desafiarme?
@@ -4757,6 +4937,12 @@ PokemonInfo: {
 	ItemUse: Para usar el objeto haz clic sobre tu pokemon o haz clic derecho en su pokeball
 	ItemActiveUse: Para usar el objeto haz clic sobre tu pokemon activo
 	ItemNoActiveUse: Para usar el objeto haz clic derecho en la pokeball de uno de tus pokemon
+	// NoEffect: No Effect
+	/* TMContains:
+		'''
+		Can teach your pokemon a new move. 
+		Contains: 
+		''' */
 	GloveTooltip: "[c/ffd51c:Modo actual: {0}]"
 	GloveTooltipLeft: Clic izquierdo para que tu pokemon esté en modo: {0}
 	GloveTooltipRight: Clic derecho para que tu pokemon esté en modo: {0}
@@ -4773,7 +4959,15 @@ PokemonInfo: {
 MoveLearnUI: {
 	MoveLearn: Tu {0} quiere aprender un nuevo movimiento, ¿cuál debería olvidar?
 	Forget: Olvidar seleccionado
+	// ForgetTooltip: Learn the new move {0}, and forget {1}?
 	NotLearn: No aprender
+	// NotLearnTooltip: Keep current moves and give up on learning {0}?
+	// NoSelection: No move selected
+	// MovePower: Power: {0}
+	// MoveSpeed: Speed: {0}
+	// MoveRange: Range: {0}
+	// MoveEffect: Effect: {0}
+	// Success: "{0} learned {1}"
 }
 
 PokemonTypes: {
