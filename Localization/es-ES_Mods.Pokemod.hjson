@@ -1879,182 +1879,182 @@ Items: {
 
 	FocusPunchTM: {
 		// Tooltip: ""
-		// DisplayName: TM01
+		// DisplayName: TM01 Focus Punch
 	}
 
 	ToxicTM: {
 		// Tooltip: ""
-		// DisplayName: TM02
+		// DisplayName: TM02 Toxic
 	}
 
 	HyperBeamTM: {
 		// Tooltip: ""
-		// DisplayName: TM03
+		// DisplayName: TM03 Hyper Beam
 	}
 
 	WingAttackTM: {
 		// Tooltip: ""
-		// DisplayName: TM04
+		// DisplayName: TM04 Wing Attack
 	}
 
 	ThunderboltTM: {
 		// Tooltip: ""
-		// DisplayName: TM05
+		// DisplayName: TM05 Thunderbolt
 	}
 
 	ThunderTM: {
 		// Tooltip: ""
-		// DisplayName: TM06
+		// DisplayName: TM06 Thunder
 	}
 
 	RockSlideTM: {
 		// Tooltip: ""
-		// DisplayName: TM07
+		// DisplayName: TM07 Rock Slide
 	}
 
 	StoneEdgeTM: {
 		// Tooltip: ""
-		// DisplayName: TM08
+		// DisplayName: TM08 Stone Edge
 	}
 
 	CrunchTM: {
 		// Tooltip: ""
-		// DisplayName: TM09
+		// DisplayName: TM09 Crunch
 	}
 
 	SludgeBombTM: {
 		// Tooltip: ""
-		// DisplayName: TM10
+		// DisplayName: TM10 Sludge Bomb
 	}
 
 	PinMissileTM: {
 		// Tooltip: ""
-		// DisplayName: TM11
+		// DisplayName: TM11 Pin Missile
 	}
 
 	SwiftTM: {
 		// Tooltip: ""
-		// DisplayName: TM12
+		// DisplayName: TM12 Swift
 	}
 
 	PsychoCutTM: {
 		// Tooltip: ""
-		// DisplayName: TM13
+		// DisplayName: TM13 Psycho Cut
 	}
 
 	PsychicTM: {
 		// Tooltip: ""
-		// DisplayName: TM14
+		// DisplayName: TM14 Psychic
 	}
 
 	ShadowBallTM: {
 		// Tooltip: ""
-		// DisplayName: TM15
+		// DisplayName: TM15 Shadow Ball
 	}
 
 	OverheatTM: {
 		// Tooltip: ""
-		// DisplayName: TM16
+		// DisplayName: TM16 Overheat
 	}
 
 	NightSlashTM: {
 		// Tooltip: ""
-		// DisplayName: TM17
+		// DisplayName: TM17 Night Slash
 	}
 
 	DragonBreathTM: {
 		// Tooltip: ""
-		// DisplayName: TM18
+		// DisplayName: TM18 Dragon Breath
 	}
 
 	WaterPulseTM: {
 		// Tooltip: ""
-		// DisplayName: TM19
+		// DisplayName: TM19 Water Pulse
 	}
 
 	HydroPumpTM: {
 		// Tooltip: ""
-		// DisplayName: TM20
+		// DisplayName: TM20 Hydro Pump
 	}
 
 	FlashCannonTM: {
 		// Tooltip: ""
-		// DisplayName: TM21
+		// DisplayName: TM21 Flash Cannon
 	}
 
 	GigaDrainTM: {
 		// Tooltip: ""
-		// DisplayName: TM22
+		// DisplayName: TM22 Giga Drain
 	}
 
 	FuryCutterTM: {
 		// Tooltip: ""
-		// DisplayName: TM23
+		// DisplayName: TM23 Fury Cutter
 	}
 
 	AirSlashTM: {
 		// Tooltip: ""
-		// DisplayName: TM24
+		// DisplayName: TM24 Air Slash
 	}
 
 	HexTM: {
 		// Tooltip: ""
-		// DisplayName: TM25
+		// DisplayName: TM25 Hex
 	}
 
 	FlamethrowerTM: {
 		// Tooltip: ""
-		// DisplayName: TM26
+		// DisplayName: TM26 Flamethrower
 	}
 
 	FireBlastTM: {
 		// Tooltip: ""
-		// DisplayName: TM27
+		// DisplayName: TM27 Fire Blast
 	}
 
 	ExplosionTM: {
 		// Tooltip: ""
-		// DisplayName: TM28
+		// DisplayName: TM28 Explosion
 	}
 
 	EarthquakeTM: {
 		// Tooltip: ""
-		// DisplayName: TM29
+		// DisplayName: TM29 Earthquake
 	}
 
 	DragonRushTM: {
 		// Tooltip: ""
-		// DisplayName: TM30
+		// DisplayName: TM30 Dragon Rush
 	}
 
 	DigTM: {
 		// Tooltip: ""
-		// DisplayName: TM31
+		// DisplayName: TM31 Dig
 	}
 
 	BrickBreakTM: {
 		// Tooltip: ""
-		// DisplayName: TM32
+		// DisplayName: TM32 Brick Break
 	}
 
 	BulletSeedTM: {
 		// Tooltip: ""
-		// DisplayName: TM33
+		// DisplayName: TM33 Bullet Seed
 	}
 
 	SolarBeamTM: {
 		// Tooltip: ""
-		// DisplayName: TM34
+		// DisplayName: TM34 Solar Beam
 	}
 
 	IceBeamTM: {
 		// Tooltip: ""
-		// DisplayName: TM35
+		// DisplayName: TM35 Ice Beam
 	}
 
 	BlizzardTM: {
 		// Tooltip: ""
-		// DisplayName: TM36
+		// DisplayName: TM36 Blizzard
 	}
 }
 
@@ -4962,7 +4962,8 @@ MoveLearnUI: {
 	// ForgetTooltip: Learn the new move {0}, and forget {1}?
 	NotLearn: No aprender
 	// NotLearnTooltip: Keep current moves and give up on learning {0}?
-	// NoSelection: No move selected
+	// NoSelection: No Selection
+	// NoSelectionTooltip: Click on a move from the list to replace it
 	// MovePower: Power: {0}
 	// MoveSpeed: Speed: {0}
 	// MoveRange: Range: {0}

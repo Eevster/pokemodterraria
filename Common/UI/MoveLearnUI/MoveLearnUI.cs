@@ -59,7 +59,7 @@ namespace Pokemod.Common.UI.MoveLearnUI
             leftSidePanel.Append(PokemonFrame);
 
 			//Confirm Button
-			confirmButton = new UIHoverImageButton(ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/GoldButton"), Language.GetTextValue("Mods.Pokemod.MoveLearnUI.NoSelection"))
+			confirmButton = new UIHoverImageButton(ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/GoldButton"), Language.GetTextValue("Mods.Pokemod.MoveLearnUI.NoSelectionTooltip"))
 			{
 				Width = new(168, 0),
 				Height = new(46, 0),
@@ -72,9 +72,9 @@ namespace Pokemod.Common.UI.MoveLearnUI
 			SetRectangle(confirmButton, left: 0.5f, top: 1f, width: 168, height: 46);
             confirmButton.OnLeftClick += ConfirmButtonClicked;
 
-            confirmText = new UIText(LocalizedText.Empty, 1f)
+            confirmText = new UIText(Language.GetTextValue("Mods.Pokemod.MoveLearnUI.NoSelection"), 1f)
             {
-                TextColor = Color.Yellow,
+                TextColor = new(120,120,120,80),
                 HAlign = 0.5f,
                 VAlign = 0.5f,
                 OverflowHidden = true,
@@ -200,6 +200,7 @@ namespace Pokemod.Common.UI.MoveLearnUI
 
 		public void UpdateConfirmText(bool learn, int selection)
 		{
+			confirmText.TextColor = Color.Yellow;
 			if (learn)
 			{
 				confirmText.SetText(Language.GetTextValue("Mods.Pokemod.MoveLearnUI.Forget"));
