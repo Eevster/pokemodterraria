@@ -57,6 +57,7 @@ namespace Pokemod.Common.GlobalNPCs
         public override void HitEffect(NPC npc, NPC.HitInfo hit)
         {
             pokemonProjs = pokemonProjs.Distinct().ToList();
+            pokemonProjs = pokemonProjs.FindAll(x => x.active);
 
             if (npc.realLife == -1)
             {
@@ -126,6 +127,8 @@ namespace Pokemod.Common.GlobalNPCs
 
             if (npc.value <= 0) exp = (int)(0.2f * exp);
             if (exp < 1) exp = 1;
+
+            //Main.NewText("Value: "+npc.value+" Split: "+split+" Exp: "+exp);
 
             return exp;
         }

@@ -842,7 +842,7 @@ namespace Pokemod.Content.Items
 			happiness = tag.GetInt("Happiness");
 			BallType = tag.GetString("BallType");
 			pokeHeldItem = tag.GetString("PokeHeldItem");
-			currentHP = tag.GetInt("CurrentHP");
+			currentHP = Math.Max(tag.GetInt("CurrentHP"),0);
 			if(tag.ContainsKey("IVs")){
 				IVs = [.. tag.GetList<int>("IVs")];
 			}
