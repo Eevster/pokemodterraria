@@ -33,6 +33,44 @@ Changelog 1.3.1:
 -Decreases Ice Shard knockback
 -Pokemon Items now have a HP Bar in the description
 
+Changelog 1.3.2:
+-Fixed Fossil revival not working in multiplayer (hopefully)
+-Fixed Gyarados "WaterFall" misspelling
+-Improved damage of Dragon Breath
+-Reduced saturations for some fossil types
+-Mints bug fixed + polish
+-1 exp bug fixed
+-Splash range increased
+-Redesign of the evolution stone armor sets
+-Nerfed trainer glove recipe
+-Fixed hp regen bug
+-Many TM System Edits + Focus Punch Fix
+
+-TMs:
+--TMs now hold one specific move and drop from specific enemies.
+--There are now TMs for every Type but fairy (Totalling 36).
+--Type-grouped TMs can still exist as they are in player's inventories but will no longer spawn in the world or from enemies. (These could be re-introduced in some way maybe if they were re-named)
+
+-Move Learn UI updated and more stable:
+--Will no longer close if the close button is clicked immediately on opening
+--Will no longer close when opening or closing the inventory.
+--Layout adjusted slightly.
+--UI window can now be grabbed from anywhere that isn't a button.
+--Button for Confirming move choice is now more clear.
+--Tooltips now appear, providing some stats to compare moves.
+--Move Learning is now accompanied by audio-visual feedback and a notification.
+
+-Focus Punch now works
+
+-Fixed the Gender Symbol on Shiny Nidoran
+
+-Fixing outlines and improving sprites
+
+-Added move names to TM names, Changed Move Learn button to red.
+
+-Captured Pokémon no longer can have less than 0 HP when fainted during capture
+-The number by which the experience received was divided increased each time the same Pokemon was summoned again, this is now fixed.
+
 Legal:
 This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 
 All Pokémon-related content, including names, designs, and concepts, is the intellectual property of The Pokémon Company, Nintendo, and Game Freak. 
