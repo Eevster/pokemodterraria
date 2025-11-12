@@ -19,6 +19,12 @@ namespace Pokemod.Content.Pets.ShellderPet
 		public override int[] jumpStartEnd => [2,2];
 		public override int[] fallStartEnd => [4, 4];
 		public override int[] attackStartEnd => [11, 11];
+
+		public override bool canSwim => true;
+
+		public override int[] idleSwimStartEnd => [0,6];
+		public override int[] walkSwimStartEnd => [7,10];
+		public override int[] attackSwimStartEnd => [11,11];
 		
         public override string[] evolutions => ["Cloyster"];
         public override string[] itemToEvolve => ["WaterStoneItem"];
