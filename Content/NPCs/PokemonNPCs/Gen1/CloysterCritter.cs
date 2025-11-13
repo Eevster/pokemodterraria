@@ -16,6 +16,13 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkStartEnd => [0,5];
 		public override int[] jumpStartEnd => [1,1];
 		public override int[] fallStartEnd => [5, 5];
+
+		public override bool canSwim => true;
+
+		public override int[] idleSwimStartEnd => [0,5];
+		public override int[] walkSwimStartEnd => [0,5];
+		public override int[] attackSwimStartEnd => [13, 13];
+		
 		public override float catchRate => 60;
 		public override int minLevel => 40;
         public override int[][] spawnConditions =>

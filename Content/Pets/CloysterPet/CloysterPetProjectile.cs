@@ -19,6 +19,12 @@ namespace Pokemod.Content.Pets.CloysterPet
 		public override int[] jumpStartEnd => [1,1];
 		public override int[] fallStartEnd => [5, 5];
 		public override int[] attackStartEnd => [13, 13];
+
+		public override bool canSwim => true;
+
+		public override int[] idleSwimStartEnd => [0,5];
+		public override int[] walkSwimStartEnd => [0,5];
+		public override int[] attackSwimStartEnd => [13, 13];
 		
 		
 	}
