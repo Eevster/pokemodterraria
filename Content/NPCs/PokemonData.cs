@@ -39,6 +39,7 @@ namespace Pokemod.Content.NPCs
                 if (i < IVs.Length) binaryWriter.Write(IVs[i]);
                 else binaryWriter.Write(0);
             }
+            binaryWriter.Write(variant);
         }
 
         // Make sure you always read exactly as much data as you sent!
@@ -55,6 +56,7 @@ namespace Pokemod.Content.NPCs
             {
                 IVs[i] = binaryReader.ReadInt32();
             }
+            variant = binaryReader.ReadString();
         }
 
 

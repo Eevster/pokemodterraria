@@ -91,15 +91,16 @@ namespace Pokemod.Content.Items
 			writer.Write((double)exp);
 			writer.Write((double)nature);
 			writer.Write((double)happiness);
-			foreach(int IV in IVs){
-				writer.Write((double)IV);
+            for (int i = 0; i < 6; i++){
+				writer.Write((double)IVs[i]);
 			}
-			foreach(int EV in EVs){
-				writer.Write((double)EV);
+            for (int i = 0; i < 6; i++){
+				writer.Write((double)EVs[i]);
 			}
-			writer.Write(moves.Length);
-			foreach(string move in moves){
-				writer.Write(move);
+			writer.Write((double)moves.Length);
+            for (int i = 0; i < moves.Length; i++)
+            {
+				writer.Write(moves[i]);
 			}
 			writer.Write((double)moveIndex);
 			writer.Write((double)currentHP);
@@ -117,13 +118,13 @@ namespace Pokemod.Content.Items
 			exp = (int)reader.ReadDouble();
 			nature = (int)reader.ReadDouble();
 			happiness = (int)reader.ReadDouble();
-			for(int i = 0; i < IVs.Length; i++){
+			for(int i = 0; i < 6; i++){
 				IVs[i] = (int)reader.ReadDouble();
 			}
-			for(int i = 0; i < EVs.Length; i++){
+			for(int i = 0; i < 6; i++){
 				EVs[i] = (int)reader.ReadDouble();
 			}
-			int nMoves = reader.ReadInt32();
+			int nMoves = (int)reader.ReadDouble();
 			moves = new string[nMoves];
 			for(int i = 0; i < nMoves; i++){
 				moves[i] = reader.ReadString();
@@ -154,6 +155,10 @@ namespace Pokemod.Content.Items
 			if(canShoot && currentHP != 0){
 				int projIndex = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, currentHP);
 				proj = Main.projectile[projIndex];
+				if (proj.ModProjectile is PokemonPetProjectile petProj)
+				{
+					petProj.variant = variant;
+				}
 			}
 
             return false;
@@ -421,13 +426,6 @@ namespace Pokemod.Content.Items
 							PokemonProj.currentAttack = moves[moveIndex];
 							PokemonProj.ClearOldMoves();
 							PokemonProj.ballType = BallType;
-							if (variant != null)
-							{
-								if (variant != "")
-								{
-									PokemonProj.variant = variant;
-								}
-							}
 						}
 					}
 				}

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Pokemod.Content.NPCs;
+using Pokemod.Content.Projectiles;
 using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
@@ -21,10 +23,10 @@ namespace Pokemod.Content.Pets.NinetalesPet
 	}
 
 	public class NinetalesPetProjectileShiny : NinetalesPetProjectile{
-        public override void ExtraChanges()
+        public override void ChangeAttackColor(PokemonAttack attack, bool condition = false, int shaderID = 0, Color color = default)
         {
-            ChangeAttackColor(new Color(21, 40, 255));
-            base.ExtraChanges();
+            condition = attack.attackType == (int)TypeIndex.Fire;
+            base.ChangeAttackColor(attack, condition, shaderID, color);
         }
     }
 }

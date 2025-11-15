@@ -1,9 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles;
 using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Graphics.Shaders;
+using Pokemod.Content.NPCs;
 
 namespace Pokemod.Content.Pets.AerodactylPet
 {
@@ -24,10 +27,12 @@ namespace Pokemod.Content.Pets.AerodactylPet
         public override int[] walkFlyStartEnd => [5, 9];
         public override int[] attackFlyStartEnd => [10, 14];
 
-        public override void ExtraChanges()
+        public override void ChangeAttackColor(PokemonAttack attack, bool condition = false, int shaderID = 0, Color color = default)
         {
-            ChangeAttackColor(new Color(165, 105, 255), shaderID: ItemID.ShadowflameHadesDye);
-            base.ExtraChanges();
+            condition = attack.attackType == (int)TypeIndex.Fire;
+            shaderID = ItemID.ShadowflameHadesDye;
+            color = new Color(165, 105, 255);
+            base.ChangeAttackColor(attack, condition, shaderID, color);
         }
     }
 

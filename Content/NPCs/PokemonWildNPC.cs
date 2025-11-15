@@ -53,7 +53,7 @@ namespace Pokemod.Content.NPCs
 		public int[] finalStats = [0,0,0,0,0,0];
 
 		public virtual string[] variants => [];
-		public string variant;
+		public int variantID = -1;
 		public virtual int variantProbDenominator => 10;
 
 		public virtual int[][] spawnConditions =>
@@ -76,7 +76,8 @@ namespace Pokemod.Content.NPCs
 			writer.Write(flyDirection);
 			writer.Write(isFlying);
 			writer.Write(isSwimming);
-		}
+			writer.Write(variantID);
+        }
 
 		public override void ReceiveExtraAI(BinaryReader reader) {
 			NPC.lifeMax = reader.ReadInt32();
@@ -89,6 +90,7 @@ namespace Pokemod.Content.NPCs
 			flyDirection = reader.ReadInt32();
 			isFlying = reader.ReadBoolean();
 			isSwimming = reader.ReadBoolean();
+			variantID = reader.ReadInt32();
 		}
 
 		public override void SetStaticDefaults() {
@@ -133,42 +135,49 @@ namespace Pokemod.Content.NPCs
 			nature = 10 * Main.rand.Next(5) + Main.rand.Next(5);
 			lvl = Main.rand.Next(minLevel, Math.Min(WorldLevel.MaxWorldLevel, maxLevel) + 1);
 			//Probability of it being a variant
+
 			if (Main.rand.NextBool(variantProbDenominator))
 			{
 				if (variants.Length > 0)
 				{
-					variant = variants[Main.rand.Next(variants.Length)];
-
+					variantID = Main.rand.Next(variants.Length);
 					//Remove the possibility of spawning with the "Christmas" variant if it is no longer Christmas
-					if (variant == "Christmas")
+					if (variants[variantID] == "Christmas")
 					{
 						if (!Main.xMas)
 						{
-							variant = "";
+							variantID = -1;
 						}
 					}//Add back in a few weeks
-					//if (variant == "Halloween")
-					//{
-						//if (!Main.halloween)
-						//{
-							//variant = "";
-						//}
-					//}
+					 //if (variant == "Halloween")
+					 //{
+					 //if (!Main.halloween)
+					 //{
+					 //variant = "";
+					 //}
+					 //}
 				}
 				else
 				{
-					variant = "";
+					variantID = -1;
 				}
 			}
 			else
 			{
-				variant = "";
+				variantID = -1;
 			}
+
+
 
 			int[] IVs = PokemonNPCData.GenerateIVs();
 			finalStats = PokemonNPCData.CalcAllStats(lvl, baseStats, IVs, [0, 0, 0, 0, 0, 0], nature);
 
-			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, IVs, nature, variant: variant);
+			string variantName = "";
+			if (variantID >= 0 && variants.Length > 0)
+			{
+				variantName = variants[variantID];
+			}
+			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, IVs, nature, variant: variantName);
 
 			/*if (Main.netMode == NetmodeID.Server)
 			{
@@ -184,12 +193,11 @@ namespace Pokemod.Content.NPCs
 			NPC.life = NPC.lifeMax;
 			NPC.defense = Math.Max(finalStats[2], finalStats[4]);
 
-			if (Main.netMode == NetmodeID.Server)
-			{
-				NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
-			}
+
+			NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
 
 			NPC.netUpdate = true;
+			Main.showServerConsole = true;
 		}
 		
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
@@ -259,9 +267,9 @@ namespace Pokemod.Content.NPCs
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-			if(variant != null){
-				if(variant != ""){
-					if (ModContent.RequestIfExists<Texture2D>(Texture + "_" + variant, out Asset<Texture2D> variantTexture))
+			if(variantID >= 0 && variants.Length > 0){
+				if(variants[variantID] != ""){
+					if (ModContent.RequestIfExists<Texture2D>(Texture + "_" + variants[variantID], out Asset<Texture2D> variantTexture))
 					{
 						spriteBatch.Draw(variantTexture.Value, NPC.Center - screenPos,
 							variantTexture.Frame(1, totalFrames, 0, (int)currentFrame), drawColor, NPC.rotation,
