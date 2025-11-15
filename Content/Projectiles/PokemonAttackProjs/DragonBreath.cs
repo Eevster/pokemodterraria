@@ -59,7 +59,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                             Vector2 spray = new Vector2(Main.rand.NextFloat(2f)-1f, Main.rand.NextFloat(2f)-1f) * 0.2f * Math.Clamp((pokemonOwner.timer / 90f - 0.1f), 0f, 1f);
                             float speed = 15f * (1.2f - (float)Math.Pow(pokemonOwner.timer / 90f, 2f));
 
-                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, speed*(Vector2.Normalize(targetCenter-pokemon.Center) + spray), ModContent.ProjectileType<DragonBreath>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 4f, pokemon.owner, Main.rand.NextBool()? 1: 0)];
+                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, speed*(Vector2.Normalize(targetCenter-pokemon.Center) + spray), ModContent.ProjectileType<DragonBreath>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name) / 3, 4f, pokemon.owner, Main.rand.NextBool()? 1: 0)];
 							if(pokemonOwner.timer > 85){
 								SoundEngine.PlaySound(SoundID.Item119, pokemon.position);
 							}
@@ -83,7 +83,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.damage = (int)(Projectile.damage*0.5f); 
             Projectile.Opacity = 1f;
             Projectile.rotation = Projectile.velocity.ToRotation();
             base.OnSpawn(source);

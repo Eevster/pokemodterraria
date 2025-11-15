@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Pokemod.Content.NPCs;
+using Pokemod.Content.Projectiles;
 using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.Audio;
@@ -21,11 +23,11 @@ namespace Pokemod.Content.Pets.ArcaninePet
 	}
 
 	public class ArcaninePetProjectileShiny : ArcaninePetProjectile{
-        public override void ExtraChanges()
+        public override void ChangeAttackColor(PokemonAttack attack, bool condition = false, int shaderID = 0, Color color = default)
         {
-            ChangeAttackColor(new Color(255, 200, 20));
-            base.ExtraChanges();
+            condition = attack.attackType == (int)TypeIndex.Fire;
+            color = new Color(255, 200, 20);
+            base.ChangeAttackColor(attack, condition, shaderID, color);
         }
-		
 	}
 }

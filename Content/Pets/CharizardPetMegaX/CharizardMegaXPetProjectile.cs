@@ -1,6 +1,8 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Pokemod.Content.NPCs;
+using Pokemod.Content.Projectiles;
 using Pokemod.Content.Projectiles.PokemonAttackProjs;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -47,12 +49,11 @@ namespace Pokemod.Content.Pets.CharizardPetMegaX
 			Projectile.light = 1f;
 		}
 
-		public override void ExtraChanges()
-		{
-            ChangeAttackColor(new Color(21, 40, 255));
-            base.ExtraChanges();
-		}
+        public override void ChangeAttackColor(PokemonAttack attack, bool condition = false, int shaderID = 0, Color color = default)
+        {
+            condition = attack.attackType == (int)TypeIndex.Fire;
+            base.ChangeAttackColor(attack, condition, shaderID, color);
+        }
 	}
-
 	public class CharizardMegaXPetProjectileShiny : CharizardMegaXPetProjectile{}
 }

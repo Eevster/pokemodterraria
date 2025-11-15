@@ -1573,6 +1573,10 @@ namespace Pokemod.Content.Pets
 				}
 				oldAttack = currentAttack;
 			}
+            if (Main.myPlayer == Projectile.owner)
+            {
+                Projectile.netUpdate = true;
+            }
         }
 
         public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
@@ -1604,15 +1608,23 @@ namespace Pokemod.Content.Pets
 		public virtual void UpdateAttackProjs(int i, ref float maxFallSpeed){
 			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
 				var pokemonAttack = (PokemonAttack)modProjBase;
-				pokemonAttack.UpdateAttackProjs(Projectile, i, ref maxFallSpeed);
+				if (attackProjs[i].ModProjectile is PokemonAttack attackProj && attackProj.Name == currentAttack)
+				{
+					pokemonAttack.UpdateAttackProjs(Projectile, i, ref maxFallSpeed);
+					ChangeAttackColor(attackProj);
+                }
 			}
 		}
 
 		public virtual void UpdateNoAttackProjs(int i){
 			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
 				var pokemonAttack = (PokemonAttack)modProjBase;
-				pokemonAttack.UpdateNoAttackProjs(Projectile, i);
-			}
+                if (attackProjs[i].ModProjectile is PokemonAttack attackProj && attackProj.Name == currentAttack)
+                {
+                    pokemonAttack.UpdateNoAttackProjs(Projectile, i);
+                    ChangeAttackColor(attackProj);
+                }
+            }
 		}
 
 		public virtual void ExtraChanges(){
@@ -1622,21 +1634,24 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-        public virtual void ChangeAttackColor(Color newColor, int type = (int)TypeIndex.Fire, int shaderID = ItemID.WispDye)
+        public virtual void ChangeAttackColor(PokemonAttack attack, bool condition = false, int shaderID = ItemID.WispDye, Color color = default)
         {
-			foreach (Projectile attack in attackProjs)
+			if (condition)
 			{
-				if (attack != null && attack.active)
+                if (color == default)
+                {
+                    color = new Color(21, 40, 255); //Blue Fire
+                }
+                ArmorShaderData attackShader = GameShaders.Armor.GetShaderFromItemId(shaderID).UseColor(color);
+				if (attackShader != null)
 				{
-					var pokemonAttack = (PokemonAttack)attack.ModProjectile;
-
-					if (pokemonAttack.attackType == type)
-					{
-						pokemonAttack.effectColor = newColor;
-						pokemonAttack.shader = GameShaders.Armor.GetShaderFromItemId(shaderID).UseColor(pokemonAttack.effectColor);
-					}
+					attack.shader = attackShader;
 				}
-			}
+                if (Main.myPlayer == Projectile.owner)
+                {
+                    Projectile.netUpdate = true;
+                }
+            }
         }
 
         public virtual void Jump(){
