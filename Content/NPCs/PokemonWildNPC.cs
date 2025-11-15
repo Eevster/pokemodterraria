@@ -146,14 +146,14 @@ namespace Pokemod.Content.NPCs
 						{
 							variant = "";
 						}
-					}//Add back in a few weeks
-					//if (variant == "Halloween")
-					//{
-						//if (!Main.halloween)
-						//{
-							//variant = "";
-						//}
-					//}
+					}
+					if (variant == "Halloween")
+					{
+						if (!Main.halloween)
+						{
+							variant = "";
+						}
+					}
 				}
 				else
 				{

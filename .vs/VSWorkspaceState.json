@@ -1,11 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Common",
+    "\\Common\\Configs",
+    "\\Common\\Players",
+    "\\Common\\Systems",
     "\\Content",
-    "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen1"
+    "\\Content\\Items",
+    "\\Content\\Items\\Armor",
+    "\\Content\\Items\\Badges",
+    "\\Content\\NPCs"
   ],
-  "SelectedNode": "\\Content",
+  "SelectedNode": "\\Content\\Items\\Armor\\FireStoneBreastplate.cs",
   "PreviewInSolutionExplorer": false
 }
