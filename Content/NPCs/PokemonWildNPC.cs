@@ -149,11 +149,11 @@ namespace Pokemod.Content.NPCs
 							variantID = -1;
 						}
 					}
-					if (variant[variantID] == "Halloween")
+					if (variants[variantID] == "Halloween")
 					{
 						if (!Main.halloween)
 						{
-							variant = "";
+							variantID = -1;
 						}
 					}
 				}

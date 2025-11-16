@@ -8,9 +8,9 @@
     "\\Content",
     "\\Content\\Items",
     "\\Content\\Items\\Armor",
-    "\\Content\\Items\\Badges",
+    "\\Content\\Items\\EvoStones",
     "\\Content\\NPCs"
   ],
-  "SelectedNode": "\\Content\\Items\\Armor\\FireStoneBreastplate.cs",
+  "SelectedNode": "\\Content\\Items\\EvoStones\\LinkingCordItem.cs",
   "PreviewInSolutionExplorer": false
 }
