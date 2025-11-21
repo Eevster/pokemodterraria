@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Common",
+    "\\Assets",
+    "\\Assets\\Textures",
     "\\Common\\Configs",
+    "\\Common\\GlobalNPCs",
     "\\Common\\Players",
     "\\Common\\Systems",
     "\\Content",
     "\\Content\\Items",
-    "\\Content\\Items\\Armor",
-    "\\Content\\Items\\EvoStones",
-    "\\Content\\NPCs"
+    "\\Content\\Items\\Armor"
   ],
-  "SelectedNode": "\\Content\\Items\\EvoStones\\LinkingCordItem.cs",
+  "SelectedNode": "\\Content\\Items\\Armor\\MoonStoneHelmet.png",
   "PreviewInSolutionExplorer": false
 }
