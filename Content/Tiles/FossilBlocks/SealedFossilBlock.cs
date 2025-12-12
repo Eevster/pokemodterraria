@@ -127,17 +127,11 @@ namespace Pokemod.Content.Tiles.FossilBlocks
         }
 	}
 
-    public class SealedFossilItem : ModItem
-	{
-		public override void SetDefaults()
-		{
-			Item.width = 24;
-			Item.height = 24;
-
-			Item.value = Item.buyPrice(0);
-			Item.maxStack = Item.CommonMaxStack;
-
-			Item.DefaultToPlaceableTile(ModContent.TileType<SealedFossilBlock>());
+    public class SealedFossilItem : FossilBlockItem
+    {
+        public override void SetDefaults()
+        {
+            Item.DefaultToPlaceableTile(ModContent.TileType<SealedFossilBlock>());
 		}
 	}
 }

@@ -1,5 +1,6 @@
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -61,5 +62,68 @@ namespace Pokemod.Content.TileEntities
 			entity = null;
 			return false;
 		}
-	}
+
+        public static void MergeWithCommonBlocks(int type, bool merge = true)
+        {
+			Main.tileMergeDirt[type] = merge;
+
+            Main.tileMerge[type][TileID.Stone] = merge;
+            Main.tileMerge[type][TileID.Grass] = merge;
+            Main.tileMerge[type][TileID.CorruptGrass] = merge;
+            Main.tileMerge[type][TileID.Ebonstone] = merge;
+            Main.tileMerge[type][TileID.ClayBlock] = merge;
+            Main.tileMerge[type][TileID.Sand] = merge;
+            Main.tileMerge[type][TileID.Ash] = merge;
+            Main.tileMerge[type][TileID.Mud] = merge;
+            Main.tileMerge[type][TileID.JungleGrass] = merge;
+            Main.tileMerge[type][TileID.HallowedGrass] = merge;
+            Main.tileMerge[type][TileID.Ebonsand] = merge;
+            Main.tileMerge[type][TileID.Pearlsand] = merge;
+            Main.tileMerge[type][TileID.Pearlstone] = merge;
+            Main.tileMerge[type][TileID.Silt] = merge;
+            Main.tileMerge[type][TileID.ActiveStoneBlock] = merge;
+            Main.tileMerge[type][TileID.InactiveStoneBlock] = merge;
+            Main.tileMerge[type][TileID.SnowBlock] = merge;
+            Main.tileMerge[type][TileID.CrimsonGrass] = merge;
+            Main.tileMerge[type][TileID.Crimstone] = merge;
+            Main.tileMerge[type][TileID.Slush] = merge;
+            Main.tileMerge[type][TileID.Crimsand] = merge;
+            Main.tileMerge[type][TileID.LesionBlock] = merge;
+            Main.tileMerge[type][TileID.GolfGrass] = merge;
+            Main.tileMerge[type][TileID.GolfGrassHallowed] = merge;
+            Main.tileMerge[type][TileID.CorruptJungleGrass] = merge;
+            Main.tileMerge[type][TileID.CrimsonJungleGrass] = merge;
+            Main.tileMerge[type][TileID.AshGrass] = merge;
+            Main.tileMerge[type][TileID.MushroomGrass] = merge;
+
+            Main.tileMerge[TileID.Stone][type] = merge;
+            Main.tileMerge[TileID.Grass][type] = merge;
+            Main.tileMerge[TileID.CorruptGrass][type] = merge;
+            Main.tileMerge[TileID.Ebonstone][type] = merge;
+            Main.tileMerge[TileID.ClayBlock][type] = merge;
+            Main.tileMerge[TileID.Sand][type] = merge;
+            Main.tileMerge[TileID.Ash][type] = merge;
+            Main.tileMerge[TileID.Mud][type] = merge;
+            Main.tileMerge[TileID.JungleGrass][type] = merge;
+            Main.tileMerge[TileID.HallowedGrass][type] = merge;
+            Main.tileMerge[TileID.Ebonsand][type] = merge;
+            Main.tileMerge[TileID.Pearlsand][type] = merge;
+            Main.tileMerge[TileID.Pearlstone][type] = merge;
+            Main.tileMerge[TileID.Silt][type] = merge;
+            Main.tileMerge[TileID.ActiveStoneBlock][type] = merge;
+            Main.tileMerge[TileID.InactiveStoneBlock][type] = merge;
+            Main.tileMerge[TileID.SnowBlock][type] = merge;
+            Main.tileMerge[TileID.CrimsonGrass][type] = merge;
+            Main.tileMerge[TileID.Crimstone][type] = merge;
+            Main.tileMerge[TileID.Slush][type] = merge;
+            Main.tileMerge[TileID.Crimsand][type] = merge;
+            Main.tileMerge[TileID.LesionBlock][type] = merge;
+            Main.tileMerge[TileID.GolfGrass][type] = merge;
+            Main.tileMerge[TileID.GolfGrassHallowed][type] = merge;
+            Main.tileMerge[TileID.CorruptJungleGrass][type] = merge;
+            Main.tileMerge[TileID.CrimsonJungleGrass][type] = merge;
+            Main.tileMerge[TileID.AshGrass][type] = merge;
+            Main.tileMerge[TileID.MushroomGrass][type] = merge;
+        }
+    }
 }

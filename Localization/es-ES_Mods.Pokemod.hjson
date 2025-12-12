@@ -2056,6 +2056,20 @@ Items: {
 		// Tooltip: ""
 		// DisplayName: TM36 Blizzard
 	}
+
+	MegaShardBlockItem: {
+		// Tooltip: ""
+		// DisplayName: Mega Shard Block
+	}
+
+	MegaShardItem: {
+		/* Tooltip:
+			'''
+			'Strange Fragments of a celestial stone'
+			Radiates an incredible power 
+			''' */
+		// DisplayName: Mega Shard
+	}
 }
 
 Buffs: {

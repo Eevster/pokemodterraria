@@ -11,15 +11,15 @@ namespace Pokemod.Content.Items.MegaStones
 		public override void SetDefaults() {
 			Item.width = 16;
 			Item.height = 16;
-
-			Item.value = Item.buyPrice(silver: 1);
+            Item.material = true;
+            Item.value = Item.buyPrice(silver: 1);
 		}
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		public override void AddRecipes() {
 			CreateRecipe(1)
-				.AddIngredient(ItemID.WhitePearl, 1)
-				.AddIngredient(ItemID.Ruby, 5)
+                .AddIngredient<MegaShardItem>(5)
+                .AddIngredient(ItemID.Ruby, 5)
 				.AddIngredient(ItemID.Emerald, 5)
 				.AddIngredient(ItemID.Sapphire, 5)
 				.AddIngredient(ItemID.Amethyst, 5)

@@ -72,17 +72,11 @@ namespace Pokemod.Content.Tiles.FossilBlocks
         }
     }
 
-    public class FrozenFossilItem : ModItem
+    public class FrozenFossilItem : FossilBlockItem
 	{
 		public override void SetDefaults()
 		{
-			Item.width = 24;
-			Item.height = 24;
-
-			Item.value = Item.buyPrice(0);
-			Item.maxStack = Item.CommonMaxStack;
-
-			Item.DefaultToPlaceableTile(ModContent.TileType<FrozenFossilBlock>());
+            Item.DefaultToPlaceableTile(ModContent.TileType<FrozenFossilBlock>());
 		}
 	}
 }

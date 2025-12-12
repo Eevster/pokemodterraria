@@ -8,5 +8,14 @@ namespace Pokemod.Content.Items.MegaStones
 {
 	public class BlastoiseMegaStoneItem : MegaStoneItem
 	{
-	}
+        public override void AddRecipes()
+        {
+            CreateRecipe(1)
+                .AddIngredient<MegaShardItem>(25)
+                .AddIngredient(ItemID.SoulofMight, 3)
+                .AddIngredient(ItemID.SoulofLight, 3)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+    }
 }

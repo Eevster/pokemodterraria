@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Pokemod.Content.TileEntities;
 using Pokemod.Content.Items.GeneticSamples;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,9 @@ namespace Pokemod.Content.Tiles.FossilBlocks
             MineResist = 2f;
 			MinPick = 110;
             Main.tileOreFinderPriority[Type] = 300;
+            TileUtils.MergeWithCommonBlocks(Type);
 
-			// Visuals
+            // Visuals
             DustType = DustID.Obsidian;
             dustHighlight = DustID.RedTorch;
 			dustChance = 200; //Higher values = slower rate
@@ -72,17 +74,11 @@ namespace Pokemod.Content.Tiles.FossilBlocks
     }
 
 
-    public class IgneousFossilItem : ModItem
-	{
-		public override void SetDefaults()
-		{
-			Item.width = 24;
-			Item.height = 24;
-
-			Item.value = Item.buyPrice(0);
-			Item.maxStack = Item.CommonMaxStack;
-
-			Item.DefaultToPlaceableTile(ModContent.TileType<IgneousFossilBlock>());
+    public class IgneousFossilItem : FossilBlockItem
+    {
+        public override void SetDefaults()
+        {
+            Item.DefaultToPlaceableTile(ModContent.TileType<IgneousFossilBlock>());
 		}
 	}
 }
