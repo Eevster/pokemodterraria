@@ -34,10 +34,10 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
-                {
-                        bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HelixFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
-                new FlavorTextBestiaryInfoElement("In prehistoric times, it swam on the sea floor, eating plankton. Its fossils are sometimes found."));
-                }
+        {
+            bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HelixFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns);
+            base.SetBestiary(database, bestiaryEntry);
+        }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
 		}

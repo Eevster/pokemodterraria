@@ -35,9 +35,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
                 {
-                        bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "EldritchHelixItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.UndergroundSnow,
-                new FlavorTextBestiaryInfoElement("Those who first discovered this ancient Pokemon were said to have gone mad."));
-                }
+                        bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "EldritchHelixItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.UndergroundSnow);
+            base.SetBestiary(database, bestiaryEntry);
+        }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
 		}

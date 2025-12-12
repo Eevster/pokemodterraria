@@ -33,11 +33,12 @@ namespace Pokemod.Content.Tiles.FossilBlocks
             HitSound = SoundID.Item127;
 			
 			// Item Drops
-			fossilChance = 15;
+			fossilChance = 11;
 				fossilList.Add(ModContent.ItemType<OldAmberItem>());
 				fossilList.Add(ModContent.ItemType<HelixFossilItem>());
 				fossilList.Add(ModContent.ItemType<DomeFossilItem>());
-			fossilBlockChance = 5;
+				fossilList.Add(ModContent.ItemType<SkullFossilItem>());
+            fossilBlockChance = 5;
 				fossilBlock = ModContent.ItemType<PrimordialFossilItem>();
 				defaultBlock = ItemID.DirtBlock;
             commonItemChance = 3;
