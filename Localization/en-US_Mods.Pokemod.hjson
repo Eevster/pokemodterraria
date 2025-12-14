@@ -4446,7 +4446,7 @@ NPCs: {
 
 	PorygonCritterNPC: {
 		DisplayName: Porygon
-		Description: ""
+		Description: The world's first artificially created Pokémon. It can travel through electronic space.
 	}
 
 	PrimeapeCritterNPC: {
@@ -5227,3 +5227,4 @@ Configs: {
 		}
 	}
 }
+
