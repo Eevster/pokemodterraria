@@ -31,9 +31,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Marble,
-				new FlavorTextBestiaryInfoElement("It is known to drift on winds if it is bloated to bursting with stored electricity."));
-		}
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Marble);
+            base.SetBestiary(database, bestiaryEntry);
+        }
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneMarble) {

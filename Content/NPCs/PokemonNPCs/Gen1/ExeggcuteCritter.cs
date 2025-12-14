@@ -23,9 +23,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
             [(int)SpawnArea.Jungle, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Though it may look like it's just a bunch of eggs, it's a proper Pokémon. Exeggcute communicates with others of its kind via telepathy, apparently."));
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
+			base.SetBestiary(database, bestiaryEntry);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneJungle)

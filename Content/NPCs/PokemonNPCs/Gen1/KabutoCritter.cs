@@ -35,9 +35,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
-
-            bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "DomeFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
-                new FlavorTextBestiaryInfoElement("This Pokémon lived in ancient times. On rare occasions, it has been discovered as a living fossil."));
+            base.SetBestiary(database, bestiaryEntry);
+            bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "DomeFossilItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns);
         }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;

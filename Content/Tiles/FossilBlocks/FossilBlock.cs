@@ -30,9 +30,9 @@ namespace Pokemod.Content.Tiles.FossilBlocks
 		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[Type] = true;
-			Main.tileBlendAll[Type] = false;
 			Main.tileBlockLight[Type] = true;
 			Main.tileSpelunker[Type] = true;
+            Main.tileBlendAll[Type] = false;
 		}
 
 		public override void NumDust(int i, int j, bool fail, ref int num)
@@ -232,6 +232,19 @@ namespace Pokemod.Content.Tiles.FossilBlocks
                 morning = false;
             }
             else if (Main.time == 1 && !Main.dayTime) morning = true;
+        }
+    }
+
+    public abstract class FossilBlockItem : ModItem
+    {
+        public override void SetDefaults()
+        {
+            Item.width = 24;
+            Item.height = 24;
+
+            Item.value = Item.buyPrice(0);
+            Item.maxStack = Item.CommonMaxStack;
+            Item.ResearchUnlockCount = 100;
         }
     }
 }

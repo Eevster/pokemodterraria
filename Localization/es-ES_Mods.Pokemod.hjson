@@ -480,6 +480,10 @@ Projectiles: {
 	// UmbreonPetProjectileShiny.DisplayName: Umbreon Pet Projectile Shiny
 	// UnownPetProjectile.DisplayName: Unown Pet Projectile
 	// UnownPetProjectileShiny.DisplayName: Unown Pet Projectile Shiny
+	// CranidosPetProjectile.DisplayName: Cranidos Pet Projectile
+	// CranidosPetProjectileShiny.DisplayName: Cranidos Pet Projectile Shiny
+	// RampardosPetProjectile.DisplayName: Rampardos Pet Projectile
+	// RampardosPetProjectileShiny.DisplayName: Rampardos Pet Projectile Shiny
 }
 
 Items: {
@@ -1675,7 +1679,12 @@ Items: {
 
 	DomeFossilItem: {
 		Tooltip: "{$CommonItemTooltip.GeneticSample}"
-		DisplayName: Fóxil Domo
+		DisplayName: Fósil Domo
+	}
+
+	SkullFossilItem: {
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Fósil cráneo
 	}
 
 	AdamantMint: {
@@ -2055,6 +2064,20 @@ Items: {
 	BlizzardTM: {
 		// Tooltip: ""
 		// DisplayName: TM36 Blizzard
+	}
+
+	MegaShardBlockItem: {
+		// Tooltip: ""
+		// DisplayName: Mega Shard Block
+	}
+
+	MegaShardItem: {
+		/* Tooltip:
+			'''
+			'Strange Fragments of a celestial stone'
+			Radiates an incredible power 
+			''' */
+		// DisplayName: Mega Shard
 	}
 }
 
@@ -3753,7 +3776,7 @@ NPCs: {
 
 	BlacephalonCritterNPC: {
 		DisplayName: Blacephalon
-		// Description: ""
+		// Description: The fire on the tip of its tail is a measure of its life. If the Pokémon is healthy, its tail burns intensely.
 	}
 
 	ChikoritaCritterNPC: {
@@ -4053,12 +4076,12 @@ NPCs: {
 
 	CloysterCritterNPC: {
 		// DisplayName: Cloyster
-		// Description: ""
+		// Description: It fights by keeping its shell tightly shut for protection and by shooting spikes to repel foes.
 	}
 
 	CuboneCritterNPC: {
 		// DisplayName: Cubone
-		// Description: ""
+		// Description: When the memory of its departed mother brings it to tears, its cries echo mournfully within the skull it wears on its head.
 	}
 
 	DewgongCritterNPC: {
@@ -4118,12 +4141,12 @@ NPCs: {
 
 	ExeggcuteCritterNPC: {
 		// DisplayName: Exeggcute
-		// Description: ""
+		// Description: Though it may look like it's just a bunch of eggs, it's a proper Pokémon. Exeggcute communicates with others of its kind via telepathy, apparently.
 	}
 
 	ExeggutorCritterNPC: {
 		// DisplayName: Exeggutor
-		// Description: ""
+		// Description: When they work together, Exeggutor's three heads can put out powerful psychic energy. Cloudy days make this Pokémon sluggish.
 	}
 
 	FarfetchdCritterNPC: {
@@ -4163,7 +4186,7 @@ NPCs: {
 
 	GolduckCritterNPC: {
 		// DisplayName: Golduck
-		// Description: ""
+		// Description: Old tales tell of Golduck punishing those that defiled its river. The guilty were dragged into the water and taken away.
 	}
 
 	GolemCritterNPC: {
@@ -4263,7 +4286,7 @@ NPCs: {
 
 	LaprasCritterNPC: {
 		// DisplayName: Lapras
-		// Description: ""
+		// Description: A smart and kindhearted Pokémon, it glides across the surface of the sea while its beautiful song echoes around it.
 	}
 
 	LickitungCritterNPC: {
@@ -4273,17 +4296,17 @@ NPCs: {
 
 	MachampCritterNPC: {
 		// DisplayName: Machamp
-		// Description: ""
+		// Description: It quickly swings its four arms to rock its opponents with ceaseless punches and chops from all angles.
 	}
 
 	MachokeCritterNPC: {
 		// DisplayName: Machoke
-		// Description: ""
+		// Description: Machoke's boundless power is very dangerous, so it wears a belt that suppresses its energy.
 	}
 
 	MachopCritterNPC: {
 		// DisplayName: Machop
-		// Description: ""
+		// Description: It hefts a Graveler repeatedly to strengthen its entire body. It uses every type of martial arts.
 	}
 
 	MagikarpCritterNPC: {
@@ -4303,7 +4326,7 @@ NPCs: {
 
 	MarowakCritterNPC: {
 		// DisplayName: Marowak
-		// Description: ""
+		// Description: This Pokémon overcame its sorrow to evolve a sturdy new body. Marowak faces its opponents bravely, using a bone as a weapon.
 	}
 
 	MeowthCritterNPC: {
@@ -4328,7 +4351,7 @@ NPCs: {
 
 	MrMimeCritterNPC: {
 		// DisplayName: Mr Mime
-		// Description: ""
+		// Description: It is a pantomime expert that can create invisible but solid walls using miming gestures.
 	}
 
 	MukCritterNPC: {
@@ -4378,7 +4401,7 @@ NPCs: {
 
 	OnixCritterNPC: {
 		// DisplayName: Onix
-		// Description: ""
+		// Description: As it digs through the ground, it absorbs many hard objects. This is what makes its body so solid.
 	}
 
 	ParasCritterNPC: {
@@ -4433,7 +4456,7 @@ NPCs: {
 
 	PsyduckCritterNPC: {
 		// DisplayName: Psyduck
-		// Description: ""
+		// Description: As Psyduck gets stressed out, its headache gets progressively worse. It uses intense psychic energy to overwhelm those around it.
 	}
 
 	RapidashCritterNPC: {
@@ -4473,7 +4496,7 @@ NPCs: {
 
 	ShellderCritterNPC: {
 		// DisplayName: Shellder
-		// Description: ""
+		// Description: It swims backward by opening and closing its two shells. Its large tongue is always kept hanging out.
 	}
 
 	SlowbroCritterNPC: {
@@ -4503,7 +4526,7 @@ NPCs: {
 
 	TangelaCritterNPC: {
 		// DisplayName: Tangela
-		// Description: ""
+		// Description: It is shrouded by blue vines. No one has seen the face hidden behind this growth of vines.
 	}
 
 	TaurosCritterNPC: {
@@ -4584,6 +4607,16 @@ NPCs: {
 	UnownCritterNPC: {
 		// DisplayName: Unown
 		// Description: Because the Pokémon is shaped like ancient writing, it is a huge mystery whether written language or Unown came first.
+	}
+
+	CranidosCritterNPC: {
+		// DisplayName: Cranidos
+		// Description: Cranidos toughen up their already rock-hard heads by headbutting one another.
+	}
+
+	RampardosCritterNPC: {
+		// DisplayName: Rampardos
+		// Description: Its skull withstands impacts of any magnitude. As a result, its brain never gets the chance to grow.
 	}
 
 	JoltikCritterNPC: {
@@ -4792,6 +4825,8 @@ NPCs: {
 	// EspeonCritterNPCShiny.DisplayName: Espeon Shiny
 	// UmbreonCritterNPCShiny.DisplayName: Umbreon Shiny
 	// UnownCritterNPCShiny.DisplayName: Unown Shiny
+	// CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
+	// RampardosCritterNPCShiny.DisplayName: Rampardos Shiny
 	// JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	// GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
 	// TerrarianKabutoCritterNPCShiny.DisplayName: Terrarian Kabuto Shiny

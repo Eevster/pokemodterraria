@@ -20,9 +20,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Zeraora creates a powerful magnetic field by emitting strong electric currents from the pads on its hands and feet. Unlike most Electric-type Pokémon, Zeraora doesn’t have an organ within its body that can produce electricity. However, it is able to gather and store electricity from outside sources, then use it as its own electric energy."));
-		}
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
+            base.SetBestiary(database, bestiaryEntry);
+        }
 	}
 
 	public class ZeraoraCritterNPCShiny : ZeraoraCritterNPC{}

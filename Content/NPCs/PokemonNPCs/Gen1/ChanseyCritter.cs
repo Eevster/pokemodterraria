@@ -26,9 +26,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It is said to deliver happiness. Being compassionate, it shares its eggs with injured people."));
-		}
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
+            base.SetBestiary(database, bestiaryEntry);
+        }
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{

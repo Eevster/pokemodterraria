@@ -33,9 +33,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
                 {
-                        bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HauntedDomeItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
-                new FlavorTextBestiaryInfoElement("The phantom that inhabits these bones may not even be a Pokemon at all."));
-                }
+                        bestiaryEntry.AddTags(new CustomItemBestiaryInfoElement() { itemName = "HauntedDomeItem" }, BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns);
+            base.SetBestiary(database, bestiaryEntry);
+        }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			return 0f;
 		}

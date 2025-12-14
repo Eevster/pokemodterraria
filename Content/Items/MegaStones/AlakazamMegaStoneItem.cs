@@ -8,5 +8,14 @@ namespace Pokemod.Content.Items.MegaStones
 {
 	public class AlakazamMegaStoneItem : MegaStoneItem
 	{
-	}
+        public override void AddRecipes()
+        {
+            CreateRecipe(1)
+                .AddIngredient<MegaShardItem>(25)
+                .AddIngredient(ItemID.SoulofSight, 3)
+                .AddIngredient(ItemID.SoulofFlight, 3)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+    }
 }

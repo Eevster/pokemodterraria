@@ -23,9 +23,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
             [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It hefts a Graveler repeatedly to strengthen its entire body. It uses every type of martial arts."));
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
+			base.SetBestiary(database, bestiaryEntry);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest)

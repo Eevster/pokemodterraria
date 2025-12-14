@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Pokemod.Content.TileEntities;
 using Pokemod.Content.Items.GeneticSamples;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Pokemod.Content.Tiles.FossilBlocks
             MineResist = 1.5f;
 			MinPick = 0;
             Main.tileOreFinderPriority[Type] = 150;
-            Main.tileBlendAll[Type] = true;
+            TileUtils.MergeWithCommonBlocks(Type);
 
             // Visuals
             DustType = DustID.Pearlwood;
@@ -32,11 +33,12 @@ namespace Pokemod.Content.Tiles.FossilBlocks
             HitSound = SoundID.Item127;
 			
 			// Item Drops
-			fossilChance = 15;
+			fossilChance = 11;
 				fossilList.Add(ModContent.ItemType<OldAmberItem>());
 				fossilList.Add(ModContent.ItemType<HelixFossilItem>());
 				fossilList.Add(ModContent.ItemType<DomeFossilItem>());
-			fossilBlockChance = 5;
+				fossilList.Add(ModContent.ItemType<SkullFossilItem>());
+            fossilBlockChance = 5;
 				fossilBlock = ModContent.ItemType<PrimordialFossilItem>();
 				defaultBlock = ItemID.DirtBlock;
             commonItemChance = 3;
@@ -63,17 +65,11 @@ namespace Pokemod.Content.Tiles.FossilBlocks
         }
 	}
 
-    public class PrimordialFossilItem : ModItem
-	{
-		public override void SetDefaults()
-		{
-			Item.width = 24;
-			Item.height = 24;
-
-			Item.value = Item.buyPrice(0);
-			Item.maxStack = Item.CommonMaxStack;
-
-			Item.DefaultToPlaceableTile(ModContent.TileType<PrimordialFossilBlock>());
+    public class PrimordialFossilItem : FossilBlockItem
+    {
+        public override void SetDefaults()
+        {
+            Item.DefaultToPlaceableTile(ModContent.TileType<PrimordialFossilBlock>());
 		}
 	}
 }

@@ -38,9 +38,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
             [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
-				new FlavorTextBestiaryInfoElement("If its body takes on an aura, the weather changes instantly. It is said to live in seas and lakes."));
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
+			base.SetBestiary(database, bestiaryEntry);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneBeach) {

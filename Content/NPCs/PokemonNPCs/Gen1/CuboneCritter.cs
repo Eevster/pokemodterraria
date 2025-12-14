@@ -24,9 +24,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
             [(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
-				new FlavorTextBestiaryInfoElement("When the memory of its departed mother brings it to tears, its cries echo mournfully within the skull it wears on its head."));
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
+			base.SetBestiary(database, bestiaryEntry);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneDesert)

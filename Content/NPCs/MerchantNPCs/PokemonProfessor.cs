@@ -7,8 +7,6 @@ using Pokemod.Content.Dusts;
 using Pokemod.Content.Items;
 using Pokemod.Content.Items.Accessories;
 using Pokemod.Content.Items.Consumables.Mints;
-using Pokemod.Content.Items.GeneticSamples;
-using Pokemod.Content.Items.MegaStones;
 using Pokemod.Content.Items.Pokeballs;
 using Pokemod.Content.Items.Tools;
 using Pokemod.Content.Tiles;
@@ -62,15 +60,6 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			Shop.Add<PokedexV1>();
 			Shop.Add<SynchroMachine>();
 			Shop.Add<GeoResonatorBlueprint>(TownNPCRespawnSystem.scientistArrivedCondition);
-
-			Shop.AddPool("MegaStones", slots: 1, true)
-				.Add<BlastoiseMegaStoneItem>(Condition.DownedMechBossAny)
-				.Add<CharizardMegaStoneItemX>(Condition.DownedMechBossAny)
-                .Add<CharizardMegaStoneItemY>(Condition.DownedMechBossAny)
-                .Add<VenusaurMegaStoneItem>(Condition.DownedMechBossAny)
-				.Add<AlakazamMegaStoneItem>(Condition.DownedMechBossAny)
-                .Add<GengarMegaStoneItem>(Condition.DownedMechBossAny)
-                .Add<GyaradosMegaStoneItem>(Condition.DownedMechBossAny);
 
 			Shop.Register();
 		}

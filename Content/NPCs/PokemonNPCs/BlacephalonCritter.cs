@@ -137,7 +137,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData("Blacephalon");
         }*/
 
-		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { base.SetBestiary(database, bestiaryEntry);
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("The fire on the tip of its tail is a measure of its life. If the Pokémon is healthy, its tail burns intensely."));
 		}

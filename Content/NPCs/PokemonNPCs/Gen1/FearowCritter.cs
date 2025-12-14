@@ -20,9 +20,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int minLevel => 20;
 
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) {
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("It has the stamina to fly all day on its broad wings. It fights by using its sharp beak."));
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
+			base.SetBestiary(database, bestiaryEntry);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
