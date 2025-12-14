@@ -10,7 +10,7 @@ namespace Pokemod.Content.Pets.MachopPet
 	public class MachopPetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 62;
 
 		public override int totalFrames => 7;
 		public override int animationSpeed => 12;

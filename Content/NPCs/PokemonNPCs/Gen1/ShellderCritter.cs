@@ -8,7 +8,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	public class ShellderCritterNPC : PokemonWildNPC
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 30;
 
 		public override int totalFrames => 12;
 		public override int animationSpeed => 8;
@@ -22,7 +22,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int[] idleSwimStartEnd => [0,6];
 		public override int[] walkSwimStartEnd => [7,10];
-		public override int[] attackSwimStartEnd => [22,22];
+		public override int[] attackSwimStartEnd => [11,11];
 
         public override int[][] spawnConditions =>
         [

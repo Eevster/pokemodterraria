@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class LaprasCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 60;
+		public override int hitboxHeight => 62;
 
 		public override int totalFrames => 23;
 		public override int animationSpeed => 12;

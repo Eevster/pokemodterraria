@@ -8,7 +8,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	public class CuboneCritterNPC : PokemonWildNPC
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 30;
 
 		public override int totalFrames => 11;
 		public override int animationSpeed => 5;

@@ -8,7 +8,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	public class TangelaCritterNPC : PokemonWildNPC
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 30;
 
 		public override int totalFrames => 12;
 		public override int animationSpeed => 8;

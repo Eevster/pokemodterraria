@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class ExeggcuteCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 44;
+		public override int hitboxHeight => 14;
 
 		public override int totalFrames => 17;
 		public override int animationSpeed => 10;

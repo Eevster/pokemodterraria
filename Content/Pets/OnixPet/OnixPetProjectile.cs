@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.OnixPet
 {
 	public class OnixPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 92;
+		public override int hitboxHeight => 78;
 
 		public override int totalFrames => 11;
 		public override int animationSpeed => 12;

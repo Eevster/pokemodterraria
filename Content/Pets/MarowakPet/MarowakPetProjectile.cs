@@ -10,7 +10,7 @@ namespace Pokemod.Content.Pets.MarowakPet
 	public class MarowakPetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 30;
 
 		public override int totalFrames => 10;
 		public override int animationSpeed => 6;
