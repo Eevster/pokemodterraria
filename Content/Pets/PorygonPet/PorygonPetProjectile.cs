@@ -9,7 +9,7 @@ namespace Pokemod.Content.Pets.PorygonPet
 {
 	public class PorygonPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 44;
+		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 30;
 
 		public override int totalFrames => 8;

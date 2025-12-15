@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.CloysterPet
 {
 	public class CloysterPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 44;
+		public override int hitboxHeight => 62;
 
 		public override int totalFrames => 14;
 		public override int animationSpeed => 8;

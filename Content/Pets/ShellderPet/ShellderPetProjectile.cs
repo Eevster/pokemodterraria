@@ -10,7 +10,7 @@ namespace Pokemod.Content.Pets.ShellderPet
 	public class ShellderPetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 30;
 
 		public override int totalFrames => 12;
 		public override int animationSpeed => 8;

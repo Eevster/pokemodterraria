@@ -4331,7 +4331,7 @@ NPCs: {
 
 	MeowthCritterNPC: {
 		DisplayName: Meowth
-		Description: ""
+		Description: It loves anything that shines. It especially adores coins that it picks up and secretly hoards.
 	}
 
 	MewCritterNPC: {
