@@ -124,7 +124,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 				{
 					SoundEngine.PlaySound(SoundID.Grab);
 					Item.consumable = true;
-					item.LearnMove(newMoves[Main.rand.Next(newMoves.Count)]);
+					item.LearnMove(newMoves[Main.rand.Next(newMoves.Count)], Item.type);
 					ReduceStack(player, Item.type);
 					return true;
 				}

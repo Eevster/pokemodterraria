@@ -745,12 +745,13 @@ namespace Pokemod.Content.Items
 			}
 		}
 
-		public void LearnMove(string newMove)
+		public void LearnMove(string newMove, int itemUsedType = -1, int itemUsedAmount = 1)
 		{
 			if (moves.Length >= 4)
 			{
-				ModContent.GetInstance<MoveLearnUISystem>().ShowMyUI(this, newMove);
-			}
+				MoveLearnUISystem uiSystem = ModContent.GetInstance<MoveLearnUISystem>();
+				uiSystem.ShowMyUI(this, newMove, itemUsedType, itemUsedAmount);
+            }
 			else
 			{
 				List<string> existentMoves = moves.ToList();
