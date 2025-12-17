@@ -4336,7 +4336,7 @@ NPCs: {
 
 	MeowthCritterNPC: {
 		DisplayName: Meowth
-		Description: ""
+		Description: It loves anything that shines. It especially adores coins that it picks up and secretly hoards.
 	}
 
 	MewCritterNPC: {
@@ -4451,7 +4451,7 @@ NPCs: {
 
 	PorygonCritterNPC: {
 		DisplayName: Porygon
-		Description: ""
+		Description: The world's first artificially created Pokémon. It can travel through electronic space.
 	}
 
 	PrimeapeCritterNPC: {

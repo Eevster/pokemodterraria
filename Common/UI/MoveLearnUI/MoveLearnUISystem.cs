@@ -15,8 +15,8 @@ namespace Pokemod.Common.UI.MoveLearnUI
 		internal MoveLearnUIState MoveLearnUI;
         
 		// These two methods will set the state of our custom UI, causing it to show or hide
-		public void ShowMyUI(CaughtPokemonItem pokemon, string newMove) {
-            MoveLearnUI.SetMoveData(pokemon, newMove);
+		public void ShowMyUI(CaughtPokemonItem pokemon, string newMove, int itemUsedType = -1, int itemUsedAmount = 1) {
+            MoveLearnUI.SetMoveData(pokemon, newMove, itemUsedType, itemUsedAmount);
 			MoveLearnUIState.hidden = false;
             MoveLearnUserInterface?.SetState(MoveLearnUI);
 		}

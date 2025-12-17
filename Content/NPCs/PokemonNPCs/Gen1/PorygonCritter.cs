@@ -8,7 +8,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	public class PorygonCritterNPC : PokemonWildNPC
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 30;
 
 		public override int totalFrames => 8;
 		public override int animationSpeed => 8;

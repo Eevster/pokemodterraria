@@ -1,12 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Content.Items;
 using Pokemod.Content.NPCs;
 using ReLogic.Content;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
 using Terraria.Localization;
@@ -24,6 +26,8 @@ namespace Pokemod.Common.UI.MoveLearnUI
 		UIText confirmText;
 		public int selectedMove = -1;
 		public string newMove;
+		public int itemUsedType = -1;
+		public int itemUsedAmount = 1;
 
 		public static bool hidden = true;
 		
@@ -175,10 +179,12 @@ namespace Pokemod.Common.UI.MoveLearnUI
 			return moveToolTip;
 		}
 
-		public void SetMoveData(CaughtPokemonItem pokemon, string newMove)
+		public void SetMoveData(CaughtPokemonItem pokemon, string newMove, int itemUsedType = -1, int itemUsedAmount = 1)
 		{
 			this.pokemon = pokemon;
 			this.newMove = newMove;
+			this.itemUsedType = itemUsedType;
+			this.itemUsedAmount = itemUsedAmount;
 			OpenPanel();
 		}
 
@@ -229,6 +235,11 @@ namespace Pokemod.Common.UI.MoveLearnUI
             }
 			pokemon.moves = newMoves.ToArray();
 
+			if (selectedMove == 4)
+			{
+                RefundItemUsed();
+            }
+
 			ModContent.GetInstance<MoveLearnUISystem>().HideMyUI();
 		}
 
@@ -242,8 +253,25 @@ namespace Pokemod.Common.UI.MoveLearnUI
 			if (timer >= 45)
 			{
 				SoundEngine.PlaySound(SoundID.MenuClose);
+				RefundItemUsed();
 				ModContent.GetInstance<MoveLearnUISystem>().HideMyUI();
 			}
+		}
+
+		public void RefundItemUsed()
+		{
+			string notLearnMessage = newMove + " not learned. ";
+			if (itemUsedType != -1) 
+			{
+				Player player = Main.LocalPlayer;
+				if (player != null)
+				{
+					var entitySource = new EntitySource_Misc("RefundUsedItem");
+					int item = player.QuickSpawnItem(entitySource, itemUsedType, itemUsedAmount);
+					notLearnMessage += Main.item[item].HoverName + " refunded.";
+				}
+			}
+			Main.NewText(notLearnMessage);
 		}
 	}
 }

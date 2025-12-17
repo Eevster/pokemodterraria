@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class MachampCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 44;
+		public override int hitboxHeight => 62;
 
 		public override int totalFrames => 11;
 		public override int animationSpeed => 10;
