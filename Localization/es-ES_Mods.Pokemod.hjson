@@ -2079,6 +2079,11 @@ Items: {
 			''' */
 		// DisplayName: Mega Shard
 	}
+
+	SuperRod: {
+		// Tooltip: ""
+		// DisplayName: Super Rod
+	}
 }
 
 Buffs: {

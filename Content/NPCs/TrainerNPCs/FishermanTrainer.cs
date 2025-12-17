@@ -11,7 +11,7 @@ using Terraria.Utilities;
 
 namespace Pokemod.Content.NPCs.TrainerNPCs
 {
-	public class FishermanTrainer : ModNPC
+	public class FishermanTrainer : BattleTrainer
 	{
 		private static Profiles.StackedNPCProfile NPCProfile;
 
@@ -55,7 +55,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			NPC.friendly = true; // NPC Will not attack player
 			NPC.width = 18;
 			NPC.height = 40;
-			NPC.aiStyle = 7;
+			NPC.aiStyle = NPCAIStyleID.Passive;
 			NPC.damage = 0;
 			NPC.defense = 50;
 			NPC.lifeMax = 500;
@@ -115,7 +115,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 
 		public override void SetChatButtons(ref string button, ref string button2)
 		{ // What the chat buttons are when you open up the chat UI
-			button = "Battle (WIP)";
+			button = "Battle";
 			button2 = Language.GetTextValue("LegacyInterface.28"); //This is the key to the word "Shop"
 		}
 
@@ -123,9 +123,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		{
 			if (firstButton)
 			{
-				/*if (player.GetModPlayer<PokemonPlayer>().SetBattle(true))
-				{
-				}*/
+				StartBattle();
 			}
 			else
 			{
@@ -137,6 +135,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			new NPCShop(Type)
 				.Add<OldRod>()
 				.Add<GoodRod>()
+				.Add<SuperRod>()
 				.Register();
 		}
 	}

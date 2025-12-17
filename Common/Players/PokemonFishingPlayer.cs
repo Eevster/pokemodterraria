@@ -14,13 +14,18 @@ namespace Pokemod.Common.Players
 			bool inWater = !attempt.inHoney;
 
 			bool isPokemonFishingRod = attempt.playerFishingConditions.PoleItemType == ModContent.ItemType<OldRod>() ||
-			attempt.playerFishingConditions.PoleItemType == ModContent.ItemType<GoodRod>();
+			attempt.playerFishingConditions.PoleItemType == ModContent.ItemType<GoodRod>() ||
+			attempt.playerFishingConditions.PoleItemType == ModContent.ItemType<SuperRod>();
 			
 			int[] pokemonList = {
 				ModContent.NPCType<MagikarpCritterNPC>(),
 				ModContent.NPCType<PoliwagCritterNPC>(),
 				ModContent.NPCType<ShellderCritterNPC>(),
+				ModContent.NPCType<DratiniCritterNPC>(),
 			};
+
+			const int oldRodLimit = 1;
+			const int goodRodLimit = 3;
 
 			if (isPokemonFishingRod && inWater)
 			{
@@ -28,11 +33,15 @@ namespace Pokemod.Common.Players
 
 				if (attempt.playerFishingConditions.PoleItemType == ModContent.ItemType<OldRod>())
 				{
-					npc = pokemonList[Main.rand.Next(1)];
+					npc = pokemonList[Main.rand.Next(oldRodLimit)];
 				}
 				if (attempt.playerFishingConditions.PoleItemType == ModContent.ItemType<GoodRod>())
 				{
-					npc = pokemonList[Main.rand.Next(3)];
+					npc = pokemonList[Main.rand.Next(goodRodLimit)];
+				}
+				if (attempt.playerFishingConditions.PoleItemType == ModContent.ItemType<SuperRod>())
+				{
+					npc = pokemonList[Main.rand.Next(pokemonList.Length)];
 				}
 
 				if (npc != -1)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -71,6 +72,7 @@ namespace Pokemod.Common.Players
 		//Battle Mode
 
 		public bool onBattle = false;
+		CaughtPokemonItem[] currentPokemonTeam;
 
 		//Player data
 		public string TrainerID { get; internal set; }
@@ -266,7 +268,7 @@ namespace Pokemod.Common.Players
 
 			levelCap = defaultLevelCap;
 
-			if (manualControl)
+			if (manualControl && !onBattle)
 			{
 				if (currentActivePokemon.Count <= 0) manualControl = false;
 				else
@@ -552,6 +554,8 @@ namespace Pokemod.Common.Players
 
 		public void SetManualControl()
 		{
+			if(onBattle) return;
+
 			if (!manualControl)
 			{
 				PokemonPetProjectile pokemonProj = GetPokemonProjectile(0);
@@ -649,53 +653,65 @@ namespace Pokemod.Common.Players
 
 		public bool SetBattle(bool active)
 		{
-			CaughtPokemonItem[] pokemonTeam = GetPokemonTeam(1);
-
-			if (pokemonTeam.Length > 0)
+			if (active)
 			{
-				if (active)
-				{
-					if (pokemonTeam[0].proj == null)
-					{
-						pokemonTeam[0].UseItem(Player);
-						pokemonTeam[0].Shoot(Player, null, Player.Center, 10f * new Vector2(Player.direction > 0 ? 1 : -1, 0), pokemonTeam[0].Item.shoot, pokemonTeam[0].Item.damage, pokemonTeam[0].Item.knockBack);
-					}
+				currentPokemonTeam = GetPokemonTeam(6);
 
+				if (currentPokemonTeam.Length > 0)
+				{
 					onBattle = true;
 
-					if (pokemonTeam[0].proj.ModProjectile is PokemonPetProjectile pokemonProj)
-					{
-						Main.NewText("Battle manual control");
-						manualControl = true;
-						pokemonProj.manualControl = true;
-					}
+					SendNextPokemon();
+
+					return true;
 				}
-				else
-				{
-					onBattle = false;
-					manualControl = false;
-				}
+			}
+			else
+			{
+				onBattle = false;
+				manualControl = false;
 
 				return true;
 			}
+
 			return false;
 		}
 
+		public void SendNextPokemon()
+		{
+			foreach(CaughtPokemonItem nextPokemon in currentPokemonTeam)
+			{
+				if (nextPokemon.currentHP > 0 && !(nextPokemon.proj != null && nextPokemon.proj.ModProjectile is PokemonPetProjectile && ((PokemonPetProjectile)nextPokemon.proj.ModProjectile).currentHp <= 0))
+				{
+					if (nextPokemon.proj == null)
+					{
+						nextPokemon.UseItem(Player);
+						nextPokemon.Shoot(Player, null, Player.Center, 10f * new Vector2(Player.direction > 0 ? 1 : -1, 0), nextPokemon.Item.shoot, nextPokemon.Item.damage, nextPokemon.Item.knockBack);
+					}
+
+					if (nextPokemon.proj.ModProjectile is PokemonPetProjectile pokemonProj)
+					{
+						manualControl = true;
+						pokemonProj.manualControl = true;
+					}
+
+					Main.NewText(nextPokemon.PokemonName);
+
+					return;
+				}
+			}
+
+			Main.NewText("Your entire team was defeated...");
+			SetBattle(false);
+		}
 		public CaughtPokemonItem[] GetPokemonTeam(int amount) {
 			List<Item> pokemonItems = Player.inventory.ToList().FindAll(item => item.type == ModContent.ItemType<CaughtPokemonItem>());
 			List<CaughtPokemonItem> pokemonTeam = [];
 
-			for (int i = 0; i < amount; i++)
+			for (int i = 0; i < Math.Min(amount, pokemonItems.Count); i++)
 			{
-				if (pokemonItems.Count > i)
-				{
-					Main.NewText("PokeItem");
-					pokemonTeam.Add(pokemonItems[i].ModItem as CaughtPokemonItem);
-				}
-				else
-				{
-					Main.NewText("Null");
-				}
+				pokemonTeam.Add(pokemonItems[i].ModItem as CaughtPokemonItem);
+				Main.NewText(((CaughtPokemonItem)pokemonItems[i].ModItem).PokemonName);
 			}
 
 			return pokemonTeam.ToArray();

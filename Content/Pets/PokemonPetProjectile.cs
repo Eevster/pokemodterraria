@@ -1,5 +1,4 @@
-﻿using log4net.Core;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Configs;
 using Pokemod.Common.Players;
@@ -7,6 +6,7 @@ using Pokemod.Common.Systems;
 using Pokemod.Content.Buffs;
 using Pokemod.Content.DamageClasses;
 using Pokemod.Content.NPCs;
+using Pokemod.Content.NPCs.TrainerNPCs;
 using Pokemod.Content.Projectiles;
 using ReLogic.Content;
 using System;
@@ -17,7 +17,6 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.GameContent.Creative;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
@@ -157,8 +156,12 @@ namespace Pokemod.Content.Pets
 		public int isOutTimer = 0;
 
 		//Attacks
-		public string currentAttack = "Swift";
-        public string oldAttack = "Swift";
+		public string currentAttack = "Tackle";
+        public string oldAttack = "Tackle";
+
+		//EnemyControl
+		public bool isEnemy;
+		public NPC npcOwner;
 
 		public override void SendExtraAI(BinaryWriter writer)
         {
@@ -166,6 +169,7 @@ namespace Pokemod.Content.Pets
             writer.Write((double)currentStatus);
 			writer.Write((double)expGained);
 			writer.Write(canFall);
+			writer.Write(isEnemy);
             base.SendExtraAI(writer);
         }
 
@@ -175,6 +179,7 @@ namespace Pokemod.Content.Pets
             currentStatus = (int)reader.ReadDouble();
 			expGained = (int)reader.ReadDouble();
 			canFall = reader.ReadBoolean();
+			isEnemy = reader.ReadBoolean();
             base.ReceiveExtraAI(reader);
         }
 
@@ -439,6 +444,14 @@ namespace Pokemod.Content.Pets
 			return "";
 		}
 
+		//Set enemy behavior
+
+		public void SetAsEnemyPokemon(NPC newNPCOwner)
+		{
+			npcOwner = newNPCOwner;
+			isEnemy = true;
+		}
+
 		//General behavior
         public override void AI() {
 			Player player = Main.player[Projectile.owner];
@@ -455,22 +468,34 @@ namespace Pokemod.Content.Pets
             GetAllProjsExp();
             TakeDamage();
 
-			if (manualControl && !player.GetModPlayer<PokemonPlayer>().manualControl) manualControl = false;
+			if (manualControl && (!player.GetModPlayer<PokemonPlayer>().manualControl || isEnemy)){
+				manualControl = false;
+			}
 
 			if (isOut)
 			{
-                SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter, out bool hostilesNearby);
-                
-				if (!manualControl)
+				if (!isEnemy)
 				{
-					GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
-					Movement(foundTarget, hostilesNearby, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
+					SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter, out bool hostilesNearby);
+					
+					if (!manualControl)
+					{
+						GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
+						Movement(foundTarget, hostilesNearby, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
+					}
+					else
+					{
+						ManualMovement(hostilesNearby);
+					}
+					RefreshStatMods(hostilesNearby);
 				}
 				else
 				{
-					ManualMovement(hostilesNearby);
+					SearchForPokemonTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
+					
+					GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
+					Movement(foundTarget, true, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
 				}
-				RefreshStatMods(hostilesNearby);
 			}
 			else
 			{
@@ -484,12 +509,15 @@ namespace Pokemod.Content.Pets
 			ExtraChanges();
 
 			if(Main.myPlayer == Projectile.owner){
-				if(!player.GetModPlayer<PokemonPlayer>().currentActivePokemon.Contains(Projectile.whoAmI)){
+				if (!isEnemy)
+				{
+					if(!player.GetModPlayer<PokemonPlayer>().currentActivePokemon.Contains(Projectile.whoAmI)){
 					player.GetModPlayer<PokemonPlayer>().currentActivePokemon.Add(Projectile.whoAmI);
-				}
-				if(player.GetModPlayer<PokemonPlayer>().FreePokemonSlots()<0){
-					Main.projectile[player.GetModPlayer<PokemonPlayer>().currentActivePokemon[0]].Kill();
-					player.GetModPlayer<PokemonPlayer>().currentActivePokemon.RemoveAt(0);
+					}
+					if(player.GetModPlayer<PokemonPlayer>().FreePokemonSlots()<0){
+						Main.projectile[player.GetModPlayer<PokemonPlayer>().currentActivePokemon[0]].Kill();
+						player.GetModPlayer<PokemonPlayer>().currentActivePokemon.RemoveAt(0);
+					}
 				}
 
 				Projectile.netUpdate = true;
@@ -578,10 +606,14 @@ namespace Pokemod.Content.Pets
 
 		public virtual void GeneralBehavior(Player owner, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition) {
 			Vector2 idlePosition = owner.Center;
+			if(isEnemy) idlePosition = npcOwner.Center;
 			idlePosition.Y -= 16-(owner.height-Projectile.height)/2; // Go up 48 coordinates (three tiles from the center of the player)
 
-			float minionPositionOffsetX = (10 + Projectile.minionPos * 40) * -owner.direction;
-			idlePosition.X += minionPositionOffsetX; // Go behind the player
+			if (!isEnemy)
+			{
+				float minionPositionOffsetX = (10 + Projectile.minionPos * 40) * -owner.direction;
+				idlePosition.X += minionPositionOffsetX; // Go behind the player
+			}
 
 			// All of this code below this line is adapted from Spazmamini code (ID 388, aiStyle 66)
 
@@ -589,7 +621,7 @@ namespace Pokemod.Content.Pets
 			vectorToIdlePosition = idlePosition - Projectile.Center;
 			distanceToIdlePosition = vectorToIdlePosition.Length();
 
-			if (Main.myPlayer == owner.whoAmI && distanceToIdlePosition > 1200f) {
+			if (Main.myPlayer == owner.whoAmI && !isEnemy && distanceToIdlePosition > 1200f) {
 				// Whenever you deal with non-regular events that change the behavior or position drastically, make sure to only run the code on the owner of the projectile,
 				// and then set netUpdate to true
 				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKFainted") with {Volume = 0.7f}, Projectile.Center);
@@ -735,6 +767,45 @@ namespace Pokemod.Content.Pets
             }
 		}
 
+		public virtual void SearchForPokemonTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter) {
+			// Starting search distance
+			distanceFromTarget = 10000f;
+			targetCenter = Projectile.Center;
+			foundTarget = false;
+
+			Projectile enemyPokemon = null;
+			for (int j = 0; j < Main.maxProjectiles; j++)
+			{
+				enemyPokemon = Main.projectile[j];
+
+				if (enemyPokemon.owner == Projectile.owner)
+				{
+					if(enemyPokemon.ModProjectile is PokemonPetProjectile)
+					{
+						var enemyPokemonProj = (PokemonPetProjectile)enemyPokemon.ModProjectile;
+						if(!enemyPokemonProj.isEnemy)
+						{
+							if(Vector2.Distance(enemyPokemon.Center,Projectile.Center) < distanceFromTarget)
+							{
+								foundTarget = true;
+								targetCenter = enemyPokemon.Center;
+								distanceFromTarget = Vector2.Distance(enemyPokemon.Center,Projectile.Center);
+							}
+						}
+					}
+				}
+			}
+
+			Projectile.hostile = foundTarget;
+
+			//Scrambles aiming if accuracy has been reduced.
+			if (Main.rand.NextFloat(1f) > statMods[5])
+			{
+				targetCenter += Main.rand.NextVector2Unit() * 150;
+				distanceFromTarget += Main.rand.Next(-100, 101);
+            }
+		}
+
 		public virtual void BallMovement()
 		{
 			Projectile.velocity.Y += 0.5f;
@@ -774,7 +845,7 @@ namespace Pokemod.Content.Pets
                 Projectile.tileCollide = true;
             }
 
-            if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
+            if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && !isEnemy && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
 			{
 				if (moveStyle != (int)MovementStyle.Fly)
 				{
@@ -782,7 +853,7 @@ namespace Pokemod.Content.Pets
                 }
 				isFlying = true;
 			}
-			else if(moveStyle != (int)MovementStyle.Hybrid && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon <= 0)
+			else if(moveStyle != (int)MovementStyle.Hybrid && (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon <= 0 || isEnemy))
 			{
 				isFlying = false;
 			}
@@ -1014,7 +1085,7 @@ namespace Pokemod.Content.Pets
 					if (distanceToIdlePosition < 70f && tangible)
 					{
 						Projectile.tileCollide = true;
-						if (moveStyle == (int)MovementStyle.Hybrid)
+						if (moveStyle == (int)MovementStyle.Hybrid && !isEnemy)
 						{
 							Tile playerStanding = Main.tile[(int)(Main.player[Projectile.owner].Bottom.X / 16f), (int)((Main.player[Projectile.owner].Bottom.Y + 8) / 16f)]; //only lands if the player is on the ground.
 							if (playerStanding.HasTile && (playerStanding.IsHalfBlock || Main.tileSolid[playerStanding.TileType]))
@@ -1610,6 +1681,11 @@ namespace Pokemod.Content.Pets
 				var pokemonAttack = (PokemonAttack)modProjBase;
 				if (attackProjs[i].ModProjectile is PokemonAttack attackProj && attackProj.Name == currentAttack)
 				{
+					if (isEnemy)
+					{
+						if(!attackProjs[i].hostile) attackProjs[i].hostile = true;
+						if(attackProjs[i].friendly) attackProjs[i].friendly = false;
+					}
 					pokemonAttack.UpdateAttackProjs(Projectile, i, ref maxFallSpeed);
 					ChangeAttackColor(attackProj);
                 }
@@ -1855,8 +1931,25 @@ namespace Pokemod.Content.Pets
             if (currentHp <= 0) {
 				currentHp = 0;
 				//Main.player[Projectile.owner].ClearBuff(PokemonBuff);
-				if(Projectile.owner == Main.myPlayer){
-					Main.NewText(Language.GetTextValue("Mods.Pokemod.PokemonInfo.FaintedMsg"), 255, 130, 130); 
+				if(!isEnemy){
+					if(Projectile.owner == Main.myPlayer){
+						Main.NewText(Language.GetTextValue("Mods.Pokemod.PokemonInfo.FaintedMsg"), 255, 130, 130); 
+					}
+
+					if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().onBattle)
+					{
+						Main.NewText("Sending next Pokemon");
+						Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().SendNextPokemon();
+					}
+				}
+				else
+				{
+					if(npcOwner.ModNPC is BattleTrainer)
+					{
+						BattleTrainer battleNPCOwner = (BattleTrainer)npcOwner.ModNPC;
+						battleNPCOwner.FaintedPokemon(); 
+					}
+					Projectile.Kill();
 				}
 			}
 		}
@@ -1894,7 +1987,7 @@ namespace Pokemod.Content.Pets
 				{
 					bullet = Main.projectile[j];
 
-					if (bullet.hostile && bullet.damage > 0 && bullet.active)
+					if (((bullet.hostile && !isEnemy) || (bullet.friendly && isEnemy)) && bullet.damage > 0 && bullet.active)
 					{
 						if (Projectile.Hitbox.Intersects(bullet.getRect()) && !immune)
 						{
@@ -2201,6 +2294,11 @@ namespace Pokemod.Content.Pets
 			}
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
+
+        public override bool? CanCutTiles()
+        {
+            return false;
         }
 	}
 }

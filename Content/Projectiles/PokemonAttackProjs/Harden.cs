@@ -58,7 +58,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             for (int i = 0; i < 7; i++)
             {
-                int dust = Dust.NewDust(position, 16, 16, 63, Main.rand.Next(-6, 7), Main.rand.Next(-6, 7), default, default, 2.5f);
+                int dust = Dust.NewDust(position, 16, 16, DustID.WhiteTorch, Main.rand.Next(-6, 7), Main.rand.Next(-6, 7), default, default, 2.5f);
                 Main.dust[dust].noGravity = true;
                 Main.dust[dust].noLight = true;
             }
