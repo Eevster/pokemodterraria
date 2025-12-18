@@ -7,10 +7,10 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class ClefableCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 76;
+		public override int hitboxHeight => 66;
 
-		public override int totalFrames => 4;
+		public override int totalFrames => 14;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,0];
 		public override int[] walkStartEnd => [0,3];
@@ -25,10 +25,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneForest) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.2f);
-			}
+			if (spawnInfo.Player.ZoneForest) {
+				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.2f);
 			}
 
 			return 0f;

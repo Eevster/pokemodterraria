@@ -3,14 +3,14 @@
     "",
     "\\Assets",
     "\\Assets\\Textures",
-    "\\Common\\Configs",
-    "\\Common\\GlobalNPCs",
-    "\\Common\\Players",
-    "\\Common\\Systems",
+    "\\Assets\\Textures\\Pokesprites",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
-    "\\Content\\Items",
-    "\\Content\\Items\\Armor"
+    "\\Content\\NPCs",
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen1",
+    "\\Localization"
   ],
-  "SelectedNode": "\\Content\\Items\\Armor\\MoonStoneHelmet.png",
+  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets",
   "PreviewInSolutionExplorer": false
 }

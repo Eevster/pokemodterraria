@@ -484,6 +484,8 @@ Projectiles: {
 	// CranidosPetProjectileShiny.DisplayName: Cranidos Pet Projectile Shiny
 	// RampardosPetProjectile.DisplayName: Rampardos Pet Projectile
 	// RampardosPetProjectileShiny.DisplayName: Rampardos Pet Projectile Shiny
+	// CleffaPetProjectile.DisplayName: Cleffa Pet Projectile
+	// CleffaPetProjectileShiny.DisplayName: Cleffa Pet Projectile Shiny
 }
 
 Items: {
@@ -3746,6 +3748,16 @@ Buffs: {
 		DisplayName: Mega Evolución
 		Description: ¡Gracias a sus fuertes lazos y el poder de las mega piedras tu pokemon puede alcanzar una nueva evolución!
 	}
+
+	CleffaPetBuff: {
+		// DisplayName: Cleffa Pet Buff
+		// Description: Mods.Pokemod.Buffs.CleffaPetBuff.Description
+	}
+
+	CleffaPetBuffShiny: {
+		// DisplayName: Cleffa Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.CleffaPetBuffShiny.Description
+	}
 }
 
 NPCs: {
@@ -4886,6 +4898,8 @@ NPCs: {
 	}
 
 	G1T1_Brock.DisplayName: Lider de gimnasio de tipo Roca
+	// CleffaCritterNPC.DisplayName: Cleffa Critter N P C
+	// CleffaCritterNPCShiny.DisplayName: Cleffa Critter N P C Shiny
 }
 
 Bestiary: {
