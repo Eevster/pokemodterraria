@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-SynchroMachine (2)",
+      "appliesTo": "Content/Items/SynchroMachine (2).png",
+      "type": "launch"
+    }
+  ]
+}
