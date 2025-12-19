@@ -2081,6 +2081,11 @@ Items: {
 			''' */
 		// DisplayName: Mega Shard
 	}
+
+	HeartScale: {
+		// DisplayName: Heart Scale
+		// Tooltip: ""
+	}
 }
 
 Buffs: {
@@ -4897,16 +4902,38 @@ NPCs: {
 		}
 	}
 
+	MoveTutor: {
+		// DisplayName: Move Tutor
+		// Census.SpawnCondition: Have a Pokemon forget a move.
+
+		TownNPCMood: {
+			// Content: I feel ready to wrestle a Machoke.
+			// NoHome: I can't train without a home to rest in.
+			// FarFromHome: I'm not lost. I'm just... exploring.
+			// LoveSpace: I've got enough space to practice my kicks without breaking anything!
+			// DislikeCrowded: I'm not so sure I can train with so many people nearby. I'd hate to accidently hit someone.
+			// HateCrowded: I can't even meditate with so many people nearby!
+			// LoveBiome: I love training beside the sounds of {BiomeName}.
+			// LikeBiome: I like that {BiomeName} offers forgiving ground for practicing throws.
+			// DislikeBiome: I can't handle the cold of {BiomeName}.
+			// HateBiome: I hate {BiomeName}. I get too claustrophobic.
+			// LoveNPC: I love the way {NPCName} talks about Pokemon. They get so fired up!
+			// LikeNPC: The muscles on {NPCName} really set a high bar. I need to keep training so I can keep up!
+			// DislikeNPC: "{NPCName} should take their weird gizmos somewhere else."
+			// HateNPC: I don't think {NPCName} has ever worked a day in their life. It makes me sick.
+			// LikeNPC_Princess: "{NPCName} is so lovely, and has surprisingly quick reflexes."
+			// Princess_LovesNPC: "{NPCName} really pushes me to do my best!"
+		}
+	}
+
 	G1T1_Brock.DisplayName: Lider de gimnasio de tipo Roca
 	// CleffaCritterNPC.DisplayName: Cleffa Critter N P C
 	// CleffaCritterNPCShiny.DisplayName: Cleffa Critter N P C Shiny
 }
 
 Bestiary: {
-	PokemonScientist: {
-		BestiaryEntry1: La mente brillante en la frontera de la investigación genética de Pokemon.
-		BestiaryEntry2: Puede utilizar fósiles y otras muestras genéticas para traer de nuevo a la vida especies extintas de Pokemon.
-	}
+	// PokemonScientist.BestiaryEntry: The brilliant mind at the frontier of Pokemon genetic research, the Pokemon Scientist can use Fossils and other Genetic Samples to Revitalise extinct species of Pokemon.
+	// MoveTutor.BestiaryEntry: The Move Tutor is an experienced Pokemon enthusiast who knows all there is to know about moves. They can teach pokemon moves that they have forgotten.
 }
 
 Dialogue: {
@@ -4933,6 +4960,13 @@ Dialogue: {
 		LowLevelDialogue: Esta muestra contiene una energía poderosa. Necesitaré investigar más antes de poder procesarla.
 		Success: ¡Renacimiento exitoso!
 		SuccessDialogue: ¡Hemos creado un ejemplar vivo de {0}! Cuídalo bien.
+	}
+
+	MoveTutor: {
+		// StandardDialogue1: Your Pokemon look strong, but they can always get stronger.
+		// StandardDialogue2: A good trainer never stops trying to improve their skills!
+		// StandardDialogue3: I can teach your Pokemon moves that they've forgetten!
+		// Button: Learn Moves
 	}
 
 	G1T1_Brock.StandardDialogue1: ¡Creo en la defensa férrea y la determinación! ¿Estás listo para desafiarme?
@@ -5018,6 +5052,11 @@ MoveLearnUI: {
 	// MoveRange: Range: {0}
 	// MoveEffect: Effect: {0}
 	// Success: "{0} learned {1}"
+}
+
+MoveTutorUI: {
+	// Prompt: Insert Pokemon
+	// Description: "{0} can learn:"
 }
 
 PokemonTypes: {

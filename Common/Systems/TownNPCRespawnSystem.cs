@@ -14,6 +14,7 @@ public class TownNPCRespawnSystem : ModSystem
 	// Tracks if ExamplePerson has ever been spawned in this world
 	public static bool unlockedScientistSpawn = false;
 	public static bool ScientistArrived = false;
+    public static bool unlockedMoveTutor = false;
 
     public static Condition scientistArrivedCondition = new Condition(
     Language.GetText("Mods.Pokemod.Conditions.ScientistInTown"),
@@ -26,31 +27,37 @@ public class TownNPCRespawnSystem : ModSystem
     public override void ClearWorld() {
 		unlockedScientistSpawn = false;
         ScientistArrived = false;
+        unlockedMoveTutor = false;
     }
 
 	public override void SaveWorldData(TagCompound tag) {
 		tag[nameof(unlockedScientistSpawn)] = unlockedScientistSpawn;
         tag[nameof(ScientistArrived)] = ScientistArrived;
+        tag[nameof(unlockedMoveTutor)] = unlockedMoveTutor;
     }
 
 	public override void LoadWorldData(TagCompound tag) {
 		unlockedScientistSpawn = tag.GetBool(nameof(unlockedScientistSpawn));
         ScientistArrived = tag.GetBool(nameof(ScientistArrived));
+        unlockedMoveTutor = tag.GetBool(nameof(unlockedMoveTutor));
 
         // This line sets unlockedScientistSpawn to true if an ExamplePerson is already in the world. This is only needed because unlockedScientistSpawn was added in an update to this mod, meaning that existing users might have unlockedScientistSpawn incorrectly set to false.
         // If you are tracking Town NPC unlocks from your initial mod release, then this isn't necessary.
         unlockedScientistSpawn |= NPC.AnyNPCs(ModContent.NPCType<PokemonScientist>());
         ScientistArrived |= NPC.AnyNPCs(ModContent.NPCType<PokemonScientist>());
+        unlockedMoveTutor |= NPC.AnyNPCs(ModContent.NPCType<MoveTutor>());
     }
 
 	public override void NetSend(BinaryWriter writer) {
 		writer.WriteFlags(unlockedScientistSpawn);
         writer.WriteFlags(ScientistArrived);
+        writer.WriteFlags(unlockedMoveTutor);
     }
 
 	public override void NetReceive(BinaryReader reader) {
 		reader.ReadFlags(out unlockedScientistSpawn);
         reader.ReadFlags(out ScientistArrived);
+        reader.ReadFlags(out unlockedMoveTutor);
     }
 
 }

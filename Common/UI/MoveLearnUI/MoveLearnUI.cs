@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Common.Systems;
 using Pokemod.Content.Items;
 using Pokemod.Content.NPCs;
 using ReLogic.Content;
@@ -42,22 +43,22 @@ namespace Pokemod.Common.UI.MoveLearnUI
 
 			MoveLearnPanel = new DraggableUIPanel();
 			MoveLearnPanel.SetPadding(0);
-			SetRectangleAlign(MoveLearnPanel, left: 0.8f, top: 0.2f, width: 600, height: 300);
+            UIHelpers.SetRectangleAlign(MoveLearnPanel, left: 0.8f, top: 0.2f, width: 600, height: 300);
 
 			var leftSidePanel = new UIPanel();
 			leftSidePanel.BorderColor = new(0, 0, 0, 0);
             leftSidePanel.BackgroundColor = new(0, 0, 0, 0);
 			leftSidePanel.IgnoresMouseInteraction = true;
             leftSidePanel.SetPadding(0);
-			SetRectangle(leftSidePanel, left: 13, top: 13, width: 224, height: MoveLearnPanel.Height.Pixels - 26);
+            UIHelpers.SetRectangle(leftSidePanel, left: 13, top: 13, width: 224, height: MoveLearnPanel.Height.Pixels - 26);
 
 			//Pokemon Icon
             Asset<Texture2D> iconFrameTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/PokemonIconFrame");
             Asset <Texture2D> pokemonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokesprites/Icons/" + pokemon?.PokemonName);
 			var PokemonFrame = new UIImage(iconFrameTexture) { Color = new(255, 255, 255, 80) };
-            SetRectangleAlign(PokemonFrame, left: 0.5f, top: 0f, width: 104f, height: 104f);
+            UIHelpers.SetRectangleAlign(PokemonFrame, left: 0.5f, top: 0f, width: 104f, height: 104f);
             var PokemonImage = new UIImage(pokemonTexture) { ScaleToFit = true };
-			SetRectangleAlign(PokemonImage, left: 0.5f, top: 0.5f, width: 96f, height: 96f);
+            UIHelpers.SetRectangleAlign(PokemonImage, left: 0.5f, top: 0.5f, width: 96f, height: 96f);
 
 			PokemonFrame.Append(PokemonImage);
             leftSidePanel.Append(PokemonFrame);
@@ -73,7 +74,7 @@ namespace Pokemod.Common.UI.MoveLearnUI
 				MarginLeft = 14 + (leftSidePanel.Width.Pixels / 2) - (168 / 2),
 				canBeSelected = true,
 			};
-			SetRectangle(confirmButton, left: 0.5f, top: 1f, width: 168, height: 46);
+			UIHelpers.SetRectangle(confirmButton, left: 0.5f, top: 1f, width: 168, height: 46);
             confirmButton.OnLeftClick += ConfirmButtonClicked;
 
             confirmText = new UIText(Language.GetTextValue("Mods.Pokemod.MoveLearnUI.NoSelection"), 1f)
@@ -117,10 +118,10 @@ namespace Pokemod.Common.UI.MoveLearnUI
 				bool isNewMove = (i == movesButtons.Length - 1);
 				string moveName = (isNewMove ? newMove : pokemon?.moves[i]);
 
-                movesButtons[i] = new UIHoverImageButton(moveButtonTexture, moveButtonActiveTexture, Color.White, SetMoveTooltip(pokemon, moveName));
+                movesButtons[i] = new UIHoverImageButton(moveButtonTexture, moveButtonActiveTexture, Color.White, PokemonData.SetMoveTooltip(pokemon, moveName));
 				movesButtons[i].tooltipSolid = true;
 				movesButtons[i].canBeSelected = true;
-				SetRectangleAlign(movesButtons[i], left: 1f, top: isNewMove ? 1f : 0f, width: 292f, height: 42f);
+				UIHelpers.SetRectangleAlign(movesButtons[i], left: 1f, top: isNewMove ? 1f : 0f, width: 292f, height: 42f);
 				if (isNewMove) movesButtons[i].MarginBottom = 16f;
 				else movesButtons[i].MarginTop = 14 + (isNewMove ? 0f : (8 + movesButtons[i].Height.Pixels) * i);
 				movesButtons[i].MarginRight = 56; //Margin of 14 + Close button dimension 0f 32 + 10 pixel gap.
@@ -149,34 +150,6 @@ namespace Pokemod.Common.UI.MoveLearnUI
 			MoveLearnPanel.Append(closeButton);
 
 			Append(MoveLearnPanel);
-		}
-
-        private void SetRectangle(UIElement uiElement, float left, float top, float width, float height) {
-			uiElement.Left.Set(left, 0f);
-			uiElement.Top.Set(top, 0f);
-			uiElement.Width.Set(width, 0f);
-			uiElement.Height.Set(height, 0f);
-		}
-
-		private void SetRectangleAlign(UIElement uiElement, float left, float top, float width, float height) {
-			uiElement.HAlign = left;
-			uiElement.VAlign = top;
-			uiElement.Width.Set(width, 0f);
-			uiElement.Height.Set(height, 0f);
-		}
-
-		private string SetMoveTooltip(CaughtPokemonItem pokemon, string moveName)
-		{
-            int moveType = PokemonData.pokemonAttacks[moveName].attackType;
-            int moveSpeed = (int)(6000f / Math.Clamp(PokemonData.pokemonAttacks[moveName].cooldown + PokemonData.pokemonAttacks[moveName].attackDuration, 1, 1200));
-
-            //Type, Special, Power, Speed, Range, (Effect? Maybe relevant descriptions could be added to Pokemon Data)
-            string moveToolTip = "[c/" + PokemonNPCData.GetTypeColor(moveType) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonTypes." + (TypeIndex)moveType) + "]\n"
-                + (PokemonData.pokemonAttacks[moveName].isSpecial ? "Special" : "Physical") + "\n"
-                + Language.GetText("Mods.Pokemod.MoveLearnUI.MovePower").WithFormatArgs(PokemonData.pokemonAttacks[moveName].attackPower).ToString() + "\n"
-                + Language.GetText("Mods.Pokemod.MoveLearnUI.MoveSpeed").WithFormatArgs(moveSpeed).ToString() + "\n"
-                + Language.GetText("Mods.Pokemod.MoveLearnUI.MoveRange").WithFormatArgs((int)(PokemonData.pokemonAttacks[moveName].distanceToAttack / 16)).ToString() + "\n";
-			return moveToolTip;
 		}
 
 		public void SetMoveData(CaughtPokemonItem pokemon, string newMove, int itemUsedType = -1, int itemUsedAmount = 1)
@@ -219,7 +192,7 @@ namespace Pokemod.Common.UI.MoveLearnUI
             }
 		}
 
-        private void ConfirmButtonClicked(UIMouseEvent evt, UIElement listeningElement)
+		private void ConfirmButtonClicked(UIMouseEvent evt, UIElement listeningElement)
 		{
 			if (selectedMove == -1) return;
 
@@ -231,14 +204,13 @@ namespace Pokemod.Common.UI.MoveLearnUI
 			{
 				newMoves.RemoveAt(selectedMove);
 				newMoves.Add(newMove);
-                pokemon.MoveLearnEffects(newMove);
-            }
+			}
 			pokemon.moves = newMoves.ToArray();
 
-			if (selectedMove == 4)
-			{
-                RefundItemUsed();
-            }
+			if (selectedMove == 4) RefundItemUsed();
+			else pokemon.MoveLearnEffects(newMove);
+
+			TownNPCRespawnSystem.unlockedMoveTutor = true;
 
 			ModContent.GetInstance<MoveLearnUISystem>().HideMyUI();
 		}
@@ -254,8 +226,9 @@ namespace Pokemod.Common.UI.MoveLearnUI
 			{
 				SoundEngine.PlaySound(SoundID.MenuClose);
 				RefundItemUsed();
-				ModContent.GetInstance<MoveLearnUISystem>().HideMyUI();
-			}
+                TownNPCRespawnSystem.unlockedMoveTutor = true;
+                ModContent.GetInstance<MoveLearnUISystem>().HideMyUI();
+            }
 		}
 
 		public void RefundItemUsed()

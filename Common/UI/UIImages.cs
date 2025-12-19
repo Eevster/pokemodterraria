@@ -57,6 +57,11 @@ namespace Pokemod.Common.UI
 			currentFrame = fromFrame;
 		}
 
+		public void SetAnimation(Asset<Texture2D> animTexture)
+		{
+			_Texture = animTexture;
+		}
+
 		protected override void DrawSelf(SpriteBatch spriteBatch)
 		{
 			CalculatedStyle dimensions = GetDimensions();

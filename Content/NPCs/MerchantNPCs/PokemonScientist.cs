@@ -117,8 +117,7 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 
-				new FlavorTextBestiaryInfoElement("Mods.Pokemod.Bestiary.PokemonScientist.BestiaryEntry1"),
-				new FlavorTextBestiaryInfoElement("Mods.Pokemod.Bestiary.PokemonScientist.BestiaryEntry2")
+				new FlavorTextBestiaryInfoElement("Mods.Pokemod.Bestiary.PokemonScientist.BestiaryEntry")
 			]);
 		}
 

@@ -26,12 +26,6 @@ namespace Pokemod.Common.UI.MoveLearnUI
             MoveLearnUserInterface?.SetState(null);
 		}
 
-		public void CatchUIState(MoveLearnUIState state)
-		{
-            MoveLearnUIState.hidden = false;
-            MoveLearnUserInterface?.SetState(state);
-        }
-
 		public bool IsActive()
 		{
 			return MoveLearnUserInterface?.CurrentState != null;
@@ -55,9 +49,9 @@ namespace Pokemod.Common.UI.MoveLearnUI
 			// Here we call .Update on our custom UI and propagate it to its state and underlying elements
 			if (MoveLearnUserInterface?.CurrentState != null){
 				MoveLearnUserInterface?.Update(gameTime);
-				if(Main.LocalPlayer.controlInv){
+				/*if(Main.LocalPlayer.controlInv){
 					HideMyUI();
-				}
+				}*/
 			}
 		}
 

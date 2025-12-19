@@ -1,13 +1,15 @@
+using Pokemod.Common.Configs;
+using Pokemod.Content.Items;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Pokemod.Common.Configs;
-using Pokemod.Content.Projectiles.PokemonAttackProjs;
 using Terraria;
 using Terraria.GameContent.Bestiary;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -618,6 +620,20 @@ namespace Pokemod.Content.NPCs
             {"WaterPulse", new PokemonAttackInfo(60,40,60,800f,false,true,(int)TypeIndex.Water, true)},
             {"WingAttack", new PokemonAttackInfo(60,40,60,600f,false,false,(int)TypeIndex.Flying)},
         };
+
+        public static string SetMoveTooltip(CaughtPokemonItem pokemon, string moveName)
+        {
+            int moveType = PokemonData.pokemonAttacks[moveName].attackType;
+            int moveSpeed = (int)(6000f / Math.Clamp(PokemonData.pokemonAttacks[moveName].cooldown + PokemonData.pokemonAttacks[moveName].attackDuration, 1, 1200));
+
+            //Type, Special, Power, Speed, Range, (Effect? Maybe relevant descriptions could be added to Pokemon Data)
+            string moveToolTip = "[c/" + PokemonNPCData.GetTypeColor(moveType) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonTypes." + (TypeIndex)moveType) + "]\n"
+                + (PokemonData.pokemonAttacks[moveName].isSpecial ? "Special" : "Physical") + "\n"
+                + Language.GetText("Mods.Pokemod.MoveLearnUI.MovePower").WithFormatArgs(PokemonData.pokemonAttacks[moveName].attackPower).ToString() + "\n"
+                + Language.GetText("Mods.Pokemod.MoveLearnUI.MoveSpeed").WithFormatArgs(moveSpeed).ToString() + "\n"
+                + Language.GetText("Mods.Pokemod.MoveLearnUI.MoveRange").WithFormatArgs((int)(PokemonData.pokemonAttacks[moveName].distanceToAttack / 16)).ToString() + "\n";
+            return moveToolTip;
+        }
     }
 
     public enum TypeIndex
