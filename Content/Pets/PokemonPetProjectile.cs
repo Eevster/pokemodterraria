@@ -9,6 +9,7 @@ using Pokemod.Content.NPCs;
 using Pokemod.Content.NPCs.TrainerNPCs;
 using Pokemod.Content.Projectiles;
 using ReLogic.Content;
+using SteelSeries.GameSense;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -162,6 +163,8 @@ namespace Pokemod.Content.Pets
 		//EnemyControl
 		public bool isEnemy;
 		public NPC npcOwner;
+
+		public string[] moveSet;
 
 		public override void SendExtraAI(BinaryWriter writer)
         {
@@ -446,9 +449,10 @@ namespace Pokemod.Content.Pets
 
 		//Set enemy behavior
 
-		public void SetAsEnemyPokemon(NPC newNPCOwner)
+		public void SetAsEnemyPokemon(NPC newNPCOwner, string[] moveSet)
 		{
 			npcOwner = newNPCOwner;
+			this.moveSet = moveSet;
 			isEnemy = true;
 		}
 
@@ -582,7 +586,14 @@ namespace Pokemod.Content.Pets
         }
 
 		public virtual void CheckActive(Player player) {
-			// Keep the projectile from disappearing as long as the player isn't dead and has the pet buff
+			if (isEnemy)
+			{
+				if(!(player != null && !player.dead && player.GetModPlayer<PokemonPlayer>().onBattle)){
+					Projectile.Kill();
+					return;
+				}
+			}
+
 			if (Main.netMode == NetmodeID.SinglePlayer)
 			{
 				if (!player.dead /*&& player.HasBuff(PokemonBuff)*/)
@@ -1635,7 +1646,7 @@ namespace Pokemod.Content.Pets
 					Projectile move = attackProjs[i];
 					if (move != null)
 					{
-						if (move.Name != currentAttack)
+						if (move.Name.Replace("_Front","") != currentAttack)
 						{
                             move.Kill();
 							attackProjs[i] = null;
@@ -1662,6 +1673,11 @@ namespace Pokemod.Content.Pets
 					return;
 				}
 			}
+
+			if (isEnemy && Main.myPlayer == Projectile.owner)
+			{
+				currentAttack = moveSet[Main.rand.Next(moveSet.Length)];
+			}
 			
 			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
 				var pokemonAttack = (PokemonAttack)modProjBase;
@@ -1679,12 +1695,17 @@ namespace Pokemod.Content.Pets
 		public virtual void UpdateAttackProjs(int i, ref float maxFallSpeed){
 			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
 				var pokemonAttack = (PokemonAttack)modProjBase;
-				if (attackProjs[i].ModProjectile is PokemonAttack attackProj && attackProj.Name == currentAttack)
+				if (attackProjs[i].ModProjectile is PokemonAttack attackProj && attackProj.Name.Replace("_Front","") == currentAttack)
 				{
 					if (isEnemy)
 					{
 						if(!attackProjs[i].hostile) attackProjs[i].hostile = true;
 						if(attackProjs[i].friendly) attackProjs[i].friendly = false;
+						attackProj.inPokemonBattle = true;
+					}
+					else
+					{
+						if(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().onBattle) attackProj.inPokemonBattle = true;
 					}
 					pokemonAttack.UpdateAttackProjs(Projectile, i, ref maxFallSpeed);
 					ChangeAttackColor(attackProj);
@@ -1695,7 +1716,7 @@ namespace Pokemod.Content.Pets
 		public virtual void UpdateNoAttackProjs(int i){
 			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
 				var pokemonAttack = (PokemonAttack)modProjBase;
-                if (attackProjs[i].ModProjectile is PokemonAttack attackProj && attackProj.Name == currentAttack)
+                if (attackProjs[i].ModProjectile is PokemonAttack attackProj && attackProj.Name.Replace("_Front","") == currentAttack)
                 {
                     pokemonAttack.UpdateNoAttackProjs(Projectile, i);
                     ChangeAttackColor(attackProj);
@@ -1876,7 +1897,7 @@ namespace Pokemod.Content.Pets
             if (pokemonShader != null) pokemonShader = null;
         }
 
-		public int CalcIncomingDmg(int npcdmg, bool physical, bool enemyPokemon = false)
+		public int CalcIncomingDmg(int npcdmg, bool physical, bool enemyPokemon = false, int attackType = -1)
 		{
 			//Chance to Dodge incoming hit if evasion has been increased.
 			if (Main.rand.NextFloat(1f) > statMods[6])
@@ -1887,14 +1908,20 @@ namespace Pokemod.Content.Pets
 			}
 			
 			// template for typeChart implementation (just need to correctly detect incoming attack type, which vanilla enemies currently don't have): ---------------------------+
-			int incomingDamageType = (int)TypeIndex.Normal;
-			int primaryDefense = PokemonData.pokemonInfo[pokemonName].pokemonTypes[0];
-			
-			int secondaryDefense = -1;
-			if (PokemonData.pokemonInfo[pokemonName].pokemonTypes.Length > 1) {
-				secondaryDefense = PokemonData.pokemonInfo[pokemonName].pokemonTypes[1];
+			float typeEffectiveness = 1f;
+
+			if (attackType != -1)
+			{
+				int incomingDamageType = attackType;
+
+				int primaryDefense = PokemonData.pokemonInfo[pokemonName].pokemonTypes[0];
+				int secondaryDefense = -1;
+				if (PokemonData.pokemonInfo[pokemonName].pokemonTypes.Length > 1) {
+					secondaryDefense = PokemonData.pokemonInfo[pokemonName].pokemonTypes[1];
+				}
+
+				typeEffectiveness = PokemonTypeChart.GetTypeEffectiveness(incomingDamageType, primaryDefense, secondaryDefense);
 			}
-			float typeEffectiveness = PokemonTypeChart.GetTypeEffectiveness(incomingDamageType, primaryDefense, secondaryDefense);
 			// can then be used to multiply the final damage. --------------------------------------------------------------------------------------------------------------------+
 
 			//calling Hp
@@ -1914,19 +1941,24 @@ namespace Pokemod.Content.Pets
             }
 			else //scale the pokemon's defense normally against other pokemon (multiplied by 14 to reverse the assumed 14 defense of vanilla enemies)(Multiplied by 5 to account for the global health scaling)(divided by 3 as most pokemon attacks hit 3 times).
 			{
-				dmg = 2 + (int)(Math.Clamp((npcdmg - 2f) * 5f * 14f / 3f, 0f, 9999f) / (defenseValue + 2));
+				dmg = (int)((2 + Math.Clamp((npcdmg - 2f) * 5f * 14f / 3f, 0f, 9999f) / (defenseValue + 2))*typeEffectiveness);
             }
-			manualDmg(dmg);
+
+			Color dmgColor = new Color(255, 50, 50);
+			if(typeEffectiveness > 1f) dmgColor = new Color(255, 133, 10);
+			if(typeEffectiveness < 1f) dmgColor = new Color(97, 97, 97);
+
+			manualDmg(dmg, dmgColor.R, dmgColor.G, dmgColor.B);
             return dmg;
         }
 
-		public void manualDmg(int dmg){
+		public void manualDmg(int dmg, byte R = 255, byte G = 50, byte B = 50){
 			if (dmg <= 0) dmg = 1;
 
             currentHp -= dmg;
 			SoundEngine.PlaySound(SoundID.NPCHit1, Projectile.position);
 
-            CombatText.NewText(Projectile.Hitbox, new Color(255, 50, 50), dmg);
+            CombatText.NewText(Projectile.Hitbox, new Color(R,G,B), dmg);
 
             if (currentHp <= 0) {
 				currentHp = 0;
@@ -1938,7 +1970,6 @@ namespace Pokemod.Content.Pets
 
 					if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().onBattle)
 					{
-						Main.NewText("Sending next Pokemon");
 						Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().SendNextPokemon();
 					}
 				}
@@ -1963,21 +1994,26 @@ namespace Pokemod.Content.Pets
         }
         
         public void TakeDamage(){
-            NPC npc = null;
-            for (int i = 0; i < Main.maxNPCs; i++){
-                npc = Main.npc[i];
+			PokemonPlayer pokemonPlayer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
 
-                if (npc.CanBeChasedBy() && npc.damage != 0){
-                    if (Projectile.Hitbox.Intersects(npc.getRect()) && !immune){
-                        int npcdmg = npc.defDamage;
-                        if(currentHp != 0){
-							CalcIncomingDmg(npcdmg, true);
-							Projectile.velocity += 4f*(Projectile.Center - npc.Center).SafeNormalize(Vector2.Zero);
+            NPC npc = null;
+
+			if(!pokemonPlayer.onBattle){
+				for (int i = 0; i < Main.maxNPCs; i++){
+					npc = Main.npc[i];
+
+					if (npc.CanBeChasedBy() && npc.damage != 0){
+						if (Projectile.Hitbox.Intersects(npc.getRect()) && !immune){
+							int npcdmg = npc.defDamage;
+							if(currentHp != 0){
+								CalcIncomingDmg(npcdmg, true);
+								Projectile.velocity += 4f*(Projectile.Center - npc.Center).SafeNormalize(Vector2.Zero);
+							}
+							immune = true;
 						}
-                        immune = true;
-                    }
-                }
-            }
+					}
+				}
+			}
 
 			// Projectile damage which goes against special defense (or based on isSpecial for pokemon attacks). 
 			if (Main.myPlayer == Projectile.owner)
@@ -1989,7 +2025,7 @@ namespace Pokemod.Content.Pets
 
 					if (((bullet.hostile && !isEnemy) || (bullet.friendly && isEnemy)) && bullet.damage > 0 && bullet.active)
 					{
-						if (Projectile.Hitbox.Intersects(bullet.getRect()) && !immune)
+						if (/*Projectile.Hitbox.Intersects(bullet.getRect())*/bullet.Colliding(bullet.Hitbox,Projectile.Hitbox) == true && !immune)
 						{
 							int bulletdmg = bullet.damage;
 							if (bullet.owner == 0) //if the bullet comes from an npc, it's damage needs to be manually scaled for the world difficulty. *Currently doesn't scale correctly in Journey mode* ----------------------------
@@ -2009,18 +2045,29 @@ namespace Pokemod.Content.Pets
 							}
                             if (currentHp != 0)
 							{
+								bool canHit = !pokemonPlayer.onBattle;
+
 								bool enemyPokemon = false;
 								bool physical = false;
-								if (bullet.ModProjectile is PokemonAttack) 
+								int attackType = -1;
+								if (bullet.ModProjectile is PokemonAttack attack) 
 								{
 									enemyPokemon = true; 
-									var enemyPokemonAttack = (PokemonAttack)bullet.ModProjectile;
+									var enemyPokemonAttack = attack;
 									physical = !enemyPokemonAttack.isSpecial;
+									attackType = enemyPokemonAttack.attackType;
+
+									if(bullet.owner == Projectile.owner)
+									{
+										canHit = true;
+									}
 								}
-								CalcIncomingDmg(bulletdmg, physical, enemyPokemon);
-								Projectile.velocity += bullet.knockBack * (Projectile.Center - bullet.Center).SafeNormalize(Vector2.Zero);
+								if(canHit){
+									CalcIncomingDmg(bulletdmg, physical, enemyPokemon, attackType);
+									Projectile.velocity += bullet.knockBack * (Projectile.Center - bullet.Center).SafeNormalize(Vector2.Zero);
+									immune = true;
+								}
 							}
-							immune = true;
 						}
 					}
 				}
@@ -2037,6 +2084,20 @@ namespace Pokemod.Content.Pets
                 }
             }
         }
+
+		public float GetHPRatio()
+		{
+			return (float)currentHp/finalStats[0];
+		}
+
+		public Color GetHPBarColor()
+		{
+			float percent = GetHPRatio();
+
+			if(percent > 0.5f) return new Color(26, 255, 75);
+			else if(percent > 0.2f) return new Color(255, 244, 26);
+			else return new Color(255, 34, 26);
+		}
 
         public override bool PreDraw(ref Color lightColor)
         {
@@ -2106,8 +2167,8 @@ namespace Pokemod.Content.Pets
 
 						for (int i = 0; i < steps; i += 1)
 						{
-							float percent = (float)i / (right - left);
-							Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Entity.Top + new Vector2(left + i, -20) - Main.screenPosition, new Rectangle(0, 0, 1, 8), Color.Lerp(new Color(50, 255, 50), new Color(50, 255, 50), percent), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
+							//float percent = (float)i / (right - left);
+							Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Entity.Top + new Vector2(left + i, -20) - Main.screenPosition, new Rectangle(0, 0, 1, 8), GetHPBarColor(), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
 
 						}
 						Main.EntitySpriteDraw(barTexture.Value, Entity.Top + new Vector2(0, -20) - Main.screenPosition, barTexture.Value.Bounds, Color.White, 0, barTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);

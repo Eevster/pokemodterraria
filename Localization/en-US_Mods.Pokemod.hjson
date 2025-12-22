@@ -4996,6 +4996,16 @@ PokemonInfo: {
 	DodgeAttack: Dodge
 }
 
+PokemonBattle: {
+	TrainerLvl: Trainer Level: {0}
+	NextPokemon: Go {0}!
+	BattleStart: "{0} wants to battle!"
+	EnemyPokemonFainted: Enemy {0} fainted!
+	BattleWin: "{0} was defeated! You won!"
+	TeamDefeated: Your entire team was defeated...
+	NoTeam: You don't have any Pokémon that can fight
+}
+
 MoveLearnUI: {
 	MoveLearn: Your {0} wants to learn a new move, which one should it forget?
 	Forget: Forget selected
@@ -5228,6 +5238,26 @@ Configs: {
 
 		None: {
 			Label: None
+			Tooltip: ""
+		}
+	}
+
+	UIConfig: {
+		DisplayName: U I Config
+		Headers.PokemonCursor: Pokemon Cursor Header
+
+		ArrowDistance: {
+			Label: Arrow Distance
+			Tooltip: ""
+		}
+
+		ArrowScale: {
+			Label: Arrow Scale
+			Tooltip: ""
+		}
+
+		PokemonImageDistance: {
+			Label: Pokemon Image Distance
 			Tooltip: ""
 		}
 	}

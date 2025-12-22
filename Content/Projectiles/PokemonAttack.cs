@@ -37,6 +37,8 @@ namespace Pokemod.Content.Projectiles
         public ArmorShaderData shader = null;
 		public Color effectColor = Color.White;
 
+		public bool inPokemonBattle = false;
+
         public override void SetDefaults()
         {
 			Projectile.DamageType = ModContent.GetInstance<PokemonDamageClass>();
@@ -170,8 +172,13 @@ namespace Pokemod.Content.Projectiles
 			return exp;
 		}*/
 
-		public void SearchTarget(float distanceFromTarget, bool canAttackThroughWalls = true){
-			Vector2 targetCenter = Projectile.Center;
+		public void SearchTarget(float distanceFromTarget, bool canAttackThroughWalls = true)
+		{
+			SearchTargetFromPoint(Projectile.Center, distanceFromTarget, canAttackThroughWalls);
+		}
+
+		public void SearchTargetFromPoint(Vector2 point, float distanceFromTarget, bool canAttackThroughWalls = true){
+			Vector2 targetCenter = point;
 
             PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
 
@@ -190,9 +197,9 @@ namespace Pokemod.Content.Projectiles
 						Player target = Main.player[k];
 						if(target.whoAmI != Projectile.owner){
 							if(target.active && !target.dead){
-								float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, Projectile.Center);
+								float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, point);
 								bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, target.position, target.width, target.height);
-								bool closeThroughWall = Vector2.Distance(target.Center, Projectile.Center) < 100f || canAttackThroughWalls;
+								bool closeThroughWall = Vector2.Distance(target.Center, point) < 100f || canAttackThroughWalls;
 
 								// Check if it is within the radius
 								if (sqrDistanceToTarget < sqrMaxDetectDistance && (lineOfSight || closeThroughWall)) {
@@ -217,8 +224,8 @@ namespace Pokemod.Content.Projectiles
 				NPC npc = Main.npc[i];
 
 				if (npc.CanBeChasedBy()) {
-					float between = Vector2.Distance(npc.Center, Projectile.Center);
-					bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
+					float between = Vector2.Distance(npc.Center, point);
+					bool closest = Vector2.Distance(point, targetCenter) > between;
 					bool inRange = between < distanceFromTarget;
 
 					bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
@@ -243,13 +250,18 @@ namespace Pokemod.Content.Projectiles
 			}
 
 			if(targetPlayer != null && targetEnemy != null){
-				if(Vector2.Distance(Projectile.Center, targetPlayer.Center) >= Vector2.Distance(Projectile.Center, targetEnemy.Center)){
+				if(Vector2.Distance(point, targetPlayer.Center) >= Vector2.Distance(point, targetEnemy.Center)){
 					targetEnemy = null;
 				}else{
 					targetPlayer = null;
 				}
 			}
 		}
+
+        public override bool? CanDamage()
+        {
+            return !inPokemonBattle;
+        }
 
         public override bool PreDraw(ref Color lightColor)
         {

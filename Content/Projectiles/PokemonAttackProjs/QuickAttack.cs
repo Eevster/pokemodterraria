@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Common.Players;
 using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
@@ -84,7 +85,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
 
 			if(!pokemonOwner.canAttack && pokemonOwner.timer > 0){
-				pokemonOwner.immune = true;
+				if(!Main.player[pokemon.owner].GetModPlayer<PokemonPlayer>().onBattle) pokemonOwner.immune = true;
                 pokemon.velocity.Y *= 0.95f;
             }
         }

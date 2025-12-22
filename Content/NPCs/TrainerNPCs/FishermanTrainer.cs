@@ -15,6 +15,9 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 	{
 		private static Profiles.StackedNPCProfile NPCProfile;
 
+		public override int nPokemon => 3;
+		public override string[] pokemonOptions => ["Magikarp", "Poliwag", "Shellder"];
+
 		public override void SetStaticDefaults()
 		{
 			Main.npcFrameCount[Type] = 26; // The amount of frames the NPC has
@@ -109,7 +112,8 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			WeightedRandom<string> chat = new WeightedRandom<string>();
 
 			// These are things that the NPC has a chance of telling you when you talk to it.
-			chat.Add(Language.GetTextValue($"Mods.Pokemod.Dialogue.{GetType().Name}.StandardDialogue1"));
+			chat.Add(Language.GetTextValue($"Mods.Pokemod.Dialogue.{GetType().Name}.StandardDialogue1") + "\n"+
+				"[c/FFE270:"+Language.GetText($"Mods.Pokemod.PokemonBattle.TrainerLvl").WithFormatArgs(trainerLevel).Value+"]");
 			return chat; // chat is implicitly cast to a string.
 		}
 
@@ -123,7 +127,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		{
 			if (firstButton)
 			{
-				StartBattle();
+				StartBattle(Main.player[Main.myPlayer]);
 			}
 			else
 			{

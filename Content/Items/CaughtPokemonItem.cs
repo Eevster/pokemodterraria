@@ -556,6 +556,8 @@ namespace Pokemod.Content.Items
 		}
 
 		private PokemonPetProjectile SafeGetPokemonProj(Projectile proj){
+			if(!(proj != null && proj.active)) return null;
+
 			PokemonPetProjectile PokemonProj;
 			if(proj.ModProjectile is PokemonPetProjectile){
 				PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
@@ -918,7 +920,7 @@ namespace Pokemod.Content.Items
 				spriteBatch.Draw(ballTexture.Value,
 					position: position-scale*new Vector2(ballTexture.Value.Width/2, ballTexture.Value.Height/2),
 					sourceRectangle: ballTexture.Value.Bounds,
-					drawColor,
+					(currentHP <= 0)?Color.DarkGray:drawColor,
 					rotation: 0f,
 					origin: Vector2.Zero,
 					scale: scale,
@@ -937,6 +939,24 @@ namespace Pokemod.Content.Items
 					scale: scale,
 					SpriteEffects.None,
 					layerDepth: 0f);
+
+				if (currentHP > 0)
+				{
+					float quotient = (float)currentHP / GetPokemonStats(Main.player[Main.myPlayer])[0];;
+					quotient = Utils.Clamp(quotient, 0f, 1f);
+
+					int barWidth = 4;
+					int barHeight = 28;
+
+					int up = (int)(-scale*0.5f*barHeight);
+					int down = (int)(scale*0.5f*barHeight);
+					int steps = (int)((down - up) * quotient);
+
+					for (int i = 0; i < steps; i += 1)
+					{
+						spriteBatch.Draw(TextureAssets.MagicPixel.Value, position + new Vector2((int)(-scale*0.5f*barHeight), down-i), new Rectangle(0, 0, (int)(scale * barWidth), 1), GetHPBarColor(quotient), 0, new Rectangle(0, 0, (int)(scale * barWidth), 1).Size() * 0.5f, 1, SpriteEffects.None, 0);
+					}
+				}
 			}
 
 			if(!Main.gamePaused){
@@ -949,6 +969,13 @@ namespace Pokemod.Content.Items
 				
             base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
         }
+
+		public Color GetHPBarColor(float percent)
+		{
+			if(percent > 0.5f) return new Color(26, 255, 75);
+			else if(percent > 0.2f) return new Color(255, 244, 26);
+			else return new Color(255, 34, 26);
+		}
 
 		public bool ComparePokemon(CaughtPokemonItem other){
 			if(OriginalTrainerID == other.OriginalTrainerID && CurrentTrainerID == other.CurrentTrainerID
@@ -968,6 +995,7 @@ namespace Pokemod.Content.Items
 				{
 					GetProjHP();
 					proj.Kill();
+					proj = null;
 				}
 				else
 				{

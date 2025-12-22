@@ -120,11 +120,6 @@ namespace Pokemod.Content.Tiles
                 healed = true;
             }
         }
-
-        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
-        {
-            return true;
-        }
     }
 
     public class PokeHealer : ModItem

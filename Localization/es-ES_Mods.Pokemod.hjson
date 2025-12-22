@@ -29,9 +29,9 @@ Projectiles: {
 	Swift.DisplayName: Meteoros
 	VineWhipBack.DisplayName: Látigo cepa
 	VineWhipFront.DisplayName: Látigo cepa
-	// VineWhip.DisplayName: Vine Whip
+	VineWhip.DisplayName: Látigo cepa
 	ThunderboltHold.DisplayName: Rayo
-	// Thunderbolt.DisplayName: Thunderbolt
+	Thunderbolt.DisplayName: Rayo
 	PikachuPetProjectileShiny.DisplayName: Pikachu Pet Projectile Shiny
 	PokeballProj.DisplayName: Pokeball Proj
 	UltraballProj.DisplayName: Ultraball Proj
@@ -51,7 +51,7 @@ Projectiles: {
 	RaichuPetProjectileShiny.DisplayName: Raichu Pet Projectile Shiny
 	PoisonPowder.DisplayName: Polvo veneno
 	SolarBeamHold.DisplayName: Rayo solar
-	// SolarBeam.DisplayName: Solar Beam
+	SolarBeam.DisplayName: Rayo solar
 	Ember.DisplayName: Ascuas
 	Flamethrower.DisplayName: Lanzallamas
 	FireBlast.DisplayName: Llamarada
@@ -114,7 +114,7 @@ Projectiles: {
 	Confusion.DisplayName: Confusión
 	PinMissile.DisplayName: Pin misil
 	ThunderWave.DisplayName: Onda trueno
-	// Thunder.DisplayName: Thunder
+	Thunder.DisplayName: Trueno
 	FlashCannon.DisplayName: Foco resplandor
 	ConfuseRay.DisplayName: Rayo confuso
 	Hex.DisplayName: Infortunio
@@ -4993,22 +4993,32 @@ PokemonInfo: {
 	WrongType: Tipo incorrecto
 	NoMoveAvailable: No hay movimientos disponibles
 	Disobedience: *te ignora*
-	// DodgeAttack: Dodge
+	DodgeAttack: Esvasión
+}
+
+PokemonBattle: {
+	TrainerLvl: Nivel de entrenador: {0}
+	NextPokemon: Adelante {0}!
+	BattleStart: ¡{0} quiere combatir!
+	EnemyPokemonFainted: ¡{0} enemigo se debilitó!
+	BattleWin: ¡{0} fue derrotado! ¡Ganaste!
+	TeamDefeated: Todo tu equipo fue derrotado...
+	NoTeam: No tienes ningún pokemon capaz de luchar
 }
 
 MoveLearnUI: {
 	MoveLearn: Tu {0} quiere aprender un nuevo movimiento, ¿cuál debería olvidar?
 	Forget: Olvidar seleccionado
-	// ForgetTooltip: Learn the new move {0}, and forget {1}?
+	ForgetTooltip: ¿Aprender {0}, y olvidar {1}?
 	NotLearn: No aprender
-	// NotLearnTooltip: Keep current moves and give up on learning {0}?
-	// NoSelection: No Selection
-	// NoSelectionTooltip: Click on a move from the list to replace it
-	// MovePower: Power: {0}
-	// MoveSpeed: Speed: {0}
-	// MoveRange: Range: {0}
-	// MoveEffect: Effect: {0}
-	// Success: "{0} learned {1}"
+	NotLearnTooltip: ¿Mantener movimientos y no aprender {0}?
+	NoSelection: Sin selección
+	NoSelectionTooltip: Haz clic en un movimiento de la lista para reemplazarlo
+	MovePower: Poder: {0}
+	MoveSpeed: Velocidad: {0}
+	MoveRange: Rango: {0}
+	MoveEffect: Efecto: {0}
+	Success: "{0} aprendió {1}"
 }
 
 PokemonTypes: {
@@ -5228,6 +5238,26 @@ Configs: {
 
 		None: {
 			Label: Ninguno
+			// Tooltip: ""
+		}
+	}
+
+	UIConfig: {
+		// DisplayName: U I Config
+		// Headers.PokemonCursor: Pokemon Cursor Header
+
+		ArrowDistance: {
+			Label: Distancia de flecha
+			// Tooltip: ""
+		}
+
+		ArrowScale: {
+			Label: Tamaño de flecha
+			// Tooltip: ""
+		}
+
+		PokemonImageDistance: {
+			Label: Distancia de imagen de pokemon
 			// Tooltip: ""
 		}
 	}

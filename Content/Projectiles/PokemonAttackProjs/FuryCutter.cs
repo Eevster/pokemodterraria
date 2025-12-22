@@ -76,7 +76,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override bool? CanDamage()
         {
-            return Projectile.frame >= 2;
+            return Projectile.frame >= 2 && !inPokemonBattle;
         }
     }
 }

@@ -8,6 +8,7 @@ using Terraria.GameContent.Achievements;
 using Terraria.DataStructures;
 using Pokemod.Content.Pets;
 using Terraria.Graphics.Shaders;
+using Pokemod.Common.Players;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
@@ -80,9 +81,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
 
             if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && !pokemonOwner.canAttack) {
-                pokemonOwner.immune = true;
-                pokemonOwner.pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.ReflectiveSilverDye);
-                
+                if(!Main.player[pokemon.owner].GetModPlayer<PokemonPlayer>().onBattle) pokemonOwner.immune = true;
+                pokemonOwner.pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.ReflectiveSilverDye);     
             }
         }
     }

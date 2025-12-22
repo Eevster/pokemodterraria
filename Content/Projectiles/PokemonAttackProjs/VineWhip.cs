@@ -169,7 +169,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}
 
 				if(Projectile.frame == 3){
-					if(!foundTarget && attackMode != (int)PokemonPlayer.AttackMode.Directed_Attack) Projectile.Kill();
+					if(!foundTarget && attackMode != (int)PokemonPlayer.AttackMode.Directed_Attack && !Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().manualControl) Projectile.Kill();
 					if(Projectile.Opacity == 0){
 						Projectile.Opacity = 1f;
 					}
@@ -190,7 +190,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override bool? CanDamage()
         {
-            return canDamage;
+            return canDamage && !inPokemonBattle;
         }
 
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
@@ -312,7 +312,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				if (++Projectile.frame >= Main.projFrames[Projectile.type])
 				{
 					Projectile.frame = 0;
-					if(!foundTarget && attackMode != (int)PokemonPlayer.AttackMode.Directed_Attack) Projectile.Kill();
+					if(!foundTarget && attackMode != (int)PokemonPlayer.AttackMode.Directed_Attack && !Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().manualControl) Projectile.Kill();
                 }
 
 				if(Projectile.Opacity != 0){
@@ -343,7 +343,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override bool? CanDamage()
         {
-            return canDamage;
+            return canDamage && !inPokemonBattle;
         }
 
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

@@ -23,6 +23,7 @@ using Pokemod.Content.Tiles;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Buffs;
 using Pokemod.Common.Configs;
+using Terraria.Localization;
 
 namespace Pokemod.Common.Players
 {
@@ -661,9 +662,14 @@ namespace Pokemod.Common.Players
 				{
 					onBattle = true;
 
+					DespawnAllPokemon();
 					SendNextPokemon();
 
 					return true;
+				}
+				else
+				{
+					Main.NewText(Language.GetTextValue("Mods.Pokemod.PokemonBattle.NoTeam"), 255, 130, 130);
 				}
 			}
 			else
@@ -695,13 +701,13 @@ namespace Pokemod.Common.Players
 						pokemonProj.manualControl = true;
 					}
 
-					Main.NewText(nextPokemon.PokemonName);
+					Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.NextPokemon").WithFormatArgs(nextPokemon.PokemonName).Value, 0, 191, 35); 
 
 					return;
 				}
 			}
 
-			Main.NewText("Your entire team was defeated...");
+			Main.NewText(Language.GetTextValue("Mods.Pokemod.PokemonBattle.TeamDefeated"), 255, 130, 130);
 			SetBattle(false);
 		}
 		public CaughtPokemonItem[] GetPokemonTeam(int amount) {
@@ -711,10 +717,38 @@ namespace Pokemod.Common.Players
 			for (int i = 0; i < Math.Min(amount, pokemonItems.Count); i++)
 			{
 				pokemonTeam.Add(pokemonItems[i].ModItem as CaughtPokemonItem);
-				Main.NewText(((CaughtPokemonItem)pokemonItems[i].ModItem).PokemonName);
+				//Main.NewText(((CaughtPokemonItem)pokemonItems[i].ModItem).PokemonName);
 			}
 
 			return pokemonTeam.ToArray();
 		}
+
+		public void DespawnAllPokemon()
+		{
+			List<Item> pokemonItems = Player.inventory.ToList().FindAll(item => item.type == ModContent.ItemType<CaughtPokemonItem>());
+
+			for (int i = 0; i < pokemonItems.Count; i++)
+			{
+				if(pokemonItems[i].ModItem is CaughtPokemonItem pokemonItem)
+				{
+					pokemonItem.DespawnPokemon();
+				}
+			}
+
+		}
+
+        public override bool CanBeHitByNPC(NPC npc, ref int cooldownSlot)
+        {
+			if(onBattle) return false;
+
+            return base.CanBeHitByNPC(npc, ref cooldownSlot);
+        }
+
+        public override bool CanBeHitByProjectile(Projectile proj)
+        {
+			if(onBattle) return false;
+
+            return base.CanBeHitByProjectile(proj);
+        }
 	}
 }

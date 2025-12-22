@@ -60,7 +60,7 @@ namespace Pokemod.Common.UI.PokedexUI
 			int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
 			if (mouseTextIndex != -1) {
 				layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
-					"Pokemod: Move Learn",
+					"Pokemod: Pokedex",
 					delegate {
 						if (PokedexUserInterface?.CurrentState != null)
 							PokedexUserInterface.Draw(Main.spriteBatch, new GameTime());

@@ -52,6 +52,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.penetrate = -1;
 
 			Projectile.light = 1f;
+            Projectile.Opacity = 0.6f;
 
 			Projectile.hide = true;
             base.SetDefaults();
@@ -62,7 +63,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
 			SoundEngine.PlaySound(SoundID.Item94, pokemon.position);
 			if(pokemon.owner == Main.myPlayer){
-				pokemonOwner.attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Thunderbolt>(), pokemonOwner.GetPokemonDamage(90, true), 2f, pokemon.owner)];
+				pokemonOwner.attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Thunderbolt>(), pokemonOwner.GetPokemonDamage(90, true), 2f, pokemon.owner, targetCenter.X, targetCenter.Y)];
 			}
 			pokemonOwner.timer = pokemonOwner.attackDuration;
 			pokemonOwner.canAttack = false;
@@ -100,9 +101,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     distanceToOrigin = directionToOrigin.Length();
 
                     Main.EntitySpriteDraw(chainTexture.Value, center - Main.screenPosition,
-                        chainTexture.Frame(1, 3, 0, Projectile.frame), Color.White, directionToOrigin.ToRotation(),
+                        chainTexture.Frame(1, 3, 0, Projectile.frame), Color.White * Projectile.Opacity, directionToOrigin.ToRotation(),
                         chainTexture.Frame(1, 3).Size() / 2f, 1f, SpriteEffects.None, 0);
                 }
+
+                var AttackTexture = ModContent.Request<Texture2D>(Texture);
+
+                Main.EntitySpriteDraw(AttackTexture.Value, targetPosition - Main.screenPosition,
+                        AttackTexture.Frame(1, 3, 0, Projectile.frame), Color.White * Projectile.Opacity, directionToOrigin.ToRotation(),
+                        AttackTexture.Frame(1, 3).Size() / 2f, 1f, SpriteEffects.None, 0);
             }
             
             return false;
@@ -111,7 +118,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void AI()
         {
             if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-			    SearchTarget(600f, false);
+                if (foundTarget)
+                {
+                    SearchTargetFromPoint(targetPosition, 64f, false);
+                }
+                else targetPosition = new Vector2(Projectile.ai[0], Projectile.ai[1]);
+                foundTarget = true;
             }else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
                 targetPosition = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().attackPosition;
                 foundTarget = true;
@@ -138,7 +150,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override bool? CanDamage()
         {
-            return Projectile.timeLeft <= 25;
+            return Projectile.timeLeft <= 25 && !inPokemonBattle;
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
@@ -151,7 +163,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(!foundTarget){
 				return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 48f, ref collisionPoint);
 			}else{
-                if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack && targetEnemy != null) targetPosition = targetEnemy.Center;
+                if(targetEnemy != null) targetPosition = targetEnemy.Center;
 				return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 48f, ref collisionPoint) ||
 					Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, targetPosition, 32f, ref collisionPoint);
 			}
@@ -159,7 +171,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {
-            behindProjectiles.Add(index);
+            overPlayers.Add(index);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Common.Players;
 using Pokemod.Content.Dusts;
 using Pokemod.Content.Pets;
 using Terraria;
@@ -113,7 +114,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             if (!pokemonOwner.canAttack && pokemonOwner.timer > 0)
             {
-                pokemonOwner.immune = true;
+                if(!Main.player[pokemon.owner].GetModPlayer<PokemonPlayer>().onBattle) pokemonOwner.immune = true;
                 pokemon.velocity.Y *= 0.95f;
                 if (pokemon.velocity.Length() > 1f)
                 {
