@@ -2086,7 +2086,7 @@ Items: {
 		Tooltip: ""
 		DisplayName: Super Rod
 	}
-	
+
 	HeartScale: {
 		DisplayName: Heart Scale
 		Tooltip: ""
