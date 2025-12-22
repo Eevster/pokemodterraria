@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Configs;
 using Pokemod.Common.Players;
 using Pokemod.Common.UI.MoveLearnUI;
+using Pokemod.Common.UI.MoveTutorUI;
 using Pokemod.Content.Items.Consumables;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
@@ -786,6 +787,8 @@ namespace Pokemod.Content.Items
                     Main.dust[dust].color = typeColor;
                 }
             }
+			MoveTutorUISystem tutorUI = ModContent.GetInstance<MoveTutorUISystem>();
+		    tutorUI.RefreshUI();
 		}
 
 		public void AddHappiness(int add1, int add2, int add3){
