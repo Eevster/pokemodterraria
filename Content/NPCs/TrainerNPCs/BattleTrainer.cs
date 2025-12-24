@@ -77,15 +77,22 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		{
 			if(pokemonTeam.Count > 0)
 			{
-				Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.EnemyPokemonFainted").WithFormatArgs(pokemonTeam[0].name).Value, 237, 143, 2); 
+				Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.EnemyPokemonFainted").WithFormatArgs(pokemonTeam[0].name).Value, 237, 143, 2);
+				var opponentPokemon = Main.projectile[opponent.GetModPlayer<PokemonPlayer>().currentActivePokemon[0]];
+				if(opponentPokemon.ModProjectile is PokemonPetProjectile activePokemon)
+				{
+					activePokemon.SetGainedExp((int)(100f * pokemonTeam[0].level / 7f));
+				}
 				pokemonTeam.RemoveAt(0);
 
 				if(pokemonTeam.Count > 0)SendPokemon(opponent);
 				else
 				{
-					Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.BattleWin").WithFormatArgs(NPC.FullName).Value, 237, 206, 2); 
+					Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.BattleWin").WithFormatArgs(NPC.FullName).Value, 237, 206, 2);
 					opponent.GetModPlayer<PokemonPlayer>().SetBattle(false);
-					NPC.EncourageDespawn(0);
+					NPC.active = false;
+					NPC.netSkip = -1;
+					NPC.life = 0;
 				}
 			}
 		}

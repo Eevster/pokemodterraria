@@ -687,6 +687,8 @@ namespace Pokemod.Common.Players
 				onBattle = false;
 				manualControl = false;
 
+				Player.SetImmuneTimeForAllTypes(Player.longInvince ? 120 : 80);
+
 				return true;
 			}
 
@@ -749,7 +751,7 @@ namespace Pokemod.Common.Players
 
         public override bool CanBeHitByNPC(NPC npc, ref int cooldownSlot)
         {
-			if(onBattle) return false;
+			if(onBattle && !npc.boss) return false;
 
             return base.CanBeHitByNPC(npc, ref cooldownSlot);
         }

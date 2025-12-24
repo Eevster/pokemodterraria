@@ -21,11 +21,12 @@ namespace Pokemod.Common.Players
 				ModContent.NPCType<MagikarpCritterNPC>(),
 				ModContent.NPCType<PoliwagCritterNPC>(),
 				ModContent.NPCType<ShellderCritterNPC>(),
+				ModContent.NPCType<StaryuCritterNPC>(),
 				ModContent.NPCType<DratiniCritterNPC>(),
 			};
 
 			const int oldRodLimit = 1;
-			const int goodRodLimit = 3;
+			const int goodRodLimit = 4;
 
 			if (isPokemonFishingRod && inWater)
 			{
