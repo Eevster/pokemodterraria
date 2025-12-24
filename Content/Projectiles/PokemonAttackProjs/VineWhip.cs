@@ -18,6 +18,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class VineWhip : PokemonAttack
 	{
+		public override bool CanExistIfNotActualMove => false;
 		private bool canDamage = false;
 		private int projDirection = 1;
 		Vector2 vectorToTarget;

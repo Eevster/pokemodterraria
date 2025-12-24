@@ -17,6 +17,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Blizzard : PokemonAttack
 	{
+		public override bool CanExistIfNotActualMove => false;
 		int explosionSize = 400;
 
 		public override void SetDefaults()

@@ -17,6 +17,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class FlameWheel : PokemonAttack
 	{
+        public override bool CanExistIfNotActualMove => false;
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 6;

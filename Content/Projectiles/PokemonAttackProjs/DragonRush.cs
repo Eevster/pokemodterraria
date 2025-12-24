@@ -18,6 +18,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class DragonRush : PokemonAttack
 	{
+		public override bool CanExistIfNotActualMove => false;
         public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
         public override void SetDefaults()
         {

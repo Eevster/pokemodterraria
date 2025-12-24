@@ -78,8 +78,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
-            width = 4;
-			height = 4;
+            width = 2;
+			height = 2;
             fallThrough = true;
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);

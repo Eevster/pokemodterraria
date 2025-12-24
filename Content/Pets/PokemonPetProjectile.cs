@@ -1648,7 +1648,9 @@ namespace Pokemod.Content.Pets
 					{
 						if (move.Name.Replace("_Front","") != currentAttack)
 						{
-                            move.Kill();
+                            if(move.ModProjectile is PokemonAttack pokemonMove){
+								if(!pokemonMove.CanExistIfNotActualMove) move.Kill();
+							}
 							attackProjs[i] = null;
 						}
 					}

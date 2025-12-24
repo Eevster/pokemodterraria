@@ -16,6 +16,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Discharge : PokemonAttack
 	{
+        public override bool CanExistIfNotActualMove => false;
         Vector2 LightVector;
         public override void SetStaticDefaults()
         {

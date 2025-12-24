@@ -18,6 +18,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class WingAttack : PokemonAttack
 	{
+		public override bool CanExistIfNotActualMove => false;
         public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/QuickAttack";
 		public override void SetDefaults()
         {

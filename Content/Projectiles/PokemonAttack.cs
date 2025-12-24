@@ -39,6 +39,8 @@ namespace Pokemod.Content.Projectiles
 
 		public bool inPokemonBattle = false;
 
+		public virtual bool CanExistIfNotActualMove => true;
+
         public override void SetDefaults()
         {
 			Projectile.DamageType = ModContent.GetInstance<PokemonDamageClass>();
@@ -181,6 +183,8 @@ namespace Pokemod.Content.Projectiles
 			Vector2 targetCenter = point;
 
             PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+
+			if(trainer.onBattle) return;
 
             Vector2 playerPosition = trainer.Player.Center;
             float distanceFromPlayer = 1500;

@@ -16,6 +16,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class AquaRing : PokemonAttack
 	{
+        public override bool CanExistIfNotActualMove => false;
 		private static Asset<Texture2D> ringTexture;
         
         public override void Load()

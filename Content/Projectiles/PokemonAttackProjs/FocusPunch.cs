@@ -17,6 +17,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class FocusPunch : PokemonAttack
 	{
+        public override bool CanExistIfNotActualMove => false;
         private Vector2 positionOffset;
         public override void SetStaticDefaults()
         {

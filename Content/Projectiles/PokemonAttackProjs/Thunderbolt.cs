@@ -18,6 +18,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Thunderbolt : PokemonAttack
 	{
+        public override bool CanExistIfNotActualMove => false;
         Vector2 targetPosition;
 		public override void SetStaticDefaults()
         {

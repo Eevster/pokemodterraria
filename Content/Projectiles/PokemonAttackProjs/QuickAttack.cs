@@ -17,6 +17,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class QuickAttack : PokemonAttack
 	{
+		public override bool CanExistIfNotActualMove => false;
 		public override void SetDefaults()
         {
             Projectile.width = 50;

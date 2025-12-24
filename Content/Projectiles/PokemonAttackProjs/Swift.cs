@@ -19,6 +19,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Swift : PokemonAttack
 	{
+		public override bool CanExistIfNotActualMove => false;
 		private Vector2 targetPosition;
 		private bool canfollow = true;
 		public override void SendExtraAI(BinaryWriter writer)

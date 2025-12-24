@@ -13,6 +13,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
     public class NightSlash : PokemonAttack
 	{
+        public override bool CanExistIfNotActualMove => false;
         private bool mirrored;
 
         public override void SetStaticDefaults()

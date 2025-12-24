@@ -280,6 +280,11 @@ namespace Pokemod.Common.Players
 				}
 			}
 
+			if (onBattle)
+			{
+				Player.aggro -= 3000;
+			}
+
 			ExpMult = 1f;
 			if (LeftoversTimer > 0) LeftoversTimer--;
 			if (HasAirBalloon > 0) HasAirBalloon--;
@@ -636,6 +641,11 @@ namespace Pokemod.Common.Players
 					Player.delayUseItem = true;
 					Player.controlUseTile = false;
 				}*/
+			}
+
+			if (onBattle)
+			{
+				Player.aggro -= 3000;
 			}
 		}
 

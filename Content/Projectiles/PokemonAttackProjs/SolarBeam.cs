@@ -18,6 +18,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class SolarBeam : PokemonAttack
 	{
+        public override bool CanExistIfNotActualMove => false;
 		Vector2 enemyCenter;
         float maxLenght = 1500;
         bool canPlaySound = true;

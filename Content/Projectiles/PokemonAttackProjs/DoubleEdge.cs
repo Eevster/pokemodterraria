@@ -16,6 +16,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class DoubleEdge : PokemonAttack
 	{
+		public override bool CanExistIfNotActualMove => false;
 		public bool firstImpact = true;
 		private Color dustColor = new Color(255, 200, 150);
 

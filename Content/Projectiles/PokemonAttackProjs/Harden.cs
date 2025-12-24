@@ -14,6 +14,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
     internal class Harden : PokemonAttack
     {
+        public override bool CanExistIfNotActualMove => false;
         public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
         public override void SetDefaults()
         {

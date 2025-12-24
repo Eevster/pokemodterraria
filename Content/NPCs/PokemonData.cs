@@ -415,7 +415,7 @@ namespace Pokemod.Content.NPCs
             {"Goldeen", new PokemonInfo(0118, [45, 67, 60, 35, 50, 63], [(int)TypeIndex.Water], [new MoveLvl("BubbleBeam")], [(int)EggGroups.Water2], 0.6f, 15.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast, completed: false)},
             {"Seaking", new PokemonInfo(0119, [80, 92, 65, 65, 80, 68], [(int)TypeIndex.Water], [new MoveLvl("WaterPulse")], [(int)EggGroups.Water2], 1.3f, 39.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast, completed: false)},
 
-            {"Staryu", new PokemonInfo(0120, [30, 45, 55, 70, 55, 85], [(int)TypeIndex.Water], [new MoveLvl("Bubble")], [(int)EggGroups.Water3], 0.8f, 34.5f, (int)StageIndex.Basic, (int)ExpTypes.Slow, completed: false)},
+            {"Staryu", new PokemonInfo(0120, [30, 45, 55, 70, 55, 85], [(int)TypeIndex.Water], [new MoveLvl("Bubble")], [(int)EggGroups.Water3], 0.8f, 34.5f, (int)StageIndex.Basic, (int)ExpTypes.Slow)},
             {"Starmie", new PokemonInfo(0121, [60, 75, 85, 100, 85, 115], [(int)TypeIndex.Water,(int)TypeIndex.Psychic], [new MoveLvl("Confusion")], [(int)EggGroups.Water3], 1.1f, 80.0f, (int)StageIndex.Stage1, (int)ExpTypes.Slow, completed: false)},
 
             {"MrMime", new PokemonInfo(0122, [40, 45, 65, 100, 120, 90], [(int)TypeIndex.Psychic,(int)TypeIndex.Fairy], [new MoveLvl("Tackle"), new MoveLvl("Confusion", 8), new MoveLvl("DoubleKick", 16), new MoveLvl("MagicalLeaf", 24), new MoveLvl("Psybeam", 32), new MoveLvl("Psychic", 40), new MoveLvl("Hyperbeam", 50)], [(int)EggGroups.HumanLike], 1.3f, 54.5f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
