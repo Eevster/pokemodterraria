@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Configs;
@@ -29,11 +30,12 @@ namespace Pokemod.Common.UI.PokemonHoverUI
                                 Vector2 mousePosition = Main.MouseWorld;
                                 if (Vector2.Distance(proj.Center, Main.UIScale*(mousePosition-Main.screenPosition)+Main.screenPosition) <= 64f){
                                     string PokemonInfo = pokemon.pokemonName + " Lvl " + pokemon.pokemonLvl;
-                                    Vector2 vector2 = ((DynamicSpriteFont)FontAssets.MouseText).MeasureString(PokemonInfo);
+                                    DynamicSpriteFont font = (DynamicSpriteFont)FontAssets.MouseText;
+                                    Vector2 vector2 = font.MeasureString(PokemonInfo);
                                     Vector2 vector3 = new Vector2(vector2.X * 0.5f, vector2.Y * 0.5f);
                                     var infoPos = posScaleFactor*(proj.Top - Main.screenPosition) - vector3 + new Vector2(0, -40*posScaleFactor);
                     
-                                    DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, (DynamicSpriteFont)FontAssets.MouseText, PokemonInfo, infoPos, Color.White);
+                                    DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, font, PokemonInfo, infoPos, Color.White);
                                 }
                             }
                         }

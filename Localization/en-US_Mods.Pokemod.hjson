@@ -486,6 +486,9 @@ Projectiles: {
 	RampardosPetProjectileShiny.DisplayName: Rampardos Pet Projectile Shiny
 	CleffaPetProjectile.DisplayName: Cleffa Pet Projectile
 	CleffaPetProjectileShiny.DisplayName: Cleffa Pet Projectile Shiny
+	CosmicPower.DisplayName: Cosmic Power
+	PowerGem.DisplayName: Power Gem
+	RapidSpin.DisplayName: Rapid Spin
 }
 
 Items: {
