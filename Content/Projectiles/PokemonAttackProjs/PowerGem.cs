@@ -76,7 +76,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
             
 			if(pokemon.owner == Main.myPlayer){
-				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer >= 40 && pokemonOwner.timer%5==0){
+				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer > 40 && pokemonOwner.timer%5==0){
 					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 						if(pokemonOwner.attackProjs[i] == null){
 							SoundEngine.PlaySound(SoundID.Item39, Projectile.position);
@@ -98,7 +98,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				for (int k = 0; k < Projectile.oldPos.Length; k++) {
 					Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
 					Color color = Projectile.GetAlpha(lightColor);
-					color *= (Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length;
+					color *= 0.75f*(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length;
 					Main.EntitySpriteDraw(texture, drawPos, texture.Frame(1,8,0,7), color, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0);
 				}
 			}

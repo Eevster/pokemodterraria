@@ -489,6 +489,11 @@ Projectiles: {
 	CosmicPower.DisplayName: Cosmic Power
 	PowerGem.DisplayName: Power Gem
 	RapidSpin.DisplayName: Rapid Spin
+	ExtremeSpeed.DisplayName: Extreme Speed
+	EnergyBall.DisplayName: Energy Ball
+	Hurricane.DisplayName: Hurricane
+	DragonTail.DisplayName: Dragon Tail
+	AquaTail.DisplayName: Aqua Tail
 }
 
 Items: {
@@ -3816,12 +3821,12 @@ NPCs: {
 
 	CharizardMegaXCritterNPC: {
 		DisplayName: Mega Charizard X
-		Description: ""
+		Description: The overwhelming power that fills its entire body causes it to turn black and creates intense blue flames.
 	}
 
 	CharizardMegaYCritterNPC: {
 		DisplayName: Mega Charizard Y
-		Description: ""
+		Description: Its bond with its Trainer is the source of its power. It boasts speed and maneuverability greater than that of a jet.
 	}
 
 	CyndaquilCritterNPC: {
@@ -3836,7 +3841,7 @@ NPCs: {
 
 	BlastoiseMegaCritterNPC: {
 		DisplayName: Mega Blastoise
-		Description: ""
+		Description: The cannon on its back is as powerful as a tank gun. Its tough legs and back enable it to withstand the recoil from firing the cannon.
 	}
 
 	BayleefCritterNPC: {
@@ -3886,7 +3891,7 @@ NPCs: {
 
 	VenusaurMegaCritterNPC: {
 		DisplayName: Mega Venusaur
-		Description: ""
+		Description: In order to support its flower, which has grown larger due to Mega Evolution, its back and legs have become stronger.
 	}
 
 	WartortleCritterNPC: {
@@ -4081,7 +4086,7 @@ NPCs: {
 
 	AlakazamMegaCritterNPC: {
 		DisplayName: Mega Alakazam
-		Description: ""
+		Description: Alakazam has traded away its muscles, unleashing its true power. With its psychic powers, it can foresee all things.
 	}
 
 	ArcanineCritterNPC: {
@@ -4141,7 +4146,7 @@ NPCs: {
 
 	DragoniteCritterNPC: {
 		DisplayName: Dragonite
-		Description: ""
+		Description: It is said to make its home somewhere in the sea. It guides wrecked ships to shore.
 	}
 
 	DratiniCritterNPC: {
@@ -4186,7 +4191,7 @@ NPCs: {
 
 	GengarMegaCritterNPC: {
 		DisplayName: Mega Gengar
-		Description: ""
+		Description: It can pass through other dimensions and appear anywhere. It caused a stir one time when it stuck just one leg out of a wall.
 	}
 
 	GeodudeCritterNPC: {
@@ -4241,7 +4246,7 @@ NPCs: {
 
 	GyaradosMegaCritterNPC: {
 		DisplayName: Mega Gyarados
-		Description: ""
+		Description: It jets water from the orifices on its sides, streaking above the water surface at supersonic speed.
 	}
 
 	HitmonchanCritterNPC: {
@@ -4296,7 +4301,7 @@ NPCs: {
 
 	KinglerCritterNPC: {
 		DisplayName: Kingler
-		Description: ""
+		Description: The larger pincer has 10,000-horsepower strength. However, it is so heavy, it is difficult to aim.
 	}
 
 	KoffingCritterNPC: {
@@ -4306,7 +4311,7 @@ NPCs: {
 
 	KrabbyCritterNPC: {
 		DisplayName: Krabby
-		Description: ""
+		Description: It lives in burrows dug on sandy beaches. Its pincers fully grow back if they are lost in battle.
 	}
 
 	LaprasCritterNPC: {
@@ -4541,12 +4546,12 @@ NPCs: {
 
 	StarmieCritterNPC: {
 		DisplayName: Starmie
-		Description: ""
+		Description: At the center of its body is a red core that sends mysterious radio signals into the night sky.
 	}
 
 	StaryuCritterNPC: {
 		DisplayName: Staryu
-		Description: ""
+		Description: If Staryu's body is damaged, it will regenerate as long as the red core remains. The core flashes at midnight.
 	}
 
 	TangelaCritterNPC: {
@@ -4617,6 +4622,11 @@ NPCs: {
 	ZubatCritterNPC: {
 		DisplayName: Zubat
 		Description: ""
+	}
+
+	CleffaCritterNPC: {
+		DisplayName: Cleffa
+		Description: Its silhouette is like a star. It is believed to arrive riding on shooting stars.
 	}
 
 	EspeonCritterNPC: {
@@ -4847,6 +4857,7 @@ NPCs: {
 	WigglytuffCritterNPCShiny.DisplayName: Wigglytuff Shiny
 	ZapdosCritterNPCShiny.DisplayName: Zapdos Shiny
 	ZubatCritterNPCShiny.DisplayName: Zubat Shiny
+	CleffaCritterNPCShiny.DisplayName: Cleffa Shiny
 	EspeonCritterNPCShiny.DisplayName: Espeon Shiny
 	UmbreonCritterNPCShiny.DisplayName: Umbreon Shiny
 	UnownCritterNPCShiny.DisplayName: Unown Shiny
@@ -4935,8 +4946,6 @@ NPCs: {
 	}
 
 	G1T1_Brock.DisplayName: Rock-type Gym Leader
-	CleffaCritterNPC.DisplayName: Cleffa Critter N P C
-	CleffaCritterNPCShiny.DisplayName: Cleffa Critter N P C Shiny
 }
 
 Bestiary: {

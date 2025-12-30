@@ -15,11 +15,11 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-	public class QuickAttack : PokemonAttack
+	public class ExtremeSpeed : PokemonAttack
 	{
 		public override bool CanExistIfNotActualMove => false;
 
-		public bool didHit = false;
+		public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
 
 		public override void SetDefaults()
         {
@@ -50,8 +50,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(pokemon.owner == Main.myPlayer){
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<QuickAttack>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name) * 2, 0f, pokemon.owner)];
-						pokemon.velocity = 36*Vector2.Normalize(targetCenter-pokemon.Center);
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<ExtremeSpeed>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name) * 2, 0f, pokemon.owner)];
+						pokemon.velocity = 45*Vector2.Normalize(targetCenter-pokemon.Center);
 						SoundEngine.PlaySound(SoundID.Item1, pokemon.position);
 						pokemonOwner.timer = pokemonOwner.attackDuration;
 						pokemonOwner.canAttack = false;
@@ -96,26 +96,25 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void AI()
         {
-            if(Main.rand.NextBool())
-            {
-				int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Firework_Blue, Projectile.velocity.X / 2, Projectile.velocity.Y / 2, 100, default(Color), 0f);
-				Main.dust[dust].noGravity = true;
-				Main.dust[dust].scale = Main.rand.NextFloat(0.5f,1.5f);
+            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Firework_Blue, Projectile.velocity.X / 2, Projectile.velocity.Y / 2, 100, default(Color), 0f);
+			Main.dust[dust].noGravity = true;
+			Main.dust[dust].scale = Main.rand.NextFloat(1f,2f);
+
+			if (pokemonProj != null && pokemonProj.velocity.Length() > 0.2f)
+			{
+				for(int i = 0; i < 2; i++)
+				{
+					dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.HallowSpray, Projectile.velocity.X / 2, Projectile.velocity.Y / 2, 100, default(Color), 0f);
+					Main.dust[dust].position = Projectile.Center + 40f*pokemonProj.velocity.SafeNormalize(Vector2.Zero);
+					Main.dust[dust].velocity = 5f*pokemonProj.velocity.RotatedBy((i>0?1f:-1f)*MathHelper.ToRadians(70)).SafeNormalize(Vector2.Zero);
+					Main.dust[dust].noGravity = true;
+					Main.dust[dust].scale = Main.rand.NextFloat(1f,2f);
+				}
 			}
 
             if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
 			}
-        }
-
-		public override void AfterHitTarget(Entity target, int damageDone)
-        {
-			if (!didHit)
-			{
-				pokemonProj.velocity *= -0.5f;
-				didHit = true;
-			}
-            base.AfterHitTarget(target, damageDone);
         }
     }
 }

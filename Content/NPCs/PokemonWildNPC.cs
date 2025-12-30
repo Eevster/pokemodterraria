@@ -133,7 +133,7 @@ namespace Pokemod.Content.NPCs
 		public override void OnSpawn(IEntitySource source)
 		{
 			nature = 10 * Main.rand.Next(5) + Main.rand.Next(5);
-			lvl = Main.rand.Next(minLevel, Math.Min(WorldLevel.MaxWorldLevel, maxLevel) + 1);
+			lvl = Main.rand.Next(Math.Min(WorldLevel.MaxWorldLevel, minLevel), Math.Min(WorldLevel.MaxWorldLevel, maxLevel) + 1);
 			//Probability of it being a variant
 
 			if (Main.rand.NextBool(variantProbDenominator))

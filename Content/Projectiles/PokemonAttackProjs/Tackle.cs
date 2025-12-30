@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using Pokemod.Common.Players;
+using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
@@ -19,6 +20,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 	{
 		public override bool CanExistIfNotActualMove => false;
         public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
+
+		public bool didHit = false;
+
         public override void SetDefaults()
         {
             Projectile.width = 50;
@@ -103,6 +107,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
 			}
+        }
+
+        public override void AfterHitTarget(Entity target, int damageDone)
+        {
+			if (!didHit)
+			{
+				pokemonProj.velocity *= -0.5f;
+				didHit = true;
+			}
+            base.AfterHitTarget(target, damageDone);
         }
     }
 }
