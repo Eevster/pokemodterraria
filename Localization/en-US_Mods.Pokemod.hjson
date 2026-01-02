@@ -281,6 +281,8 @@ Projectiles: {
 	MankeyPetProjectileShiny.DisplayName: Mankey Pet Projectile Shiny
 	MarowakPetProjectile.DisplayName: Marowak Pet Projectile
 	MarowakPetProjectileShiny.DisplayName: Marowak Pet Projectile Shiny
+	MawilePetProjectile.DisplayName: Mawile Pet Projectile
+	MawilePetProjectileShiny.DisplayName: Mawile Pet Projectile Shiny
 	MeowthPetProjectile.DisplayName: Meowth Pet Projectile
 	MeowthPetProjectileShiny.DisplayName: Meowth Pet Projectile Shiny
 	MewPetProjectile.DisplayName: Mew Pet Projectile
@@ -4631,6 +4633,11 @@ NPCs: {
 		Description: Because the Pokémon is shaped like ancient writing, it is a huge mystery whether written language or Unown came first.
 	}
 
+	MawileCritterNPC: {
+		DisplayName: Mawile
+		Description: Attached to its head is a huge set of jaws formed by horns. It can chew through iron beams.
+	}
+
 	CranidosCritterNPC: {
 		DisplayName: Cranidos
 		Description: Cranidos toughen up their already rock-hard heads by headbutting one another.
@@ -4847,6 +4854,7 @@ NPCs: {
 	EspeonCritterNPCShiny.DisplayName: Espeon Shiny
 	UmbreonCritterNPCShiny.DisplayName: Umbreon Shiny
 	UnownCritterNPCShiny.DisplayName: Unown Shiny
+	MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
 	RampardosCritterNPCShiny.DisplayName: Rampardos Shiny
 	JoltikCritterNPCShiny.DisplayName: Joltik Shiny
