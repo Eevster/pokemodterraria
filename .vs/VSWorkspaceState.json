@@ -2,15 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites",
-    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
-    "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen1",
-    "\\Localization"
+    "\\Content\\Items",
+    "\\Content\\NPCs\\TrainerNPCs",
+    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
   ],
-  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets",
   "PreviewInSolutionExplorer": false
 }
