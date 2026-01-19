@@ -26,7 +26,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackFlyStartEnd => [10, 13];
 
         public override float catchRate => 50;
-        public override string[] variants => ["Halloween"];
+        public override string[] variants => ["Halloween", "Christmas"];
         public override int minLevel => 40;
         
         public override int[][] spawnConditions =>
