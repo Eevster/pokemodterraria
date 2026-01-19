@@ -499,6 +499,8 @@ Projectiles: {
 	DrillRun.DisplayName: Drill Run
 	DragoniteMegaPetProjectileShiny.DisplayName: Dragonite Mega Pet Projectile Shiny
 	DragoniteMegaPetProjectile.DisplayName: Dragonite Mega Pet Projectile
+	SudowoodoPetProjectileShiny.DisplayName: Sudowoodo Pet Projectile Shiny
+	SudowoodoPetProjectile.DisplayName: Sudowoodo Pet Projectile
 }
 
 Items: {
@@ -4644,6 +4646,11 @@ NPCs: {
 		Description: Its silhouette is like a star. It is believed to arrive riding on shooting stars.
 	}
 
+	SudowoodoCritterNPC: {
+		DisplayName: Sudowoodo
+		Description: It stands along paths pretending to be a tree. If it starts raining, it seems to disappear.
+	}
+
 	EspeonCritterNPC: {
 		DisplayName: Espeon
 		Description: Its fur has the look and feel of velvet. The orb on its forehead glows when it uses psychic power.
@@ -4967,6 +4974,7 @@ NPCs: {
 	}
 
 	G1T1_Brock.DisplayName: Rock-type Gym Leader
+	SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Critter N P C Shiny
 }
 
 Bestiary: {
