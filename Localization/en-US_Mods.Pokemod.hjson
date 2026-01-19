@@ -494,6 +494,9 @@ Projectiles: {
 	Hurricane.DisplayName: Hurricane
 	DragonTail.DisplayName: Dragon Tail
 	AquaTail.DisplayName: Aqua Tail
+	DrillRun.DisplayName: Drill Run
+	DragoniteMegaPetProjectileShiny.DisplayName: Dragonite Mega Pet Projectile Shiny
+	DragoniteMegaPetProjectile.DisplayName: Dragonite Mega Pet Projectile
 }
 
 Items: {
@@ -581,11 +584,6 @@ Items: {
 		DisplayName: Charizard Pet Item
 	}
 
-	VenusaurMegaStoneItem: {
-		DisplayName: Venusaurite
-		Tooltip: Allows the holder to mega evolve Venusaur, when a mega cuff is used
-	}
-
 	GreatballItem: {
 		DisplayName: Great Ball
 		Tooltip: Poke Ball that provides a higher success rate for catching pokemon than a standard Poke Ball
@@ -654,21 +652,6 @@ Items: {
 	BlastoisePetItem: {
 		DisplayName: Blastoise Pet Item
 		Tooltip: ""
-	}
-
-	BlastoiseMegaStoneItem: {
-		DisplayName: Blastoisinite
-		Tooltip: Allows the holder to mega evolve Blastoise, when a mega cuff is used
-	}
-
-	CharizardMegaStoneItemX: {
-		DisplayName: Charizardite X
-		Tooltip: Allows the holder to mega evolve Charizard, when a mega cuff is used
-	}
-
-	CharizardMegaStoneItemY: {
-		DisplayName: Charizardite Y
-		Tooltip: Allows the holder to mega evolve Charizard, when a mega cuff is used
 	}
 
 	BlastoisePetItemMega: {
@@ -1109,11 +1092,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	GengarMegaStoneItem: {
-		DisplayName: Gengarite
-		Tooltip: Allows the holder to mega evolve Gengar, when a mega cuff is used
-	}
-
 	ExpertBeltItem: {
 		DisplayName: Expert Belt
 		Tooltip: ""
@@ -1176,11 +1154,6 @@ Items: {
 	HealballItem: {
 		DisplayName: Heal Ball
 		Tooltip: A remedial Poke Ball that restores the HP of a pokemon caught with it
-	}
-
-	GyaradosMegaStoneItem: {
-		DisplayName: Gyaradosite
-		Tooltip: Allows the holder to mega evolve Gyarados, when a mega cuff is used
 	}
 
 	MaxPotion: {
@@ -1286,9 +1259,44 @@ Items: {
 		Tooltip: ""
 	}
 
+	BlastoiseMegaStoneItem: {
+		DisplayName: Blastoisinite
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	CharizardMegaStoneItemX: {
+		DisplayName: Charizardite X
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	CharizardMegaStoneItemY: {
+		DisplayName: Charizardite Y
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	VenusaurMegaStoneItem: {
+		DisplayName: Venusaurite
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
 	AlakazamMegaStoneItem: {
 		DisplayName: Alakazite
-		Tooltip: Allows the holder to mega evolve Alakazam, when a mega cuff is used
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	GengarMegaStoneItem: {
+		DisplayName: Gengarite
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	GyaradosMegaStoneItem: {
+		DisplayName: Gyaradosite
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	DragoniteMegaStoneItem: {
+		DisplayName: Dragoninite
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
 	}
 
 	TMBug: {
@@ -4149,6 +4157,11 @@ NPCs: {
 		Description: It is said to make its home somewhere in the sea. It guides wrecked ships to shore.
 	}
 
+	DragoniteMegaCritterNPC: {
+		DisplayName: Mega Dragonite
+		Description: Mega Evolution has excessively powered up this Pokémon's feelings of kindness. It finishes off its opponents with mercy in its heart.
+	}
+
 	DratiniCritterNPC: {
 		DisplayName: Dratini
 		Description: It is called the Mirage Pokémon because so few have seen it, but its shed skin has been found.
@@ -5026,6 +5039,7 @@ CommonItemTooltip: {
 		The remains of a {0} type Pokemon
 		A scientist might find it interesting
 		'''
+	MegaStone: Allows the holder to mega evolve {0}, when a mega cuff is used
 }
 
 PokemonInfo: {

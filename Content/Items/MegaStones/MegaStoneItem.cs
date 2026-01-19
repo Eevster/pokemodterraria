@@ -2,12 +2,14 @@ using Pokemod.Common.Players;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.MegaStones
 {
 	public abstract class MegaStoneItem : ModItem
 	{
+		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Item.ModItem.Name.Replace("MegaStoneItemX", "").Replace("MegaStoneItemY", "").Replace("MegaStoneItemZ", "").Replace("MegaStoneItem", ""));
 		public override void SetDefaults()
 		{
 			Item.width = 20;

@@ -494,6 +494,9 @@ Projectiles: {
 	Hurricane.DisplayName: Vendaval
 	DragonTail.DisplayName: Cola dragón
 	AquaTail.DisplayName: Acua cola
+	// DrillRun.DisplayName: Drill Run
+	// DragoniteMegaPetProjectileShiny.DisplayName: Dragonite Mega Pet Projectile Shiny
+	// DragoniteMegaPetProjectile.DisplayName: Dragonite Mega Pet Projectile
 }
 
 Items: {
@@ -581,11 +584,6 @@ Items: {
 		DisplayName: Charizard Pet Item
 	}
 
-	VenusaurMegaStoneItem: {
-		DisplayName: Venusaurita
-		Tooltip: ""
-	}
-
 	GreatballItem: {
 		DisplayName: Super Ball
 		Tooltip: Poke Ball que proporciona una mayor tasa de éxito para atrapar pokemon que una Poke Ball estándar
@@ -653,21 +651,6 @@ Items: {
 
 	BlastoisePetItem: {
 		DisplayName: Blastoise Pet Item
-		Tooltip: ""
-	}
-
-	BlastoiseMegaStoneItem: {
-		DisplayName: Blastoisita
-		Tooltip: ""
-	}
-
-	CharizardMegaStoneItemX: {
-		DisplayName: Charizardita X
-		Tooltip: ""
-	}
-
-	CharizardMegaStoneItemY: {
-		DisplayName: Charizardita Y
 		Tooltip: ""
 	}
 
@@ -1109,11 +1092,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	GengarMegaStoneItem: {
-		DisplayName: Gengarita
-		Tooltip: ""
-	}
-
 	ExpertBeltItem: {
 		DisplayName: Cinta Experto
 		Tooltip: ""
@@ -1176,11 +1154,6 @@ Items: {
 	HealballItem: {
 		DisplayName: Sana Ball
 		Tooltip: Una Poke Ball que restaura los HP de un pokemon capturado con ella
-	}
-
-	GyaradosMegaStoneItem: {
-		DisplayName: Gyaradosita
-		Tooltip: ""
 	}
 
 	MaxPotion: {
@@ -1286,9 +1259,44 @@ Items: {
 		// Tooltip: ""
 	}
 
+	BlastoiseMegaStoneItem: {
+		DisplayName: Blastoisita
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	CharizardMegaStoneItemX: {
+		DisplayName: Charizardita X
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	CharizardMegaStoneItemY: {
+		DisplayName: Charizardita Y
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	VenusaurMegaStoneItem: {
+		DisplayName: Venusaurita
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
 	AlakazamMegaStoneItem: {
 		DisplayName: Alakazamita
-		Tooltip: ""
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	GengarMegaStoneItem: {
+		DisplayName: Gengarita
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	GyaradosMegaStoneItem: {
+		DisplayName: Gyaradosita
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	DragoniteMegaStoneItem: {
+		DisplayName: Dragonitita
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
 	}
 
 	TMBug: {
@@ -4149,6 +4157,11 @@ NPCs: {
 		// Description: It is said to make its home somewhere in the sea. It guides wrecked ships to shore.
 	}
 
+	DragoniteMegaCritterNPC: {
+		// DisplayName: Mega Dragonite
+		// Description: Mega Evolution has excessively powered up this Pokémon's feelings of kindness. It finishes off its opponents with mercy in its heart.
+	}
+
 	DratiniCritterNPC: {
 		// DisplayName: Dratini
 		// Description: It is called the Mirage Pokémon because so few have seen it, but its shed skin has been found.
@@ -5026,6 +5039,7 @@ CommonItemTooltip: {
 		Los restos de un Pokemon tipo {0}
 		Un científico podría encontrarlo interesante
 		'''
+	MegaStone: Permite al poseedor megaevolucionar a {0}, cuando se usa un mega brazalete
 }
 
 PokemonInfo: {

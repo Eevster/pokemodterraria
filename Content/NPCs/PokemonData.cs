@@ -269,7 +269,7 @@ namespace Pokemod.Content.NPCs
             {"Raticate", new PokemonInfo(0020, [55, 81, 60, 50, 70, 97], [(int)TypeIndex.Normal], [new MoveLvl("Tackle", 1), new MoveLvl("QuickAttack", 4), new MoveLvl("Bite", 24), new MoveLvl("HyperFang", 34), new MoveLvl("DoubleEdge", 39)], [(int)EggGroups.Field], 0.7f, 18.5f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
 
             {"Spearow", new PokemonInfo(0021, [40, 60, 30, 31, 31, 70], [(int)TypeIndex.Normal,(int)TypeIndex.Flying], [new MoveLvl("Tackle", 1), new MoveLvl("WingAttack", 18)], [(int)EggGroups.Flying], 0.3f, 2.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
-            {"Fearow", new PokemonInfo(0022, [65, 90, 65, 61, 61, 100], [(int)TypeIndex.Normal,(int)TypeIndex.Flying], [new MoveLvl("Tackle", 1), new MoveLvl("WingAttack", 18)], [(int)EggGroups.Flying], 1.2f, 38.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
+            {"Fearow", new PokemonInfo(0022, [65, 90, 65, 61, 61, 100], [(int)TypeIndex.Normal,(int)TypeIndex.Flying], [new MoveLvl("Tackle", 1), new MoveLvl("DrillRun", 1), new MoveLvl("WingAttack", 18), new MoveLvl("DrillRun", 45)], [(int)EggGroups.Flying], 1.2f, 38.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
 
             {"Ekans", new PokemonInfo(0023, [35, 60, 44, 40, 54, 55], [(int)TypeIndex.Poison], [new MoveLvl("PoisonSting"), new MoveLvl("SludgeBomb", 33)], [(int)EggGroups.Field, (int)EggGroups.Dragon], 2.0f, 6.9f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast, completed: false)},
             {"Arbok", new PokemonInfo(0024, [60, 95, 69, 65, 79, 80], [(int)TypeIndex.Poison], [new MoveLvl("IceFang"), new MoveLvl("PoisonSting"), new MoveLvl("Crunch"), new MoveLvl("SludgeBomb", 39)], [(int)EggGroups.Field, (int)EggGroups.Dragon], 3.5f, 65.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast, completed: false)},
@@ -497,6 +497,7 @@ namespace Pokemod.Content.NPCs
             {"AlakazamMega", new PokemonInfo(0065, [55, 50, 65, 175, 95, 150], [(int)TypeIndex.Psychic], [new MoveLvl("ShadowBall")], [(int)EggGroups.NoEggs], 1.2f, 48.0f, (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
             {"GengarMega", new PokemonInfo(0094, [60, 65, 80, 170, 95, 130], [(int)TypeIndex.Ghost,(int)TypeIndex.Poison], [new MoveLvl("Psychic")], [(int)EggGroups.NoEggs], 1.4f, 40.5f, (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
             {"GyaradosMega", new PokemonInfo(0130, [95, 155, 109, 70, 130, 81], [(int)TypeIndex.Water,(int)TypeIndex.Dark], [new MoveLvl("DragonRush")], [(int)EggGroups.NoEggs], 6.5f, 305.0f, (int)StageIndex.Mega, (int)ExpTypes.Slow)},
+            {"DragoniteMega", new PokemonInfo(0149, [91, 124, 115, 145, 125, 100], [(int)TypeIndex.Dragon,(int)TypeIndex.Flying], [new MoveLvl("AirSlash")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 2.2f, 210.0f, (int)StageIndex.Stage2, (int)ExpTypes.Slow)},
 
             //Alolan Regional Forms
             {"AlolanDiglett", new PokemonInfo(0050, [10, 55, 30, 35, 45, 90], [(int)TypeIndex.Ground,(int)TypeIndex.Steel], [new MoveLvl("Tackle"), new MoveLvl("MudSlap", 12), new MoveLvl("Dig", 32), new MoveLvl("Earthquake", 40)], [(int)EggGroups.Field], 0.2f, 0.8f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
@@ -563,6 +564,7 @@ namespace Pokemod.Content.NPCs
             {"DragonBreath", new PokemonAttackInfo(60,90,60,800f,false,false,(int)TypeIndex.Dragon, true)},
             {"DragonRush", new PokemonAttackInfo(100,60,60,600f,false,false,(int)TypeIndex.Dragon)},
             {"DragonTail", new PokemonAttackInfo(60,20,70,400f,false,false,(int)TypeIndex.Dragon)},
+            {"DrillRun", new PokemonAttackInfo(80,30,70,400f,false,false,(int)TypeIndex.Ground)},
             {"Earthquake", new PokemonAttackInfo(100,50,60,500f,false,true,(int)TypeIndex.Ground)},
             {"ElectroBall", new PokemonAttackInfo(40,30,50,800f,true,false,(int)TypeIndex.Electric)},
             {"Ember", new PokemonAttackInfo(40,30,40,800f,false,false,(int)TypeIndex.Fire, true)},

@@ -1862,12 +1862,12 @@ namespace Pokemod.Content.Pets
 						frameSpeed = (int)(animationSpeed*3f/Math.Clamp(Math.Abs(Projectile.velocity.X), 2f, 20f));
 						break;
 					case (int)ProjStatus.Jump:
-						initialFrame = jumpStartEnd[0];
-						finalFrame = jumpStartEnd[1];
+						initialFrame = jumpStartEnd[0] >= 0 ? jumpStartEnd[0]:walkStartEnd[0];
+						finalFrame = jumpStartEnd[1] >= 0 ? jumpStartEnd[1]:walkStartEnd[1];
 						break;
 					case (int)ProjStatus.Fall:
-						initialFrame = fallStartEnd[0];
-						finalFrame = fallStartEnd[1];
+						initialFrame = fallStartEnd[0] >= 0 ? fallStartEnd[0]:walkStartEnd[0];
+						finalFrame = fallStartEnd[1] >= 0 ? fallStartEnd[1]:walkStartEnd[1];
 						break;
 					case (int)ProjStatus.Attack:
 						initialFrame = attackStartEnd[0] >= 0 ? attackStartEnd[0]:idleStartEnd[0];

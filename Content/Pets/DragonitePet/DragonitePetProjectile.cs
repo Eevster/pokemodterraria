@@ -31,6 +31,9 @@ namespace Pokemod.Content.Pets.DragonitePet
 		public override int[] idleSwimStartEnd => [16,19];
 		public override int[] walkSwimStartEnd => [16,19];
 		public override int[] attackSwimStartEnd => [20,23];
+
+		public override string[] megaEvolutions => ["DragoniteMega"];
+		public override string[] itemToMegaEvolve => ["DragoniteMegaStoneItem"];
 	}
 
 	public class DragonitePetProjectileShiny : DragonitePetProjectile{}

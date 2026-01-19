@@ -6,22 +6,85 @@ using Pokemod.Common.Players;
 using Pokemod.Common.Systems;
 using Pokemod.Content.Pets;
 using Terraria;
-using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.Utilities;
+using Terraria.DataStructures;
 
 namespace Pokemod.Content.NPCs.TrainerNPCs
 {
 	public abstract class BattleTrainer : ModNPC
 	{
+		private static Profiles.StackedNPCProfile NPCProfile;
+		public override void SetStaticDefaults()
+		{
+			Main.npcFrameCount[Type] = 26; // The amount of frames the NPC has
+
+			NPCID.Sets.ExtraFramesCount[Type] = 10; // Generally for Town NPCs, but this is how the NPC does extra things such as sitting in a chair and talking to other NPCs.
+			NPCID.Sets.AttackFrameCount[Type] = 0;
+			NPCID.Sets.DangerDetectRange[Type] = 700; // The amount of pixels away from the center of the npc that it tries to attack enemies.
+			NPCID.Sets.PrettySafe[Type] = 300;
+			NPCID.Sets.AttackType[Type] = -1; // magic attack.
+			NPCID.Sets.AttackTime[Type] = 0; // The amount of time it takes for the NPC's attack animation to be over once it starts.
+			NPCID.Sets.AttackAverageChance[Type] = 0;
+			NPCID.Sets.HatOffsetY[Type] = 0; // For when a party is active, the party hat spawns at a Y offset.
+			NPCID.Sets.ShimmerTownTransform[NPC.type] = false; // This set says that the Town NPC has a Shimmered form. Otherwise, the Town NPC will become transparent when touching Shimmer like other enemies.
+
+			NPCID.Sets.ActsLikeTownNPC[Type] = true;
+			NPCID.Sets.NoTownNPCHappiness[Type] = true;
+			NPCID.Sets.SpawnsWithCustomName[Type] = true;
+
+			NPCID.Sets.AllowDoorInteraction[Type] = true;
+
+			// Influences how the NPC looks in the Bestiary
+			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
+			{
+				Velocity = 1f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+				Direction = -1 // -1 is left and 1 is right. NPCs are drawn facing the left by default but ExamplePerson will be drawn facing the right
+			};
+
+			NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
+
+			NPCProfile = new Profiles.StackedNPCProfile(
+				new Profiles.DefaultNPCProfile(Texture, -1)
+			// new Profiles.DefaultNPCProfile(Texture + "_Shimmer", -1)
+			);
+		}
+
+		public override void SetDefaults()
+		{
+			NPC.friendly = true; // NPC Will not attack player
+			NPC.width = 18;
+			NPC.height = 40;
+			NPC.aiStyle = NPCAIStyleID.Passive;
+			NPC.damage = 0;
+			NPC.defense = 50;
+			NPC.lifeMax = 500;
+			NPC.HitSound = SoundID.PlayerHit;
+			NPC.DeathSound = SoundID.PlayerKilled;
+			NPC.knockBackResist = 0f;
+
+			AnimationType = NPCID.Demolitionist;
+		}
+
+		public override ITownNPCProfile TownNPCProfile()
+		{
+			return NPCProfile;
+		}
+
 		public bool OnBattle = false;
+
+		public virtual bool GymLeader => false;
 
 		public virtual int nPokemon => 1;
 		public virtual bool randomPokemon => false;
 		public virtual bool canRepeat => false;
 		public virtual string[] pokemonOptions => ["Magikarp"];
 		public int trainerLevel = 5;
-		private List<EnemyPokemonInfo> pokemonTeam;
+		public List<EnemyPokemonInfo> pokemonTeam;
 
 		public Player opponent;
 
@@ -137,11 +200,11 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
         {
 			if(OnBattle) return false;
 
-            return base.CanChat();
+            return true;
         }
 	}
 
-	internal class EnemyPokemonInfo
+	public class EnemyPokemonInfo
     {
         public string name;
 		public int level;
@@ -162,10 +225,33 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			happiness = 100;
         }
 
+		public EnemyPokemonInfo(string name, int level, string[] moveSet)
+        {
+            this.name = name;
+			this.level = level;
+			this.moveSet = moveSet;
+			IVs = PokemonNPCData.GenerateIVs();
+			EVs = [0,0,0,0,0,0];
+			nature = 10 * Main.rand.Next(5) + Main.rand.Next(5);
+			happiness = 100;
+        }
+
 		public EnemyPokemonInfo(string name, int level, int[] IVs, int[] EVs, int nature, int happiness)
         {
             this.name = name;
 			this.level = level;
+			moveSet = GetPokemonMoves(name, level);
+			this.IVs = IVs;
+			this.EVs = EVs;
+			this.nature = nature;
+			this.happiness = happiness;
+        }
+
+		public EnemyPokemonInfo(string name, int level, string[] moveSet, int[] IVs, int[] EVs, int nature, int happiness)
+        {
+            this.name = name;
+			this.level = level;
+			this.moveSet = moveSet;
 			this.IVs = IVs;
 			this.EVs = EVs;
 			this.nature = nature;

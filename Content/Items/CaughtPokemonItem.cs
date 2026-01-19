@@ -714,7 +714,9 @@ namespace Pokemod.Content.Items
 		}
 
 		private int GetExpToLevel(int lvl){
-			switch(PokemonData.pokemonInfo[PokemonName].expType){
+			if(!PokemonData.pokemonInfo.TryGetValue(PokemonName, out PokemonInfo value)) return (int)Math.Pow(lvl, 3);
+
+			switch(value.expType){
 				case (int)ExpTypes.Slow:
 					return (int)(1.25f*Math.Pow(lvl, 3));
 				case (int)ExpTypes.MediumSlow:
@@ -943,9 +945,10 @@ namespace Pokemod.Content.Items
 					SpriteEffects.None,
 					layerDepth: 0f);
 
-				if (currentHP > 0)
+				float quotient = (float)currentHP / GetPokemonStats(Main.player[Main.myPlayer])[0];
+
+				if (quotient > 0f  && quotient < 1f)
 				{
-					float quotient = (float)currentHP / GetPokemonStats(Main.player[Main.myPlayer])[0];;
 					quotient = Utils.Clamp(quotient, 0f, 1f);
 
 					int barWidth = 4;
