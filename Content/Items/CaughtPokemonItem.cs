@@ -588,6 +588,7 @@ namespace Pokemod.Content.Items
 						int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
 						proj = Main.projectile[projIndex];
 						PokemonProj = SafeGetPokemonProj(proj);
+						PokemonProj.variant = variant;
 						PokemonProj.isOut = true;
 					}
 				}
@@ -655,6 +656,7 @@ namespace Pokemod.Content.Items
 						int projIndex = Projectile.NewProjectile(Item.GetSource_FromThis(), pokePosition, Vector2.Zero, Item.shoot, 0, 0, player.whoAmI, currentHP);
 						proj = Main.projectile[projIndex];
 						PokemonProj = SafeGetPokemonProj(proj);
+						PokemonProj.variant = variant;
 						PokemonProj.isOut = true;
 					}
 				}

@@ -30,7 +30,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.friendly = true;
             Projectile.ignoreWater= true;
             Projectile.tileCollide= false;
-            Projectile.timeLeft = 80;
+            Projectile.timeLeft = 30;
             Projectile.penetrate = 3;
             Projectile.Opacity = 0.6f;
             Projectile.usesLocalNPCImmunity = true;
@@ -64,7 +64,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer <= 5){
 					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 						if(pokemonOwner.attackProjs[i] == null){
-							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<HealPulse>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetCenter, Vector2.Zero, ModContent.ProjectileType<HealPulse>(), 0, 2f, pokemon.owner)];
 							SoundEngine.PlaySound(SoundID.Item4, pokemon.position);
 							pokemonOwner.canAttackOutTimer = false;
 							break;
@@ -91,7 +91,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			Projectile.scale += 0.02f/Projectile.scale;
 
-			if(Projectile.timeLeft%20==0){
+			if(Projectile.timeLeft%10==0){
 				SoundEngine.PlaySound(SoundID.Item4 with {Volume = 0.5f}, Projectile.position);
 				for (int i = 0; i < 30; i++)
 				{
@@ -102,17 +102,38 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					posAux.Y *= 0.2f;
 					posAux = posAux.RotatedBy(Projectile.rotation);
 					Main.dust[dustIndex].position = Projectile.Center + posAux;
-					Main.dust[dustIndex].velocity = 0.4f*posAux;
+					Main.dust[dustIndex].velocity = 0.8f*posAux;
 				}
+
 				Vector2 start = Projectile.Center + Projectile.scale*new Vector2(50,0);
 				Vector2 end = Projectile.Center - Projectile.scale*new Vector2(50,0);
+
 				for (int k = 0; k < Main.maxPlayers; k++) {
 					if(Main.player[k] != null){
 						float collisionPoint = 0f;
 						if(Collision.CheckAABBvLineCollision(Main.player[k].Hitbox.TopLeft(), Main.player[k].Hitbox.Size(), start, end, Projectile.scale*20f, ref collisionPoint)){
-							HealEffect(Main.player[k]);
+							HealEffect(Main.player[k], Main.player[k].statLifeMax2>300?3:2);
 						}
 					}
+				}
+
+				for (int j = 0; j < Main.maxProjectiles; j++)
+				{
+					var targetPokemon = Main.projectile[j];
+
+					if ((Projectile.owner == targetPokemon.owner || !Main.player[targetPokemon.owner].InOpposingTeam(Main.player[Projectile.owner])) && Projectile != pokemonProj)
+					{
+                        if (targetPokemon.ModProjectile is PokemonPetProjectile targetPokemonProj)
+                        {
+                            if (!targetPokemonProj.isEnemy)
+                            {
+								float collisionPoint = 0f;
+                                if(Collision.CheckAABBvLineCollision(targetPokemon.Hitbox.TopLeft(), targetPokemon.Hitbox.Size(), start, end, Projectile.scale*20f, ref collisionPoint)){
+									HealEffect(targetPokemonProj, 0.1f);
+								}
+                            }
+                        }
+                    }
 				}
 			}
 
@@ -125,18 +146,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
         }
 
-		public void HealEffect(Player player){
-			player.Heal(player.statLifeMax2>300?3:2);
-
-			for(int i = 0; i < 15; i++){
-				int dustIndex = Dust.NewDust(player.Center-0.5f*new Vector2(player.width,player.height), 64, 64, DustID.DryadsWard, 0f, 0f, 200, default(Color), 1f);
-				Main.dust[dustIndex].noGravity = true;
-			}
-		}
-
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			Vector2 start = Projectile.Center + Projectile.scale*new Vector2(50,0);
-				Vector2 end = Projectile.Center - Projectile.scale*new Vector2(50,0);
+			Vector2 end = Projectile.Center - Projectile.scale*new Vector2(50,0);
 			float collisionPoint = 0f; // Don't need that variable, but required as parameter
 
 			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, Projectile.scale*20f, ref collisionPoint);

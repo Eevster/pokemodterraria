@@ -79,21 +79,25 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void OnSpawn(IEntitySource source)
         {
             Projectile.scale = 0.1f;
-			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-				SearchTarget(64f);
-			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				if(Trainer.targetPlayer != null){
-					targetPlayer = Trainer.targetPlayer;
-				}else if(Trainer.targetNPC != null){
-					targetEnemy = Trainer.targetNPC;
-				}
-			}
 
             base.OnSpawn(source);
         }
 
         public override void AI()
         {
+			if(Projectile.timeLeft >= 70)
+			{
+				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+					SearchTarget(64f);
+				}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+					if(Trainer.targetPlayer != null){
+						targetPlayer = Trainer.targetPlayer;
+					}else if(Trainer.targetNPC != null){
+						targetEnemy = Trainer.targetNPC;
+					}
+				}
+			}
+
 			Lighting.AddLight(Projectile.Center, Projectile.Opacity*0.3f, Projectile.Opacity, Projectile.Opacity*0.3f);
 
 			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
@@ -160,29 +164,37 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if(target.CanBeChasedBy()){
-                HealEffect();
+                HealEffect(hit.Damage);
             }
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            HealEffect();
+            HealEffect(info.Damage);
 
             base.OnHitPlayer(target, info);
         }
 
-		public void HealEffect(){
-			Player player = Main.player[Projectile.owner];
-			player.Heal(player.statLifeMax2>300?3:2);
+		public void HealEffect(int healAmount){
+			Vector2 targetCenter = Owner.Center;
+
+			if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
+			{
+				HealEffect(pokemonPetProj, healAmount);
+				targetCenter = pokemonProj.Center;
+			}
+			else
+			{
+				HealEffect(Owner, Owner.statLifeMax2>300?2:1);
+			}
 
 			for(int i = 0; i < 10; i++){
 				int dustIndex = Dust.NewDust(Projectile.Center-0.5f*new Vector2(32,32), 64, 64, DustID.DryadsWard, 0f, 0f, 200, default(Color), 1f);
 				Main.dust[dustIndex].noGravity = true;
-				Main.dust[dustIndex].velocity = 16f*Vector2.Normalize(player.Center-Main.dust[dustIndex].position);
+				Main.dust[dustIndex].velocity = 16f*Vector2.Normalize(targetCenter-Main.dust[dustIndex].position);
 			}
 		}
-
 
         public override Color? GetAlpha(Color lightColor)
         {
@@ -195,7 +207,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 		}
 
         private static void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawPos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness) {
-			Texture2D sparkleTexture = TextureAssets.Extra[98].Value;
+			Texture2D sparkleTexture = TextureAssets.Extra[ExtrasID.SharpTears].Value;
 			Color bigColor = shineColor * opacity * 0.5f;
 			bigColor.A = 0;
 			Vector2 origin = sparkleTexture.Size() / 2f;

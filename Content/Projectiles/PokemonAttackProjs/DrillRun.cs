@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Players;
@@ -38,6 +39,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
 
             Projectile.Opacity = 0.8f;
+            Projectile.hide = true;
 
             base.SetDefaults();
         }
@@ -209,5 +211,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 }
             }
         }
+
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            overPlayers.Add(index);
+        }
+
     }
 }

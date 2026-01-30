@@ -44,6 +44,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.tileCollide = false;  
             Projectile.penetrate = -1;
 
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 20;
+
 			Projectile.Opacity = 0.5f;
 
 			Projectile.hide = true;
@@ -117,16 +120,28 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if(target.CanBeChasedBy()){
-                Player player = Main.player[Projectile.owner];
-                player.Heal(player.statLifeMax2>300?2:1);
+                if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
+                {
+                    HealEffect(pokemonPetProj, 0.02f);
+                }
+                else
+                {
+                    HealEffect(Owner, Owner.statLifeMax2>300?2:1);
+                }
             }
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            Player player = Main.player[Projectile.owner];
-            player.Heal(player.statLifeMax2>300?2:1);
+            if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
+            {
+                HealEffect(pokemonPetProj, 0.02f);
+            }
+            else
+            {
+                HealEffect(Owner, Owner.statLifeMax2>300?2:1);
+            }
 
             base.OnHitPlayer(target, info);
         }

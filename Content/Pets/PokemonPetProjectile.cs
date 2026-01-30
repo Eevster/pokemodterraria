@@ -66,6 +66,7 @@ namespace Pokemod.Content.Pets
 		public float distanceToAttack = 800f;
 		public bool canAttackThroughWalls = false;
 		public bool canMoveWhileAttack = false;
+		public bool shouldTargetAllies = false;
 		public int attackDuration = 0;
 		public int attackCooldown = 0;
 		public int remainAttacks = 0;
@@ -481,6 +482,17 @@ namespace Pokemod.Content.Pets
 				if (!isEnemy)
 				{
 					SearchForTargets(player, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter, out bool hostilesNearby);
+					if(shouldTargetAllies && player.GetModPlayer<PokemonPlayer>().attackMode != (int)PokemonPlayer.AttackMode.Directed_Attack)
+					{
+						if (player.GetModPlayer<PokemonPlayer>().currentActivePokemon.Count > 1)
+						{
+							SearchForPokemonTargets(player, out foundTarget, out distanceFromTarget, out targetCenter);
+						}
+						else
+						{
+							
+						}
+					}
 					
 					if (!manualControl)
 					{
@@ -730,8 +742,8 @@ namespace Pokemod.Content.Pets
 
 							if (inRange && (closest || !foundTarget) && (lineOfSight || closeThroughWall || (canAttackThroughWalls && throughWallRange)) && !npc.GetGlobalNPC<PokemonNPCData>().isPokemon)
 							{
-                                hostilesNearby = true;
-                                if (Vector2.Distance(npc.Center, Projectile.Center) < 120) //Self-Defense Bubble.
+								hostilesNearby = true;
+								if (Vector2.Distance(npc.Center, Projectile.Center) < 120) //Self-Defense Bubble.
 								{
 									distanceFromTarget = between;
 									targetCenter = npc.Center;
@@ -780,7 +792,7 @@ namespace Pokemod.Content.Pets
 
 		public virtual void SearchForPokemonTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter) {
 			// Starting search distance
-			distanceFromTarget = 10000f;
+			distanceFromTarget = isEnemy?10000f:enemySearchDistance;
 			targetCenter = Projectile.Center;
 			foundTarget = false;
 
@@ -789,7 +801,7 @@ namespace Pokemod.Content.Pets
 			{
 				enemyPokemon = Main.projectile[j];
 
-				if (enemyPokemon.owner == Projectile.owner)
+				if (enemyPokemon.owner == Projectile.owner && enemyPokemon != Projectile)
 				{
 					if(enemyPokemon.ModProjectile is PokemonPetProjectile)
 					{
@@ -807,7 +819,7 @@ namespace Pokemod.Content.Pets
 				}
 			}
 
-			Projectile.hostile = foundTarget;
+			if(isEnemy) Projectile.hostile = foundTarget;
 
 			//Scrambles aiming if accuracy has been reduced.
 			if (Main.rand.NextFloat(1f) > statMods[5])
@@ -1623,18 +1635,19 @@ namespace Pokemod.Content.Pets
 
 		public virtual void SetAttackInfo()
 		{
-				ClearOldMoves();
-                
-                attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
-				attackCooldown = PokemonData.pokemonAttacks[currentAttack].cooldown;
-				distanceToAttack = PokemonData.pokemonAttacks[currentAttack].distanceToAttack;
-				canMoveWhileAttack = PokemonData.pokemonAttacks[currentAttack].canMove;
-				canAttackThroughWalls = PokemonData.pokemonAttacks[currentAttack].canPassThroughWalls;
+			ClearOldMoves();
+			
+			attackDuration = PokemonData.pokemonAttacks[currentAttack].attackDuration;
+			attackCooldown = PokemonData.pokemonAttacks[currentAttack].cooldown;
+			distanceToAttack = PokemonData.pokemonAttacks[currentAttack].distanceToAttack;
+			canMoveWhileAttack = PokemonData.pokemonAttacks[currentAttack].canMove;
+			canAttackThroughWalls = PokemonData.pokemonAttacks[currentAttack].canPassThroughWalls;
+			shouldTargetAllies = PokemonData.pokemonAttacks[currentAttack].shouldTargetAllies;
 
-				if (Main.myPlayer == Projectile.owner)
-				{
-					Projectile.netUpdate = true;
-				}
+			if (Main.myPlayer == Projectile.owner)
+			{
+				Projectile.netUpdate = true;
+			}
 		}
 
         public void ClearOldMoves()
@@ -1994,6 +2007,11 @@ namespace Pokemod.Content.Pets
 			if (currentHp > finalStats[0]) { currentHp = finalStats[0]; }
 			//Main.NewText(currentHp+"/"+finalStats[0]); 
         }
+
+		public void regenPercentHP(float percent, bool showText = true){
+			int amount = (int)(percent * finalStats[0]);
+            regenHP(amount, showText);
+        }
         
         public void TakeDamage(){
 			PokemonPlayer pokemonPlayer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
@@ -2266,7 +2284,7 @@ namespace Pokemod.Content.Pets
 
 		public bool CheckDoorCollide(Vector2 velocity, int range = 16)
 		{
-            int direction = Math.Sign(velocity.X);
+            int direction = velocity.X >= 0? 1:-1;
             Vector2 topLeft = Projectile.TopLeft + Vector2.UnitX * range * direction + Vector2.UnitY * (hitboxHeight / 2f > 8 ? 8 : hitboxHeight / 2f);
             Vector2 bottomRight = Projectile.BottomRight + Vector2.UnitX * 16 * direction - Vector2.UnitY; // some minor adjustments made to the checking range to ensure it's only checking horizontal collisions with doors
 

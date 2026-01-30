@@ -160,6 +160,33 @@ namespace Pokemod.Content.Projectiles
             base.ModifyHitNPC(target, ref modifiers);
         }
 
+		public static void HealEffect(Player player, int amount){
+			player.Heal(amount);
+
+			for(int i = 0; i < 15; i++){
+				int dustIndex = Dust.NewDust(player.Center-0.5f*new Vector2(player.width,player.height), player.width, player.height, DustID.DryadsWard, 0f, 0f, 200, default(Color), 1f);
+				Main.dust[dustIndex].noGravity = true;
+			}
+		}
+
+		public static void HealEffect(PokemonPetProjectile pokemon, int amount){
+			pokemon.regenHP(amount);
+
+			for(int i = 0; i < 15; i++){
+				int dustIndex = Dust.NewDust(pokemon.Projectile.Center-0.5f*new Vector2(pokemon.Projectile.width,pokemon.Projectile.height), pokemon.Projectile.width, pokemon.Projectile.height, DustID.DryadsWard, 0f, 0f, 200, default(Color), 1f);
+				Main.dust[dustIndex].noGravity = true;
+			}
+		}
+
+		public static void HealEffect(PokemonPetProjectile pokemon, float percent){
+			pokemon.regenPercentHP(percent);
+
+			for(int i = 0; i < 15; i++){
+				int dustIndex = Dust.NewDust(pokemon.Projectile.Center-0.5f*new Vector2(pokemon.Projectile.width,pokemon.Projectile.height), pokemon.Projectile.width, pokemon.Projectile.height, DustID.DryadsWard, 0f, 0f, 200, default(Color), 1f);
+				Main.dust[dustIndex].noGravity = true;
+			}
+		}
+
         /*public void SetExpGained(NPC target, NPC.HitInfo hit){
 			if(target.life <= 0 || hit.InstantKill){
 				int exp = (int)Math.Sqrt(target.value);

@@ -32,11 +32,11 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         }
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneJungle)
+			if (spawnInfo.Player.ZoneJungle && !spawnInfo.Player.ZoneRain)
 			{
 				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
 			}
-			else if (spawnInfo.Player.ZoneForest)
+			else if (spawnInfo.Player.ZoneForest && !spawnInfo.Player.ZoneRain)
 			{
 				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.2f);
 			}

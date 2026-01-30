@@ -496,11 +496,12 @@ Projectiles: {
 	Hurricane.DisplayName: Vendaval
 	DragonTail.DisplayName: Cola dragón
 	AquaTail.DisplayName: Acua cola
-	// DrillRun.DisplayName: Drill Run
+	DrillRun.DisplayName: Taladradora
 	// DragoniteMegaPetProjectileShiny.DisplayName: Dragonite Mega Pet Projectile Shiny
 	// DragoniteMegaPetProjectile.DisplayName: Dragonite Mega Pet Projectile
 	// SudowoodoPetProjectileShiny.DisplayName: Sudowoodo Pet Projectile Shiny
 	// SudowoodoPetProjectile.DisplayName: Sudowoodo Pet Projectile
+	LeechSeed.DisplayName: Drenadoras
 }
 
 Items: {
@@ -3787,6 +3788,11 @@ Buffs: {
 	CleffaPetBuffShiny: {
 		// DisplayName: Cleffa Pet Buff Shiny
 		// Description: Mods.Pokemod.Buffs.CleffaPetBuffShiny.Description
+	}
+
+	LeechSeedDebuff: {
+		// Description: Mods.Pokemod.Buffs.LeechSeedDebuff.Description
+		// DisplayName: Leech Seed Debuff
 	}
 }
 

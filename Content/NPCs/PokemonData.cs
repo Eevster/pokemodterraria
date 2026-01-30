@@ -241,9 +241,9 @@ namespace Pokemod.Content.NPCs
     {
         public static Dictionary<string, PokemonInfo> pokemonInfo = new(){
             //Gen 1
-            {"Bulbasaur", new PokemonInfo(0001, [45, 49, 49, 65, 65, 45], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [new MoveLvl("Tackle"), new MoveLvl("VineWhip", 3), new MoveLvl("RazorLeaf", 12), new MoveLvl("PoisonPowder", 15), new MoveLvl("BulletSeed", 18), new MoveLvl("GigaDrain", 27), new MoveLvl("DoubleEdge", 33), new MoveLvl("SolarBeam", 36)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 0.7f, 6.9f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
-            {"Ivysaur", new PokemonInfo(0002, [60, 62, 63, 80, 80, 60], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [new MoveLvl("Tackle", 1), new MoveLvl("VineWhip", 3), new MoveLvl("RazorLeaf", 12), new MoveLvl("PoisonPowder", 15), new MoveLvl("BulletSeed", 20), new MoveLvl("GigaDrain", 35), new MoveLvl("DoubleEdge", 45), new MoveLvl("SolarBeam", 50)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 1.0f, 13.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
-            {"Venusaur", new PokemonInfo(0003, [80, 82, 83, 100, 100, 80], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [new MoveLvl("LeafStorm"), new MoveLvl("Tackle", 1), new MoveLvl("VineWhip", 1), new MoveLvl("RazorLeaf", 12), new MoveLvl("PoisonPowder", 15), new MoveLvl("BulletSeed", 20), new MoveLvl("GigaDrain", 37), new MoveLvl("DoubleEdge", 51), new MoveLvl("SolarBeam", 58)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 2.0f, 100.0f, (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
+            {"Bulbasaur", new PokemonInfo(0001, [45, 49, 49, 65, 65, 45], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [new MoveLvl("Tackle"), new MoveLvl("VineWhip", 3), new MoveLvl("LeechSeed", 9), new MoveLvl("RazorLeaf", 12), new MoveLvl("PoisonPowder", 15), new MoveLvl("BulletSeed", 18), new MoveLvl("GigaDrain", 27), new MoveLvl("DoubleEdge", 33), new MoveLvl("SolarBeam", 36)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 0.7f, 6.9f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
+            {"Ivysaur", new PokemonInfo(0002, [60, 62, 63, 80, 80, 60], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [new MoveLvl("Tackle", 1), new MoveLvl("VineWhip", 3), new MoveLvl("LeechSeed", 9), new MoveLvl("RazorLeaf", 12), new MoveLvl("PoisonPowder", 15), new MoveLvl("BulletSeed", 20), new MoveLvl("GigaDrain", 35), new MoveLvl("DoubleEdge", 45), new MoveLvl("SolarBeam", 50)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 1.0f, 13.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
+            {"Venusaur", new PokemonInfo(0003, [80, 82, 83, 100, 100, 80], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [new MoveLvl("LeafStorm"), new MoveLvl("Tackle", 1), new MoveLvl("VineWhip", 1), new MoveLvl("LeechSeed", 9), new MoveLvl("RazorLeaf", 12), new MoveLvl("PoisonPowder", 15), new MoveLvl("BulletSeed", 20), new MoveLvl("GigaDrain", 37), new MoveLvl("DoubleEdge", 51), new MoveLvl("SolarBeam", 58)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 2.0f, 100.0f, (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
 
             {"Charmander", new PokemonInfo(0004,[39, 52, 43, 60, 50, 65], [(int)TypeIndex.Fire], [new MoveLvl("Tackle"), new MoveLvl("Ember", 4), new MoveLvl("Smokescreen", 8), new MoveLvl("DragonBreath", 12), new MoveLvl("Slash", 20), new MoveLvl("Flamethrower", 24), new MoveLvl("FlameWheel", 32), new MoveLvl("FireBlast", 40)], [(int)EggGroups.Monster, (int)EggGroups.Dragon], 0.6f, 8.5f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
             {"Charmeleon", new PokemonInfo(0005,[58, 64, 58, 80, 65, 80], [(int)TypeIndex.Fire], [new MoveLvl("Tackle", 1), new MoveLvl("Ember", 1), new MoveLvl("Smokescreen", 1), new MoveLvl("DragonBreath", 12), new MoveLvl("Slash", 24), new MoveLvl("Flamethrower", 30), new MoveLvl("FlameWheel", 42), new MoveLvl("FireBlast", 54)], [(int)EggGroups.Monster, (int)EggGroups.Dragon], 1.1f, 19.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
@@ -386,8 +386,8 @@ namespace Pokemod.Content.NPCs
             {"Voltorb", new PokemonInfo(0100, [40, 30, 50, 55, 55, 100], [(int)TypeIndex.Electric], [new MoveLvl("Tackle"), new MoveLvl("ThunderWave", 4), new MoveLvl("RockThrow", 11), new MoveLvl("Swift", 16), new MoveLvl("ElectroBall", 22), new MoveLvl("SelfDestruct", 28), new MoveLvl("Thunderbolt", 32), new MoveLvl("Discharge", 37), new MoveLvl("Explosion", 41)], [(int)EggGroups.Mineral], 0.5f, 10.4f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
             {"Electrode", new PokemonInfo(0101, [60, 50, 70, 80, 80, 150], [(int)TypeIndex.Electric], [new MoveLvl("Tackle", 1), new MoveLvl("ThunderWave", 4), new MoveLvl("RockThrow", 11), new MoveLvl("Swift", 16), new MoveLvl("ElectroBall", 22), new MoveLvl("SelfDestruct", 28), new MoveLvl("Thunderbolt", 34), new MoveLvl("Discharge", 41), new MoveLvl("Explosion", 47)], [(int)EggGroups.Mineral], 1.2f, 66.6f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
 
-            {"Exeggcute", new PokemonInfo(0102, [60, 40, 80, 60, 45, 40], [(int)TypeIndex.Grass,(int)TypeIndex.Psychic], [new MoveLvl("VineWhip"), new MoveLvl("Confusion", 6), new MoveLvl("MegaDrain", 14), new MoveLvl("HealPulse", 22), new MoveLvl("BulletSeed", 30), new MoveLvl("GigaDrain", 38), new MoveLvl("Psychic", 46), new MoveLvl("SolarBeam", 52)], [(int)EggGroups.Grass], 0.4f, 2.5f, (int)StageIndex.Basic, (int)ExpTypes.Slow)},
-            {"Exeggutor", new PokemonInfo(0103, [95, 95, 85, 125, 75, 55], [(int)TypeIndex.Grass,(int)TypeIndex.Psychic], [new MoveLvl("MagicalLeaf"), new MoveLvl("VineWhip", 1), new MoveLvl("Confusion", 6), new MoveLvl("MegaDrain", 14), new MoveLvl("HealPulse", 22), new MoveLvl("BulletSeed", 30), new MoveLvl("GigaDrain", 38), new MoveLvl("Psychic", 46), new MoveLvl("SolarBeam", 52)], [(int)EggGroups.Grass], 2.0f, 120.0f, (int)StageIndex.Stage1, (int)ExpTypes.Slow)},
+            {"Exeggcute", new PokemonInfo(0102, [60, 40, 80, 60, 45, 40], [(int)TypeIndex.Grass,(int)TypeIndex.Psychic], [new MoveLvl("VineWhip"), new MoveLvl("Confusion", 6), new MoveLvl("LeechSeed", 9), new MoveLvl("MegaDrain", 14), new MoveLvl("HealPulse", 22), new MoveLvl("BulletSeed", 30), new MoveLvl("GigaDrain", 38), new MoveLvl("Psychic", 46), new MoveLvl("SolarBeam", 52)], [(int)EggGroups.Grass], 0.4f, 2.5f, (int)StageIndex.Basic, (int)ExpTypes.Slow)},
+            {"Exeggutor", new PokemonInfo(0103, [95, 95, 85, 125, 75, 55], [(int)TypeIndex.Grass,(int)TypeIndex.Psychic], [new MoveLvl("MagicalLeaf"), new MoveLvl("VineWhip", 1), new MoveLvl("LeechSeed", 1), new MoveLvl("Confusion", 6), new MoveLvl("MegaDrain", 14), new MoveLvl("HealPulse", 22), new MoveLvl("BulletSeed", 30), new MoveLvl("GigaDrain", 38), new MoveLvl("Psychic", 46), new MoveLvl("SolarBeam", 52)], [(int)EggGroups.Grass], 2.0f, 120.0f, (int)StageIndex.Stage1, (int)ExpTypes.Slow)},
 
             {"Cubone", new PokemonInfo(0104, [50, 50, 95, 40, 50, 35], [(int)TypeIndex.Ground], [new MoveLvl("MudSlap"), new MoveLvl("Tackle", 8), new MoveLvl("Slam", 16), new MoveLvl("Dig", 24), new MoveLvl("Slash", 32), new MoveLvl("DoubleEdge", 40), new MoveLvl("Earthquake", 48)], [(int)EggGroups.Monster], 0.4f, 6.5f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
             {"Marowak", new PokemonInfo(0105, [60, 80, 110, 50, 80, 45], [(int)TypeIndex.Ground], [new MoveLvl("MudSlap", 1), new MoveLvl("Tackle", 8), new MoveLvl("Slam", 16), new MoveLvl("Dig", 24), new MoveLvl("Slash", 34), new MoveLvl("DoubleEdge", 44), new MoveLvl("Earthquake", 54)], [(int)EggGroups.Monster], 1.0f, 45.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
@@ -460,9 +460,9 @@ namespace Pokemod.Content.NPCs
             {"Mew", new PokemonInfo(0151, [100, 100, 100, 100, 100, 100], [(int)TypeIndex.Psychic], [new MoveLvl("Psychic")], [(int)EggGroups.NoEggs], 0.4f, 4.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow, legendary: true, completed: false)},
             
             //Gen 2
-            {"Chikorita", new PokemonInfo(0152, [45, 49, 65, 49, 65, 45], [(int)TypeIndex.Grass], [new MoveLvl("Tackle"), new MoveLvl("RazorLeaf", 6), new MoveLvl("PoisonPowder", 9), new MoveLvl("AquaRing", 17), new MoveLvl("MagicalLeaf", 23), new MoveLvl("Slam", 31), new MoveLvl("HealPulse", 39), new MoveLvl("SolarBeam", 45)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 0.9f, 6.4f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
-            {"Bayleef", new PokemonInfo(0153, [60, 62, 80, 63, 80, 60], [(int)TypeIndex.Grass], [new MoveLvl("Tackle", 1), new MoveLvl("RazorLeaf", 6), new MoveLvl("PoisonPowder", 9), new MoveLvl("AquaRing", 18), new MoveLvl("MagicalLeaf", 26), new MoveLvl("Slam", 36), new MoveLvl("HealPulse", 46), new MoveLvl("SolarBeam", 54)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 1.2f, 15.8f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
-            {"Meganium", new PokemonInfo(0154, [80, 82, 100, 83, 100, 80], [(int)TypeIndex.Grass], [new MoveLvl("LeafStorm"), new MoveLvl("Tackle", 1), new MoveLvl("RazorLeaf", 6), new MoveLvl("PoisonPowder", 9), new MoveLvl("AquaRing", 18), new MoveLvl("MagicalLeaf", 26), new MoveLvl("Slam", 40), new MoveLvl("HealPulse", 54), new MoveLvl("SolarBeam", 66), new MoveLvl("LeafBlade", 70)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 1.8f, 100.5f, (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
+            {"Chikorita", new PokemonInfo(0152, [45, 49, 65, 49, 65, 45], [(int)TypeIndex.Grass], [new MoveLvl("Tackle"), new MoveLvl("RazorLeaf", 6), new MoveLvl("PoisonPowder", 9), new MoveLvl("AquaRing", 17), new MoveLvl("MagicalLeaf", 20), new MoveLvl("LeechSeed", 23), new MoveLvl("Slam", 31), new MoveLvl("HealPulse", 39), new MoveLvl("SolarBeam", 45)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 0.9f, 6.4f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
+            {"Bayleef", new PokemonInfo(0153, [60, 62, 80, 63, 80, 60], [(int)TypeIndex.Grass], [new MoveLvl("Tackle", 1), new MoveLvl("RazorLeaf", 6), new MoveLvl("PoisonPowder", 9), new MoveLvl("AquaRing", 18), new MoveLvl("MagicalLeaf", 22), new MoveLvl("LeechSeed", 26), new MoveLvl("Slam", 36), new MoveLvl("HealPulse", 46), new MoveLvl("SolarBeam", 54)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 1.2f, 15.8f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
+            {"Meganium", new PokemonInfo(0154, [80, 82, 100, 83, 100, 80], [(int)TypeIndex.Grass], [new MoveLvl("LeafStorm"), new MoveLvl("Tackle", 1), new MoveLvl("RazorLeaf", 6), new MoveLvl("PoisonPowder", 9), new MoveLvl("AquaRing", 18), new MoveLvl("MagicalLeaf", 22), new MoveLvl("LeechSeed", 26), new MoveLvl("Slam", 40), new MoveLvl("HealPulse", 54), new MoveLvl("SolarBeam", 66), new MoveLvl("LeafBlade", 70)], [(int)EggGroups.Monster, (int)EggGroups.Grass], 1.8f, 100.5f, (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
 
             {"Cyndaquil", new PokemonInfo(0155, [39, 52, 43, 60, 50, 65], [(int)TypeIndex.Fire], [new MoveLvl("Tackle"), new MoveLvl("Smokescreen", 6), new MoveLvl("Ember", 10), new MoveLvl("FlameWheel", 19), new MoveLvl("Swift", 28), new MoveLvl("LavaPlume", 37), new MoveLvl("Flamethrower", 40), new MoveLvl("Overheat", 46), new MoveLvl("DoubleEdge", 55)], [(int)EggGroups.Field], 0.5f, 7.9f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
             {"Quilava", new PokemonInfo(0156, [58, 64, 58, 80, 65, 80], [(int)TypeIndex.Fire], [new MoveLvl("Tackle", 1), new MoveLvl("Smokescreen", 6), new MoveLvl("Ember", 10), new MoveLvl("FlameWheel", 20), new MoveLvl("Swift", 31), new MoveLvl("LavaPlume", 42), new MoveLvl("Flamethrower", 46), new MoveLvl("Overheat", 53), new MoveLvl("DoubleEdge", 64)], [(int)EggGroups.Field], 0.9f, 19.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
@@ -585,7 +585,7 @@ namespace Pokemod.Content.NPCs
             {"GigaDrain", new PokemonAttackInfo(75,56,60,800f,false,true,(int)TypeIndex.Grass, true)},
             {"Gust", new PokemonAttackInfo(40,30,40,800f,false,false,(int)TypeIndex.Flying, true)},
             {"Harden", new PokemonAttackInfo(0,60,60,64f,false,false,(int)TypeIndex.Normal)},
-            {"HealPulse", new PokemonAttackInfo(0,30,60,200f,true,false,(int)TypeIndex.Normal, true)},
+            {"HealPulse", new PokemonAttackInfo(0,30,60,200f,true,false,(int)TypeIndex.Normal, true, true)},
             {"Hex", new PokemonAttackInfo(65,30,60,800f,true,true,(int)TypeIndex.Ghost, true)},
             {"Hurricane", new PokemonAttackInfo(110,60,60,800f,false,true,(int)TypeIndex.Flying, true)},
             {"HydroPump", new PokemonAttackInfo(110,42,60,800f,false,true,(int)TypeIndex.Water, true)},
@@ -597,6 +597,7 @@ namespace Pokemod.Content.NPCs
             {"LavaPlume", new PokemonAttackInfo(80,20,60,800f,true,true,(int)TypeIndex.Fire, true)},
             {"LeafBlade", new PokemonAttackInfo(90,40,60,500f,false,false,(int)TypeIndex.Grass)},
             {"LeafStorm", new PokemonAttackInfo(130,40,60,800f,false,false,(int)TypeIndex.Grass, true)},
+            {"LeechSeed", new PokemonAttackInfo(0,50,80,800f,false,false,(int)TypeIndex.Grass)},
             {"MagicalLeaf", new PokemonAttackInfo(60,60,60,500f,false,true,(int)TypeIndex.Grass, true)},
             {"MegaDrain", new PokemonAttackInfo(40,56,60,600f,false,true,(int)TypeIndex.Grass, true)},
             {"MudShot", new PokemonAttackInfo(55,45,60,800f,false,false,(int)TypeIndex.Ground, true)},
@@ -778,8 +779,9 @@ namespace Pokemod.Content.NPCs
 
         public int attackType;
         public bool isSpecial;
+        public bool shouldTargetAllies;
 
-        public PokemonAttackInfo(int attackPower, int attackDuration, int cooldown, float distanceToAttack, bool canMove, bool canPassThroughWalls, int attackType, bool isSpecial = false)
+        public PokemonAttackInfo(int attackPower, int attackDuration, int cooldown, float distanceToAttack, bool canMove, bool canPassThroughWalls, int attackType, bool isSpecial = false, bool shouldTargetAllies = false)
         {
             if (attackPower < 10) attackPower = 10;
             this.attackPower = attackPower;
@@ -790,6 +792,7 @@ namespace Pokemod.Content.NPCs
             this.canPassThroughWalls = canPassThroughWalls;
             this.attackType = attackType;
             this.isSpecial = isSpecial;
+            this.shouldTargetAllies = shouldTargetAllies;
         }
     }
 
