@@ -477,6 +477,22 @@ namespace Pokemod.Common.Players
 					float cursorScale = Main.cursorScale / Main.GameZoomTarget;
 					Main.spriteBatch.Draw(gloveIconTexture.Value, Main.MouseWorld - Main.screenPosition + cursorScale * new Vector2(-gloveIconTexture.Width() / 2, 8 + gloveIconTexture.Height() / 2), gloveIconTexture.Value.Bounds, Color.White, 0, gloveIconTexture.Size() * 0.5f, cursorScale, SpriteEffects.None, 0);
 				}
+
+				foreach(Projectile proj in Main.projectile){
+					if(proj.owner == Player.whoAmI){
+						if(proj.ModProjectile != null){
+							if(proj.active){
+								if(proj.ModProjectile is PokemonPetProjectile pokemon){
+									Vector2 mousePosition = Main.MouseWorld;
+									if (Vector2.Distance(proj.Center, mousePosition) <= 32f){
+										string PokemonInfo = pokemon.pokemonName + " Lvl " + pokemon.pokemonLvl;
+										Main.instance.MouseText(PokemonInfo);
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 			base.DrawEffects(drawInfo, ref r, ref g, ref b, ref a, ref fullBright);
 		}

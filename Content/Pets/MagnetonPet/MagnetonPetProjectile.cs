@@ -22,6 +22,9 @@ namespace Pokemod.Content.Pets.MagnetonPet
 		public override int[] idleFlyStartEnd => [0,7];
 		public override int[] walkFlyStartEnd => [0,7];
 		public override int[] attackFlyStartEnd => [8,15];
+
+		public override string[] evolutions => ["Magnezone"];
+        public override string[] itemToEvolve => ["ThunderStoneItem"];
 	}
 
 	public class MagnetonPetProjectileShiny : MagnetonPetProjectile{}

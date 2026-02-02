@@ -2126,6 +2126,8 @@ namespace Pokemod.Content.Pets
 
         public override bool PreDraw(ref Color lightColor)
         {
+			bool canDraw = true;
+
 			if (isOut)
 			{
 				if (pokemonShader != null)
@@ -2147,7 +2149,7 @@ namespace Pokemod.Content.Pets
 								variantTexture.Frame(1, totalFrames, 0, Projectile.frame), lightColor, Projectile.rotation,
 								variantTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 
-							return false;
+							canDraw = false;
 						}
 					}
 				}
@@ -2159,10 +2161,10 @@ namespace Pokemod.Content.Pets
 
 				Main.EntitySpriteDraw(ballTexture.Value, Projectile.Center - Main.screenPosition, ballTexture.Value.Bounds, drawColor, isOutTimer * MathHelper.ToRadians(2*Math.Clamp(Math.Abs(Projectile.velocity.X), 4, 30)) * (Projectile.velocity.X > 0 ? 1 : -1), ballTexture.Size() * 0.5f, 1f, SpriteEffects.None, 0);
 
-				return false;
+				canDraw = false;
 			}
 
-            return true;
+            return canDraw;
         }
 
         public override bool PreDrawExtras()
@@ -2208,6 +2210,8 @@ namespace Pokemod.Content.Pets
         {
 			if (isOut)
 			{
+				PostDrawPokemonExtras(lightColor);
+
 				if (isEvolving && evolveTimer > 0)
 				{
 					Vector2 drawPos2 = Projectile.Center - Main.screenPosition;
@@ -2238,6 +2242,18 @@ namespace Pokemod.Content.Pets
 				}
 			}
         }
+
+		public virtual void PostDrawPokemonExtras(Color lightColor)
+		{
+			if (ModContent.RequestIfExists<Texture2D>("Pokemod/Assets/Textures/Pokesprites/Pets/Extras/"+GetType().Name+"_Light", out Asset<Texture2D> lightTexture))
+			{
+				Vector2 positionOffset = (lightTexture.Frame(1, totalFrames).Size() * Vector2.UnitY * 0.5f) - Vector2.UnitY * 4f; //Anchors the sprite to the bottom of the hitbox correctly
+
+				Main.EntitySpriteDraw(lightTexture.Value, Projectile.Bottom - Main.screenPosition - positionOffset,
+					lightTexture.Frame(1, totalFrames, 0, Projectile.frame), Color.White, Projectile.rotation,
+					lightTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+			}
+		}
 
         private static void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawPos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness) {
 			Texture2D sparkleTexture = TextureAssets.Extra[ExtrasID.SharpTears].Value;

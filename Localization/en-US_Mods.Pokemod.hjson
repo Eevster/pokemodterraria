@@ -502,6 +502,8 @@ Projectiles: {
 	SudowoodoPetProjectileShiny.DisplayName: Sudowoodo Pet Projectile Shiny
 	SudowoodoPetProjectile.DisplayName: Sudowoodo Pet Projectile
 	LeechSeed.DisplayName: Leech Seed
+	MagnezonePetProjectileShiny.DisplayName: Magnezone Pet Projectile Shiny
+	MagnezonePetProjectile.DisplayName: Magnezone Pet Projectile
 }
 
 Items: {
@@ -2201,6 +2203,11 @@ Items: {
 	WaterGem: {
 		DisplayName: Water Gem
 		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	ShellBell: {
+		Tooltip: ""
+		DisplayName: Shell Bell
 	}
 }
 
@@ -4777,6 +4784,11 @@ NPCs: {
 		Description: Its skull withstands impacts of any magnitude. As a result, its brain never gets the chance to grow.
 	}
 
+	MagnezoneCritterNPC: {
+		DisplayName: Magnezone
+		Description: It evolved from exposure to a special magnetic field. Its three units generate magnetism.
+	}
+
 	JoltikCritterNPC: {
 		DisplayName: Joltik
 		Description: Since it can't generate its own electricity, it sticks onto large-bodied Pokémon and absorbs static electricity.
@@ -4982,11 +4994,13 @@ NPCs: {
 	ZubatCritterNPCShiny.DisplayName: Zubat Shiny
 	CleffaCritterNPCShiny.DisplayName: Cleffa Shiny
 	EspeonCritterNPCShiny.DisplayName: Espeon Shiny
+	SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Shiny
 	UmbreonCritterNPCShiny.DisplayName: Umbreon Shiny
 	UnownCritterNPCShiny.DisplayName: Unown Shiny
 	MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
 	RampardosCritterNPCShiny.DisplayName: Rampardos Shiny
+	MagnezoneCritterNPCShiny.DisplayName: Magnezone Shiny
 	JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
 	TerrarianKabutoCritterNPCShiny.DisplayName: Terrarian Kabuto Shiny
@@ -5070,7 +5084,6 @@ NPCs: {
 	}
 
 	G1T1_Brock.DisplayName: Rock-type Gym Leader
-	SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Critter N P C Shiny
 }
 
 Bestiary: {
