@@ -2104,13 +2104,103 @@ Items: {
 	}
 
 	SuperRod: {
-		Tooltip: ""
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
 		DisplayName: Super Rod
 	}
 
 	HeartScale: {
 		DisplayName: Heart Scale
-		Tooltip: ""
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	GhostGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Ghost Gem
+	}
+
+	FlyingGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Flying Gem
+	}
+
+	FireGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Fire Gem
+	}
+
+	FightingGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Fighting Gem
+	}
+
+	FairyGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Fairy Gem
+	}
+
+	ElectricGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Electric Gem
+	}
+
+	DragonGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Dragon Gem
+	}
+
+	DarkGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Dark Gem
+	}
+
+	BugGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Bug Gem
+	}
+
+	GrassGem: {
+		DisplayName: Grass Gem
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	GroundGem: {
+		DisplayName: Ground Gem
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	IceGem: {
+		DisplayName: Ice Gem
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	NormalGem: {
+		DisplayName: Normal Gem
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	PoisonGem: {
+		DisplayName: Poison Gem
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	PsychicGem: {
+		DisplayName: Psychic Gem
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	RockGem: {
+		DisplayName: Rock Gem
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SteelGem: {
+		DisplayName: Steel Gem
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	WaterGem: {
+		DisplayName: Water Gem
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
 	}
 }
 
@@ -5062,6 +5152,7 @@ CommonItemTooltip: {
 		A scientist might find it interesting
 		'''
 	MegaStone: Allows the holder to mega evolve {0}, when a mega cuff is used
+	PokemonTypeDamageBoost: Increases {0} type damage by {1}%
 }
 
 PokemonInfo: {

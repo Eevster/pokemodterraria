@@ -8,6 +8,8 @@ using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Pokemod.Content.NPCs;
+using Pokemod.Content.Items.Accessories.Gems;
 
 namespace Pokemod.Common.GlobalNPCs
 {
@@ -160,6 +162,48 @@ namespace Pokemod.Common.GlobalNPCs
                     break;
             }
 		}
+
+        public static int gemChanceDenominator = 10;
+        public override void OnKill(NPC npc)
+        {   
+            if(NPC.downedBoss1 && npc.ModNPC is PokemonWildNPC wildNPC){
+                if (Main.rand.NextBool(gemChanceDenominator))
+                {
+                    int[] pokemonTypes = PokemonData.pokemonInfo[wildNPC.pokemonName].pokemonTypes;
+                    if(pokemonTypes != null && pokemonTypes[0] >= 0)
+                    {
+                        int gemDrop = ModContent.ItemType<NormalGem>();
+                        int selectedType = pokemonTypes[0];
+                        if(pokemonTypes[1] >= 0 && Main.rand.NextBool()) selectedType = pokemonTypes[1];
+
+                        switch (selectedType)
+                        {
+                            case 0: gemDrop = ModContent.ItemType<NormalGem>(); break;
+                            case 1: gemDrop = ModContent.ItemType<FightingGem>(); break;
+                            case 2: gemDrop = ModContent.ItemType<FlyingGem>(); break;
+                            case 3: gemDrop = ModContent.ItemType<PoisonGem>(); break;
+                            case 4: gemDrop = ModContent.ItemType<GroundGem>(); break;
+                            case 5: gemDrop = ModContent.ItemType<RockGem>(); break;
+                            case 6: gemDrop = ModContent.ItemType<BugGem>(); break;
+                            case 7: gemDrop = ModContent.ItemType<GhostGem>(); break;
+                            case 8: gemDrop = ModContent.ItemType<SteelGem>(); break;
+                            case 9: gemDrop = ModContent.ItemType<FireGem>(); break;
+                            case 10: gemDrop = ModContent.ItemType<WaterGem>(); break;
+                            case 11: gemDrop = ModContent.ItemType<GrassGem>(); break;
+                            case 12: gemDrop = ModContent.ItemType<ElectricGem>(); break;
+                            case 13: gemDrop = ModContent.ItemType<PsychicGem>(); break;
+                            case 14: gemDrop = ModContent.ItemType<IceGem>(); break;
+                            case 15: gemDrop = ModContent.ItemType<DragonGem>(); break;
+                            case 16: gemDrop = ModContent.ItemType<DarkGem>(); break;
+                            case 17: gemDrop = ModContent.ItemType<FairyGem>(); break;
+                        }
+
+                        Item.NewItem(npc.GetSource_Death(), npc.position, npc.Size, gemDrop);
+                    }
+                }
+            }
+            base.OnKill(npc);
+        }
 	}
 
     public class AndCondition : IItemDropRuleCondition

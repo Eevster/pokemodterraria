@@ -41,6 +41,9 @@ namespace Pokemod.Common.Players
 		public float ExpMult = 1f;
 		public int LeftoversTimer;
 
+		//Multipliers
+		public float[] typeMult = Enumerable.Repeat(1f,18).ToArray();
+
 		//Trainer Glove
 		public int attackMode;
 		public enum AttackMode
@@ -286,6 +289,8 @@ namespace Pokemod.Common.Players
 			}
 
 			ExpMult = 1f;
+			typeMult = Enumerable.Repeat(1f,18).ToArray();
+
 			if (LeftoversTimer > 0) LeftoversTimer--;
 			if (HasAirBalloon > 0) HasAirBalloon--;
 		}

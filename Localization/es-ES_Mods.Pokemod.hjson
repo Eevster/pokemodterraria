@@ -2112,6 +2112,96 @@ Items: {
 		DisplayName: Escama corazón
 		Tooltip: ""
 	}
+
+	GhostGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Gema fantasma
+	}
+
+	FlyingGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Gema volador
+	}
+
+	FireGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Gema fuego
+	}
+
+	FightingGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Gema lucha
+	}
+
+	FairyGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Gema hada
+	}
+
+	ElectricGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Gema eléctrico
+	}
+
+	DragonGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Gema dragón
+	}
+
+	DarkGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Gema siniestro
+	}
+
+	BugGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Gema bicho
+	}
+
+	GrassGem: {
+		DisplayName: Gema planta
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	GroundGem: {
+		DisplayName: Gema tierra
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	IceGem: {
+		DisplayName: Gema hielo
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	NormalGem: {
+		DisplayName: Gema normal
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	PoisonGem: {
+		DisplayName: Gema veneno
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	PsychicGem: {
+		DisplayName: Gema psíquico
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	RockGem: {
+		DisplayName: Gema roca
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SteelGem: {
+		DisplayName: Gema acero
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	WaterGem: {
+		DisplayName: Gema agua
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
 }
 
 Buffs: {
@@ -5062,6 +5152,7 @@ CommonItemTooltip: {
 		Un científico podría encontrarlo interesante
 		'''
 	MegaStone: Permite al poseedor megaevolucionar a {0}, cuando se usa un mega brazalete
+	PokemonTypeDamageBoost: Incrementa el daño de tipo {0} en {1}%
 }
 
 PokemonInfo: {

@@ -281,7 +281,12 @@ namespace Pokemod.Content.Pets
 		public virtual int GetPokemonAttackDamage(string attackName){
 			int power = PokemonData.pokemonAttacks[attackName].attackPower;
 			bool special = PokemonData.pokemonAttacks[attackName].isSpecial;
-			float multiplier = PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains(PokemonData.pokemonAttacks[attackName].attackType)?1.5f:1f;
+			int attackType = PokemonData.pokemonAttacks[attackName].attackType;
+			float multiplier = PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains(attackType)?1.5f:1f;
+			if (attackType >= 0 && attackType < 18)
+			{
+				multiplier *= Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().typeMult[PokemonData.pokemonAttacks[attackName].attackType];
+			}
 
 			return GetPokemonDamage(power, special, multiplier);
 		}
