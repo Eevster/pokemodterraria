@@ -2213,8 +2213,98 @@ Items: {
 	}
 
 	ShellBell: {
-		// Tooltip: ""
-		// DisplayName: Shell Bell
+		Tooltip: ""
+		DisplayName: Shell Bell
+	}
+
+	TeraGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonDamageBoost}"
+		DisplayName: Tera Gema
+	}
+
+	BlackGlasses: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Gafas de sol
+	}
+
+	MiracleSeed: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Semilla milagro
+	}
+
+	MetalCoat: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Revestimiento metálico
+	}
+
+	Magnet: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Imán
+	}
+
+	HardStone: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Piedra dura
+	}
+
+	FairyFeather: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Pluma feérica
+	}
+
+	DragonFang: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Colmillo dragón
+	}
+
+	Charcoal: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Carbón
+	}
+
+	MysticWater: {
+		DisplayName: Agua mística
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	NeverMeltIce: {
+		DisplayName: Antiderretir
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	PoisonBarb: {
+		DisplayName: Flecha venenosa
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SharpBeak: {
+		DisplayName: Pico afilado
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SilkScarf: {
+		DisplayName: Pañuelo de seda
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SilverPowder: {
+		DisplayName: Polvo plata
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SoftSand: {
+		DisplayName: Arena fina
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SpellTag: {
+		DisplayName: Hechizo
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	TwistedSpoon: {
+		DisplayName: Cuchara torcida
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
 	}
 }
 

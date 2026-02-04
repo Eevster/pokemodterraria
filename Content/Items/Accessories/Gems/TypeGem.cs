@@ -7,25 +7,16 @@ using Pokemod.Content.NPCs;
 
 namespace Pokemod.Content.Items.Accessories.Gems
 {
-    public abstract class TypeGem : ModItem
+    public abstract class TypeGem : TypeDamageItem
 	{
 		public override string Texture => "Pokemod/Content/Items/Accessories/Gems/"+Item.ModItem.Name;
-		public virtual int pokemonType => 0;
-		public float damageMult = 0.1f;
+		public override float damageMult => 0.1f;
 
-		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonTypes."+(TypeIndex)pokemonType), (int)(100f*damageMult));
-		public override void SetDefaults() {
-			Item.width = 24;
-			Item.height = 24;
-			Item.maxStack = 1;
-			Item.rare = ItemRarityID.Green;
-			Item.value = Item.sellPrice(silver: 50);
-			Item.accessory = true;
-		}
-
-		public override void UpdateAccessory(Player player, bool hideVisual) {
-			player.GetModPlayer<PokemonPlayer>().typeMult[pokemonType] += damageMult;
-		}
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+			Item.maxStack = Item.CommonMaxStack;
+        }
 	}
 
 	public class BugGem : TypeGem

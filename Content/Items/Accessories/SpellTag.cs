@@ -8,15 +8,15 @@ using Pokemod.Content.Items.Accessories.Gems;
 
 namespace Pokemod.Content.Items.Accessories
 {
-	public class BlackBeltItem : TypeDamageItem
+    public class SpellTag : TypeDamageItem
 	{
-		public override int pokemonType => (int)TypeIndex.Fighting;
+		public override int pokemonType => (int)TypeIndex.Ghost;
 		public override float damageMult => 0.15f;
 
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient<FightingGem>(3)
+				.AddIngredient<GhostGem>(3)
 				.AddIngredient(ItemID.WaterCandle, 1)
 				.AddTile(TileID.TinkerersWorkbench)
 				.Register();

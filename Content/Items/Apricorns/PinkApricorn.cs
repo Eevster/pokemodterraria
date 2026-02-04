@@ -19,12 +19,10 @@ namespace Pokemod.Content.Items.Apricorns
 
         public override void SetDefaults()
         {
-            Item.maxStack = 999;
-            Item.width = 12;
-            Item.height = 14;
-            Item.value = 80;
+            Item.width = 24;
+            Item.height = 24;
+            Item.value = Item.sellPrice(copper: 50);
+            Item.maxStack = Item.CommonMaxStack;
         }
-
-
     }
 }

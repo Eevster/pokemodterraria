@@ -2216,6 +2216,96 @@ Items: {
 		Tooltip: ""
 		DisplayName: Shell Bell
 	}
+
+	TeraGem: {
+		Tooltip: "{$CommonItemTooltip.PokemonDamageBoost}"
+		DisplayName: Tera Gem
+	}
+
+	BlackGlasses: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Black Glasses
+	}
+
+	MiracleSeed: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Miracle Seed
+	}
+
+	MetalCoat: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Metal Coat
+	}
+
+	Magnet: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Magnet
+	}
+
+	HardStone: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Hard Stone
+	}
+
+	FairyFeather: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Fairy Feather
+	}
+
+	DragonFang: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Dragon Fang
+	}
+
+	Charcoal: {
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		DisplayName: Charcoal
+	}
+
+	MysticWater: {
+		DisplayName: Mystic Water
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	NeverMeltIce: {
+		DisplayName: Never Melt Ice
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	PoisonBarb: {
+		DisplayName: Poison Barb
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SharpBeak: {
+		DisplayName: Sharp Beak
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SilkScarf: {
+		DisplayName: Silk Scarf
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SilverPowder: {
+		DisplayName: Silver Powder
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SoftSand: {
+		DisplayName: Soft Sand
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	SpellTag: {
+		DisplayName: Spell Tag
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
+
+	TwistedSpoon: {
+		DisplayName: Twisted Spoon
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+	}
 }
 
 Buffs: {
