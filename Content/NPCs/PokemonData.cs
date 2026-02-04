@@ -502,9 +502,10 @@ namespace Pokemod.Content.NPCs
             {"CharizardMegaY", new PokemonInfo(0006, [78, 104, 78, 159, 115, 100], [(int)TypeIndex.Fire,(int)TypeIndex.Flying], [new MoveLvl("SolarBeam")], [(int)EggGroups.NoEggs], 1.7f, 100.5f, (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
             {"BlastoiseMega", new PokemonInfo(0009, [79, 103, 120, 135, 115, 78], [(int)TypeIndex.Water], [new MoveLvl("FocusPunch")], [(int)EggGroups.NoEggs], 1.6f, 101.1f, (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
             {"AlakazamMega", new PokemonInfo(0065, [55, 50, 65, 175, 95, 150], [(int)TypeIndex.Psychic], [new MoveLvl("ShadowBall")], [(int)EggGroups.NoEggs], 1.2f, 48.0f, (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
+            {"VictreebelMega", new PokemonInfo(0071, [80, 125, 85, 135, 95, 70], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [new MoveLvl("SludgeBomb")], [(int)EggGroups.NoEggs], 4.5f, 125.5f, (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
             {"GengarMega", new PokemonInfo(0094, [60, 65, 80, 170, 95, 130], [(int)TypeIndex.Ghost,(int)TypeIndex.Poison], [new MoveLvl("Psychic")], [(int)EggGroups.NoEggs], 1.4f, 40.5f, (int)StageIndex.Mega, (int)ExpTypes.MediumSlow)},
             {"GyaradosMega", new PokemonInfo(0130, [95, 155, 109, 70, 130, 81], [(int)TypeIndex.Water,(int)TypeIndex.Dark], [new MoveLvl("DragonRush")], [(int)EggGroups.NoEggs], 6.5f, 305.0f, (int)StageIndex.Mega, (int)ExpTypes.Slow)},
-            {"DragoniteMega", new PokemonInfo(0149, [91, 124, 115, 145, 125, 100], [(int)TypeIndex.Dragon,(int)TypeIndex.Flying], [new MoveLvl("AirSlash")], [(int)EggGroups.Water1, (int)EggGroups.Dragon], 2.2f, 210.0f, (int)StageIndex.Stage2, (int)ExpTypes.Slow)},
+            {"DragoniteMega", new PokemonInfo(0149, [91, 124, 115, 145, 125, 100], [(int)TypeIndex.Dragon,(int)TypeIndex.Flying], [new MoveLvl("AirSlash")], [(int)EggGroups.NoEggs], 2.2f, 290.0f, (int)StageIndex.Mega, (int)ExpTypes.Slow)},
 
             //Alolan Regional Forms
             {"AlolanDiglett", new PokemonInfo(0050, [10, 55, 30, 35, 45, 90], [(int)TypeIndex.Ground,(int)TypeIndex.Steel], [new MoveLvl("Tackle"), new MoveLvl("MudSlap", 12), new MoveLvl("Dig", 32), new MoveLvl("Earthquake", 40)], [(int)EggGroups.Field], 0.2f, 0.8f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},

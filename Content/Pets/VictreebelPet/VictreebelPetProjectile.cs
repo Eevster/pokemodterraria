@@ -19,6 +19,9 @@ namespace Pokemod.Content.Pets.VictreebelPet
 		public override int[] jumpStartEnd => [2,2];
 		public override int[] fallStartEnd => [3,3];
 		public override int[] attackStartEnd => [4,7];
+
+		public override string[] megaEvolutions => ["VictreebelMega"];
+		public override string[] itemToMegaEvolve => ["VictreebelMegaStoneItem"];
 	}
 
 	public class VictreebelPetProjectileShiny : VictreebelPetProjectile{}
