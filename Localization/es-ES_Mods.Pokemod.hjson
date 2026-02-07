@@ -506,6 +506,8 @@ Projectiles: {
 	// MagnezonePetProjectile.DisplayName: Magnezone Pet Projectile
 	// VictreebelMegaPetProjectileShiny.DisplayName: Victreebel Mega Pet Projectile Shiny
 	// VictreebelMegaPetProjectile.DisplayName: Victreebel Mega Pet Projectile
+	// DelibirdPetProjectile.DisplayName: Delibird Pet Projectile
+	// DelibirdPetProjectileShiny.DisplayName: Delibird Pet Projectile Shiny
 }
 
 Items: {
@@ -3988,6 +3990,16 @@ Buffs: {
 		// Description: Mods.Pokemod.Buffs.LeechSeedDebuff.Description
 		// DisplayName: Leech Seed Debuff
 	}
+
+	DelibirdPetBuff: {
+		// DisplayName: Delibird Pet Buff
+		// Description: Mods.Pokemod.Buffs.DelibirdPetBuff.Description
+	}
+
+	DelibirdPetBuffShiny: {
+		// DisplayName: Delibird Pet Buff Shiny
+		// Description: Mods.Pokemod.Buffs.DelibirdPetBuffShiny.Description
+	}
 }
 
 NPCs: {
@@ -5186,6 +5198,8 @@ NPCs: {
 	}
 
 	G1T1_Brock.DisplayName: Lider de gimnasio de tipo Roca
+	// DelibirdCritterNPC.DisplayName: Delibird Critter N P C
+	// DelibirdCritterNPCShiny.DisplayName: Delibird Critter N P C Shiny
 }
 
 Bestiary: {
