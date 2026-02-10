@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Content",
+    "\\Content\\NPCs",
+    "\\Content\\NPCs\\TrainerNPCs",
+    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
   ],
+  "SelectedNode": "\\Content\\NPCs\\TrainerNPCs\\GymLeaders\\G1T1_Brock.cs",
   "PreviewInSolutionExplorer": false
 }
