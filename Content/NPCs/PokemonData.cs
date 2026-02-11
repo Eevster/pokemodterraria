@@ -473,13 +473,14 @@ namespace Pokemod.Content.NPCs
             {"Feraligatr", new PokemonInfo(0160, [85, 105, 100, 79, 83, 78], [(int)TypeIndex.Water], [new MoveLvl("Tackle", 1), new MoveLvl("WaterGun", 6), new MoveLvl("MudShot", 13), new MoveLvl("IceFang", 21), new MoveLvl("Crunch", 32), new MoveLvl("Slash", 45), new MoveLvl("Waterfall", 58), new MoveLvl("AquaTail", 59), new MoveLvl("FocusPunch", 71), new MoveLvl("HydroPump", 76)], [(int)EggGroups.Monster, (int)EggGroups.Water1], 2.3f, 88.8f, (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
             
             {"Cleffa", new PokemonInfo(0173, [50, 25, 28, 45, 55, 15], [(int)TypeIndex.Fairy], [new MoveLvl("Tackle")], [(int)EggGroups.Fairy], 0.6f, 7.5f, (int)StageIndex.Baby, (int)ExpTypes.Fast, completed: false)},
-
+            
             {"Sudowoodo", new PokemonInfo(0185, [70, 100, 115, 30, 65, 30], [(int)TypeIndex.Rock], [new MoveLvl("Tackle"), new MoveLvl("DoubleKick", 9), new MoveLvl("RockThrow", 14), new MoveLvl("RockSlide", 20), new MoveLvl("BrickBreak", 36), new MoveLvl("DoubleEdge", 44), new MoveLvl("StoneEdge", 48)], [(int)EggGroups.Mineral], 1.2f, 38.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
             
             {"Espeon", new PokemonInfo(0196, [65, 65, 60, 130, 95, 110], [(int)TypeIndex.Psychic], [new MoveLvl("Confusion"), new MoveLvl("Tackle", 1), new MoveLvl("Bite", 1), new MoveLvl("QuickAttack", 10), new MoveLvl("Swift", 20), new MoveLvl("Psybeam", 25), new MoveLvl("Psychic", 40)], [(int)EggGroups.Field], 1.0f, 29.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
             {"Umbreon", new PokemonInfo(0197, [95, 65, 110, 60, 130, 65], [(int)TypeIndex.Dark], [new MoveLvl("Crunch"), new MoveLvl("Tackle", 1), new MoveLvl("Bite", 1), new MoveLvl("Swift", 1), new MoveLvl("QuickAttack", 10), new MoveLvl("ConfuseRay", 20), new MoveLvl("Toxic", 25)], [(int)EggGroups.Field], 1.0f, 29.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
             {"Unown", new PokemonInfo(0201, [48, 72, 48, 72, 48, 48], [(int)TypeIndex.Psychic], [new MoveLvl("Confusion", 1)], [(int)EggGroups.NoEggs], 0.5f, 5.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
-
+            
+            {"Delibird", new PokemonInfo(0225, [45, 55, 45, 65, 45, 75], [(int)TypeIndex.Ice,(int)TypeIndex.Flying], [new MoveLvl("Tackle"), new MoveLvl("IceShard", 8), new MoveLvl("IceFang", 32), new MoveLvl("Blizzard", 50)], [(int)EggGroups.Field], 1.3f, 54.5f, (int)StageIndex.Basic, (int)ExpTypes.Fast)},
             //Gen 3
             {"Mawile", new PokemonInfo(0303, [50, 85, 85, 55, 55, 50], [(int)TypeIndex.Steel,(int)TypeIndex.Fairy], [new MoveLvl("Bite")], [(int)EggGroups.HumanLike], 0.6f, 11.5f, (int)StageIndex.Basic, (int)ExpTypes.Fast, completed: false)},
 

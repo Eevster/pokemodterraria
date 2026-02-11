@@ -5200,6 +5200,8 @@ NPCs: {
 	G1T1_Brock.DisplayName: Lider de gimnasio de tipo Roca
 	// DelibirdCritterNPC.DisplayName: Delibird Critter N P C
 	// DelibirdCritterNPCShiny.DisplayName: Delibird Critter N P C Shiny
+	// MareepCritterNPC.DisplayName: Mareep Critter N P C
+	// MareepCritterNPCShiny.DisplayName: Mareep Critter N P C Shiny
 }
 
 Bestiary: {

@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Assets",
+    "\\Assets\\Textures",
+    "\\Assets\\Textures\\Pokesprites",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
     "\\Content\\NPCs",
     "\\Content\\NPCs\\TrainerNPCs",
