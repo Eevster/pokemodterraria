@@ -4795,12 +4795,12 @@ NPCs: {
 
 	TentacoolCritterNPC: {
 		// DisplayName: Tentacool
-		// Description: ""
+		// Description: It drifts in sea currents. Countless fishermen are hurt by its poison stingers.
 	}
 
 	TentacruelCritterNPC: {
 		// DisplayName: Tentacruel
-		// Description: ""
+		// Description: It alerts others to danger by stridently flashing the red orbs on its head.
 	}
 
 	VenomothCritterNPC: {
