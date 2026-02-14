@@ -262,7 +262,7 @@ namespace Pokemod.Content.NPCs
 				chance = 0;
 			}
 
-			return chance * ModContent.GetInstance<GameplayConfig>().PokemonSpawnMultiplier;
+			return chance * 0.5f*ModContent.GetInstance<GameplayConfig>().PokemonSpawnMultiplier;
 		}
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

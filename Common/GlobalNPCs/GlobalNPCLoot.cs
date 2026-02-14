@@ -10,6 +10,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Items.Accessories.Gems;
+using Pokemod.Common.Configs;
 
 namespace Pokemod.Common.GlobalNPCs
 {

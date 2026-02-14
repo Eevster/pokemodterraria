@@ -506,6 +506,7 @@ Projectiles: {
 	MagnezonePetProjectile.DisplayName: Magnezone Pet Projectile
 	VictreebelMegaPetProjectileShiny.DisplayName: Victreebel Mega Pet Projectile Shiny
 	VictreebelMegaPetProjectile.DisplayName: Victreebel Mega Pet Projectile
+	Recover.DisplayName: Recover
 }
 
 Items: {
@@ -5186,6 +5187,7 @@ NPCs: {
 	}
 
 	G1T1_Brock.DisplayName: Rock-type Gym Leader
+	G1T2_Misty.DisplayName: Water-type Gym Leader
 }
 
 Bestiary: {
@@ -5227,6 +5229,7 @@ Dialogue: {
 	}
 
 	G1T1_Brock.StandardDialogue1: I believe in rock-hard defense and determination! Are you ready to challenge me?
+	G1T2_Misty.StandardDialogue1: What is your approach when you catch and train pokemon? My policy is an all out offensive with Water-type pokemon!
 }
 
 Tiles: {

@@ -506,6 +506,7 @@ Projectiles: {
 	// MagnezonePetProjectile.DisplayName: Magnezone Pet Projectile
 	// VictreebelMegaPetProjectileShiny.DisplayName: Victreebel Mega Pet Projectile Shiny
 	// VictreebelMegaPetProjectile.DisplayName: Victreebel Mega Pet Projectile
+	Recover.DisplayName: Recuperación
 }
 
 Items: {
@@ -5186,6 +5187,7 @@ NPCs: {
 	}
 
 	G1T1_Brock.DisplayName: Lider de gimnasio de tipo Roca
+	G1T2_Misty.DisplayName: Lider de gimnasio de tipo Agua
 }
 
 Bestiary: {
@@ -5227,6 +5229,7 @@ Dialogue: {
 	}
 
 	G1T1_Brock.StandardDialogue1: ¡Creo en la defensa férrea y la determinación! ¿Estás listo para desafiarme?
+	G1T2_Misty.StandardDialogue1: ¡Mi táctica es la ofensiva total con los Pokémon del tipo agua!
 }
 
 Tiles: {

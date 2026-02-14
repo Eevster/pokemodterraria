@@ -152,12 +152,18 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 				else
 				{
 					Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.BattleWin").WithFormatArgs(NPC.FullName).Value, 237, 206, 2);
+					GiveRewards(opponent);
 					opponent.GetModPlayer<PokemonPlayer>().SetBattle(false);
 					NPC.active = false;
 					NPC.netSkip = -1;
 					NPC.life = 0;
 				}
 			}
+		}
+
+		public virtual void GiveRewards(Player opponent)
+		{
+			
 		}
 
         public override void PostAI()

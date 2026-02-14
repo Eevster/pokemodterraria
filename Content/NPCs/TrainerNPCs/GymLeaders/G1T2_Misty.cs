@@ -10,26 +10,35 @@ using Terraria.Utilities;
 
 namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 {
-	public class G1T1_Brock : BattleTrainer
+	public class G1T2_Misty : BattleTrainer
 	{
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+
+			Main.npcFrameCount[Type] = 23; // The amount of frames the NPC has
+
+			NPCID.Sets.ExtraFramesCount[Type] = 10; // Generally for Town NPCs, but this is how the NPC does extra things such as sitting in a chair and talking to other NPCs.
+		}
+
+        public override void SetDefaults()
+        {
+			base.SetDefaults();
+			AnimationType = NPCID.Mechanic;
+        }
 		public override bool GymLeader => true;
 		public override void LoadTeam()
 		{
 			pokemonTeam = new List<EnemyPokemonInfo>();
 
-			pokemonTeam.Add(new EnemyPokemonInfo("Geodude", 12, ["Tackle", "Harden"]));
-			pokemonTeam.Add(new EnemyPokemonInfo("Onix", 14, ["Tackle", "RockThrow", "RockSlide", "Harden"]));
+			pokemonTeam.Add(new EnemyPokemonInfo("Staryu", 18, ["Tackle", "Harden", "Recover", "WaterPulse"]));
+			pokemonTeam.Add(new EnemyPokemonInfo("Starmie", 21, ["WaterPulse", "Recover", "RapidSpin", "Swift"]));
 		}
-
-        public override void GiveRewards(Player opponent)
-        {
-			
-            base.GiveRewards(opponent);
-        }
+		
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
 				new FlavorTextBestiaryInfoElement($"Mods.Pokemod.Bestiary.{GetType().Name}"),
 			});
 		}
@@ -37,13 +46,13 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		public override List<string> SetNPCNameList()
 		{
 			return new List<string> {
-				"Brock",
+				"Misty",
 			};
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if ((spawnInfo.Player.ZoneRockLayerHeight || spawnInfo.Player.ZoneDesert) && !NPC.AnyNPCs(Type))
+			if ((spawnInfo.Player.ZoneSnow || spawnInfo.Player.ZoneBeach) && !NPC.AnyNPCs(Type))
 			{
 				return 0.1f;
 			}
