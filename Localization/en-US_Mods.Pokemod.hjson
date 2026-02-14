@@ -507,6 +507,8 @@ Projectiles: {
 	VictreebelMegaPetProjectileShiny.DisplayName: Victreebel Mega Pet Projectile Shiny
 	VictreebelMegaPetProjectile.DisplayName: Victreebel Mega Pet Projectile
 	Recover.DisplayName: Recover
+	DelibirdPetProjectile.DisplayName: Delibird Pet Projectile
+	DelibirdPetProjectileShiny.DisplayName: Delibird Pet Projectile Shiny
 }
 
 Items: {
@@ -3989,6 +3991,16 @@ Buffs: {
 		Description: Mods.Pokemod.Buffs.LeechSeedDebuff.Description
 		DisplayName: Leech Seed Debuff
 	}
+
+	DelibirdPetBuff: {
+		DisplayName: Delibird Pet Buff
+		Description: Mods.Pokemod.Buffs.DelibirdPetBuff.Description
+	}
+
+	DelibirdPetBuffShiny: {
+		DisplayName: Delibird Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.DelibirdPetBuffShiny.Description
+	}
 }
 
 NPCs: {
@@ -4489,7 +4501,7 @@ NPCs: {
 
 	JigglypuffCritterNPC: {
 		DisplayName: Jigglypuff
-		Description: ""
+		Description: When it wavers its big, round eyes, it begins singing a lullaby that makes everyone drowsy.
 	}
 
 	JynxCritterNPC: {
@@ -4569,7 +4581,7 @@ NPCs: {
 
 	MankeyCritterNPC: {
 		DisplayName: Mankey
-		Description: ""
+		Description: It lives in treetop colonies. If one member of the group becomes enraged, the whole colony rampages for no reason.
 	}
 
 	MarowakCritterNPC: {
@@ -4664,7 +4676,7 @@ NPCs: {
 
 	PersianCritterNPC: {
 		DisplayName: Persian
-		Description: ""
+		Description: It is a very haughty Pokémon. Among fans of Persian, the size of the jewel in its forehead is a topic of much talk.
 	}
 
 	PinsirCritterNPC: {
@@ -4784,12 +4796,12 @@ NPCs: {
 
 	TentacoolCritterNPC: {
 		DisplayName: Tentacool
-		Description: ""
+		Description: It drifts in sea currents. Countless fishermen are hurt by its poison stingers.
 	}
 
 	TentacruelCritterNPC: {
 		DisplayName: Tentacruel
-		Description: ""
+		Description: It alerts others to danger by stridently flashing the red orbs on its head.
 	}
 
 	VenomothCritterNPC: {
@@ -4819,7 +4831,7 @@ NPCs: {
 
 	VulpixCritterNPC: {
 		DisplayName: Vulpix
-		Description: ""
+		Description: It controls balls of fire. As it grows, its six tails split from their tips to make more tails.
 	}
 
 	WeepinbellCritterNPC: {
@@ -4834,7 +4846,7 @@ NPCs: {
 
 	WigglytuffCritterNPC: {
 		DisplayName: Wigglytuff
-		Description: ""
+		Description: Its fine fur feels sublime to the touch. It can expand its body by inhaling air.
 	}
 
 	ZapdosCritterNPC: {
@@ -4844,12 +4856,17 @@ NPCs: {
 
 	ZubatCritterNPC: {
 		DisplayName: Zubat
-		Description: ""
+		Description: Even though it has no eyes, it can sense obstacles using ultrasonic waves it emits from its mouth.
 	}
 
 	CleffaCritterNPC: {
 		DisplayName: Cleffa
 		Description: Its silhouette is like a star. It is believed to arrive riding on shooting stars.
+	}
+
+	MareepCritterNPC: {
+		DisplayName: Mareep
+		Description: Its fluffy coat doubles in size when static electricity builds up. Touching it can be shocking.
 	}
 
 	SudowoodoCritterNPC: {
@@ -4870,6 +4887,11 @@ NPCs: {
 	UnownCritterNPC: {
 		DisplayName: Unown
 		Description: Because the Pokémon is shaped like ancient writing, it is a huge mystery whether written language or Unown came first.
+	}
+
+	DelibirdCritterNPC: {
+		DisplayName: Delibird
+		Description: It carries food rolled up in its tail. It has a habit of sharing food with people lost in the mountains.
 	}
 
 	MawileCritterNPC: {
@@ -5100,6 +5122,8 @@ NPCs: {
 	SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Shiny
 	UmbreonCritterNPCShiny.DisplayName: Umbreon Shiny
 	UnownCritterNPCShiny.DisplayName: Unown Shiny
+	DelibirdCritterNPCShiny.DisplayName: Delibird Shiny
+	MareepCritterNPCShiny.DisplayName: Mareep Shiny
 	MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
 	RampardosCritterNPCShiny.DisplayName: Rampardos Shiny

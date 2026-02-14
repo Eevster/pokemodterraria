@@ -2,10 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
+    "\\Assets\\Textures",
+    "\\Assets\\Textures\\Pokesprites",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
-    "\\Content\\Items",
+    "\\Content\\NPCs",
     "\\Content\\NPCs\\TrainerNPCs",
     "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
   ],
+  "SelectedNode": "\\Content\\NPCs\\TrainerNPCs\\GymLeaders\\G1T1_Brock.cs",
   "PreviewInSolutionExplorer": false
 }
