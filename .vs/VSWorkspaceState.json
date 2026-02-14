@@ -4,12 +4,10 @@
     "\\Assets",
     "\\Assets\\Textures",
     "\\Assets\\Textures\\Pokesprites",
-    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
     "\\Content\\NPCs",
-    "\\Content\\NPCs\\TrainerNPCs",
-    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
+    "\\Content\\NPCs\\PokemonNPCs"
   ],
-  "SelectedNode": "\\Content\\NPCs\\TrainerNPCs\\GymLeaders\\G1T1_Brock.cs",
+  "SelectedNode": "\\Content\\NPCs\\PokemonData.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -480,7 +480,7 @@ namespace Pokemod.Content.NPCs
             {"Umbreon", new PokemonInfo(0197, [95, 65, 110, 60, 130, 65], [(int)TypeIndex.Dark], [new MoveLvl("Crunch"), new MoveLvl("Tackle", 1), new MoveLvl("Bite", 1), new MoveLvl("Swift", 1), new MoveLvl("QuickAttack", 10), new MoveLvl("ConfuseRay", 20), new MoveLvl("Toxic", 25)], [(int)EggGroups.Field], 1.0f, 29.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast)},
             {"Unown", new PokemonInfo(0201, [48, 72, 48, 72, 48, 48], [(int)TypeIndex.Psychic], [new MoveLvl("Confusion", 1)], [(int)EggGroups.NoEggs], 0.5f, 5.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast)},
             
-            {"Delibird", new PokemonInfo(0225, [45, 55, 45, 65, 45, 75], [(int)TypeIndex.Ice,(int)TypeIndex.Flying], [new MoveLvl("Tackle"), new MoveLvl("IceShard", 8), new MoveLvl("IceFang", 32), new MoveLvl("Blizzard", 50)], [(int)EggGroups.Field], 1.3f, 54.5f, (int)StageIndex.Basic, (int)ExpTypes.Fast)},
+            {"Delibird", new PokemonInfo(0225, [45, 55, 45, 65, 45, 75], [(int)TypeIndex.Ice,(int)TypeIndex.Flying], [new MoveLvl("Tackle"), new MoveLvl("IceShard", 8), new MoveLvl("IceFang", 32), new MoveLvl("Blizzard", 50)], [(int)EggGroups.Field], 0.9f, 16.0f, (int)StageIndex.Basic, (int)ExpTypes.Fast)},
             //Gen 3
             {"Mawile", new PokemonInfo(0303, [50, 85, 85, 55, 55, 50], [(int)TypeIndex.Steel,(int)TypeIndex.Fairy], [new MoveLvl("Bite")], [(int)EggGroups.HumanLike], 0.6f, 11.5f, (int)StageIndex.Basic, (int)ExpTypes.Fast, completed: false)},
 
