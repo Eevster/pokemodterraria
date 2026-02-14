@@ -72,11 +72,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnSpawn(source);
         }
 
-        public override void AI()
-        {
-            CheckPokemonPetCollide();
-        }
-
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.rand.NextBool(5)) //same 20% as the base games, using Weak as a proxy for Special Attack Down until stat mod stages are implemented.

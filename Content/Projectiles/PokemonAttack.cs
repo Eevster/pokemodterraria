@@ -86,8 +86,16 @@ namespace Pokemod.Content.Projectiles
             base.OnSpawn(source);
         }
 
+        public override void PostAI()
+        {
+			//if(Trainer.onBattle) CheckPokemonPetCollide();
+            base.PostAI();
+        }
+
 		public void CheckPokemonPetCollide()
 		{
+			if(Projectile.penetrate == 0) return;
+
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
 				if (Main.projectile[i].ModProjectile is PokemonPetProjectile)
@@ -98,7 +106,7 @@ namespace Pokemod.Content.Projectiles
 						if (hostilePokemon.Projectile.owner >= 0 && hostilePokemon.Projectile.owner < Main.maxPlayers)
 						{
 							Player targetOwner = Main.player[hostilePokemon.Projectile.owner];
-							if (targetOwner.hostile && (targetOwner.team == 0 || Owner.team == 0 || targetOwner.team != Owner.team)) //Pokemon is Hostile
+							if (hostilePokemon.isEnemy || (targetOwner.hostile && (targetOwner.team == 0 || Owner.team == 0 || targetOwner.team != Owner.team))) //Pokemon is Hostile
 							{
 								if (Colliding(Projectile.Hitbox, hostilePokemon.Projectile.Hitbox) == true)
 								{
@@ -140,6 +148,8 @@ namespace Pokemod.Content.Projectiles
 
 		public virtual void OnHitPokemonPet(PokemonPetProjectile target, int damageDone) //Requires that CheckPokemonPetCollide() is called in AI(). This is intentionally not always called, to save on wasted processing.
 		{
+			if(Projectile.penetrate > 0) Projectile.penetrate--;
+			//Main.NewText("OnHitPokemon");
 			AfterHitTarget(target.Projectile, damageDone);
 		}
 

@@ -144,7 +144,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             {
                 Projectile.Opacity += 0.1f;
             }
-
+            
             UpdateAnimation();
 
             if (Projectile.owner == Main.myPlayer)
@@ -163,6 +163,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             StartCut(target.Center);
             base.OnHitPlayer(target, info);
+        }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            StartCut(target.Projectile.Center);
+            base.OnHitPokemonPet(target, damageDone);
         }
 
         public void StartCut(Vector2 position)

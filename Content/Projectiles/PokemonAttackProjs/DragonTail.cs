@@ -165,6 +165,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            StartCut(target.Projectile.Center);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
         public void StartCut(Vector2 position)
         {
             if (Projectile.ai[0] == 0f)

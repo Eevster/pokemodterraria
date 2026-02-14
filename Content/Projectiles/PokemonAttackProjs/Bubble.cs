@@ -71,6 +71,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            if(Main.rand.NextBool(10)) target.ApplyStatMod(4, -1);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
 			width = 2;

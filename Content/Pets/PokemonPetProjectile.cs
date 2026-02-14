@@ -2079,6 +2079,7 @@ namespace Pokemod.Content.Pets
 								{
 									enemyPokemon = true; 
 									var enemyPokemonAttack = attack;
+									attack.OnHitPokemonPet(this, bulletdmg);
 									physical = !enemyPokemonAttack.isSpecial;
 									attackType = enemyPokemonAttack.attackType;
 

@@ -106,6 +106,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            if(Main.rand.NextBool(10)) target.ApplyStatMod(4, -1);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
         public override bool PreDraw(ref Color lightColor) {
 			Main.instance.LoadProjectile(Projectile.type);
 			Texture2D texture = trailTexture.Value;
