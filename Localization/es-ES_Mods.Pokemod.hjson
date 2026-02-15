@@ -2309,6 +2309,15 @@ Items: {
 		DisplayName: Cuchara torcida
 		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
 	}
+
+	DynamaxBand: {
+		DisplayName: Banda Dinamax
+		Tooltip:
+			'''
+			Permite dinamaxizar a tus pokemon
+			Al usarse, el siguiente pokemon enviado será afectado por el fenómeno Dynamax
+			'''
+	}
 }
 
 Buffs: {

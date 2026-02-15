@@ -8,9 +8,9 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Items.MegaStones
+namespace Pokemod.Content.Items.Dynamax
 {
-	public class MegaCuffItem : ModItem
+	public class DynamaxBand : ModItem
 	{
 		public override void SetDefaults()
 		{
@@ -31,25 +31,16 @@ namespace Pokemod.Content.Items.MegaStones
 				return true;
 			}
 
-			if (player.GetModPlayer<PokemonPlayer>().CanMegaEvolve != 0)
+			if (player.GetModPlayer<PokemonPlayer>().CanDynamax != 0)
 			{
 				SoundEngine.PlaySound(SoundID.MenuTick, player.position);
 				CombatText.NewText(player.Hitbox, new Color(255, 255, 255), "Not Charged!");
 				return true;
 			}
-
-			if (!player.GetModPlayer<PokemonPlayer>().HasPokemonByName(player.GetModPlayer<PokemonPlayer>().MegaStone.Replace("MegaStoneItemX","").Replace("MegaStoneItemY","").Replace("MegaStoneItem","")))
-			{
-				SoundEngine.PlaySound(SoundID.MenuTick, player.position);
-				CombatText.NewText(player.Hitbox, new Color(255, 255, 255), "Incorrect Pokemon");
-				return true;
-			}
-
-			if (player.GetModPlayer<PokemonPlayer>().HasMegaStone > 0)
+			else
 			{
 				SoundEngine.PlaySound(SoundID.Item6, player.position);
-				player.AddBuff(ModContent.BuffType<MegaEvolution>(), 60 * 60);
-				player.GetModPlayer<PokemonPlayer>().CanMegaEvolve = 2;
+				player.GetModPlayer<PokemonPlayer>().shouldDynamax = 3*60;
 			}
 
             return true;
@@ -57,9 +48,9 @@ namespace Pokemod.Content.Items.MegaStones
 
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
-			if (Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().CanMegaEvolve == 0)
+			if (Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().CanDynamax == 0)
 			{
-				Asset<Texture2D> megaTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/MegaItemSymbol");
+				Asset<Texture2D> megaTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/DynamaxItemSymbol");
 
 				spriteBatch.Draw(megaTexture.Value,
 					position: position,
@@ -78,7 +69,6 @@ namespace Pokemod.Content.Items.MegaStones
 		public override void AddRecipes()
 		{
 			CreateRecipe(1)
-				.AddIngredient<KeyStoneItem>(1)
 				.AddIngredient(ItemID.HallowedBar, 8)
 				.AddTile(TileID.MythrilAnvil)
 				.Register();

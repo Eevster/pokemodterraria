@@ -34,6 +34,10 @@ namespace Pokemod.Common.Players
 		public int CanMegaEvolve;
 		public string MegaStone;
 		public int HasMegaStone;
+
+		public int CanDynamax;
+		public int shouldDynamax;
+
 		public bool HasShinyCharm;
 		public int HasEverstone;
 		public int HasAirBalloon;
@@ -111,6 +115,7 @@ namespace Pokemod.Common.Players
 			tag["TrainerID"] = TrainerID;
 			tag["HasStarter"] = HasStarter;
 			tag["CanMegaEvolve"] = CanMegaEvolve;
+			tag["CanDynamax"] = CanDynamax;
 
 			tag["RegisteredPKKeys"] = registeredPokemon.Keys.ToList();
 			tag["RegisteredPKValues"] = registeredPokemon.Values.ToList();
@@ -121,6 +126,7 @@ namespace Pokemod.Common.Players
 			TrainerID = tag.GetString("TrainerID");
 			HasStarter = tag.GetBool("HasStarter");
 			CanMegaEvolve = tag.GetInt("CanMegaEvolve");
+			CanDynamax = tag.GetInt("CanDynamax");
 
 			List<string> auxKeys = tag.GetList<string>("RegisteredPKKeys").ToList();
 			List<int> auxValues = tag.GetList<int>("RegisteredPKValues").ToList();
@@ -252,6 +258,17 @@ namespace Pokemod.Common.Players
 			if (CanMegaEvolve == 1 && Main.dayTime)
 			{
 				CanMegaEvolve = 0;
+			}
+
+			if(shouldDynamax > 0) shouldDynamax--;
+
+			if (CanDynamax == 2 && !Main.dayTime)
+			{
+				CanDynamax = 1;
+			}
+			if (CanDynamax == 1 && Main.dayTime)
+			{
+				CanDynamax = 0;
 			}
 
 			maxPokemon = defaultMaxPokemon;
@@ -491,6 +508,18 @@ namespace Pokemod.Common.Players
 								}
 							}
 						}
+					}
+				}
+
+				if(shouldDynamax > 0)
+				{
+					if(Main.rand.NextBool(3))
+					{
+						int dust = Dust.NewDust(Player.Center, 5,5, DustID.FireworkFountain_Pink, 0, 0);
+						Main.dust[dust].position = Player.Center;
+						Main.dust[dust].velocity = Main.rand.NextFloat(3,5)*Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
+						Main.dust[dust].scale = Main.rand.NextFloat(0.8f,1.5f);
+						Main.dust[dust].noGravity = true;
 					}
 				}
 			}

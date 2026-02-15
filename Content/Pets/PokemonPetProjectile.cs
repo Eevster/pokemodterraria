@@ -140,6 +140,10 @@ namespace Pokemod.Content.Pets
 		public virtual string[] megaEvolutionBase => [];
 		public virtual string[] itemToMegaEvolve => [];
 
+		//Dynamax
+		public bool dynamax = false;
+		public int dynamaxTimer = 0;
+
 		public int currentStatus = 0;
 		public enum ProjStatus
 		{
@@ -166,6 +170,10 @@ namespace Pokemod.Content.Pets
 		public NPC npcOwner;
 
 		public string[] moveSet;
+
+		//Scale
+		private float prevScale;
+		public float forcedScale = -1;
 
 		public override void SendExtraAI(BinaryWriter writer)
         {
@@ -234,6 +242,14 @@ namespace Pokemod.Content.Pets
 				DrawOffsetX = -(pokeTexture.Width() - Projectile.width)/2;
 				Projectile.height = (int)(Projectile.scale*hitboxHeight);
 				DrawOriginOffsetY = (int)((Projectile.scale-2)*(pokeTexture.Height()/(totalFrames)-hitboxHeight)) + (int)(4*Projectile.scale);*/
+			}
+
+			if (player.GetModPlayer<PokemonPlayer>().shouldDynamax > 0)
+			{
+				player.GetModPlayer<PokemonPlayer>().shouldDynamax = 0;
+				player.GetModPlayer<PokemonPlayer>().CanDynamax = 2;
+				dynamax = true;
+				dynamaxTimer = 90;
 			}
 
 			Projectile.Center += new Vector2(0,(player.height-Projectile.height)/2);
@@ -453,6 +469,21 @@ namespace Pokemod.Content.Pets
 			return "";
 		}
 
+		//Dynamax Methods
+		public virtual void DynamaxProcess(){
+			if(isOut && dynamax){
+				if((dynamaxTimer-1)%30 == 0)
+				{
+					SoundEngine.PlaySound(SoundID.Item100, Projectile.position);
+					Projectile.scale *= 2f; 
+				}
+
+				if(dynamaxTimer>0){
+					dynamaxTimer--;
+				}
+			}
+		}
+
 		//Set enemy behavior
 
 		public void SetAsEnemyPokemon(NPC newNPCOwner, string[] moveSet)
@@ -526,8 +557,11 @@ namespace Pokemod.Content.Pets
 			GetAllProjsExp();
 			EvolutionProcess();
 			MegaEvolutionProcess();
+			DynamaxProcess();
 			Visuals();
 			ExtraChanges();
+
+			CheckAlteredScale();
 
 			if(Main.myPlayer == Projectile.owner){
 				if (!isEnemy)
@@ -1523,6 +1557,30 @@ namespace Pokemod.Content.Pets
 			);
 		}
 
+		public virtual void CheckAlteredScale()
+		{
+			if(!isOut) return;
+
+			if(forcedScale > 0 && Projectile.scale != forcedScale)
+			{
+				Projectile.scale = forcedScale;
+			}
+
+			if(Projectile.scale != 1f && prevScale != Projectile.scale)
+			{
+				Asset<Texture2D> pokeTexture = ModContent.Request<Texture2D>(Texture);
+				Projectile.width = (int)(Projectile.scale*hitboxWidth);
+				DrawOffsetX = -(pokeTexture.Width() - Projectile.width)/2;
+				Projectile.height = (int)(Projectile.scale*hitboxHeight);
+				//DrawOriginOffsetY = (int)((Projectile.scale-2)*((pokeTexture.Height()/totalFrames)-hitboxHeight)) + (int)(4*Projectile.scale);
+				DrawOriginOffsetY = -((pokeTexture.Height()/totalFrames) - (int)(Projectile.scale*hitboxHeight))/2 - ((pokeTexture.Height()/totalFrames)-hitboxHeight)/2 + 4;
+
+				Projectile.Center -= 0.5f * ((int)(Projectile.scale-prevScale))*(pokeTexture.Height()/totalFrames) * Vector2.UnitY;
+
+				prevScale = Projectile.scale;
+			}
+		}
+
 		public virtual void RefreshStatMods(bool hostilesNearby) //Three conditions for the stat mods resetting: 10 seconds without seeing a hostile || 5 seconds since applying a stat mod while out of combat || 60 seconds without applying a stat mod.
 		{
 			bool empty = true;
@@ -2146,7 +2204,7 @@ namespace Pokemod.Content.Pets
 						{
 							Vector2 positionOffset = (variantTexture.Frame(1, totalFrames).Size() * Vector2.UnitY * 0.5f) - Vector2.UnitY * 4f; //Anchors the sprite to the bottom of the hitbox correctly
 
-                            Main.EntitySpriteDraw(variantTexture.Value, Projectile.Bottom - Main.screenPosition - positionOffset,
+                            Main.EntitySpriteDraw(variantTexture.Value, Projectile.Bottom - Projectile.scale * positionOffset - Main.screenPosition,
 								variantTexture.Frame(1, totalFrames, 0, Projectile.frame), lightColor, Projectile.rotation,
 								variantTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 
@@ -2157,7 +2215,7 @@ namespace Pokemod.Content.Pets
 			}
 			else
 			{
-				Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+ballType);
+				Asset<Texture2D> ballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/"+(dynamax?"Dynamaxball":ballType));
 				Color drawColor = Lighting.GetColor((int)(Projectile.Center.X / 16), (int)(Projectile.Center.Y / 16));
 
 				Main.EntitySpriteDraw(ballTexture.Value, Projectile.Center - Main.screenPosition, ballTexture.Value.Bounds, drawColor, isOutTimer * MathHelper.ToRadians(2*Math.Clamp(Math.Abs(Projectile.velocity.X), 4, 30)) * (Projectile.velocity.X > 0 ? 1 : -1), ballTexture.Size() * 0.5f, 1f, SpriteEffects.None, 0);
@@ -2250,7 +2308,7 @@ namespace Pokemod.Content.Pets
 			{
 				Vector2 positionOffset = (lightTexture.Frame(1, totalFrames).Size() * Vector2.UnitY * 0.5f) - Vector2.UnitY * 4f; //Anchors the sprite to the bottom of the hitbox correctly
 
-				Main.EntitySpriteDraw(lightTexture.Value, Projectile.Bottom - Main.screenPosition - positionOffset,
+				Main.EntitySpriteDraw(lightTexture.Value, Projectile.Bottom - Projectile.scale * positionOffset - Main.screenPosition,
 					lightTexture.Frame(1, totalFrames, 0, Projectile.frame), Color.White, Projectile.rotation,
 					lightTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 			}

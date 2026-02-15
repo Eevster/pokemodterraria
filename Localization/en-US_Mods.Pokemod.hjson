@@ -2309,6 +2309,15 @@ Items: {
 		DisplayName: Twisted Spoon
 		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
 	}
+
+	DynamaxBand: {
+		DisplayName: Dynamax Band
+		Tooltip:
+			'''
+			Allows you to dynamax your pokemon
+			When used, the next pokemon sent will be affected by the Dynamax phenomenon
+			'''
+	}
 }
 
 Buffs: {
