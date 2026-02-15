@@ -3,11 +3,12 @@
     "",
     "\\Assets",
     "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites",
+    "\\Common",
+    "\\Common\\GlobalNPCs",
     "\\Content",
     "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs"
+    "\\Content\\NPCs\\TrainerNPCs",
+    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonData.cs",
   "PreviewInSolutionExplorer": false
 }
