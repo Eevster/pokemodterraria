@@ -41,6 +41,11 @@ namespace Pokemod.Common.Players
 		public bool HasShinyCharm;
 		public int HasEverstone;
 		public int HasAirBalloon;
+		public int HasEviolite;
+		public int HasRockyHelmet;
+		public int HasLuminousMoss;
+		public int HasEjectButton;
+		public int HasShellBell;
 
 		public float ExpMult = 1f;
 		public int LeftoversTimer;
@@ -56,6 +61,8 @@ namespace Pokemod.Common.Players
 			No_Attack,
 			Directed_Attack
 		}
+
+		public float targetRotation;
 		public Vector2 attackPosition;
 		private int directedEmptyTimer;
 		private const int directedEmptyMaxTime = 3 * 60;
@@ -94,7 +101,7 @@ namespace Pokemod.Common.Players
 
 		public override void Load()
 		{
-			targetTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/PokemonTarget");
+			targetTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/PokemonTargetAlt");
 
 			noAttackTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/CursorNoAttack");
 			autoAttackTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/CursorAutoAttack");
@@ -248,6 +255,8 @@ namespace Pokemod.Common.Players
 
 			HasShinyCharm = false;
 			if (HasEverstone > 0) HasEverstone--;
+			if (HasEviolite > 0) HasEviolite--;
+
 			if (HasMegaStone > 0) HasMegaStone--;
 			else MegaStone = "";
 
@@ -310,6 +319,10 @@ namespace Pokemod.Common.Players
 
 			if (LeftoversTimer > 0) LeftoversTimer--;
 			if (HasAirBalloon > 0) HasAirBalloon--;
+			if (HasRockyHelmet > 0) HasRockyHelmet--;
+			if (HasLuminousMoss > 0) HasLuminousMoss--;
+			if (HasEjectButton > 0) HasEjectButton--;
+			if (HasShellBell > 0) HasShellBell--;
 		}
 
 		public int FreePokemonSlots()
@@ -472,9 +485,11 @@ namespace Pokemod.Common.Players
 		{
 			if (Player.whoAmI == Main.myPlayer)
 			{
+				targetRotation += MathHelper.ToRadians(-5);
+
 				if (Vector2.Distance(Player.Center, attackPosition) < 3000 && attackMode == (int)AttackMode.Directed_Attack)
 				{
-					Main.EntitySpriteDraw(targetTexture.Value, attackPosition - Main.screenPosition, targetTexture.Value.Bounds, Color.White * 0.8f, 0, targetTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
+					Main.EntitySpriteDraw(targetTexture.Value, attackPosition - Main.screenPosition, targetTexture.Value.Bounds, Color.White * 0.8f, targetRotation, targetTexture.Size() * 0.5f, 1f, SpriteEffects.None, 0);
 				}
 				if (Player.HeldItem.ModItem is TrainerGlove)
 				{

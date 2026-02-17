@@ -1233,7 +1233,11 @@ Items: {
 
 	BikeVoucher: {
 		DisplayName: Bono Bici
-		Tooltip: ¡Cubre el precio completo de una bici!
+		Tooltip:
+			'''
+			¡Cubre el precio completo de una bici!
+			Invoca una montura de bicicleta
+			'''
 	}
 
 	DarkballItem: {
@@ -2314,9 +2318,48 @@ Items: {
 		DisplayName: Banda Dinamax
 		Tooltip:
 			'''
-			Permite dinamaxizar a tus pokemon
+			Permite dinamaxizar a tus pokemon una vez al día
 			Al usarse, el siguiente pokemon enviado será afectado por el fenómeno Dynamax
 			'''
+	}
+
+	DynamaxDye: {
+		Tooltip: ""
+		DisplayName: Tinte Dinamax
+	}
+
+	RockyHelmet: {
+		Tooltip: Cuando tu pokemon recibe daño de contacto devuelve daño al atacante
+		DisplayName: Casco dentado
+	}
+
+	LuminousMoss: {
+		Tooltip: Tus pokemon emiten algo de luz
+		DisplayName: Musgo brillante
+	}
+
+	Eviolite: {
+		DisplayName: Mineral evolutivo
+		Tooltip:
+			'''
+			Cuando está equipado cualquier Pokémon seleccionado como favorito no puede evolucionar por nivel
+			Los pokemon no totalmente evolucionados aumentan su defensa y defensa especial en 50%
+			'''
+	}
+
+	EjectButton: {
+		DisplayName: Botón escape
+		Tooltip: Cuando tu pokemon activo queda con 20% de HP o menos regresa a su pokeball
+	}
+
+	MuscleBand: {
+		DisplayName: Cinta fuerte
+		Tooltip: Aumenta el daño de los movimientos físicos en un 10%
+	}
+
+	BigRoot: {
+		DisplayName: Raiz grande
+		Tooltip: Aumenta la vida restaurada por movimientos que absorben HP
 	}
 }
 

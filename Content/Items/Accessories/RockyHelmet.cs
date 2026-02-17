@@ -5,25 +5,25 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.Accessories
 {
-    public class ShellBell : ModItem
+    public class RockyHelmet : ModItem
 	{
 		public override void SetDefaults() {
 			Item.width = 24;
 			Item.height = 24;
 			Item.maxStack = 1;
-			Item.value = 0;
+			Item.value = Item.buyPrice(silver: 50);
 			Item.accessory = true;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual) {
-			player.GetModPlayer<PokemonPlayer>().HasShellBell = 3;
+			player.GetModPlayer<PokemonPlayer>().HasRockyHelmet = 3;
 		}
 
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient(ItemID.Seashell, 15)
-				.AddIngredient(ItemID.Chain, 5)
+				.AddIngredient(ItemID.FossilOre, 30)
+				.AddIngredient(ItemID.Spike, 10)
 				.AddTile(TileID.TinkerersWorkbench)
 				.Register();
 		}

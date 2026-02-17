@@ -91,16 +91,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        public override void AfterHitTarget(Entity target, int damageDone)
         {
             DustBomb(Projectile.velocity, target.Center);
-            base.OnHitNPC(target, hit, damageDone);
+            base.AfterHitTarget(target, damageDone);
         }
 
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
-            DustBomb(Projectile.velocity, target.Center);
-            base.OnHitPlayer(target, info);
+            target.ApplyStatMod(4, -1); //Speed Down
+            base.OnHitPokemonPet(target, damageDone);
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)

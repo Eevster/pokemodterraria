@@ -166,9 +166,18 @@ namespace Pokemod.Content.Projectiles
 				modifiers.FinalDamage *=  14f / ((!isSpecial ? wildNPC.finalStats[2] : wildNPC.finalStats[4]) * 3f);
 				//modifiers.FinalDamage /= (!isSpecial ? wildNPC.NPC.GetGlobalNPC<PokemonNPCData>().GetWildCalcStat(2) : wildNPC.NPC.GetGlobalNPC<PokemonNPCData>().GetWildCalcStat(4)) / 10f;
 			}
+			else
+			{
+				
+			}
 
             base.ModifyHitNPC(target, ref modifiers);
         }
+
+		public virtual void ModifyHitPokemonPet(PokemonPetProjectile target, ref int damage)
+		{
+			
+		}
 
 		public static void HealEffect(Player player, int amount){
 			player.Heal(amount);

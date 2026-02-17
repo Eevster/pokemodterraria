@@ -100,6 +100,22 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
         }
 
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if(target.CanBeChasedBy()){
+                target.AddBuff(BuffID.Confused, 2*60);
+            }
+            base.OnHitNPC(target, hit, damageDone);
+        }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            target.AddBuff(BuffID.Confused, 60);
+
+            base.OnHitPlayer(target, info);
+        }
+
+
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
 		{
 			modifiers.HitDirectionOverride = (target.Center-Projectile.Center).X > 0?1:-1;

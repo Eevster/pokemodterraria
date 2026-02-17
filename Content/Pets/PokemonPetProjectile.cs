@@ -1,10 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Configs;
+using Pokemod.Common.GlobalNPCs;
 using Pokemod.Common.Players;
 using Pokemod.Common.Systems;
 using Pokemod.Content.Buffs;
 using Pokemod.Content.DamageClasses;
+using Pokemod.Content.Items.Dyes;
+using Pokemod.Content.Items.Dynamax;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.NPCs.TrainerNPCs;
 using Pokemod.Content.Projectiles;
@@ -143,6 +146,10 @@ namespace Pokemod.Content.Pets
 		//Dynamax
 		public bool dynamax = false;
 		public int dynamaxTimer = 0;
+		private float dynamaxScale = 0.5f;
+		private bool dynamaxShouldScale = true;
+		private int dynamaxFrameDuration = 5;
+		private int dynamaxAnimTimer = 0;
 
 		public int currentStatus = 0;
 		public enum ProjStatus
@@ -269,6 +276,11 @@ namespace Pokemod.Content.Pets
 		public void UpdateStats(){
 			currentLevelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
 			finalStats = PokemonNPCData.CalcAllStats(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().GetClampedLevel(pokemonLvl), baseStats, IVs, EVs, nature);
+			if(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasEviolite > 0 && evolutions.Length > 0)
+			{
+				finalStats[2] = (int)(finalStats[2]*1.5f);
+				finalStats[4] = (int)(finalStats[4]*1.5f);
+			}
 			//Main.NewText("LevelCap: "+currentLevelCap+"  ["+finalStats[0]+","+finalStats[1]+","+finalStats[2]+","+finalStats[3]+","+finalStats[4]+","+finalStats[5]+"]"); 
 		}
 
@@ -474,6 +486,7 @@ namespace Pokemod.Content.Pets
 			if(isOut && dynamax){
 				if((dynamaxTimer-1)%30 == 0)
 				{
+					pokemonShader = GameShaders.Armor.GetShaderFromItemId(ModContent.ItemType<DynamaxDye>());
 					SoundEngine.PlaySound(SoundID.Item100, Projectile.position);
 					Projectile.scale *= 2f; 
 				}
@@ -562,6 +575,8 @@ namespace Pokemod.Content.Pets
 			ExtraChanges();
 
 			CheckAlteredScale();
+
+			if(player.GetModPlayer<PokemonPlayer>().HasLuminousMoss > 0) Lighting.AddLight(Projectile.Center, new Vector3(0.5f,0.7f,0.5f));
 
 			if(Main.myPlayer == Projectile.owner){
 				if (!isEnemy)
@@ -1972,7 +1987,17 @@ namespace Pokemod.Content.Pets
 				}
 			}
 
-            if (pokemonShader != null) pokemonShader = null;
+            if (pokemonShader != null){
+				pokemonShader = dynamax ? GameShaders.Armor.GetShaderFromItemId(ModContent.ItemType<DynamaxDye>()) : null;
+			}
+
+			if (dynamax)
+			{
+				if(++dynamaxAnimTimer > 8 * dynamaxFrameDuration)
+				{
+					dynamaxAnimTimer = 0;
+				}
+			}
         }
 
 		public int CalcIncomingDmg(int npcdmg, bool physical, bool enemyPokemon = false, int attackType = -1)
@@ -2038,6 +2063,11 @@ namespace Pokemod.Content.Pets
 
             CombatText.NewText(Projectile.Hitbox, new Color(R,G,B), dmg);
 
+			if(currentHp <= 0.2f*finalStats[0] && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasEjectButton > 0)
+			{
+				Projectile.Kill();
+			}
+
             if (currentHp <= 0) {
 				currentHp = 0;
 				//Main.player[Projectile.owner].ClearBuff(PokemonBuff);
@@ -2090,6 +2120,18 @@ namespace Pokemod.Content.Pets
 							int npcdmg = npc.defDamage;
 							if(currentHp != 0){
 								CalcIncomingDmg(npcdmg, true);
+								if(pokemonPlayer.HasRockyHelmet > 0){
+									if (!npc.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Contains(Projectile))
+									{
+										if (npc.life <= 0)
+										{
+											PokemonPetProjectile pokemonMainProj = (PokemonPetProjectile)Projectile?.ModProjectile;
+											pokemonMainProj?.SetGainedExp(HitByPokemonNPC.SetExpGained(npc, npc.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Count));
+										}
+										npc.GetGlobalNPC<HitByPokemonNPC>().pokemonProjs.Add(Projectile);
+									}
+									npc.SimpleStrikeNPC(pokemonLvl, (npc.Center-Projectile.Center).X > 0?1:-1, false, 4);
+								}
 								Projectile.velocity += 4f*(Projectile.Center - npc.Center).SafeNormalize(Vector2.Zero);
 							}
 							immune = true;
@@ -2144,6 +2186,12 @@ namespace Pokemod.Content.Pets
 									if(bullet.owner == Projectile.owner)
 									{
 										canHit = true;
+										if(physical && pokemonPlayer.HasRockyHelmet > 0){
+											if(attack.pokemonProj.ModProjectile is PokemonPetProjectile attackerPokemon)
+											{
+												attackerPokemon.manualDmg(pokemonLvl);
+											}
+										}
 									}
 								}
 								if(canHit){
@@ -2189,10 +2237,18 @@ namespace Pokemod.Content.Pets
 
 			if (isOut)
 			{
+				if (dynamax)
+				{
+					Asset<Texture2D> dynamaxTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/DynamaxVisuals_Back");
+					Vector2 positionOffset = (ModContent.Request<Texture2D>(Texture).Frame(1, totalFrames).Size() * Vector2.UnitY) - Vector2.UnitY * 4f;
+
+					Main.EntitySpriteDraw(dynamaxTexture.Value, Projectile.Bottom - positionOffset*Projectile.scale + new Vector2(0, -40) - Main.screenPosition, dynamaxTexture.Frame(1,8,0,dynamaxAnimTimer/dynamaxFrameDuration), Color.White, 0, dynamaxTexture.Frame(1,8).Size() * 0.5f, dynamaxShouldScale?dynamaxScale*Projectile.scale:dynamaxScale, SpriteEffects.None, 0);
+				}
+
 				if (pokemonShader != null)
 				{
 					Main.spriteBatch.End();
-					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
 					pokemonShader.Apply(Projectile);
 				}
 
@@ -2231,11 +2287,12 @@ namespace Pokemod.Content.Pets
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
             if (isOut) {
+				Vector2 positionOffset = (ModContent.Request<Texture2D>(Texture).Frame(1, totalFrames).Size() * Vector2.UnitY) - Vector2.UnitY * 4f;
 				if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0)
 				{
 					Asset<Texture2D> balloonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/AirBalloon_Texture");
 
-					Main.EntitySpriteDraw(balloonTexture.Value, Entity.Top + new Vector2(0, 10) - Main.screenPosition, balloonTexture.Value.Bounds, Color.White, 0, new Vector2(balloonTexture.Width() * 0.5f, balloonTexture.Height()), 1, SpriteEffects.None, 0);
+					Main.EntitySpriteDraw(balloonTexture.Value, Projectile.Bottom - Projectile.scale * positionOffset + new Vector2(0, Projectile.scale*10) - Main.screenPosition, balloonTexture.Value.Bounds, Color.White, 0, new Vector2(balloonTexture.Width() * 0.5f, balloonTexture.Height()), 1, SpriteEffects.None, 0);
 				}
 				if (finalStats[0] != 0)
 				{
@@ -2254,10 +2311,10 @@ namespace Pokemod.Content.Pets
 						for (int i = 0; i < steps; i += 1)
 						{
 							//float percent = (float)i / (right - left);
-							Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Entity.Top + new Vector2(left + i, -20) - Main.screenPosition, new Rectangle(0, 0, 1, 8), GetHPBarColor(), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
+							Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Projectile.Bottom - Projectile.scale * positionOffset + new Vector2(left + i, -20) - Main.screenPosition, new Rectangle(0, 0, 1, 8), GetHPBarColor(), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
 
 						}
-						Main.EntitySpriteDraw(barTexture.Value, Entity.Top + new Vector2(0, -20) - Main.screenPosition, barTexture.Value.Bounds, Color.White, 0, barTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
+						Main.EntitySpriteDraw(barTexture.Value, Projectile.Bottom - Projectile.scale * positionOffset + new Vector2(0, -20) - Main.screenPosition, barTexture.Value.Bounds, Color.White, 0, barTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
 					}
 				}
 			}
@@ -2311,6 +2368,14 @@ namespace Pokemod.Content.Pets
 				Main.EntitySpriteDraw(lightTexture.Value, Projectile.Bottom - Projectile.scale * positionOffset - Main.screenPosition,
 					lightTexture.Frame(1, totalFrames, 0, Projectile.frame), Color.White, Projectile.rotation,
 					lightTexture.Frame(1, totalFrames).Size() / 2f, Projectile.scale, Projectile.spriteDirection >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+			}
+
+			if (dynamax)
+			{
+				Asset<Texture2D> dynamaxTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/DynamaxVisuals");
+				Vector2 positionOffset = (ModContent.Request<Texture2D>(Texture).Frame(1, totalFrames).Size() * Vector2.UnitY) - Vector2.UnitY * 4f;
+
+				Main.EntitySpriteDraw(dynamaxTexture.Value, Projectile.Bottom - Projectile.scale * positionOffset + new Vector2(0, -40) - Main.screenPosition, dynamaxTexture.Frame(1,8,0,dynamaxAnimTimer/dynamaxFrameDuration), Color.White, 0, dynamaxTexture.Frame(1,8).Size() * 0.5f, dynamaxShouldScale?dynamaxScale*Projectile.scale:dynamaxScale, SpriteEffects.None, 0);
 			}
 		}
 

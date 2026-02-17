@@ -69,10 +69,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
 					SoundEngine.PlaySound(SoundID.Item1, pokemon.position);
 					if(pokemonOwner.attackProjs[0] == null){
-						pokemonOwner.attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<VineWhip>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner, 0, Math.Sign((targetCenter - pokemon.Center).X))];
+						pokemonOwner.attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<VineWhip>(), (int)(0.5f *pokemonOwner.GetPokemonAttackDamage(GetType().Name)), 2f, pokemon.owner, 0, Math.Sign((targetCenter - pokemon.Center).X))];
 					}
 					if(pokemonOwner.attackProjs[1] == null){
-						pokemonOwner.attackProjs[1] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<VineWhip_Front>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner, 0, Math.Sign((targetCenter - pokemon.Center).X))];
+						pokemonOwner.attackProjs[1] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<VineWhip_Front>(), (int)(0.5f *pokemonOwner.GetPokemonAttackDamage(GetType().Name)), 2f, pokemon.owner, 0, Math.Sign((targetCenter - pokemon.Center).X))];
 					}
 				}
 			}

@@ -191,5 +191,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Dust.NewDust(Projectile.Center-new Vector2(8*Projectile.scale, 8*Projectile.scale), (int)(16*Projectile.scale), (int)(16*Projectile.scale), DustID.WhiteTorch, Main.rand.NextFloat(-3,3), Main.rand.NextFloat(-3,3), 100, default(Color), 2f);
             }
         }
+
+		public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            if (Main.rand.NextBool(10))
+            {
+                target.ApplyStatMod(3, -1); //Special Defense Down
+            }
+            base.OnHitPokemonPet(target, damageDone);
+        }
     }
 }

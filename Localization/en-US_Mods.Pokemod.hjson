@@ -1233,7 +1233,11 @@ Items: {
 
 	BikeVoucher: {
 		DisplayName: Bike Voucher
-		Tooltip: A voucher for obtaining a bicycle from the Bike Shop
+		Tooltip:
+			'''
+			A voucher for obtaining a bicycle from the Bike Shop
+			Summon a bicycle mount
+			'''
 	}
 
 	DarkballItem: {
@@ -2122,7 +2126,7 @@ Items: {
 
 	HeartScale: {
 		DisplayName: Heart Scale
-		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
+		Tooltip: ""
 	}
 
 	GhostGem: {
@@ -2314,9 +2318,48 @@ Items: {
 		DisplayName: Dynamax Band
 		Tooltip:
 			'''
-			Allows you to dynamax your pokemon
+			Allows you to dynamax your pokemon once per day
 			When used, the next pokemon sent will be affected by the Dynamax phenomenon
 			'''
+	}
+
+	DynamaxDye: {
+		Tooltip: ""
+		DisplayName: Dynamax Dye
+	}
+
+	RockyHelmet: {
+		Tooltip: When your pokemon takes contact damage, it returns damage to the attacker
+		DisplayName: Rocky Helmet
+	}
+
+	LuminousMoss: {
+		Tooltip: Your pokemon emit some light
+		DisplayName: Luminous Moss
+	}
+
+	Eviolite: {
+		DisplayName: Eviolite
+		Tooltip:
+			'''
+			When equipped, any pokemon selected as favorite is prevented from evolving by level
+			Pokemon that are not fully evolved have their Defense and Special Defense increased by 50%
+			'''
+	}
+
+	EjectButton: {
+		DisplayName: Eject Button
+		Tooltip: When your active pokemon has 20% HP or less, it returns to its pokeball
+	}
+
+	MuscleBand: {
+		DisplayName: Muscle Band
+		Tooltip: Increases the damage of physical moves by 10%
+	}
+
+	BigRoot: {
+		DisplayName: Big Root
+		Tooltip: Increases the amount of life restored by moves that absorb HP
 	}
 }
 

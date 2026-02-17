@@ -261,6 +261,20 @@ namespace Pokemod.Common.UI.PokedexUI
 						imageFrame.Append(pokeImage);
 					}
 
+					if (phase > 1 && PokemonData.pokemonInfo.TryGetValue(pokemonName, out PokemonInfo value) && value.artist != "")
+					{
+						var artistText = new UIText("sprite by " + value.artist, 1f)
+						{
+							TextColor = Color.Yellow,
+							Width = new(365f, 0f),
+							Height = new(215f, 0f),
+							TextOriginX = 1f,
+							TextOriginY = 1f,
+						};
+
+						imageFrame.Append(artistText);
+					}
+
 					pokeInfoDisplay = new UIPokedexInfoDisplay(pokemonName, phase == 2);
 					UIHelpers.SetRectangle(pokeInfoDisplay, left: 0f, top: 275f, width: 420, height: 320);
 					pokeInfoDisplay.SetPadding(0);

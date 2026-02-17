@@ -341,7 +341,7 @@ namespace Pokemod.Content.NPCs
             {"Weepinbell", new PokemonInfo(0070, [65, 90, 50, 85, 45, 55], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [new MoveLvl("VineWhip", 1), new MoveLvl("PoisonPowder", 12), new MoveLvl("ThunderWave", 17), new MoveLvl("PoisonSting", 24), new MoveLvl("Crunch", 32), new MoveLvl("RazorLeaf", 44), new MoveLvl("SludgeBomb", 47), new MoveLvl("Slam", 54)], [(int)EggGroups.Grass], 1.0f, 6.4f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow)},
             {"Victreebel", new PokemonInfo(0071, [80, 105, 65, 100, 70, 70], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [new MoveLvl("BulletSeed"), new MoveLvl("PoisonSting", 1), new MoveLvl("RazorLeaf", 1), new MoveLvl("Slam", 1), new MoveLvl("LeafStorm", 32), new MoveLvl("LeafBlade", 44)], [(int)EggGroups.Grass], 1.7f, 15.5f, (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow)},
 
-            {"Tentacool", new PokemonInfo(0072, [40, 40, 35, 50, 100, 70], [(int)TypeIndex.Water,(int)TypeIndex.Poison], [new MoveLvl("PoisonSting"), new MoveLvl("WaterGun"), new MoveLvl("ConfuseRay", 8), new MoveLvl("WaterPulse", 16), new MoveLvl("BubbleBeam", 24), new MoveLvl("Hex", 32), new MoveLvl("SludgeBomb", 40), new MoveLvl("HydroPump", 48)], [(int)EggGroups.Water3], 0.9f, 45.5f, (int)StageIndex.Basic, (int)ExpTypes.Slow)},
+            {"Tentacool", new PokemonInfo(0072, [40, 40, 35, 50, 100, 70], [(int)TypeIndex.Water,(int)TypeIndex.Poison], [new MoveLvl("PoisonSting"), new MoveLvl("WaterGun"), new MoveLvl("ConfuseRay", 8), new MoveLvl("WaterPulse", 16), new MoveLvl("BubbleBeam", 24), new MoveLvl("Hex", 32), new MoveLvl("SludgeBomb", 40), new MoveLvl("HydroPump", 48)], [(int)EggGroups.Water3], 0.9f, 45.5f, (int)StageIndex.Basic, (int)ExpTypes.Slow, artist: "gotilies")},
             {"Tentacruel", new PokemonInfo(0073, [80, 70, 65, 80, 120, 100], [(int)TypeIndex.Water,(int)TypeIndex.Poison], [new MoveLvl("PoisonSting"), new MoveLvl("WaterGun"), new MoveLvl("ConfuseRay", 8), new MoveLvl("WaterPulse", 16), new MoveLvl("BubbleBeam", 24), new MoveLvl("Hex", 34), new MoveLvl("SludgeBomb", 46), new MoveLvl("HydroPump", 58)], [(int)EggGroups.Water3], 1.6f, 55.0f, (int)StageIndex.Stage1, (int)ExpTypes.Slow, completed: false)},
 
             {"Geodude", new PokemonInfo(0074, [40, 80, 100, 30, 30, 20], [(int)TypeIndex.Rock,(int)TypeIndex.Ground], [new MoveLvl("Tackle"), new MoveLvl("RockThrow", 6), new MoveLvl("Harden", 12), new MoveLvl("RockSlide", 18), new MoveLvl("SelfDestruct", 22), new MoveLvl("Dig", 26), new MoveLvl("Earthquake", 30), new MoveLvl("Explosion", 34), new MoveLvl("DoubleEdge", 38), new MoveLvl("StoneEdge", 42)], [(int)EggGroups.Mineral], 0.4f, 20.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow)},
@@ -747,7 +747,9 @@ namespace Pokemod.Content.NPCs
 
         public bool completed;
 
-        public PokemonInfo(int pokemonID, int[] pokemonStats, int[] pokemonTypes, MoveLvl[] movePool, int[] eggGroups, float height, float weight, int pokemonStage = 0, int expType = 0, bool legendary = false, bool completed = true)
+        public string artist;
+
+        public PokemonInfo(int pokemonID, int[] pokemonStats, int[] pokemonTypes, MoveLvl[] movePool, int[] eggGroups, float height, float weight, int pokemonStage = 0, int expType = 0, bool legendary = false, bool completed = true, string artist = "")
         {
             this.pokemonID = pokemonID;
             this.pokemonStats = pokemonStats;
@@ -760,6 +762,7 @@ namespace Pokemod.Content.NPCs
             this.expType = expType;
             this.legendary = legendary;
             this.completed = completed;
+            this.artist = artist;
         }
 
         public bool HasType(TypeIndex type)

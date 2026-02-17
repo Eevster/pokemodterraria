@@ -899,6 +899,11 @@ namespace Pokemod.Content.Items
             return base.OnPickup(player);
         }
 
+        public override bool CanStack(Item source)
+        {
+            return false;
+        }
+
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
 			if (BallType != null && BallType != "")

@@ -5,25 +5,26 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.Accessories
 {
-    public class ShellBell : ModItem
+    public class BigRoot : ModItem
 	{
 		public override void SetDefaults() {
 			Item.width = 24;
 			Item.height = 24;
 			Item.maxStack = 1;
-			Item.value = 0;
+			Item.value = Item.buyPrice(silver: 50);
 			Item.accessory = true;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual) {
-			player.GetModPlayer<PokemonPlayer>().HasShellBell = 3;
+			
 		}
 
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient(ItemID.Seashell, 15)
-				.AddIngredient(ItemID.Chain, 5)
+				.AddIngredient(ItemID.Vine, 3)
+				.AddIngredient(ItemID.Mushroom, 10)
+				.AddIngredient(ItemID.BottledHoney, 3)
 				.AddTile(TileID.TinkerersWorkbench)
 				.Register();
 		}

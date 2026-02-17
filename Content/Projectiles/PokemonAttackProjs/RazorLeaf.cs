@@ -56,10 +56,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             
 			if(pokemon.owner == Main.myPlayer){
 				if(pokemonOwner.currentStatus == (int)PokemonPetProjectile.ProjStatus.Attack && pokemonOwner.timer <= 20){
-					int remainProjs = 1;
+					int remainProjs = 3;
 					for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 						if(pokemonOwner.attackProjs[i] == null){
-							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 15f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<RazorLeaf>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+							pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 15f*Vector2.Normalize(targetCenter-pokemon.Center).RotatedBy((2-remainProjs)*MathHelper.ToRadians(5)), ModContent.ProjectileType<RazorLeaf>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
 							SoundEngine.PlaySound(SoundID.Item1, pokemon.position);
 							remainProjs--;
 							pokemonOwner.canAttackOutTimer = false;

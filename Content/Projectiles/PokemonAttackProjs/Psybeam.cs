@@ -164,5 +164,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			float collisionPoint = 0f; // Don't need that variable, but required as parameter
 			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 40, ref collisionPoint);
 		}
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if(target.CanBeChasedBy()){
+                target.AddBuff(BuffID.Confused, 60);
+            }
+            base.OnHitNPC(target, hit, damageDone);
+        }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            target.AddBuff(BuffID.Confused, 30);
+
+            base.OnHitPlayer(target, info);
+        }
     }
 }

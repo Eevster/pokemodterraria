@@ -86,7 +86,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             if (target.ModNPC is PokemonWildNPC wildNPC)
             {
-                float dmgMultiplier = (int)((PokemonPetProjectile)pokemonProj.ModProjectile).finalStats[5]/wildNPC.finalStats[5];
+                float dmgMultiplier = ((PokemonPetProjectile)pokemonProj.ModProjectile).finalStats[5]/wildNPC.finalStats[5];
                 dmgMultiplier = MathHelper.Clamp(dmgMultiplier, 0, 4);
                 dmgMultiplier = 1f + dmgMultiplier / 4f;
                 modifiers.FinalDamage *= dmgMultiplier;
@@ -110,6 +110,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             modifiers.FinalDamage *= dmgMultiplier;
 
             base.ModifyHitPlayer(target, ref modifiers);
+        }
+
+        public override void ModifyHitPokemonPet(PokemonPetProjectile target, ref int damage)
+        {
+            float dmgMultiplier = ((PokemonPetProjectile)pokemonProj.ModProjectile).finalStats[5]/target.finalStats[5];
+            dmgMultiplier = MathHelper.Clamp(dmgMultiplier, 0, 4);
+            dmgMultiplier = 1f + dmgMultiplier / 2f;
+            damage = (int)(damage*dmgMultiplier);
+
+            base.ModifyHitPokemonPet(target, ref damage);
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
