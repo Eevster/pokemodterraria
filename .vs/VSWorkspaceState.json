@@ -1,14 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Assets",
-    "\\Assets\\Textures",
-    "\\Common",
-    "\\Common\\GlobalNPCs",
     "\\Content",
+    "\\Content\\Items",
     "\\Content\\NPCs",
-    "\\Content\\NPCs\\TrainerNPCs",
-    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
+    "\\Content\\NPCs\\MerchantNPCs",
+    "\\Content\\NPCs\\PokemonNPCs"
   ],
+  "SelectedNode": "\\Content\\NPCs\\MerchantNPCs\\PokemonProfessor.cs",
   "PreviewInSolutionExplorer": false
 }
