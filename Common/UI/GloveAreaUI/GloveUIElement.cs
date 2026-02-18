@@ -29,8 +29,23 @@ namespace Pokemod.Common.UI.GloveAreaUI
                 return;
             }
 
+            float trainerGloveRange = Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().trainerGloveRange;
+            bool enemyInRange = false;
+
+            for (int i = 0; i < Main.maxNPCs; i++){
+                NPC npc = Main.npc[i];
+
+                if (npc.CanBeChasedBy() && npc.damage != 0){
+                    if(Vector2.Distance(npc.Center, Main.MouseWorld) <= 16f*trainerGloveRange)
+                    {
+                        enemyInRange = true;
+                        break;
+                    }
+                }
+            }
+
             var tex = ModContent.Request<Texture2D>(GloveTexturePath).Value;
-            spriteBatch.Draw(tex, Main.MouseWorld - Main.screenPosition, tex.Bounds, Color.White * 0.25f, 0f, tex.Size() / 2f, 1f * Main.GameZoomTarget / Main.UIScale, SpriteEffects.None, 1);
+            spriteBatch.Draw(tex, Main.MouseWorld - Main.screenPosition, tex.Bounds, Color.White * (enemyInRange?0.4f:0.1f), 0f, tex.Size() / 2f, (10f/trainerGloveRange) * Main.GameZoomTarget / Main.UIScale, SpriteEffects.None, 1);
         }
     }
 }

@@ -909,8 +909,8 @@ Items: {
 	}
 
 	TrainerGlove: {
-		Tooltip: ""
 		DisplayName: Trainer Glove
+		Tooltip: Pokemon attacks ignore {0}% of enemy defense within a radius of {1} blocks
 	}
 
 	ChikoritaCritterItem: {

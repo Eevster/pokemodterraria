@@ -8,8 +8,12 @@ using Terraria.Localization;
 
 namespace Pokemod.Content.Items
 {
+	[AutoloadEquip(EquipType.HandsOn)]
 	public class TrainerGlove : ModItem
 	{
+		public static readonly float DefenseReduction = 0.25f;
+		public static readonly int GloveRange = 10;
+
         public int attackType = 0; // keeps track of which attack it is
 		public override void SetStaticDefaults() {
 			Item.ResearchUnlockCount = 1;
@@ -25,6 +29,14 @@ namespace Pokemod.Content.Items
 			Item.maxStack = 1; // The item's max stack value
 			Item.value = Item.buyPrice(silver: 1); // The value of the item in copper coins. Item.buyPrice & Item.sellPrice are helper methods that returns costs in copper coins based on platinum/gold/silver/copper arguments provided to it.
 		}
+
+        public override void HoldItem(Player player)
+        {
+			player.handon = EquipLoader.GetEquipSlot(Mod, ModContent.GetInstance<TrainerGlove>().Name, EquipType.HandsOn);
+			player.GetModPlayer<PokemonPlayer>().trainerGloveDefenseReduction += DefenseReduction;
+			player.GetModPlayer<PokemonPlayer>().trainerGloveRange += GloveRange;
+            base.HoldItem(player);
+        }
 		
 		public override bool AltFunctionUse(Player player)
         {
@@ -77,17 +89,18 @@ namespace Pokemod.Content.Items
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
 			foreach (TooltipLine line in tooltips) {
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
+					line.Text = Language.GetText($"Mods.Pokemod.Items.{Item.ModItem.Name}.Tooltip").WithFormatArgs((int)(DefenseReduction*100), GloveRange).Value;
 					if(attackType == 0){
-						line.Text = Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value
+						line.Text += "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value
 						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
 						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipRight").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack")).Value;
 					}
                     if(attackType == 1){
-						line.Text = Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack")).Value
+						line.Text += "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack")).Value
 						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value;
 					}
                     if(attackType == 2){
-						line.Text = Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
+						line.Text += "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
 						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
 						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipRight").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value;
 					}

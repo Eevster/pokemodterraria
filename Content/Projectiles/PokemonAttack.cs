@@ -3,8 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.GlobalNPCs;
 using Pokemod.Common.Players;
 using Pokemod.Content.DamageClasses;
+using Pokemod.Content.Items;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
+using System;
 using System.IO;
 using System.Linq;
 using Terraria;
@@ -168,7 +170,15 @@ namespace Pokemod.Content.Projectiles
 			}
 			else
 			{
-				
+				if (target.CanBeChasedBy() && target.damage != 0){
+                    if(Vector2.Distance(target.Center, Main.MouseWorld) <= 16f*Trainer.trainerGloveRange){
+						if(Owner.HeldItem.ModItem is TrainerGlove)
+						{
+							modifiers.DefenseEffectiveness *= Math.Clamp(1f-Trainer.trainerGloveDefenseReduction, 0f, 1f);
+							//Main.NewText(Trainer.trainerGloveDefenseReduction);
+						}
+					}
+				}
 			}
 
             base.ModifyHitNPC(target, ref modifiers);

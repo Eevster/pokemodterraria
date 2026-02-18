@@ -62,6 +62,9 @@ namespace Pokemod.Common.Players
 			Directed_Attack
 		}
 
+		public float trainerGloveRange = 10;
+		public float trainerGloveDefenseReduction = 0.25f;
+
 		public float targetRotation;
 		public Vector2 attackPosition;
 		private int directedEmptyTimer;
@@ -316,6 +319,9 @@ namespace Pokemod.Common.Players
 
 			ExpMult = 1f;
 			typeMult = Enumerable.Repeat(1f,18).ToArray();
+
+			trainerGloveDefenseReduction = 0;
+			trainerGloveRange = 0;
 
 			if (LeftoversTimer > 0) LeftoversTimer--;
 			if (HasAirBalloon > 0) HasAirBalloon--;
