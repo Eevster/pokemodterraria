@@ -12,27 +12,29 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 {
 	public class G1T2_Misty : BattleTrainer
 	{
-		public override void SetStaticDefaults()
-		{
-			base.SetStaticDefaults();
-
-			Main.npcFrameCount[Type] = 23; // The amount of frames the NPC has
-
-			NPCID.Sets.ExtraFramesCount[Type] = 10; // Generally for Town NPCs, but this is how the NPC does extra things such as sitting in a chair and talking to other NPCs.
-		}
-
-        public override void SetDefaults()
-        {
-			base.SetDefaults();
-			AnimationType = NPCID.Mechanic;
-        }
+        public override bool isWoman => true;
 		public override bool GymLeader => true;
 		public override void LoadTeam()
 		{
-			pokemonTeam = new List<EnemyPokemonInfo>();
+			pokemonTeam =
+            [
+                new EnemyPokemonInfo("Staryu", 18, ["Tackle", "Harden", "Recover", "WaterPulse"]),
+                new EnemyPokemonInfo("Starmie", 21, ["WaterPulse", "Recover", "RapidSpin", "Swift"]),
+            ];
+		}
 
-			pokemonTeam.Add(new EnemyPokemonInfo("Staryu", 18, ["Tackle", "Harden", "Recover", "WaterPulse"]));
-			pokemonTeam.Add(new EnemyPokemonInfo("Starmie", 21, ["WaterPulse", "Recover", "RapidSpin", "Swift"]));
+		private static Profiles.StackedNPCProfile NPCProfile;
+		public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+			NPCProfile = new Profiles.StackedNPCProfile(
+				new Profiles.DefaultNPCProfile(Texture, -1)
+			// new Profiles.DefaultNPCProfile(Texture + "_Shimmer", -1)
+			);
+        }
+		public override ITownNPCProfile TownNPCProfile()
+		{
+			return NPCProfile;
 		}
 		
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)

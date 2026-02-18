@@ -15,10 +15,11 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		public override bool GymLeader => true;
 		public override void LoadTeam()
 		{
-			pokemonTeam = new List<EnemyPokemonInfo>();
-
-			pokemonTeam.Add(new EnemyPokemonInfo("Geodude", 12, ["Tackle", "Harden"]));
-			pokemonTeam.Add(new EnemyPokemonInfo("Onix", 14, ["Tackle", "RockThrow", "RockSlide", "Harden"]));
+			pokemonTeam =
+            [
+                new EnemyPokemonInfo("Geodude", 12, ["Tackle", "Harden"]),
+                new EnemyPokemonInfo("Onix", 14, ["Tackle", "RockThrow", "RockSlide", "Harden"]),
+            ];
 		}
 
         public override void GiveRewards(Player opponent)
@@ -26,6 +27,21 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 			
             base.GiveRewards(opponent);
         }
+
+		private static Profiles.StackedNPCProfile NPCProfile;
+		public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+			NPCProfile = new Profiles.StackedNPCProfile(
+				new Profiles.DefaultNPCProfile(Texture, -1)
+			// new Profiles.DefaultNPCProfile(Texture + "_Shimmer", -1)
+			);
+        }
+		public override ITownNPCProfile TownNPCProfile()
+		{
+			return NPCProfile;
+		}
+		
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {

@@ -16,6 +16,20 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		public override int nPokemon => 3;
 		public override string[] pokemonOptions => ["Magikarp", "Poliwag", "Shellder"];
 
+		private static Profiles.StackedNPCProfile NPCProfile;
+		public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+			NPCProfile = new Profiles.StackedNPCProfile(
+				new Profiles.DefaultNPCProfile(Texture, -1)
+			// new Profiles.DefaultNPCProfile(Texture + "_Shimmer", -1)
+			);
+        }
+		public override ITownNPCProfile TownNPCProfile()
+		{
+			return NPCProfile;
+		}
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {

@@ -18,10 +18,10 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 {
 	public abstract class BattleTrainer : ModNPC
 	{
-		private static Profiles.StackedNPCProfile NPCProfile;
+		public virtual bool isWoman => false;
 		public override void SetStaticDefaults()
 		{
-			Main.npcFrameCount[Type] = 26; // The amount of frames the NPC has
+			Main.npcFrameCount[Type] = isWoman?23:26; // The amount of frames the NPC has
 
 			NPCID.Sets.ExtraFramesCount[Type] = 10; // Generally for Town NPCs, but this is how the NPC does extra things such as sitting in a chair and talking to other NPCs.
 			NPCID.Sets.AttackFrameCount[Type] = 0;
@@ -47,11 +47,6 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			};
 
 			NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
-
-			NPCProfile = new Profiles.StackedNPCProfile(
-				new Profiles.DefaultNPCProfile(Texture, -1)
-			// new Profiles.DefaultNPCProfile(Texture + "_Shimmer", -1)
-			);
 		}
 
 		public override void SetDefaults()
@@ -67,12 +62,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			NPC.DeathSound = SoundID.PlayerKilled;
 			NPC.knockBackResist = 0f;
 
-			AnimationType = NPCID.Demolitionist;
-		}
-
-		public override ITownNPCProfile TownNPCProfile()
-		{
-			return NPCProfile;
+			AnimationType = isWoman?NPCID.Mechanic:NPCID.Demolitionist;
 		}
 
 		public bool OnBattle = false;
