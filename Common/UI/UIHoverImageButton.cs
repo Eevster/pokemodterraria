@@ -201,6 +201,8 @@ namespace Pokemod.Common.UI
 
 				if (pokemonTexture != null)
 				{
+					spriteBatch.End();
+					spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.UIScaleMatrix);
 					spriteBatch.Draw(pokemonTexture.Value, new Vector2(shopx + Width.Pixels / 2, shopy - 25f - 4f * pokemonTexture.Height() / 2 + (IsMouseHovering ? -hoverUp : 0)), pokemonTexture.Value.Bounds, color, 0f, pokemonTexture.Size() * 0.5f, 4f, SpriteEffects.None, 0);
 				}
 

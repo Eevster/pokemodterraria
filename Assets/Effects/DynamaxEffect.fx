@@ -52,7 +52,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 coords : TEXCOORD
             }
         }
 
-        /*float4 colorU = tex2D(uImage0, float2(coords.x,coords.y - pixelSize.y));
+        float4 colorU = tex2D(uImage0, float2(coords.x,coords.y - pixelSize.y));
         if(colorU.a <= 0){
             colorAlpha = 1.0;
         }else{
@@ -71,7 +71,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 coords : TEXCOORD
             if(colorD2.a <= 0){
                 if(colorAlpha < 0.5) colorAlpha = 0.5;
             }
-        }*/
+        }
 
         if(colorAlpha > 0){
             //color.r = (255.0-10.0*colorAlpha)/255;

@@ -1993,7 +1993,7 @@ namespace Pokemod.Content.Pets
 
 			if (dynamax)
 			{
-				if(++dynamaxAnimTimer > 8 * dynamaxFrameDuration)
+				if(++dynamaxAnimTimer >= 8 * dynamaxFrameDuration)
 				{
 					dynamaxAnimTimer = 0;
 				}
@@ -2242,14 +2242,26 @@ namespace Pokemod.Content.Pets
 					Asset<Texture2D> dynamaxTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/DynamaxVisuals_Back");
 					Vector2 positionOffset = (ModContent.Request<Texture2D>(Texture).Frame(1, totalFrames).Size() * Vector2.UnitY) - Vector2.UnitY * 4f;
 
-					Main.EntitySpriteDraw(dynamaxTexture.Value, Projectile.Bottom - positionOffset*Projectile.scale + new Vector2(0, -40) - Main.screenPosition, dynamaxTexture.Frame(1,8,0,dynamaxAnimTimer/dynamaxFrameDuration), Color.White, 0, dynamaxTexture.Frame(1,8).Size() * 0.5f, dynamaxShouldScale?dynamaxScale*Projectile.scale:dynamaxScale, SpriteEffects.None, 0);
+					Main.EntitySpriteDraw(dynamaxTexture.Value, Projectile.Bottom - positionOffset*Projectile.scale + new Vector2(0, -5) - Main.screenPosition, dynamaxTexture.Frame(1,8,0,dynamaxAnimTimer/dynamaxFrameDuration), Color.White, 0, dynamaxTexture.Frame(1,8).Size() * 0.5f, dynamaxShouldScale?dynamaxScale*Projectile.scale:dynamaxScale, SpriteEffects.None, 0);
 				}
 
 				if (pokemonShader != null)
 				{
 					Main.spriteBatch.End();
-					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
-					pokemonShader.Apply(Projectile);
+					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+					Asset<Texture2D> texture = ModContent.Request<Texture2D>(Texture);
+					DrawData spriteDrawData = new DrawData(
+						texture.Value, // The texture to render.
+						Projectile.position, // Position to render at.
+						texture.Frame(1,totalFrames,0,Projectile.frame), // Source rectangle.
+						lightColor, // Color.
+						Projectile.rotation, // Rotation.
+						texture.Frame(1,totalFrames).Size() * 0.5f, // Origin. Uses the texture's center.
+						Projectile.scale, // Scale.
+						Projectile.spriteDirection >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, // SpriteEffects.
+						0 // 'Layer'. This is always 0 in Terraria.
+					);
+					pokemonShader.Apply(Projectile, spriteDrawData);
 				}
 
 				if (variant != null)
@@ -2311,10 +2323,10 @@ namespace Pokemod.Content.Pets
 						for (int i = 0; i < steps; i += 1)
 						{
 							//float percent = (float)i / (right - left);
-							Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Projectile.Bottom - Projectile.scale * positionOffset + new Vector2(left + i, -20) - Main.screenPosition, new Rectangle(0, 0, 1, 8), GetHPBarColor(), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
+							Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, Projectile.Bottom - Projectile.scale * positionOffset + new Vector2(left + i, -10-10*Projectile.scale) - Main.screenPosition, new Rectangle(0, 0, 1, 8), GetHPBarColor(), 0, new Rectangle(0, 0, 1, 8).Size() * 0.5f, 1, SpriteEffects.None, 0);
 
 						}
-						Main.EntitySpriteDraw(barTexture.Value, Projectile.Bottom - Projectile.scale * positionOffset + new Vector2(0, -20) - Main.screenPosition, barTexture.Value.Bounds, Color.White, 0, barTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
+						Main.EntitySpriteDraw(barTexture.Value, Projectile.Bottom - Projectile.scale * positionOffset + new Vector2(0, -10-10*Projectile.scale) - Main.screenPosition, barTexture.Value.Bounds, Color.White, 0, barTexture.Size() * 0.5f, 1, SpriteEffects.None, 0);
 					}
 				}
 			}
@@ -2375,7 +2387,7 @@ namespace Pokemod.Content.Pets
 				Asset<Texture2D> dynamaxTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/DynamaxVisuals");
 				Vector2 positionOffset = (ModContent.Request<Texture2D>(Texture).Frame(1, totalFrames).Size() * Vector2.UnitY) - Vector2.UnitY * 4f;
 
-				Main.EntitySpriteDraw(dynamaxTexture.Value, Projectile.Bottom - Projectile.scale * positionOffset + new Vector2(0, -40) - Main.screenPosition, dynamaxTexture.Frame(1,8,0,dynamaxAnimTimer/dynamaxFrameDuration), Color.White, 0, dynamaxTexture.Frame(1,8).Size() * 0.5f, dynamaxShouldScale?dynamaxScale*Projectile.scale:dynamaxScale, SpriteEffects.None, 0);
+				Main.EntitySpriteDraw(dynamaxTexture.Value, Projectile.Bottom - Projectile.scale * positionOffset + new Vector2(0, -5) - Main.screenPosition, dynamaxTexture.Frame(1,8,0,dynamaxAnimTimer/dynamaxFrameDuration), Color.White, 0, dynamaxTexture.Frame(1,8).Size() * 0.5f, dynamaxShouldScale?dynamaxScale*Projectile.scale:dynamaxScale, SpriteEffects.None, 0);
 			}
 		}
 

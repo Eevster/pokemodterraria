@@ -6,6 +6,9 @@ using Pokemod.Common.Players;
 using Terraria.UI;
 using Microsoft.Xna.Framework;
 using Pokemod.Content;
+using ReLogic.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.Graphics.Shaders;
 
 
 namespace Pokemod
