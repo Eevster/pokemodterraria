@@ -40,7 +40,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if (pokemon.owner == Main.myPlayer)
 			{
-				if (Collision.SolidCollision(pokemon.Bottom, pokemon.width - 3, 1))
+				if (Collision.SolidCollision(pokemon.BottomLeft, pokemon.width - 3, 1))
 				{ //Grounded
 					for (int i = 0; i < pokemonOwner.nAttackProjs; i++)
 					{

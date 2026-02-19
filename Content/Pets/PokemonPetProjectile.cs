@@ -161,7 +161,7 @@ namespace Pokemod.Content.Pets
 			Attack
 		}
 
-		public const float fallLimit = float.Epsilon;
+		public const float fallLimit = 0.3f;
 
 		//PokeballProj
 		public string ballType = "PokeballItem";
@@ -1210,7 +1210,7 @@ namespace Pokemod.Content.Pets
 				{
 					if (Projectile.velocity.Y > fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
 					{
-						Jump();
+						TryJump();
 					}
 				}
 
@@ -1263,10 +1263,11 @@ namespace Pokemod.Content.Pets
 						currentStatus = (int)ProjStatus.Fall;
 					}
 
-					if (moveStyle != (int)MovementStyle.Jump && Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
+					if (moveStyle != (int)MovementStyle.Jump && Projectile.velocity.Y > -fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
 					{
-						Jump();
-					}
+						if (Collision.SolidCollision(Projectile.BottomLeft, hitboxWidth, 8, true)) TryJump();
+						else TryJump(true);
+                    }
 				}
 
 				Projectile.velocity.Y += fallAccel;
@@ -1457,7 +1458,7 @@ namespace Pokemod.Content.Pets
 						break;
 					case (int)MovementStyle.Fly:
 						break;
-					case (int)MovementStyle.Jump:
+					case (int)MovementStyle.TryJump:
 						break;
 					default:
 						break;
@@ -1629,7 +1630,6 @@ namespace Pokemod.Content.Pets
 				}
 			}
 		}
-
 		
 		public virtual void ApplyStatMod(int stat, int stageDifference) //stageDifference should be -2, -1, +1, or +2.
         {
@@ -1844,56 +1844,70 @@ namespace Pokemod.Content.Pets
             }
         }
 
-        public virtual void Jump(){
-			if(CheckDoorCollide(Projectile.velocity, 32))
+        public virtual void TryJump(bool clambering = false){
+			int localMaxHeight = clambering ? 1 : maxJumpHeight;
+            int checkingRange = (int)Math.Clamp(Math.Abs(Projectile.velocity.X) * Math.Sqrt(2 * localMaxHeight * 16 / fallAccel) / 16, clambering ? 0 : 1, 100);
+            //The distance (in tiles) of the largest possible jump at this speed.
+
+            /*if (CheckDoorCollide(Projectile.velocity, checkingRange + 1))
 			{
 				return;
-			}
-			
-			int moveDirection = 0;
-			if (Projectile.velocity.X < 0f)
-			{
-				moveDirection = -1;
-			}
-			if (Projectile.velocity.X > 0f)
-			{
-				moveDirection = 1;
-			}
+			}*/
 
+            int moveDirection = Math.Sign(Projectile.velocity.X);
 			if(moveDirection == 0){
 				return;
 			}
 
-			bool foundDoor = false;
 			float jumpHeight = 0;
+			int jumpDistance = 100;
+			bool jumpCleared = false;
 
-			for(int i = 1; i < 4; i++){
+			//Check each column of tiles in front of the pokemon.
+            for (int i = 1; i <= checkingRange; i++){
 				jumpHeight = 0;
-                for(int j = 0; j < maxJumpHeight; j++){
-                    Vector2 scanPosition = Projectile.Bottom + Vector2.UnitX * (hitboxWidth / 2f) * moveDirection + new Vector2(moveDirection*(16*i - 8),8-16*(j+1));
+				jumpCleared = false;
 
-                    //Don't jump if approaching a door
-                    int tileType = Main.tile[(int)scanPosition.X / 16 + moveDirection, (int)scanPosition.Y / 16].TileType;
+				//check first for a hole
+
+				//Scan up the column until air is found.
+                for(int j = 0; j <= (clambering? 1 : localMaxHeight); j++){
+                    Vector2 scanPosition = Projectile.Bottom + Vector2.UnitX * (16 * i - 8 + hitboxWidth / 2f) * moveDirection - Vector2.UnitY * 16 * j;
+
+                    //Don't jump because of a door
+                    int tileType = Main.tile[(int)scanPosition.X / 16, (int)scanPosition.Y / 16].TileType;
                     if (tileType == TileID.ClosedDoor || tileType == TileID.TallGateClosed)
 					{
-						foundDoor = true;
-						break;
+                        jumpCleared = true;
+                        break;
 					}
 
-                    if(Collision.SolidCollision(scanPosition - new Vector2(8,16), 16, 16) || Main.tile[(int)scanPosition.X/16-moveDirection, (int)scanPosition.Y/16+1].IsHalfBlock || Main.tile[(int)scanPosition.X/16, (int)scanPosition.Y/16].IsHalfBlock){
-                        jumpHeight += 1f;
-                    }else{
-						break;
+					if (Collision.SolidCollision(scanPosition - new Vector2(8, hitboxHeight), hitboxWidth, hitboxHeight) || Main.tile[(int)scanPosition.X / 16, (int)scanPosition.Y / 16].IsHalfBlock)
+					{
+						jumpHeight += 1f;
+					}
+					else
+					{
+                        jumpCleared = true;
+                        break;
 					}
                 }
-				if(jumpHeight > 0 || foundDoor){
+				if (!jumpCleared) return;
+				if(jumpHeight > 0){
+					jumpDistance = i - 2;
 					break;
 				}
             }
 
-			if(jumpHeight != 0){
-				currentStatus = (int)ProjStatus.Jump;
-				Projectile.velocity.Y -= (int)Math.Sqrt((isSwimming?4:2)*(Projectile.wet?0.5f:0.3f)*jumpHeight*16f);
+			if (jumpHeight != 0 && jumpCleared)
+			{
+				//minimum distance to complete the jump. to avoid jumping too early.
+				int jumpRange = (int)Math.Clamp(Math.Abs(Projectile.velocity.X) * Math.Sqrt(2 * jumpHeight * 16 / fallAccel) / 16, 1, 100);
+				if (jumpDistance <= jumpRange)
+				{
+					currentStatus = (int)ProjStatus.Jump;
+					Projectile.velocity.Y -= (int)Math.Sqrt((isSwimming ? 4 : 2) * (Projectile.wet ? 0.5f : 0.3f) * jumpHeight * 16f);
+				}
 			}
 		}
 
@@ -2039,8 +2053,10 @@ namespace Pokemod.Content.Pets
 			{
 
 				float defenseModVsTerrariaNPC = 0.1f * (1.4f * (float)Math.Pow(0.95f, defenseValue * 0.9f) + 0.3f);
+                float statScaleConfig = ModContent.GetInstance<GameplayConfig>().AddedContentStatScaling;
+				float defenceScale = 1 + statScaleConfig * (float)Math.Clamp(0.003 * Math.Pow(1.056, pokemonLvl), 0.1, 1);
 
-				dmg = 1 + (int)(Math.Clamp(npcdmg - 1, 0f, 9999f) / (defenseValue * defenseModVsTerrariaNPC));
+            dmg = 1 + (int)(Math.Clamp(npcdmg - 1, 0f, 9999f) / (defenseValue * defenseModVsTerrariaNPC * defenceScale));
             }
 			else //scale the pokemon's defense normally against other pokemon (multiplied by 14 to reverse the assumed 14 defense of vanilla enemies)(Multiplied by 5 to account for the global health scaling)(divided by 3 as most pokemon attacks hit 3 times).
 			{
@@ -2469,6 +2485,55 @@ namespace Pokemod.Content.Pets
             }
 			return collidingDoorFound && !solidTileFound;
         }
+
+        /*public bool CheckStepCollide(Vector2 velocity, out float stepHeight)
+		{
+            int direction = velocity.X >= 0 ? 1 : -1;
+			Vector2 stepPosition = Projectile.Bottom + Vector2.UnitX * direction * (8 + hitboxWidth / 2f);
+			Point stepPoint = new((int)(stepPosition.X / 16f), (int)(stepPosition.Y / 16f));
+
+            Tile step = Main.tile[stepPoint];
+
+            stepHeight = 2 + (stepPoint.ToWorldCoordinates(0, 0).Y - Projectile.Bottom.Y);
+            if (step.IsHalfBlock)
+			{
+				stepHeight -= 8;
+            }
+			if (step.TopSlope)
+			{
+				stepHeight = 1;
+			}
+            if (!step.HasUnactuatedTile || stepHeight < 0)
+            {
+                stepHeight = 0f;
+                return false;
+            }
+
+            Vector2 topLeft = Projectile.TopLeft + Vector2.UnitX * 16 * direction - Vector2.UnitY * stepHeight;
+            Vector2 bottomRight = Projectile.BottomRight + Vector2.UnitX * 16 * direction - Vector2.UnitY * 16;
+
+			Dust.QuickBox(topLeft, bottomRight, 20, Color.AliceBlue, default); //DEBUG=======================================================================================================
+
+            List<Point> collidingTiles = Collision.GetTilesIn(topLeft, bottomRight);
+            bool solidTileFound = false;
+            foreach (Point point in collidingTiles)
+            {
+                Tile tile = Main.tile[point];
+                if (tile.HasTile)
+                {
+                    if (Main.tileSolid[tile.TileType])
+                    {
+                        solidTileFound = true;
+                        break;
+                    }
+                }
+            }
+			Main.NewText("-\n" + solidTileFound); //DEBUG=======================================================================================================
+            Main.NewText(step.IsHalfBlock + ", " + step.TopSlope); //DEBUG=======================================================================================================
+            Main.NewText(stepHeight); //DEBUG=======================================================================================================
+
+            return !solidTileFound;
+		}*/
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {

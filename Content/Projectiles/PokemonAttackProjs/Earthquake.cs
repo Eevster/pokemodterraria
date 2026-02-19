@@ -93,7 +93,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 {
                     if ((npc.Center - Projectile.Center).Length() < PokemonData.pokemonAttacks["Psychic"].distanceToAttack)
                     {
-                        if (Collision.SolidCollision(npc.Bottom, npc.width, 4))
+                        if (Collision.SolidCollision(npc.BottomLeft, npc.width, 4))
                         {
                             targets.Add(npc);
                         }
@@ -118,7 +118,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     if (npc != null)
                     {
                         targetsRemaining = true;
-                        if (Collision.SolidCollision(npc.Bottom, npc.width, 4))
+                        if (Collision.SolidCollision(npc.BottomLeft, npc.width, 4))
                         {
                             Projectile.height = npc.height;
                             Projectile.position = npc.Center - new Vector2(Projectile.width, Projectile.height) / 2f;

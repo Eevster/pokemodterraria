@@ -5602,6 +5602,11 @@ Configs: {
 				Ninguno: Sin efecto.
 				'''
 		}
+
+		AddedContentStatScaling: {
+			// Label: Pokemon Stat Scaling
+			// Tooltip: Used to make Pokemod more compatible with other mods which add post-game content. (Value of 1 recommended for Calamity, changes most notable beyond level 50)
+		}
 	}
 
 	LevelCapOptions: {

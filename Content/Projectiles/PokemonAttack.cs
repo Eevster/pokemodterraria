@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pokemod.Common.Configs;
 using Pokemod.Common.GlobalNPCs;
 using Pokemod.Common.Players;
 using Pokemod.Content.DamageClasses;
@@ -14,6 +15,7 @@ using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.PlayerDrawLayer;
 
 namespace Pokemod.Content.Projectiles
 {
@@ -170,15 +172,32 @@ namespace Pokemod.Content.Projectiles
 			}
 			else
 			{
-				if (target.CanBeChasedBy() && target.damage != 0){
-                    if(Vector2.Distance(target.Center, Main.MouseWorld) <= 16f*Trainer.trainerGloveRange){
-						if(Owner.HeldItem.ModItem is TrainerGlove)
+				if (target.CanBeChasedBy() && target.damage != 0)
+				{
+					if (Vector2.Distance(target.Center, Main.MouseWorld) <= 16f * Trainer.trainerGloveRange)
+					{
+						if (Owner.HeldItem.ModItem is TrainerGlove)
 						{
-							modifiers.DefenseEffectiveness *= Math.Clamp(1f-Trainer.trainerGloveDefenseReduction, 0f, 1f);
+							modifiers.DefenseEffectiveness *= Math.Clamp(1f - Trainer.trainerGloveDefenseReduction, 0f, 1f);
 							//Main.NewText(Trainer.trainerGloveDefenseReduction);
 						}
 					}
 				}
+
+				int pokemonLvl = 0;
+				if (pokemonProj != null)
+				{
+					if (pokemonProj.active)
+					{
+						if (pokemonProj.ModProjectile is PokemonPetProjectile pokemon)
+						{
+							pokemonLvl = pokemon.pokemonLvl;
+						}
+					}
+				}
+				float statScaleConfig = ModContent.GetInstance<GameplayConfig>().AddedContentStatScaling;
+                float damageScale = 1 + statScaleConfig * (float)Math.Clamp(0.009 * Math.Pow(1.05, pokemonLvl), 0.15, 1);
+				modifiers.FinalDamage *= damageScale;
 			}
 
             base.ModifyHitNPC(target, ref modifiers);

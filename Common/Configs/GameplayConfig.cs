@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Terraria.ModLoader.Config;
 
 namespace Pokemod.Common.Configs
@@ -26,6 +27,11 @@ namespace Pokemod.Common.Configs
 		[Header("GameplayChanges")]
 		[DefaultValue(LevelCapOptions.LevelClamping)]
 		public LevelCapOptions LevelCapType;
+        [Range(0f, 1f)]
+        [Increment(.1f)]
+        [DrawTicks]
+        [DefaultValue(0f)]
+        public float AddedContentStatScaling;
 
         [Header("RuleChanges")] 
 
