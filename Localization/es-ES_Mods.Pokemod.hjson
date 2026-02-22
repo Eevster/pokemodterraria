@@ -509,6 +509,12 @@ Projectiles: {
 	Recover.DisplayName: Recuperación
 	// DelibirdPetProjectile.DisplayName: Delibird Pet Projectile
 	// DelibirdPetProjectileShiny.DisplayName: Delibird Pet Projectile Shiny
+	// IgglybuffPetProjectile.DisplayName: Igglybuff Pet Projectile
+	// IgglybuffPetProjectileShiny.DisplayName: Igglybuff Pet Projectile Shiny
+	// AlolanSandshrewPetProjectile.DisplayName: Alolan Sandshrew Pet Projectile
+	// AlolanSandshrewPetProjectileShiny.DisplayName: Alolan Sandshrew Pet Projectile Shiny
+	// AlolanSandslashPetProjectile.DisplayName: Alolan Sandslash Pet Projectile
+	// AlolanSandslashPetProjectileShiny.DisplayName: Alolan Sandslash Pet Projectile Shiny
 }
 
 Items: {
@@ -2360,6 +2366,11 @@ Items: {
 	BigRoot: {
 		DisplayName: Raiz grande
 		Tooltip: Aumenta la vida restaurada por movimientos que absorben HP
+	}
+
+	IceStoneItem: {
+		// DisplayName: Ice Stone Item
+		// Tooltip: ""
 	}
 }
 
@@ -4333,7 +4344,7 @@ NPCs: {
 
 	SandslashCritterNPC: {
 		// DisplayName: Sandslash
-		// Description: ""
+		// Description: It curls up, then rolls into foes with its back. Its sharp spines inflict severe damage.
 	}
 
 	ClefairyCritterNPC: {
@@ -4488,7 +4499,7 @@ NPCs: {
 
 	GolbatCritterNPC: {
 		// DisplayName: Golbat
-		// Description: It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however.
+		// Description: Its sharp fangs puncture the toughest of hides and have small holes for greedily sucking blood.
 	}
 
 	GoldeenCritterNPC: {
@@ -5001,6 +5012,21 @@ NPCs: {
 		// Description: This Pokemon's many eyes allow it to peer into deep space.
 	}
 
+	IgglybuffCritterNPC: {
+		// DisplayName: Igglybuff
+		// Description: It has a soft and bouncy body. Once it starts bouncing, it becomes impossible to stop.
+	}
+
+	AlolanSandshrewCritterNPC: {
+		// DisplayName: Alolan Sandshrew
+		// Description: The skin on its back is as hard as steel. Predators go after its soft belly, so it clings to the ground desperately.
+	}
+
+	AlolanSandslashCritterNPC: {
+		// DisplayName: Alolan Sandslash
+		// Description: This Pokémon's steel spikes are sheathed in ice. Stabs from these spikes cause deep wounds and severe frostbite as well.
+	}
+
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
 	CharmanderCritterNPCShiny.DisplayName: Charmander
 	SquirtleCritterNPCShiny.DisplayName: Squirtle
@@ -5187,6 +5213,9 @@ NPCs: {
 	// TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
 	// TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	// TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
+	// IgglybuffCritterNPCShiny.DisplayName: Igglybuff Shiny
+	// AlolanSandshrewCritterNPCShiny.DisplayName: Alolan Sandshrew Shiny
+	// AlolanSandslashCritterNPCShiny.DisplayName: Alolan Sandslash Shiny
 
 	PokemonProfessor: {
 		DisplayName: Profesor Pokemon

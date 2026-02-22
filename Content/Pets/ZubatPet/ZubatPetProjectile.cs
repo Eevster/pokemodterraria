@@ -10,7 +10,7 @@ namespace Pokemod.Content.Pets.ZubatPet
 	public class ZubatPetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 36;
 		public override int moveStyle => 1;
 
 		public override int totalFrames => 6;

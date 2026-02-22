@@ -9,15 +9,16 @@ namespace Pokemod.Content.Pets.JigglypuffPet
 {
 	public class JigglypuffPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+        public override int hitboxWidth => 24;
+        public override int hitboxHeight => 32;
 
-		public override int totalFrames => 4;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
+        public override int totalFrames => 17;
+        public override int animationSpeed => 7;
+        public override int[] idleStartEnd => [0, 6];
+        public override int[] walkStartEnd => [7, 12];
+        public override int[] jumpStartEnd => [13, 13];
+        public override int[] fallStartEnd => [7, 7];
+        public override int[] attackStartEnd => [13, 16];
 
         public override string[] evolutions => ["Wigglytuff"];
         public override string[] itemToEvolve => ["MoonStoneItem"];

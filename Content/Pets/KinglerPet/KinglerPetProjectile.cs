@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.KinglerPet
 {
 	public class KinglerPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 72;
-		public override int hitboxHeight => 46;
+        public override int hitboxWidth => 64;
+        public override int hitboxHeight => 26;
 
 		public override int totalFrames => 9;
 		public override int animationSpeed => 15;

@@ -7,16 +7,17 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class ClefairyCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 50;
-		public override int hitboxHeight => 44;
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 28;
 
 		public override int totalFrames => 16;
 		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
-		public override float catchRate => 150;
+		public override int[] idleStartEnd => [0,7];
+		public override int[] walkStartEnd => [8,11];
+		public override int[] jumpStartEnd => [10,10];
+		public override int[] fallStartEnd => [8,8];
+        public override int[] attackStartEnd => [12, 15];
+        public override float catchRate => 150;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);

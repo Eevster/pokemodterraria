@@ -44,6 +44,7 @@ namespace Pokemod.Content.Tiles
                 ModContent.ItemType<ThunderStoneItem>(),
                 ModContent.ItemType<MoonStoneItem>(),
                 ModContent.ItemType<LeafStoneItem>(),
+                ModContent.ItemType<IceStoneItem>(),
 
                 ModContent.ItemType<Potion>(),
                 ModContent.ItemType<SuperPotion>(),

@@ -8,7 +8,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	public class ZubatCritterNPC : PokemonWildNPC
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 36;
 		public override int moveStyle => 1;
 
 		public override int totalFrames => 6;
@@ -26,10 +26,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
 				if (spawnInfo.Player.ZoneForest) {
 					return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.5f);
-			}
 			}
 
 			return 0f;

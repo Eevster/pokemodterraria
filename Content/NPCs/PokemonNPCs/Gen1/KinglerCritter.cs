@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class KinglerCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 72;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 64;
+		public override int hitboxHeight => 26;
 
 		public override int totalFrames => 9;
 		public override int animationSpeed => 15;
@@ -25,10 +25,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
 				if (spawnInfo.Player.ZoneBeach) {
 					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.3f);
-			}
 			}
 
 			return 0f;

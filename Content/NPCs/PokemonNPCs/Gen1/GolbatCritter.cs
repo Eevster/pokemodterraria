@@ -8,7 +8,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	public class GolbatCritterNPC : PokemonWildNPC
 	{
 		public override int hitboxWidth => 44;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 40;
 
 		public override int moveStyle => 1;
 
@@ -29,10 +29,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
 				if (spawnInfo.Player.ZoneJungle) {
 					return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.5f);
-			}
 			}
 
 			return 0f;

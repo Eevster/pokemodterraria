@@ -8,26 +8,25 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	public class SandshrewCritterNPC : PokemonWildNPC
 	{
 		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 36;
 
-		public override int totalFrames => 4;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
-		public override float catchRate => 255;
+		public override int totalFrames => 20;
+		public override int animationSpeed => 6;
+		public override int[] idleStartEnd => [0,6];
+		public override int[] walkStartEnd => [7,14];
+		public override int[] jumpStartEnd => [12,12];
+		public override int[] fallStartEnd => [8,8];
+        public override int[] attackStartEnd => [15, 19];
+        public override float catchRate => 255;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
 				if (spawnInfo.Player.ZoneDesert) {
                 return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.5f);
             	}
-			}
 
 			return 0f;
 		}
@@ -35,5 +34,5 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		
 	}
 
-	public class SandshrewCritterNPCShiny : SandslashCritterNPC{}
+	public class SandshrewCritterNPCShiny : SandshrewCritterNPC{}
 }

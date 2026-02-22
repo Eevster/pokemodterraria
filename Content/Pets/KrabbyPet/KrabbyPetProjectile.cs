@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.KrabbyPet
 {
 	public class KrabbyPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 44;
-		public override int hitboxHeight => 30;
+        public override int hitboxWidth => 44;
+        public override int hitboxHeight => 22;
 
 		public override int totalFrames => 11;
 		public override int animationSpeed => 10;

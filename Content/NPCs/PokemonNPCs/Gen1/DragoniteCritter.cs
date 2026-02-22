@@ -43,10 +43,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
 				if (spawnInfo.Player.ZoneBeach) {
 					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.1f);
-			}
 			}
 
 			return 0f;

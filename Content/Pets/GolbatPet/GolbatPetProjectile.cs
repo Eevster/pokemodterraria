@@ -10,7 +10,7 @@ namespace Pokemod.Content.Pets.GolbatPet
 	public class GolbatPetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 44;
-		public override int hitboxHeight => 46;
+		public override int hitboxHeight => 40;
 
 		public override int moveStyle => 1;
 
