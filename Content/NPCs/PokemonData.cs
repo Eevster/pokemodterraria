@@ -92,7 +92,7 @@ namespace Pokemod.Content.NPCs
             int done;
 
             if (index == 0) done = (((2 * baseStat + IV + (EV / 4)) * Level / 100) + Level + 10) * 5;
-            else done = (int)(((2 * (baseStat + IV + (EV / 4)) * Level / 100) + 5) * GetNatureMult(index, nature));
+            else done = (int)((((2 * baseStat + IV + (EV / 4)) * Level / 100) + 5) * GetNatureMult(index, nature));
 
             return done;
         }
