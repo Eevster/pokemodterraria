@@ -916,7 +916,7 @@ Items: {
 
 	TrainerGlove: {
 		DisplayName: Guante de entrenador
-		Tooltip: Los ataques de tus Pokemon hacen {0} más daño a los enemigos dentro de un radio de {1} bloques
+		Tooltip: Cuando tu Pokemon golpea a un enemigo dentro de un radio de {0} bloques hace {1} más de daño
 	}
 
 	ChikoritaCritterItem: {
@@ -2371,6 +2371,21 @@ Items: {
 	IceStoneItem: {
 		// DisplayName: Ice Stone Item
 		// Tooltip: ""
+	}
+
+	GreatTrainerGlove: {
+		DisplayName: Super guante de entrenador
+		Tooltip: Cuando tu Pokemon golpea a un enemigo dentro de un radio de {0} bloques hace {1} más de daño
+	}
+
+	HyperTrainerGlove: {
+		DisplayName: Ultra guante de entrenador
+		Tooltip: Cuando tu Pokemon golpea a un enemigo dentro de un radio de {0} bloques hace {1} más de daño
+	}
+
+	NatureTrainerGlove: {
+		DisplayName: Guante natural de entrenador
+		Tooltip: Cuando tu Pokemon golpea a un enemigo dentro de un radio de {0} bloques hace {1} más de daño y obtienes el buff Miel
 	}
 }
 

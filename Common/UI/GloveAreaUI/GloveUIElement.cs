@@ -5,6 +5,7 @@ using Pokemod.Common.Configs;
 using Pokemod.Common.Players;
 using Pokemod.Content.Pets;
 using Pokemod.Content.Items;
+using Pokemod.Content.Items.TrainerGear;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -45,7 +46,7 @@ namespace Pokemod.Common.UI.GloveAreaUI
             }
 
             var tex = ModContent.Request<Texture2D>(GloveTexturePath).Value;
-            spriteBatch.Draw(tex, Main.MouseWorld - Main.screenPosition, tex.Bounds, Color.White * (enemyInRange?0.4f:0.1f), 0f, tex.Size() / 2f, (10f/trainerGloveRange) * Main.GameZoomTarget / Main.UIScale, SpriteEffects.None, 1);
+            spriteBatch.Draw(tex, Main.MouseWorld - Main.screenPosition, tex.Bounds, Color.White * (enemyInRange?0.4f:0.1f), 0f, tex.Size() / 2f, (trainerGloveRange/10f) * (Main.GameZoomTarget / Main.UIScale), SpriteEffects.None, 1);
         }
     }
 }

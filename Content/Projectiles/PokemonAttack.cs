@@ -5,6 +5,7 @@ using Pokemod.Common.GlobalNPCs;
 using Pokemod.Common.Players;
 using Pokemod.Content.DamageClasses;
 using Pokemod.Content.Items;
+using Pokemod.Content.Items.TrainerGear;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
 using System;
@@ -172,15 +173,20 @@ namespace Pokemod.Content.Projectiles
 			}
 			else
 			{
-				if (target.CanBeChasedBy() && target.damage != 0)
+				if (Vector2.Distance(target.Center, Main.MouseWorld) <= 16f * Trainer.trainerGloveRange)
 				{
-					if (Vector2.Distance(target.Center, Main.MouseWorld) <= 16f * Trainer.trainerGloveRange)
+					if (Owner.HeldItem.ModItem is TrainerGlove)
 					{
-						if (Owner.HeldItem.ModItem is TrainerGlove)
+						modifiers.FinalDamage.Base += Trainer.trainerGloveExtraDamage;
+						modifiers.DefenseEffectiveness *= Math.Clamp(1f - Trainer.trainerGloveDefenseReduction, 0f, 1f);
+						//Main.NewText(Trainer.trainerGloveDefenseReduction);
+
+						if (target.CanBeChasedBy() && target.damage != 0)
 						{
-							modifiers.FinalDamage += Trainer.trainerGloveExtraDamage;
-							modifiers.DefenseEffectiveness *= Math.Clamp(1f - Trainer.trainerGloveDefenseReduction, 0f, 1f);
-							//Main.NewText(Trainer.trainerGloveDefenseReduction);
+							if(Owner.HeldItem.ModItem is NatureTrainerGlove)
+							{
+								Owner.AddBuff(BuffID.Honey, 3*60);
+							}
 						}
 					}
 				}

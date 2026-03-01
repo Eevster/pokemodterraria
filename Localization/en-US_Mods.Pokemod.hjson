@@ -916,7 +916,7 @@ Items: {
 
 	TrainerGlove: {
 		DisplayName: Trainer Glove
-		Tooltip: Pokemon attacks do {0} more damage to enemies within a radius of {1} blocks
+		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage
 	}
 
 	ChikoritaCritterItem: {
@@ -2371,6 +2371,21 @@ Items: {
 	IceStoneItem: {
 		DisplayName: Ice Stone Item
 		Tooltip: ""
+	}
+
+	GreatTrainerGlove: {
+		DisplayName: Great Trainer Glove
+		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage
+	}
+
+	HyperTrainerGlove: {
+		DisplayName: Hyper Trainer Glove
+		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage
+	}
+
+	NatureTrainerGlove: {
+		DisplayName: Nature Trainer Glove
+		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage and you get the Honey buff
 	}
 }
 

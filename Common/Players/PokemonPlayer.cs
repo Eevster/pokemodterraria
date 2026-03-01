@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Pokemod.Content.Pets;
 using Pokemod.Content.Items;
+using Pokemod.Content.Items.TrainerGear;
 using Pokemod.Content.Pets.CharmanderPet;
 using Pokemod.Content.Pets.BulbasaurPet;
 using Pokemod.Content.Pets.SquirtlePet;
@@ -62,7 +63,7 @@ namespace Pokemod.Common.Players
 			Directed_Attack
 		}
 
-		public float trainerGloveRange = 10;
+		public float trainerGloveRange = 0;
 		public int trainerGloveExtraDamage = 0;
 		public float trainerGloveDefenseReduction = 0f;
 
