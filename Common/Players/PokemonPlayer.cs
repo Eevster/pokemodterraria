@@ -63,7 +63,8 @@ namespace Pokemod.Common.Players
 		}
 
 		public float trainerGloveRange = 10;
-		public float trainerGloveDefenseReduction = 0.25f;
+		public int trainerGloveExtraDamage = 0;
+		public float trainerGloveDefenseReduction = 0f;
 
 		public float targetRotation;
 		public Vector2 attackPosition;
@@ -321,6 +322,7 @@ namespace Pokemod.Common.Players
 			typeMult = Enumerable.Repeat(1f,18).ToArray();
 
 			trainerGloveDefenseReduction = 0;
+			trainerGloveExtraDamage = 0;
 			trainerGloveRange = 0;
 
 			if (LeftoversTimer > 0) LeftoversTimer--;

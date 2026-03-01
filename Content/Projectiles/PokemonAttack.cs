@@ -178,6 +178,7 @@ namespace Pokemod.Content.Projectiles
 					{
 						if (Owner.HeldItem.ModItem is TrainerGlove)
 						{
+							modifiers.FinalDamage += Trainer.trainerGloveExtraDamage;
 							modifiers.DefenseEffectiveness *= Math.Clamp(1f - Trainer.trainerGloveDefenseReduction, 0f, 1f);
 							//Main.NewText(Trainer.trainerGloveDefenseReduction);
 						}

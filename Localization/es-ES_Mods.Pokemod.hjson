@@ -916,7 +916,7 @@ Items: {
 
 	TrainerGlove: {
 		DisplayName: Guante de entrenador
-		Tooltip: ""
+		Tooltip: Los ataques de tus Pokemon hacen {0} más daño a los enemigos dentro de un radio de {1} bloques
 	}
 
 	ChikoritaCritterItem: {
