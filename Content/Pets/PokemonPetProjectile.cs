@@ -222,6 +222,8 @@ namespace Pokemod.Content.Pets
 		public override void SetDefaults() {
 			Projectile.CloneDefaults(ProjectileID.EyeOfCthulhuPet); // Copy the stats of the Suspicious Grinning Eye projectile
 
+			Projectile.DamageType = ModContent.GetInstance<PokemonDamageClass>();
+
 			Asset<Texture2D> pokeTexture = ModContent.Request<Texture2D>(Texture);
 			Projectile.width = hitboxWidth;
 			DrawOffsetX = -(pokeTexture.Width() - Projectile.width)/2;

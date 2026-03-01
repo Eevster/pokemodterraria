@@ -49,7 +49,6 @@ namespace Pokemod.Content.Projectiles
         public override void SetDefaults()
         {
 			Projectile.DamageType = ModContent.GetInstance<PokemonDamageClass>();
-			base.SetDefaults();
         }
         public override void SendExtraAI(BinaryWriter writer)
         {
@@ -64,7 +63,7 @@ namespace Pokemod.Content.Projectiles
 		}
 
 		public virtual void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
-
+			
 		}
 
 		public virtual void AttackOutTimer(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter){
@@ -88,6 +87,9 @@ namespace Pokemod.Content.Projectiles
 			attackType = PokemonData.pokemonAttacks[GetType().Name.Replace("_Front", "")].attackType;
 			isSpecial = PokemonData.pokemonAttacks[GetType().Name.Replace("_Front", "")].isSpecial;
 			attackMode = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().attackMode;
+
+			Projectile.CritChance += (int)Owner.GetCritChance<PokemonDamageClass>();
+
             base.OnSpawn(source);
         }
 

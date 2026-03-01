@@ -25,12 +25,25 @@ namespace Pokemod.Common.Players
 				ModContent.NPCType<DratiniCritterNPC>(),
 			};
 
+			int[] shinyPokemonList =
+			{
+				ModContent.NPCType<MagikarpCritterNPCShiny>(),
+				ModContent.NPCType<PoliwagCritterNPCShiny>(),
+				ModContent.NPCType<ShellderCritterNPCShiny>(),
+				ModContent.NPCType<StaryuCritterNPCShiny>(),
+				ModContent.NPCType<DratiniCritterNPCShiny>(),
+			};
+
 			const int oldRodLimit = 1;
 			const int goodRodLimit = 4;
 
 			if (isPokemonFishingRod && inWater)
 			{
 				int npc = -1;
+
+				bool shiny = Main.rand.NextBool(Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().HasShinyCharm?2048:4096);
+
+				if(shiny) pokemonList = shinyPokemonList;
 
 				if (attempt.playerFishingConditions.PoleItemType == ModContent.ItemType<OldRod>())
 				{
@@ -53,7 +66,7 @@ namespace Pokemod.Common.Players
 
 					// Also, to make it cooler, we will make a special sonar message for when it shows up
 					sonar.Text = "Gotcha!";
-					sonar.Color = Color.LimeGreen;
+					sonar.Color = shiny?Color.Gold:Color.LimeGreen;
 					sonar.Velocity = Vector2.Zero;
 					sonar.DurationInFrames = 300;
 
