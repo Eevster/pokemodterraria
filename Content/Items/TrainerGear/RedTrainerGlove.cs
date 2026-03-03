@@ -9,12 +9,12 @@ using Terraria.Localization;
 namespace Pokemod.Content.Items.TrainerGear
 {
 	[AutoloadEquip(EquipType.HandsOn)]
-	public class GreatTrainerGlove : TrainerGlove
+	public class RedTrainerGlove : TrainerGlove
 	{
 		private readonly int ExtraDamage = 4;
 		private readonly int GloveRange = 8;
 
-        public override void SetDefaults()
+		public override void SetDefaults()
         {
             base.SetDefaults();
 			Item.rare = ItemRarityID.Green;
@@ -35,13 +35,8 @@ namespace Pokemod.Content.Items.TrainerGear
         {
             CreateRecipe()
                 .AddIngredient(ItemID.Silk, 7)
-                .AddIngredient(ItemID.DemoniteBar, 5)
-                .AddTile(TileID.Anvils)
-                .Register();
-
-			CreateRecipe()
-                .AddIngredient(ItemID.Silk, 7)
-                .AddIngredient(ItemID.CrimtaneBar, 5)
+                .AddIngredient(ItemID.Hellstone, 7)
+                .AddIngredient(ItemID.Obsidian, 5)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

@@ -185,9 +185,17 @@ namespace Pokemod.Content.Projectiles
 
 						if (target.CanBeChasedBy() && target.damage != 0)
 						{
-							if(Owner.HeldItem.ModItem is NatureTrainerGlove)
+							if(Owner.HeldItem.ModItem is GreenTrainerGlove)
 							{
 								Owner.AddBuff(BuffID.Honey, 3*60);
+							}
+							if(Owner.HeldItem.ModItem is RedTrainerGlove)
+							{
+								if(Main.rand.NextBool(5)) target.AddBuff(BuffID.OnFire, 4*60);
+							}
+							if(Owner.HeldItem.ModItem is BlueTrainerGlove)
+							{
+								if(Main.rand.NextBool(5)) target.AddBuff(BuffID.Frostburn, 3*60);
 							}
 						}
 					}

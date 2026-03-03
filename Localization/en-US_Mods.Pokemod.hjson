@@ -2370,7 +2370,11 @@ Items: {
 
 	IceStoneItem: {
 		DisplayName: Ice Stone Item
-		Tooltip: ""
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			A peculiar stone that can make certain species of Pokémon evolve. It has an unmistakable snowflake pattern
+			'''
 	}
 
 	GreatTrainerGlove: {
@@ -2383,9 +2387,19 @@ Items: {
 		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage
 	}
 
-	NatureTrainerGlove: {
-		DisplayName: Nature Trainer Glove
+	GreenTrainerGlove: {
+		DisplayName: Green Trainer Glove
 		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage and you get the Honey buff
+	}
+
+	RedTrainerGlove: {
+		DisplayName: Red Trainer Glove
+		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage and has a 20% chance of inflicting the On Fire! debuff
+	}
+
+	BlueTrainerGlove: {
+		DisplayName: Blue Trainer Glove
+		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage and has a 20% chance of inflicting the Frostburn debuff
 	}
 }
 
@@ -5409,8 +5423,8 @@ PokemonInfo: {
 		Contains: 
 		'''
 	GloveTooltip: "[c/ffd51c:Actual mode: {0}]"
-	GloveTooltipLeft: Left click to make your pokemon perform: {0}
-	GloveTooltipRight: Right click to make your pokemon perform: {0}
+	GloveTooltipLeft: Left click to switch to: {0}
+	GloveTooltipRight: Right click to switch to: {0}
 	AutoAttack: Auto Attack
 	NoAttack: No Attack
 	DirectedAttack: Directed Attack

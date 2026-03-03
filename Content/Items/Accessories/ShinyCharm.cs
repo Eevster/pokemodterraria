@@ -17,5 +17,10 @@ namespace Pokemod.Content.Items.Accessories
 		public override void UpdateAccessory(Player player, bool hideVisual) {
 			player.GetModPlayer<PokemonPlayer>().HasShinyCharm = true;
 		}
+
+        public override void UpdateVanity(Player player)
+        {
+            player.GetModPlayer<PokemonPlayer>().HasShinyCharm = true;
+        }
 	}
 }

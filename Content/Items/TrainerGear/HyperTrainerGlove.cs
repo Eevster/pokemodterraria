@@ -14,6 +14,12 @@ namespace Pokemod.Content.Items.TrainerGear
 		private readonly int ExtraDamage = 6;
 		private readonly int GloveRange = 10;
 
+		public override void SetDefaults()
+        {
+            base.SetDefaults();
+			Item.rare = ItemRarityID.Orange;
+        }
+
         public override void HoldItem(Player player)
         {
 			player.handon = EquipLoader.GetEquipSlot(Mod, Item.ModItem.Name, EquipType.HandsOn);

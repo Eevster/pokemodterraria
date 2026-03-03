@@ -9,10 +9,16 @@ using Terraria.Localization;
 namespace Pokemod.Content.Items.TrainerGear
 {
 	[AutoloadEquip(EquipType.HandsOn)]
-	public class NatureTrainerGlove : TrainerGlove
+	public class BlueTrainerGlove : TrainerGlove
 	{
 		private readonly int ExtraDamage = 4;
-		private readonly int GloveRange = 7;
+		private readonly int GloveRange = 6;
+
+		public override void SetDefaults()
+        {
+            base.SetDefaults();
+			Item.rare = ItemRarityID.Green;
+        }
 
         public override void HoldItem(Player player)
         {
@@ -29,8 +35,8 @@ namespace Pokemod.Content.Items.TrainerGear
         {
             CreateRecipe()
                 .AddIngredient(ItemID.Silk, 7)
-                .AddIngredient(ItemID.JungleSpores, 7)
-                .AddIngredient(ItemID.BeeWax, 5)
+                .AddIngredient(ItemID.FlinxFur, 7)
+                .AddIngredient(ItemID.WaterCandle, 5)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
