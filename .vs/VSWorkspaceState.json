@@ -3,10 +3,8 @@
     "",
     "\\Content",
     "\\Content\\Items",
-    "\\Content\\NPCs",
-    "\\Content\\NPCs\\MerchantNPCs",
-    "\\Content\\NPCs\\PokemonNPCs"
+    "\\Content\\Items\\TrainerGear"
   ],
-  "SelectedNode": "\\Content\\NPCs\\MerchantNPCs\\PokemonProfessor.cs",
+  "SelectedNode": "\\Content\\Items\\TrainerGear\\HyperTrainerGlove.cs",
   "PreviewInSolutionExplorer": false
 }
