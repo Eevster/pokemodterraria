@@ -515,6 +515,8 @@ Projectiles: {
 	AlolanSandshrewPetProjectileShiny.DisplayName: Alolan Sandshrew Pet Projectile Shiny
 	AlolanSandslashPetProjectile.DisplayName: Alolan Sandslash Pet Projectile
 	AlolanSandslashPetProjectileShiny.DisplayName: Alolan Sandslash Pet Projectile Shiny
+	MareepPetProjectileShiny.DisplayName: Mareep Pet Projectile Shiny
+	MareepPetProjectile.DisplayName: Mareep Pet Projectile
 }
 
 Items: {
@@ -4092,6 +4094,16 @@ Buffs: {
 	DelibirdPetBuffShiny: {
 		DisplayName: Delibird Pet Buff Shiny
 		Description: Mods.Pokemod.Buffs.DelibirdPetBuffShiny.Description
+	}
+
+	MareepPetBuffShiny: {
+		Description: Mods.Pokemod.Buffs.MareepPetBuffShiny.Description
+		DisplayName: Mareep Pet Buff Shiny
+	}
+
+	MareepPetBuff: {
+		Description: Mods.Pokemod.Buffs.MareepPetBuff.Description
+		DisplayName: Mareep Pet Buff
 	}
 }
 
