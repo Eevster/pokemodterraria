@@ -164,7 +164,7 @@ namespace Pokemod.Content.Projectiles
 
 		public virtual void AfterHitTarget(Entity target, int damageDone)
 		{
-			if (!healed)
+			if (Trainer.HasShellBell > 0 && !healed)
 			{
 				if(pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj)
 				{
