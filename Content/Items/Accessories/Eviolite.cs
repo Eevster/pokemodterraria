@@ -20,6 +20,11 @@ namespace Pokemod.Content.Items.Accessories
 			player.GetModPlayer<PokemonPlayer>().HasEviolite = 3;
 		}
 
+		public override void UpdateVanity(Player player)
+        {
+            player.GetModPlayer<PokemonPlayer>().HasEverstone = 3;
+        }
+
 		public override void AddRecipes()
 		{
 			CreateRecipe()

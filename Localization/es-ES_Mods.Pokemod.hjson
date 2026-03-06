@@ -918,7 +918,11 @@ Items: {
 
 	TrainerGlove: {
 		DisplayName: Guante de entrenador
-		Tooltip: Si tu Pokemon golpea a un enemigo en un radio de {0} bloques hace {1} más de daño
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			'''
 	}
 
 	ChikoritaCritterItem: {
@@ -997,7 +1001,7 @@ Items: {
 
 	BlackBeltItem: {
 		DisplayName: Cinturón Negro
-		Tooltip: Un objeto que debe sostener el jugador, aumenta el daño de ataque de los Pokémon de los usuarios
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
 	}
 
 	FireStoneHelmet: {
@@ -1109,12 +1113,12 @@ Items: {
 
 	AssaultVestItem: {
 		DisplayName: Chaleco Asalto
-		Tooltip: ""
+		Tooltip: Aumenta la defensa y defensa especial de tus pokemon en 20%
 	}
 
 	ExpertBeltItem: {
 		DisplayName: Cinta Experto
-		Tooltip: ""
+		Tooltip: Aumenta el daño de los movimientos del mismo tipo que tu pokemon en un 10%
 	}
 
 	KingsRockItem: {
@@ -2228,13 +2232,13 @@ Items: {
 	}
 
 	ShellBell: {
-		Tooltip: ""
-		DisplayName: Shell Bell
+		Tooltip: Cuando tu pokemon inflige daño usando un movimiento de contacto, se cura un porcentaje del daño infligido
+		DisplayName: Cascabel concha
 	}
 
 	TeraGem: {
 		Tooltip: "{$CommonItemTooltip.PokemonDamageBoost}"
-		DisplayName: Tera Gema
+		DisplayName: Tera gema
 	}
 
 	BlackGlasses: {
@@ -2362,7 +2366,7 @@ Items: {
 
 	MuscleBand: {
 		DisplayName: Cinta fuerte
-		Tooltip: Aumenta el daño de los movimientos físicos en un 10%
+		Tooltip: Aumenta el daño de los movimientos de contacto en un 10%
 	}
 
 	BigRoot: {
@@ -2381,27 +2385,50 @@ Items: {
 
 	GreatTrainerGlove: {
 		DisplayName: Super guante de entrenador
-		Tooltip: Si tu Pokemon golpea a un enemigo en un radio de {0} bloques hace {1} más de daño
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			'''
 	}
 
 	HyperTrainerGlove: {
 		DisplayName: Ultra guante de entrenador
-		Tooltip: Si tu Pokemon golpea a un enemigo en un radio de {0} bloques hace {1} más de daño
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			'''
 	}
 
 	GreenTrainerGlove: {
 		DisplayName: Guante verde de entrenador
-		Tooltip: Si tu Pokemon golpea a un enemigo en un radio de {0} bloques hace {1} más de daño y obtienes el buff Miel
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			El entrenador obtiene el buff Miel
+			'''
 	}
 
 	RedTrainerGlove: {
 		DisplayName: Guante rojo de entrenador
-		Tooltip: Si tu Pokemon golpea a un enemigo en un radio de {0} bloques hace {1} más de daño y tiene un 20% de probabilidad de inflingir el debuff ¡En llamas!
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			20% de probabilidad de inflingir el debuff ¡En llamas!
+			'''
 	}
 
 	BlueTrainerGlove: {
 		DisplayName: Guante azul de entrenador
-		Tooltip: Si tu Pokemon golpea a un enemigo en un radio de {0} bloques hace {1} más de daño y tiene un 20% de probabilidad de inflingir el debuff Quemadura de hielo
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			20% de probabilidad de inflingir el debuff Quemadura de hielo
+			'''
 	}
 }
 

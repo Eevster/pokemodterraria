@@ -5,6 +5,7 @@ using Pokemod.Common.Players;
 using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.Localization;
+using System;
 
 namespace Pokemod.Content.Items.TrainerGear
 {
@@ -14,6 +15,8 @@ namespace Pokemod.Content.Items.TrainerGear
 		//private readonly float DefenseReduction = 0.25f;
 		private readonly int ExtraDamage = 3;
 		private readonly int GloveRange = 6;
+
+		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(GloveRange, ExtraDamage);
 
         public int attackType = 0; // keeps track of which attack it is
 		public override void SetStaticDefaults() {
@@ -86,29 +89,32 @@ namespace Pokemod.Content.Items.TrainerGear
             attackType = player.GetModPlayer<PokemonPlayer>().attackMode;
         }
 
-		public virtual string SetInitialTooltip()
-		{
-			return Language.GetText($"Mods.Pokemod.Items.{Item.ModItem.Name}.Tooltip").WithFormatArgs(GloveRange, ExtraDamage).Value;
-		}
-
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
+			string mode = "";
+
+			if(attackType == 0){
+				mode += Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value
+				+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
+				+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipRight").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack")).Value;
+			}
+			if(attackType == 1){
+				mode += Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack")).Value
+				+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value;
+			}
+			if(attackType == 2){
+				mode += Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
+				+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
+				+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipRight").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value;
+			}
+
+			mode += "\n----------------------------";
+
+			var newLine = new TooltipLine(Mod, "TrainerGloveMode", mode);
+
 			foreach (TooltipLine line in tooltips) {
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0") {
-					line.Text = SetInitialTooltip();
-					if(attackType == 0){
-						line.Text += "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value
-						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
-						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipRight").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack")).Value;
-					}
-                    if(attackType == 1){
-						line.Text += "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.NoAttack")).Value
-						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value;
-					}
-                    if(attackType == 2){
-						line.Text += "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltip").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
-						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipLeft").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.DirectedAttack")).Value
-						+ "\n" + Language.GetText("Mods.Pokemod.PokemonInfo.GloveTooltipRight").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.PokemonInfo.AutoAttack")).Value;
-					}
+					tooltips.Insert(tooltips.IndexOf(line), newLine);
+					break;
 				}
 			}
 

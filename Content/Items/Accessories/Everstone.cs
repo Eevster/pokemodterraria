@@ -17,5 +17,10 @@ namespace Pokemod.Content.Items.Accessories
 		public override void UpdateAccessory(Player player, bool hideVisual) {
 			player.GetModPlayer<PokemonPlayer>().HasEverstone = 3;
 		}
+
+		public override void UpdateVanity(Player player)
+        {
+            player.GetModPlayer<PokemonPlayer>().HasEverstone = 3;
+        }
 	}
 }

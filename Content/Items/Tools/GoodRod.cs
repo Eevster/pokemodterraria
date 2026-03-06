@@ -15,7 +15,7 @@ namespace Pokemod.Content.Items.Tools
 
 		public override void SetDefaults()
 		{
-			Item.CloneDefaults(ItemID.FiberglassFishingPole);
+			Item.CloneDefaults(ItemID.ScarabFishingRod);
 
 			Item.fishingPole = 15; // Sets the poles fishing power
 			Item.shootSpeed = 12f; // Sets the speed in which the bobbers are launched. Wooden Fishing Pole is 9f and Golden Fishing Rod is 17f.

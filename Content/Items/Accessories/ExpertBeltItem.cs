@@ -17,7 +17,7 @@ namespace Pokemod.Content.Items.Accessories
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual) {
-			player.GetDamage<PokemonDamageClass>() += 0.40f;
+			player.GetModPlayer<PokemonPlayer>().stabAdd += 0.1f;
 		}
         public override void AddRecipes()
         {

@@ -122,11 +122,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             if(target.CanBeChasedBy()){
                 if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
                 {
-                    HealEffect(pokemonPetProj, 0.02f);
+                    HealEffect(pokemonPetProj, 0.02f, true);
                 }
                 else
                 {
-                    HealEffect(Owner, Owner.statLifeMax2>300?2:1);
+                    HealEffect(Owner, Owner.statLifeMax2>300?2:1, true);
                 }
             }
             base.OnHitNPC(target, hit, damageDone);
@@ -136,11 +136,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
             {
-                HealEffect(pokemonPetProj, 0.02f);
+                HealEffect(pokemonPetProj, 0.02f, true);
             }
             else
             {
-                HealEffect(Owner, Owner.statLifeMax2>300?2:1);
+                HealEffect(Owner, Owner.statLifeMax2>300?2:1, true);
             }
 
             base.OnHitPlayer(target, info);

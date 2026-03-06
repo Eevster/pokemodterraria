@@ -181,12 +181,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
 			{
-				HealEffect(pokemonPetProj, healAmount);
+				HealEffect(pokemonPetProj, healAmount, true);
 				targetCenter = pokemonProj.Center;
 			}
 			else
 			{
-				HealEffect(Owner, Owner.statLifeMax2>300?2:1);
+				HealEffect(Owner, Owner.statLifeMax2>300?2:1, true);
 			}
 
 			for(int i = 0; i < 10; i++){

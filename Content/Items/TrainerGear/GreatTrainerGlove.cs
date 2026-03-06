@@ -14,6 +14,8 @@ namespace Pokemod.Content.Items.TrainerGear
 		private readonly int ExtraDamage = 4;
 		private readonly int GloveRange = 8;
 
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(GloveRange, ExtraDamage);
+
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -27,10 +29,6 @@ namespace Pokemod.Content.Items.TrainerGear
 			player.GetModPlayer<PokemonPlayer>().trainerGloveRange += GloveRange;
         }
 
-        public override string SetInitialTooltip()
-		{
-			return Language.GetText($"Mods.Pokemod.Items.{Item.ModItem.Name}.Tooltip").WithFormatArgs(GloveRange, ExtraDamage).Value;
-		}
 		public override void AddRecipes()
         {
             CreateRecipe()

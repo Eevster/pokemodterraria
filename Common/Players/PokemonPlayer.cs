@@ -47,12 +47,16 @@ namespace Pokemod.Common.Players
 		public int HasLuminousMoss;
 		public int HasEjectButton;
 		public int HasShellBell;
+		public int HasBigRoot;
 
 		public float ExpMult = 1f;
 		public int LeftoversTimer;
 
 		//Multipliers
 		public float[] typeMult = Enumerable.Repeat(1f,18).ToArray();
+		public float[] statMult = Enumerable.Repeat(1f,6).ToArray();
+		public float contactMult = 1f;
+		public float stabAdd = 0.5f;
 
 		//Trainer Glove
 		public int attackMode;
@@ -321,6 +325,9 @@ namespace Pokemod.Common.Players
 
 			ExpMult = 1f;
 			typeMult = Enumerable.Repeat(1f,18).ToArray();
+			statMult = Enumerable.Repeat(1f,6).ToArray();
+			contactMult = 1f;
+			stabAdd = 0.5f;
 
 			trainerGloveDefenseReduction = 0;
 			trainerGloveExtraDamage = 0;
@@ -332,6 +339,7 @@ namespace Pokemod.Common.Players
 			if (HasLuminousMoss > 0) HasLuminousMoss--;
 			if (HasEjectButton > 0) HasEjectButton--;
 			if (HasShellBell > 0) HasShellBell--;
+			if (HasBigRoot > 0) HasBigRoot--;
 		}
 
 		public int FreePokemonSlots()

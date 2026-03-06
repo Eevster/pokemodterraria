@@ -145,7 +145,7 @@ namespace Pokemod.Content.NPCs
             {
                 string[] grassStarters = { "Eevee", "Bulbasaur", "Chikorita" };
                 string[] fireStarters = { "Pikachu", "Charmander", "Cyndaquil" };
-                string[] waterStarters = { "Squirtle", "Totodile" };
+                string[] waterStarters = { "Clefairy", "Squirtle", "Totodile" };
 
                 starters[0] = grassStarters[Main.rand.Next(grassStarters.Length)];
                 starters[1] = fireStarters[Main.rand.Next(fireStarters.Length)];
@@ -578,37 +578,37 @@ namespace Pokemod.Content.NPCs
             {"AirSlash", new PokemonAttackInfo(75,54,76,800f,true,true,(int)TypeIndex.Flying, true)},
             {"AncientPower", new PokemonAttackInfo(60,45,60,600f,true,false,(int)TypeIndex.Rock, true)},
             {"AquaRing", new PokemonAttackInfo(0,90,60,100f,true,false,(int)TypeIndex.Water, true)},
-            {"AquaTail", new PokemonAttackInfo(90,20,60,400f,false,false,(int)TypeIndex.Water)},
-            {"Bite", new PokemonAttackInfo(60,30,60,200f,true,false,(int)TypeIndex.Dark)},
+            {"AquaTail", new PokemonAttackInfo(90,20,60,400f,false,false,(int)TypeIndex.Water, contact: true)},
+            {"Bite", new PokemonAttackInfo(60,30,60,200f,true,false,(int)TypeIndex.Dark, contact: true)},
             {"Blizzard", new PokemonAttackInfo(110,120,90,250f,false,true,(int)TypeIndex.Ice, true)},
-            {"BrickBreak", new PokemonAttackInfo(75,30,60,200f,true,false,(int)TypeIndex.Fighting)},
+            {"BrickBreak", new PokemonAttackInfo(75,30,60,200f,true,false,(int)TypeIndex.Fighting, contact: true)},
             {"Bubble", new PokemonAttackInfo(20,10,50,600f,false,false,(int)TypeIndex.Water, true)},
             {"BubbleBeam", new PokemonAttackInfo(65,30,60,800f,false,false,(int)TypeIndex.Water, true)},
             {"BulletSeed", new PokemonAttackInfo(25,30,50,800f,false,false,(int)TypeIndex.Grass)},
             {"ConfuseRay", new PokemonAttackInfo(0,30,60,800f,true,true,(int)TypeIndex.Ghost, true)},
             {"Confusion", new PokemonAttackInfo(50,56,60,800f,false,true,(int)TypeIndex.Psychic, true)},
             {"CosmicPower", new PokemonAttackInfo(0,45,60,800f,false,true,(int)TypeIndex.Psychic, true)},
-            {"Crunch", new PokemonAttackInfo(80,30,60,200f,true,false,(int)TypeIndex.Dark)},
-            {"Dig", new PokemonAttackInfo(80,90,60,800f,false,true,(int)TypeIndex.Ground)},
+            {"Crunch", new PokemonAttackInfo(80,30,60,200f,true,false,(int)TypeIndex.Dark, contact: true)},
+            {"Dig", new PokemonAttackInfo(80,90,60,800f,false,true,(int)TypeIndex.Ground, contact: true)},
             {"Discharge", new PokemonAttackInfo(80,60,60,200f,true,false,(int)TypeIndex.Electric, true)},
-            {"DoubleEdge", new PokemonAttackInfo(120,40,60,400f,false,false,(int)TypeIndex.Normal)},
-            {"DoubleKick", new PokemonAttackInfo(30,30,60,200f,false,false,(int)TypeIndex.Fighting)},
+            {"DoubleEdge", new PokemonAttackInfo(120,40,60,400f,false,false,(int)TypeIndex.Normal, contact: true)},
+            {"DoubleKick", new PokemonAttackInfo(30,30,60,200f,false,false,(int)TypeIndex.Fighting, contact: true)},
             {"DragonBreath", new PokemonAttackInfo(60,90,60,800f,false,false,(int)TypeIndex.Dragon, true)},
             {"DragonRush", new PokemonAttackInfo(100,60,60,600f,false,false,(int)TypeIndex.Dragon)},
-            {"DragonTail", new PokemonAttackInfo(60,20,70,400f,false,false,(int)TypeIndex.Dragon)},
-            {"DrillRun", new PokemonAttackInfo(80,30,70,400f,false,false,(int)TypeIndex.Ground)},
+            {"DragonTail", new PokemonAttackInfo(60,20,70,400f,false,false,(int)TypeIndex.Dragon, contact: true)},
+            {"DrillRun", new PokemonAttackInfo(80,30,70,400f,false,false,(int)TypeIndex.Ground, contact: true)},
             {"Earthquake", new PokemonAttackInfo(100,50,60,500f,false,true,(int)TypeIndex.Ground)},
             {"ElectroBall", new PokemonAttackInfo(40,30,50,800f,true,false,(int)TypeIndex.Electric)},
             {"Ember", new PokemonAttackInfo(40,30,40,800f,false,false,(int)TypeIndex.Fire, true)},
             {"EnergyBall", new PokemonAttackInfo(90,40,50,800f,true,false,(int)TypeIndex.Grass, true)},
             {"Explosion", new PokemonAttackInfo(250,32,60,250f,false,false,(int)TypeIndex.Normal)},
-            {"ExtremeSpeed", new PokemonAttackInfo(80,30,20,600f,false,false,(int)TypeIndex.Normal)},
+            {"ExtremeSpeed", new PokemonAttackInfo(80,30,20,600f,false,false,(int)TypeIndex.Normal, contact: true)},
             {"FireBlast", new PokemonAttackInfo(110,40,60,800f,true,true,(int)TypeIndex.Fire, true)},
             {"Flamethrower", new PokemonAttackInfo(90,40,80,300f,true,false,(int)TypeIndex.Fire, true)},
-            {"FlameWheel", new PokemonAttackInfo(60,60,60,500f,false,false,(int)TypeIndex.Fire)},
+            {"FlameWheel", new PokemonAttackInfo(60,60,60,500f,false,false,(int)TypeIndex.Fire, contact: true)},
             {"FlashCannon", new PokemonAttackInfo(80,40,60,800f,false,true,(int)TypeIndex.Steel, true)},
-            {"FocusPunch", new PokemonAttackInfo(150,90,60,600f,false,false,(int)TypeIndex.Fighting)},
-            {"FuryCutter", new PokemonAttackInfo(40,42,40,250f,false,false,(int)TypeIndex.Bug)},
+            {"FocusPunch", new PokemonAttackInfo(150,90,60,600f,false,false,(int)TypeIndex.Fighting, contact: true)},
+            {"FuryCutter", new PokemonAttackInfo(40,42,40,250f,false,false,(int)TypeIndex.Bug, contact: true)},
             {"GigaDrain", new PokemonAttackInfo(75,56,60,800f,false,true,(int)TypeIndex.Grass, true)},
             {"Gust", new PokemonAttackInfo(40,30,40,800f,false,false,(int)TypeIndex.Flying, true)},
             {"Harden", new PokemonAttackInfo(0,60,60,64f,false,false,(int)TypeIndex.Normal)},
@@ -617,12 +617,12 @@ namespace Pokemod.Content.NPCs
             {"Hurricane", new PokemonAttackInfo(110,60,60,800f,false,true,(int)TypeIndex.Flying, true)},
             {"HydroPump", new PokemonAttackInfo(110,42,60,800f,false,true,(int)TypeIndex.Water, true)},
             {"HyperBeam", new PokemonAttackInfo(150,35,150,800f,false,true,(int)TypeIndex.Normal, true)},
-            {"HyperFang", new PokemonAttackInfo(80,42,60,400f,false,false,(int)TypeIndex.Normal)},
+            {"HyperFang", new PokemonAttackInfo(80,42,60,400f,false,false,(int)TypeIndex.Normal, contact: true)},
             {"IceBeam", new PokemonAttackInfo(90,40,60,800f,false,false,(int)TypeIndex.Ice, true)},
-            {"IceFang", new PokemonAttackInfo(65,30,60,200f,false,false,(int)TypeIndex.Ice)},
+            {"IceFang", new PokemonAttackInfo(65,30,60,200f,false,false,(int)TypeIndex.Ice, contact: true)},
             {"IceShard", new PokemonAttackInfo(40,30,40,800f,false,false,(int)TypeIndex.Ice)},
             {"LavaPlume", new PokemonAttackInfo(80,20,60,800f,true,true,(int)TypeIndex.Fire, true)},
-            {"LeafBlade", new PokemonAttackInfo(90,40,60,500f,false,false,(int)TypeIndex.Grass)},
+            {"LeafBlade", new PokemonAttackInfo(90,40,60,500f,false,false,(int)TypeIndex.Grass, contact: true)},
             {"LeafStorm", new PokemonAttackInfo(130,40,60,800f,false,false,(int)TypeIndex.Grass, true)},
             {"LeechSeed", new PokemonAttackInfo(0,50,80,800f,false,false,(int)TypeIndex.Grass)},
             {"MagicalLeaf", new PokemonAttackInfo(60,60,60,500f,false,true,(int)TypeIndex.Grass, true)},
@@ -630,7 +630,7 @@ namespace Pokemod.Content.NPCs
             {"MudShot", new PokemonAttackInfo(55,45,60,800f,false,false,(int)TypeIndex.Ground, true)},
             {"MudSlap", new PokemonAttackInfo(20,45,60,500f,false,false,(int)TypeIndex.Ground, true)},
             {"NightShade", new PokemonAttackInfo(0,30,40,800f,true,true,(int)TypeIndex.Ghost, true)},
-            {"NightSlash", new PokemonAttackInfo(70,20,50,400f,false,false,(int)TypeIndex.Dark)},
+            {"NightSlash", new PokemonAttackInfo(70,20,50,400f,false,false,(int)TypeIndex.Dark, contact: true)},
             {"Overheat", new PokemonAttackInfo(130,60,60,400f,false,true,(int)TypeIndex.Fire, true)},
             {"PinMissile", new PokemonAttackInfo(25,30,60,800f,false,false,(int)TypeIndex.Bug)},
             {"PoisonPowder", new PokemonAttackInfo(0,20,60,800f,true,false,(int)TypeIndex.Poison, true)},
@@ -639,16 +639,16 @@ namespace Pokemod.Content.NPCs
             {"Psybeam", new PokemonAttackInfo(65,60,40,800f,false,true,(int)TypeIndex.Psychic, true)},
             {"Psychic", new PokemonAttackInfo(90,45,60,800f,false,true,(int)TypeIndex.Psychic, true)},
             {"PsychoCut", new PokemonAttackInfo(70,50,60,500f,true,true,(int)TypeIndex.Psychic)},
-            {"QuickAttack", new PokemonAttackInfo(40,30,20,400f,false,false,(int)TypeIndex.Normal)},
-            {"RapidSpin", new PokemonAttackInfo(50,60,30,40f,true,false,(int)TypeIndex.Normal)},
+            {"QuickAttack", new PokemonAttackInfo(40,30,20,400f,false,false,(int)TypeIndex.Normal, contact: true)},
+            {"RapidSpin", new PokemonAttackInfo(50,60,30,40f,true,false,(int)TypeIndex.Normal, contact: true)},
             {"RazorLeaf", new PokemonAttackInfo(55,45,30,800f,false,false,(int)TypeIndex.Grass)},
             {"Recover", new PokemonAttackInfo(0,90,60,800f,false,false,(int)TypeIndex.Normal)},
             {"RockSlide", new PokemonAttackInfo(75,45,60,500f,false,true,(int)TypeIndex.Rock)},
             {"RockThrow", new PokemonAttackInfo(50,30,60,700f,false,false,(int)TypeIndex.Rock)},
             {"SelfDestruct", new PokemonAttackInfo(200,32,60,100f,false,false,(int)TypeIndex.Normal)},
             {"ShadowBall", new PokemonAttackInfo(80,30,60,800f,false,true,(int)TypeIndex.Ghost, true)},
-            {"Slam", new PokemonAttackInfo(80,30,60,300f,false,false,(int)TypeIndex.Normal)},
-            {"Slash", new PokemonAttackInfo(70,20,50,350f,false,false,(int)TypeIndex.Normal)},
+            {"Slam", new PokemonAttackInfo(80,30,60,300f,false,false,(int)TypeIndex.Normal, contact: true)},
+            {"Slash", new PokemonAttackInfo(70,20,50,350f,false,false,(int)TypeIndex.Normal, contact: true)},
             {"SludgeBomb", new PokemonAttackInfo(90,45,60,800f,false,false,(int)TypeIndex.Poison, true)},
             {"Smokescreen", new PokemonAttackInfo(0,60,60,600f,true,false,(int)TypeIndex.Normal, true)},
             {"SolarBeam", new PokemonAttackInfo(120,60,120,800f,false,true,(int)TypeIndex.Grass, true)},
@@ -656,17 +656,17 @@ namespace Pokemod.Content.NPCs
             {"StoneEdge", new PokemonAttackInfo(100,45,90,800f,false,false,(int)TypeIndex.Rock)},
             {"StringShot", new PokemonAttackInfo(0,60,60,800f,false,false,(int)TypeIndex.Bug)},
             {"Swift", new PokemonAttackInfo(60,45,60,500f,true,true,(int)TypeIndex.Normal, true)},
-            {"Tackle", new PokemonAttackInfo(40,30,30,200f,false,false,(int)TypeIndex.Normal)},
+            {"Tackle", new PokemonAttackInfo(40,30,30,200f,false,false,(int)TypeIndex.Normal, contact: true)},
             {"Teleport", new PokemonAttackInfo(0,20,60,200f,false,false,(int)TypeIndex.Psychic)},
             {"Thunder", new PokemonAttackInfo(110,30,60,800f,false,false,(int)TypeIndex.Electric, true)},
             {"Thunderbolt", new PokemonAttackInfo(90,30,60,800f,true,false,(int)TypeIndex.Electric, true)},
             {"ThunderWave", new PokemonAttackInfo(0,40,60,800f,false,false,(int)TypeIndex.Electric, true)},
             {"Toxic", new PokemonAttackInfo(0,36,60,800f,false,true,(int)TypeIndex.Poison, true)},
-            {"VineWhip", new PokemonAttackInfo(45,80,20,140f,true,false,(int)TypeIndex.Grass)},
-            {"Waterfall", new PokemonAttackInfo(80,42,60,600f,false,true,(int)TypeIndex.Water)},
+            {"VineWhip", new PokemonAttackInfo(45,80,20,140f,true,false,(int)TypeIndex.Grass, contact: true)},
+            {"Waterfall", new PokemonAttackInfo(80,42,60,600f,false,true,(int)TypeIndex.Water, contact: true)},
             {"WaterGun", new PokemonAttackInfo(40,30,40,600f,false,false,(int)TypeIndex.Water, true)},
             {"WaterPulse", new PokemonAttackInfo(60,40,60,800f,false,true,(int)TypeIndex.Water, true)},
-            {"WingAttack", new PokemonAttackInfo(60,40,60,600f,false,false,(int)TypeIndex.Flying)},
+            {"WingAttack", new PokemonAttackInfo(60,40,60,600f,false,false,(int)TypeIndex.Flying, contact: true)},
         };
 
         public static string SetMoveTooltip(CaughtPokemonItem pokemon, string moveName)
@@ -811,8 +811,9 @@ namespace Pokemod.Content.NPCs
         public int attackType;
         public bool isSpecial;
         public bool shouldTargetAllies;
+        public bool contact;
 
-        public PokemonAttackInfo(int attackPower, int attackDuration, int cooldown, float distanceToAttack, bool canMove, bool canPassThroughWalls, int attackType, bool isSpecial = false, bool shouldTargetAllies = false)
+        public PokemonAttackInfo(int attackPower, int attackDuration, int cooldown, float distanceToAttack, bool canMove, bool canPassThroughWalls, int attackType, bool isSpecial = false, bool shouldTargetAllies = false, bool contact = false)
         {
             if (attackPower < 10) attackPower = 10;
             this.attackPower = attackPower;
@@ -824,6 +825,7 @@ namespace Pokemod.Content.NPCs
             this.attackType = attackType;
             this.isSpecial = isSpecial;
             this.shouldTargetAllies = shouldTargetAllies;
+            this.contact = contact;
         }
     }
 

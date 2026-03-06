@@ -85,12 +85,12 @@ namespace Pokemod.Content.Buffs
                         PokemonPetProjectile pokemonProj = targetPlayer.GetModPlayer<PokemonPlayer>().GetPokemonProjectile(0);
                         if(pokemonProj != null)
                         {
-                            PokemonAttack.HealEffect(pokemonProj, 5);
+                            PokemonAttack.HealEffect(pokemonProj, 5, true);
                         }
                     }
                     else
                     {
-                        PokemonAttack.HealEffect(targetPlayer, 2);
+                        PokemonAttack.HealEffect(targetPlayer, 2, true);
                     }
                 }
             }
@@ -146,12 +146,12 @@ namespace Pokemod.Content.Buffs
                         PokemonPetProjectile pokemonProj = targetPlayer.GetModPlayer<PokemonPlayer>().GetPokemonProjectile(0);
                         if(pokemonProj != null)
                         {
-                            PokemonAttack.HealEffect(pokemonProj, 5);
+                            PokemonAttack.HealEffect(pokemonProj, 5, true);
                         }
                     }
                     else
                     {
-                        PokemonAttack.HealEffect(targetPlayer, 2);
+                        PokemonAttack.HealEffect(targetPlayer, 2, true);
                     }
                 }
             }

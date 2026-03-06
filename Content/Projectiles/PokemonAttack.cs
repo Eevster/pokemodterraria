@@ -46,6 +46,8 @@ namespace Pokemod.Content.Projectiles
 
 		public virtual bool CanExistIfNotActualMove => true;
 
+		private bool healed = false;
+
         public override void SetDefaults()
         {
 			Projectile.DamageType = ModContent.GetInstance<PokemonDamageClass>();
@@ -162,7 +164,14 @@ namespace Pokemod.Content.Projectiles
 
 		public virtual void AfterHitTarget(Entity target, int damageDone)
 		{
-
+			if (!healed)
+			{
+				if(pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj)
+				{
+					HealEffect(pokemonPetProj, (int)(damageDone*0.1f), true);
+				}
+				healed = true;
+			}
 		}
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -225,8 +234,9 @@ namespace Pokemod.Content.Projectiles
 			
 		}
 
-		public static void HealEffect(Player player, int amount){
-			player.Heal(amount);
+		public static void HealEffect(Player player, int amount, bool hpSteal = false){
+			if(player.GetModPlayer<PokemonPlayer>().HasBigRoot <= 0) hpSteal = false;
+			player.Heal(hpSteal?(amount+1):amount);
 
 			for(int i = 0; i < 15; i++){
 				int dustIndex = Dust.NewDust(player.Center-0.5f*new Vector2(player.width,player.height), player.width, player.height, DustID.DryadsWard, 0f, 0f, 200, default(Color), 1f);
@@ -234,8 +244,9 @@ namespace Pokemod.Content.Projectiles
 			}
 		}
 
-		public static void HealEffect(PokemonPetProjectile pokemon, int amount){
-			pokemon.regenHP(amount);
+		public static void HealEffect(PokemonPetProjectile pokemon, int amount, bool hpSteal = false){
+			if(Main.player[pokemon.Projectile.owner].GetModPlayer<PokemonPlayer>().HasBigRoot <= 0) hpSteal = false;
+			pokemon.regenHP(hpSteal?(amount+2):amount);
 
 			for(int i = 0; i < 15; i++){
 				int dustIndex = Dust.NewDust(pokemon.Projectile.Center-0.5f*new Vector2(pokemon.Projectile.width,pokemon.Projectile.height), pokemon.Projectile.width, pokemon.Projectile.height, DustID.DryadsWard, 0f, 0f, 200, default(Color), 1f);
@@ -243,8 +254,9 @@ namespace Pokemod.Content.Projectiles
 			}
 		}
 
-		public static void HealEffect(PokemonPetProjectile pokemon, float percent){
-			pokemon.regenPercentHP(percent);
+		public static void HealEffect(PokemonPetProjectile pokemon, float percent, bool hpSteal = false){
+			if(Main.player[pokemon.Projectile.owner].GetModPlayer<PokemonPlayer>().HasBigRoot <= 0) hpSteal = false;
+			pokemon.regenPercentHP(hpSteal?(percent*1.2f):percent);
 
 			for(int i = 0; i < 15; i++){
 				int dustIndex = Dust.NewDust(pokemon.Projectile.Center-0.5f*new Vector2(pokemon.Projectile.width,pokemon.Projectile.height), pokemon.Projectile.width, pokemon.Projectile.height, DustID.DryadsWard, 0f, 0f, 200, default(Color), 1f);

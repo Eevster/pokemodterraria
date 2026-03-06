@@ -918,7 +918,11 @@ Items: {
 
 	TrainerGlove: {
 		DisplayName: Trainer Glove
-		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			'''
 	}
 
 	ChikoritaCritterItem: {
@@ -997,7 +1001,7 @@ Items: {
 
 	BlackBeltItem: {
 		DisplayName: Black Belt
-		Tooltip: An Item to be held by the player, it increases the users Pokemon Attack Damage
+		Tooltip: "{$CommonItemTooltip.PokemonTypeDamageBoost}"
 	}
 
 	FireStoneHelmet: {
@@ -1109,12 +1113,12 @@ Items: {
 
 	AssaultVestItem: {
 		DisplayName: Assault Vest
-		Tooltip: ""
+		Tooltip: Increases your Pokemon's Defense and Special Defense by 20%
 	}
 
 	ExpertBeltItem: {
 		DisplayName: Expert Belt
-		Tooltip: ""
+		Tooltip: Increases the damage of moves of the same type as your Pokemon by 10%
 	}
 
 	KingsRockItem: {
@@ -2228,7 +2232,7 @@ Items: {
 	}
 
 	ShellBell: {
-		Tooltip: ""
+		Tooltip: When your Pokemon deals damage using a contact move, it heals a percentage of the damage dealt
 		DisplayName: Shell Bell
 	}
 
@@ -2362,7 +2366,7 @@ Items: {
 
 	MuscleBand: {
 		DisplayName: Muscle Band
-		Tooltip: Increases the damage of physical moves by 10%
+		Tooltip: Increases the damage of contact moves by 10%
 	}
 
 	BigRoot: {
@@ -2371,7 +2375,7 @@ Items: {
 	}
 
 	IceStoneItem: {
-		DisplayName: Ice Stone Item
+		DisplayName: Ice Stone
 		Tooltip:
 			'''
 			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
@@ -2381,27 +2385,50 @@ Items: {
 
 	GreatTrainerGlove: {
 		DisplayName: Great Trainer Glove
-		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			'''
 	}
 
 	HyperTrainerGlove: {
 		DisplayName: Hyper Trainer Glove
-		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			'''
 	}
 
 	GreenTrainerGlove: {
 		DisplayName: Green Trainer Glove
-		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage and you get the Honey buff
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			Trainer gets the Honey buff
+			'''
 	}
 
 	RedTrainerGlove: {
 		DisplayName: Red Trainer Glove
-		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage and has a 20% chance of inflicting the On Fire! debuff
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			20% chance of inflicting the On Fire! debuff
+			'''
 	}
 
 	BlueTrainerGlove: {
 		DisplayName: Blue Trainer Glove
-		Tooltip: When your Pokemon hits an enemy within a radius of {0} blocks, it does {1} more damage and has a 20% chance of inflicting the Frostburn debuff
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			20% chance of inflicting the Frostburn debuff
+			'''
 	}
 }
 

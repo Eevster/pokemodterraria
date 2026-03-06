@@ -278,11 +278,14 @@ namespace Pokemod.Content.Pets
 		public void UpdateStats(){
 			currentLevelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
 			finalStats = PokemonNPCData.CalcAllStats(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().GetClampedLevel(pokemonLvl), baseStats, IVs, EVs, nature);
-			if(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasEviolite > 0 && evolutions.Length > 0)
+
+			var trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+
+			for(int i = 0; i < finalStats.Length; i++)
 			{
-				finalStats[2] = (int)(finalStats[2]*1.5f);
-				finalStats[4] = (int)(finalStats[4]*1.5f);
+				finalStats[i] = (int)(finalStats[i]*(trainer.statMult[i]+((trainer.HasEviolite > 0 && evolutions.Length > 0 && (i == 2 || i == 4))?0.5f:0f)));
 			}
+
 			//Main.NewText("LevelCap: "+currentLevelCap+"  ["+finalStats[0]+","+finalStats[1]+","+finalStats[2]+","+finalStats[3]+","+finalStats[4]+","+finalStats[5]+"]"); 
 		}
 
@@ -312,11 +315,16 @@ namespace Pokemod.Content.Pets
 			int power = PokemonData.pokemonAttacks[attackName].attackPower;
 			bool special = PokemonData.pokemonAttacks[attackName].isSpecial;
 			int attackType = PokemonData.pokemonAttacks[attackName].attackType;
-			float multiplier = PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains(attackType)?1.5f:1f;
-			if (attackType >= 0 && attackType < 18)
-			{
-				multiplier *= Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().typeMult[PokemonData.pokemonAttacks[attackName].attackType];
-			}
+			float multiplier = 1f;
+
+			var trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+
+			//Stab
+			multiplier *= PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains(attackType)?(1f+trainer.stabAdd):1f;
+			//TypeMult
+			if (attackType >= 0 && attackType < 18) multiplier *= trainer.typeMult[PokemonData.pokemonAttacks[attackName].attackType];
+			//ContactMult
+			if (PokemonData.pokemonAttacks[attackName].contact) multiplier *= trainer.contactMult;
 
 			return GetPokemonDamage(power, special, multiplier);
 		}

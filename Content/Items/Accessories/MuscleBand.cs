@@ -16,7 +16,7 @@ namespace Pokemod.Content.Items.Accessories
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual) {
-			
+			player.GetModPlayer<PokemonPlayer>().contactMult += 0.1f;
 		}
 
 		public override void AddRecipes()
