@@ -1,10 +1,17 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Assets",
+    "\\Assets\\Textures",
+    "\\Assets\\Textures\\Pokesprites",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
-    "\\Content\\Items",
-    "\\Content\\Items\\TrainerGear"
+    "\\Content\\NPCs",
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen2",
+    "\\Content\\Pets",
+    "\\Content\\Pets\\MareepPet"
   ],
-  "SelectedNode": "\\Content\\Items\\TrainerGear\\HyperTrainerGlove.cs",
+  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets\\FlaaffyPetProjectile.png",
   "PreviewInSolutionExplorer": false
 }
