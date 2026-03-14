@@ -23,7 +23,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
             base.SetBestiary(database, bestiaryEntry);
         }
-	}
+        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        {
+            if (spawnInfo.Player.ZoneUndergroundDesert)
+            {
+                return GetSpawnChance(spawnInfo, SpawnCondition.DesertCave.Chance * 0.00000000000001f);
+            }
+
+            return 0f;
+        }
+    }
 
 	public class ZeraoraCritterNPCShiny : ZeraoraCritterNPC{}
 }

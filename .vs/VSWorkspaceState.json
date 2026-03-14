@@ -3,15 +3,13 @@
     "",
     "\\Assets",
     "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites",
-    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
     "\\Content\\NPCs",
     "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen2",
-    "\\Content\\Pets",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen1",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen7",
     "\\Content\\Pets\\MareepPet"
   ],
-  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets\\FlaaffyPetProjectile.png",
+  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\Gen1\\DratiniCritter.cs",
   "PreviewInSolutionExplorer": false
 }
