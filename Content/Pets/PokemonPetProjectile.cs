@@ -989,6 +989,9 @@ namespace Pokemod.Content.Pets
 							directionMod = -1f;
 						}
 					}
+
+					if(dynamax) speed = 0;
+					
                     Vector2 direction = targetCenter - Projectile.Center;
                     direction.Normalize();
                     direction *= speedMultiplier * speed * directionMod;
@@ -1182,6 +1185,8 @@ namespace Pokemod.Content.Pets
 						}
 					}
 				}
+
+				if(dynamax) speed = 0;
 
 				if (distanceToIdlePosition > 80f)
 				{

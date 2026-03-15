@@ -11,6 +11,7 @@ using Terraria.ModLoader;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Items.Accessories.Gems;
 using Pokemod.Common.Configs;
+using Pokemod.Content.Buffs;
 
 namespace Pokemod.Common.GlobalNPCs
 {
@@ -18,6 +19,8 @@ namespace Pokemod.Common.GlobalNPCs
 	{
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
         {
+            if(player.HasBuff<PokemonRepel>()) return;
+
             float multiplier = ModContent.GetInstance<GameplayConfig>().PokemonSpawnMultiplier;
             multiplier = 2f + (multiplier-1f)*0.5f;
 
