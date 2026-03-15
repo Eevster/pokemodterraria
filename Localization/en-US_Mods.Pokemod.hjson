@@ -515,8 +515,12 @@ Projectiles: {
 	AlolanSandshrewPetProjectileShiny.DisplayName: Alolan Sandshrew Pet Projectile Shiny
 	AlolanSandslashPetProjectile.DisplayName: Alolan Sandslash Pet Projectile
 	AlolanSandslashPetProjectileShiny.DisplayName: Alolan Sandslash Pet Projectile Shiny
-	MareepPetProjectileShiny.DisplayName: Mareep Pet Projectile Shiny
+	AmpharosPetProjectile.DisplayName: Ampharos Pet Projectile
+	AmpharosPetProjectileShiny.DisplayName: Ampharos Pet Projectile Shiny
+	FlaaffyPetProjectile.DisplayName: Flaaffy Pet Projectile
+	FlaaffyPetProjectileShiny.DisplayName: Flaaffy Pet Projectile Shiny
 	MareepPetProjectile.DisplayName: Mareep Pet Projectile
+	MareepPetProjectileShiny.DisplayName: Mareep Pet Projectile Shiny
 }
 
 Items: {
@@ -5361,6 +5365,10 @@ NPCs: {
 
 	G1T1_Brock.DisplayName: Rock-type Gym Leader
 	G1T2_Misty.DisplayName: Water-type Gym Leader
+	AmpharosCritterNPC.DisplayName: Ampharos Critter N P C
+	AmpharosCritterNPCShiny.DisplayName: Ampharos Critter N P C Shiny
+	FlaaffyCritterNPC.DisplayName: Flaaffy Critter N P C
+	FlaaffyCritterNPCShiny.DisplayName: Flaaffy Critter N P C Shiny
 }
 
 Bestiary: {
@@ -5702,7 +5710,7 @@ Configs: {
 
 		AddedContentStatScaling: {
 			Label: Pokemon Stat Scaling
-			Tooltip: Used to make Pokemod more compatible with other mods which add post-game content. (Value of 1 recommended for Calamity, changes most notable beyond level 50)
+			Tooltip: Used to make Pokemod more compatible with other mods which add post-game content. (Value of 0.7 recommended for Calamity, changes most notable beyond level 50)
 		}
 	}
 
