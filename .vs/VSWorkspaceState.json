@@ -1,10 +1,15 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Assets",
+    "\\Assets\\Textures",
     "\\Content",
-    "\\Content\\Items",
-    "\\Content\\Items\\TrainerGear"
+    "\\Content\\NPCs",
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen1",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen7",
+    "\\Content\\Pets\\MareepPet"
   ],
-  "SelectedNode": "\\Content\\Items\\TrainerGear\\HyperTrainerGlove.cs",
+  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\Gen1\\DratiniCritter.cs",
   "PreviewInSolutionExplorer": false
 }

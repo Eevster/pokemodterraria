@@ -12,7 +12,7 @@ namespace Pokemod.Content.Pets.MareepPet
 		public override int hitboxWidth => 75;
 		public override int hitboxHeight => 60;
 
-        public override int totalFrames => 22;
+        public override int totalFrames => 23;
         public override int animationSpeed => 8;
         public override int[] idleStartEnd => [0, 6];
         public override int[] walkStartEnd => [6, 15];
