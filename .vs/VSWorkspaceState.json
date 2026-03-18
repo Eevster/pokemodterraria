@@ -2,14 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Textures",
+    "\\Assets\\Textures\\Pokesprites",
     "\\Content",
     "\\Content\\NPCs",
     "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen1",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen7",
-    "\\Content\\Pets\\MareepPet"
+    "\\Content\\NPCs\\PokemonNPCs\\Gen7"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\Gen1\\DratiniCritter.cs",
+  "SelectedNode": "\\description.txt",
   "PreviewInSolutionExplorer": false
 }
