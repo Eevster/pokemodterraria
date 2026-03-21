@@ -3,12 +3,14 @@
     "",
     "\\Assets",
     "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites",
-    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
     "\\Content\\NPCs",
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen2",
     "\\Content\\Pets",
+    "\\Content\\Pets\\AmpharosPet",
     "\\Content\\Pets\\MareepPet"
   ],
+  "SelectedNode": "\\Content\\Pets\\AmpharosPet\\AmpharosPetProjectile.cs",
   "PreviewInSolutionExplorer": false
 }
