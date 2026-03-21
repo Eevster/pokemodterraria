@@ -2,12 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
+    "\\Assets\\Textures",
     "\\Assets\\Textures\\Pokesprites",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
     "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen7"
+    "\\Content\\Pets",
+    "\\Content\\Pets\\MareepPet"
   ],
-  "SelectedNode": "\\description.txt",
   "PreviewInSolutionExplorer": false
 }

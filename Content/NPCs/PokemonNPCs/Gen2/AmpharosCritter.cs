@@ -7,16 +7,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class AmpharosCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 80;
+		public override int hitboxHeight => 65;
 
-		public override int totalFrames => 4;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
-        public override int[] attackStartEnd => [9, 9];
+		public override int totalFrames => 30;
+		public override int animationSpeed => 8;
+		public override int[] idleStartEnd => [0,10];
+		public override int[] walkStartEnd => [24,29];
+		public override int[] jumpStartEnd => [10,15];
+		public override int[] fallStartEnd => [12,15];
+        public override int[] attackStartEnd => [15, 23];
         public override float catchRate => 45;
         public override int minLevel => 30;
 
