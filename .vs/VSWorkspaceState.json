@@ -2,15 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Textures",
-    "\\Content",
-    "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen2",
-    "\\Content\\Pets",
-    "\\Content\\Pets\\AmpharosPet",
-    "\\Content\\Pets\\MareepPet"
+    "\\Common",
+    "\\Common\\Configs",
+    "\\Common\\Systems",
+    "\\Content"
   ],
-  "SelectedNode": "\\Content\\Pets\\AmpharosPet\\AmpharosPetProjectile.cs",
+  "SelectedNode": "\\Common\\Systems\\PokemonTypeChart.cs",
   "PreviewInSolutionExplorer": false
 }
