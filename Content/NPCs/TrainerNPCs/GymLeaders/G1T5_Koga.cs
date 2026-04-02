@@ -10,17 +10,18 @@ using Terraria.Utilities;
 
 namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 {
-	public class G1T4_Erika : BattleTrainer
+	public class G1T5_Koga : BattleTrainer
 	{
-        public override bool isWoman => true;
+        
         public override bool GymLeader => true;
 		public override void LoadTeam()
 		{
 			pokemonTeam =
             [
-                new EnemyPokemonInfo("Victreebel", 29, ["Slam", "RazorLeaf", "PoisonSting", "BulletSeed"]),
-                new EnemyPokemonInfo("Tangela", 24, ["VineWhip", "MegaDrain", "PoisonPowder", "AncientPower"]),
-                new EnemyPokemonInfo("Vileplume", 29, ["GigaDrain", "GigaDrain", "GigaDrain", "GigaDrain"]),
+                new EnemyPokemonInfo("Koffing", 37, ["Crunch", "SelfDestruct", "SludgeBomb", "Toxic"]),
+                new EnemyPokemonInfo("Muk", 39, ["VineWhip", "MegaDrain", "PoisonPowder", "AncientPower"]),
+                new EnemyPokemonInfo("Koffing", 37, ["Crunch", "SelfDestruct", "SludgeBomb", "Toxic"]),
+                new EnemyPokemonInfo("Weezing", 43, ["SludgeBomb", "SludgeBomb", "SludgeBomb", "SludgeBomb"]),
             ];
 		}
 
@@ -41,7 +42,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement($"Mods.Pokemod.Bestiary.{GetType().Name}"),
 			});
 		}
@@ -49,13 +50,13 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		public override List<string> SetNPCNameList()
 		{
 			return new List<string> {
-				"Erika",
+				"Koga",
 			};
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if ((spawnInfo.Player.ZoneForest) && !NPC.AnyNPCs(Type))
+			if ((spawnInfo.Player.ZoneJungle) && !NPC.AnyNPCs(Type))
 			{
 				return 0.1f;
 			}

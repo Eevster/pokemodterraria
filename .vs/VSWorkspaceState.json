@@ -2,11 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Common",
-    "\\Common\\Configs",
-    "\\Common\\Systems",
-    "\\Content"
+    "\\Content",
+    "\\Content\\NPCs",
+    "\\Content\\NPCs\\TrainerNPCs",
+    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
   ],
-  "SelectedNode": "\\Common\\Systems\\PokemonTypeChart.cs",
+  "SelectedNode": "\\Content\\NPCs\\TrainerNPCs\\GymLeaders\\G1T4_Erika.cs",
   "PreviewInSolutionExplorer": false
 }
