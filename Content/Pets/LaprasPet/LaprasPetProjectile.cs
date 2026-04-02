@@ -12,20 +12,20 @@ namespace Pokemod.Content.Pets.LaprasPet
 		public override int hitboxWidth => 60;
 		public override int hitboxHeight => 62;
 
-		public override int totalFrames => 23;
-		public override int animationSpeed => 14;
-		public override int[] idleStartEnd => [0, 7];
-		public override int[] walkStartEnd => [8, 11];
-		public override int[] jumpStartEnd => [0, 0];
-		public override int[] fallStartEnd => [19, 19];
+		public override int totalFrames => 18;
+		public override int animationSpeed => 12;
+		public override int[] idleStartEnd => [0, 3];
+		public override int[] walkStartEnd => [4, 7];
+		public override int[] jumpStartEnd => [4, 4];
+		public override int[] fallStartEnd => [5, 5];
 		
-		public override int[] attackStartEnd => [12,12];
+		public override int[] attackStartEnd => [8,8];
 		
 		public override bool canSwim => true;
 
-		public override int[] idleSwimStartEnd => [13,16];
-		public override int[] walkSwimStartEnd => [17,21];
-		public override int[] attackSwimStartEnd => [22,22];
+		public override int[] idleSwimStartEnd => [9,12];
+		public override int[] walkSwimStartEnd => [13,16];
+		public override int[] attackSwimStartEnd => [17,17];
 	}
 
 	public class LaprasPetProjectileShiny : LaprasPetProjectile{}
