@@ -5013,6 +5013,16 @@ NPCs: {
 		Description: Its fluffy coat doubles in size when static electricity builds up. Touching it can be shocking.
 	}
 
+	FlaaffyCritterNPC:{
+		DisplayName: Flaaffy
+		Description: ""
+	}
+
+	AmpharosCritterNPC:{
+		DisplayName: Ampharos
+		Description: ""
+	}
+
 	MarillCritterNPC: {
 		DisplayName: Marill
 		Description: Using its tail as a float, it dives underwater. It likes eating plants that grow in riverbeds.
@@ -5286,8 +5296,12 @@ NPCs: {
 	WigglytuffCritterNPCShiny.DisplayName: Wigglytuff Shiny
 	ZapdosCritterNPCShiny.DisplayName: Zapdos Shiny
 	ZubatCritterNPCShiny.DisplayName: Zubat Shiny
+	PichuCritterNPCShiny.DisplayName: Pichu Shiny
 	CleffaCritterNPCShiny.DisplayName: Cleffa Shiny
 	EspeonCritterNPCShiny.DisplayName: Espeon Shiny
+	AmpharosCritterNPCShiny.DisplayName: Ampharos Shiny
+	FlaaffyCritterNPCShiny.DisplayName: Flaaffy Shiny
+	MarillCritterNPCShiny.DisplayName: Marill Shiny
 	SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Shiny
 	UmbreonCritterNPCShiny.DisplayName: Umbreon Shiny
 	UnownCritterNPCShiny.DisplayName: Unown Shiny
@@ -5384,12 +5398,9 @@ NPCs: {
 
 	G1T1_Brock.DisplayName: Rock-type Gym Leader
 	G1T2_Misty.DisplayName: Water-type Gym Leader
-	AmpharosCritterNPC.DisplayName: Ampharos Critter N P C
-	AmpharosCritterNPCShiny.DisplayName: Ampharos Critter N P C Shiny
-	FlaaffyCritterNPC.DisplayName: Flaaffy Critter N P C
-	FlaaffyCritterNPCShiny.DisplayName: Flaaffy Critter N P C Shiny
-	PichuCritterNPCShiny.DisplayName: Pichu Critter N P C Shiny
-	MarillCritterNPCShiny.DisplayName: Marill Critter N P C Shiny
+	G1T3_LtSurge.DisplayName: G1 T3_ Lt Surge
+	G1T4_Erika.DisplayName: G1 T4_ Erika
+	G1T5_Koga.DisplayName: G1 T5_ Koga
 }
 
 Bestiary: {

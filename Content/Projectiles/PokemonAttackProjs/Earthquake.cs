@@ -91,7 +91,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 NPC npc = Main.npc[i];
                 if (npc.CanBeChasedBy() && npc.life > 0)
                 {
-                    if ((npc.Center - Projectile.Center).Length() < PokemonData.pokemonAttacks["Psychic"].distanceToAttack)
+                    if ((npc.Center - Projectile.Center).Length() < PokemonData.pokemonAttacks["Earthquake"].distanceToAttack)
                     {
                         if (Collision.SolidCollision(npc.BottomLeft, npc.width, 4))
                         {
@@ -102,7 +102,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
 
             SoundEngine.PlaySound(SoundID.Item70, Projectile.Center);
-            PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 7f, 5f, 25, PokemonData.pokemonAttacks["Psychic"].distanceToAttack * 2f, FullName);
+            PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 7f, 5f, 25, PokemonData.pokemonAttacks["Earthquake"].distanceToAttack * 2f, FullName);
             Main.instance.CameraModifiers.Add(modifier);
 
             base.OnSpawn(source);

@@ -7,16 +7,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class FlaaffyCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 58;
+		public override int hitboxHeight => 55;
 
-		public override int totalFrames => 4;
+		public override int totalFrames => 36;
 		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
-        public override int[] attackStartEnd => [9, 9];
+		public override int[] idleStartEnd => [0,9];
+		public override int[] walkStartEnd => [26,35];
+		public override int[] jumpStartEnd => [9,14];
+		public override int[] fallStartEnd => [11,13];
+        public override int[] attackStartEnd => [14, 26];
         public override float catchRate => 120;
         public override int minLevel => 15;
 
