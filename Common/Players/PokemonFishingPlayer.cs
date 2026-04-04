@@ -22,6 +22,7 @@ namespace Pokemod.Common.Players
 				ModContent.NPCType<PoliwagCritterNPC>(),
 				ModContent.NPCType<ShellderCritterNPC>(),
 				ModContent.NPCType<StaryuCritterNPC>(),
+				ModContent.NPCType<MarillCritterNPC>(),
 				ModContent.NPCType<DratiniCritterNPC>(),
 			};
 
@@ -31,11 +32,12 @@ namespace Pokemod.Common.Players
 				ModContent.NPCType<PoliwagCritterNPCShiny>(),
 				ModContent.NPCType<ShellderCritterNPCShiny>(),
 				ModContent.NPCType<StaryuCritterNPCShiny>(),
+				ModContent.NPCType<MarillCritterNPCShiny>(),
 				ModContent.NPCType<DratiniCritterNPCShiny>(),
 			};
 
 			const int oldRodLimit = 1;
-			const int goodRodLimit = 4;
+			const int goodRodLimit = 5;
 
 			if (isPokemonFishingRod && inWater)
 			{

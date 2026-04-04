@@ -19,19 +19,22 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackStartEnd => [9,9];
         public override float catchRate => 180;
 
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Surface, (int)DayTimeStatus.Night, (int)WeatherStatus.All]
+        ];
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.9f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.3f);
 			}
 
 			return 0f;
 		}
-
-		
 	}
 
 	public class CleffaCritterNPCShiny : CleffaCritterNPC { }

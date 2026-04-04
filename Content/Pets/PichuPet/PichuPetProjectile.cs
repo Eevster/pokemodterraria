@@ -6,12 +6,12 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.PikachuPet
+namespace Pokemod.Content.Pets.PichuPet
 {
-	public class PikachuPetProjectile : PokemonPetProjectile
+	public class PichuPetProjectile : PokemonPetProjectile
 	{
 		public override int hitboxWidth => 16;
-		public override int hitboxHeight => 24;
+		public override int hitboxHeight => 16;
 
 		public override int totalFrames => 26;
 		public override int animationSpeed => 5;
@@ -21,9 +21,9 @@ namespace Pokemod.Content.Pets.PikachuPet
 		public override int[] fallStartEnd => [13,15];
 		public override int[] attackStartEnd => [18,25];
 
-		public override string[] evolutions => ["Raichu"];
-		public override string[] itemToEvolve => ["ThunderStoneItem"];
+		public override string[] evolutions => ["Pichu"];
+		public override string[] specialConditionToEvolve => ["Happiness"];
 	}
 
-	public class PikachuPetProjectileShiny : PikachuPetProjectile{}
+	public class PichuPetProjectileShiny : PichuPetProjectile{}
 }

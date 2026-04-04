@@ -6,15 +6,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class EeveeCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 22;
-		public override int hitboxHeight => 30;
+		public override int hitboxWidth => 20;
+		public override int hitboxHeight => 20;
 
-		public override int totalFrames => 18;
+		public override int totalFrames => 19;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,8];
 		public override int[] walkStartEnd => [9,17];
-		public override int[] jumpStartEnd => [12,12];
-		public override int[] fallStartEnd => [15,15];
+		public override int[] jumpStartEnd => [9,10];
+		public override int[] fallStartEnd => [12,14];
+		public override int[] attackStartEnd => [18,18];
 		
 		public override int[][] spawnConditions =>
 		[

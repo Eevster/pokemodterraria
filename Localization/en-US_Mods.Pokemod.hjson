@@ -521,6 +521,10 @@ Projectiles: {
 	FlaaffyPetProjectileShiny.DisplayName: Flaaffy Pet Projectile Shiny
 	MareepPetProjectile.DisplayName: Mareep Pet Projectile
 	MareepPetProjectileShiny.DisplayName: Mareep Pet Projectile Shiny
+	PichuPetProjectileShiny.DisplayName: Pichu Pet Projectile Shiny
+	PichuPetProjectile.DisplayName: Pichu Pet Projectile
+	MarillPetProjectileShiny.DisplayName: Marill Pet Projectile Shiny
+	MarillPetProjectile.DisplayName: Marill Pet Projectile
 }
 
 Items: {
@@ -4994,6 +4998,11 @@ NPCs: {
 		Description: Even though it has no eyes, it can sense obstacles using ultrasonic waves it emits from its mouth.
 	}
 
+	PichuCritterNPC: {
+		DisplayName: Pichu
+		Description: The electric sacs on its cheeks are still small. They cannot store much electricity yet.
+	}
+
 	CleffaCritterNPC: {
 		DisplayName: Cleffa
 		Description: Its silhouette is like a star. It is believed to arrive riding on shooting stars.
@@ -5002,6 +5011,16 @@ NPCs: {
 	MareepCritterNPC: {
 		DisplayName: Mareep
 		Description: Its fluffy coat doubles in size when static electricity builds up. Touching it can be shocking.
+	}
+
+	MarillCritterNPC: {
+		DisplayName: Marill
+		Description: Using its tail as a float, it dives underwater. It likes eating plants that grow in riverbeds.
+	}
+
+	AzumarillCritterNPC: {
+		DisplayName: Azumarill
+		Description: It lives in rivers and lakes. In water, its coloring and patterns trick the vision of foes.
 	}
 
 	SudowoodoCritterNPC: {
@@ -5369,6 +5388,8 @@ NPCs: {
 	AmpharosCritterNPCShiny.DisplayName: Ampharos Critter N P C Shiny
 	FlaaffyCritterNPC.DisplayName: Flaaffy Critter N P C
 	FlaaffyCritterNPCShiny.DisplayName: Flaaffy Critter N P C Shiny
+	PichuCritterNPCShiny.DisplayName: Pichu Critter N P C Shiny
+	MarillCritterNPCShiny.DisplayName: Marill Critter N P C Shiny
 }
 
 Bestiary: {

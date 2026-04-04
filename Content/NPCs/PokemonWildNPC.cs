@@ -351,6 +351,7 @@ namespace Pokemod.Content.NPCs
 			int initialFrame = 0;
 			int finalFrame = 0;
 			int frameSpeed = animationSpeed;
+			bool isLoop = true;
 
 			if(isSwimming){
 				switch(AI_State){
@@ -398,10 +399,12 @@ namespace Pokemod.Content.NPCs
 					case (int)NPCStatus.Jump:
 						initialFrame = jumpStartEnd[0];
 						finalFrame = jumpStartEnd[1];
+						isLoop = false;
 						break;
 					case (int)NPCStatus.Fall:
 						initialFrame = fallStartEnd[0];
 						finalFrame = fallStartEnd[1];
+						isLoop = false;
 						break;
 					case (int)NPCStatus.Attack:
 						initialFrame = attackStartEnd[0];
@@ -426,7 +429,8 @@ namespace Pokemod.Content.NPCs
 				currentFrame++;
 
 				if (currentFrame > finalFrame) {
-					currentFrame = initialFrame;
+					if(isLoop) currentFrame = initialFrame;
+					else currentFrame--;
 				}
 			}
 

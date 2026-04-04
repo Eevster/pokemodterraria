@@ -5,10 +5,10 @@ using Terraria.ModLoader.Utilities;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
-	public class PikachuCritterNPC : PokemonWildNPC
+	public class PichuCritterNPC : PokemonWildNPC
 	{
 		public override int hitboxWidth => 16;
-		public override int hitboxHeight => 24;
+		public override int hitboxHeight => 16;
 
 		public override int totalFrames => 26;
 		public override int animationSpeed => 5;
@@ -34,12 +34,12 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		{
 			if (spawnInfo.Player.ZoneForest)
 			{
-				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.1f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.08f);
 			}
 
 			return 0f;
 		}
 	}
 
-	public class PikachuCritterNPCShiny : PikachuCritterNPC{}
+	public class PichuCritterNPCShiny : PichuCritterNPC{}
 }
