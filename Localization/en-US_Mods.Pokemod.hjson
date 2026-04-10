@@ -521,6 +521,8 @@ Projectiles: {
 	FlaaffyPetProjectileShiny.DisplayName: Flaaffy Pet Projectile Shiny
 	MareepPetProjectile.DisplayName: Mareep Pet Projectile
 	MareepPetProjectileShiny.DisplayName: Mareep Pet Projectile Shiny
+	HoppipPetProjectileShiny.DisplayName: Hoppip Pet Projectile Shiny
+	HoppipPetProjectile.DisplayName: Hoppip Pet Projectile
 }
 
 Items: {
@@ -5372,6 +5374,8 @@ NPCs: {
 	G1T3_LtSurge.DisplayName: G1 T3_ Lt Surge
 	G1T4_Erika.DisplayName: G1 T4_ Erika
 	G1T5_Koga.DisplayName: G1 T5_ Koga
+	HoppipCritterNPCShiny.DisplayName: Hoppip Critter N P C Shiny
+	HoppipCritterNPC.DisplayName: Hoppip Critter N P C
 }
 
 Bestiary: {
