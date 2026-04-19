@@ -2,15 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites",
     "\\Content",
     "\\Content\\NPCs",
     "\\Content\\NPCs\\PokemonNPCs",
     "\\Content\\NPCs\\PokemonNPCs\\Gen2",
-    "\\Content\\Pets",
-    "\\Content\\Pets\\HoppipPet"
+    "\\Content\\Pets\\SkiploomPet"
   ],
-  "SelectedNode": "\\Content\\Pets\\HoppipPet\\HoppipPetProjectile.cs",
+  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\Gen2\\SkiploomCritter.cs",
   "PreviewInSolutionExplorer": false
 }
