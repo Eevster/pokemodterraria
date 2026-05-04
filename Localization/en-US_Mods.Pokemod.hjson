@@ -525,6 +525,8 @@ Projectiles: {
 	PichuPetProjectile.DisplayName: Pichu Pet Projectile
 	MarillPetProjectileShiny.DisplayName: Marill Pet Projectile Shiny
 	MarillPetProjectile.DisplayName: Marill Pet Projectile
+	AzumarillPetProjectileShiny.DisplayName: Azumarill Pet Projectile Shiny
+	AzumarillPetProjectile.DisplayName: Azumarill Pet Projectile
 }
 
 Items: {
@@ -5013,12 +5015,12 @@ NPCs: {
 		Description: Its fluffy coat doubles in size when static electricity builds up. Touching it can be shocking.
 	}
 
-	FlaaffyCritterNPC:{
+	FlaaffyCritterNPC: {
 		DisplayName: Flaaffy
 		Description: ""
 	}
 
-	AmpharosCritterNPC:{
+	AmpharosCritterNPC: {
 		DisplayName: Ampharos
 		Description: ""
 	}
@@ -5302,6 +5304,7 @@ NPCs: {
 	AmpharosCritterNPCShiny.DisplayName: Ampharos Shiny
 	FlaaffyCritterNPCShiny.DisplayName: Flaaffy Shiny
 	MarillCritterNPCShiny.DisplayName: Marill Shiny
+	AzumarillCritterNPCShiny.DisplayName: Azumarill Shiny
 	SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Shiny
 	UmbreonCritterNPCShiny.DisplayName: Umbreon Shiny
 	UnownCritterNPCShiny.DisplayName: Unown Shiny
@@ -5398,9 +5401,9 @@ NPCs: {
 
 	G1T1_Brock.DisplayName: Rock-type Gym Leader
 	G1T2_Misty.DisplayName: Water-type Gym Leader
-	G1T3_LtSurge.DisplayName: G1 T3_ Lt Surge
-	G1T4_Erika.DisplayName: G1 T4_ Erika
-	G1T5_Koga.DisplayName: G1 T5_ Koga
+	G1T3_LtSurge.DisplayName: Electric-type Gym Leader
+	G1T4_Erika.DisplayName: Grass-type Gym Leader
+	G1T5_Koga.DisplayName: Poison-type Gym Leader
 }
 
 Bestiary: {

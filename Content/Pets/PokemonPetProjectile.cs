@@ -189,6 +189,10 @@ namespace Pokemod.Content.Pets
 			writer.Write((double)expGained);
 			writer.Write(canFall);
 			writer.Write(isEnemy);
+			writer.Write(manualControl);
+			writer.Write(isMegaEvolving);
+			writer.Write(dynamax);
+			writer.Write((double)prevScale);
             base.SendExtraAI(writer);
         }
 
@@ -199,6 +203,11 @@ namespace Pokemod.Content.Pets
 			expGained = (int)reader.ReadDouble();
 			canFall = reader.ReadBoolean();
 			isEnemy = reader.ReadBoolean();
+			manualControl = reader.ReadBoolean();
+			isMegaEvolving = reader.ReadBoolean();
+			dynamax = reader.ReadBoolean();
+			prevScale = (float)reader.ReadDouble();
+			
             base.ReceiveExtraAI(reader);
         }
 

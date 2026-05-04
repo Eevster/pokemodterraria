@@ -525,6 +525,8 @@ Projectiles: {
 	// PichuPetProjectile.DisplayName: Pichu Pet Projectile
 	// MarillPetProjectileShiny.DisplayName: Marill Pet Projectile Shiny
 	// MarillPetProjectile.DisplayName: Marill Pet Projectile
+	// AzumarillPetProjectileShiny.DisplayName: Azumarill Pet Projectile Shiny
+	// AzumarillPetProjectile.DisplayName: Azumarill Pet Projectile
 }
 
 Items: {
@@ -5302,6 +5304,7 @@ NPCs: {
 	// AmpharosCritterNPCShiny.DisplayName: Ampharos Shiny
 	// FlaaffyCritterNPCShiny.DisplayName: Flaaffy Shiny
 	// MarillCritterNPCShiny.DisplayName: Marill Shiny
+	// AzumarillCritterNPCShiny.DisplayName: Azumarill Shiny
 	// SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Shiny
 	// UmbreonCritterNPCShiny.DisplayName: Umbreon Shiny
 	// UnownCritterNPCShiny.DisplayName: Unown Shiny

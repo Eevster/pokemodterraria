@@ -21,6 +21,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Main.projFrames[Projectile.type] = 6;
         }
 
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write((double)Projectile.scale);
+            writer.Write((double)Projectile.Opacity);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            Projectile.scale = (float)reader.ReadDouble();
+            Projectile.Opacity = (float)reader.ReadDouble();
+            base.ReceiveExtraAI(reader);
+        }
+
 		public override void SetDefaults()
         {
             Projectile.width = 162;
@@ -59,6 +73,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                         pokemonOwner.attackProjs[i].scale = scale;
                         pokemonOwner.attackProjs[i].frame += i%6;
                         pokemonOwner.attackProjs[i].timeLeft -= 3*(nProjs-1-i);
+                        pokemonOwner.attackProjs[i].netUpdate = true;
 						SoundEngine.PlaySound(SoundID.DD2_SonicBoomBladeSlash, pokemon.position);
                         pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
 						pokemonOwner.timer = pokemonOwner.attackDuration;

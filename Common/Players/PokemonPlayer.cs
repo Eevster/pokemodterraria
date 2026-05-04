@@ -189,6 +189,8 @@ namespace Pokemod.Common.Players
 
 			packet.Write((byte)attackMode);
 			packet.WriteVector2(attackPosition);
+			packet.Write(manualControl);
+			packet.Write(onBattle);
 
 			packet.Send(toWho, fromWho);
 		}
@@ -197,6 +199,8 @@ namespace Pokemod.Common.Players
 		{
 			attackMode = reader.ReadByte();
 			attackPosition = reader.ReadVector2();
+			manualControl = reader.ReadBoolean();
+			onBattle = reader.ReadBoolean();
 		}
 
 		public override void CopyClientState(ModPlayer targetCopy)
