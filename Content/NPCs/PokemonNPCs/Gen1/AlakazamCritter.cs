@@ -35,7 +35,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		{
 			if (spawnInfo.Player.ZoneForest)
 			{
-				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.1f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.005f);
 			}
 
 			return 0f;

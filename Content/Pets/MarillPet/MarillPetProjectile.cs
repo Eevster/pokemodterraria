@@ -26,6 +26,10 @@ namespace Pokemod.Content.Pets.MarillPet
 		public override int[] idleSwimStartEnd => [0,8];
 		public override int[] walkSwimStartEnd => [9,17];
 		public override int[] attackSwimStartEnd => [18,25];
+
+		public override string[] evolutions => ["Azumarill"];
+		public override int levelToEvolve => 18;
+		public override int levelEvolutionsNumber => 1;
 	}
 
 	public class MarillPetProjectileShiny : MarillPetProjectile{}

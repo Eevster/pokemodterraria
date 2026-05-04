@@ -4,9 +4,10 @@
     "\\Assets",
     "\\Content",
     "\\Content\\NPCs",
-    "\\Content\\NPCs\\TrainerNPCs",
-    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen2",
+    "\\Content\\Pets\\SkiploomPet"
   ],
-  "SelectedNode": "\\Content\\NPCs\\TrainerNPCs\\GymLeaders\\G1T4_Erika.cs",
+  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\Gen2\\SkiploomCritter.cs",
   "PreviewInSolutionExplorer": false
 }

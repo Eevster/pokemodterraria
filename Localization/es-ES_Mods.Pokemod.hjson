@@ -527,6 +527,10 @@ Projectiles: {
 	// MarillPetProjectile.DisplayName: Marill Pet Projectile
 	// AzumarillPetProjectileShiny.DisplayName: Azumarill Pet Projectile Shiny
 	// AzumarillPetProjectile.DisplayName: Azumarill Pet Projectile
+	// HoppipPetProjectileShiny.DisplayName: Hoppip Pet Projectile Shiny
+	// HoppipPetProjectile.DisplayName: Hoppip Pet Projectile
+	// SkiploomPetProjectile.DisplayName: Skiploom Pet Projectile
+	// SkiploomPetProjectileShiny.DisplayName: Skiploom Pet Projectile Shiny
 }
 
 Items: {
@@ -5017,12 +5021,22 @@ NPCs: {
 
 	FlaaffyCritterNPC: {
 		// DisplayName: Flaaffy
-		// Description: ""
+		// Description: If its coat becomes fully charged with electricity, its tail lights up. Flaaffy can fire hair that zaps on impact.
 	}
 
 	AmpharosCritterNPC: {
 		// DisplayName: Ampharos
-		// Description: ""
+		// Description: The tip of its tail shines brightly. In the olden days, people sent signals using the light from this Pokémon's tail.
+	}
+
+	HoppipCritterNPC: {
+		// DisplayName: Hoppip
+		// Description: They are blown adrift by winds. It is said that when Hoppip gather in fields and mountains, spring is on the way.
+	}
+
+	SkiploomCritterNPC: {
+		// DisplayName: Skiploom
+		// Description: It blooms when the weather warms. It floats in the sky to soak up as much sunlight as possible.
 	}
 
 	MarillCritterNPC: {
@@ -5310,6 +5324,8 @@ NPCs: {
 	// UnownCritterNPCShiny.DisplayName: Unown Shiny
 	// DelibirdCritterNPCShiny.DisplayName: Delibird Shiny
 	// MareepCritterNPCShiny.DisplayName: Mareep Shiny
+	// HoppipCritterNPCShiny.DisplayName: Hoppip Shiny
+	// SkiploomCritterNPCShiny.DisplayName: Skiploom Shiny
 	// MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	// CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
 	// RampardosCritterNPCShiny.DisplayName: Rampardos Shiny
@@ -5404,6 +5420,7 @@ NPCs: {
 	G1T3_LtSurge.DisplayName: Lider de gimnasio de tipo Eléctrico
 	G1T4_Erika.DisplayName: Lider de gimnasio de tipo Planta
 	G1T5_Koga.DisplayName: Lider de gimnasio de tipo Veneno
+	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 }
 
 Bestiary: {

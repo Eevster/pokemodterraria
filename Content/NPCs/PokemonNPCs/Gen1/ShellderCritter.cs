@@ -35,12 +35,12 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneSnow || spawnInfo.Player.ZoneBeach)
+			if (spawnInfo.Player.ZoneSnow)
 			{
 				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.4f);
 			}
 
-			return 0f;
+			return GetSpawnChance(spawnInfo, SpawnCondition.Ocean.Chance * 0.4f);
 		}
 		
 	}

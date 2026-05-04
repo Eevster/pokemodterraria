@@ -27,7 +27,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.2f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.OverworldNight.Chance * 0.01f);
 			}
 
 			return 0f;

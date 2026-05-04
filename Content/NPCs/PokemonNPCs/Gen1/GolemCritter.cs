@@ -35,7 +35,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		{
 			if (spawnInfo.Player.ZoneNormalUnderground || spawnInfo.Player.ZoneNormalCaverns)
 			{
-				return GetSpawnChance(spawnInfo, (SpawnCondition.Underground.Chance + SpawnCondition.Cavern.Chance) * 0.1f);
+				return GetSpawnChance(spawnInfo, (SpawnCondition.Underground.Chance + SpawnCondition.Cavern.Chance) * 0.005f);
 			}
 
 			return 0f;

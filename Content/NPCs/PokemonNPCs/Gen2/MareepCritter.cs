@@ -8,16 +8,16 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class MareepCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 48;
-		public override int hitboxHeight => 40;
+		public override int hitboxWidth => 20;
+		public override int hitboxHeight => 24;
 
 		public override int totalFrames => 26;
 		public override int animationSpeed => 8;
-		public override int[] idleStartEnd => [0,6];
-		public override int[] walkStartEnd => [6,15];
-		public override int[] jumpStartEnd => [6,15];
-		public override int[] fallStartEnd => [0,6];
-        public override int[] attackStartEnd => [16, 21];
+		public override int[] idleStartEnd => [0,4];
+		public override int[] walkStartEnd => [21,25];
+		public override int[] jumpStartEnd => [7,10];
+		public override int[] fallStartEnd => [0,2];
+        public override int[] attackStartEnd => [11, 20];
 
         public override float catchRate => 200;
 
@@ -35,7 +35,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		{
 			if (spawnInfo.Player.ZoneForest)
 			{
-				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.7f);
 			}
 
 			return 0f;

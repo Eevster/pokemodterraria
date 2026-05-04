@@ -25,7 +25,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackFlyStartEnd => [10, 14];
 
         public override float catchRate => 50;
-        public override int minLevel => 20;
+        public override int minLevel => 30;
 		
 		public override int[][] spawnConditions =>
 		[
@@ -42,7 +42,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		{
 			if (spawnInfo.Player.ZoneBeach)
 			{
-				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.2f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.01f);
 			}
 
 			return 0f;

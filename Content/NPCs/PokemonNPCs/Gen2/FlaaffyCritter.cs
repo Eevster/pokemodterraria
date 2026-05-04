@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class FlaaffyCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 58;
-		public override int hitboxHeight => 55;
+		public override int hitboxWidth => 24;
+		public override int hitboxHeight => 42;
 
 		public override int totalFrames => 36;
 		public override int animationSpeed => 5;

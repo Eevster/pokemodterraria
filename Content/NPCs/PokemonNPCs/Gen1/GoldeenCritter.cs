@@ -18,15 +18,19 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [0,3];
 		public override float catchRate => 225;
 
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneBeach) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
-			}
+				float chance = 0.4f;
+				return GetSpawnChance(spawnInfo, SpawnCondition.Ocean.Chance * chance) + GetSpawnChance(spawnInfo, SpawnCondition.CaveJellyfish.Chance * 0.5f * chance);
 			}
 
 			return 0f;

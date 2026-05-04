@@ -9,16 +9,16 @@ namespace Pokemod.Content.Pets.MareepPet
 {
 	public class MareepPetProjectile : PokemonPetProjectile
 	{
-		public override int hitboxWidth => 75;
-		public override int hitboxHeight => 60;
+		public override int hitboxWidth => 20;
+		public override int hitboxHeight => 24;
 
-        public override int totalFrames => 26;
-        public override int animationSpeed => 8;
-        public override int[] idleStartEnd => [0, 6];
-        public override int[] walkStartEnd => [6, 15];
-        public override int[] jumpStartEnd => [6, 15];
-        public override int[] fallStartEnd => [0, 6];
-        public override int[] attackStartEnd => [16, 21];
+		public override int totalFrames => 26;
+		public override int animationSpeed => 8;
+		public override int[] idleStartEnd => [0,4];
+		public override int[] walkStartEnd => [21,25];
+		public override int[] jumpStartEnd => [7,10];
+		public override int[] fallStartEnd => [0,2];
+        public override int[] attackStartEnd => [11, 20];
 
         public override string[] evolutions => ["Flaaffy"];
 		public override int levelToEvolve => 16;

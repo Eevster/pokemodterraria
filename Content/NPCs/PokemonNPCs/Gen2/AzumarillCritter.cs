@@ -39,7 +39,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneBeach) {
-                return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.3f);
+                return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.08f);
             }
 
 			return 0f;
