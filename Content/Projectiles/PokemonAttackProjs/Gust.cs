@@ -35,7 +35,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.penetrate = 3;
 
 			Projectile.usesLocalNPCImmunity = true;
-			Projectile.localNPCHitCooldown = 10;
+			Projectile.localNPCHitCooldown = 2;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
 
             base.SetDefaults();

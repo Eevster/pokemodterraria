@@ -30,7 +30,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             Projectile.timeLeft = 120;
 
-            Projectile.tileCollide = true;  
+            Projectile.tileCollide = false;  
             Projectile.penetrate = 1;
 
             Projectile.usesLocalNPCImmunity = true;

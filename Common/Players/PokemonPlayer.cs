@@ -208,13 +208,15 @@ namespace Pokemod.Common.Players
 			PokemonPlayer clone = (PokemonPlayer)targetCopy;
 			clone.attackMode = attackMode;
 			clone.attackPosition = attackPosition;
+			clone.manualControl = manualControl;
+			clone.onBattle = onBattle;
 		}
 
 		public override void SendClientChanges(ModPlayer clientPlayer)
 		{
 			PokemonPlayer clone = (PokemonPlayer)clientPlayer;
 
-			if (clone.attackMode != attackMode || clone.attackPosition != attackPosition)
+			if (clone.attackMode != attackMode || clone.attackPosition != attackPosition || clone.manualControl != manualControl || clone.onBattle != onBattle)
 				SyncPlayer(toWho: -1, fromWho: Main.myPlayer, newPlayer: false);
 		}
 
@@ -313,12 +315,16 @@ namespace Pokemod.Common.Players
 
 			if (manualControl && !onBattle)
 			{
-				if (currentActivePokemon.Count <= 0) manualControl = false;
+				if (currentActivePokemon.Count <= 0){
+					manualControl = false;
+				}
 				else
 				{
 					PokemonPetProjectile pokemonProj = GetPokemonProjectile(0);
 
-					if (pokemonProj != null && !pokemonProj.manualControl) manualControl = false;
+					if (pokemonProj != null && !pokemonProj.manualControl){
+						manualControl = false;
+					}
 				}
 			}
 

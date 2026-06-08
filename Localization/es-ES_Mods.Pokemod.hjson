@@ -5435,7 +5435,10 @@ Dialogue: {
 		StandardDialogue3: ¡Puedo darte todo lo que necesitas para comenzar tu viaje!
 	}
 
-	FishermanTrainer.StandardDialogue1: Hola, ¿te interesa la pesca?
+	FishermanTrainer: {
+		StandardDialogue1: Hola, ¿te interesa la pesca?
+		// DefeatedDialogue: What a disgrace! Beaten in my own fishing spot!
+	}
 
 	PokemonScientist: {
 		StandardDialogue1: Pareces alguien a quien le gusta cavar. ¡Solo puedo imaginar las maravillas que yacen bajo nuestros pies!
@@ -5461,8 +5464,35 @@ Dialogue: {
 		// Button: Learn Moves
 	}
 
-	G1T1_Brock.StandardDialogue1: ¡Creo en la defensa férrea y la determinación! ¿Estás listo para desafiarme?
-	G1T2_Misty.StandardDialogue1: ¡Mi táctica es la ofensiva total con los Pokémon del tipo agua!
+	G1T1_Brock: {
+		StandardDialogue1: ¡Creo en la defensa férrea y la determinación! ¿Estás listo para desafiarme?
+		// DefeatedDialogue: Your Pokemon's powerful attacks overcame my rock-hard resistance... You're stronger than I expected...
+	}
+
+	G1T2_Misty: {
+		StandardDialogue1: ¡Mi táctica es la ofensiva total con los Pokémon del tipo agua!
+		// DefeatedDialogue: Wow! You're too much! All right! You can have the Cascade Badge to show you beat me!
+	}
+
+	G1T3_LtSurge: {
+		// StandardDialogue1: What do you think you're doing here? You won't live long in combat! That's for sure!
+		// DefeatedDialogue: You electrified me in our battle! I didn't know that there were gutsy trainers like you. It made me change my mind about you!
+	}
+
+	G1T4_Erika: {
+		// StandardDialogue1: Hello. Lovely weather isn't it? It's so pleasant.
+		// DefeatedDialogue: You are cataloging Pokemon? I must say I'm impressed. I would never collect Pokemon if they were unattractive.
+	}
+
+	G1T5_Koga: {
+		// StandardDialogue1: I shall show you true terror as a ninja master! You shall feel the despair of poison and sleep techniques!
+		// DefeatedDialogue: Humph! You have proven your worth!
+	}
+
+	G1T6_Sabrina: {
+		// StandardDialogue1: I had a vision of your arrival! I have had psychic powers since I was a child. I dislike fighting, but if you wish, I will show you my powers!
+		// DefeatedDialogue: I'm shocked! But, a loss is a loss. I admit I didn't work hard enough to win!
+	}
 }
 
 Tiles: {
@@ -5537,6 +5567,7 @@ PokemonInfo: {
 PokemonBattle: {
 	TrainerLvl: Nivel de entrenador: {0}
 	NextPokemon: Adelante {0}!
+	NextPokemonCommon: "{0} envía a {1}"
 	BattleStart: ¡{0} quiere combatir!
 	EnemyPokemonFainted: ¡{0} enemigo se debilitó!
 	BattleWin: ¡{0} fue derrotado! ¡Ganaste!

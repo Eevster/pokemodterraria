@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Pokemod.Content.Items.Badges;
 using Pokemod.Content.Items.Tools;
 using Terraria;
 using Terraria.GameContent;
@@ -23,6 +24,13 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
                 new EnemyPokemonInfo("Vileplume", 29, ["GigaDrain", "GigaDrain", "GigaDrain", "GigaDrain"]),
             ];
 		}
+
+		public override void GiveRewards(Player opponent)
+        {
+			opponent.QuickSpawnItem(NPC.GetSource_FromThis(), ModContent.ItemType<RainbowBadge>(), 1);
+			opponent.QuickSpawnItem(NPC.GetSource_FromThis(), ItemID.GoldCoin, 10);
+            base.GiveRewards(opponent);
+        }
 
 		private static Profiles.StackedNPCProfile NPCProfile;
 		public override void SetStaticDefaults()
@@ -67,7 +75,14 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 			WeightedRandom<string> chat = new WeightedRandom<string>();
 
 			// These are things that the NPC has a chance of telling you when you talk to it.
-			chat.Add(Language.GetTextValue($"Mods.Pokemod.Dialogue.{GetType().Name}.StandardDialogue1"));
+			if(!WasDefeatedBy(Main.player[Main.myPlayer])){
+				chat.Add(Language.GetTextValue($"Mods.Pokemod.Dialogue.{GetType().Name}.StandardDialogue1"));
+			}
+			else
+			{
+				chat.Add(Language.GetTextValue($"Mods.Pokemod.Dialogue.{GetType().Name}.DefeatedDialogue"));
+			}
+
 			return chat; // chat is implicitly cast to a string.
 		}
 
@@ -78,9 +93,11 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 
 		public override void OnChatButtonClicked(bool firstButton, ref string shop)
 		{
-			if (firstButton)
+			Player opponent = Main.player[Main.myPlayer];
+
+			if (firstButton && !WasDefeatedBy(opponent))
 			{
-				StartBattle(Main.player[Main.myPlayer]);
+				StartBattle(opponent);
 			}
 		}
 	}

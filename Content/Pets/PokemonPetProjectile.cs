@@ -184,29 +184,37 @@ namespace Pokemod.Content.Pets
 
 		public override void SendExtraAI(BinaryWriter writer)
         {
-			writer.Write((int)currentHp);
-            writer.Write((double)currentStatus);
-			writer.Write((double)expGained);
+			writer.Write(currentHp);
+            writer.Write(currentStatus);
+			writer.Write(expGained);
 			writer.Write(canFall);
 			writer.Write(isEnemy);
+			writer.Write(isOut);
 			writer.Write(manualControl);
 			writer.Write(isMegaEvolving);
 			writer.Write(dynamax);
 			writer.Write((double)prevScale);
+			writer.Write(ballType);
+			writer.Write(Projectile.timeLeft);
+			writer.Write(variant);
             base.SendExtraAI(writer);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
 			currentHp = reader.ReadInt32();
-            currentStatus = (int)reader.ReadDouble();
-			expGained = (int)reader.ReadDouble();
+            currentStatus = reader.ReadInt32();
+			expGained = reader.ReadInt32();
 			canFall = reader.ReadBoolean();
 			isEnemy = reader.ReadBoolean();
+			isOut = reader.ReadBoolean();
 			manualControl = reader.ReadBoolean();
 			isMegaEvolving = reader.ReadBoolean();
 			dynamax = reader.ReadBoolean();
 			prevScale = (float)reader.ReadDouble();
+			ballType = reader.ReadString();
+			Projectile.timeLeft = reader.ReadInt32();
+			variant = reader.ReadString();
 			
             base.ReceiveExtraAI(reader);
         }
@@ -677,20 +685,26 @@ namespace Pokemod.Content.Pets
 					Projectile.Kill();
 					return;
 				}
-			}
-
-			if (Main.netMode == NetmodeID.SinglePlayer)
-			{
-				if (!player.dead /*&& player.HasBuff(PokemonBuff)*/)
+				else
 				{
-					Projectile.timeLeft = 2;
-					//player.AddBuff(PokemonBuff, 10);
+					Projectile.timeLeft = 10;
 				}
 			}
 			else
 			{
-				if (Main.myPlayer == Projectile.owner){
-					if (Projectile.timeLeft > 10) Projectile.timeLeft = 10;
+				if (Main.netMode == NetmodeID.SinglePlayer)
+				{
+					if (!player.dead /*&& player.HasBuff(PokemonBuff)*/)
+					{
+						Projectile.timeLeft = 2;
+						//player.AddBuff(PokemonBuff, 10);
+					}
+				}
+				else
+				{
+					if (Main.myPlayer == Projectile.owner){
+						if (Projectile.timeLeft > 10) Projectile.timeLeft = 10;
+					}
 				}
 			}
 			
@@ -702,7 +716,13 @@ namespace Pokemod.Content.Pets
 
 		public virtual void GeneralBehavior(Player owner, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition) {
 			Vector2 idlePosition = owner.Center;
-			if(isEnemy) idlePosition = npcOwner.Center;
+			if (isEnemy)
+			{
+				if(npcOwner != null)
+				{
+					idlePosition = npcOwner.Center;
+				}
+			}
 			idlePosition.Y -= 16-(owner.height-Projectile.height)/2; // Go up 48 coordinates (three tiles from the center of the player)
 
 			if (!isEnemy)
@@ -920,6 +940,11 @@ namespace Pokemod.Content.Pets
 				}
 				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKSpawn") with {Volume = 0.5f}, Projectile.Center);
 				Projectile.position.Y -= 16+4;
+
+				if(Projectile.owner == Main.myPlayer)
+				{
+					Projectile.netUpdate = true;
+				}
 			}
 		}
 
@@ -2127,10 +2152,13 @@ namespace Pokemod.Content.Pets
 				}
 				else
 				{
-					if(npcOwner.ModNPC is BattleTrainer)
+					if (npcOwner != null)
 					{
-						BattleTrainer battleNPCOwner = (BattleTrainer)npcOwner.ModNPC;
-						battleNPCOwner.FaintedPokemon(); 
+						if(npcOwner.ModNPC is BattleTrainer)
+						{
+							BattleTrainer battleNPCOwner = (BattleTrainer)npcOwner.ModNPC;
+							battleNPCOwner.FaintedPokemon(); 
+						}
 					}
 					Projectile.Kill();
 				}
@@ -2456,6 +2484,8 @@ namespace Pokemod.Content.Pets
 
         public override void OnKill(int timeLeft)
 		{
+			//Main.NewText($"{pokemonName}_{Projectile.whoAmI}: was deleted");
+
 			if (Projectile.owner == Main.myPlayer)
 			{
 				for (int i = 0; i < nAttackProjs; i++)

@@ -24,14 +24,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void SendExtraAI(BinaryWriter writer)
         {
             writer.Write((double)Projectile.scale);
-            writer.Write((double)Projectile.Opacity);
+            writer.Write((int)Projectile.timeLeft);
+            writer.Write((int)Projectile.frame);
             base.SendExtraAI(writer);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             Projectile.scale = (float)reader.ReadDouble();
-            Projectile.Opacity = (float)reader.ReadDouble();
+            Projectile.timeLeft = reader.ReadInt32();
+            Projectile.frame = reader.ReadInt32();
             base.ReceiveExtraAI(reader);
         }
 

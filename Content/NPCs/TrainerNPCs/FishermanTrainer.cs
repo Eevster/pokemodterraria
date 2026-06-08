@@ -16,6 +16,12 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		public override int nPokemon => 3;
 		public override string[] pokemonOptions => ["Magikarp", "Poliwag", "Shellder"];
 
+		public override void GiveRewards(Player opponent)
+        {
+			opponent.QuickSpawnItem(NPC.GetSource_FromThis(), ItemID.SilverCoin, 20*trainerLevel);
+            base.GiveRewards(opponent);
+        }
+
 		private static Profiles.StackedNPCProfile NPCProfile;
 		public override void SetStaticDefaults()
         {
@@ -63,8 +69,15 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			WeightedRandom<string> chat = new WeightedRandom<string>();
 
 			// These are things that the NPC has a chance of telling you when you talk to it.
-			chat.Add(Language.GetTextValue($"Mods.Pokemod.Dialogue.{GetType().Name}.StandardDialogue1") + "\n"+
+			if (!WasDefeatedBy(Main.player[Main.myPlayer]))
+			{
+				chat.Add(Language.GetTextValue($"Mods.Pokemod.Dialogue.{GetType().Name}.StandardDialogue1") + "\n"+
 				"[c/FFE270:"+Language.GetText($"Mods.Pokemod.PokemonBattle.TrainerLvl").WithFormatArgs(trainerLevel).Value+"]");
+			}
+			else
+			{
+				chat.Add(Language.GetTextValue($"Mods.Pokemod.Dialogue.{GetType().Name}.DefeatedDialogue"));
+			}
 			return chat; // chat is implicitly cast to a string.
 		}
 
@@ -76,9 +89,11 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 
 		public override void OnChatButtonClicked(bool firstButton, ref string shop)
 		{
-			if (firstButton)
+			Player opponent = Main.player[Main.myPlayer];
+
+			if (firstButton && !WasDefeatedBy(opponent))
 			{
-				StartBattle(Main.player[Main.myPlayer]);
+				StartBattle(opponent);
 			}
 			else
 			{

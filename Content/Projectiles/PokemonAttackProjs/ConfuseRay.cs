@@ -25,12 +25,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 		public override void SendExtraAI(BinaryWriter writer)
         {
             writer.WriteVector2(targetPosition);
+			writer.WriteVector2(Projectile.velocity);
             base.SendExtraAI(writer);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             targetPosition = reader.ReadVector2();
+			Projectile.velocity = reader.ReadVector2();
             base.ReceiveExtraAI(reader);
         }
 
@@ -102,6 +104,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
 				float projSpeed = 10f;
 				Projectile.velocity = (Trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+			}
+
+			if(Projectile.owner == Main.myPlayer){
+				Projectile.netUpdate = true;
 			}
 
             base.OnSpawn(source);

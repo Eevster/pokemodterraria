@@ -75,6 +75,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		public virtual string[] pokemonOptions => ["Magikarp"];
 		public int trainerLevel = 5;
 		public List<EnemyPokemonInfo> pokemonTeam;
+		public List<string> DefeatedBy = new List<string>();
 
 		public Player opponent;
 
@@ -92,7 +93,9 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 				opponent.SetTalkNPC(0);
 
 				LoadTeam();
-				SendPokemon(opponent);
+				if(opponent.whoAmI == Main.myPlayer){
+					SendPokemon(opponent);
+				}
 			}
 		}
 
@@ -114,12 +117,12 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 
 		private void SendPokemon(Player player)
 		{
-			int projIndex = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(3f*Math.Sign(player.Center.X-NPC.Center.X), -3f), ModContent.Find<ModProjectile>("Pokemod", pokemonTeam[0].name+"PetProjectile").Type, 0, 0, player.whoAmI, 10000);
-			Projectile proj = Main.projectile[projIndex];
+			Projectile proj = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(3f*Math.Sign(player.Center.X-NPC.Center.X), -3f), ModContent.Find<ModProjectile>("Pokemod", pokemonTeam[0].name+"PetProjectile").Type, 0, 0, player.whoAmI, 10000)];
 
 			PokemonPetProjectile PokemonProj = null;
 			if(proj.ModProjectile is PokemonPetProjectile){
 				PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
+				Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.NextPokemonCommon").WithFormatArgs(NPC.FullName, PokemonProj.pokemonName).Value, 237, 206, 2);
 			}
 			
 			PokemonProj?.SetPokemonLvl(pokemonTeam[0].level, pokemonTeam[0].IVs, pokemonTeam[0].EVs, pokemonTeam[0].nature, pokemonTeam[0].happiness);
@@ -128,6 +131,8 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 
 		public void FaintedPokemon()
 		{
+			Console.WriteLine($"(Syncing Trainer NPC) pokemonTeam.Count > 0:{pokemonTeam.Count > 0}, pokemonTeam.Count > 0:{pokemonTeam.Count > 0}, Main.netMode != NetmodeID.MultiplayerClient:{Main.netMode != NetmodeID.MultiplayerClient}");
+
 			if(pokemonTeam.Count > 0)
 			{
 				Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.EnemyPokemonFainted").WithFormatArgs(pokemonTeam[0].name).Value, 237, 143, 2);
@@ -138,17 +143,37 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 				}
 				pokemonTeam.RemoveAt(0);
 
-				if(pokemonTeam.Count > 0)SendPokemon(opponent);
+				if(pokemonTeam.Count > 0){
+					if(opponent.whoAmI == Main.myPlayer)SendPokemon(opponent);
+				}
 				else
 				{
 					Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.BattleWin").WithFormatArgs(NPC.FullName).Value, 237, 206, 2);
 					GiveRewards(opponent);
 					opponent.GetModPlayer<PokemonPlayer>().SetBattle(false);
-					NPC.active = false;
-					NPC.netSkip = -1;
-					NPC.life = 0;
+					if(!DefeatedBy.Contains(opponent.GetModPlayer<PokemonPlayer>().TrainerID)) DefeatedBy.Add(opponent.GetModPlayer<PokemonPlayer>().TrainerID);
+
+					/*if(Main.netMode != NetmodeID.MultiplayerClient){
+						Console.WriteLine("Syncing Trainer NPC");
+						NPC.active = false;
+						NPC.netSkip = -1;
+						NPC.life = 0;
+						NPC.TopLeft = new Vector2(Main.leftWorld, Main.topWorld);
+
+						NPC.despawnEncouraged = true;
+
+						NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+
+						NPC.netUpdate = true;
+						Main.showServerConsole = true;
+					}*/
 				}
 			}
+		}
+
+		public bool WasDefeatedBy(Player player)
+		{
+			return DefeatedBy.Contains(player.GetModPlayer<PokemonPlayer>().TrainerID);
 		}
 
 		public virtual void GiveRewards(Player opponent)
@@ -159,6 +184,13 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
         public override void PostAI()
         {
             base.PostAI();
+
+			if ((Main.netMode == NetmodeID.SinglePlayer && DefeatedBy.Count > 0) || (Main.netMode != NetmodeID.SinglePlayer && DefeatedBy.Count >= Main.player.Length))
+			{
+				NPC.despawnEncouraged = true;
+				return;
+			}
+
 			if(opponent != null)
 			{
 				if(opponent.dead || !opponent.GetModPlayer<PokemonPlayer>().onBattle)

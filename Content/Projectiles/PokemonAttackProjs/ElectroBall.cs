@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Content.Pets;
 using Terraria.GameContent;
 using Pokemod.Content.NPCs;
+using System;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
@@ -31,7 +32,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.timeLeft = 120;
 
             Projectile.tileCollide = true;  
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 2;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 5;
@@ -120,6 +121,23 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             damage = (int)(damage*dmgMultiplier);
 
             base.ModifyHitPokemonPet(target, ref damage);
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            if(Projectile.penetrate > 1)
+            {
+                if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f) {
+				Projectile.velocity.X = oldVelocity.X * -1f;
+                }
+                if (Projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f) {
+                    Projectile.velocity.Y = oldVelocity.Y * -1f;
+                }
+
+                Projectile.penetrate--;
+            }
+
+            return base.OnTileCollide(oldVelocity);
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
