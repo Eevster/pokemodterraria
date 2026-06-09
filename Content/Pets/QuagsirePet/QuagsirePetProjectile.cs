@@ -1,0 +1,27 @@
+﻿using Microsoft.Xna.Framework;
+using Pokemod.Content.Projectiles.PokemonAttackProjs;
+using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace Pokemod.Content.Pets.QuagsirePet
+{
+	public class QuagsirePetProjectile : PokemonPetProjectile
+	{
+        public override int hitboxWidth => 56;
+        public override int hitboxHeight => 40;
+
+        public override int totalFrames => 29;
+        public override int animationSpeed => 5;
+        public override int[] idleStartEnd => [0, 9];
+        public override int[] walkStartEnd => [20, 28];
+        public override int[] jumpStartEnd => [10, 13];
+        public override int[] fallStartEnd => [13, 13];
+        public override int[] attackStartEnd => [14, 19];
+
+        
+	}
+
+	public class QuagsirePetProjectileShiny : QuagsirePetProjectile{}
+}

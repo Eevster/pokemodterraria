@@ -531,6 +531,10 @@ Projectiles: {
 	HoppipPetProjectile.DisplayName: Hoppip Pet Projectile
 	SkiploomPetProjectile.DisplayName: Skiploom Pet Projectile
 	SkiploomPetProjectileShiny.DisplayName: Skiploom Pet Projectile Shiny
+	QuagsirePetProjectile.DisplayName: Quagsire Pet Projectile
+	QuagsirePetProjectileShiny.DisplayName: Quagsire Pet Projectile Shiny
+	WooperPetProjectile.DisplayName: Wooper Pet Projectile
+	WooperPetProjectileShiny.DisplayName: Wooper Pet Projectile Shiny
 }
 
 Items: {
@@ -4146,6 +4150,26 @@ Buffs: {
 		Description: Mods.Pokemod.Buffs.MareepPetBuff.Description
 		DisplayName: Mareep Pet Buff
 	}
+
+	QuagsirePetBuff: {
+		DisplayName: Quagsire Pet Buff
+		Description: Mods.Pokemod.Buffs.QuagsirePetBuff.Description
+	}
+
+	QuagsirePetBuffShiny: {
+		DisplayName: Quagsire Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.QuagsirePetBuffShiny.Description
+	}
+
+	WooperPetBuff: {
+		DisplayName: Wooper Pet Buff
+		Description: Mods.Pokemod.Buffs.WooperPetBuff.Description
+	}
+
+	WooperPetBuffShiny: {
+		DisplayName: Wooper Pet Buff Shiny
+		Description: Mods.Pokemod.Buffs.WooperPetBuffShiny.Description
+	}
 }
 
 NPCs: {
@@ -5423,6 +5447,10 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
 	G1T8_Giovanni.DisplayName: G1 T8_ Giovanni
 	G1T7_Blaine.DisplayName: G1 T7_ Blaine
+	WooperCritterNPC.DisplayName: Wooper Critter N P C
+	WooperCritterNPCShiny.DisplayName: Wooper Critter N P C Shiny
+	QuagsireCritterNPC.DisplayName: Quagsire Critter N P C
+	QuagsireCritterNPCShiny.DisplayName: Quagsire Critter N P C Shiny
 }
 
 Bestiary: {
