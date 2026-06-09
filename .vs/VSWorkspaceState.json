@@ -4,11 +4,12 @@
     "\\Assets",
     "\\Common",
     "\\Content",
-    "\\Content\\Items\\Tools",
+    "\\Content\\Items",
+    "\\Content\\Items\\Badges",
     "\\Content\\NPCs",
     "\\Content\\NPCs\\TrainerNPCs",
     "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
   ],
-  "SelectedNode": "\\Content\\NPCs\\TrainerNPCs\\GymLeaders\\G1T7_Blaine.cs",
+  "SelectedNode": "\\Content\\Items\\Badges\\Badges.cs",
   "PreviewInSolutionExplorer": false
 }

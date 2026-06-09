@@ -5421,6 +5421,8 @@ NPCs: {
 	G1T4_Erika.DisplayName: Grass-type Gym Leader
 	G1T5_Koga.DisplayName: Poison-type Gym Leader
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
+	G1T8_Giovanni.DisplayName: G1 T8_ Giovanni
+	G1T7_Blaine.DisplayName: G1 T7_ Blaine
 }
 
 Bestiary: {

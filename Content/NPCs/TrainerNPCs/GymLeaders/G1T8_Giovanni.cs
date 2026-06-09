@@ -19,11 +19,11 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		{
 			pokemonTeam =
             [
-                new EnemyPokemonInfo("Rhyhorn", 45, ["Takle", "RockSlide", "Takle", "RockSlide"]),
+                new EnemyPokemonInfo("Rhyhorn", 45, ["Tackle", "RockSlide", "Tackle", "RockSlide"]),
                 new EnemyPokemonInfo("Dugtrio", 42, ["Dig", "RockThrow", "Slash", "MudSlap"]),
                 new EnemyPokemonInfo("Nidoqueen", 44, ["FocusPunch", "Crunch", "Toxic", "Bite"]),
                 new EnemyPokemonInfo("Nidoking", 45, ["FocusPunch", "Crunch", "Toxic", "Bite"]),
-                new EnemyPokemonInfo("Rhyhorn", 50, ["Takle", "RockSlide", "StoneEdge", "Takle"]),
+                new EnemyPokemonInfo("Rhyhorn", 50, ["Tackle", "RockSlide", "StoneEdge", "Tackle"]),
             ];
 		}
 
