@@ -2,12 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
+    "\\Common",
     "\\Content",
+    "\\Content\\Items\\Tools",
     "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen2",
-    "\\Content\\Pets\\SkiploomPet"
+    "\\Content\\NPCs\\TrainerNPCs",
+    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\Gen2\\SkiploomCritter.cs",
+  "SelectedNode": "\\Content\\NPCs\\TrainerNPCs\\GymLeaders\\G1T7_Blaine.cs",
   "PreviewInSolutionExplorer": false
 }
