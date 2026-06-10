@@ -535,6 +535,8 @@ Projectiles: {
 	// QuagsirePetProjectileShiny.DisplayName: Quagsire Pet Projectile Shiny
 	// WooperPetProjectile.DisplayName: Wooper Pet Projectile
 	// WooperPetProjectileShiny.DisplayName: Wooper Pet Projectile Shiny
+	// JumpluffPetProjectileShiny.DisplayName: Jumpluff Pet Projectile Shiny
+	// JumpluffPetProjectile.DisplayName: Jumpluff Pet Projectile
 }
 
 Items: {
@@ -5451,6 +5453,8 @@ NPCs: {
 	// WooperCritterNPCShiny.DisplayName: Wooper Critter N P C Shiny
 	// QuagsireCritterNPC.DisplayName: Quagsire Critter N P C
 	// QuagsireCritterNPCShiny.DisplayName: Quagsire Critter N P C Shiny
+	// JumpluffCritterNPCShiny.DisplayName: Jumpluff Critter N P C Shiny
+	// JumpluffCritterNPC.DisplayName: Jumpluff Critter N P C
 }
 
 Bestiary: {
