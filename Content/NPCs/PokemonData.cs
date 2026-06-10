@@ -497,7 +497,7 @@ namespace Pokemod.Content.NPCs
             {"Espeon", new PokemonInfo(0196, [65, 65, 60, 130, 95, 110], [(int)TypeIndex.Psychic], [new MoveLvl("Confusion"), new MoveLvl("Tackle", 1), new MoveLvl("Bite", 1), new MoveLvl("QuickAttack", 10), new MoveLvl("Swift", 20), new MoveLvl("Psybeam", 25), new MoveLvl("Psychic", 40)], [(int)EggGroups.Field], 1.0f, 29.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast, artist: "JACSMITH")},
             {"Umbreon", new PokemonInfo(0197, [95, 65, 110, 60, 130, 65], [(int)TypeIndex.Dark], [new MoveLvl("Crunch"), new MoveLvl("Tackle", 1), new MoveLvl("Bite", 1), new MoveLvl("Swift", 1), new MoveLvl("QuickAttack", 10), new MoveLvl("ConfuseRay", 20), new MoveLvl("Toxic", 25)], [(int)EggGroups.Field], 1.0f, 29.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast, artist: "JACSMITH")},
 
-            {"SlowKing", new PokemonInfo(0199, [85, 75, 80, 100, 110, 30], [(int)TypeIndex.Water, (int)TypeIndex.Psychic], [new MoveLvl("Confusion", 1)], [(int)EggGroups.Monster, (int)EggGroups.Water1], 2.0f, 79.5f, (int)StageIndex.Stage2, (int)ExpTypes.MediumFast, completed: false, artist: "Kerpi")},
+            {"Slowking", new PokemonInfo(0199, [85, 75, 80, 100, 110, 30], [(int)TypeIndex.Water, (int)TypeIndex.Psychic], [new MoveLvl("Confusion", 1)], [(int)EggGroups.Monster, (int)EggGroups.Water1], 2.0f, 79.5f, (int)StageIndex.Stage2, (int)ExpTypes.MediumFast, completed: false, artist: "Kerpi")},
 
             {"Unown", new PokemonInfo(0201, [48, 72, 48, 72, 48, 48], [(int)TypeIndex.Psychic], [new MoveLvl("Confusion", 1)], [(int)EggGroups.NoEggs], 0.5f, 5.0f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast, artist: "JACSMITH")},
             

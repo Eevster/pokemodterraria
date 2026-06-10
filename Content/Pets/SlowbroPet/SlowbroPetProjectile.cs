@@ -19,6 +19,9 @@ namespace Pokemod.Content.Pets.SlowbroPet
 		public override int[] jumpStartEnd => [52,55];
 		public override int[] fallStartEnd => [52,55];
         public override int[] attackStartEnd => [58, 64];
+
+        public override string[] evolutions => ["Slowking"];
+        public override string[] itemToEvolve => ["KingsRockItem"];
     }
 
 	public class SlowbroPetProjectileShiny : SlowbroPetProjectile{}
