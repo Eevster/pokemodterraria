@@ -7,16 +7,17 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class VenonatCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+		public override int hitboxWidth => 40;
+		public override int hitboxHeight => 58;
 
-		public override int totalFrames => 4;
+		public override int totalFrames => 15;
 		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
-		public override float catchRate => 190;
+		public override int[] idleStartEnd => [0,4];
+		public override int[] walkStartEnd => [5,7];
+		public override int[] jumpStartEnd => [8,8];
+		public override int[] fallStartEnd => [8,8];
+        public override int[] attackStartEnd => [9, 14];
+        public override float catchRate => 190;
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
