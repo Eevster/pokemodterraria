@@ -537,6 +537,8 @@ Projectiles: {
 	// WooperPetProjectileShiny.DisplayName: Wooper Pet Projectile Shiny
 	// JumpluffPetProjectileShiny.DisplayName: Jumpluff Pet Projectile Shiny
 	// JumpluffPetProjectile.DisplayName: Jumpluff Pet Projectile
+	// SlowkingPetProjectileShiny.DisplayName: Slowking Pet Projectile Shiny
+	// SlowkingPetProjectile.DisplayName: Slowking Pet Projectile
 }
 
 Items: {
@@ -4172,6 +4174,16 @@ Buffs: {
 		// DisplayName: Wooper Pet Buff Shiny
 		// Description: Mods.Pokemod.Buffs.WooperPetBuffShiny.Description
 	}
+
+	SlowkingPetBuffShiny: {
+		// Description: Mods.Pokemod.Buffs.SlowkingPetBuffShiny.Description
+		// DisplayName: Slowking Pet Buff Shiny
+	}
+
+	SlowkingPetBuff: {
+		// Description: Mods.Pokemod.Buffs.SlowkingPetBuff.Description
+		// DisplayName: Slowking Pet Buff
+	}
 }
 
 NPCs: {
@@ -5455,6 +5467,8 @@ NPCs: {
 	// QuagsireCritterNPCShiny.DisplayName: Quagsire Critter N P C Shiny
 	// JumpluffCritterNPCShiny.DisplayName: Jumpluff Critter N P C Shiny
 	// JumpluffCritterNPC.DisplayName: Jumpluff Critter N P C
+	// SlowkingCritterNPCShiny.DisplayName: Slowking Critter N P C Shiny
+	// SlowkingCritterNPC.DisplayName: Slowking Critter N P C
 }
 
 Bestiary: {
