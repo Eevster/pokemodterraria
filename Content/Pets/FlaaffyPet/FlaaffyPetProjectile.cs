@@ -12,7 +12,7 @@ namespace Pokemod.Content.Pets.DoduoPet
         public override int hitboxWidth => 62;
 		public override int hitboxHeight => 58;
 
-		public override int totalFrames => 32;
+		public override int totalFrames => 33;
 		public override int animationSpeed => 5;
         public override int[] idleStartEnd => [0, 8];
         public override int[] walkStartEnd => [25, 32];
