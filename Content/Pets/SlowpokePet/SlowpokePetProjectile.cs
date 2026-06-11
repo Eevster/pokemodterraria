@@ -20,10 +20,11 @@ namespace Pokemod.Content.Pets.SlowpokePet
         public override int[] fallStartEnd => [39, 48];
         public override int[] attackStartEnd => [47, 55];
 
-        public override string[] evolutions => ["Slowbro"];
+        public override string[] evolutions => ["Slowbro", "Slowking"];
 		public override int levelToEvolve => 37;
 		public override int levelEvolutionsNumber => 1;
-	}
+        public override string[] itemToEvolve => ["KingsRockItem"];
+    }
 
 	public class SlowpokePetProjectileShiny : SlowpokePetProjectile{}
 }

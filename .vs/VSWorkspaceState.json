@@ -2,16 +2,16 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Textures",
+    "\\Assets\\Effects",
+    "\\Common",
+    "\\Common\\Players",
     "\\Content",
-    "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen1",
-    "\\Content\\Pets\\PidgeyPet",
-    "\\Content\\Pets\\SlowkingPet",
-    "\\Content\\Pets\\VenomothPet",
-    "\\Content\\Pets\\VenonatPet"
+    "\\Content\\Items",
+    "\\Content\\Items\\Armor",
+    "\\Content\\Items\\Armor\\TrainerSets",
+    "\\Content\\Pets",
+    "\\Content\\TitleScreens"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\Gen1\\VenomothCritter.cs",
+  "SelectedNode": "\\Content\\Items\\Armor\\TrainerSets\\TrainerT8Legs.cs",
   "PreviewInSolutionExplorer": false
 }
