@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using Pokemod.Common.Players;
 using Pokemod.Content.Pets;
-using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -19,6 +18,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 	public class MegaDrain : PokemonAttack
 	{
 		private Vector2 targetPosition;
+		private float sizeChangeRate = 0.05f;
+		private float shadowScaleDiff = 0.20f;
+		private int shadowCount = 3;
 
 		public override void SendExtraAI(BinaryWriter writer)
         {
@@ -65,6 +67,27 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
 		}
 
+		public override bool PreDraw(ref Color lightColor) {
+			Main.instance.LoadProjectile(Projectile.type);
+			Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
+
+			for(int i = 0; i < shadowCount; i++)
+			{
+				Color color = Projectile.GetAlpha(lightColor) * ((shadowCount - (i + 1)) / (float)shadowCount);
+				float scale = Projectile.scale + (i+1)*shadowScaleDiff;
+				if(scale > 1f)
+				{
+					scale -= 1f;
+				}
+
+				Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition,
+				texture.Bounds, color, Projectile.rotation,
+				texture.Size() * 0.5f, scale, SpriteEffects.None, 0);
+			}
+
+			return true;
+		}
+
         public override void AI()
         {
 			Lighting.AddLight(Projectile.Center, Projectile.Opacity*0.3f, Projectile.Opacity, Projectile.Opacity*0.3f);
@@ -90,13 +113,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}
 			}
 
-			if (Projectile.scale > 0.1f)
+			if (Projectile.scale > 0f)
 			{
-				Projectile.scale -= 0.02f;
-			}
-			else
-			{
-				Projectile.Opacity = 0f;
+				Projectile.scale -= sizeChangeRate;
+
+				if(Projectile.scale <= 0f)
+				{
+					Projectile.scale += 1f;
+				}
 			}
 
 			if(targetEnemy != null || targetPlayer != null){

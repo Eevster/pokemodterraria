@@ -19,7 +19,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void SetDefaults()
         {
-
             Projectile.timeLeft = 150;
 
             Projectile.width = 36;
@@ -128,15 +127,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             switch (Main.rand.Next(0, 7))
             {
                 case 0:
-                    Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Ice_Purple, 0, 0, default, default, 1.5f); break;
+                    Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Ice_Purple, 0, 0, default, default, 1.5f); break;
                 case 1:
-                    Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Venom, velocity.X * 0.5f, velocity.Y * 0.5f); break;
+                    Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Venom, velocity.X * 0.5f, velocity.Y * 0.5f); break;
                 case 2:
-                    Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Venom, velocity.X * 0.4f, velocity.Y * 0.4f);
+                    Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Venom, velocity.X * 0.4f, velocity.Y * 0.4f);
                     SoundEngine.PlaySound(SoundID.SplashWeak with { Pitch = -0.7f }, Projectile.position); break;
                 case 3:
-                    Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Ice_Purple, velocity.X * 0.2f, velocity.Y * 0.2f, default, default, 2f);
-                    Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Venom, velocity.X * 0.2f, velocity.Y * 0.2f, default, default, 2f); break;
+                    Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Ice_Purple, velocity.X * 0.2f, velocity.Y * 0.2f, default, default, 2f);
+                    Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Venom, velocity.X * 0.2f, velocity.Y * 0.2f, default, default, 2f); break;
             }
         }
 
@@ -172,8 +171,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             {
                 return;
             }
-            Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Ice_Purple, Main.rand.Next(-2, 3), -3, default, default, 2f);
-            Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Venom, Main.rand.Next(-2, 3), -3, default, default, 2f);
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Ice_Purple, Main.rand.Next(-2, 3), -3, default, default, 2f);
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Venom, Main.rand.Next(-2, 3), -3, default, default, 2f);
 
             Dust.NewDust(targetPosition, Projectile.width, Projectile.height, DustID.Ice_Purple, Main.rand.Next(-2, 3) + velocity.X * 0.1f, -3 + velocity.Y * 0.1f, default, default, 2f);
             Dust.NewDust(targetPosition, Projectile.width, Projectile.height, DustID.Water_Corruption, Main.rand.Next(-2, 3) + velocity.X * 0.1f, -3 + velocity.Y * 0.1f, default, default, 2f);

@@ -17,6 +17,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Ember : PokemonAttack
 	{
+        public override void SetStaticDefaults()
+        {
+            Main.projFrames[Projectile.type] = 4;
+        }
+
 		public override void SetDefaults()
         {
             Projectile.width = 22;
@@ -65,6 +70,21 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
 			}
+
+            UpdateAnimation();
+        }
+        
+        private void UpdateAnimation()
+        {
+            if (++Projectile.frameCounter >= 6)
+            {
+                Projectile.frameCounter = 0;
+                if (++Projectile.frame >=  Main.projFrames[Projectile.type])
+                {
+                    Projectile.frame = 0;
+                    SoundEngine.PlaySound(SoundID.Item20 with {Volume = 0.5f}, Projectile.position);
+                }
+            }
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

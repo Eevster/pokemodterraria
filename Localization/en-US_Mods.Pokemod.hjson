@@ -539,6 +539,10 @@ Projectiles: {
 	JumpluffPetProjectile.DisplayName: Jumpluff Pet Projectile
 	SlowkingPetProjectileShiny.DisplayName: Slowking Pet Projectile Shiny
 	SlowkingPetProjectile.DisplayName: Slowking Pet Projectile
+	Absorb.DisplayName: Absorb
+	Acid.DisplayName: Acid
+	AcidArmor.DisplayName: Acid Armor
+	Amnesia.DisplayName: Amnesia
 }
 
 Items: {
