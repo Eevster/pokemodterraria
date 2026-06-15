@@ -543,6 +543,9 @@ Projectiles: {
 	Acid.DisplayName: Acid
 	AcidArmor.DisplayName: Acid Armor
 	Amnesia.DisplayName: Amnesia
+	AuroraBeam.DisplayName: Aurora Beam
+	Bonemerang.DisplayName: Bonemerang
+	BoneRush.DisplayName: Bone Rush
 }
 
 Items: {

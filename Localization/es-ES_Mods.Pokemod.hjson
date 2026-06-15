@@ -543,6 +543,9 @@ Projectiles: {
 	Acid.DisplayName: Ácido
 	AcidArmor.DisplayName: Armadura ácida
 	Amnesia.DisplayName: Amnesia
+	AuroraBeam.DisplayName: Rayo aurora
+	Bonemerang.DisplayName: Huesomerang
+	BoneRush.DisplayName: Ataque óseo
 }
 
 Items: {
@@ -5489,7 +5492,7 @@ Dialogue: {
 
 	FishermanTrainer: {
 		StandardDialogue1: Hola, ¿te interesa la pesca?
-		// DefeatedDialogue: What a disgrace! Beaten in my own fishing spot!
+		DefeatedDialogue: ¡Qué vergüenza! ¡Me han vencido en mi propio lugar de pesca!
 	}
 
 	PokemonScientist: {
@@ -5510,10 +5513,10 @@ Dialogue: {
 	}
 
 	MoveTutor: {
-		// StandardDialogue1: Your Pokemon look strong, but they can always get stronger.
-		// StandardDialogue2: A good trainer never stops trying to improve their skills!
-		// StandardDialogue3: I can teach your Pokemon moves that they've forgetten!
-		// Button: Learn Moves
+		StandardDialogue1: Tus Pokemon parecen fuertes, pero siempre pueden volverse más fuertes.
+		StandardDialogue2: ¡Un buen entrenador nunca deja de intentar mejorar sus habilidades!
+		StandardDialogue3: ¡Puedo enseñar a tus Pokemon movimientos que han olvidado!
+		Button: Aprender movimiento
 	}
 
 	G1T1_Brock: {
