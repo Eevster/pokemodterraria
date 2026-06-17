@@ -22,6 +22,9 @@ namespace Pokemod.Content.Pets.RattataPet
 		public override string[] evolutions => ["Raticate"];
 		public override int levelToEvolve => 20;
 		public override int levelEvolutionsNumber => 1;
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
 	}
 
 	public class RattataPetProjectileShiny : RattataPetProjectile{}

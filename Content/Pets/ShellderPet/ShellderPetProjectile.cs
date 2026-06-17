@@ -28,6 +28,9 @@ namespace Pokemod.Content.Pets.ShellderPet
 		
         public override string[] evolutions => ["Cloyster"];
         public override string[] itemToEvolve => ["WaterStoneItem"];
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
 	}
 
 	public class ShellderPetProjectileShiny : ShellderPetProjectile{}

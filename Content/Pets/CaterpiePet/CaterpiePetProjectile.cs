@@ -25,6 +25,9 @@ namespace Pokemod.Content.Pets.CaterpiePet
 		public override string[] evolutions => ["Metapod"];
 		public override int levelToEvolve => 7;
 		public override int levelEvolutionsNumber => 1;
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
 	}
 
 	public class CaterpiePetProjectileShiny : CaterpiePetProjectile{}

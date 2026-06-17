@@ -11,6 +11,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Pokemod.Content.Items.Apricorns;
+using Pokemod.Common.Players;
 
 namespace Pokemod.Content.Items.Tools
 {
@@ -37,6 +38,13 @@ namespace Pokemod.Content.Items.Tools
 			Item.UseSound = SoundID.MenuTick;
 			Item.value = Item.sellPrice(gold: 1);
 		}
+
+        public override void UpdateInventory(Player player)
+        {
+			player.GetModPlayer<PokemonPlayer>().HasPokedex = true;
+
+            base.UpdateInventory(player);
+        }
 
 		public override bool? UseItem(Player player)
 		{

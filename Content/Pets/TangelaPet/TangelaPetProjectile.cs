@@ -19,6 +19,9 @@ namespace Pokemod.Content.Pets.TangelaPet
 		public override int[] jumpStartEnd => [4, 4];
 		public override int[] fallStartEnd => [7, 7];
 		public override int[] attackStartEnd => [10, 11];
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(0,0);
 	}
 
 	public class TangelaPetProjectileShiny : TangelaPetProjectile{}

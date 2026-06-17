@@ -79,6 +79,7 @@ namespace Pokemod.Common.Players
 		public Player targetPlayer;
 
 		//Registered Pokemon
+		public bool HasPokedex;
 		public Dictionary<string, int> registeredPokemon = new Dictionary<string, int>();
 
 		//Active Pokemon
@@ -92,6 +93,14 @@ namespace Pokemod.Common.Players
 
 		//Manual Control
 		public bool manualControl;
+
+		//Hovering over Pokemon
+		public PokemonPetProjectile mouseOverPokemon;
+
+		//Holding Pokemon
+		public bool isHoldingPokemon;
+		private int distanceToHold = 6*16;
+		public bool didRightClick;
 
 		//Battle Mode
 
@@ -191,6 +200,7 @@ namespace Pokemod.Common.Players
 			packet.WriteVector2(attackPosition);
 			packet.Write(manualControl);
 			packet.Write(onBattle);
+			packet.Write(isHoldingPokemon);
 
 			packet.Send(toWho, fromWho);
 		}
@@ -201,6 +211,7 @@ namespace Pokemod.Common.Players
 			attackPosition = reader.ReadVector2();
 			manualControl = reader.ReadBoolean();
 			onBattle = reader.ReadBoolean();
+			isHoldingPokemon = reader.ReadBoolean();
 		}
 
 		public override void CopyClientState(ModPlayer targetCopy)
@@ -210,13 +221,14 @@ namespace Pokemod.Common.Players
 			clone.attackPosition = attackPosition;
 			clone.manualControl = manualControl;
 			clone.onBattle = onBattle;
+			clone.isHoldingPokemon = isHoldingPokemon;
 		}
 
 		public override void SendClientChanges(ModPlayer clientPlayer)
 		{
 			PokemonPlayer clone = (PokemonPlayer)clientPlayer;
 
-			if (clone.attackMode != attackMode || clone.attackPosition != attackPosition || clone.manualControl != manualControl || clone.onBattle != onBattle)
+			if (clone.attackMode != attackMode || clone.attackPosition != attackPosition || clone.manualControl != manualControl || clone.onBattle != onBattle || clone.isHoldingPokemon != isHoldingPokemon)
 				SyncPlayer(toWho: -1, fromWho: Main.myPlayer, newPlayer: false);
 		}
 
@@ -298,6 +310,8 @@ namespace Pokemod.Common.Players
 			maxPokemon = defaultMaxPokemon;
 			currentActivePokemon ??= [];
 
+			bool holdingPokemonAux = false;
+
 			int i = 0;
 			while (i < currentActivePokemon.Count)
 			{
@@ -307,9 +321,12 @@ namespace Pokemod.Common.Players
 				}
 				else
 				{
+					if(GetPokemonProjectile(i).isHeldByPlayer) holdingPokemonAux = true;
 					i++;
 				}
 			}
+
+			if(!holdingPokemonAux) isHoldingPokemon = false;
 
 			levelCap = defaultLevelCap;
 
@@ -332,6 +349,11 @@ namespace Pokemod.Common.Players
 			{
 				Player.aggro -= 3000;
 			}
+
+			HasPokedex = false;
+
+			mouseOverPokemon = null;
+			CheckMouseOverPokemon();
 
 			ExpMult = 1f;
 			typeMult = Enumerable.Repeat(1f,18).ToArray();
@@ -498,13 +520,44 @@ namespace Pokemod.Common.Players
 		{
 			List<string> allForms = PokemonData.GetAllForms(pokemonName);
 
+			int pokemonDexStatus = -1;
+
 			foreach (string form in allForms)
 			{
 				if (!registeredPokemon.Keys.Contains(form))
 				{
-					registeredPokemon.Add(form, (captured && form == pokemonName) ? 1 : 0);
+					if(captured && form == pokemonName)
+					{
+						registeredPokemon.Add(form, 1);
+						pokemonDexStatus = 1;
+					}
+					else
+					{
+						if(form == pokemonName) pokemonDexStatus = 0;
+						registeredPokemon.Add(form, 0);
+					}
 				}
-				else if (captured && form == pokemonName) registeredPokemon[form] = 1;
+				else if (captured && form == pokemonName && registeredPokemon[form] < 1){
+					registeredPokemon[form] = 1;
+					pokemonDexStatus = 1;
+				}
+			}
+
+			if(Player.whoAmI == Main.myPlayer)
+			{
+				if(HasPokedex){
+					switch (pokemonDexStatus)
+					{
+						case 0:
+							SoundEngine.PlaySound(SoundID.ResearchComplete with { Pitch = -0.5f }, Player.Center);
+							Main.NewText("[c/FFE270:"+Language.GetText("Mods.Pokemod.PokedexMsg.SeenMsg").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName")).Value+"]");
+							break;
+						case 1:
+							SoundEngine.PlaySound(SoundID.ResearchComplete with { Pitch = -0.5f }, Player.Center);
+							Main.NewText("[c/FFE270:"+Language.GetText("Mods.Pokemod.PokedexMsg.ObtainedMsg").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName")).Value+"]");
+							break;
+					}
+				}
 			}
 		}
 
@@ -537,20 +590,16 @@ namespace Pokemod.Common.Players
 					Main.spriteBatch.Draw(gloveIconTexture.Value, Main.MouseWorld - Main.screenPosition + cursorScale * new Vector2(-gloveIconTexture.Width() / 2, 8 + gloveIconTexture.Height() / 2), gloveIconTexture.Value.Bounds, Color.White, 0, gloveIconTexture.Size() * 0.5f, cursorScale, SpriteEffects.None, 0);
 				}
 
-				foreach(Projectile proj in Main.projectile){
-					if(proj.owner == Player.whoAmI){
-						if(proj.ModProjectile != null){
-							if(proj.active){
-								if(proj.ModProjectile is PokemonPetProjectile pokemon){
-									Vector2 mousePosition = Main.MouseWorld;
-									if (Vector2.Distance(proj.Center, mousePosition) <= 32f){
-										string PokemonInfo = pokemon.pokemonName + " Lvl " + pokemon.pokemonLvl;
-										Main.instance.MouseText(PokemonInfo);
-									}
-								}
-							}
-						}
+				if(mouseOverPokemon != null)
+				{
+					string PokemonInfo = mouseOverPokemon.pokemonName + " Lvl " + mouseOverPokemon.pokemonLvl;
+
+					if(mouseOverPokemon.canBeHeld && Vector2.Distance(mouseOverPokemon.Projectile.Center, Player.Center) <= distanceToHold && mouseOverPokemon.currentStatus != (int)PokemonPetProjectile.ProjStatus.Attack)
+					{
+						PokemonInfo += "\n" + "[c/FFE270:" + Language.GetTextValue("Mods.Pokemod.PokemonInfo.PickUp") + "]";
 					}
+
+					Main.instance.MouseText(PokemonInfo);
 				}
 
 				if(shouldDynamax > 0)
@@ -670,6 +719,32 @@ namespace Pokemod.Common.Players
 			}
 		}
 
+		private void CheckMouseOverPokemon()
+		{
+			foreach(Projectile proj in Main.projectile){
+				if(proj.owner == Player.whoAmI){
+					if(proj.ModProjectile != null){
+						if(proj.active){
+							if(proj.ModProjectile is PokemonPetProjectile pokemon){
+								Vector2 mousePosition = Main.MouseWorld;
+								if (Vector2.Distance(proj.Center, mousePosition) <= 32f || (mouseOverPokemon != null && Vector2.Distance(proj.Center, mousePosition) < Vector2.Distance(mouseOverPokemon.Projectile.Center, mousePosition))){
+									mouseOverPokemon = pokemon;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		private void PickUpPokemon()
+		{
+			if(mouseOverPokemon != null && mouseOverPokemon.Projectile.owner == Player.whoAmI && Vector2.Distance(mouseOverPokemon.Projectile.Center, Player.Center) <= distanceToHold){
+				mouseOverPokemon.SetHeldByPlayer(!isHoldingPokemon);
+				didRightClick = true;
+			}
+		}
+
 		public void SetMegaEvolution(string megaName)
 		{
 			if (MegaStone != megaName) Player.ClearBuff(ModContent.BuffType<MegaEvolution>());
@@ -681,7 +756,7 @@ namespace Pokemod.Common.Players
 		{
 			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.LevelClamping)
 			{
-				return System.Math.Clamp(pokemonLvl, 0, levelCap);
+				return Math.Clamp(pokemonLvl, 0, levelCap);
 			}
 
 			return pokemonLvl;
@@ -733,6 +808,19 @@ namespace Pokemod.Common.Players
 					Player.delayUseItem = true;
 					Player.controlUseTile = false;
 				}*/
+			}
+			else if (!onBattle)
+			{
+				if (Player.controlUseTile)
+				{
+					if(!didRightClick){
+						PickUpPokemon();
+					}
+				}
+				else
+				{
+					didRightClick = false;
+				}
 			}
 
 			if (onBattle)

@@ -24,6 +24,9 @@ namespace Pokemod.Content.Pets.EeveePet
 		public override string[] evolutions => ["Flareon", "Jolteon", "Vaporeon", "Espeon", "Umbreon"];
 		public override string[] itemToEvolve => ["FireStoneItem", "ThunderStoneItem", "WaterStoneItem"];
 		public override string[] specialConditionToEvolve => ["HappinessDay", "HappinessNight"];
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
 	}
 
 	public class EeveePetProjectileShiny : EeveePetProjectile{}

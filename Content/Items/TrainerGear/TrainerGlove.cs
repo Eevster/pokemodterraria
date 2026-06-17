@@ -52,6 +52,8 @@ namespace Pokemod.Content.Items.TrainerGear
 				return true;
 			}
 
+			if(player.GetModPlayer<PokemonPlayer>().mouseOverPokemon != null) return true;
+
 			attackType = player.GetModPlayer<PokemonPlayer>().attackMode;
 
 			if (player.altFunctionUse == 2) {

@@ -135,6 +135,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 }
 
                 Projectile.penetrate--;
+
+                return false;
             }
 
             return base.OnTileCollide(oldVelocity);

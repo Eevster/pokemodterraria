@@ -164,7 +164,7 @@ namespace Pokemod.Common.GlobalNPCs
             }
 		}
 
-        public static int gemChanceDenominator = 10;
+        public static int gemChanceDenominator = 20;
         public override void OnKill(NPC npc)
         {   
             if(NPC.downedBoss1 && npc.ModNPC is PokemonWildNPC wildNPC){

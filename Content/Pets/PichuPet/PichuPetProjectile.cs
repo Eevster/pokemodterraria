@@ -23,6 +23,9 @@ namespace Pokemod.Content.Pets.PichuPet
 
 		public override string[] evolutions => ["Pichu"];
 		public override string[] specialConditionToEvolve => ["Happiness"];
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
 	}
 
 	public class PichuPetProjectileShiny : PichuPetProjectile{}

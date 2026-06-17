@@ -28,6 +28,9 @@ namespace Pokemod.Content.Pets.JoltikPet
 		public override string[] evolutions => ["Galvantula"];
 		public override int levelToEvolve => 36;
 		public override int levelEvolutionsNumber => 1;
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
 	}
 
 	public class JoltikPetProjectileShiny : JoltikPetProjectile{}

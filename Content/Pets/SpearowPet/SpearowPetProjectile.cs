@@ -29,6 +29,9 @@ namespace Pokemod.Content.Pets.SpearowPet
 		public override string[] evolutions => ["Fearow"];
 		public override int levelToEvolve => 20;
 		public override int levelEvolutionsNumber => 1;
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
 	}
 
 	public class SpearowPetProjectileShiny : SpearowPetProjectile{}

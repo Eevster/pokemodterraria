@@ -23,6 +23,9 @@ namespace Pokemod.Content.Pets.WeedlePet
 		public override string[] evolutions => ["Kakuna"];
 		public override int levelToEvolve => 7;
 		public override int levelEvolutionsNumber => 1;
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
 	}
 
 	public class WeedlePetProjectileShiny : WeedlePetProjectile{}

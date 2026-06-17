@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Players;
+using Pokemod.Content.Dusts;
 using Pokemod.Content.NPCs;
 using ReLogic.Content;
 using Terraria;
@@ -288,6 +289,17 @@ namespace Pokemod.Content.Items.Pokeballs
 				int[] IVs = targetPokemon.GetGlobalNPC<PokemonNPCData>().IVs;
 				int nature = targetPokemon.GetGlobalNPC<PokemonNPCData>().nature;
 				string variant = targetPokemon.GetGlobalNPC<PokemonNPCData>().variant;
+
+				SoundEngine.PlaySound(SoundID.ResearchComplete with { Pitch = -0.8f }, Projectile.Center);
+
+				for(int i = 0; i < 3; i++)
+				{
+					Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<Sparkle>(), Main.rand.NextFloat(-1,1), Main.rand.NextFloat(-1,1), 0, Scale: 1f);
+					Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<Sparkle>(), Main.rand.NextFloat(-1,1), Main.rand.NextFloat(-1,1), 0, Scale: 1f);
+
+					Vector2 starDirection = 10f*new Vector2(0,-1).RotatedBy(MathHelper.ToRadians(90f*(-0.5f+(i/2f))));
+					Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<StarDust>(), starDirection.X, starDirection.Y, 0, Scale: 1f);
+				}
 
 				if (player != null)
 				{

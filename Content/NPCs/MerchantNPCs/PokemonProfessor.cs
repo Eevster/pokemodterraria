@@ -70,14 +70,14 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 		}
 
 		public override void SetStaticDefaults() {
-			Main.npcFrameCount[Type] = 25;
+			Main.npcFrameCount[Type] = 26;
 
-			NPCID.Sets.ExtraFramesCount[Type] = 9;
-			NPCID.Sets.AttackFrameCount[Type] = 4;
+			NPCID.Sets.ExtraFramesCount[Type] = 10;
+			NPCID.Sets.AttackFrameCount[Type] = 5;
 			NPCID.Sets.DangerDetectRange[Type] = 60;
-			NPCID.Sets.AttackType[Type] = 3; // Swings a weapon. This NPC attacks in roughly the same manner as Stylist
+			NPCID.Sets.AttackType[Type] = 1; // Swings a weapon. This NPC attacks in roughly the same manner as Stylist
 			NPCID.Sets.AttackTime[Type] = 12;
-			NPCID.Sets.AttackAverageChance[Type] = 1;
+			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
@@ -112,14 +112,14 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			NPC.friendly = true;
 			NPC.width = 18;
 			NPC.height = 40;
-			NPC.aiStyle = 7;
+			NPC.aiStyle = NPCAIStyleID.Passive;
 			NPC.damage = 10;
 			NPC.defense = 15;
 			NPC.lifeMax = 250;
 			NPC.HitSound = SoundID.NPCHit1;
 			NPC.DeathSound = SoundID.NPCDeath1;
 			NPC.knockBackResist = 0.5f;
-			AnimationType = NPCID.Stylist;
+			AnimationType = NPCID.Guide;
 		}
 
 		public void UpdateShop() {

@@ -30,6 +30,9 @@ namespace Pokemod.Content.Pets.PidgeyPet
 		public override string[] evolutions => ["Pidgeotto"];
 		public override int levelToEvolve => 18;
 		public override int levelEvolutionsNumber => 1;
+
+        public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
 	}
 
 	public class PidgeyPetProjectileShiny : PidgeyPetProjectile{}

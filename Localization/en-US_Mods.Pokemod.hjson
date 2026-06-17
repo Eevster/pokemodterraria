@@ -546,6 +546,10 @@ Projectiles: {
 	AuroraBeam.DisplayName: Aurora Beam
 	Bonemerang.DisplayName: Bonemerang
 	BoneRush.DisplayName: Bone Rush
+	AlolanDiglettPetProjectile.DisplayName: Alolan Diglett Pet Projectile
+	AlolanDiglettPetProjectileShiny.DisplayName: Alolan Diglett Pet Projectile Shiny
+	AlolanDugtrioPetProjectile.DisplayName: Alolan Dugtrio Pet Projectile
+	AlolanDugtrioPetProjectileShiny.DisplayName: Alolan Dugtrio Pet Projectile Shiny
 }
 
 Items: {
@@ -1934,7 +1938,7 @@ Items: {
 
 	PokedexV1: {
 		DisplayName: Pokedex
-		Tooltip: ""
+		Tooltip: An electronic encyclopedia capable of recording info of the various Pokemon
 	}
 
 	GeoResonator: {
@@ -5179,6 +5183,16 @@ NPCs: {
 		Description: It has a soft and bouncy body. Once it starts bouncing, it becomes impossible to stop.
 	}
 
+	AlolanDiglettCritterNPC: {
+		DisplayName: Alolan Diglett
+		Description: The metal-rich geology of this Pokémon's habitat caused it to develop steel whiskers on its head.
+	}
+
+	AlolanDugtrioCritterNPC: {
+		DisplayName: Alolan Dugtrio
+		Description: Their beautiful, metallic whiskers create a sort of protective helmet on their heads, and they also function as highly precise sensors.
+	}
+
 	AlolanSandshrewCritterNPC: {
 		DisplayName: Alolan Sandshrew
 		Description: The skin on its back is as hard as steel. Predators go after its soft belly, so it clings to the ground desperately.
@@ -5383,6 +5397,8 @@ NPCs: {
 	TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
 	IgglybuffCritterNPCShiny.DisplayName: Igglybuff Shiny
+	AlolanDiglettCritterNPCShiny.DisplayName: Alolan Diglett Shiny
+	AlolanDugtrioCritterNPCShiny.DisplayName: Alolan Dugtrio Shiny
 	AlolanSandshrewCritterNPCShiny.DisplayName: Alolan Sandshrew Shiny
 	AlolanSandslashCritterNPCShiny.DisplayName: Alolan Sandslash Shiny
 
@@ -5466,16 +5482,16 @@ NPCs: {
 	G1T4_Erika.DisplayName: Grass-type Gym Leader
 	G1T5_Koga.DisplayName: Poison-type Gym Leader
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
-	G1T8_Giovanni.DisplayName: G1 T8_ Giovanni
-	G1T7_Blaine.DisplayName: G1 T7_ Blaine
-	WooperCritterNPC.DisplayName: Wooper Critter N P C
-	WooperCritterNPCShiny.DisplayName: Wooper Critter N P C Shiny
-	QuagsireCritterNPC.DisplayName: Quagsire Critter N P C
-	QuagsireCritterNPCShiny.DisplayName: Quagsire Critter N P C Shiny
-	JumpluffCritterNPCShiny.DisplayName: Jumpluff Critter N P C Shiny
-	JumpluffCritterNPC.DisplayName: Jumpluff Critter N P C
-	SlowkingCritterNPCShiny.DisplayName: Slowking Critter N P C Shiny
-	SlowkingCritterNPC.DisplayName: Slowking Critter N P C
+	G1T7_Blaine.DisplayName: Fire-type Gym Leader
+	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
+	WooperCritterNPC.DisplayName: Wooper
+	WooperCritterNPCShiny.DisplayName: Wooper Shiny
+	QuagsireCritterNPC.DisplayName: Quagsire
+	QuagsireCritterNPCShiny.DisplayName: Quagsire Shiny
+	JumpluffCritterNPCShiny.DisplayName: Jumpluff Shiny
+	JumpluffCritterNPC.DisplayName: Jumpluff
+	SlowkingCritterNPCShiny.DisplayName: Slowking Shiny
+	SlowkingCritterNPC.DisplayName: Slowking
 }
 
 Bestiary: {
@@ -5617,6 +5633,12 @@ PokemonInfo: {
 	NoMoveAvailable: No moves available
 	Disobedience: *ignores you*
 	DodgeAttack: Dodge
+	PickUp: Right click to pick up
+}
+
+PokedexMsg: {
+	SeenMsg: "{0} was registered in the Pokedex!"
+	ObtainedMsg: "{0}'s complete data registered in the Pokedex!"
 }
 
 PokemonBattle: {
@@ -5760,6 +5782,7 @@ SpawnArea: {
 	UndergroundMushroom: Underground Mushroom
 	Sky: Sky
 	Beach: Beach
+	UndergroundBeach: Underground Beach
 	Ocean: Ocean
 	Marble: Marble
 	Granite: Granite

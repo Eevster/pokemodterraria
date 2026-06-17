@@ -108,10 +108,18 @@ namespace Pokemod.Content.Pets
 		public bool isSwimming = false;
 		public bool isFlying = false;
 
+		public virtual bool canBeHeld => false;
+		public bool isHeldByPlayer = false;
+		public virtual Vector2 heldByPlayerPosition => Vector2.Zero;
+		public virtual bool heldOverPlayer => false;
+
+
 		public virtual bool tangible => true;
 		public virtual bool ghostTangible => false;
 		public virtual bool canRotate => false;
 		public bool canFall = false;
+
+		private int pokemonOrder;
 
 		public enum MovementStyle
 		{
@@ -197,6 +205,8 @@ namespace Pokemod.Content.Pets
 			writer.Write(ballType);
 			writer.Write(Projectile.timeLeft);
 			writer.Write(variant);
+			writer.Write(isHeldByPlayer);
+			writer.Write(pokemonOrder);
             base.SendExtraAI(writer);
         }
 
@@ -215,6 +225,8 @@ namespace Pokemod.Content.Pets
 			ballType = reader.ReadString();
 			Projectile.timeLeft = reader.ReadInt32();
 			variant = reader.ReadString();
+			isHeldByPlayer = reader.ReadBoolean();
+			pokemonOrder = reader.ReadInt32();
 			
             base.ReceiveExtraAI(reader);
         }
@@ -524,8 +536,16 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
-		//Set enemy behavior
+		//Set held by player
+		public void SetHeldByPlayer(bool active)
+		{
+			if (canBeHeld && currentStatus != (int)ProjStatus.Attack)
+			{
+				isHeldByPlayer = active;
+			}
+		}
 
+		//Set enemy behavior
 		public void SetAsEnemyPokemon(NPC newNPCOwner, string[] moveSet)
 		{
 			npcOwner = newNPCOwner;
@@ -536,6 +556,7 @@ namespace Pokemod.Content.Pets
 		//General behavior
         public override void AI() {
 			Player player = Main.player[Projectile.owner];
+			PokemonPlayer trainer = player.GetModPlayer<PokemonPlayer>();
 
 			CheckActive(player);
 
@@ -572,11 +593,14 @@ namespace Pokemod.Content.Pets
 					
 					if (!manualControl)
 					{
+						if(isHeldByPlayer && (player.sleeping.isSleeping || player.dead)) isHeldByPlayer = false;
+
 						GeneralBehavior(player, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
 						Movement(foundTarget, hostilesNearby, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
 					}
 					else
 					{
+						if(isHeldByPlayer) isHeldByPlayer = false;
 						ManualMovement(hostilesNearby);
 					}
 					RefreshStatMods(hostilesNearby);
@@ -593,6 +617,7 @@ namespace Pokemod.Content.Pets
 			{
 				BallMovement();
 			}
+
 			LimitPosition();
 			GetAllProjsExp();
 			EvolutionProcess();
@@ -603,17 +628,27 @@ namespace Pokemod.Content.Pets
 
 			CheckAlteredScale();
 
-			if(player.GetModPlayer<PokemonPlayer>().HasLuminousMoss > 0) Lighting.AddLight(Projectile.Center, new Vector3(0.5f,0.7f,0.5f));
+			if(trainer.HasLuminousMoss > 0) Lighting.AddLight(Projectile.Center, new Vector3(0.5f,0.7f,0.5f));
 
 			if(Main.myPlayer == Projectile.owner){
 				if (!isEnemy)
 				{
-					if(!player.GetModPlayer<PokemonPlayer>().currentActivePokemon.Contains(Projectile.whoAmI)){
-					player.GetModPlayer<PokemonPlayer>().currentActivePokemon.Add(Projectile.whoAmI);
+					if(!trainer.currentActivePokemon.Contains(Projectile.whoAmI)){
+						trainer.currentActivePokemon.Add(Projectile.whoAmI);
 					}
-					if(player.GetModPlayer<PokemonPlayer>().FreePokemonSlots()<0){
-						Main.projectile[player.GetModPlayer<PokemonPlayer>().currentActivePokemon[0]].Kill();
-						player.GetModPlayer<PokemonPlayer>().currentActivePokemon.RemoveAt(0);
+					if(trainer.FreePokemonSlots()<0){
+						Main.projectile[trainer.currentActivePokemon[0]].Kill();
+						trainer.currentActivePokemon.RemoveAt(0);
+					}
+
+					if (trainer.currentActivePokemon.Contains(Projectile.whoAmI))
+					{
+						pokemonOrder = trainer.currentActivePokemon.IndexOf(Projectile.whoAmI);
+					}
+
+					if (isHeldByPlayer)
+					{
+						trainer.isHoldingPokemon = true;
 					}
 				}
 
@@ -727,11 +762,9 @@ namespace Pokemod.Content.Pets
 
 			if (!isEnemy)
 			{
-				float minionPositionOffsetX = (10 + Projectile.minionPos * 40) * -owner.direction;
+				float minionPositionOffsetX = (2 + pokemonOrder * 40) * -owner.direction;
 				idlePosition.X += minionPositionOffsetX; // Go behind the player
 			}
-
-			// All of this code below this line is adapted from Spazmamini code (ID 388, aiStyle 66)
 
 			// Teleport to player if distance is too big
 			vectorToIdlePosition = idlePosition - Projectile.Center;
@@ -1024,7 +1057,7 @@ namespace Pokemod.Content.Pets
 						}
 					}
 
-					if(dynamax) speed = 0;
+					if(dynamax || isHeldByPlayer) speed = 0;
 					
                     Vector2 direction = targetCenter - Projectile.Center;
                     direction.Normalize();
@@ -1073,7 +1106,7 @@ namespace Pokemod.Content.Pets
 					}
 					if (timer <= 0)
 					{
-						if (canAttack)
+						if (canAttack && !(isHeldByPlayer && PokemonData.pokemonAttacks[currentAttack].contact))
 						{
 							Attack(distanceFromTarget, targetCenter);
 						}
@@ -1171,10 +1204,6 @@ namespace Pokemod.Content.Pets
 						}
 					}
 				}
-				if (isFlying && distanceToIdlePosition > 1200f && tangible)
-				{
-					Projectile.tileCollide = false;
-				}
 
 				if (!isFlying && !isSwimming && currentStatus != (int)ProjStatus.Attack)
 				{
@@ -1192,6 +1221,13 @@ namespace Pokemod.Content.Pets
 						isFlying = true;
 					}
 					speed = moveSpeed2;
+
+					// Speed up even more and make the minion intangible
+					if (isFlying && distanceToIdlePosition > 1000f && tangible)
+					{
+						Projectile.tileCollide = false;
+						speed += Math.Max(4,moveSpeed2-moveSpeed1);
+					}
 				}
 				else
 				{
@@ -1208,7 +1244,8 @@ namespace Pokemod.Content.Pets
 
 					if (distanceToIdlePosition < 70f && tangible)
 					{
-						Projectile.tileCollide = true;
+						if(!Projectile.tileCollide && !Collision.SolidCollision(Projectile.Bottom - new Vector2(hitboxWidth/2, 2+hitboxHeight), hitboxWidth, hitboxHeight)) Projectile.tileCollide = true;
+
 						if (moveStyle == (int)MovementStyle.Hybrid && !isEnemy)
 						{
 							Tile playerStanding = Main.tile[(int)(Main.player[Projectile.owner].Bottom.X / 16f), (int)((Main.player[Projectile.owner].Bottom.Y + 8) / 16f)]; //only lands if the player is on the ground.
@@ -1220,10 +1257,12 @@ namespace Pokemod.Content.Pets
 					}
 				}
 
-				if(dynamax) speed = 0;
+				if(dynamax || isHeldByPlayer) speed = 0;
 
 				if (distanceToIdlePosition > 80f)
 				{
+					Vector2 toIdlePositionAux = vectorToIdlePosition;
+
 					// The immediate range around the player (when it passively floats about)
 
 					// This is a simple movement formula using the two parameters and its desired direction to create a "homing" movement
@@ -1236,11 +1275,16 @@ namespace Pokemod.Content.Pets
 					else
 					{
 						Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia).X;
+
+						if (Math.Abs(Projectile.velocity.X) < 0.5f && Math.Abs(toIdlePositionAux.X) < 16)
+						{
+							Projectile.velocity.X = 0;
+						}
 					}
 				}
 				else
 				{
-					if (Math.Abs(Projectile.velocity.X) > 0.2f)
+					if (Math.Abs(Projectile.velocity.X) > 0.5f)
 					{
 						Projectile.velocity.X *= 0.9f;
 					}
@@ -1319,16 +1363,25 @@ namespace Pokemod.Content.Pets
                     }
 				}
 
-				Projectile.velocity.Y += fallAccel;
-				if (Projectile.velocity.Y > maxFallSpeed)
-				{
-					Projectile.velocity.Y = maxFallSpeed;
+				if (!isHeldByPlayer){
+					Projectile.velocity.Y += fallAccel;
+					if (Projectile.velocity.Y > maxFallSpeed)
+					{
+						Projectile.velocity.Y = maxFallSpeed;
+					}
 				}
 			}
 
 			if (canRotate)
 			{
 				Projectile.rotation += Projectile.spriteDirection * MathHelper.ToRadians(1.5f * Projectile.velocity.Length());
+			}
+
+			if (isHeldByPlayer)
+			{
+				Player owner = Main.player[Projectile.owner];
+				Projectile.Bottom = owner.RotatedRelativePoint(owner.MountedCenter) + new Vector2(Projectile.spriteDirection * heldByPlayerPosition.X, -0.5f * owner.height + heldByPlayerPosition.Y);
+				Projectile.velocity = Vector2.Zero;
 			}
 
 			if (timer > 0)
@@ -1967,6 +2020,13 @@ namespace Pokemod.Content.Pets
 				}
 			}
 			Projectile.spriteDirection = Projectile.direction;
+
+			if (isHeldByPlayer)
+			{
+				Player owner = Main.player[Projectile.owner];
+				Projectile.spriteDirection = Projectile.direction = owner.direction>0?1:-1;
+			}
+
 
 			int initialFrame = 0;
 			int finalFrame = 0;

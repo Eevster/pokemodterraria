@@ -23,6 +23,9 @@ namespace Pokemod.Content.Pets.BellsproutPet
 		public override string[] evolutions => ["Weepinbell"];
 		public override int levelToEvolve => 21;
 		public override int levelEvolutionsNumber => 1;
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
 	}
 
 	public class BellsproutPetProjectileShiny : BellsproutPetProjectile{}
