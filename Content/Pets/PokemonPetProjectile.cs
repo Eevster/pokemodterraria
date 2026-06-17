@@ -542,6 +542,14 @@ namespace Pokemod.Content.Pets
 			if (canBeHeld && currentStatus != (int)ProjStatus.Attack)
 			{
 				isHeldByPlayer = active;
+
+				if (active)
+				{
+					if(currentStatus != (int)ProjStatus.Idle && currentStatus != (int)ProjStatus.Attack)
+					{
+						currentStatus = (int)ProjStatus.Idle;
+					}
+				}
 			}
 		}
 

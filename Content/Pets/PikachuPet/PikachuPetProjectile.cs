@@ -25,7 +25,7 @@ namespace Pokemod.Content.Pets.PikachuPet
 		public override string[] itemToEvolve => ["ThunderStoneItem"];
 
 		public override bool canBeHeld => true;
-        public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
+        public override Vector2 heldByPlayerPosition => new Vector2(-4,0);
 	}
 
 	public class PikachuPetProjectileShiny : PikachuPetProjectile{}
