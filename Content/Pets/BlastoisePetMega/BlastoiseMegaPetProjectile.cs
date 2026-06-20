@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -27,6 +28,9 @@ namespace Pokemod.Content.Pets.BlastoisePetMega
 
 		public override string[] megaEvolutionBase => ["Blastoise"];
 		public override string[] itemToMegaEvolve => ["BlastoiseMegaStoneItem"];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(-2,0);
 	}
 	
 	public class BlastoiseMegaPetProjectileShiny : BlastoiseMegaPetProjectile{}

@@ -43,6 +43,9 @@ namespace Pokemod.Content.Pets.CharizardPetMegaX
 		public override string[] megaEvolutionBase => ["Charizard"];
 		public override string[] itemToMegaEvolve => ["CharizardMegaStoneItemX"];
 
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(0,0);
+
         public override void SetDefaults()
         {
             base.SetDefaults();

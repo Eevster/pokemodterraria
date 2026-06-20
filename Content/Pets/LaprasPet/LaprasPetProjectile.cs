@@ -26,6 +26,9 @@ namespace Pokemod.Content.Pets.LaprasPet
 		public override int[] idleSwimStartEnd => [9,12];
 		public override int[] walkSwimStartEnd => [13,16];
 		public override int[] attackSwimStartEnd => [17,17];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(0,14);
 	}
 
 	public class LaprasPetProjectileShiny : LaprasPetProjectile{}

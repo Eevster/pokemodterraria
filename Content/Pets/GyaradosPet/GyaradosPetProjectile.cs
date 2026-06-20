@@ -26,6 +26,9 @@ namespace Pokemod.Content.Pets.GyaradosPet
 
 		public override string[] megaEvolutions => ["GyaradosMega"];
 		public override string[] itemToMegaEvolve => ["GyaradosMegaStoneItem"];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(-4,4);
 	}
 
 	public class GyaradosPetProjectileShiny : GyaradosPetProjectile{}

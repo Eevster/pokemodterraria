@@ -5,6 +5,7 @@ using Pokemod.Common.GlobalNPCs;
 using Pokemod.Common.Players;
 using Pokemod.Common.Systems;
 using Pokemod.Content.Buffs;
+using Pokemod.Content.Buffs.MountBuffs;
 using Pokemod.Content.DamageClasses;
 using Pokemod.Content.Items.Dyes;
 using Pokemod.Content.Items.Dynamax;
@@ -113,6 +114,9 @@ namespace Pokemod.Content.Pets
 		public virtual Vector2 heldByPlayerPosition => Vector2.Zero;
 		public virtual bool heldOverPlayer => false;
 
+		public virtual bool canBeMounted => false;
+		public bool isMount = false;
+		public virtual Vector2 playerMountPosition => Vector2.Zero;
 
 		public virtual bool tangible => true;
 		public virtual bool ghostTangible => false;
@@ -553,6 +557,17 @@ namespace Pokemod.Content.Pets
 			}
 		}
 
+		//Set mount
+		public void SetMount(bool active)
+		{
+			if (canBeMounted)
+			{
+				isMount = active;
+				if(active) Main.player[Projectile.owner].AddBuff(ModContent.BuffType<PokeMountBuff>(), 10);
+				else Main.player[Projectile.owner].ClearBuff(ModContent.BuffType<PokeMountBuff>());
+			}
+		}
+
 		//Set enemy behavior
 		public void SetAsEnemyPokemon(NPC newNPCOwner, string[] moveSet)
 		{
@@ -582,6 +597,11 @@ namespace Pokemod.Content.Pets
 				manualControl = false;
 			}
 
+			if (isMount && !player.HasBuff<PokeMountBuff>())
+			{
+				isMount = false;
+			}
+
 			if (isOut)
 			{
 				if (!isEnemy)
@@ -599,7 +619,7 @@ namespace Pokemod.Content.Pets
 						}
 					}
 					
-					if (!manualControl)
+					if (!manualControl && !isMount)
 					{
 						if(isHeldByPlayer && (player.sleeping.isSleeping || player.dead)) isHeldByPlayer = false;
 
@@ -654,15 +674,26 @@ namespace Pokemod.Content.Pets
 						pokemonOrder = trainer.currentActivePokemon.IndexOf(Projectile.whoAmI);
 					}
 
-					if (isHeldByPlayer)
-					{
-						trainer.isHoldingPokemon = true;
-					}
+					if (isHeldByPlayer) trainer.isHoldingPokemon = true;
+					if (isMount) trainer.isMounted = true;
 				}
 
 				Projectile.netUpdate = true;
 			}
 		}
+
+        public override void PostAI()
+        {
+            base.PostAI();
+			Player player = Main.player[Projectile.owner];
+
+			if (isOut && !isEnemy && isMount)
+			{
+				player.direction = Projectile.spriteDirection;
+				player.Bottom = Projectile.Center + new Vector2(Projectile.spriteDirection*playerMountPosition.X, playerMountPosition.Y);
+				player.velocity = Vector2.Zero;
+			}
+        }
 
 		//Exp methods
 		public virtual void GetAllProjsExp(){
@@ -1694,6 +1725,8 @@ namespace Pokemod.Content.Pets
 
 			if(Projectile.scale != 1f && prevScale != Projectile.scale)
 			{
+				Vector2 BottomAux = Projectile.Bottom;
+
 				Asset<Texture2D> pokeTexture = ModContent.Request<Texture2D>(Texture);
 				Projectile.width = (int)(Projectile.scale*hitboxWidth);
 				DrawOffsetX = -(pokeTexture.Width() - Projectile.width)/2;
@@ -1701,7 +1734,8 @@ namespace Pokemod.Content.Pets
 				//DrawOriginOffsetY = (int)((Projectile.scale-2)*((pokeTexture.Height()/totalFrames)-hitboxHeight)) + (int)(4*Projectile.scale);
 				DrawOriginOffsetY = -((pokeTexture.Height()/totalFrames) - (int)(Projectile.scale*hitboxHeight))/2 - ((pokeTexture.Height()/totalFrames)-hitboxHeight)/2 + 4;
 
-				Projectile.Center -= 0.5f * ((int)(Projectile.scale-prevScale))*(pokeTexture.Height()/totalFrames) * Vector2.UnitY;
+				//Projectile.Bottom -= 0.5f * ((int)(Projectile.scale-prevScale))*(pokeTexture.Height()/totalFrames) * Vector2.UnitY;
+				Projectile.Bottom = BottomAux;
 
 				prevScale = Projectile.scale;
 			}
@@ -2691,7 +2725,7 @@ namespace Pokemod.Content.Pets
 				}
 				if (Projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f)
 				{
-					if (manualControl && moveStyle == (int)MovementStyle.Hybrid)
+					if ((manualControl || isMount) && moveStyle == (int)MovementStyle.Hybrid)
 					{
 						if (Projectile.oldVelocity.Y > 0) isFlying = false;
 					}

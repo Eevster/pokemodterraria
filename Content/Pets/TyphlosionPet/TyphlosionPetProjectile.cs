@@ -23,6 +23,9 @@ namespace Pokemod.Content.Pets.TyphlosionPet
 		public override float moveDistance1 => 200f;
 		public override float moveDistance2 => 140f;
 
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(0,0);
+
 		public override void SetDefaults()
         {
             base.SetDefaults();

@@ -23,6 +23,9 @@ namespace Pokemod.Content.Pets.AerodactylPet
         public override int[] idleFlyStartEnd => [0, 4];
         public override int[] walkFlyStartEnd => [5, 9];
         public override int[] attackFlyStartEnd => [10, 14];
+
+        public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(0,0);
     }
 
 	public class AerodactylPetProjectileShiny : AerodactylPetProjectile{}

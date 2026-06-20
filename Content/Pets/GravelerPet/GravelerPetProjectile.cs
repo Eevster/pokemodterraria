@@ -22,6 +22,9 @@ namespace Pokemod.Content.Pets.GravelerPet
 
 		public override string[] evolutions => ["Golem"];
 		public override string[] itemToEvolve => ["LinkingCordItem"];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(0,0);
 	}
 
 	public class GravelerPetProjectileShiny : GravelerPetProjectile{}

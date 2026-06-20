@@ -4195,6 +4195,11 @@ Buffs: {
 		// Description: Mods.Pokemod.Buffs.SlowkingPetBuff.Description
 		// DisplayName: Slowking Pet Buff
 	}
+
+	PokeMountBuff: {
+		// Description: Mods.Pokemod.Buffs.PokeMountBuff.Description
+		// DisplayName: Poke Mount Buff
+	}
 }
 
 NPCs: {
@@ -5634,6 +5639,7 @@ PokemonInfo: {
 	Disobedience: *te ignora*
 	DodgeAttack: Esvasión
 	PickUp: Clic derecho para sostenerlo
+	Mount: Clic derecho para montar
 }
 
 PokedexMsg: {

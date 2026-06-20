@@ -19,6 +19,9 @@ namespace Pokemod.Content.Pets.MeganiumPet
 		public override int[] jumpStartEnd => [8,8];
 		public override int[] fallStartEnd => [10,10];
 		public override int[] attackStartEnd => [11,17];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(-2,4);
 	}
 
 	public class MeganiumPetProjectileShiny : MeganiumPetProjectile{}

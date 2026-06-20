@@ -28,6 +28,9 @@ namespace Pokemod.Content.Pets.BlastoisePet
 		
 		public override string[] megaEvolutions => ["BlastoiseMega"];
 		public override string[] itemToMegaEvolve => ["BlastoiseMegaStoneItem"];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(-2,0);
 	}
 
 	public class BlastoisePetProjectileShiny : BlastoisePetProjectile{}

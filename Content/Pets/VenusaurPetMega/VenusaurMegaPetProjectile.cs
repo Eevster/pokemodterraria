@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -24,6 +25,9 @@ namespace Pokemod.Content.Pets.VenusaurPetMega
 
 		public override string[] megaEvolutionBase => ["Venusaur"];
 		public override string[] itemToMegaEvolve => ["VenusaurMegaStoneItem"];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(-8,-10);
 	}
 	
 	public class VenusaurMegaPetProjectileShiny : VenusaurMegaPetProjectile{}

@@ -25,6 +25,9 @@ namespace Pokemod.Content.Pets.FearowPet
 		public override int[] idleFlyStartEnd => [8,11];
 		public override int[] walkFlyStartEnd => [8,11];
 		public override int[] attackFlyStartEnd => [12,15];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(0,4);
 	}
 
 	public class FearowPetProjectileShiny : FearowPetProjectile{}

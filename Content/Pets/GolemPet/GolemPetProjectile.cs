@@ -19,6 +19,9 @@ namespace Pokemod.Content.Pets.GolemPet
 		public override int[] jumpStartEnd => [9,9];
 		public override int[] fallStartEnd => [10,10];
 		public override int[] attackStartEnd => [8,11];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(-8,0);
 	}
 
 	public class GolemPetProjectileShiny : GolemPetProjectile{}

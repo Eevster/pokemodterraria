@@ -22,6 +22,9 @@ namespace Pokemod.Content.Pets.MagnezonePet
 		public override int[] idleFlyStartEnd => [0,7];
 		public override int[] walkFlyStartEnd => [0,7];
 		public override int[] attackFlyStartEnd => [8,15];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(-8,0);
 	}
 
 	public class MagnezonePetProjectileShiny : MagnezonePetProjectile{}

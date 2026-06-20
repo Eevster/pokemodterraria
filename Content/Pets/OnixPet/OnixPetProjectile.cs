@@ -19,6 +19,9 @@ namespace Pokemod.Content.Pets.OnixPet
 		public override int[] jumpStartEnd => [0, 0];
 		public override int[] fallStartEnd => [1, 1];
 		public override int[] attackStartEnd => [4, 4];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(8,-18);
 	}
 
 	public class OnixPetProjectileShiny : OnixPetProjectile{}

@@ -29,6 +29,9 @@ namespace Pokemod.Content.Pets.PidgeotPet
 
 		public override float moveSpeed1 => 8;
         public override float moveSpeed2 => 12;
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(-2,4);
 	}
 
 	public class PidgeotPetProjectileShiny : PidgeotPetProjectile{}

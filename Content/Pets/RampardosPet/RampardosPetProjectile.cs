@@ -20,6 +20,8 @@ namespace Pokemod.Content.Pets.RampardosPet
         public override int[] fallStartEnd => [6, 6];
         public override int[] attackStartEnd => [10, 12];
 
+        public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(-4,4);
     }
 
 	public class RampardosPetProjectileShiny : RampardosPetProjectile{}

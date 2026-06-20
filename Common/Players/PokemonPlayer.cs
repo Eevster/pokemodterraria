@@ -25,6 +25,7 @@ using Pokemod.Content.NPCs;
 using Pokemod.Content.Buffs;
 using Pokemod.Common.Configs;
 using Terraria.Localization;
+using Pokemod.Content.Buffs.MountBuffs;
 
 namespace Pokemod.Common.Players
 {
@@ -97,9 +98,10 @@ namespace Pokemod.Common.Players
 		//Hovering over Pokemon
 		public PokemonPetProjectile mouseOverPokemon;
 
-		//Holding Pokemon
+		//Interact with Pokemon
 		public bool isHoldingPokemon;
-		private int distanceToHold = 6*16;
+		private int distanceToInteract = 6*16;
+		public bool isMounted;
 		public bool didRightClick;
 
 		//Battle Mode
@@ -311,6 +313,7 @@ namespace Pokemod.Common.Players
 			currentActivePokemon ??= [];
 
 			bool holdingPokemonAux = false;
+			bool mountPokemonAux = false;
 
 			int i = 0;
 			while (i < currentActivePokemon.Count)
@@ -322,11 +325,16 @@ namespace Pokemod.Common.Players
 				else
 				{
 					if(GetPokemonProjectile(i).isHeldByPlayer) holdingPokemonAux = true;
+					if(GetPokemonProjectile(i).isMount) mountPokemonAux = true;
 					i++;
 				}
 			}
 
 			if(!holdingPokemonAux) isHoldingPokemon = false;
+			if(!mountPokemonAux){
+				Player.ClearBuff(ModContent.BuffType<PokeMountBuff>());
+				isMounted = false;
+			}
 
 			levelCap = defaultLevelCap;
 
@@ -561,6 +569,16 @@ namespace Pokemod.Common.Players
 			}
 		}
 
+        public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
+        {
+			if (isMounted)
+			{
+				Player.gfxOffY = 0;
+			}
+
+            base.ModifyDrawInfo(ref drawInfo);
+        }
+
 		public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
 		{
 			if (Player.whoAmI == Main.myPlayer)
@@ -594,9 +612,16 @@ namespace Pokemod.Common.Players
 				{
 					string PokemonInfo = mouseOverPokemon.pokemonName + " Lvl " + mouseOverPokemon.pokemonLvl;
 
-					if(mouseOverPokemon.canBeHeld && Vector2.Distance(mouseOverPokemon.Projectile.Center, Player.Center) <= distanceToHold && mouseOverPokemon.currentStatus != (int)PokemonPetProjectile.ProjStatus.Attack)
+					if(Vector2.Distance(mouseOverPokemon.Projectile.Center, Player.Center) <= distanceToInteract && mouseOverPokemon.currentStatus != (int)PokemonPetProjectile.ProjStatus.Attack && !mouseOverPokemon.dynamax)
 					{
-						PokemonInfo += "\n" + "[c/FFE270:" + Language.GetTextValue("Mods.Pokemod.PokemonInfo.PickUp") + "]";
+						if (mouseOverPokemon.canBeHeld)
+						{
+							PokemonInfo += "\n" + "[c/FFE270:" + Language.GetTextValue("Mods.Pokemod.PokemonInfo.PickUp") + "]";
+						}
+						if (mouseOverPokemon.canBeMounted)
+						{
+							PokemonInfo += "\n" + "[c/FFE270:" + Language.GetTextValue("Mods.Pokemod.PokemonInfo.Mount") + "]";
+						}
 					}
 
 					Main.instance.MouseText(PokemonInfo);
@@ -739,10 +764,32 @@ namespace Pokemod.Common.Players
 
 		private void PickUpPokemon()
 		{
-			if(mouseOverPokemon != null && mouseOverPokemon.Projectile.owner == Player.whoAmI && Vector2.Distance(mouseOverPokemon.Projectile.Center, Player.Center) <= distanceToHold){
+			if(mouseOverPokemon != null && mouseOverPokemon.Projectile.owner == Player.whoAmI && Vector2.Distance(mouseOverPokemon.Projectile.Center, Player.Center) <= distanceToInteract && mouseOverPokemon.canBeHeld && mouseOverPokemon.isOut && !mouseOverPokemon.dynamax){
 				mouseOverPokemon.SetHeldByPlayer(!isHoldingPokemon);
 				didRightClick = true;
 			}
+		}
+
+		private void MountPokemon()
+		{
+			if(mouseOverPokemon != null && mouseOverPokemon.Projectile.owner == Player.whoAmI && Vector2.Distance(mouseOverPokemon.Projectile.Center, Player.Center) <= distanceToInteract && mouseOverPokemon.canBeMounted && mouseOverPokemon.isOut && !mouseOverPokemon.dynamax){
+				mouseOverPokemon.SetMount(!isMounted);
+				didRightClick = true;
+			}
+		}
+
+		public PokemonPetProjectile GetMountPokemon()
+		{
+			for(int i = 0; i < currentActivePokemon.Count; i++)
+			{
+				PokemonPetProjectile poke = GetPokemonProjectile(i);
+				if(poke != null && poke.isMount)
+				{
+					return poke;
+				}
+			}
+
+			return null;
 		}
 
 		public void SetMegaEvolution(string megaName)
@@ -815,6 +862,7 @@ namespace Pokemod.Common.Players
 				{
 					if(!didRightClick){
 						PickUpPokemon();
+						MountPokemon();
 					}
 				}
 				else

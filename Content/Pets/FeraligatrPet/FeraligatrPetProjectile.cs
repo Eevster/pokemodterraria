@@ -25,6 +25,9 @@ namespace Pokemod.Content.Pets.FeraligatrPet
 		public override int[] idleSwimStartEnd => [0,5];
 		public override int[] walkSwimStartEnd => [6,11];
 		public override int[] attackSwimStartEnd => [12,17];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(0,0);
 	}
 
 	public class FeraligatrPetProjectileShiny : FeraligatrPetProjectile{}

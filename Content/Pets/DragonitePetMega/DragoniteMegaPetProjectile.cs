@@ -37,6 +37,9 @@ namespace Pokemod.Content.Pets.DragonitePetMega
 		
 		public override string[] megaEvolutionBase => ["Dragonite"];
 		public override string[] itemToMegaEvolve => ["DragoniteMegaStoneItem"];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(0,0);
 	}
 	public class DragoniteMegaPetProjectileShiny : DragoniteMegaPetProjectile{}
 }

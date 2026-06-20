@@ -27,6 +27,9 @@ namespace Pokemod.Content.Pets.AerodactylPet
         public override int[] walkFlyStartEnd => [5, 9];
         public override int[] attackFlyStartEnd => [10, 14];
 
+        public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(0,0);
+
         public override void ChangeAttackColor(PokemonAttack attack, bool condition = false, int shaderID = 0, Color color = default)
         {
             condition = attack.attackType == (int)TypeIndex.Fire;

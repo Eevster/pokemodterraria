@@ -26,6 +26,9 @@ namespace Pokemod.Content.Pets.VenusaurPet
 		
 		public override string[] megaEvolutions => ["VenusaurMega"];
 		public override string[] itemToMegaEvolve => ["VenusaurMegaStoneItem"];
+
+		public override bool canBeMounted => true;
+        public override Vector2 playerMountPosition => new Vector2(-8,-10);
 	}
 
 	public class VenusaurPetProjectileShiny : VenusaurPetProjectile{}
