@@ -34,6 +34,10 @@ namespace Pokemod.Content.Projectiles
 
 		public NPC targetEnemy;
 		public Player targetPlayer;
+		public Projectile targetPokemon;
+
+		public Vector2 targetPosition;
+
 		public bool foundTarget = false;
 
 		public Vector2 positionAux;
@@ -264,6 +268,52 @@ namespace Pokemod.Content.Projectiles
 			}
 		}
 
+		public bool SafeUpdateTargetPosition()
+		{
+			if (targetEnemy != null || targetPlayer != null || targetPokemon != null)
+			{
+				if (targetEnemy != null)
+				{
+					if (targetEnemy.active)
+					{
+						targetPosition = targetEnemy.Center;
+					}
+					else
+					{
+						targetEnemy = null;
+					}
+				}
+				if (targetPlayer != null)
+				{
+					if (targetPlayer.active && !targetPlayer.dead)
+					{
+						targetPosition = targetPlayer.Center;
+					}
+					else
+					{
+						targetPlayer = null;
+					}
+				}
+				if (targetPokemon != null)
+				{
+					if (targetPokemon.active && targetPokemon.ModProjectile is PokemonPetProjectile)
+					{
+						targetPosition = targetPokemon.Center;
+					}
+					else
+					{
+						targetPokemon = null;
+					}
+				}
+				if (targetEnemy != null || targetPlayer != null || targetPokemon != null)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
         /*public void SetExpGained(NPC target, NPC.HitInfo hit){
 			if(target.life <= 0 || hit.InstantKill){
 				int exp = (int)Math.Sqrt(target.value);
@@ -288,8 +338,6 @@ namespace Pokemod.Content.Projectiles
 
             PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
 
-			if(trainer.onBattle) return;
-
             Vector2 playerPosition = trainer.Player.Center;
             float distanceFromPlayer = 1500;
 
@@ -297,6 +345,39 @@ namespace Pokemod.Content.Projectiles
 
 			targetEnemy = null;
 			targetPlayer = null;
+			targetPokemon = null;
+
+			if (trainer.onBattle)
+			{
+				bool isEnemy = pokemonProj != null && pokemonProj.active && pokemonProj.ModProjectile is PokemonPetProjectile pokeProj && pokeProj.isEnemy;
+				float sqrMaxDetectDistance = distanceFromTarget*distanceFromTarget;
+
+				foreach(Projectile proj in Main.projectile){
+					if(proj.owner == Projectile.owner){
+						if(proj.active){
+							if(proj.ModProjectile != null){
+								if(proj.ModProjectile is PokemonPetProjectile pokemon){
+									float sqrDistanceToTarget = Vector2.DistanceSquared(proj.Center, point);
+									bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, proj.position, proj.width, proj.height);
+									bool closeThroughWall = Vector2.Distance(proj.Center, point) < 100f || canAttackThroughWalls;
+
+									// Check if it is within the radius
+									if (sqrDistanceToTarget < sqrMaxDetectDistance && (lineOfSight || closeThroughWall)) {
+										if(pokemon.isEnemy != isEnemy){
+											sqrMaxDetectDistance = sqrDistanceToTarget;
+											targetCenter = proj.Center;
+											targetPokemon = proj;
+											foundTarget = true;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				return;
+			}
 
 			if(Main.netMode != NetmodeID.SinglePlayer){
 				float sqrMaxDetectDistance = distanceFromTarget*distanceFromTarget;

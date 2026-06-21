@@ -228,19 +228,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 SearchTarget((float)PokemonData.pokemonAttacks["Psychic"].distanceToAttack);
                 if (foundTarget)
                 {
-                    if (targetEnemy != null)
+                    if (SafeUpdateTargetPosition())
                     {
-                        if (targetEnemy.active)
-                        {
-                            homingTarget = targetEnemy.Center;
-                        }
-                    }
-                    else if (targetPlayer != null)
-                    {
-                        if (targetPlayer.active)
-                        {
-                            homingTarget = targetPlayer.Center;
-                        }
+                        homingTarget = targetPosition;
                     }
                 }
             }

@@ -138,5 +138,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
             base.OnHitPlayer(target, info);
         }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			if(!exploded){
+				Projectile.frame = 3;
+				exploded = true;
+				Projectile.velocity = Vector2.Zero;
+			}
+            base.OnHitPokemonPet(target, damageDone);
+        }
     }
 }

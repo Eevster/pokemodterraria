@@ -123,5 +123,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
 			HitEffect();
         }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            base.OnHitPokemonPet(target, damageDone);
+			HitEffect();
+        }
+
     }
 }

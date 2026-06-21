@@ -19,7 +19,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class MagicalLeaf : PokemonAttack
 	{
-		private Vector2 targetPosition;
 		private bool canfollow = true;
 		public override void SendExtraAI(BinaryWriter writer)
         {
@@ -150,19 +149,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}
 
 				if(foundTarget){
-					if(targetPlayer != null){
-						if(targetPlayer.active && !targetPlayer.dead){
-							targetPosition = targetPlayer.Center;
-						}else{
-							targetPlayer = null;
-						}
-					}else if(targetEnemy != null){
-						if(targetEnemy.active){
-							targetPosition = targetEnemy.Center;
-						}else{
-							targetEnemy = null;
-						}
-					}
+					SafeUpdateTargetPosition();
 
 					if(Projectile.timeLeft < 60){
 						if(Projectile.ai[1] == 0){

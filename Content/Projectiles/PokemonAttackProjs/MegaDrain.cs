@@ -17,7 +17,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class MegaDrain : PokemonAttack
 	{
-		private Vector2 targetPosition;
 		private float sizeChangeRate = 0.05f;
 		private float shadowScaleDiff = 0.20f;
 		private int shadowCount = 3;
@@ -94,22 +93,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if(Projectile.timeLeft >= 70)
 			{
-				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack)
+				{
 					SearchTarget(64f);
-				}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-					if(Trainer.targetPlayer != null){
+				}
+				else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack)
+				{
+					if(Trainer.targetPlayer != null)
+					{
 						targetPlayer = Trainer.targetPlayer;
-					}else if(Trainer.targetNPC != null){
+					}
+					else if(Trainer.targetNPC != null)
+					{
 						targetEnemy = Trainer.targetNPC;
 					}
-				}
-			}
-
-			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				if(Trainer.targetPlayer != null){
-					targetPlayer = Trainer.targetPlayer;
-				}else if(Trainer.targetNPC != null){
-					targetEnemy = Trainer.targetNPC;
 				}
 			}
 
@@ -123,24 +120,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}
 			}
 
-			if(targetEnemy != null || targetPlayer != null){
-				if(targetEnemy != null){
-					if(targetEnemy.active){
-						targetPosition = targetEnemy.Center;
-					}else{
-						targetEnemy = null;
-					}
-				}
-				if(targetPlayer != null){
-					if(targetPlayer.active && !targetPlayer.dead){
-						targetPosition = targetPlayer.Center;
-					}else{
-						targetPlayer = null;
-					}
-				}
-				if(targetEnemy != null || targetPlayer != null){
-					Projectile.Center = targetPosition;
-				}
+			if (SafeUpdateTargetPosition())
+			{
+				Projectile.Center = targetPosition;
 			}
 
 			if(Projectile.owner == Main.myPlayer){
@@ -181,6 +163,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             HealEffect(info.Damage);
 
             base.OnHitPlayer(target, info);
+        }
+
+		public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			HealEffect(damageDone);
+
+            base.OnHitPokemonPet(target, damageDone);
         }
 
 		public void HealEffect(int healAmount){

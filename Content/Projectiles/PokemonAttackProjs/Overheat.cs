@@ -123,11 +123,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Player player = Main.player[Projectile.owner];
-
             if(target.CanBeChasedBy()){
-                if(Vector2.Distance(target.Center, player.Center) > 0){
-                    target.velocity += 4*Vector2.Normalize(target.Center-player.Center)*target.knockBackResist;
+                if(pokemonProj != null && pokemonProj.active && pokemonProj.ModProjectile is PokemonPetProjectile)
+                {
+                    if(Vector2.Distance(target.Center, pokemonProj.Center) > 0){
+                        target.velocity += 4*Vector2.Normalize(target.Center-pokemonProj.Center)*target.knockBackResist;
+                    }
                 }
             }
             base.OnHitNPC(target, hit, damageDone);
@@ -135,14 +136,27 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            Player player = Main.player[Projectile.owner];
-
-            if(Vector2.Distance(target.Center, player.Center) > 0){
-                target.velocity += 4*Vector2.Normalize(target.Center-player.Center);
+            if(pokemonProj != null && pokemonProj.active && pokemonProj.ModProjectile is PokemonPetProjectile)
+            {
+                if(Vector2.Distance(target.Center, pokemonProj.Center) > 0){
+                    target.velocity += 4*Vector2.Normalize(target.Center-pokemonProj.Center);
+                }
             }
+
             base.OnHitPlayer(target, info);
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            if(pokemonProj != null && pokemonProj.active && pokemonProj.ModProjectile is PokemonPetProjectile)
+            {
+                if(Vector2.Distance(target.Projectile.Center, pokemonProj.Center) > 0){
+                    target.Projectile.velocity += 4*Vector2.Normalize(target.Projectile.Center-pokemonProj.Center);
+                }
+            }
+
+            base.OnHitPokemonPet(target, damageDone);
+        }
 
         public override Color? GetAlpha(Color lightColor)
         {

@@ -208,6 +208,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             HitStun();
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            HitStun();
+            
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
+
         public void HitStun()
         {
             PokemonPetProjectile pokemonOwner = (PokemonPetProjectile)pokemonProj.ModProjectile;

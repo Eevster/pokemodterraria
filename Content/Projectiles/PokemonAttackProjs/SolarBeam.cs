@@ -141,18 +141,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
                     SearchTarget(1000f, true);
 
-                    if(targetPlayer != null){
-                        if(targetPlayer.active && !targetPlayer.dead){
-                            enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetPlayer.Center - Projectile.Center);
-                        }else{
-                            targetPlayer = null;
-                        }
-                    }else if(targetEnemy != null){
-                        if(targetEnemy.active){
-                            enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetEnemy.Center - Projectile.Center);
-                        }else{
-                            targetEnemy = null;
-                        }
+                    if (SafeUpdateTargetPosition())
+                    {
+                        enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetPosition - Projectile.Center);
                     }
                 }else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
                     enemyCenter = Projectile.Center + maxLenght*Vector2.Normalize(Trainer.attackPosition - Projectile.Center);
@@ -166,26 +157,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
                     SearchTarget(1000f, true);
 
-                    if(targetPlayer != null){
-                        if(targetPlayer.active && !targetPlayer.dead){
-                            Vector2 directionToCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetPlayer.Center - Projectile.Center)-enemyCenter;
-                            if(directionToCenter.Length()>float.Epsilon){
-                                directionToCenter = Math.Clamp(directionToCenter.Length(), 0f, 16f)*Vector2.Normalize(directionToCenter);
-                            }
-                            enemyCenter += directionToCenter;
-                        }else{
-                            targetPlayer = null;
+                    if (SafeUpdateTargetPosition())
+                    {
+                        Vector2 directionToCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetPosition - Projectile.Center)-enemyCenter;
+                        if(directionToCenter.Length()>float.Epsilon){
+                            directionToCenter = Math.Clamp(directionToCenter.Length(), 0f, 16f)*Vector2.Normalize(directionToCenter);
                         }
-                    }else if(targetEnemy != null){
-                        if(targetEnemy.active){
-                            Vector2 directionToCenter = Projectile.Center + maxLenght*Vector2.Normalize(targetEnemy.Center - Projectile.Center)-enemyCenter;
-                            if(directionToCenter.Length()>float.Epsilon){
-                                directionToCenter = Math.Clamp(directionToCenter.Length(), 0f, 16f)*Vector2.Normalize(directionToCenter);
-                            }
-                            enemyCenter += directionToCenter;
-                        }else{
-                            targetEnemy = null;
-                        }
+                        enemyCenter += directionToCenter;
                     }
                 }else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
                     Vector2 directionToCenter = Projectile.Center + maxLenght*Vector2.Normalize(Trainer.attackPosition - Projectile.Center)-enemyCenter;

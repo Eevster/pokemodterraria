@@ -119,18 +119,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.direction = Projectile.spriteDirection = projDirection;
 
 			if(foundTarget){
-				if(targetPlayer != null){
-					if(targetPlayer.active && !targetPlayer.dead){
-						vectorToTarget = targetPlayer.Center-Projectile.Center;
-					}else{
-						targetPlayer = null;
-					}
-				}else if(targetEnemy != null){
-					if(targetEnemy.active){
-						vectorToTarget = targetEnemy.Center-Projectile.Center;
-					}else{
-						targetEnemy = null;
-					}
+				if (SafeUpdateTargetPosition())
+				{
+					vectorToTarget = targetPosition-Projectile.Center;
 				}
 			}
 			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
@@ -276,18 +267,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			Projectile.direction = Projectile.spriteDirection = projDirection;
 
 			if(foundTarget){
-				if(targetPlayer != null){
-					if(targetPlayer.active && !targetPlayer.dead){
-						vectorToTarget = targetPlayer.Center-Projectile.Center;
-					}else{
-						targetPlayer = null;
-					}
-				}else if(targetEnemy != null){
-					if(targetEnemy.active){
-						vectorToTarget = targetEnemy.Center-Projectile.Center;
-					}else{
-						targetEnemy = null;
-					}
+				if (SafeUpdateTargetPosition())
+				{
+					vectorToTarget = targetPosition-Projectile.Center;
 				}
 			}
 			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){

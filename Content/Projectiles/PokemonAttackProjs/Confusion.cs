@@ -18,8 +18,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Confusion : PokemonAttack
 	{
-		private Vector2 targetPosition;
-
 		public override void SendExtraAI(BinaryWriter writer)
         {
             writer.WriteVector2(targetPosition);
@@ -117,88 +115,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.Opacity = Projectile.timeLeft*0.05f;
 			}
 
-			if(targetEnemy != null || targetPlayer != null){
-				if(targetEnemy != null){
-					if(targetEnemy.active){
-						targetPosition = targetEnemy.Center;
-					}else{
-						targetEnemy = null;
-					}
-				}
-				if(targetPlayer != null){
-					if(targetPlayer.active && !targetPlayer.dead){
-						targetPosition = targetPlayer.Center;
-					}else{
-						targetPlayer = null;
-					}
-				}
-				if(targetEnemy != null || targetPlayer != null){
-					Projectile.Center = targetPosition;
-				}
+			if (SafeUpdateTargetPosition())
+			{
+				Projectile.Center = targetPosition;
 			}
 
 			if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
 			}
         }
-
-		/*private void SearchTarget(){
-			if(attackMode == (int)PokemonPlayer.AttackMode.No_Attack) return;
-
-			float distanceFromTarget = 16f;
-			Vector2 targetCenter = Projectile.Center;
-			bool foundTarget = false;
-
-			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				return;
-			}
-
-			if (true) {
-				float sqrMaxDetectDistance = distanceFromTarget*distanceFromTarget;
-				for (int k = 0; k < Main.maxPlayers; k++) {
-					if(Main.player[k] != null){
-						Player target = Main.player[k];
-						if(target.whoAmI != Projectile.owner){
-							if(target.active && !target.dead){
-								float sqrDistanceToTarget = Vector2.DistanceSquared(target.Center, Projectile.Center);
-
-								// Check if it is within the radius
-								if (sqrDistanceToTarget < sqrMaxDetectDistance) {
-									if(target.hostile){
-										sqrMaxDetectDistance = sqrDistanceToTarget;
-										targetPlayer = target;
-									}
-								}
-							}
-						}
-					}
-				}
-				// This code is required either way, used for finding a target
-				if(targetPlayer == null){
-					for (int i = 0; i < Main.maxNPCs; i++) {
-						NPC npc = Main.npc[i];
-
-						if (npc.CanBeChasedBy()) {
-							float between = Vector2.Distance(npc.Center, Projectile.Center);
-							bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-							bool inRange = between < distanceFromTarget;
-
-							if(npc.boss){
-								targetEnemy = npc;
-								break;
-							}
-
-							if ((closest && inRange) || !foundTarget) {
-								foundTarget = true;
-								distanceFromTarget = between;
-								targetCenter = npc.Center;
-								targetEnemy = npc;
-							}
-						}
-					}
-				}
-			}
-		}*/
 
 		public override bool? CanHitNPC(NPC target)
         {
@@ -233,6 +158,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             target.AddBuff(BuffID.Confused, 60);
 
             base.OnHitPlayer(target, info);
+        }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            base.OnHitPokemonPet(target, damageDone);
         }
 
         public override bool ShouldUpdatePosition() {

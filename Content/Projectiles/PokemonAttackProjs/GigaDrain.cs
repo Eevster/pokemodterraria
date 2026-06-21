@@ -18,7 +18,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class GigaDrain : PokemonAttack
 	{
-		private Vector2 targetPosition;
 		public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
 
 		public override void SendExtraAI(BinaryWriter writer)
@@ -87,26 +86,24 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
 			if(Projectile.timeLeft >= 70)
 			{
-				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack)
+				{
 					SearchTarget(64f);
-				}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-					if(Trainer.targetPlayer != null){
+				}
+				else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack)
+				{
+					if(Trainer.targetPlayer != null)
+					{
 						targetPlayer = Trainer.targetPlayer;
-					}else if(Trainer.targetNPC != null){
+					}
+					else if(Trainer.targetNPC != null)
+					{
 						targetEnemy = Trainer.targetNPC;
 					}
 				}
 			}
 
 			Lighting.AddLight(Projectile.Center, Projectile.Opacity*0.3f, Projectile.Opacity, Projectile.Opacity*0.3f);
-
-			if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
-				if(Trainer.targetPlayer != null){
-					targetPlayer = Trainer.targetPlayer;
-				}else if(Trainer.targetNPC != null){
-					targetEnemy = Trainer.targetNPC;
-				}
-			}
 
             if(Projectile.scale < 1.5f){
                 Projectile.scale += 0.02f/Projectile.scale;
@@ -116,24 +113,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.Opacity = Projectile.timeLeft*0.05f;
 			}
 
-			if(targetEnemy != null || targetPlayer != null){
-				if(targetEnemy != null){
-					if(targetEnemy.active){
-						targetPosition = targetEnemy.Center;
-					}else{
-						targetEnemy = null;
-					}
-				}
-				if(targetPlayer != null){
-					if(targetPlayer.active && !targetPlayer.dead){
-						targetPosition = targetPlayer.Center;
-					}else{
-						targetPlayer = null;
-					}
-				}
-				if(targetEnemy != null || targetPlayer != null){
-					Projectile.Center = targetPosition;
-				}
+			if (SafeUpdateTargetPosition())
+			{
+				Projectile.Center = targetPosition;
 			}
 
 			if(Projectile.owner == Main.myPlayer){
@@ -174,6 +156,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             HealEffect(info.Damage);
 
             base.OnHitPlayer(target, info);
+        }
+
+		public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			HealEffect(damageDone);
+
+            base.OnHitPokemonPet(target, damageDone);
         }
 
 		public void HealEffect(int healAmount){

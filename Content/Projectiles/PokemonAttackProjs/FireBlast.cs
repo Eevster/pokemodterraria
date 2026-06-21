@@ -165,6 +165,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            if(!exploded){
+                exploded = true;
+                Projectile.frame = 0;
+                Projectile.velocity = Vector2.Zero;
+                Projectile.scale = 1.5f;
+                if(Projectile.timeLeft < 40){
+                    Projectile.timeLeft = 40;
+                }
+            }
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item20, Projectile.position);

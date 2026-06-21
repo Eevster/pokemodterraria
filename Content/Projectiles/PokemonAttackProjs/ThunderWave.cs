@@ -134,36 +134,19 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 				if(foundTarget){
 					float projSpeed = 10f;
-					if(targetPlayer != null){
-						if(targetPlayer.active && !targetPlayer.dead){
-							Projectile.velocity =  (targetPlayer.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
-						}else{
-							targetPlayer = null;
-						}
-					}else if(targetEnemy != null){
-						if(targetEnemy.active){
-							Projectile.velocity =  (targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
-						}else{
-							targetEnemy = null;
-						}
+
+					if (SafeUpdateTargetPosition())
+					{
+						Projectile.velocity =  (targetPlayer.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 					}
 				}
 			}else{
 				Projectile.velocity = Vector2.Zero;
 				Projectile.rotation = 0;
 
-				if(targetPlayer != null){
-					if(targetPlayer.active && !targetPlayer.dead){
-						Projectile.Center = targetPlayer.Center;
-					}else{
-						targetPlayer = null;
-					}
-				}else if(targetEnemy != null){
-					if(targetEnemy.active){
-						Projectile.Center = targetEnemy.Center;
-					}else{
-						targetEnemy = null;
-					}
+				if (SafeUpdateTargetPosition())
+				{
+					Projectile.Center = targetPosition;
 				}
 
 				if(Projectile.timeLeft < 10){

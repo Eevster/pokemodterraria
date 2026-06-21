@@ -19,7 +19,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class PoisonPowder : PokemonAttack
 	{
-		private Vector2 targetPosition;
 		private bool canfollow = true;
 		public override void SendExtraAI(BinaryWriter writer)
         {
@@ -104,19 +103,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             if (attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				if(foundTarget){
-					if(targetPlayer != null){
-						if(targetPlayer.active && !targetPlayer.dead){
-							targetPosition = targetPlayer.Center;
-						}else{
-							targetPlayer = null;
-						}
-					}else if(targetEnemy != null){
-						if(targetEnemy.active){
-							targetPosition = targetEnemy.Center;
-						}else{
-							targetEnemy = null;
-						}
-					}
+					SafeUpdateTargetPosition();
 
 					if(canfollow){
 						if(Vector2.Distance(Projectile.Center, targetPosition) > 4*projSpeed){

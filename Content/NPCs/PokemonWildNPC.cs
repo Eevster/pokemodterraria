@@ -97,6 +97,7 @@ namespace Pokemod.Content.NPCs
 			Main.npcFrameCount[Type] = totalFrames;
 			NPCID.Sets.CountsAsCritter[Type] = true;
 			NPCID.Sets.TownCritter[Type] = true;
+			NPCID.Sets.CantTakeLunchMoney[Type] = true;
 
 			NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers() {
 				// Influences how the NPC looks in the Bestiary

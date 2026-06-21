@@ -96,6 +96,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            target.Projectile.velocity += 5*(target.Projectile.Center-Projectile.Center).SafeNormalize(Vector2.UnitX);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
         public override bool? CanDamage()
         {
             return Projectile.frame >= 3 && !inPokemonBattle;

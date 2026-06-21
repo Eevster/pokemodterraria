@@ -18,7 +18,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class ConfuseRay : PokemonAttack
 	{
-		private Vector2 targetPosition;
 		bool exploded = false;
 		public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
 
@@ -88,19 +87,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 				SearchTarget(64f);
-				if(targetPlayer != null){
-					if(targetPlayer.active && !targetPlayer.dead){
-						targetPosition = targetPlayer.Center;
-					}else{
-						targetPlayer = null;
-					}
-				}else if(targetEnemy != null){
-					if(targetEnemy.active){
-						targetPosition = targetEnemy.Center;
-					}else{
-						targetEnemy = null;
-					}
-				}
+				SafeUpdateTargetPosition();
 			}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
 				float projSpeed = 10f;
 				Projectile.velocity = (Trainer.attackPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
@@ -134,20 +121,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 					float projSpeed = 10f;
 
-					if(targetPlayer != null){
-						if(targetPlayer.active && !targetPlayer.dead){
-							targetPosition = targetPlayer.Center;
-							Projectile.velocity += 0.2f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
-						}else{
-							targetPlayer = null;
-						}
-					}else if(targetEnemy != null){
-						if(targetEnemy.active){
-							targetPosition = targetEnemy.Center;
-							Projectile.velocity += 0.2f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
-						}else{
-							targetEnemy = null;
-						}
+					if (SafeUpdateTargetPosition())
+					{
+						Projectile.velocity += 0.2f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 					}
 
 					if(Projectile.velocity.Length() > projSpeed){
@@ -157,18 +133,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}else{
 				Projectile.velocity = Vector2.Zero;
 
-				if(targetPlayer != null){
-					if(targetPlayer.active && !targetPlayer.dead){
-						Projectile.Center = targetPlayer.Center;
-					}else{
-						targetPlayer = null;
-					}
-				}else if(targetEnemy != null){
-					if(targetEnemy.active){
-						Projectile.Center = targetEnemy.Center;
-					}else{
-						targetEnemy = null;
-					}
+				if (SafeUpdateTargetPosition())
+				{
+					Projectile.Center = targetPosition;
 				}
 			}
 
@@ -203,6 +170,19 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			target.AddBuff(BuffID.Confused, 7*60);
 
             base.OnHitPlayer(target, info);
+        }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			if(!exploded){
+                exploded = true;
+                Projectile.velocity = Vector2.Zero;
+                Projectile.timeLeft = 60;
+				targetPokemon = target.Projectile;
+				foundTarget = true;
+            }
+
+            base.OnHitPokemonPet(target, damageDone);
         }
 
         private static void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawPos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness) {

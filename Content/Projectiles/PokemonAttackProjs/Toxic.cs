@@ -20,7 +20,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 	public class Toxic : PokemonAttack
 	{
 		public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/QuickAttack";
-		private Vector2 targetPosition;
 		public override void SendExtraAI(BinaryWriter writer)
         {
             writer.WriteVector2(targetPosition);
@@ -136,24 +135,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.Opacity = Projectile.timeLeft*0.05f;
 			}
 
-			if(targetEnemy != null || targetPlayer != null){
-				if(targetEnemy != null){
-					if(targetEnemy.active){
-						targetPosition = targetEnemy.Center;
-					}else{
-						targetEnemy = null;
-					}
-				}
-				if(targetPlayer != null){
-					if(targetPlayer.active && !targetPlayer.dead){
-						targetPosition = targetPlayer.Center;
-					}else{
-						targetPlayer = null;
-					}
-				}
-				if(targetEnemy != null || targetPlayer != null){
-					Projectile.Center = targetPosition;
-				}
+			if (SafeUpdateTargetPosition())
+			{
+				Projectile.Center = targetPosition;
 			}
 
 			if(Projectile.owner == Main.myPlayer){

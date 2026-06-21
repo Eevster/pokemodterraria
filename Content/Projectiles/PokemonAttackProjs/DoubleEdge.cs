@@ -150,6 +150,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			base.OnHitPlayer(target, info);
 		}
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			Impact(damageDone, target.Projectile.Center);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
+
 		public void Impact(int damage, Vector2 targetPosition)
 		{
 			for (int i = 0; i < 20; i++)

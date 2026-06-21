@@ -165,6 +165,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            DustBomb(Projectile.velocity, target.Projectile.Center);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
+
         private void DustBomb(Vector2 velocity, Vector2 targetPosition)
         {
             if(Projectile.timeLeft <= 5) //Does repeat if already exploded.

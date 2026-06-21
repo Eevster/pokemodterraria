@@ -137,16 +137,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
 						SearchTarget(1000f);
 
-						if(targetPlayer != null){
-							if(targetPlayer.active && !targetPlayer.dead){
-								ShootProj(targetPlayer.Center);
-							}else{
-								targetPlayer = null;
-							}
-						}else if(targetEnemy != null){
-							if(targetEnemy.active){
-								ShootProj(targetEnemy.Center);
-							}
+						if (SafeUpdateTargetPosition())
+						{
+							ShootProj(targetPosition);
 						}
 					}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
 						ShootProj(Trainer.attackPosition);

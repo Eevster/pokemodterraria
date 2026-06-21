@@ -211,6 +211,8 @@ namespace Pokemod.Content.Pets
 			writer.Write(variant);
 			writer.Write(isHeldByPlayer);
 			writer.Write(pokemonOrder);
+			writer.Write(isMount);
+			
             base.SendExtraAI(writer);
         }
 
@@ -231,6 +233,7 @@ namespace Pokemod.Content.Pets
 			variant = reader.ReadString();
 			isHeldByPlayer = reader.ReadBoolean();
 			pokemonOrder = reader.ReadInt32();
+			isMount = reader.ReadBoolean();
 			
             base.ReceiveExtraAI(reader);
         }
@@ -1205,6 +1208,11 @@ namespace Pokemod.Content.Pets
 						}
 						canAttack = true;
 						timer = (int)Math.Clamp((attackCooldown * cooldownMult), 10, 240);
+
+						if (isEnemy && Main.myPlayer == Projectile.owner)
+						{
+							currentAttack = moveSet[Main.rand.Next(moveSet.Length)];
+						}
 					}
 				}
 			}
@@ -1224,6 +1232,11 @@ namespace Pokemod.Content.Pets
 						}
 						canAttack = true;
 						timer = (int)Math.Clamp((attackCooldown * cooldownMult), 10, 240);
+
+						if (isEnemy && Main.myPlayer == Projectile.owner)
+						{
+							currentAttack = moveSet[Main.rand.Next(moveSet.Length)];
+						}
 					}
 				}
 				if (Projectile.owner == Main.myPlayer)
@@ -1909,11 +1922,6 @@ namespace Pokemod.Content.Pets
 					timer = 120;
 					return;
 				}
-			}
-
-			if (isEnemy && Main.myPlayer == Projectile.owner)
-			{
-				currentAttack = moveSet[Main.rand.Next(moveSet.Length)];
 			}
 			
 			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {

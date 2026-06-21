@@ -13,8 +13,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class NightShade : PokemonAttack
 	{
-		private Vector2 targetPosition;
-
 		public override void SendExtraAI(BinaryWriter writer)
         {
             writer.WriteVector2(targetPosition);
@@ -77,6 +75,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             modifiers.FinalDamage += (int)(pokemonOwner.pokemonLvl * 4f) - 1;
         }
 
+        public override void ModifyHitPokemonPet(PokemonPetProjectile target, ref int damage)
+        {
+            base.ModifyHitPokemonPet(target, ref damage);
+			PokemonPetProjectile pokemonOwner = (PokemonPetProjectile)pokemonProj.ModProjectile;
+            //modifiers.FinalDamage *= 1;
+            damage += (int)(pokemonOwner.pokemonLvl * 4f) - 1;
+        }
+
 
         public override void OnSpawn(IEntitySource source)
 		{
@@ -124,30 +130,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			Projectile.Opacity = Projectile.timeLeft*0.025f;
 
-			if (targetEnemy != null || targetPlayer != null)
+			if (SafeUpdateTargetPosition())
 			{
-				if (targetEnemy != null)
-				{
-					if (targetEnemy.active)
-					{
-						targetPosition = targetEnemy.Center;
-					}
-					else
-					{
-						targetEnemy = null;
-					}
-				}
-				if (targetPlayer != null)
-				{
-					if (targetPlayer.active && !targetPlayer.dead)
-					{
-						targetPosition = targetPlayer.Center;
-					}
-					else
-					{
-						targetPlayer = null;
-					}
-				}
 				Projectile.Center = targetPosition;
 			}
 

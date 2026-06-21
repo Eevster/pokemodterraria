@@ -107,6 +107,18 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			if(!exploded){
+				Explode();
+			}
+			else
+			{
+				target.ApplyStatMod(5, -1);
+			}
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
 		public override bool OnTileCollide (Vector2 oldVelocity){
 			if(!exploded){
 				Explode();

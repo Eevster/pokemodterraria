@@ -103,6 +103,18 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitNPC(target, hit, damageDone);
         }
 
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            Projectile.ai[0] = 1f;
+            base.OnHitPlayer(target, info);
+        }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            Projectile.ai[0] = 1f;
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
         private void UpdateAnimation()
         {
             if (++Projectile.frameCounter >= 6)

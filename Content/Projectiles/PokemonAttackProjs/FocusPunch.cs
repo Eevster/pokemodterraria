@@ -173,6 +173,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            Punch(target.Projectile);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
+
         public void Punch(Entity target)
         {
             for (int j = 0; j < 20; j++)

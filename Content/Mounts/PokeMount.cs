@@ -94,7 +94,7 @@ namespace Pokemod.Content.Mounts
 
 		public override bool Draw(List<DrawData> playerDrawData, int drawType, Player drawPlayer, ref Texture2D texture, ref Texture2D glowTexture, ref Vector2 drawPosition, ref Rectangle frame, ref Color drawColor, ref Color glowColor, ref float rotation, ref SpriteEffects spriteEffects, ref Vector2 drawOrigin, ref float drawScale, float shadow) {
 			if (drawType == 3 && (pokemon != null || (pokemon != null && !pokemon.Projectile.active))) {
-				string TextureName = $"Assets/Textures/Pokesprites/Pets/{pokemon.pokemonName}PetProjectile";
+				string TextureName = $"Assets/Textures/Pokesprites/Pets/{pokemon.GetType().Name}";
 
 				if(pokemon.variant != null && pokemon.variant != "") TextureName += "_" + pokemon.variant;
 

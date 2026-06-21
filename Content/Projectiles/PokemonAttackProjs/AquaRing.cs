@@ -146,6 +146,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+             if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
+            {
+                HealEffect(pokemonPetProj, 0.02f, true);
+            }
+            else
+            {
+                HealEffect(Owner, Owner.statLifeMax2>300?2:1, true);
+            }
+            
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"
 			// shootSpeed is 2.1f for reference, so this is basically plotting 12 pixels ahead from the center

@@ -203,6 +203,7 @@ namespace Pokemod.Common.Players
 			packet.Write(manualControl);
 			packet.Write(onBattle);
 			packet.Write(isHoldingPokemon);
+			packet.Write(isMounted);
 
 			packet.Send(toWho, fromWho);
 		}
@@ -214,6 +215,7 @@ namespace Pokemod.Common.Players
 			manualControl = reader.ReadBoolean();
 			onBattle = reader.ReadBoolean();
 			isHoldingPokemon = reader.ReadBoolean();
+			isMounted = reader.ReadBoolean();
 		}
 
 		public override void CopyClientState(ModPlayer targetCopy)
@@ -224,13 +226,15 @@ namespace Pokemod.Common.Players
 			clone.manualControl = manualControl;
 			clone.onBattle = onBattle;
 			clone.isHoldingPokemon = isHoldingPokemon;
+			clone.isMounted = isMounted;
 		}
 
 		public override void SendClientChanges(ModPlayer clientPlayer)
 		{
 			PokemonPlayer clone = (PokemonPlayer)clientPlayer;
 
-			if (clone.attackMode != attackMode || clone.attackPosition != attackPosition || clone.manualControl != manualControl || clone.onBattle != onBattle || clone.isHoldingPokemon != isHoldingPokemon)
+			if (clone.attackMode != attackMode || clone.attackPosition != attackPosition || clone.manualControl != manualControl ||
+				clone.onBattle != onBattle || clone.isHoldingPokemon != isHoldingPokemon || clone.isMounted != isMounted)
 				SyncPlayer(toWho: -1, fromWho: Main.myPlayer, newPlayer: false);
 		}
 
@@ -899,6 +903,8 @@ namespace Pokemod.Common.Players
 				if (currentPokemonTeam.Length > 0)
 				{
 					onBattle = true;
+
+					if(attackMode == (int)AttackMode.Directed_Attack) attackMode = (int)AttackMode.Auto_Attack;
 
 					DespawnAllPokemon();
 					SendNextPokemon();

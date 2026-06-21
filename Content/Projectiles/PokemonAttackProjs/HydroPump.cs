@@ -165,27 +165,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 						foundTarget = false;
 					}
 				}else{
-					if(targetPlayer != null){
-						if(targetPlayer.active && !targetPlayer.dead){
-							Projectile.velocity +=  0.2f*(targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+					if (SafeUpdateTargetPosition())
+					{
+						Projectile.velocity +=  0.2f*(targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 
 							if(Projectile.velocity.Length() > projSpeed){
 								Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
 							}
-						}else{
-							targetPlayer = null;
-						}
-					}else if(targetEnemy != null){
-						if(targetEnemy.active){
-							Projectile.velocity +=  0.2f*(targetEnemy.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
-
-							if(Projectile.velocity.Length() > projSpeed){
-								Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
-							}
-						}else{
-							targetEnemy = null;
-						}
-					}else{
+					}
+					else
+					{
 						Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
 					}
 				}

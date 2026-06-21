@@ -17,7 +17,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
 	public class Absorb : PokemonAttack
 	{
-		private Vector2 targetPosition;
 		private float sizeChangeRate = 0.05f;
 		private float shadowScaleDiff = 0.20f;
 		private int shadowCount = 3;
@@ -116,18 +115,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}
 			}
 
-			if (attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack)
-			{
-				if (Trainer.targetPlayer != null)
-				{
-					targetPlayer = Trainer.targetPlayer;
-				}
-				else if (Trainer.targetNPC != null)
-				{
-					targetEnemy = Trainer.targetNPC;
-				}
-			}
-
 			if (Projectile.scale > 0f)
 			{
 				Projectile.scale -= sizeChangeRate;
@@ -138,34 +125,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}
 			}
 
-			if (targetEnemy != null || targetPlayer != null)
+			if (SafeUpdateTargetPosition())
 			{
-				if (targetEnemy != null)
-				{
-					if (targetEnemy.active)
-					{
-						targetPosition = targetEnemy.Center;
-					}
-					else
-					{
-						targetEnemy = null;
-					}
-				}
-				if (targetPlayer != null)
-				{
-					if (targetPlayer.active && !targetPlayer.dead)
-					{
-						targetPosition = targetPlayer.Center;
-					}
-					else
-					{
-						targetPlayer = null;
-					}
-				}
-				if (targetEnemy != null || targetPlayer != null)
-				{
-					Projectile.Center = targetPosition;
-				}
+				Projectile.Center = targetPosition;
 			}
 
 			if (Projectile.owner == Main.myPlayer)
@@ -213,6 +175,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 			base.OnHitPlayer(target, info);
 		}
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			HealEffect(damageDone);
+
+            base.OnHitPokemonPet(target, damageDone);
+        }
 
 		public void HealEffect(int healAmount)
 		{
