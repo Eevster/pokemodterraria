@@ -64,7 +64,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		{
 			if ((spawnInfo.Player.ZoneSnow || spawnInfo.Player.ZoneBeach) && !NPC.AnyNPCs(Type))
 			{
-				return 0.1f;
+				return 0.01f;
 			}
 
 			return 0f;

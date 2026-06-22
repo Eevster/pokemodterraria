@@ -19,10 +19,10 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		{
 			pokemonTeam =
             [
-                new EnemyPokemonInfo("Koffing", 37, ["Crunch", "SelfDestruct", "SludgeBomb", "Toxic"]),
-                new EnemyPokemonInfo("Muk", 39, ["VineWhip", "MegaDrain", "PoisonPowder", "AncientPower"]),
-                new EnemyPokemonInfo("Koffing", 37, ["Crunch", "SelfDestruct", "SludgeBomb", "Toxic"]),
-                new EnemyPokemonInfo("Weezing", 43, ["SludgeBomb", "SludgeBomb", "SludgeBomb", "SludgeBomb"]),
+                new EnemyPokemonInfo("Koffing", 37, ["SelfDestruct", "SludgeBomb", "SmokeScreen", "Toxic"]),
+                new EnemyPokemonInfo("Muk", 39, ["Acid", "SludgeBomb", "AcidArmor", "Toxic"]),
+                new EnemyPokemonInfo("Koffing", 37, ["SelfDestruct", "SludgeBomb", "SmokeScreen", "Toxic"]),
+                new EnemyPokemonInfo("Weezing", 43, ["Tackle", "SludgeBomb", "SmokeScreen", "Toxic"]),
             ];
 		}
 
@@ -64,9 +64,9 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if ((spawnInfo.Player.ZoneJungle) && !NPC.AnyNPCs(Type))
+			if (Main.hardMode && (spawnInfo.Player.ZoneCorrupt || spawnInfo.Player.ZoneCrimson) && !NPC.AnyNPCs(Type))
 			{
-				return 0.1f;
+				return 0.01f;
 			}
 
 			return 0f;

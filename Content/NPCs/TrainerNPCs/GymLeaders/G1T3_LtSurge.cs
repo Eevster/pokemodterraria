@@ -19,8 +19,8 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		{
 			pokemonTeam =
             [
-                new EnemyPokemonInfo("Voltorb", 21, ["Swift", "RockThrow", "Tackle", "ThunderWave"]),
-                new EnemyPokemonInfo("Pikachu", 18, ["Tackle", "Thunderwave", "QuickAttack", "ElectroBall"]),
+                new EnemyPokemonInfo("Voltorb", 21, ["ShockWave", "Tackle", "SonicBoom", "ThunderWave"]),
+                new EnemyPokemonInfo("Pikachu", 18, ["ShockWave", "Thunderwave", "QuickAttack", "ElectroBall"]),
                 new EnemyPokemonInfo("Raichu", 24, ["Thunderbolt", "QuickAttack", "ElectroBall", "Discharge"]),
             ];
 		}
@@ -63,9 +63,9 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if ((spawnInfo.Player.ZoneMarble) && !NPC.AnyNPCs(Type))
+			if ((spawnInfo.Player.ZoneMarble || spawnInfo.Player.ZoneGranite) && !NPC.AnyNPCs(Type))
 			{
-				return 0.1f;
+				return 0.01f;
 			}
 
 			return 0f;

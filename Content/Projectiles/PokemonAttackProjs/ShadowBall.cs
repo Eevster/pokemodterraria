@@ -210,9 +210,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
-            HitStun();
-            
+            if (Main.rand.NextBool(5))
+            {
+                target.ApplyStatMod(3, 1);
+            }
             base.OnHitPokemonPet(target, damageDone);
+            HitStun();
         }
 
 

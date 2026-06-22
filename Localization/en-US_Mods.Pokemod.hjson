@@ -550,6 +550,10 @@ Projectiles: {
 	AlolanDiglettPetProjectileShiny.DisplayName: Alolan Diglett Pet Projectile Shiny
 	AlolanDugtrioPetProjectile.DisplayName: Alolan Dugtrio Pet Projectile
 	AlolanDugtrioPetProjectileShiny.DisplayName: Alolan Dugtrio Pet Projectile Shiny
+	ShockWave.DisplayName: Shock Wave
+	SonicBoom.DisplayName: Sonic Boom
+	Screech.DisplayName: Screech
+	Supersonic.DisplayName: Supersonic
 }
 
 Items: {

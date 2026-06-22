@@ -18,14 +18,14 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-	public class ThunderWave : PokemonAttack
+	public class Supersonic : PokemonAttack
 	{
 		bool exploded = false;
         private static Asset<Texture2D> explosionTexture;
         
         public override void Load()
         { 
-            explosionTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/ThunderWaveExplosion");
+            explosionTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/SupersonicExplosion");
         }
 
         public override void Unload()
@@ -63,8 +63,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.tileCollide = true;  
             Projectile.penetrate = 1;
 
-			Projectile.light = 1f;
-
 			Projectile.stopsDealingDamageAfterPenetrateHits = true;
 			base.SetDefaults();
         }
@@ -75,9 +73,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(pokemon.owner == Main.myPlayer){
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 10f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<ThunderWave>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, 16f*Vector2.Normalize(targetCenter-pokemon.Center), ModContent.ProjectileType<Supersonic>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
 						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
-						SoundEngine.PlaySound(SoundID.DD2_LightningAuraZap, pokemon.position);
+						SoundEngine.PlaySound(SoundID.Item20, pokemon.position);
 						pokemonOwner.timer = pokemonOwner.attackDuration;
 						pokemonOwner.canAttack = false;
 						break;
@@ -94,8 +92,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					float scale = 1f*((Projectile.timeLeft-(freq*i/3))%(int)freq)/freq;
 						
 					Main.EntitySpriteDraw(explosionTexture.Value, Projectile.Center - Main.screenPosition,
-						explosionTexture.Frame(1, 4, 0, Projectile.frame), Color.White*(1f-(scale*scale)), 0,
-						explosionTexture.Frame(1, 4).Size() / 2f, 2f*scale, SpriteEffects.None, 0);
+						explosionTexture.Value.Bounds, Color.White*(1f-(scale*scale)), 0,
+						explosionTexture.Size() / 2f, 2f*scale, SpriteEffects.None, 0);
 				}
 
                 return false;
@@ -137,7 +135,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 					if (SafeUpdateTargetPosition())
 					{
-						Projectile.velocity = (targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+						Projectile.velocity =  (targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
 					}
 				}
 			}else{
@@ -176,8 +174,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.frame = 0;
                 Projectile.velocity = Vector2.Zero;
                 Projectile.timeLeft = 30;
+				SoundEngine.PlaySound(SoundID.Item82, Projectile.position);
             }
-			target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), (target.boss?2:3)*60);
+			target.AddBuff(BuffID.Confused, (target.boss?20:30)*60);
             base.OnHitNPC(target, hit, damageDone);
         }
 
@@ -188,30 +187,27 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.frame = 0;
                 Projectile.velocity = Vector2.Zero;
                 Projectile.timeLeft = 30;
+				SoundEngine.PlaySound(SoundID.Item82, Projectile.position);
             }
-			target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), 2*60);
+			target.AddBuff(BuffID.Confused, 10*60);
             base.OnHitPlayer(target, info);
         }
 
-        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+		public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
 			if(!exploded){
                 exploded = true;
                 Projectile.frame = 0;
                 Projectile.velocity = Vector2.Zero;
                 Projectile.timeLeft = 30;
+				SoundEngine.PlaySound(SoundID.Item82, Projectile.position);
             }
             base.OnHitPokemonPet(target, damageDone);
         }
 
 		public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Item94, Projectile.position);
-
-            for (int i = 0; i < 20; i++)
-            {
-                Dust.NewDust(Projectile.Center-new Vector2(8*Projectile.scale, 8*Projectile.scale), (int)(16*Projectile.scale), (int)(16*Projectile.scale), DustID.YellowStarDust, Main.rand.NextFloat(-3,3), Main.rand.NextFloat(-3,3), 100, default(Color), 2f);
-            }
+            SoundEngine.PlaySound(SoundID.Item20, Projectile.position);
         }
 
 		public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)

@@ -19,10 +19,10 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		{
 			pokemonTeam =
             [
-                new EnemyPokemonInfo("Kadabra", 38, ["Teleport", "Psybeam", "Recover", "PsychoCut"]),
+                new EnemyPokemonInfo("Kadabra", 38, ["Psybeam", "Psybeam", "Recover", "PsychoCut"]),
                 new EnemyPokemonInfo("MrMime", 37, ["Confusion", "DoubleKick", "MagicalLeaf", "Psybeam"]),
-                new EnemyPokemonInfo("Venomoth", 38, ["Psychic", "Psychic", "Psychic", "Psychic"]),
-                new EnemyPokemonInfo("Alakazam", 43, ["Psybeam", "Recover", "PsychoCut", "Psychic"]),
+                new EnemyPokemonInfo("Venomoth", 38, ["Psybeam", "Gust", "MegaDrain", "Confusion"]),
+                new EnemyPokemonInfo("Alakazam", 43, ["Psychic", "Recover", "PsychoCut", "Psychic"]),
             ];
 		}
 
@@ -64,9 +64,9 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if ((spawnInfo.Player.ZoneJungle) && !NPC.AnyNPCs(Type))
+			if (Main.hardMode && (spawnInfo.Player.ZoneHallow) && !NPC.AnyNPCs(Type))
 			{
-				return 0.1f;
+				return 0.01f;
 			}
 
 			return 0f;

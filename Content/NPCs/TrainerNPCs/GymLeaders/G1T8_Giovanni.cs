@@ -19,11 +19,11 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		{
 			pokemonTeam =
             [
-                new EnemyPokemonInfo("Rhyhorn", 45, ["Tackle", "RockSlide", "Tackle", "RockSlide"]),
-                new EnemyPokemonInfo("Dugtrio", 42, ["Dig", "RockThrow", "Slash", "MudSlap"]),
+                new EnemyPokemonInfo("Rhyhorn", 45, ["Tackle", "RockSlide", "Tackle", "Earthquake"]),
+                new EnemyPokemonInfo("Dugtrio", 42, ["Slash", "Dig", "MudSlap", "Earthquake"]),
                 new EnemyPokemonInfo("Nidoqueen", 44, ["FocusPunch", "Crunch", "Toxic", "Bite"]),
                 new EnemyPokemonInfo("Nidoking", 45, ["FocusPunch", "Crunch", "Toxic", "Bite"]),
-                new EnemyPokemonInfo("Rhyhorn", 50, ["Tackle", "RockSlide", "StoneEdge", "Tackle"]),
+                new EnemyPokemonInfo("Rhyhorn", 50, ["Tackle", "RockSlide", "Tackle", "Earthquake"]),
             ];
 		}
 
@@ -65,9 +65,9 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if ((spawnInfo.Player.ZoneJungle) && !NPC.AnyNPCs(Type))
+			if (Main.hardMode && (spawnInfo.Player.ZoneForest) && !NPC.AnyNPCs(Type))
 			{
-				return 0.1f;
+				return 0.01f;
 			}
 
 			return 0f;

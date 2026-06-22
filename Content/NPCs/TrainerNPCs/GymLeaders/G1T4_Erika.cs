@@ -19,9 +19,9 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		{
 			pokemonTeam =
             [
-                new EnemyPokemonInfo("Victreebel", 29, ["Slam", "RazorLeaf", "PoisonSting", "BulletSeed"]),
-                new EnemyPokemonInfo("Tangela", 24, ["VineWhip", "MegaDrain", "PoisonPowder", "AncientPower"]),
-                new EnemyPokemonInfo("Vileplume", 29, ["GigaDrain", "GigaDrain", "GigaDrain", "GigaDrain"]),
+                new EnemyPokemonInfo("Victreebel", 29, ["RazorLeaf", "Acid", "PoisonPowder", "GigaDrain"]),
+                new EnemyPokemonInfo("Tangela", 24, ["PoisonPowder", "VineWhip", "AncientPower", "GigaDrain"]),
+                new EnemyPokemonInfo("Vileplume", 29, ["PoisonPowder", "Acid", "ThunderWave", "GigaDrain"]),
             ];
 		}
 
@@ -63,9 +63,9 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if ((spawnInfo.Player.ZoneForest) && !NPC.AnyNPCs(Type))
+			if ((spawnInfo.Player.ZoneJungle) && !NPC.AnyNPCs(Type))
 			{
-				return 0.1f;
+				return 0.01f;
 			}
 
 			return 0f;
