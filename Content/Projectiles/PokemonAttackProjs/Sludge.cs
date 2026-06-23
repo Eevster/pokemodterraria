@@ -13,16 +13,18 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-	public class MudSlap : PokemonAttack
+	public class Sludge : PokemonAttack
 	{
-        public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MudShot";
+        public override void SetStaticDefaults()
+        {
+            Main.projFrames[Projectile.type] = 4;
+        }
         public override void SetDefaults()
         {
-
             Projectile.timeLeft = 60;
 			
-			Projectile.width = 30;
-            Projectile.height = 30;
+			Projectile.width = 64;
+            Projectile.height = 64;
 
             Projectile.friendly = true;
             Projectile.hostile = false;
@@ -72,7 +74,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 							}
 							shootVelocity.Y -= timeToTarget * 0.25f;
 
-                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, shootVelocity, ModContent.ProjectileType<MudSlap>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 5f, pokemon.owner)];
+                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, shootVelocity, ModContent.ProjectileType<Sludge>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 5f, pokemon.owner)];
 							SoundEngine.PlaySound(SoundID.Item21 with { Pitch = -0.5f }, pokemon.position);
 							remainProjs--;
 							pokemonOwner.canAttackOutTimer = false;
@@ -85,8 +87,6 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			}
 		}
 
-
-
         public override void AI()
         {
 			//Gravity
@@ -96,10 +96,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.velocity.Y = 20f;
             }
 
-            //Rolling
-            Projectile.rotation += MathHelper.ToRadians(Projectile.velocity.X * 1.5f);
+            if(Projectile.velocity.Length() > 0) Projectile.rotation = Projectile.velocity.ToRotation();
 
             DustTrail();
+            UpdateAnimation();
         
             if (Projectile.owner == Main.myPlayer)
             {
@@ -107,32 +107,35 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
         }
 
+        private void UpdateAnimation()
+        {
+            if (++Projectile.frameCounter >= 5)
+            {
+                Projectile.frameCounter = 0;
+                if (++Projectile.frame >=  Main.projFrames[Projectile.type])
+                {
+                    Projectile.frame = 0;
+                }
+            }
+        }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             DustBomb(Projectile.velocity, target.Center);
             base.OnHitNPC(target, hit, damageDone);
-            if(Projectile.timeLeft > 18)
-            {
-                Projectile.timeLeft = 18;
-            }
-            target.AddBuff(BuffID.Weak, 5 * 60);
+            target.AddBuff(BuffID.Poisoned, 5 * 60);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             DustBomb(Projectile.velocity, target.Center);
             base.OnHitPlayer(target, info);
-            if (Projectile.timeLeft > 18)
-            {
-                Projectile.timeLeft = 18;
-            }
-            target.AddBuff(BuffID.Weak, 5 * 60);
+            target.AddBuff(BuffID.Poisoned, 5 * 60);
         }
 
         public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
             base.OnHitPokemonPet(target, damageDone);
-            target.ApplyStatMod(5, -1); //Accuracy Down
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
@@ -150,9 +153,17 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			return true;
 		}
 
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
+			Vector2 start = Projectile.Center + Projectile.scale*new Vector2(26,0).RotatedBy(Projectile.rotation);
+			Vector2 end = Projectile.Center - Projectile.scale*new Vector2(26,0).RotatedBy(Projectile.rotation);
+			float collisionPoint = 0f; // Don't need that variable, but required as parameter
+
+			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, Projectile.scale*32f, ref collisionPoint);
+		}
+
         private void DustTrail()
         {
-            Dust.NewDust(Projectile.Center, 0, 0, DustID.Mud, Scale: 2f);
+            Dust.NewDust(Projectile.Center, 0, 0, DustID.Venom, Scale: 1f);
             if (Main.rand.NextBool(10))
             {
                 SoundEngine.PlaySound(SoundID.SplashWeak with { Volume = 0.3f}, Projectile.position);
@@ -163,8 +174,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {   
             for (int i = 0; i < 20; i++)
 			{
-				Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.Mud, Main.rand.Next(-2, 3), Main.rand.Next(-2, 3), default, default, 1.5f);
-                Dust.NewDust(targetPosition, Projectile.width, Projectile.height, DustID.Mud, Main.rand.Next(-2, 3) + velocity.X * 0.1f, Main.rand.Next(-2, 3) + velocity.Y * 0.1f, default, default, 1f);
+				Dust.NewDust(Projectile.Center - 0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.Venom, Main.rand.Next(-2, 3), Main.rand.Next(-2, 3), default, default, 1.5f);
+                Dust.NewDust(targetPosition - 0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.Venom, Main.rand.Next(-2, 3) + velocity.X * 0.1f, Main.rand.Next(-2, 3) + velocity.Y * 0.1f, default, default, 1f);
             }
         }
 

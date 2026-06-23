@@ -449,6 +449,7 @@ Projectiles: {
 	FocusPunch.DisplayName: Puño certero
 	MudShot.DisplayName: Disparo lodo
 	SludgeBomb.DisplayName: Bomba lodo
+	Sludge.DisplayName: Residuos
 	HyperBeam.DisplayName: Hiperrayo
 	DoubleEdge.DisplayName: Doble filo
 	DragonBreath.DisplayName: Dragoaliento
@@ -550,10 +551,12 @@ Projectiles: {
 	// AlolanDiglettPetProjectileShiny.DisplayName: Alolan Diglett Pet Projectile Shiny
 	// AlolanDugtrioPetProjectile.DisplayName: Alolan Dugtrio Pet Projectile
 	// AlolanDugtrioPetProjectileShiny.DisplayName: Alolan Dugtrio Pet Projectile Shiny
-	// ShockWave.DisplayName: Shock Wave
-	// SonicBoom.DisplayName: Sonic Boom
-	// Screech.DisplayName: Screech
-	// Supersonic.DisplayName: Supersonic
+	ShockWave.DisplayName: Onda Voltio
+	SonicBoom.DisplayName: Bomba sónica
+	Screech.DisplayName: Chirrido
+	Supersonic.DisplayName: Supersónico
+	DoubleTeam.DisplayName: Doble equipo
+	Agility.DisplayName: Agilidad
 }
 
 Items: {

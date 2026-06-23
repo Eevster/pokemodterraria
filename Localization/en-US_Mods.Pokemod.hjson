@@ -449,6 +449,7 @@ Projectiles: {
 	FocusPunch.DisplayName: Focus Punch
 	MudShot.DisplayName: Mud Shot
 	SludgeBomb.DisplayName: Sludge Bomb
+	Sludge.DisplayName: Sludge
 	HyperBeam.DisplayName: Hyper Beam
 	DoubleEdge.DisplayName: Double Edge
 	DragonBreath.DisplayName: Dragon Breath
@@ -554,6 +555,8 @@ Projectiles: {
 	SonicBoom.DisplayName: Sonic Boom
 	Screech.DisplayName: Screech
 	Supersonic.DisplayName: Supersonic
+	DoubleTeam.DisplayName: Double Team
+	Agility.DisplayName: Agility
 }
 
 Items: {

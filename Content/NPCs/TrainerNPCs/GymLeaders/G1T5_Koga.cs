@@ -19,9 +19,9 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		{
 			pokemonTeam =
             [
-                new EnemyPokemonInfo("Koffing", 37, ["SelfDestruct", "SludgeBomb", "SmokeScreen", "Toxic"]),
-                new EnemyPokemonInfo("Muk", 39, ["Acid", "SludgeBomb", "AcidArmor", "Toxic"]),
-                new EnemyPokemonInfo("Koffing", 37, ["SelfDestruct", "SludgeBomb", "SmokeScreen", "Toxic"]),
+                new EnemyPokemonInfo("Koffing", 37, ["SelfDestruct", "Sludge", "SmokeScreen", "Toxic"]),
+                new EnemyPokemonInfo("Muk", 39, ["Acid", "Sludge", "AcidArmor", "Toxic"]),
+                new EnemyPokemonInfo("Koffing", 37, ["SelfDestruct", "Sludge", "SmokeScreen", "Toxic"]),
                 new EnemyPokemonInfo("Weezing", 43, ["Tackle", "SludgeBomb", "SmokeScreen", "Toxic"]),
             ];
 		}
