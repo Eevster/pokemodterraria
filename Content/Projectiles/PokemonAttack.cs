@@ -314,6 +314,76 @@ namespace Pokemod.Content.Projectiles
 			return false;
 		}
 
+		public Vector2 GetAuxPositionForMovingTarget(Vector2 position, float time)
+		{
+			Vector2 auxPosition = Vector2.Zero;
+			PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+			Entity targetEntity = null;
+
+			float enemySearchDistance = 150;
+
+			if(trainer.attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
+				if (trainer.targetNPC != null)
+				{
+					if (trainer.targetNPC.active)
+					{
+						targetEntity = trainer.targetNPC;
+					}
+				}
+				if (trainer.targetPlayer != null)
+				{
+					if (trainer.targetPlayer.active && !trainer.targetPlayer.dead)
+					{
+						targetEntity = trainer.targetPlayer;
+					}
+				}
+			}
+
+			if (trainer.attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
+				float sqrMaxDetectDistance = enemySearchDistance*enemySearchDistance;
+				if(Main.netMode != NetmodeID.SinglePlayer){
+					for (int k = 0; k < Main.maxPlayers; k++) {
+						if(Main.player[k] != null){
+							Player target = Main.player[k];
+							if(target.whoAmI != Projectile.owner){
+								if(target.active && !target.dead){
+									if (target.hostile)
+									{
+										if (Vector2.DistanceSquared(target.Center, position) < sqrMaxDetectDistance)
+										{
+											targetEntity = target;
+											sqrMaxDetectDistance = Vector2.DistanceSquared(target.Center, position);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				sqrMaxDetectDistance = enemySearchDistance*enemySearchDistance;
+				for (int i = 0; i < Main.maxNPCs; i++) {
+					NPC npc = Main.npc[i];
+
+					if (npc.CanBeChasedBy()) {
+						if (Vector2.DistanceSquared(npc.Center, position) < sqrMaxDetectDistance && !npc.GetGlobalNPC<PokemonNPCData>().isPokemon)
+						{
+							targetEntity = npc;
+							sqrMaxDetectDistance = Vector2.DistanceSquared(npc.Center, position);
+						}
+					}
+				}
+			}
+
+			if(targetEntity != null)
+			{
+				auxPosition = time*targetEntity.velocity;
+				auxPosition = Collision.AnyCollision(targetEntity.position, auxPosition, targetEntity.width, targetEntity.height);
+			}
+
+			return auxPosition;
+		}
+
         /*public void SetExpGained(NPC target, NPC.HitInfo hit){
 			if(target.life <= 0 || hit.InstantKill){
 				int exp = (int)Math.Sqrt(target.value);

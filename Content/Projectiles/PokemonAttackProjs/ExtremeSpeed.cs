@@ -10,6 +10,7 @@ using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,12 +20,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 	{
 		public override bool CanExistIfNotActualMove => false;
 
-		public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
+		public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/Agility";
+
+		Vector2 pokeVel;
+
+		public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8; // The length of old position to be recorded
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0; // The recording mode
+        }
 
 		public override void SetDefaults()
         {
-            Projectile.width = 50;
-            Projectile.height = 50;
+            Projectile.width = 64;
+            Projectile.height = 64;
 
             Projectile.friendly = true;
             Projectile.hostile = false;
@@ -36,11 +45,14 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.tileCollide = false;  
             Projectile.penetrate = 3;
 
+			Projectile.Opacity = 0.8f;
+
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
 			Projectile.stopsDealingDamageAfterPenetrateHits = true;
 
 			Projectile.hide = true;
+
             base.SetDefaults();
         }
 
@@ -94,13 +106,35 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
         }
 
+		public override bool PreDraw(ref Color lightColor) {
+			if(pokeVel.Length() > 5f){
+				Main.instance.LoadProjectile(Projectile.type);
+				Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
+
+				// Redraw the projectile with the color not influenced by light
+				Vector2 drawOrigin = texture.Size() / 2f;
+				for (int k = 2; k < Projectile.oldPos.Length; k++) {
+					Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
+					Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length) * Projectile.Opacity;
+					Main.EntitySpriteDraw(texture, drawPos, texture.Bounds, color, pokeVel.ToRotation(), drawOrigin, Projectile.scale, SpriteEffects.None, 0);
+				}
+			}
+
+			return false;
+		}
+
         public override void AI()
         {
             int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Firework_Blue, Projectile.velocity.X / 2, Projectile.velocity.Y / 2, 100, default(Color), 0f);
 			Main.dust[dust].noGravity = true;
 			Main.dust[dust].scale = Main.rand.NextFloat(1f,2f);
 
-			if (pokemonProj != null && pokemonProj.velocity.Length() > 0.2f)
+			if(pokemonProj != null && pokemonProj.active && pokemonProj.velocity.Length() > 0.2f)
+			{
+				pokeVel = pokemonProj.velocity;
+			}
+
+			/*if (pokemonProj != null && pokemonProj.velocity.Length() > 0.2f)
 			{
 				for(int i = 0; i < 2; i++)
 				{
@@ -110,11 +144,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 					Main.dust[dust].noGravity = true;
 					Main.dust[dust].scale = Main.rand.NextFloat(1f,2f);
 				}
-			}
+			}*/
 
             if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
 			}
+        }
+
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            behindProjectiles.Add(index);
         }
     }
 }

@@ -19,10 +19,10 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		{
 			pokemonTeam =
             [
-                new EnemyPokemonInfo("Kadabra", 38, ["Psybeam", "Psybeam", "Recover", "PsychoCut"]),
+                new EnemyPokemonInfo("Kadabra", 38, ["Psybeam", "Recover", "FutureSight", "PsychoCut"]),
                 new EnemyPokemonInfo("MrMime", 37, ["Confusion", "DoubleKick", "MagicalLeaf", "Psybeam"]),
-                new EnemyPokemonInfo("Venomoth", 38, ["Psybeam", "Gust", "MegaDrain", "Confusion"]),
-                new EnemyPokemonInfo("Alakazam", 43, ["Psychic", "Recover", "PsychoCut", "Psychic"]),
+                new EnemyPokemonInfo("Venomoth", 38, ["Psybeam", "Gust", "MegaDrain", "Supersonic"]),
+                new EnemyPokemonInfo("Alakazam", 43, ["Psychic", "Recover", "FutureSight", "PsychoCut"]),
             ];
 		}
 

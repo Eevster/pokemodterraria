@@ -557,6 +557,8 @@ Projectiles: {
 	Supersonic.DisplayName: Supersónico
 	DoubleTeam.DisplayName: Doble equipo
 	Agility.DisplayName: Agilidad
+	FutureSight.DisplayName: Premonición
+	TakeDown.DisplayName: Derribo
 }
 
 Items: {
