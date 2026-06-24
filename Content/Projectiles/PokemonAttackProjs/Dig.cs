@@ -178,5 +178,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.netUpdate = true;
 			}
 		}
+
+        public override void OnKill(int timeLeft)
+        {
+            if(pokemonProj != null && pokemonProj.active)
+            {
+                pokemonProj.Opacity = 1;
+            }
+            base.OnKill(timeLeft);
+        }
+
 	}
 }
