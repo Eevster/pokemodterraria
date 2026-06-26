@@ -2276,6 +2276,7 @@ namespace Pokemod.Content.Pets
 		}
         
         public void regenHP(int amount, bool showText = true){
+			if(currentHp <= 0) return;
             // heal hp
             currentHp += amount;
             if(showText) CombatText.NewText(Projectile.Hitbox, new Color(50, 255, 50), "+" + amount);

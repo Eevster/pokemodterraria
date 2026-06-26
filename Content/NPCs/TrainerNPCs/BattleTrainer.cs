@@ -58,7 +58,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			NPC.damage = 0;
 			NPC.defense = 50;
 			NPC.lifeMax = 500;
-			NPC.HitSound = SoundID.PlayerHit;
+			NPC.HitSound = isWoman?SoundID.FemaleHit:SoundID.PlayerHit;
 			NPC.DeathSound = SoundID.PlayerKilled;
 			NPC.knockBackResist = 0f;
 
