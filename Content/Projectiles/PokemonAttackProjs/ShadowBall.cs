@@ -212,7 +212,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             if (Main.rand.NextBool(5))
             {
-                target.ApplyStatMod(3, 1);
+                target.ApplyStatMod(3, -1);
             }
             base.OnHitPokemonPet(target, damageDone);
             HitStun();

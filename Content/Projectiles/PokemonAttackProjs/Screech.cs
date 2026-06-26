@@ -119,7 +119,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
-			target.ApplyStatMod(1, 2);
+			target.ApplyStatMod(1, -2);
             base.OnHitPokemonPet(target, damageDone);
         }
 

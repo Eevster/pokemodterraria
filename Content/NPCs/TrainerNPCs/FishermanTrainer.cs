@@ -14,7 +14,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 	public class FishermanTrainer : BattleTrainer
 	{
 		public override int nPokemon => 3;
-		public override string[] pokemonOptions => ["Magikarp", "Poliwag", "Shellder"];
+		public override string[] pokemonOptions => ["Magikarp", "Poliwag", "Shellder", "Gyarados", "Poliwhirl", "Poliwrath", "Cloyster", "Staryu", "Starmie", "Marill", "Wooper"];
 
 		public override void GiveRewards(Player opponent)
         {
