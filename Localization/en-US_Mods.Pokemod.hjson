@@ -5578,6 +5578,16 @@ Dialogue: {
 		StandardDialogue1: I had a vision of your arrival! I have had psychic powers since I was a child. I dislike fighting, but if you wish, I will show you my powers!
 		DefeatedDialogue: I'm shocked! But, a loss is a loss. I admit I didn't work hard enough to win!
 	}
+
+	G1T7_Blaine: {
+		StandardDialogue1: My fiery pokemon are all ready with intense heat! They incinerate all challengers! Hah! You better have Burn Heal!"
+		DefeatedDialogue: I have burned down to nothing! Not even ashes remain!
+	}
+
+	G1T8_Giovanni: {
+		StandardDialogue1: I'm not holding back! You shall face Giovanni, the greatest Trainer!
+		DefeatedDialogue: Ha! That was a truly intense fight. You have won!
+	}
 }
 
 Tiles: {
