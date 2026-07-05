@@ -2,16 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Effects",
     "\\Common",
-    "\\Common\\Players",
+    "\\Common\\GlobalNPCs",
     "\\Content",
-    "\\Content\\Items",
-    "\\Content\\Items\\Armor",
-    "\\Content\\Items\\Armor\\TrainerSets",
-    "\\Content\\Pets",
-    "\\Content\\TitleScreens"
+    "\\Content\\NPCs",
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen1"
   ],
-  "SelectedNode": "\\Content\\Items\\Armor\\TrainerSets\\TrainerT8Legs.cs",
   "PreviewInSolutionExplorer": false
 }
