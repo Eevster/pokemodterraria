@@ -384,6 +384,12 @@ namespace Pokemod.Common.Players
 			if (HasEjectButton > 0) HasEjectButton--;
 			if (HasShellBell > 0) HasShellBell--;
 			if (HasBigRoot > 0) HasBigRoot--;
+
+			if (Player.dead)
+			{
+				if(onBattle) onBattle = false;
+				if(manualControl) manualControl = false;
+			}
 		}
 
 		public int FreePokemonSlots()

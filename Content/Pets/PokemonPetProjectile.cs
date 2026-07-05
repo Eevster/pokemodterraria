@@ -50,18 +50,26 @@ namespace Pokemod.Content.Pets
 		public int happiness;
 		public int[] finalStats = [0,0,0,0,0,0];
 
+		//Damage system variables
 		public bool immune = true;
         public int hurtTime = 30;
         public int currentHp = 0;
 		public string variant = "";
         public bool showHp;
+		
+		//Stats mods
 		public float[] statMods = [1,1,1,1,1,1,1]; //[attack, def, spatk, spdef, speed, accuracy, evasion]
 		public int statModTimer = 0;
 		//Currently, accuracy above 1, and evasion below 1, have no effect when they should act to oppose the opponent's evasion/accuracy.
 		//Harden has an example of using ApplyStatMod().
 
+		//Debuffs
+		public int statusCondition = 0;
+		public bool isConfused = false;
+
 		public bool manualControl;
 
+		// Behavior info
 		public virtual int nAttackProjs => 16;
 		public Projectile[] attackProjs;
 		public virtual float distanceToFly => 100f;

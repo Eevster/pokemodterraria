@@ -719,6 +719,11 @@ namespace Pokemod.Content.NPCs
         HP, Atk, Def, SpAtk, SpDef, Speed
     }
 
+    public enum StatusConditions
+    {
+        None, Burn, Freeze, Paralysis, Poison, BadlyPoisoned, Sleep
+    }
+
     public enum StageIndex
     {
         Basic,
