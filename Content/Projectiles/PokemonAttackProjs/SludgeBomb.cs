@@ -156,21 +156,23 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             DustBomb(Projectile.velocity, target.Center);
+            target.AddBuff(BuffID.Poisoned, 3*60);
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             DustBomb(Projectile.velocity, target.Center);
+            target.AddBuff(BuffID.Poisoned, 3*60);
             base.OnHitPlayer(target, info);
         }
 
         public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
             DustBomb(Projectile.velocity, target.Projectile.Center);
+            if(Main.rand.NextBool(10)) target.ApplyStatusCondition(NPCs.StatusConditions.Poison);
             base.OnHitPokemonPet(target, damageDone);
         }
-
 
         private void DustBomb(Vector2 velocity, Vector2 targetPosition)
         {

@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using MonoMod.Cil;
 using Pokemod.Common.Players;
-using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
-using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -177,6 +170,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             target.AddBuff(BuffID.Venom, 5*60);
             base.OnHitPlayer(target, info);
+        }
+
+		public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			target.ApplyStatusCondition(NPCs.StatusConditions.BadlyPoisoned);
+            base.OnHitPokemonPet(target, damageDone);
         }
 
         public override bool ShouldUpdatePosition() {

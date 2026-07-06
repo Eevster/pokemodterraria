@@ -179,5 +179,11 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             base.OnHitPlayer(target, info);
         }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			if(Main.rand.NextBool(10)) target.ApplyConfusion();
+            base.OnHitPokemonPet(target, damageDone);
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			NPC.damage = 0;
 			NPC.defense = 50;
 			NPC.lifeMax = 500;
-			NPC.HitSound = SoundID.PlayerHit;
+			NPC.HitSound = isWoman?SoundID.FemaleHit:SoundID.PlayerHit;
 			NPC.DeathSound = SoundID.PlayerKilled;
 			NPC.knockBackResist = 0f;
 
@@ -108,10 +108,27 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		public virtual void LoadTeam()
 		{
 			pokemonTeam = new List<EnemyPokemonInfo>();
+			List<string> validPokemon = new List<string>();
+
+			foreach(string pokemonName in pokemonOptions)
+			{
+				if (ModContent.TryFind<ModNPC>("Pokemod", pokemonName + "CritterNPC", out var npcBase))
+				{
+					int minLvl = ((PokemonWildNPC)npcBase).minLevel;
+					if (trainerLevel > minLvl)
+					{
+						if(!validPokemon.Contains(pokemonName)) validPokemon.Add(pokemonName);
+					}
+				}
+				else
+				{
+					if(!validPokemon.Contains(pokemonName)) validPokemon.Add(pokemonName);
+				}
+			}
 
 			for(int i = 0; i < nPokemon; i++)
 			{
-				pokemonTeam.Add(new EnemyPokemonInfo(pokemonOptions[Main.rand.Next(pokemonOptions.Length)], Main.rand.Next(trainerLevel-2, trainerLevel+1)));
+				pokemonTeam.Add(new EnemyPokemonInfo(validPokemon[Main.rand.Next(validPokemon.Count)], Main.rand.Next(trainerLevel-2, trainerLevel+1)));
 			}
 		}
 
@@ -300,7 +317,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 				{
                     if (moveSet.Count >= 4)
 					{
-						newMoveList.RemoveAt(Main.rand.Next(newMoveList.Count));
+						moveSet.RemoveAt(Main.rand.Next(moveSet.Count));
 					}
 					moveSet.Add(newMoveList[0].moveName);
 				}

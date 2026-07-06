@@ -176,6 +176,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     Projectile.timeLeft = 40;
                 }
             }
+            if(Main.rand.NextBool(10)) target.ApplyStatusCondition(NPCs.StatusConditions.Burn);
             base.OnHitPokemonPet(target, damageDone);
         }
 

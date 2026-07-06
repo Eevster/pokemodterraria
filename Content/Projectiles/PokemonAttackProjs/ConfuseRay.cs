@@ -181,6 +181,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				targetPokemon = target.Projectile;
 				foundTarget = true;
             }
+			if(Main.rand.NextBool(10)) target.ApplyConfusion();
 
             base.OnHitPokemonPet(target, damageDone);
         }

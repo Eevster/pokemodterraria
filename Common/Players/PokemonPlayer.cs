@@ -384,6 +384,12 @@ namespace Pokemod.Common.Players
 			if (HasEjectButton > 0) HasEjectButton--;
 			if (HasShellBell > 0) HasShellBell--;
 			if (HasBigRoot > 0) HasBigRoot--;
+
+			if (Player.dead)
+			{
+				if(onBattle) onBattle = false;
+				if(manualControl) manualControl = false;
+			}
 		}
 
 		public int FreePokemonSlots()
@@ -679,7 +685,10 @@ namespace Pokemod.Common.Players
 						if (Main.projectile[index].ModProjectile is PokemonPetProjectile) PokemonProj = (PokemonPetProjectile)Main.projectile[index]?.ModProjectile;
 						else PokemonProj = null;
 
-						PokemonProj?.regenHP(3 * 5);
+						if(PokemonProj != null && !PokemonProj.isEnemy)
+						{
+							PokemonProj.regenHP(3 * 5);
+						}
 					}
 				}
 				LeftoversTimer = 10 * 60;

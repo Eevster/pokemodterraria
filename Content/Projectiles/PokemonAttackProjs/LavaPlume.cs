@@ -141,6 +141,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
+			if(Main.rand.NextBool(10)) target.ApplyStatusCondition(NPCs.StatusConditions.Burn);
 			if(!exploded){
 				Projectile.frame = 3;
 				exploded = true;

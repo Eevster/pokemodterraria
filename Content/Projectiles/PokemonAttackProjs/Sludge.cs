@@ -135,6 +135,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
+            DustBomb(Projectile.velocity, target.Projectile.Center);
+            if(Main.rand.NextBool(3)) target.ApplyStatusCondition(NPCs.StatusConditions.Poison);
             base.OnHitPokemonPet(target, damageDone);
         }
 

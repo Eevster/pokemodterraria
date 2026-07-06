@@ -108,6 +108,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			if(Main.rand.NextBool(10)) target.ApplyStatusCondition(NPCs.StatusConditions.Burn);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             Vector2 start = Projectile.Center+Projectile.scale*new Vector2(40,0).RotatedBy(Projectile.rotation);

@@ -12,6 +12,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
@@ -162,6 +163,10 @@ namespace Pokemod.Content.Projectiles
 		public virtual void OnHitPokemonPet(PokemonPetProjectile target, int damageDone) //Requires that CheckPokemonPetCollide() is called in AI(). This is intentionally not always called, to save on wasted processing.
 		{
 			if(Projectile.penetrate > 0) Projectile.penetrate--;
+			if(attackType == (int)TypeIndex.Fire && target.statusCondition == (int)StatusConditions.Freeze){
+				SoundEngine.PlaySound(SoundID.LiquidsWaterLava with { Volume = 0.8f }, Projectile.Bottom);
+				target.RemoveStatusCondition();
+			}
 			//Main.NewText("OnHitPokemon");
 			AfterHitTarget(target.Projectile, damageDone);
 		}
@@ -172,7 +177,7 @@ namespace Pokemod.Content.Projectiles
 			{
 				if(pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj)
 				{
-					HealEffect(pokemonPetProj, (int)(damageDone*0.1f), true);
+					if(!pokemonPetProj.isEnemy) HealEffect(pokemonPetProj, (int)(damageDone*0.1f), true);
 				}
 				healed = true;
 			}
@@ -188,32 +193,6 @@ namespace Pokemod.Content.Projectiles
 			}
 			else
 			{
-				if (Vector2.Distance(target.Center, Main.MouseWorld) <= 16f * Trainer.trainerGloveRange)
-				{
-					if (Owner.HeldItem.ModItem is TrainerGlove)
-					{
-						modifiers.FinalDamage.Base += Trainer.trainerGloveExtraDamage;
-						modifiers.DefenseEffectiveness *= Math.Clamp(1f - Trainer.trainerGloveDefenseReduction, 0f, 1f);
-						//Main.NewText(Trainer.trainerGloveDefenseReduction);
-
-						if (target.CanBeChasedBy() && target.damage != 0)
-						{
-							if(Owner.HeldItem.ModItem is GreenTrainerGlove)
-							{
-								Owner.AddBuff(BuffID.Honey, 3*60);
-							}
-							if(Owner.HeldItem.ModItem is RedTrainerGlove)
-							{
-								if(Main.rand.NextBool(5)) target.AddBuff(BuffID.OnFire, 4*60);
-							}
-							if(Owner.HeldItem.ModItem is BlueTrainerGlove)
-							{
-								if(Main.rand.NextBool(5)) target.AddBuff(BuffID.Frostburn, 3*60);
-							}
-						}
-					}
-				}
-
 				int pokemonLvl = 0;
 				if (pokemonProj != null)
 				{
@@ -222,6 +201,32 @@ namespace Pokemod.Content.Projectiles
 						if (pokemonProj.ModProjectile is PokemonPetProjectile pokemon)
 						{
 							pokemonLvl = pokemon.pokemonLvl;
+
+							if (!pokemon.isEnemy && Vector2.Distance(target.Center, Main.MouseWorld) <= 16f * Trainer.trainerGloveRange)
+							{
+								if (Owner.HeldItem.ModItem is TrainerGlove)
+								{
+									modifiers.FinalDamage.Base += Trainer.trainerGloveExtraDamage;
+									modifiers.DefenseEffectiveness *= Math.Clamp(1f - Trainer.trainerGloveDefenseReduction, 0f, 1f);
+									//Main.NewText(Trainer.trainerGloveDefenseReduction);
+
+									if (target.CanBeChasedBy() && target.damage != 0)
+									{
+										if(Owner.HeldItem.ModItem is GreenTrainerGlove)
+										{
+											Owner.AddBuff(BuffID.Honey, 3*60);
+										}
+										if(Owner.HeldItem.ModItem is RedTrainerGlove)
+										{
+											if(Main.rand.NextBool(5)) target.AddBuff(BuffID.OnFire, 4*60);
+										}
+										if(Owner.HeldItem.ModItem is BlueTrainerGlove)
+										{
+											if(Main.rand.NextBool(5)) target.AddBuff(BuffID.Frostburn, 3*60);
+										}
+									}
+								}
+							}
 						}
 					}
 				}
@@ -249,7 +254,7 @@ namespace Pokemod.Content.Projectiles
 		}
 
 		public static void HealEffect(PokemonPetProjectile pokemon, int amount, bool hpSteal = false){
-			if(Main.player[pokemon.Projectile.owner].GetModPlayer<PokemonPlayer>().HasBigRoot <= 0) hpSteal = false;
+			if(Main.player[pokemon.Projectile.owner].GetModPlayer<PokemonPlayer>().HasBigRoot <= 0 || pokemon.isEnemy) hpSteal = false;
 			pokemon.regenHP(hpSteal?(amount+2):amount);
 
 			for(int i = 0; i < 15; i++){
@@ -259,7 +264,7 @@ namespace Pokemod.Content.Projectiles
 		}
 
 		public static void HealEffect(PokemonPetProjectile pokemon, float percent, bool hpSteal = false){
-			if(Main.player[pokemon.Projectile.owner].GetModPlayer<PokemonPlayer>().HasBigRoot <= 0) hpSteal = false;
+			if(Main.player[pokemon.Projectile.owner].GetModPlayer<PokemonPlayer>().HasBigRoot <= 0 || pokemon.isEnemy) hpSteal = false;
 			pokemon.regenPercentHP(hpSteal?(percent*1.2f):percent);
 
 			for(int i = 0; i < 15; i++){

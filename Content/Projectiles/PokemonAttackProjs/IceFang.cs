@@ -89,5 +89,29 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             float collisionPoint = 0f; // Don't need that variable, but required as parameter
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 46f*Projectile.scale, ref collisionPoint);
         }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            base.OnHitNPC(target, hit, damageDone);
+            if (Main.rand.NextBool(10))
+            {
+                target.AddBuff(BuffID.Frozen, 3 * 60);
+            }
+        }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            base.OnHitPlayer(target, info);
+            if (Main.rand.NextBool(10))
+            {
+                target.AddBuff(BuffID.Frozen, 2 * 60);
+            }
+        }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			if(Main.rand.NextBool(10)) target.ApplyStatusCondition(NPCs.StatusConditions.Freeze);
+            base.OnHitPokemonPet(target, damageDone);
+        }
     }
 }

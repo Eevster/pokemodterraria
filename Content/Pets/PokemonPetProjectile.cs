@@ -50,18 +50,31 @@ namespace Pokemod.Content.Pets
 		public int happiness;
 		public int[] finalStats = [0,0,0,0,0,0];
 
+		//Damage system variables
 		public bool immune = true;
         public int hurtTime = 30;
         public int currentHp = 0;
 		public string variant = "";
         public bool showHp;
+		
+		//Stats mods
 		public float[] statMods = [1,1,1,1,1,1,1]; //[attack, def, spatk, spdef, speed, accuracy, evasion]
 		public int statModTimer = 0;
 		//Currently, accuracy above 1, and evasion below 1, have no effect when they should act to oppose the opponent's evasion/accuracy.
 		//Harden has an example of using ApplyStatMod().
 
+		//Debuffs
+		public int statusCondition = 0;
+		public int statusConditionCounter = 0;
+		public float statusConditionTimer = 0;
+
+		public int isConfused = 0;
+		public int isSeeded = 0;
+
+		//Manual control
 		public bool manualControl;
 
+		//Behavior info
 		public virtual int nAttackProjs => 16;
 		public Projectile[] attackProjs;
 		public virtual float distanceToFly => 100f;
@@ -313,13 +326,13 @@ namespace Pokemod.Content.Pets
 
 		public void UpdateStats(){
 			currentLevelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
-			finalStats = PokemonNPCData.CalcAllStats(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().GetClampedLevel(pokemonLvl), baseStats, IVs, EVs, nature);
+			finalStats = PokemonNPCData.CalcAllStats(isEnemy?pokemonLvl:Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().GetClampedLevel(pokemonLvl), baseStats, IVs, EVs, nature);
 
 			var trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
 
 			for(int i = 0; i < finalStats.Length; i++)
 			{
-				finalStats[i] = (int)(finalStats[i]*(trainer.statMult[i]+((trainer.HasEviolite > 0 && evolutions.Length > 0 && (i == 2 || i == 4))?0.5f:0f)));
+				if(!isEnemy) finalStats[i] = (int)(finalStats[i]*(trainer.statMult[i]+((trainer.HasEviolite > 0 && evolutions.Length > 0 && (i == 2 || i == 4))?0.5f:0f)));
 			}
 
 			//Main.NewText("LevelCap: "+currentLevelCap+"  ["+finalStats[0]+","+finalStats[1]+","+finalStats[2]+","+finalStats[3]+","+finalStats[4]+","+finalStats[5]+"]"); 
@@ -340,6 +353,11 @@ namespace Pokemod.Content.Pets
 		}
 
 		public virtual int GetPokemonDamage(int power = 50, bool special = false, float multiplier = 1f){
+			//StatusMult
+			if(special) multiplier *= (statusCondition == (int)StatusConditions.Freeze)?0.5f:1f;
+			else multiplier *= (statusCondition == (int)StatusConditions.Burn)?0.5f:1f;
+
+			//Calc
 			int atkStat = special?(int)(finalStats[3] * statMods[2]): (int)(finalStats[1] * statMods[0]);
 			int pokemonDamage = (int)((2+(int)((2+2f*pokemonLvl/5)*power*atkStat/(50f*14f)))*multiplier);
 			pokemonDamage = (int)(pokemonDamage*Main.player[Projectile.owner].GetTotalDamage<PokemonDamageClass>().ApplyTo(1f));
@@ -353,14 +371,22 @@ namespace Pokemod.Content.Pets
 			int attackType = PokemonData.pokemonAttacks[attackName].attackType;
 			float multiplier = 1f;
 
-			var trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+			if (!isEnemy)
+			{
+				var trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
 
-			//Stab
-			multiplier *= PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains(attackType)?(1f+trainer.stabAdd):1f;
-			//TypeMult
-			if (attackType >= 0 && attackType < 18) multiplier *= trainer.typeMult[PokemonData.pokemonAttacks[attackName].attackType];
-			//ContactMult
-			if (PokemonData.pokemonAttacks[attackName].contact) multiplier *= trainer.contactMult;
+				//Stab
+				multiplier *= PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains(attackType)?(1f+trainer.stabAdd):1f;
+				//TypeMult
+				if (attackType >= 0 && attackType < 18) multiplier *= trainer.typeMult[PokemonData.pokemonAttacks[attackName].attackType];
+				//ContactMult
+				if (PokemonData.pokemonAttacks[attackName].contact) multiplier *= trainer.contactMult;
+			}
+			else
+			{
+				//Stab
+				multiplier *= PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains(attackType)?1.5f:1f;
+			}
 
 			return GetPokemonDamage(power, special, multiplier);
 		}
@@ -595,6 +621,7 @@ namespace Pokemod.Content.Pets
 			hurtTimer();
             GetAllProjsExp();
             TakeDamage();
+			StatusConditionEffects();
 
 			if (manualControl && (!player.GetModPlayer<PokemonPlayer>().manualControl || isEnemy)){
 				manualControl = false;
@@ -659,7 +686,7 @@ namespace Pokemod.Content.Pets
 
 			CheckAlteredScale();
 
-			if(trainer.HasLuminousMoss > 0) Lighting.AddLight(Projectile.Center, new Vector3(0.5f,0.7f,0.5f));
+			if(trainer.HasLuminousMoss > 0 && !isEnemy) Lighting.AddLight(Projectile.Center, new Vector3(0.5f,0.7f,0.5f));
 
 			if(Main.myPlayer == Projectile.owner){
 				if (!isEnemy)
@@ -1028,25 +1055,26 @@ namespace Pokemod.Content.Pets
 			// Default movement parameters (here for attacking)
 			float speed = moveSpeed1;
 			float inertia = 20f;
-            float speedMultiplier = 0.5f + ((int)(finalStats[5] * statMods[4]) / 250f);
-            float cooldownMult = Math.Clamp(450f - (int)(finalStats[5] * statMods[4]), 50, 450) / 250f;
-			int targetDelay = (int)(Math.Clamp(200f - (int)(finalStats[5] * statMods[4]), 0, 200) / 4f);
+			float conditionSpeedMultiplier = (statusCondition == (int)StatusConditions.Paralysis)?0.5f:1f;
+            float speedMultiplier = 0.5f + ((int)(finalStats[5] * statMods[4] * conditionSpeedMultiplier) / 250f);
+            float cooldownMult = Math.Clamp(450f - (int)(finalStats[5] * statMods[4] * conditionSpeedMultiplier), 50, 450) / 250f;
+			int targetDelay = (int)(Math.Clamp(200f - (int)(finalStats[5] * statMods[4] * conditionSpeedMultiplier), 0, 200) / 4f);
 
 			float maxFallSpeed = 10f;
 
 			canFall = false;
 
-            if (ghostTangible && !Collision.SolidCollision(Projectile.position, hitboxWidth, hitboxHeight))
-            {
-                Projectile.tileCollide = true;
-            }
+			if (ghostTangible && !Collision.SolidCollision(Projectile.position, hitboxWidth, hitboxHeight))
+			{
+				Projectile.tileCollide = true;
+			}
 
-            if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && !isEnemy && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
+			if (moveStyle == (int)MovementStyle.Fly || (moveStyle != (int)MovementStyle.Hybrid && !isEnemy && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0))
 			{
 				if (moveStyle != (int)MovementStyle.Fly)
 				{
 					speedMultiplier = Math.Min(0.65f, speedMultiplier);
-                }
+				}
 				isFlying = true;
 			}
 			else if(moveStyle != (int)MovementStyle.Hybrid && (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon <= 0 || isEnemy))
@@ -1099,39 +1127,39 @@ namespace Pokemod.Content.Pets
 						}
 					}
 
-					if(dynamax || isHeldByPlayer) speed = 0;
+					if(dynamax || isHeldByPlayer || statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep) speed = 0;
 					
-                    Vector2 direction = targetCenter - Projectile.Center;
-                    direction.Normalize();
-                    direction *= speedMultiplier * speed * directionMod;
+					Vector2 direction = targetCenter - Projectile.Center;
+					direction.Normalize();
+					direction *= speedMultiplier * speed * directionMod;
 
-                    if (isFlying || isSwimming)
-                    {
-                        Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
-                    }
-                    else
-                    {
-                        Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
+					if (isFlying || isSwimming)
+					{
+						Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
+					}
+					else
+					{
+						Projectile.velocity.X = ((Projectile.velocity * (inertia - 1) + direction) / inertia).X;
 
-                        if ((targetCenter - Projectile.Center).Y * directionMod < 0 && -(targetCenter - Projectile.Center).Y * directionMod > Math.Abs((targetCenter - Projectile.Center).X))
-                        {
-                            if (Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
-                            {
-                                currentStatus = (int)ProjStatus.Jump;
-                                Projectile.velocity.Y -= (int)Math.Sqrt(2 * 0.3f * Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y), 0, 160));
-                            }
-                        }
-                    }
+						if ((targetCenter - Projectile.Center).Y * directionMod < 0 && -(targetCenter - Projectile.Center).Y * directionMod > Math.Abs((targetCenter - Projectile.Center).X))
+						{
+							if (Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
+							{
+								currentStatus = (int)ProjStatus.Jump;
+								Projectile.velocity.Y -= (int)Math.Sqrt(2 * 0.3f * Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y), 0, 160));
+							}
+						}
+					}
 
 					if (directionMod == 0f)
 					{
 						Projectile.velocity.X *= 0.95f;
-                        if (distanceFromTarget < 100f && moveStyle == (int)MovementStyle.Hybrid)
-                        {
-                            isFlying = false;
-                        }
-                    }
-                }
+						if (distanceFromTarget < 100f && moveStyle == (int)MovementStyle.Hybrid)
+						{
+							isFlying = false;
+						}
+					}
+				}
 				else
 				{
 					Projectile.velocity.X *= 0.9f;
@@ -1220,11 +1248,11 @@ namespace Pokemod.Content.Pets
 			{
 				if (timer <= 0)
 				{
-                    if (timer > -300 || (timer > -600 && (statMods != new float[] { 1f, 1f, 1f, 1f, 1f, 1f, 1f }))) //out of combat timer for reaction time and stat mods reset
-                    {
-                        timer--;
-                    }
-                    if (!canAttack)
+					if (timer > -300 || (timer > -600 && (statMods != new float[] { 1f, 1f, 1f, 1f, 1f, 1f, 1f }))) //out of combat timer for reaction time and stat mods reset
+					{
+						timer--;
+					}
+					if (!canAttack)
 					{
 						if (currentStatus == (int)ProjStatus.Attack)
 						{
@@ -1309,7 +1337,7 @@ namespace Pokemod.Content.Pets
 					}
 				}
 
-				if(dynamax || isHeldByPlayer) speed = 0;
+				if(dynamax || isHeldByPlayer || statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep) speed = 0;
 
 				if (distanceToIdlePosition > 80f)
 				{
@@ -1350,10 +1378,9 @@ namespace Pokemod.Content.Pets
 			if (isFlying || isSwimming)
 			{
 				canFall = true;
-
 				if (isSwimming)
 				{
-					if (Projectile.velocity.Y > fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
+					if (Projectile.velocity.Y > fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
 					{
 						TryJump();
 					}
@@ -1381,7 +1408,7 @@ namespace Pokemod.Content.Pets
 				{
 					if (currentStatus != (int)ProjStatus.Jump && currentStatus != (int)ProjStatus.Fall)
 					{
-						if (Math.Abs(Projectile.velocity.X) > float.Epsilon && Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
+						if (Math.Abs(Projectile.velocity.X) > float.Epsilon && Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
 						{
 							currentStatus = (int)ProjStatus.Jump;
 							Projectile.velocity.Y = -maxJumpHeight;
@@ -1408,19 +1435,25 @@ namespace Pokemod.Content.Pets
 						currentStatus = (int)ProjStatus.Fall;
 					}
 
-					if (moveStyle != (int)MovementStyle.Jump && Projectile.velocity.Y > -fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16))
+					if (moveStyle != (int)MovementStyle.Jump && Projectile.velocity.Y > -fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
 					{
 						if (Collision.SolidCollision(Projectile.BottomLeft, hitboxWidth, 8, true)) TryJump();
 						else TryJump(true);
-                    }
-				}
-
-				if (!isHeldByPlayer){
-					Projectile.velocity.Y += fallAccel;
-					if (Projectile.velocity.Y > maxFallSpeed)
-					{
-						Projectile.velocity.Y = maxFallSpeed;
 					}
+				}
+			}
+			
+			if(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep)
+			{
+				Projectile.tileCollide = true;
+				Projectile.velocity.X *= 0.9f;
+			}
+
+			if (!isHeldByPlayer && !(isFlying || isSwimming)){
+				Projectile.velocity.Y += fallAccel;
+				if (Projectile.velocity.Y > maxFallSpeed)
+				{
+					Projectile.velocity.Y = maxFallSpeed;
 				}
 			}
 
@@ -1447,8 +1480,9 @@ namespace Pokemod.Content.Pets
 			// Default movement parameters (here for attacking)
 			float speed = moveSpeed1;
 			float inertia = 20f;
-			float speedMultiplier = 0.5f + ((int)(finalStats[5] * statMods[4]) / 250f);
-            float cooldownMult = Math.Clamp(225f - (int)(finalStats[5] * statMods[4]), 25, 225) / 125f;
+			float conditionSpeedMultiplier = (statusCondition == (int)StatusConditions.Paralysis)?0.5f:1f;
+			float speedMultiplier = 0.5f + ((int)(finalStats[5] * statMods[4] * conditionSpeedMultiplier) / 250f);
+            float cooldownMult = Math.Clamp(225f - (int)(finalStats[5] * statMods[4] * conditionSpeedMultiplier), 25, 225) / 125f;
 
 			float maxFallSpeed = 10f;
 
@@ -1583,7 +1617,7 @@ namespace Pokemod.Content.Pets
 			float moveVelocity = speedMultiplier * speed;
 			Vector2 moveDirection = Vector2.Zero;
 
-			if ((currentStatus != (int)ProjStatus.Attack && !canMoveWhileAttack) || canMoveWhileAttack)
+			if ((currentStatus != (int)ProjStatus.Attack || canMoveWhileAttack) && statusCondition != (int)StatusConditions.Freeze && statusCondition != (int)StatusConditions.Sleep)
 			{
 				if (Main.player[Projectile.owner].controlLeft) moveDirection.X += -1;
 				if (Main.player[Projectile.owner].controlRight) moveDirection.X += 1;
@@ -1685,7 +1719,7 @@ namespace Pokemod.Content.Pets
 						currentStatus = (int)ProjStatus.Fall;
 					}
 
-					if (currentStatus != (int)ProjStatus.Jump && Math.Abs(Projectile.velocity.Y) < fallLimit && Main.player[Projectile.owner].controlJump)
+					if (currentStatus != (int)ProjStatus.Jump && Math.Abs(Projectile.velocity.Y) < fallLimit && Main.player[Projectile.owner].controlJump && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
 					{
 						Projectile.velocity.Y -= maxJumpHeight;
 						currentStatus = (int)ProjStatus.Jump;
@@ -1868,6 +1902,88 @@ namespace Pokemod.Content.Pets
             }
         }
 
+		public virtual void ApplyStatusCondition(StatusConditions conditionToApply)
+		{
+			if(statusCondition == (int)StatusConditions.None)
+			{
+				switch (conditionToApply)
+				{
+					case StatusConditions.Burn:
+						if(PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains((int)TypeIndex.Fire)) return;
+						CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Fire)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{conditionToApply}"));
+						break;
+					case StatusConditions.Freeze:
+						if(PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains((int)TypeIndex.Ice)) return;
+						CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Ice)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{conditionToApply}"));
+						break;
+					case StatusConditions.Paralysis:
+						if(PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains((int)TypeIndex.Electric)) return;
+						CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Electric)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{conditionToApply}"));
+						break;
+					case StatusConditions.Poison:
+					case StatusConditions.BadlyPoisoned:
+						if(PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains((int)TypeIndex.Poison)) return;
+						CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Poison)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{conditionToApply}"));
+						break;
+					case StatusConditions.Sleep:
+						CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Normal)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{conditionToApply}"));
+						break;
+				}
+
+				statusCondition = (int)conditionToApply;
+			}
+
+			if (Main.myPlayer == Projectile.owner)
+            {
+                Projectile.netUpdate = true;
+            }
+		}
+
+		public virtual void StatusConditionEffects()
+		{
+			if(statusConditionTimer <= 0)
+			{
+				switch (statusCondition)
+				{
+					case (int)StatusConditions.Burn:
+						SoundEngine.PlaySound(SoundID.Item20 with { Volume = 0.8f }, Projectile.Bottom);
+						manualDmg(finalStats[0]/32, withSound: false);
+						statusConditionTimer += 120;
+						break;
+					case (int)StatusConditions.Poison:
+						SoundEngine.PlaySound(SoundID.Drown with { Volume = 0.8f }, Projectile.Bottom);
+						manualDmg(finalStats[0]/16, withSound: false);
+						statusConditionTimer += 120;
+						break;
+					case (int)StatusConditions.BadlyPoisoned:
+						SoundEngine.PlaySound(SoundID.Drown with { Volume = 0.8f }, Projectile.Bottom);
+						manualDmg((statusConditionCounter+1)*finalStats[0]/32, withSound: false);
+						statusConditionTimer += 120;
+						statusConditionCounter++;
+						break;
+				}	
+			}
+			if(statusConditionTimer > 0) statusConditionTimer--;
+		}
+
+		public virtual void RemoveStatusCondition()
+		{
+			if(statusCondition != (int)StatusConditions.None)
+			{
+				statusCondition = (int)StatusConditions.None;
+				statusConditionCounter = 0;
+			}
+		}
+
+		public virtual void ApplyConfusion()
+		{
+			if(isConfused <= 0)
+			{
+				CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Psychic)), "Confused");
+				isConfused = Main.rand.Next(1,5);
+			}
+		}
+
 		public virtual void SetAttackInfo()
 		{
 			ClearOldMoves();
@@ -1912,6 +2028,7 @@ namespace Pokemod.Content.Pets
         }
 
         public virtual void Attack(float distanceFromTarget, Vector2 targetCenter){
+			// Disobedience
 			int levelCap = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().levelCap;
 			if (ModContent.GetInstance<GameplayConfig>().LevelCapType == GameplayConfig.LevelCapOptions.Disobedience && pokemonLvl > levelCap)
 			{
@@ -1924,6 +2041,58 @@ namespace Pokemod.Content.Pets
 				}
 			}
 			
+			// Status Conditions
+			if(statusCondition == (int)StatusConditions.Paralysis && Main.rand.NextBool(8))
+			{
+				CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Electric)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{StatusConditions.Paralysis}"));
+				SoundEngine.PlaySound(SoundID.DD2_LightningBugZap with { Volume = 0.8f }, Projectile.Bottom);
+				timer = 120;
+				return;
+			}
+			if(statusCondition == (int)StatusConditions.Freeze)
+			{
+				statusConditionCounter++;
+				if (!Main.rand.NextBool(4) && statusCondition < 3)
+				{
+					CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Ice)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{StatusConditions.Freeze}"));
+					SoundEngine.PlaySound(SoundID.Item27 with { Volume = 0.8f }, Projectile.Bottom);
+					timer = 120;
+					return;
+				}
+				else
+				{
+					SoundEngine.PlaySound(SoundID.LiquidsWaterLava with { Volume = 0.8f }, Projectile.Bottom);
+					RemoveStatusCondition();
+				}
+			}
+			if(statusCondition == (int)StatusConditions.Sleep)
+			{
+				statusConditionCounter++;
+				if (!Main.rand.NextBool(3) && statusCondition < 3)
+				{
+					CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Normal)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{StatusConditions.Sleep}"));
+					SoundEngine.PlaySound(SoundID.Item130 with { Volume = 0.8f }, Projectile.Bottom);
+					timer = 120;
+					return;
+				}
+				else
+				{
+					RemoveStatusCondition();
+				}
+			}
+
+			// Confusion
+			if(isConfused > 0)
+			{
+				isConfused--;
+				if(Main.rand.NextBool(3)){
+					CombatText.NewText(Projectile.Hitbox, new Color(176, 20, 224), "???");
+					CalcIncomingDmg(GetPokemonDamage(40), true, true);
+					timer = 80;
+					return;
+				}
+			} 
+			
 			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
 				var pokemonAttack = (PokemonAttack)modProjBase;
 				pokemonAttack.Attack(Projectile, distanceFromTarget, targetCenter);
@@ -1931,6 +2100,11 @@ namespace Pokemod.Content.Pets
 		}
 
 		public virtual void AttackOutTimer(float distanceFromTarget, Vector2 targetCenter){
+			if(statusCondition == (int)StatusConditions.Sleep || statusCondition == (int)StatusConditions.Freeze)
+			{
+				return;
+			}
+
 			if (ModContent.TryFind<ModProjectile>("Pokemod", currentAttack, out var modProjBase)) {
 				var pokemonAttack = (PokemonAttack)modProjBase;
 				pokemonAttack.AttackOutTimer(Projectile, distanceFromTarget, targetCenter);
@@ -2077,11 +2251,12 @@ namespace Pokemod.Content.Pets
 				Projectile.spriteDirection = Projectile.direction = owner.direction>0?1:-1;
 			}
 
-
 			int initialFrame = 0;
 			int finalFrame = 0;
 			int frameSpeed = animationSpeed;
 			bool isLoop = true;
+
+			if(statusCondition == (int)StatusConditions.Sleep) frameSpeed *= 2;
 
 			if(isSwimming){
 				switch(currentStatus){
@@ -2152,7 +2327,7 @@ namespace Pokemod.Content.Pets
 				Projectile.frame = initialFrame;
 			}
 
-			Projectile.frameCounter++;
+			if(statusCondition != (int)StatusConditions.Freeze) Projectile.frameCounter++;
 
 			if (Projectile.frameCounter >= frameSpeed) {
 				Projectile.frameCounter = 0;
@@ -2165,8 +2340,16 @@ namespace Pokemod.Content.Pets
 			}
 
             if (pokemonShader != null){
-				pokemonShader = dynamax ? GameShaders.Armor.GetShaderFromItemId(ModContent.ItemType<DynamaxDye>()) : null;
+				pokemonShader = null; 
 			}
+
+			if(dynamax) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ModContent.ItemType<DynamaxDye>());
+
+			if (statusCondition == (int)StatusConditions.Freeze) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.StardustDye);
+			if (statusCondition == (int)StatusConditions.Burn) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.BurningHadesDye);
+			if (statusCondition == (int)StatusConditions.Paralysis) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.YellowDye);
+			if (statusCondition == (int)StatusConditions.Poison) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.PurpleDye);
+			if (statusCondition == (int)StatusConditions.BadlyPoisoned) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.PurpleOozeDye);
 
 			if (dynamax)
 			{
@@ -2234,15 +2417,15 @@ namespace Pokemod.Content.Pets
             return dmg;
         }
 
-		public void manualDmg(int dmg, byte R = 255, byte G = 50, byte B = 50){
+		public void manualDmg(int dmg, byte R = 255, byte G = 50, byte B = 50, bool withSound = true){
 			if (dmg <= 0) dmg = 1;
 
             currentHp -= dmg;
-			SoundEngine.PlaySound(SoundID.NPCHit1, Projectile.position);
+			if(withSound) SoundEngine.PlaySound(SoundID.NPCHit1, Projectile.position);
 
             CombatText.NewText(Projectile.Hitbox, new Color(R,G,B), dmg);
 
-			if(currentHp <= 0.2f*finalStats[0] && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasEjectButton > 0)
+			if(currentHp <= 0.2f*finalStats[0] && !isEnemy && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasEjectButton > 0)
 			{
 				Projectile.Kill();
 			}
@@ -2276,6 +2459,7 @@ namespace Pokemod.Content.Pets
 		}
         
         public void regenHP(int amount, bool showText = true){
+			if(currentHp <= 0) return;
             // heal hp
             currentHp += amount;
             if(showText) CombatText.NewText(Projectile.Hitbox, new Color(50, 255, 50), "+" + amount);
@@ -2368,7 +2552,7 @@ namespace Pokemod.Content.Pets
 									if(bullet.owner == Projectile.owner)
 									{
 										canHit = true;
-										if(physical && pokemonPlayer.HasRockyHelmet > 0){
+										if(physical && pokemonPlayer.HasRockyHelmet > 0 && !isEnemy){
 											if(attack.pokemonProj.ModProjectile is PokemonPetProjectile attackerPokemon)
 											{
 												attackerPokemon.manualDmg(pokemonLvl);
@@ -2482,7 +2666,7 @@ namespace Pokemod.Content.Pets
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
             if (isOut) {
 				Vector2 positionOffset = (ModContent.Request<Texture2D>(Texture).Frame(1, totalFrames).Size() * Vector2.UnitY) - Vector2.UnitY * 4f;
-				if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0)
+				if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0 && !isEnemy)
 				{
 					Asset<Texture2D> balloonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/AirBalloon_Texture");
 
