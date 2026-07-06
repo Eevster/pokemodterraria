@@ -99,6 +99,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
         }
 
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			if(Main.rand.NextBool(10)) target.ApplyStatusCondition(NPCs.StatusConditions.Burn);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item20, Projectile.position);

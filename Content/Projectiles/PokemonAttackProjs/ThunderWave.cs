@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoMod.Cil;
 using Pokemod.Common.Players;
 using Pokemod.Content.Buffs;
-using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -201,6 +196,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.velocity = Vector2.Zero;
                 Projectile.timeLeft = 30;
             }
+			target.ApplyStatusCondition(NPCs.StatusConditions.Paralysis);
             base.OnHitPokemonPet(target, damageDone);
         }
 

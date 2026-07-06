@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
+using Pokemod.Content.Buffs;
 using Pokemod.Content.Pets;
 using ReLogic.Content;
 using Terraria;
@@ -215,6 +216,24 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, finalPosition, 32f, ref collisionPoint);
 			}
 		}
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+			if(Main.rand.NextBool(10)) target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), (target.boss?2:3)*60);
+            base.OnHitNPC(target, hit, damageDone);
+        }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+			if(Main.rand.NextBool(10)) target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), 2*60);
+            base.OnHitPlayer(target, info);
+        }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            if(Main.rand.NextBool(10)) target.ApplyStatusCondition(NPCs.StatusConditions.Paralysis);
+            base.OnHitPokemonPet(target, damageDone);
+        }
 
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {

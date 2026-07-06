@@ -5730,6 +5730,16 @@ PokemonStats: {
 	Reset: Stat Changes Reset
 }
 
+PokemonStatusConditions: {
+	None: None
+	Burn: Burned
+	Freeze: Frozen
+	Paralysis: Paralyzed
+	Poison: Poisoned
+	BadlyPoisoned: Badly Poisoned
+	Sleep: Asleep
+}
+
 PokemonNatures: {
 	Nature: Nature
 	Adamant: Adamant

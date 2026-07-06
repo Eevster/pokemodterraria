@@ -115,6 +115,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             base.OnHitPlayer(target, info);
         }
 
+		public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+			if(Main.rand.NextBool(10)) target.ApplyStatusCondition(NPCs.StatusConditions.Freeze);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             // "Hit anything between the player and the tip of the sword"

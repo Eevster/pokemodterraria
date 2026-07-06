@@ -202,6 +202,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.timeLeft = 30;
 				SoundEngine.PlaySound(SoundID.Item82, Projectile.position);
             }
+			target.ApplyConfusion();
             base.OnHitPokemonPet(target, damageDone);
         }
 

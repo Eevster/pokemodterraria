@@ -206,6 +206,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.scale = 0.1f;
                 Projectile.timeLeft = 20;
             }
+			if(Main.rand.NextBool(10)) target.ApplyConfusion();
             base.OnHitPokemonPet(target, damageDone);
         }
 

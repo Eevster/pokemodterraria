@@ -175,14 +175,16 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 		public void HealEffect(int healAmount){
 			Vector2 targetCenter = Owner.Center;
 
-			if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
+			if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj)
 			{
-				HealEffect(pokemonPetProj, healAmount, true);
-				targetCenter = pokemonProj.Center;
-			}
-			else
-			{
-				HealEffect(Owner, Owner.statLifeMax2>300?2:1, true);
+				if(pokemonPetProj.GetHPRatio() < 1f){
+					HealEffect(pokemonPetProj, healAmount, true);
+					targetCenter = pokemonProj.Center;
+				}
+				else if(!pokemonPetProj.isEnemy)
+				{
+					HealEffect(Owner, Owner.statLifeMax2 > 300 ? 2 : 1, true);
+				}
 			}
 
 			for(int i = 0; i < 10; i++){

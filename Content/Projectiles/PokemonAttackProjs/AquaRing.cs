@@ -119,46 +119,38 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(target.CanBeChasedBy()){
-                if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
-                {
-                    HealEffect(pokemonPetProj, 0.02f, true);
-                }
-                else
-                {
-                    HealEffect(Owner, Owner.statLifeMax2>300?2:1, true);
-                }
-            }
+            HealEffect(0.02f);
+            
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
-            {
-                HealEffect(pokemonPetProj, 0.02f, true);
-            }
-            else
-            {
-                HealEffect(Owner, Owner.statLifeMax2>300?2:1, true);
-            }
+            HealEffect(0.02f);
 
             base.OnHitPlayer(target, info);
         }
 
         public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
-             if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj && pokemonPetProj.GetHPRatio() < 1f)
-            {
-                HealEffect(pokemonPetProj, 0.02f, true);
-            }
-            else
-            {
-                HealEffect(Owner, Owner.statLifeMax2>300?2:1, true);
-            }
+            HealEffect(0.02f);
             
             base.OnHitPokemonPet(target, damageDone);
         }
+
+        public void HealEffect(float healAmount)
+		{
+			if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj)
+			{
+				if(pokemonPetProj.GetHPRatio() < 1f){
+					HealEffect(pokemonPetProj, healAmount, true);
+				}
+				else if(!pokemonPetProj.isEnemy)
+				{
+					HealEffect(Owner, Owner.statLifeMax2 > 300 ? 2 : 1, true);
+				}
+			}
+		}
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"
