@@ -110,27 +110,30 @@ namespace Pokemod.Content.Projectiles
 		{
 			if(Projectile.penetrate == 0) return;
 
-            for (int i = 0; i < Main.maxProjectiles; i++)
-            {
-				if (Main.projectile[i].ModProjectile is PokemonPetProjectile)
-				{
-					PokemonPetProjectile hostilePokemon = (PokemonPetProjectile)Main.projectile[i].ModProjectile as PokemonPetProjectile;
-					if (hostilePokemon != null)
+			if(pokemonProj != null){
+				if(pokemonProj.ModProjectile is PokemonPetProjectile ownerPokemon){
+					for (int i = 0; i < Main.maxProjectiles; i++)
 					{
-						if (hostilePokemon.Projectile.owner >= 0 && hostilePokemon.Projectile.owner < Main.maxPlayers)
+						if (Main.projectile[i].ModProjectile is PokemonPetProjectile hostilePokemon)
 						{
-							Player targetOwner = Main.player[hostilePokemon.Projectile.owner];
-							if (hostilePokemon.isEnemy || (targetOwner.hostile && (targetOwner.team == 0 || Owner.team == 0 || targetOwner.team != Owner.team))) //Pokemon is Hostile
+							if (hostilePokemon != null)
 							{
-								if (Colliding(Projectile.Hitbox, hostilePokemon.Projectile.Hitbox) == true)
+								if (hostilePokemon.Projectile.owner >= 0 && hostilePokemon.Projectile.owner < Main.maxPlayers)
 								{
-									OnHitPokemonPet(hostilePokemon, Projectile.damage);
+									Player targetOwner = Main.player[hostilePokemon.Projectile.owner];
+									if ((hostilePokemon.isEnemy != ownerPokemon.isEnemy) || (targetOwner.hostile && (targetOwner.team == 0 || Owner.team == 0 || targetOwner.team != Owner.team))) //Pokemon is Hostile
+									{
+										if (Colliding(Projectile.Hitbox, hostilePokemon.Projectile.Hitbox) == true)
+										{
+											OnHitPokemonPet(hostilePokemon, Projectile.damage);
+										}
+									}
 								}
 							}
 						}
 					}
 				}
-            }
+			}
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

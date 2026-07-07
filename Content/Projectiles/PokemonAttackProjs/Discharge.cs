@@ -138,13 +138,13 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-			if(Main.rand.NextBool(5)) target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), (target.boss?2:3)*60);
+			if(Main.rand.NextBool(5)) target.AddBuff(ModContent.BuffType<ParalyzedDebuff>(), (target.boss?2:3)*60);
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-			if(Main.rand.NextBool(5)) target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), 2*60);
+			if(Main.rand.NextBool(5)) target.AddBuff(ModContent.BuffType<ParalyzedDebuff>(), 2*60);
             base.OnHitPlayer(target, info);
         }
 

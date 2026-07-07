@@ -559,6 +559,11 @@ Projectiles: {
 	Agility.DisplayName: Agility
 	FutureSight.DisplayName: Future Sight
 	TakeDown.DisplayName: Take Down
+	AlolanRaticatePetProjectile.DisplayName: Alolan Raticate Pet Projectile
+	AlolanRaticatePetProjectileShiny.DisplayName: Alolan Raticate Pet Projectile Shiny
+	AlolanRattataPetProjectile.DisplayName: Alolan Rattata Pet Projectile
+	AlolanRattataPetProjectileShiny.DisplayName: Alolan Rattata Pet Projectile Shiny
+	Hypnosis.DisplayName: Hypnosis
 }
 
 Items: {
@@ -2820,9 +2825,9 @@ Buffs: {
 		Description: " "
 	}
 
-	ParalizedDebuff: {
+	ParalyzedDebuff: {
 		Description: " "
-		DisplayName: Paralized Debuff
+		DisplayName: Paralyzed Debuff
 	}
 
 	QuilavaPetBuffShiny: {
@@ -5102,6 +5107,11 @@ NPCs: {
 		Description: It blooms when the weather warms. It floats in the sky to soak up as much sunlight as possible.
 	}
 
+	JumpluffCritterNPC: {
+		DisplayName: Jumpluff
+		Description: Blown by seasonal winds, it circles the globe, scattering cotton spores as it goes.
+	}
+
 	MarillCritterNPC: {
 		DisplayName: Marill
 		Description: Using its tail as a float, it dives underwater. It likes eating plants that grow in riverbeds.
@@ -5135,6 +5145,21 @@ NPCs: {
 	DelibirdCritterNPC: {
 		DisplayName: Delibird
 		Description: It carries food rolled up in its tail. It has a habit of sharing food with people lost in the mountains.
+	}
+
+	WooperCritterNPC: {
+		DisplayName: Wooper
+		Description: It lives in cold water, half burying itself in mud at the bottom to sleep.
+	}
+
+	QuagsireCritterNPC: {
+		DisplayName: Quagsire
+		Description: It has a sluggish nature. It lies at the river's bottom, waiting for prey to stray into its mouth.
+	}
+
+	SlowkingCritterNPC: {
+		DisplayName: Slowking
+		Description: Being bitten by Shellder gave it intelligence comparable to that of internationally recognized scientists.
 	}
 
 	MawileCritterNPC: {
@@ -5195,6 +5220,16 @@ NPCs: {
 	IgglybuffCritterNPC: {
 		DisplayName: Igglybuff
 		Description: It has a soft and bouncy body. Once it starts bouncing, it becomes impossible to stop.
+	}
+
+	AlolanRattataCritterNPC: {
+		DisplayName: Alolan Rattata
+		Description: Its whiskers provide it with a keen sense of smell, enabling it to pick up the scent of hidden food and locate it instantly.
+	}
+
+	AlolanRaticateCritterNPC: {
+		DisplayName: Alolan Raticate
+		Description: It makes its Rattata underlings gather food for it, dining solely on the most nutritious and delicious fare.
 	}
 
 	AlolanDiglettCritterNPC: {
@@ -5399,6 +5434,10 @@ NPCs: {
 	MareepCritterNPCShiny.DisplayName: Mareep Shiny
 	HoppipCritterNPCShiny.DisplayName: Hoppip Shiny
 	SkiploomCritterNPCShiny.DisplayName: Skiploom Shiny
+	JumpluffCritterNPCShiny.DisplayName: Jumpluff Shiny
+	WooperCritterNPCShiny.DisplayName: Wooper Shiny
+	QuagsireCritterNPCShiny.DisplayName: Quagsire Shiny
+	SlowkingCritterNPCShiny.DisplayName: Slowking Shiny
 	MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
 	RampardosCritterNPCShiny.DisplayName: Rampardos Shiny
@@ -5411,6 +5450,8 @@ NPCs: {
 	TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
 	IgglybuffCritterNPCShiny.DisplayName: Igglybuff Shiny
+	AlolanRaticateCritterNPCShiny.DisplayName: Alolan Raticate Shiny
+	AlolanRattataCritterNPCShiny.DisplayName: Alolan Rattata Shiny
 	AlolanDiglettCritterNPCShiny.DisplayName: Alolan Diglett Shiny
 	AlolanDugtrioCritterNPCShiny.DisplayName: Alolan Dugtrio Shiny
 	AlolanSandshrewCritterNPCShiny.DisplayName: Alolan Sandshrew Shiny
@@ -5498,14 +5539,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
 	G1T7_Blaine.DisplayName: Fire-type Gym Leader
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
-	WooperCritterNPC.DisplayName: Wooper
-	WooperCritterNPCShiny.DisplayName: Wooper Shiny
-	QuagsireCritterNPC.DisplayName: Quagsire
-	QuagsireCritterNPCShiny.DisplayName: Quagsire Shiny
-	JumpluffCritterNPCShiny.DisplayName: Jumpluff Shiny
-	JumpluffCritterNPC.DisplayName: Jumpluff
-	SlowkingCritterNPCShiny.DisplayName: Slowking Shiny
-	SlowkingCritterNPC.DisplayName: Slowking
 }
 
 Bestiary: {
