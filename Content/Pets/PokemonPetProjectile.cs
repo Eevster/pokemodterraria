@@ -226,6 +226,7 @@ namespace Pokemod.Content.Pets
 			writer.Write(isHeldByPlayer);
 			writer.Write(pokemonOrder);
 			writer.Write(isMount);
+			writer.Write(statusCondition);
 			
             base.SendExtraAI(writer);
         }
@@ -248,6 +249,7 @@ namespace Pokemod.Content.Pets
 			isHeldByPlayer = reader.ReadBoolean();
 			pokemonOrder = reader.ReadInt32();
 			isMount = reader.ReadBoolean();
+			statusCondition = reader.ReadInt32();
 			
             base.ReceiveExtraAI(reader);
         }
