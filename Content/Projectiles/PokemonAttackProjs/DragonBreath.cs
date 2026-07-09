@@ -134,7 +134,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             if (Main.rand.NextBool(5))
             {
-                target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), (target.boss ? 2 : 3) * 60);
+                target.AddBuff(ModContent.BuffType<ParalyzedDebuff>(), (target.boss ? 2 : 3) * 60);
             }
             base.OnHitNPC(target, hit, damageDone);
         }
@@ -143,7 +143,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             if (Main.rand.NextBool(5))
             {
-                target.AddBuff(ModContent.BuffType<ParalizedDebuff>(), 2 * 60);
+                target.AddBuff(ModContent.BuffType<ParalyzedDebuff>(), 2 * 60);
             }
             base.OnHitPlayer(target, info);
         }

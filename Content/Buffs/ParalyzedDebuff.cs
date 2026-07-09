@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Buffs
 {
-    public class ParalizedDebuff : ModBuff
+    public class ParalyzedDebuff : ModBuff
 	{
 		public override void SetStaticDefaults() {
 			Main.debuff[Type] = true;  // Is it a debuff?
@@ -17,50 +17,50 @@ namespace Pokemod.Content.Buffs
 		}
 
 		public override void Update(Player player, ref int buffIndex) {
-			player.GetModPlayer<ParalizedPlayer>().hasBuff = true;
+			player.GetModPlayer<ParalyzedPlayer>().hasBuff = true;
 		}
 
         public override void Update(NPC npc, ref int buffIndex){
-            npc.GetGlobalNPC<ParalizedGlobalNPC>().hasBuff = true;
+            npc.GetGlobalNPC<ParalyzedGlobalNPC>().hasBuff = true;
         }
     }
 
-    public class ParalizedGlobalNPC : GlobalNPC
+    public class ParalyzedGlobalNPC : GlobalNPC
     {
         public override bool InstancePerEntity => true;
         public bool hasBuff;
-        public int paralizeTimer = 0;
-        public bool canParalize = false;
-        const int paralizeTime = 20;
+        public int paralyzeTimer = 0;
+        public bool canParalyze = false;
+        const int paralyzeTime = 20;
 
-        private static Asset<Texture2D> paralizedTexture;
+        private static Asset<Texture2D> paralyzedTexture;
         public override void Load()
         { 
-            paralizedTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/ThunderWaveExplosion");
+            paralyzedTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/ThunderWaveExplosion");
         }
 
         public override void Unload()
         { 
-            paralizedTexture = null;
+            paralyzedTexture = null;
         }
 
         public override void ResetEffects(NPC npc)
         {
             if(hasBuff){
-                if(paralizeTimer > 0) paralizeTimer--;
+                if(paralyzeTimer > 0) paralyzeTimer--;
 
-                if(paralizeTimer <= 0){
-                    if(canParalize){
-                        paralizeTimer = Main.rand.Next(npc.boss?80:20,100);
-                        canParalize = false;
+                if(paralyzeTimer <= 0){
+                    if(canParalyze){
+                        paralyzeTimer = Main.rand.Next(npc.boss?80:20,100);
+                        canParalyze = false;
                     }else{
-                        paralizeTimer = (int)(paralizeTime *(npc.boss?0.5f:1f));
-                        canParalize = true;
+                        paralyzeTimer = (int)(paralyzeTime *(npc.boss?0.5f:1f));
+                        canParalyze = true;
                     }
                 }
             }else{
-                paralizeTimer = 0;
-                canParalize = false;
+                paralyzeTimer = 0;
+                canParalyze = false;
             }
 
             hasBuff = false;
@@ -68,8 +68,8 @@ namespace Pokemod.Content.Buffs
 
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if(paralizeTimer > 0 && canParalize){
-                Main.EntitySpriteDraw(paralizedTexture.Value, npc.Center - Main.screenPosition, paralizedTexture.Frame(1, 4, 0, paralizeTimer/3), Color.White, 0, paralizedTexture.Frame(1, 4).Size() / 2f, (npc.width/paralizedTexture.Width()>1f)?(npc.width/paralizedTexture.Width()):1f, SpriteEffects.None, 0);
+            if(paralyzeTimer > 0 && canParalyze){
+                Main.EntitySpriteDraw(paralyzedTexture.Value, npc.Center - Main.screenPosition, paralyzedTexture.Frame(1, 4, 0, paralyzeTimer/3), Color.White, 0, paralyzedTexture.Frame(1, 4).Size() / 2f, (npc.width/paralyzedTexture.Width()>1f)?(npc.width/paralyzedTexture.Width()):1f, SpriteEffects.None, 0);
             }
             base.PostDraw(npc, spriteBatch, screenPos, drawColor);
         }
@@ -78,7 +78,7 @@ namespace Pokemod.Content.Buffs
         {
             base.PostAI(npc);
 
-            if(paralizeTimer > 0 && canParalize){
+            if(paralyzeTimer > 0 && canParalyze){
                 float speedMultiplier = 0.75f;
 
                 if(npc.boss){
@@ -101,42 +101,42 @@ namespace Pokemod.Content.Buffs
         }
     }
 
-    public class ParalizedPlayer : ModPlayer
+    public class ParalyzedPlayer : ModPlayer
 	{
         public bool hasBuff;
         
-        public int paralizeTimer = 0;
-        public bool canParalize = false;
-        const int paralizeTime = 10;
+        public int paralyzeTimer = 0;
+        public bool canParalyze = false;
+        const int paralyzeTime = 10;
 
-        private static Asset<Texture2D> paralizedTexture;
+        private static Asset<Texture2D> paralyzedTexture;
         public override void Load()
         { 
-            paralizedTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/ThunderWaveExplosion");
+            paralyzedTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/ThunderWaveExplosion");
         }
 
         public override void Unload()
         { 
-            paralizedTexture = null;
+            paralyzedTexture = null;
         }
 
         public override void ResetEffects()
         {
             if(hasBuff){
-                if(paralizeTimer > 0) paralizeTimer--;
+                if(paralyzeTimer > 0) paralyzeTimer--;
 
-                if(paralizeTimer <= 0){
-                    if(canParalize){
-                        paralizeTimer = Main.rand.Next(20,100);
-                        canParalize = false;
+                if(paralyzeTimer <= 0){
+                    if(canParalyze){
+                        paralyzeTimer = Main.rand.Next(20,100);
+                        canParalyze = false;
                     }else{
-                        paralizeTimer = paralizeTime;
-                        canParalize = true;
+                        paralyzeTimer = paralyzeTime;
+                        canParalyze = true;
                     }
                 }
             }else{
-                paralizeTimer = 0;
-                canParalize = false;
+                paralyzeTimer = 0;
+                canParalyze = false;
             }
 
             hasBuff = false;
@@ -144,7 +144,7 @@ namespace Pokemod.Content.Buffs
 
         public override void PreUpdateMovement()
         {
-            if(paralizeTimer > 0 && canParalize){
+            if(paralyzeTimer > 0 && canParalyze){
                 Player.velocity.X *= 0.2f;
                 if(Player.velocity.Y<0){
                     Player.velocity.Y *= 0.2f;
@@ -156,8 +156,8 @@ namespace Pokemod.Content.Buffs
 
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
-            if(paralizeTimer > 0 && canParalize){
-                Main.EntitySpriteDraw(paralizedTexture.Value, Player.Center - Main.screenPosition, paralizedTexture.Frame(1, 4, 0, paralizeTimer/3), Color.White, 0, paralizedTexture.Frame(1, 4).Size() / 2f, 1f, SpriteEffects.None, 0);
+            if(paralyzeTimer > 0 && canParalyze){
+                Main.EntitySpriteDraw(paralyzedTexture.Value, Player.Center - Main.screenPosition, paralyzedTexture.Frame(1, 4, 0, paralyzeTimer/3), Color.White, 0, paralyzedTexture.Frame(1, 4).Size() / 2f, 1f, SpriteEffects.None, 0);
             }
             base.DrawEffects(drawInfo, ref r, ref g, ref b, ref a, ref fullBright);
         }

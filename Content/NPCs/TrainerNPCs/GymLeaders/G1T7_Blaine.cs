@@ -19,10 +19,10 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		{
 			pokemonTeam =
             [
-                new EnemyPokemonInfo("Growlithe", 42, ["Ember", "Ember", "Ember", "Crunch"]),
-                new EnemyPokemonInfo("Ponyta", 40, ["Ember", "Ember", "Ember", "Ember"]),
-                new EnemyPokemonInfo("Rapidash", 42, ["FlameWheel", "FlameWheel", "FlameWheel", "FlameWheel"]),
-                new EnemyPokemonInfo("Arcanine", 47, ["FireBlast", "Crunch", "FireBlast", "Crunch"]),
+                new EnemyPokemonInfo("Growlithe", 42, ["Bite", "Ember", "TakeDown", "FireBlast"]),
+                new EnemyPokemonInfo("Ponyta", 40, ["Slam", "Ember", "Ember", "Ember"]),
+                new EnemyPokemonInfo("Rapidash", 42, ["Slam", "Agility", "FlameWheel", "FireBlast"]),
+                new EnemyPokemonInfo("Arcanine", 47, ["Crunch", "FlameWheel", "TakeDown", "FireBlast"]),
             ];
 		}
 

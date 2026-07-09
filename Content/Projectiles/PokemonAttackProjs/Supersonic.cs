@@ -119,7 +119,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				Projectile.rotation = Projectile.velocity.ToRotation();
 
 				if(attackMode == (int)PokemonPlayer.AttackMode.Auto_Attack){
-					SearchTarget(300f, false);
+					SearchTarget(150f, false);
 				}else if(attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack){
 					if(Trainer.targetPlayer != null){
 						targetPlayer = Trainer.targetPlayer;
@@ -131,7 +131,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}
 
 				if(foundTarget){
-					float projSpeed = 10f;
+					float projSpeed = 16f;
 
 					if (SafeUpdateTargetPosition())
 					{

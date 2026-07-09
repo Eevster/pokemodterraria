@@ -7,6 +7,7 @@ using Pokemod.Common.Systems;
 using Pokemod.Content.Buffs;
 using Pokemod.Content.Buffs.MountBuffs;
 using Pokemod.Content.DamageClasses;
+using Pokemod.Content.Dusts;
 using Pokemod.Content.Items.Dyes;
 using Pokemod.Content.Items.Dynamax;
 using Pokemod.Content.NPCs;
@@ -445,25 +446,27 @@ namespace Pokemod.Content.Pets
 		
 		private bool CheckEvoSpecialCondition(string condition)
 		{
-			bool met = false;
+			bool met = true;
+			bool conditionChecked = false;
 
 			if (condition.Contains("Happiness"))
 			{
-				if (happiness >= 160)
-				{
-					met = true;
-					if (condition.Contains("Day"))
-					{
-						met = met && Main.dayTime;
-					}
-					else if (condition.Contains("Night"))
-					{
-						met = met && !Main.dayTime;
-					}
-				}
+				met = met && (happiness >= 160);
+				conditionChecked = true;
 			}
 
-			return met;
+			if (condition.Contains("Day"))
+			{
+				met = met && Main.dayTime;
+				conditionChecked = true;
+			}
+			else if (condition.Contains("Night"))
+			{
+				met = met && !Main.dayTime;
+				conditionChecked = true;
+			}
+
+			return met && conditionChecked;
         }
 
 		public virtual bool UseEvoItem(string itemName){
@@ -998,9 +1001,8 @@ namespace Pokemod.Content.Pets
 
 				if (enemyPokemon.owner == Projectile.owner && enemyPokemon != Projectile)
 				{
-					if(enemyPokemon.ModProjectile is PokemonPetProjectile)
+					if(enemyPokemon.ModProjectile is PokemonPetProjectile enemyPokemonProj)
 					{
-						var enemyPokemonProj = (PokemonPetProjectile)enemyPokemon.ModProjectile;
 						if(!enemyPokemonProj.isEnemy)
 						{
 							if(Vector2.Distance(enemyPokemon.Center,Projectile.Center) < distanceFromTarget)
@@ -1948,16 +1950,44 @@ namespace Pokemod.Content.Pets
 					case (int)StatusConditions.Burn:
 						SoundEngine.PlaySound(SoundID.Item20 with { Volume = 0.8f }, Projectile.Bottom);
 						manualDmg(finalStats[0]/32, withSound: false);
+						for(int i = 0; i < 8; i++)
+						{
+							Dust.NewDust(Projectile.Bottom - new Vector2(0.5f*hitboxWidth, hitboxHeight), hitboxWidth, hitboxHeight, DustID.Torch, Scale: 2f);
+						}
 						statusConditionTimer += 120;
 						break;
 					case (int)StatusConditions.Poison:
 						SoundEngine.PlaySound(SoundID.Drown with { Volume = 0.8f }, Projectile.Bottom);
 						manualDmg(finalStats[0]/16, withSound: false);
+						for(int i = 0; i < 8; i++)
+						{
+							Dust.NewDust(Projectile.Bottom - new Vector2(0.5f*hitboxWidth, hitboxHeight), hitboxWidth, hitboxHeight, ModContent.DustType<PoisonDust>());
+						}
 						statusConditionTimer += 120;
 						break;
 					case (int)StatusConditions.BadlyPoisoned:
 						SoundEngine.PlaySound(SoundID.Drown with { Volume = 0.8f }, Projectile.Bottom);
 						manualDmg((statusConditionCounter+1)*finalStats[0]/32, withSound: false);
+						for(int i = 0; i < 8; i++)
+						{
+							Dust.NewDust(Projectile.Bottom - new Vector2(0.5f*hitboxWidth, hitboxHeight), hitboxWidth, hitboxHeight, ModContent.DustType<BadlyPoisonedDust>());
+						}
+						statusConditionTimer += 120;
+						statusConditionCounter++;
+						break;
+					case (int)StatusConditions.Sleep:
+						if (!Main.rand.NextBool(3) && statusConditionCounter < 3)
+						{
+							SoundEngine.PlaySound(SoundID.Item130 with { Volume = 0.8f }, Projectile.Bottom);
+							for(int i = 0; i < 3; i++)
+							{
+								Dust.NewDust(Projectile.Bottom - new Vector2(5, 5+0.9f*hitboxHeight), 5, 5, ModContent.DustType<SleepDust>(), Scale: (i+1)*0.1f);
+							}
+						}
+						else
+						{
+							RemoveStatusCondition();
+						}
 						statusConditionTimer += 120;
 						statusConditionCounter++;
 						break;
@@ -2046,6 +2076,10 @@ namespace Pokemod.Content.Pets
 			{
 				CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Electric)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{StatusConditions.Paralysis}"));
 				SoundEngine.PlaySound(SoundID.DD2_LightningBugZap with { Volume = 0.8f }, Projectile.Bottom);
+				for(int i = 0; i < 8; i++)
+				{
+					Dust.NewDust(Projectile.Bottom - new Vector2(0.5f*hitboxWidth, hitboxHeight), hitboxWidth, hitboxHeight, ModContent.DustType<ParalyzedDust>());
+				}
 				timer = 120;
 				return;
 			}
@@ -2065,13 +2099,17 @@ namespace Pokemod.Content.Pets
 					RemoveStatusCondition();
 				}
 			}
-			if(statusCondition == (int)StatusConditions.Sleep)
+			/*if(statusCondition == (int)StatusConditions.Sleep)
 			{
 				statusConditionCounter++;
-				if (!Main.rand.NextBool(3) && statusCondition < 3)
+				if (!Main.rand.NextBool(3) && statusConditionCounter < 3)
 				{
 					CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Normal)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{StatusConditions.Sleep}"));
 					SoundEngine.PlaySound(SoundID.Item130 with { Volume = 0.8f }, Projectile.Bottom);
+					for(int i = 0; i < 3; i++)
+					{
+						Dust.NewDust(Projectile.Bottom - new Vector2(5, 5+0.9f*hitboxHeight), 5, 5, ModContent.DustType<SleepDust>(), Scale: (i+1)*0.03f);
+					}
 					timer = 120;
 					return;
 				}
@@ -2079,7 +2117,7 @@ namespace Pokemod.Content.Pets
 				{
 					RemoveStatusCondition();
 				}
-			}
+			}*/
 
 			// Confusion
 			if(isConfused > 0)
@@ -2256,8 +2294,6 @@ namespace Pokemod.Content.Pets
 			int frameSpeed = animationSpeed;
 			bool isLoop = true;
 
-			if(statusCondition == (int)StatusConditions.Sleep) frameSpeed *= 2;
-
 			if(isSwimming){
 				switch(currentStatus){
 					case (int)ProjStatus.Idle:
@@ -2318,6 +2354,8 @@ namespace Pokemod.Content.Pets
 				}
 			}
 
+			if(statusCondition == (int)StatusConditions.Sleep) frameSpeed *= 4;
+
 			if(sideDiff && Projectile.spriteDirection<0){
 				initialFrame += totalFrames/2;
 				finalFrame += totalFrames/2;
@@ -2348,7 +2386,7 @@ namespace Pokemod.Content.Pets
 			if (statusCondition == (int)StatusConditions.Freeze) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.StardustDye);
 			if (statusCondition == (int)StatusConditions.Burn) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.BurningHadesDye);
 			if (statusCondition == (int)StatusConditions.Paralysis) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.YellowDye);
-			if (statusCondition == (int)StatusConditions.Poison) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.PurpleDye);
+			if (statusCondition == (int)StatusConditions.Poison) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.GreenDye);
 			if (statusCondition == (int)StatusConditions.BadlyPoisoned) pokemonShader = GameShaders.Armor.GetShaderFromItemId(ItemID.PurpleOozeDye);
 
 			if (dynamax)
@@ -2514,9 +2552,9 @@ namespace Pokemod.Content.Pets
 				{
 					bullet = Main.projectile[j];
 
-					if (((bullet.hostile && !isEnemy) || (bullet.friendly && isEnemy)) && bullet.damage > 0 && bullet.active)
+					if (((bullet.hostile && !isEnemy) || (bullet.friendly && isEnemy)) && bullet.damage > 0 && bullet.active && bullet.penetrate != 0)
 					{
-						if (/*Projectile.Hitbox.Intersects(bullet.getRect())*/bullet.Colliding(bullet.Hitbox,Projectile.Hitbox) == true && !immune)
+						if (/*Projectile.Hitbox.Intersects(bullet.getRect())*/bullet.Colliding(bullet.Hitbox,Projectile.Hitbox) && !immune)
 						{
 							int bulletdmg = bullet.damage;
 							if (bullet.owner == 0) //if the bullet comes from an npc, it's damage needs to be manually scaled for the world difficulty. *Currently doesn't scale correctly in Journey mode* ----------------------------
@@ -2666,7 +2704,7 @@ namespace Pokemod.Content.Pets
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
             if (isOut) {
 				Vector2 positionOffset = (ModContent.Request<Texture2D>(Texture).Frame(1, totalFrames).Size() * Vector2.UnitY) - Vector2.UnitY * 4f;
-				if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0 && !isEnemy)
+				if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasAirBalloon > 0 && !isEnemy && !isHeldByPlayer)
 				{
 					Asset<Texture2D> balloonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/AirBalloon_Texture");
 
