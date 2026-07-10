@@ -9,20 +9,20 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-    public class DragonTail : PokemonAttack
+    public class IcePunch : PokemonAttack
 	{
         public override bool CanExistIfNotActualMove => false;
         private bool mirrored;
 
         public override void SetStaticDefaults()
         {
-            Main.projFrames[Projectile.type] = 5;
+            Main.projFrames[Projectile.type] = 4;
         }
 
 		public override void SetDefaults()
         {
-            Projectile.width = 136;
-            Projectile.height = 80;
+            Projectile.width = 64;
+            Projectile.height = 64;
 
             Projectile.friendly = true;
             Projectile.hostile = false;
@@ -31,6 +31,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             Projectile.tileCollide = false;  
             Projectile.penetrate = -1;
+            Projectile.CritChance = 13;
 
 			Projectile.usesLocalNPCImmunity = true;
 			Projectile.localNPCHitCooldown = 20;
@@ -47,7 +48,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(pokemon.owner == Main.myPlayer){
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<DragonTail>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<IcePunch>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 7f, pokemon.owner)];
 						pokemon.velocity = 30*Vector2.Normalize(targetCenter-pokemon.Center);
 						SoundEngine.PlaySound(SoundID.Item1, pokemon.position);
 						pokemonOwner.timer = pokemonOwner.attackDuration;
@@ -61,9 +62,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void UpdateAttackProjs(Projectile pokemon, int i, ref float maxFallSpeed)
         {
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-            DragonTail proj = (DragonTail)pokemonOwner.attackProjs[i].ModProjectile;
-
-            pokemonOwner.attackProjs[i].Center = pokemon.Center;
+            IcePunch proj = (IcePunch)pokemonOwner.attackProjs[i].ModProjectile;
 
             if (pokemonOwner.attackProjs[i].ai[0] == 0)
             {
@@ -80,15 +79,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     proj.mirrored = pokemon.velocity.X < 0f;
                     pokemonOwner.attackProjs[i].rotation = pokemon.velocity.ToRotation();
                 }
+
+                pokemonOwner.attackProjs[i].Center = pokemon.Center + 32f*Vector2.UnitX.RotatedBy(pokemonOwner.attackProjs[i].rotation);
             }
         }
 
         public override void UpdateNoAttackProjs(Projectile pokemon, int i)
         {
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-            DragonTail proj = (DragonTail)pokemonOwner.attackProjs[i].ModProjectile;
-
-            pokemonOwner.attackProjs[i].Center = pokemon.Center;
+            IcePunch proj = (IcePunch)pokemonOwner.attackProjs[i].ModProjectile;
 
             if (pokemonOwner.attackProjs[i].ai[0] == 0)
             {
@@ -106,6 +105,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     pokemonOwner.attackProjs[i].rotation = pokemon.velocity.ToRotation();
                     proj.Projectile.Opacity = pokemon.velocity.Length() / 2f;
                 }
+
+                pokemonOwner.attackProjs[i].Center = pokemon.Center + 32f*Vector2.UnitX.RotatedBy(pokemonOwner.attackProjs[i].rotation);
             }
         }
 
@@ -140,11 +141,23 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void AI()
         {
-            if (Projectile.ai[0] == 0 && Projectile.timeLeft < 10)
+            if (Projectile.ai[0] == 0)
             {
-                Projectile.Opacity = Projectile.timeLeft*0.1f;
+                int dustIndex = Dust.NewDust(Projectile.Center - new Vector2(16,16), 32, 32, DustID.SnowSpray, 0f, 0f, 100, default(Color), 1f);
+                Main.dust[dustIndex].noGravity = true;
+
+                if(Projectile.timeLeft < 10){
+                    Projectile.Opacity = Projectile.timeLeft*0.1f;
+                }
             }
 
+            if(Projectile.ai[0] == 1f)
+            {
+                Projectile.scale += 0.1f;
+                if(Projectile.scale >= 2f) Projectile.Opacity -= 0.1f;
+                if(Projectile.Opacity < 0) Projectile.Kill();
+            }
+            
             UpdateAnimation();
 
             if (Projectile.owner == Main.myPlayer)
@@ -156,18 +169,21 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             StartCut(target.Center);
+            target.AddBuff(BuffID.Frostburn, 2*60);
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             StartCut(target.Center);
+            target.AddBuff(BuffID.Frostburn, 2*60);
             base.OnHitPlayer(target, info);
         }
 
         public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
             StartCut(target.Projectile.Center);
+            if(Main.rand.NextBool(10)) target.ApplyStatusCondition(NPCs.StatusConditions.Freeze);
             base.OnHitPokemonPet(target, damageDone);
         }
 
@@ -181,33 +197,36 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
                 Projectile.hide = false;
                 Projectile.frameCounter = 0;
-                Projectile.frame = 0;
+                Projectile.frame = 3;
 
                 Projectile.penetrate = 3;
-                Projectile.timeLeft = 35;
+                Projectile.timeLeft = 60;
 
                 Projectile.Opacity = 1f;
-                SoundEngine.PlaySound(SoundID.Item119, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.Item101, Projectile.Center);
+
+                if(pokemonProj != null && pokemonProj.active && pokemonProj.ModProjectile is PokemonPetProjectile)
+                {
+                    pokemonProj.velocity *= -0.5f;
+                }
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Dust.NewDust(Projectile.Center, 4, 4, DustID.FrostHydra, Main.rand.Next(2, 15) * (mirrored? -1: 1), Main.rand.Next(-7, -3), Scale: 1f);
+                }
             }
         }
 
         private void UpdateAnimation()
         {
-            if (Projectile.ai[0] == 1f)
+            if (Projectile.ai[0] == 0f)
             {
                 if (++Projectile.frameCounter >= 5)
                 {
                     Projectile.frameCounter = 0;
-                    if (++Projectile.frame >= Main.projFrames[Projectile.type])
+                    if (++Projectile.frame >= Main.projFrames[Projectile.type]-1)
                     {
-                        Projectile.Kill();
-                    }
-                    if (Projectile.frame == 1)
-                    {
-                        for (int i = 0; i < 10; i++)
-                        {
-                            Dust.NewDust(Projectile.Center, 4, 4, DustID.FireworkFountain_Pink, Main.rand.Next(2, 15) * (mirrored? -1: 1), Main.rand.Next(-7, -3));
-                        }
+                        Projectile.frame = 0;
                     }
                 }
             }

@@ -117,9 +117,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
 			if (!didHit)
 			{
-				pokemonProj.velocity *= -0.5f;
 				if(pokemonProj != null && pokemonProj.active && pokemonProj.ModProjectile is PokemonPetProjectile pokemonOwner)
 				{
+					pokemonProj.velocity *= -0.5f;
 					pokemonOwner.manualDmg(damageDone/8);
 				}
 				SoundEngine.PlaySound(SoundID.Item89 with { Volume = 0.5f }, Projectile.position);

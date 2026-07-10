@@ -147,7 +147,10 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
 			if (!didHit)
 			{
-				pokemonProj.velocity *= -0.5f;
+				if(pokemonProj != null && pokemonProj.active && pokemonProj.ModProjectile is PokemonPetProjectile)
+                {
+                    pokemonProj.velocity *= -0.5f;
+                }
 				didHit = true;
 			}
             base.AfterHitTarget(target, damageDone);

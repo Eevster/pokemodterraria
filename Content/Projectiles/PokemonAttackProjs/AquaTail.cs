@@ -129,7 +129,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 texture.Frame(1, Main.projFrames[Projectile.type],
                 0,
                 Projectile.frame),
-                Color.White,
+                Color.White*Projectile.Opacity,
                 Projectile.rotation,
                 texture.Frame(1, Main.projFrames[Projectile.type]).Size() / 2f,
                 Projectile.scale,
@@ -142,7 +142,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             if (Projectile.ai[0] == 0 && Projectile.timeLeft < 10)
             {
-                Projectile.Opacity += 0.1f;
+                Projectile.Opacity = Projectile.timeLeft*0.1f;
             }
             
             UpdateAnimation();

@@ -551,7 +551,7 @@ Projectiles: {
 	// AlolanDiglettPetProjectileShiny.DisplayName: Alolan Diglett Pet Projectile Shiny
 	// AlolanDugtrioPetProjectile.DisplayName: Alolan Dugtrio Pet Projectile
 	// AlolanDugtrioPetProjectileShiny.DisplayName: Alolan Dugtrio Pet Projectile Shiny
-	ShockWave.DisplayName: Onda Voltio
+	ShockWave.DisplayName: Onda voltio
 	SonicBoom.DisplayName: Bomba sónica
 	Screech.DisplayName: Chirrido
 	Supersonic.DisplayName: Supersónico
@@ -564,6 +564,10 @@ Projectiles: {
 	// AlolanRattataPetProjectile.DisplayName: Alolan Rattata Pet Projectile
 	// AlolanRattataPetProjectileShiny.DisplayName: Alolan Rattata Pet Projectile Shiny
 	Hypnosis.DisplayName: Hipnosis
+	PoisonTail.DisplayName: Cola veneno
+	FirePunch.DisplayName: Puño fuego
+	IcePunch.DisplayName: Puño hielo
+	ThunderPunch.DisplayName: Puño trueno
 }
 
 Items: {

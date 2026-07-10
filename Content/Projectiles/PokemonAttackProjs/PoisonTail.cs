@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-    public class DragonTail : PokemonAttack
+    public class PoisonTail : PokemonAttack
 	{
         public override bool CanExistIfNotActualMove => false;
         private bool mirrored;
@@ -31,6 +31,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
             Projectile.tileCollide = false;  
             Projectile.penetrate = -1;
+            Projectile.CritChance = 13;
 
 			Projectile.usesLocalNPCImmunity = true;
 			Projectile.localNPCHitCooldown = 20;
@@ -47,7 +48,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(pokemon.owner == Main.myPlayer){
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<DragonTail>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
+						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<PoisonTail>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 0f, pokemon.owner)];
 						pokemon.velocity = 30*Vector2.Normalize(targetCenter-pokemon.Center);
 						SoundEngine.PlaySound(SoundID.Item1, pokemon.position);
 						pokemonOwner.timer = pokemonOwner.attackDuration;
@@ -61,7 +62,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void UpdateAttackProjs(Projectile pokemon, int i, ref float maxFallSpeed)
         {
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-            DragonTail proj = (DragonTail)pokemonOwner.attackProjs[i].ModProjectile;
+            PoisonTail proj = (PoisonTail)pokemonOwner.attackProjs[i].ModProjectile;
 
             pokemonOwner.attackProjs[i].Center = pokemon.Center;
 
@@ -86,7 +87,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void UpdateNoAttackProjs(Projectile pokemon, int i)
         {
             var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-            DragonTail proj = (DragonTail)pokemonOwner.attackProjs[i].ModProjectile;
+            PoisonTail proj = (PoisonTail)pokemonOwner.attackProjs[i].ModProjectile;
 
             pokemonOwner.attackProjs[i].Center = pokemon.Center;
 
@@ -144,7 +145,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             {
                 Projectile.Opacity = Projectile.timeLeft*0.1f;
             }
-
+            
             UpdateAnimation();
 
             if (Projectile.owner == Main.myPlayer)
@@ -156,18 +157,21 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             StartCut(target.Center);
+            target.AddBuff(BuffID.Poisoned, 2*60);
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             StartCut(target.Center);
+            target.AddBuff(BuffID.Poisoned, 2*60);
             base.OnHitPlayer(target, info);
         }
 
         public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
         {
             StartCut(target.Projectile.Center);
+            if(Main.rand.NextBool(10)) target.ApplyStatusCondition(NPCs.StatusConditions.Poison);
             base.OnHitPokemonPet(target, damageDone);
         }
 
@@ -187,7 +191,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.timeLeft = 35;
 
                 Projectile.Opacity = 1f;
-                SoundEngine.PlaySound(SoundID.Item119, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.Item66, Projectile.Center);
             }
         }
 
@@ -206,7 +210,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     {
                         for (int i = 0; i < 10; i++)
                         {
-                            Dust.NewDust(Projectile.Center, 4, 4, DustID.FireworkFountain_Pink, Main.rand.Next(2, 15) * (mirrored? -1: 1), Main.rand.Next(-7, -3));
+                            Dust.NewDust(Projectile.Center, 4, 4, DustID.FireworkFountain_Blue, Main.rand.Next(2, 15) * (mirrored? -1: 1), Main.rand.Next(-7, -3));
                         }
                     }
                 }

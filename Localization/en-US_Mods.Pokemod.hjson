@@ -564,6 +564,10 @@ Projectiles: {
 	AlolanRattataPetProjectile.DisplayName: Alolan Rattata Pet Projectile
 	AlolanRattataPetProjectileShiny.DisplayName: Alolan Rattata Pet Projectile Shiny
 	Hypnosis.DisplayName: Hypnosis
+	PoisonTail.DisplayName: Poison Tail
+	FirePunch.DisplayName: Fire Punch
+	IcePunch.DisplayName: Ice Punch
+	ThunderPunch.DisplayName: Thunder Punch
 }
 
 Items: {
