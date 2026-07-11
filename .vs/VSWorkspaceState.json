@@ -2,12 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
+    "\\Assets\\Textures",
+    "\\Assets\\Textures\\Pokesprites",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Common",
-    "\\Common\\GlobalNPCs",
     "\\Content",
     "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen1"
+    "\\Content\\NPCs\\TrainerNPCs",
+    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
   ],
+  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets\\HoppipPetProjectileShiny.png",
   "PreviewInSolutionExplorer": false
 }
