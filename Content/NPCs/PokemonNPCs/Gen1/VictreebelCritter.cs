@@ -2,6 +2,8 @@
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 using Pokemod.Common.Configs;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
@@ -39,6 +41,11 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			return 0f;
 		}
 		
+		public override void ModifyNPCLoot(NPCLoot npcLoot)
+        {
+			npcLoot.Add(ItemDropRule.Common(ItemID.Vine, 8));
+            base.ModifyNPCLoot(npcLoot);
+        }
 	}
 
 	public class VictreebelCritterNPCShiny : VictreebelCritterNPC{}

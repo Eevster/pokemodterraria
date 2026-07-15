@@ -11,7 +11,7 @@ namespace Pokemod.Content.Items.TrainerGear
 	[AutoloadEquip(EquipType.HandsOn)]
 	public class BlueTrainerGlove : TrainerGlove
 	{
-		private readonly int ExtraDamage = 4;
+		private readonly int ExtraDamage = 6;
 		private readonly int GloveRange = 6;
 
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(GloveRange, ExtraDamage);

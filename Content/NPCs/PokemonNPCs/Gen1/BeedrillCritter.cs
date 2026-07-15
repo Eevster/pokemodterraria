@@ -1,5 +1,7 @@
 ﻿using System;
 using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 
@@ -27,7 +29,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		
 		public override int[][] spawnConditions =>
 		[
-            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.Jungle, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.UndergroundJungle, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -40,9 +44,18 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			if (spawnInfo.Player.ZoneForest) {
 				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
 			}
+			if (spawnInfo.Player.ZoneJungle) {
+				return GetSpawnChance(spawnInfo, (SpawnCondition.Overworld.Chance+SpawnCondition.UndergroundJungle.Chance) * 0.5f);
+			}
 
 			return 0f;
 		}
+
+        public override void ModifyNPCLoot(NPCLoot npcLoot)
+        {
+			npcLoot.Add(ItemDropRule.Common(ItemID.Stinger, 4));
+            base.ModifyNPCLoot(npcLoot);
+        }
 	}
 
 	public class BeedrillCritterNPCShiny : BeedrillCritterNPC{}

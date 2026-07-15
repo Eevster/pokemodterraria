@@ -3,6 +3,8 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 using Pokemod.Common.Configs;
 using Terraria;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
@@ -37,6 +39,11 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			return 0f;
 		}
 		
+		public override void ModifyNPCLoot(NPCLoot npcLoot)
+        {
+			npcLoot.Add(ItemDropRule.Common(ItemID.IronOre, 3, 3, 9));
+            base.ModifyNPCLoot(npcLoot);
+        }
 	}
 
 	public class AlolanDiglettCritterNPCShiny : AlolanDiglettCritterNPC{}

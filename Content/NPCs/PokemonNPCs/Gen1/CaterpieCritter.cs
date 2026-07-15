@@ -1,4 +1,6 @@
 ﻿using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 
@@ -37,6 +39,12 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 			return 0f;
 		}
+
+		public override void ModifyNPCLoot(NPCLoot npcLoot)
+        {
+			npcLoot.Add(ItemDropRule.Common(ItemID.Cobweb, 3, 4, 6));
+            base.ModifyNPCLoot(npcLoot);
+        }
 	}
 
 	public class CaterpieCritterNPCShiny : CaterpieCritterNPC{}

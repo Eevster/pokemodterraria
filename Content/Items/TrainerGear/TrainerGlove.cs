@@ -13,7 +13,7 @@ namespace Pokemod.Content.Items.TrainerGear
 	public class TrainerGlove : ModItem
 	{
 		//private readonly float DefenseReduction = 0.25f;
-		private readonly int ExtraDamage = 3;
+		private readonly int ExtraDamage = 4;
 		private readonly int GloveRange = 6;
 
 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(GloveRange, ExtraDamage);

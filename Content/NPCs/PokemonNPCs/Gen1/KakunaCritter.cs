@@ -24,7 +24,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		
 		public override int[][] spawnConditions =>
 		[
-            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.Jungle, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -34,7 +35,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         }
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneForest) {
+			if (spawnInfo.Player.ZoneForest || spawnInfo.Player.ZoneJungle) {
 				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.8f);
 			}
 
