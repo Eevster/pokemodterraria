@@ -88,9 +88,11 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			{
 				OnBattle = true;
 
-            	Main.CloseNPCChatOrSign();
-				Main.npcChatText = string.Empty;
-				opponent.SetTalkNPC(0);
+				//Main.CloseNPCChatOrSign();
+				Main.npcChatText = ""; 
+
+        		// 2. Apagamos la interfaz de conversación nativa
+        		Main.ClosePlayerChat();
 
 				LoadTeam();
 				if(opponent.whoAmI == Main.myPlayer){

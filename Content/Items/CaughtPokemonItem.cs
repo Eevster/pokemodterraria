@@ -458,6 +458,11 @@ namespace Pokemod.Content.Items
 			if(PokemonProj != null){
 				if(currentHP != 0 && PokemonProj.currentHp == 0){
 					AddHappiness(-3, -3, -5);
+
+					if (Item.playerIndexTheItemIsReservedFor >= 0 && Item.playerIndexTheItemIsReservedFor < Main.player.Length && Main.player[Item.playerIndexTheItemIsReservedFor].GetModPlayer<PokemonPlayer>().onBattle)
+					{
+						Main.player[Item.playerIndexTheItemIsReservedFor].GetModPlayer<PokemonPlayer>().SendNextPokemon();
+					}
 				}
 				currentHP = PokemonProj.currentHp;
 			}
@@ -777,7 +782,7 @@ namespace Pokemod.Content.Items
 			Player player = Main.LocalPlayer;
 			if (player == Main.player[Item.playerIndexTheItemIsReservedFor]) {
 				Color typeColor = ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor(PokemonData.pokemonAttacks[move].attackType));
-                Main.NewText(Language.GetText("Mods.Pokemod.MoveLearnUI.Success").WithFormatArgs(PokemonName, move).ToString(), color: typeColor);
+                Main.NewText(Language.GetText("Mods.Pokemod.MoveLearnUI.Success").WithFormatArgs(PokemonName, Language.GetTextValue($"Mods.Pokemod.Projectiles.{move}.DisplayName")).ToString(), color: typeColor);
 				
 				Vector2 effectPosition = proj != null && proj.active ? proj.Center : player.Center;
 

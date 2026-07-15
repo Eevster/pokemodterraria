@@ -22,9 +22,9 @@ namespace Pokemod.Common.GlobalNPCs
             if(player.HasBuff<PokemonRepel>()) return;
 
             float multiplier = ModContent.GetInstance<GameplayConfig>().PokemonSpawnMultiplier;
-            multiplier = 2f + (multiplier-1f)*0.5f;
+            multiplier = 1.5f + (multiplier-1f)*0.5f;
 
-            if(multiplier >= 2f){
+            if(multiplier >= 1.5f){
                 spawnRate = (int)(spawnRate / multiplier);
                 maxSpawns = (int)(maxSpawns * multiplier);
             }

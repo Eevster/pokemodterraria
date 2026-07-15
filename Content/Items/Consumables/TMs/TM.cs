@@ -67,7 +67,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			{
 				string tooltip =
                     Language.GetTextValue("Mods.Pokemod.PokemonInfo.ItemActiveUse") + "\n" +
-					Language.GetTextValue("Mods.Pokemod.PokemonInfo.TMContains") + Name.Replace("TM", "") + "\n" +
+					Language.GetTextValue("Mods.Pokemod.PokemonInfo.TMContains") + Language.GetTextValue($"Mods.Pokemod.Projectiles.{Name.Replace("TM", "")}.DisplayName") + "\n" +
 					"[" + "[c/" + PokemonNPCData.GetTypeColor((int)moveType) + ":" + Language.GetTextValue("Mods.Pokemod.PokemonTypes." + moveType) + "]" + "]";
 				tooltips.Add(new(Mod, Name + "Tooltip", tooltip));
 			}
@@ -182,39 +182,62 @@ namespace Pokemod.Content.Items.Consumables.TMs
         }
     }
 
+	public class AgilityTM : TechnicalMachine { }
     public class AirSlashTM : TechnicalMachine { }
+	public class AmnesiaTM : TechnicalMachine { }
     public class BlizzardTM : TechnicalMachine { }
     public class BrickBreakTM : TechnicalMachine { }
+	public class BubbleBeamTM : TechnicalMachine { }
     public class BulletSeedTM : TechnicalMachine { }
+	public class ConfuseRayTM : TechnicalMachine { }
     public class CrunchTM : TechnicalMachine { }
     public class DigTM : TechnicalMachine { }
+	public class DoubleEdgeTM : TechnicalMachine { }
+	public class DoubleTeamTM : TechnicalMachine { }
     public class DragonBreathTM : TechnicalMachine { }
     public class DragonRushTM : TechnicalMachine { }
+	public class DrillRunTM : TechnicalMachine { }
     public class EarthquakeTM : TechnicalMachine { }
+	public class ElectroBallTM : TechnicalMachine { }
+	public class EnergyBallTM : TechnicalMachine { }
     public class ExplosionTM : TechnicalMachine { }
     public class FireBlastTM : TechnicalMachine { }
+	public class FirePunchTM : TechnicalMachine { }
     public class FlamethrowerTM : TechnicalMachine { }
     public class FlashCannonTM : TechnicalMachine { }
     public class FocusPunchTM : TechnicalMachine { }
     public class FuryCutterTM : TechnicalMachine { }
     public class GigaDrainTM : TechnicalMachine { }
     public class HexTM : TechnicalMachine { }
+	public class HurricaneTM : TechnicalMachine { }
     public class HydroPumpTM : TechnicalMachine { }
     public class HyperBeamTM : TechnicalMachine { }
     public class IceBeamTM : TechnicalMachine { }
+	public class IcePunchTM : TechnicalMachine { }
+	public class LeafStormTM : TechnicalMachine { }
+	public class MagicalLeafTM : TechnicalMachine { }
+	public class MegaDrainTM : TechnicalMachine { }
+	public class MudShotTM : TechnicalMachine { }
+	public class MudSlapTM : TechnicalMachine { }
     public class NightSlashTM : TechnicalMachine { }
     public class OverheatTM : TechnicalMachine { }
     public class PinMissileTM : TechnicalMachine { }
+	public class PoisonTailTM : TechnicalMachine { }
+	public class PowerGemTM : TechnicalMachine { }
     public class PsychicTM : TechnicalMachine { }
     public class PsychoCutTM : TechnicalMachine { }
     public class RockSlideTM : TechnicalMachine { }
+	public class ScreechTM: TechnicalMachine { }
+	public class SelfDestructTM: TechnicalMachine { }
     public class ShadowBallTM: TechnicalMachine { }
     public class SludgeBombTM: TechnicalMachine { }
     public class SolarBeamTM : TechnicalMachine { }
     public class StoneEdgeTM: TechnicalMachine { }
     public class SwiftTM : TechnicalMachine { }
+	public class TakeDownTM : TechnicalMachine { }
     public class ThunderTM : TechnicalMachine { }
     public class ThunderboltTM : TechnicalMachine { }
+	public class ThunderPunchTM : TechnicalMachine { }
     public class ToxicTM : TechnicalMachine { }
     public class WaterPulseTM: TechnicalMachine { }
     public class WingAttackTM: TechnicalMachine { }
@@ -229,7 +252,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Bug;
-			moves = [];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -241,7 +264,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Dark;
-			moves = ["Crunch", "NightSlash"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -253,7 +276,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Dragon;
-			moves = ["DragonBreath", "DragonRush"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -265,7 +288,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Electric;
-			moves = ["ElectroBall", "ThunderWave", "Thunderbolt", "Thunder"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -277,7 +300,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Fairy;
-			moves = [];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -289,7 +312,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Fighting;
-			moves = ["FocusPunch", "BrickBreak"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -301,7 +324,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Fire;
-			moves = ["Flamethrower", "FireBlast", "Overheat"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -313,7 +336,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Flying;
-			moves = ["AirSlash"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -325,7 +348,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Ghost;
-			moves = ["ConfuseRay", "Hex", "NightShade", "ShadowBall"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -337,7 +360,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Grass;
-			moves = ["MagicalLeaf", "BulletSeed", "GigaDrain", "LeafStorm", "SolarBeam"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -349,7 +372,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Ground;
-			moves = ["Dig", "Earthquake", "MudShot"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -361,7 +384,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Ice;
-			moves = ["IceFang", "IceBeam", "Blizzard"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -373,7 +396,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Normal;
-			moves = ["Swift", "HyperBeam", "DoubleEdge", "Slash"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -385,7 +408,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Poison;
-			moves = ["Toxic", "SludgeBomb"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -397,7 +420,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Psychic;
-			moves = ["Psybeam", "Psychic"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -409,7 +432,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Rock;
-			moves = ["RockSlide", "StoneEdge"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 	public class TMSteel : TechnicalMachine
@@ -420,7 +443,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Steel;
-			moves = ["FlashCannon"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 
@@ -432,7 +455,7 @@ namespace Pokemod.Content.Items.Consumables.TMs
 			base.SetDefaults();
 
 			moveType = TypeIndex.Water;
-			moves = ["WaterPulse", "Waterfall", "HydroPump"];
+			moves = PokemonData.pokemonAttacks.Where(x => x.Value.attackType == (int)moveType).Select(x => x.Key).ToArray();
 		}
 	}
 }

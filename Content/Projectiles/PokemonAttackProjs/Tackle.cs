@@ -63,36 +63,39 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 		}
 
 		public override void UpdateAttackProjs(Projectile pokemon, int i, ref float maxFallSpeed){
-            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-
-			pokemonOwner.attackProjs[i].Center = pokemon.Center;
-			if(pokemon.velocity.Length() < 0.2f){
-				pokemonOwner.attackProjs[i].Kill();
-				if(!pokemonOwner.canAttack){
-					pokemonOwner.timer = 0;
+			if (pokemon.ModProjectile is PokemonPetProjectile pokemonOwner)
+			{
+				pokemonOwner.attackProjs[i].Center = pokemon.Center;
+				if(pokemon.velocity.Length() < 0.2f){
+					pokemonOwner.attackProjs[i].Kill();
+					if(!pokemonOwner.canAttack){
+						pokemonOwner.timer = 0;
+					}
 				}
 			}
 		}
 
 		public override void UpdateNoAttackProjs(Projectile pokemon, int i){
-            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-
-			pokemonOwner.attackProjs[i].Center = pokemon.Center;
-			if(pokemon.velocity.Length() < 0.2f){
-				pokemonOwner.attackProjs[i].Kill();
-				if(!pokemonOwner.canAttack){
-					pokemonOwner.timer = 0;
+            if (pokemon.ModProjectile is PokemonPetProjectile pokemonOwner)
+			{
+				pokemonOwner.attackProjs[i].Center = pokemon.Center;
+				if(pokemon.velocity.Length() < 0.2f){
+					pokemonOwner.attackProjs[i].Kill();
+					if(!pokemonOwner.canAttack){
+						pokemonOwner.timer = 0;
+					}
 				}
 			}
 		}
 
         public override void ExtraChanges(Projectile pokemon){
-            var pokemonOwner = (PokemonPetProjectile)pokemon.ModProjectile;
-
-			if(!pokemonOwner.canAttack && pokemonOwner.timer > 0){
-				if(!Main.player[pokemon.owner].GetModPlayer<PokemonPlayer>().onBattle) pokemonOwner.immune = true;
-                pokemon.velocity.Y *= 0.95f;
-            }
+            if (pokemon.ModProjectile is PokemonPetProjectile pokemonOwner)
+			{
+				if(!pokemonOwner.canAttack && pokemonOwner.timer > 0){
+					if(!Main.player[pokemon.owner].GetModPlayer<PokemonPlayer>().onBattle) pokemonOwner.immune = true;
+					pokemon.velocity.Y *= 0.95f;
+				}
+			}
         }
 
         public override void AI()

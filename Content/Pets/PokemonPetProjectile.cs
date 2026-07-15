@@ -53,7 +53,7 @@ namespace Pokemod.Content.Pets
 
 		//Damage system variables
 		public bool immune = true;
-        public int hurtTime = 30;
+        public int hurtTime = 60;
         public int currentHp = 0;
 		public string variant = "";
         public bool showHp;
@@ -400,7 +400,8 @@ namespace Pokemod.Content.Pets
 
 		public void SetPokemonLvl(int lvl, int[] IVs = null, int[] EVs = null, int nature = 0, int happiness = 0){
 			if(pokemonLvl != 0 && pokemonLvl != lvl){
-				CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile",""), lvl).Value);
+				//CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile",""), lvl).Value);
+				Main.NewText(Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile",""), lvl).Value, color: Color.Yellow);
 			}
 			pokemonLvl = lvl;
 			if(IVs != null) this.IVs = IVs;
@@ -1001,7 +1002,7 @@ namespace Pokemod.Content.Pets
 			{
 				enemyPokemon = Main.projectile[j];
 
-				if (enemyPokemon.owner == Projectile.owner && enemyPokemon != Projectile)
+				if (enemyPokemon.owner == Projectile.owner && enemyPokemon != Projectile && enemyPokemon.active)
 				{
 					if(enemyPokemon.ModProjectile is PokemonPetProjectile enemyPokemonProj)
 					{
@@ -1182,7 +1183,43 @@ namespace Pokemod.Content.Pets
 					{
 						if (canAttack && !(isHeldByPlayer && PokemonData.pokemonAttacks[currentAttack].contact))
 						{
-							Attack(distanceFromTarget, targetCenter);
+							PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+							if (!isEnemy && trainer.attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack && (trainer.targetNPC != null || trainer.targetPlayer != null))
+							{
+								Entity directedTarget = null;
+
+								if(trainer.targetNPC != null) directedTarget = trainer.targetNPC;
+								else if (trainer.targetPlayer != null) directedTarget = trainer.targetNPC;
+
+								if(directedTarget != null)
+								{
+									float between = Vector2.Distance(directedTarget.Center, Projectile.Center);
+									bool lineOfSight = Collision.CanHitLine(Projectile.Center-Vector2.One, 2, 2, directedTarget.position, directedTarget.width, directedTarget.height);
+									bool closeThroughWall = between < 150f;
+									bool throughWallRange = between < 500f;
+
+									if (lineOfSight || closeThroughWall || (canAttackThroughWalls && throughWallRange)){
+										Attack(distanceFromTarget, targetCenter);
+									}
+								}
+							}
+							else
+							{
+								Attack(distanceFromTarget, targetCenter);
+							}
+							/*PokemonPlayer trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
+							if (isEnemy)
+							{
+								Attack(distanceFromTarget, targetCenter);
+							}
+							else if(trainer.attackMode == (int)PokemonPlayer.AttackMode.Directed_Attack && trainer.targetNPC == null && trainer.targetPlayer == null)
+							{
+								Attack(distanceFromTarget, targetCenter);
+							}
+							else if(Collision.CanHitLine(Projectile.Center - Vector2.One, 2, 2, targetCenter - Vector2.One, 2, 2))
+							{
+								Attack(distanceFromTarget, targetCenter);
+							}*/
 						}
 					}
 				}
@@ -2101,25 +2138,10 @@ namespace Pokemod.Content.Pets
 					RemoveStatusCondition();
 				}
 			}
-			/*if(statusCondition == (int)StatusConditions.Sleep)
+			if(statusCondition == (int)StatusConditions.Sleep)
 			{
-				statusConditionCounter++;
-				if (!Main.rand.NextBool(3) && statusConditionCounter < 3)
-				{
-					CombatText.NewText(Projectile.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor((int)TypeIndex.Normal)), Language.GetTextValue($"Mods.Pokemod.PokemonStatusConditions.{StatusConditions.Sleep}"));
-					SoundEngine.PlaySound(SoundID.Item130 with { Volume = 0.8f }, Projectile.Bottom);
-					for(int i = 0; i < 3; i++)
-					{
-						Dust.NewDust(Projectile.Bottom - new Vector2(5, 5+0.9f*hitboxHeight), 5, 5, ModContent.DustType<SleepDust>(), Scale: (i+1)*0.03f);
-					}
-					timer = 120;
-					return;
-				}
-				else
-				{
-					RemoveStatusCondition();
-				}
-			}*/
+				return;
+			}
 
 			// Confusion
 			if(isConfused > 0)
@@ -2475,12 +2497,7 @@ namespace Pokemod.Content.Pets
 				//Main.player[Projectile.owner].ClearBuff(PokemonBuff);
 				if(!isEnemy){
 					if(Projectile.owner == Main.myPlayer){
-						Main.NewText(Language.GetTextValue("Mods.Pokemod.PokemonInfo.FaintedMsg"), 255, 130, 130); 
-					}
-
-					if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().onBattle)
-					{
-						Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().SendNextPokemon();
+						Main.NewText(Language.GetText("Mods.Pokemod.PokemonInfo.FaintedMsg").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile","")).Value, 255, 130, 130); 
 					}
 				}
 				else
@@ -2617,7 +2634,7 @@ namespace Pokemod.Content.Pets
                 hurtTime--;
 
                 if (hurtTime <= 0){
-                    hurtTime = 30;
+                    hurtTime = 60;
                     immune = false;
                 }
             }

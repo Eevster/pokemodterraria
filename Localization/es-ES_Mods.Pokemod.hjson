@@ -2168,6 +2168,121 @@ Items: {
 		// DisplayName: TM36 Blizzard
 	}
 
+	AgilityTM: {
+		// DisplayName: TM37 Agility
+		// Tooltip: ""
+	}
+
+	AmnesiaTM: {
+		// DisplayName: TM38 Amnesia
+		// Tooltip: ""
+	}
+
+	BubbleBeamTM: {
+		// DisplayName: TM39 Bubble Beam
+		// Tooltip: ""
+	}
+
+	ConfuseRayTM: {
+		// DisplayName: TM40 Confuse Ray
+		// Tooltip: ""
+	}
+
+	DoubleEdgeTM: {
+		// DisplayName: TM41 Double Edge
+		// Tooltip: ""
+	}
+
+	DoubleTeamTM: {
+		// DisplayName: TM42 Double Team
+		// Tooltip: ""
+	}
+
+	DrillRunTM: {
+		// DisplayName: TM43 Drill Run
+		// Tooltip: ""
+	}
+
+	ElectroBallTM: {
+		// DisplayName: TM44 Electro Ball
+		// Tooltip: ""
+	}
+
+	EnergyBallTM: {
+		// DisplayName: TM45 Energy Ball
+		// Tooltip: ""
+	}
+
+	FirePunchTM: {
+		// DisplayName: TM46 Fire Punch
+		// Tooltip: ""
+	}
+
+	HurricaneTM: {
+		// DisplayName: TM47 Hurricane
+		// Tooltip: ""
+	}
+
+	IcePunchTM: {
+		// DisplayName: TM48 Ice Punch
+		// Tooltip: ""
+	}
+
+	LeafStormTM: {
+		// DisplayName: TM49 Leaf Storm
+		// Tooltip: ""
+	}
+
+	MagicalLeafTM: {
+		// DisplayName: TM50 Magical Leaf
+		// Tooltip: ""
+	}
+
+	MegaDrainTM: {
+		// DisplayName: TM51 Mega Drain
+		// Tooltip: ""
+	}
+
+	MudShotTM: {
+		// DisplayName: TM52 Mud Shot
+		// Tooltip: ""
+	}
+
+	MudSlapTM: {
+		// DisplayName: TM53 Mud Slap
+		// Tooltip: ""
+	}
+
+	PoisonTailTM: {
+		// DisplayName: TM54 Poison Tail
+		// Tooltip: ""
+	}
+
+	PowerGemTM: {
+		// DisplayName: TM55 Power Gem
+		// Tooltip: ""
+	}
+
+	ScreechTM: {
+		// DisplayName: TM56 Screech
+		// Tooltip: ""
+	}
+
+	SelfDestructTM: {
+		// DisplayName: TM57 Self Destruct
+		// Tooltip: ""
+	}
+
+	TakeDownTM: {
+		// DisplayName: TM58 Take Down
+		// Tooltip: ""
+	}
+
+	ThunderPunchTM: {
+		// DisplayName: TM59 Thunder Punch
+		// Tooltip: ""
+	}
+
 	MegaShardBlockItem: {
 		Tooltip: ""
 		DisplayName: Bloque de mega fragmento
@@ -5673,7 +5788,7 @@ PokemonInfo: {
 	CaughtIn: Capturado en una {0}
 	CaughtInBy: Capturado en una {0} por {1}
 	LevelUp: "{0} subió al nivel {1}"
-	FaintedMsg: ¡Tu pokemon se debilitó!
+	FaintedMsg: ¡Tu {0} se debilitó!
 	ItemUse: Para usar el objeto haz clic sobre tu pokemon o haz clic derecho en su pokeball
 	ItemActiveUse: Para usar el objeto haz clic sobre tu pokemon activo
 	ItemNoActiveUse: Para usar el objeto haz clic derecho en la pokeball de uno de tus pokemon
