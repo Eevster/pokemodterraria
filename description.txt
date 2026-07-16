@@ -7,6 +7,9 @@ Contributers:
 -PriddyNeatGames (Discord) Developer
 -RollinMan (Discord) Artist/Developer
 
+External Credits:
+Pokesprite: Icons Gen 1-8
+
 Changelog 1.3:
 -Shiny Starters now appear on starter selection
 -New Moves

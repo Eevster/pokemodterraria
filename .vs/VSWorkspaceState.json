@@ -3,14 +3,15 @@
     "",
     "\\Assets",
     "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites",
-    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Common",
+    "\\Common\\Players",
     "\\Content",
-    "\\Content\\NPCs",
+    "\\Content\\Items",
+    "\\Content\\Items\\MegaStones",
     "\\Content\\NPCs\\TrainerNPCs",
-    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders"
+    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders",
+    "\\Content\\Pets\\AbraPet"
   ],
-  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets\\HoppipPetProjectileShiny.png",
+  "SelectedNode": "\\Content\\Items\\MegaStones\\MegaCuffItem.cs",
   "PreviewInSolutionExplorer": false
 }
