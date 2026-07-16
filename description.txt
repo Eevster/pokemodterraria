@@ -9,6 +9,7 @@ Contributers:
 
 External Credits:
 Pokesprite: Icons Gen 1-8
+MBCMechachu: Icons Gen 9 
 
 Changelog 1.3:
 -Shiny Starters now appear on starter selection
