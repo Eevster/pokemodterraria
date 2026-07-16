@@ -568,6 +568,12 @@ Projectiles: {
 	FirePunch.DisplayName: Puño fuego
 	IcePunch.DisplayName: Puño hielo
 	ThunderPunch.DisplayName: Puño trueno
+	// TinkatinkPetProjectile.DisplayName: Tinkatink Pet Projectile
+	// TinkatinkPetProjectileShiny.DisplayName: Tinkatink Pet Projectile Shiny
+	// TinkatonPetProjectile.DisplayName: Tinkaton Pet Projectile
+	// TinkatonPetProjectileShiny.DisplayName: Tinkaton Pet Projectile Shiny
+	// TinkatuffPetProjectile.DisplayName: Tinkatuff Pet Projectile
+	// TinkatuffPetProjectileShiny.DisplayName: Tinkatuff Pet Projectile Shiny
 }
 
 Items: {
@@ -5658,6 +5664,12 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
+	// TinkatinkCritterNPCShiny.DisplayName: Tinkatink Critter N P C Shiny
+	// TinkatinkCritterNPC.DisplayName: Tinkatink Critter N P C
+	// TinkatonCritterNPC.DisplayName: Tinkaton Critter N P C
+	// TinkatonCritterNPCShiny.DisplayName: Tinkaton Critter N P C Shiny
+	// TinkatuffCritterNPC.DisplayName: Tinkatuff Critter N P C
+	// TinkatuffCritterNPCShiny.DisplayName: Tinkatuff Critter N P C Shiny
 }
 
 Bestiary: {
