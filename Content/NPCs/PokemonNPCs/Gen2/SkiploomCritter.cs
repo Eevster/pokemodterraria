@@ -28,6 +28,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override float catchRate => 180;
 
+        public override int minLevel => 18;
+
         public override int[][] spawnConditions =>
 		[
             [(int)SpawnArea.Surface, (int)DayTimeStatus.Day, (int)WeatherStatus.Windy]

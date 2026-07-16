@@ -268,11 +268,15 @@ namespace Pokemod.Content.NPCs
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+			DrawBehind(spriteBatch, screenPos, drawColor);
+
 			if(variantID >= 0 && variants.Length > 0){
 				if(variants[variantID] != ""){
 					if (ModContent.RequestIfExists<Texture2D>(Texture + "_" + variants[variantID], out Asset<Texture2D> variantTexture))
 					{
-						spriteBatch.Draw(variantTexture.Value, NPC.Center - screenPos,
+						Vector2 positionOffset = (variantTexture.Frame(1, totalFrames).Size() * Vector2.UnitY * 0.5f) - Vector2.UnitY * 4f;
+
+						spriteBatch.Draw(variantTexture.Value, NPC.Bottom - NPC.scale * positionOffset - screenPos,
 							variantTexture.Frame(1, totalFrames, 0, (int)currentFrame), drawColor, NPC.rotation,
 							variantTexture.Frame(1, totalFrames).Size() / 2f, NPC.scale, NPC.direction >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
 						return false;
@@ -282,6 +286,17 @@ namespace Pokemod.Content.NPCs
 
             return true;
         }
+
+		public virtual void DrawBehind(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor){}
+
+        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+			DrawOver(spriteBatch, screenPos, drawColor);
+
+            base.PostDraw(spriteBatch, screenPos, drawColor);
+        }
+
+		public virtual void DrawOver(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor){}
 
         public virtual int animationSpeed => 6;
 		public virtual int[] idleStartEnd => [-1,-1];
@@ -632,5 +647,17 @@ namespace Pokemod.Content.NPCs
 				NPC.velocity.Y -= (int)Math.Sqrt(2*0.3f*jumpHeight*16f);
 			}
 		}
+
+        public override void OnHitByItem(Player player, Item item, NPC.HitInfo hit, int damageDone)
+        {
+			hostilePokemon = true;
+            base.OnHitByItem(player, item, hit, damageDone);
+        }
+
+        public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone)
+        {
+			hostilePokemon = true;
+            base.OnHitByProjectile(projectile, hit, damageDone);
+        }
 	}
 }

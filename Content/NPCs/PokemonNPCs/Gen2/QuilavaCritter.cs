@@ -1,4 +1,8 @@
-﻿using Terraria.GameContent.Bestiary;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria;
+using Terraria.GameContent.Bestiary;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 
@@ -9,13 +13,13 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int hitboxWidth => 28;
 		public override int hitboxHeight => 32;
 
-		public override int totalFrames => 12;
+		public override int totalFrames => 16;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,5];
 		public override int[] walkStartEnd => [6,10];
 		public override int[] jumpStartEnd => [7,7];
 		public override int[] fallStartEnd => [10,10];
-		public override int[] attackStartEnd => [11,11];
+		public override int[] attackStartEnd => [11,15];
 
 		public override int minLevel => 16;
 
@@ -36,6 +40,28 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
             }
 
 			return 0f;
+		}
+
+		private float animTimer = 0;
+
+		public override void DrawBehind(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+		{
+			if ((hostilePokemon || !Main.dayTime) && ModContent.RequestIfExists("Pokemod/Assets/Textures/Pokesprites/Pets/Extras/"+pokemonName+"PetProjectile_Back", out Asset<Texture2D> backTexture))
+			{
+				int horizontalFrames = 3;
+				int frameDuration = 5;
+
+				Vector2 positionOffset = (backTexture.Frame(horizontalFrames, totalFrames).Size() * Vector2.UnitY * 0.5f) - Vector2.UnitY * 4f;
+
+				spriteBatch.Draw(backTexture.Value, NPC.Bottom - NPC.scale * positionOffset - screenPos,
+					backTexture.Frame(horizontalFrames, totalFrames, (int)(animTimer/frameDuration), (int)currentFrame), Color.White, NPC.rotation,
+					backTexture.Frame(horizontalFrames, totalFrames).Size() / 2f, NPC.scale, NPC.direction >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+
+				if(++animTimer >= frameDuration * horizontalFrames)
+				{
+					animTimer = 0;
+				}
+			}
 		}
 	}
 

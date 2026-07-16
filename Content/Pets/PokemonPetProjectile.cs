@@ -2654,12 +2654,16 @@ namespace Pokemod.Content.Pets
 			else return new Color(255, 34, 26);
 		}
 
+		public virtual void DrawBehindMainSprite(Color lightColor){}
+
         public override bool PreDraw(ref Color lightColor)
         {
 			bool canDraw = true;
 
 			if (isOut)
 			{
+				DrawBehindMainSprite(lightColor);
+
 				if (dynamax)
 				{
 					Asset<Texture2D> dynamaxTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/DynamaxVisuals_Back");
@@ -2757,10 +2761,13 @@ namespace Pokemod.Content.Pets
             return true;
         }
 
+		public virtual void DrawOverMainSprite(Color lightColor){}
+
         public override void PostDraw(Color lightColor)
         {
 			if (isOut)
 			{
+				DrawOverMainSprite(lightColor);
 				PostDrawPokemonExtras(lightColor);
 
 				if (isEvolving && evolveTimer > 0)

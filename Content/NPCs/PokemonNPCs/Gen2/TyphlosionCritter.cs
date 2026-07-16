@@ -1,4 +1,8 @@
-﻿using Terraria.GameContent.Bestiary;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria;
+using Terraria.GameContent.Bestiary;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 
@@ -36,6 +40,28 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
             }
 
 			return 0f;
+		}
+
+		private float animTimer = 0;
+
+		public override void DrawOver(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+		{
+			if ((hostilePokemon || !Main.dayTime) && ModContent.RequestIfExists("Pokemod/Assets/Textures/Pokesprites/Pets/Extras/"+pokemonName+"PetProjectile_Front", out Asset<Texture2D> frontTexture))
+			{
+				int horizontalFrames = 3;
+				int frameDuration = 5;
+
+				Vector2 positionOffset = (frontTexture.Frame(horizontalFrames, totalFrames).Size() * Vector2.UnitY * 0.5f) - Vector2.UnitY * 4f;
+
+				spriteBatch.Draw(frontTexture.Value, NPC.Bottom - NPC.scale * positionOffset - screenPos,
+					frontTexture.Frame(horizontalFrames, totalFrames, (int)(animTimer/frameDuration), (int)currentFrame), Color.White, NPC.rotation,
+					frontTexture.Frame(horizontalFrames, totalFrames).Size() / 2f, NPC.scale, NPC.direction >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+
+				if(++animTimer >= frameDuration * horizontalFrames)
+				{
+					animTimer = 0;
+				}
+			}
 		}
 	}
 
