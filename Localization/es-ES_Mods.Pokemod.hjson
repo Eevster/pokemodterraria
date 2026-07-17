@@ -4734,7 +4734,7 @@ NPCs: {
 
 	ElectabuzzCritterNPC: {
 		// DisplayName: Electabuzz
-		// Description: ""
+		// Description: Half of all blackouts occur when this Pokémon appears at power plants and eats electricity.
 	}
 
 	ExeggcuteCritterNPC: {
@@ -5097,14 +5097,14 @@ NPCs: {
 		// Description: It swims backward by opening and closing its two shells. Its large tongue is always kept hanging out.
 	}
 
-	SlowbroCritterNPC: {
-		// DisplayName: Slowbro
-		// Description: ""
-	}
-
 	SlowpokeCritterNPC: {
 		// DisplayName: Slowpoke
-		// Description: ""
+		// Description: Although slow, it is skilled at fishing with its tail. It does not feel pain if its tail is bitten.
+	}
+
+	SlowbroCritterNPC: {
+		// DisplayName: Slowbro
+		// Description: Though usually dim-witted, it seems to become inspired if the Shellder on its tail bites down.
 	}
 
 	SnorlaxCritterNPC: {
@@ -5142,14 +5142,14 @@ NPCs: {
 		// Description: It alerts others to danger by stridently flashing the red orbs on its head.
 	}
 
-	VenomothCritterNPC: {
-		// DisplayName: Venomoth
-		// Description: ""
-	}
-
 	VenonatCritterNPC: {
 		// DisplayName: Venonat
-		// Description: ""
+		// Description: Its big eyes are actually clusters of tiny eyes. At night, its kind is drawn by light.
+	}
+
+	VenomothCritterNPC: {
+		// DisplayName: Venomoth
+		// Description: It flutters its wings to scatter dustlike scales. The scales leach toxins if they contact skin.
 	}
 
 	VictreebelCritterNPC: {
@@ -5200,6 +5200,11 @@ NPCs: {
 	PichuCritterNPC: {
 		// DisplayName: Pichu
 		// Description: The electric sacs on its cheeks are still small. They cannot store much electricity yet.
+	}
+
+	IgglybuffCritterNPC: {
+		// DisplayName: Igglybuff
+		// Description: It has a soft and bouncy body. Once it starts bouncing, it becomes impossible to stop.
 	}
 
 	CleffaCritterNPC: {
@@ -5317,6 +5322,21 @@ NPCs: {
 		// Description: It launches electrified fur from its abdomen as its means of attack. Opponents hit by the fur could be in for three full days and nights of paralysis.
 	}
 
+	TinkatinkCritterNPC: {
+		// DisplayName: Tinkatink
+		// Description: This Pokemon pounds iron scraps together to make a hammer. It will remake the hammer again and again until it's satisfied with the result.
+	}
+
+	TinkatuffCritterNPC: {
+		// DisplayName: Tinkatuff
+		// Description: These Pokemon make their homes in piles of scrap metal. They test the strength of each other's hammers by smashing them together.
+	}
+
+	TinkatonCritterNPC: {
+		// DisplayName: Tinkaton
+		// Description: The hammer tops 220 pounds, yet it gets swung around easily by Tinkaton as it steals whatever it pleases and carries its plunder back home.
+	}
+
 	TerrarianKabutoCritterNPC: {
 		// DisplayName: Terrarian Kabuto
 		// Description: Sealed long ago within the dungeon, this Pokemon inhabits the bones of a Pokemon even more ancient.
@@ -5340,11 +5360,6 @@ NPCs: {
 	TerrarianOmastarCritterNPC: {
 		// DisplayName: Terrarian Omastar
 		// Description: This Pokemon's many eyes allow it to peer into deep space.
-	}
-
-	IgglybuffCritterNPC: {
-		// DisplayName: Igglybuff
-		// Description: It has a soft and bouncy body. Once it starts bouncing, it becomes impossible to stop.
 	}
 
 	AlolanRattataCritterNPC: {
@@ -5546,6 +5561,7 @@ NPCs: {
 	// ZapdosCritterNPCShiny.DisplayName: Zapdos Shiny
 	// ZubatCritterNPCShiny.DisplayName: Zubat Shiny
 	// PichuCritterNPCShiny.DisplayName: Pichu Shiny
+	// IgglybuffCritterNPCShiny.DisplayName: Igglybuff Shiny
 	// CleffaCritterNPCShiny.DisplayName: Cleffa Shiny
 	// EspeonCritterNPCShiny.DisplayName: Espeon Shiny
 	// AmpharosCritterNPCShiny.DisplayName: Ampharos Shiny
@@ -5569,12 +5585,14 @@ NPCs: {
 	// MagnezoneCritterNPCShiny.DisplayName: Magnezone Shiny
 	// JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	// GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
+	// TinkatinkCritterNPCShiny.DisplayName: Tinkatink Shiny
+	// TinkatonCritterNPCShiny.DisplayName: Tinkaton Shiny
+	// TinkatuffCritterNPCShiny.DisplayName: Tinkatuff Shiny
 	// TerrarianKabutoCritterNPCShiny.DisplayName: Terrarian Kabuto Shiny
 	// TerrarianKabutopsCritterNPCShiny.DisplayName: Terrarian Kabutops Shiny
 	// TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
 	// TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	// TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
-	// IgglybuffCritterNPCShiny.DisplayName: Igglybuff Shiny
 	// AlolanRaticateCritterNPCShiny.DisplayName: Alolan Raticate Shiny
 	// AlolanRattataCritterNPCShiny.DisplayName: Alolan Rattata Shiny
 	// AlolanDiglettCritterNPCShiny.DisplayName: Alolan Diglett Shiny
@@ -5664,12 +5682,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
-	// TinkatinkCritterNPCShiny.DisplayName: Tinkatink Critter N P C Shiny
-	// TinkatinkCritterNPC.DisplayName: Tinkatink Critter N P C
-	// TinkatonCritterNPC.DisplayName: Tinkaton Critter N P C
-	// TinkatonCritterNPCShiny.DisplayName: Tinkaton Critter N P C Shiny
-	// TinkatuffCritterNPC.DisplayName: Tinkatuff Critter N P C
-	// TinkatuffCritterNPCShiny.DisplayName: Tinkatuff Critter N P C Shiny
 }
 
 Bestiary: {
@@ -5825,9 +5837,18 @@ PokemonInfo: {
 	Mount: Clic derecho para montar
 }
 
+PokedexUI: {
+	// InfoSection: Info
+	// AreaSection: Area
+	// FormsSection: Forms
+	// InitialInfoTitle: Total records
+	// ShinyButton: Toggle shiny
+}
+
 PokedexMsg: {
 	SeenMsg: ¡{0} se registró en la Pokedex!
 	ObtainedMsg: ¡La información completa de {0} se registró en la Pokedex!
+	// ObtainedShinyMsg: Shiny {0} registered in the Pokedex!
 }
 
 PokemonBattle: {

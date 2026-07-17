@@ -150,7 +150,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 
 		public void FaintedPokemon()
 		{
-			Console.WriteLine($"(Syncing Trainer NPC) pokemonTeam.Count > 0:{pokemonTeam.Count > 0}, pokemonTeam.Count > 0:{pokemonTeam.Count > 0}, Main.netMode != NetmodeID.MultiplayerClient:{Main.netMode != NetmodeID.MultiplayerClient}");
+			//Console.WriteLine($"(Syncing Trainer NPC) pokemonTeam.Count > 0:{pokemonTeam.Count > 0}, pokemonTeam.Count > 0:{pokemonTeam.Count > 0}, Main.netMode != NetmodeID.MultiplayerClient:{Main.netMode != NetmodeID.MultiplayerClient}");
 
 			if(pokemonTeam.Count > 0)
 			{
