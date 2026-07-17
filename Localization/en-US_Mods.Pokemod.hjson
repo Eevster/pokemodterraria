@@ -4369,7 +4369,7 @@ NPCs: {
 
 	BlacephalonCritterNPC: {
 		DisplayName: Blacephalon
-		Description: The fire on the tip of its tail is a measure of its life. If the Pokémon is healthy, its tail burns intensely.
+		Description: ""
 	}
 
 	ChikoritaCritterNPC: {
@@ -4439,7 +4439,7 @@ NPCs: {
 
 	RaichuCritterNPC: {
 		DisplayName: Raichu
-		Description: When it is angered, it immediately discharges the energy stored in the pouches in its cheeks.
+		Description: It can loose 100,000-volt bursts of electricity, instantly downing foes several times its size.
 	}
 
 	VaporeonCritterNPC: {
@@ -4609,7 +4609,7 @@ NPCs: {
 
 	EkansCritterNPC: {
 		DisplayName: Ekans
-		Description: ""
+		Description: It sneaks through grass without making a sound and strikes unsuspecting prey from behind.
 	}
 
 	SandshrewCritterNPC: {
@@ -4748,7 +4748,7 @@ NPCs: {
 	}
 
 	FarfetchdCritterNPC: {
-		DisplayName: Farfetchd
+		DisplayName: Farfetch'd
 		Description: ""
 	}
 
@@ -4769,7 +4769,7 @@ NPCs: {
 
 	GloomCritterNPC: {
 		DisplayName: Gloom
-		Description: It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however.
+		Description: The nectar it drools from its mouth smells so atrocious that it can make noses curl from more than a mile away.
 	}
 
 	GolbatCritterNPC: {
@@ -4779,7 +4779,7 @@ NPCs: {
 
 	GoldeenCritterNPC: {
 		DisplayName: Goldeen
-		Description: It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however.
+		Description: It swims elegantly by flittering its tail fin as if it were a dress. It has the look of a queen.
 	}
 
 	GolduckCritterNPC: {
@@ -4979,12 +4979,12 @@ NPCs: {
 
 	NinetalesCritterNPC: {
 		DisplayName: Ninetales
-		Description: ""
+		Description: The coat of gleaming golden fur is quite magnificent. This species is said to store sacred power in its nine long tails and to live for a millennium.
 	}
 
 	OddishCritterNPC: {
 		DisplayName: Oddish
-		Description: ""
+		Description: It often plants its root feet in the ground during the day and sows seeds as it walks about at night.
 	}
 
 	OmanyteCritterNPC: {
@@ -5049,7 +5049,7 @@ NPCs: {
 
 	PrimeapeCritterNPC: {
 		DisplayName: Primeape
-		Description: ""
+		Description: It becomes angry if it sees an opponent's eyes and gets angrier if the opponent runs. Even after it beats the opponent, it is still angry.
 	}
 
 	PsyduckCritterNPC: {
@@ -5164,7 +5164,7 @@ NPCs: {
 
 	VileplumeCritterNPC: {
 		DisplayName: Vileplume
-		Description: ""
+		Description: Its petals are the largest in the world. As it walks, it scatters extremely allergenic pollen.
 	}
 
 	VulpixCritterNPC: {
@@ -5756,7 +5756,7 @@ Dialogue: {
 	}
 
 	G1T7_Blaine: {
-		StandardDialogue1: My fiery pokemon are all ready with intense heat! They incinerate all challengers! Hah! You better have Burn Heal!"
+		StandardDialogue1: My fiery pokemon are all ready with intense heat! They incinerate all challengers! Hah! You better have Burn Heal!
 		DefeatedDialogue: I have burned down to nothing! Not even ashes remain!
 	}
 
@@ -5842,6 +5842,10 @@ PokedexUI: {
 	AreaSection: Area
 	FormsSection: Forms
 	InitialInfoTitle: Total records
+	TotalPokemon: Total Pokemon available
+	Seen: Seen
+	Owned: Owned
+	OwnedShinies: Owned Shinies
 	ShinyButton: Toggle shiny
 }
 

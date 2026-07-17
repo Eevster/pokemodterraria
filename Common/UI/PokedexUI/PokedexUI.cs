@@ -150,7 +150,7 @@ namespace Pokemod.Common.UI.PokedexUI
 			UIPanel totalPokePanel = new UIPanel();
 			UIHelpers.SetRectangle(totalPokePanel, left: 0f, top: 0f, width: 380, height: 80);
 
-			var totalPokeText = new UIText("Total Pokemon available", 1.2f)
+			var totalPokeText = new UIText(Language.GetTextValue("Mods.Pokemod.PokedexUI.TotalPokemon"), 1.2f)
 			{
 				IsWrapped = true,
 				TextColor = Color.Yellow,
@@ -217,7 +217,7 @@ namespace Pokemod.Common.UI.PokedexUI
 				}*/
 
 				// Seen
-				var seenPokeText = new UIText($"Seen: {SeenCount}/{pokemonList.Count}", 1.2f)
+				var seenPokeText = new UIText(Language.GetTextValue("Mods.Pokemod.PokedexUI.Seen")+$": {SeenCount}/{pokemonList.Count}", 1.2f)
 				{
 					IsWrapped = true,
 					TextColor = Color.White,
@@ -251,7 +251,7 @@ namespace Pokemod.Common.UI.PokedexUI
 				infoPanel.Append(seenPanel);
 
 				// Owned
-				var ownedPokeText = new UIText($"Owned: {OwnedCount}/{pokemonList.Count}", 1.2f)
+				var ownedPokeText = new UIText(Language.GetTextValue("Mods.Pokemod.PokedexUI.Owned")+$": {OwnedCount}/{pokemonList.Count}", 1.2f)
 				{
 					IsWrapped = true,
 					TextColor = Color.White,
@@ -285,7 +285,7 @@ namespace Pokemod.Common.UI.PokedexUI
 				infoPanel.Append(ownedPanel);
 
 				// Shinies
-				var ownedShiniesPokeText = new UIText($"Owned Shinies: {OwnedShiniesCount}/{pokemonList.Count}", 1.2f)
+				var ownedShiniesPokeText = new UIText(Language.GetTextValue("Mods.Pokemod.PokedexUI.OwnedShinies")+$": {OwnedShiniesCount}/{pokemonList.Count}", 1.2f)
 				{
 					IsWrapped = true,
 					TextColor = Color.White,

@@ -1996,296 +1996,296 @@ Items: {
 
 	FocusPunchTM: {
 		// Tooltip: ""
-		// DisplayName: TM01 Focus Punch
+		DisplayName: TM01 Puño certero
 	}
 
 	ToxicTM: {
 		// Tooltip: ""
-		// DisplayName: TM02 Toxic
+		DisplayName: TM02 Tóxico
 	}
 
 	HyperBeamTM: {
 		// Tooltip: ""
-		// DisplayName: TM03 Hyper Beam
+		DisplayName: TM03 Hiperrayo
 	}
 
 	WingAttackTM: {
 		// Tooltip: ""
-		// DisplayName: TM04 Wing Attack
+		DisplayName: TM04 Ataque ala
 	}
 
 	ThunderboltTM: {
 		// Tooltip: ""
-		// DisplayName: TM05 Thunderbolt
+		DisplayName: TM05 Rayo
 	}
 
 	ThunderTM: {
 		// Tooltip: ""
-		// DisplayName: TM06 Thunder
+		DisplayName: TM06 Trueno
 	}
 
 	RockSlideTM: {
 		// Tooltip: ""
-		// DisplayName: TM07 Rock Slide
+		DisplayName: TM07 Avalancha
 	}
 
 	StoneEdgeTM: {
 		// Tooltip: ""
-		// DisplayName: TM08 Stone Edge
+		DisplayName: TM08 Roca afilada
 	}
 
 	CrunchTM: {
 		// Tooltip: ""
-		// DisplayName: TM09 Crunch
+		DisplayName: TM09 Triturar
 	}
 
 	SludgeBombTM: {
 		// Tooltip: ""
-		// DisplayName: TM10 Sludge Bomb
+		DisplayName: TM10 Bomba lodo
 	}
 
 	PinMissileTM: {
 		// Tooltip: ""
-		// DisplayName: TM11 Pin Missile
+		DisplayName: TM11 Pin misil
 	}
 
 	SwiftTM: {
 		// Tooltip: ""
-		// DisplayName: TM12 Swift
+		DisplayName: TM12 Meteoros
 	}
 
 	PsychoCutTM: {
 		// Tooltip: ""
-		// DisplayName: TM13 Psycho Cut
+		DisplayName: TM13 Psicocorte
 	}
 
 	PsychicTM: {
 		// Tooltip: ""
-		// DisplayName: TM14 Psychic
+		DisplayName: TM14 Psíquico
 	}
 
 	ShadowBallTM: {
 		// Tooltip: ""
-		// DisplayName: TM15 Shadow Ball
+		DisplayName: TM15 Bola sombra
 	}
 
 	OverheatTM: {
 		// Tooltip: ""
-		// DisplayName: TM16 Overheat
+		DisplayName: TM16 Sofoco
 	}
 
 	NightSlashTM: {
 		// Tooltip: ""
-		// DisplayName: TM17 Night Slash
+		DisplayName: TM17 Tajo umbrío
 	}
 
 	DragonBreathTM: {
 		// Tooltip: ""
-		// DisplayName: TM18 Dragon Breath
+		DisplayName: TM18 Dragoaliento
 	}
 
 	WaterPulseTM: {
 		// Tooltip: ""
-		// DisplayName: TM19 Water Pulse
+		DisplayName: TM19 Hidropulso
 	}
 
 	HydroPumpTM: {
 		// Tooltip: ""
-		// DisplayName: TM20 Hydro Pump
+		DisplayName: TM20 Hidrobomba
 	}
 
 	FlashCannonTM: {
 		// Tooltip: ""
-		// DisplayName: TM21 Flash Cannon
+		DisplayName: TM21 Foco resplandor
 	}
 
 	GigaDrainTM: {
 		// Tooltip: ""
-		// DisplayName: TM22 Giga Drain
+		DisplayName: TM22 Gigadrenado
 	}
 
 	FuryCutterTM: {
 		// Tooltip: ""
-		// DisplayName: TM23 Fury Cutter
+		DisplayName: TM23 Corte furia
 	}
 
 	AirSlashTM: {
 		// Tooltip: ""
-		// DisplayName: TM24 Air Slash
+		DisplayName: TM24 Tajo aéreo
 	}
 
 	HexTM: {
 		// Tooltip: ""
-		// DisplayName: TM25 Hex
+		DisplayName: TM25 Infortunio
 	}
 
 	FlamethrowerTM: {
 		// Tooltip: ""
-		// DisplayName: TM26 Flamethrower
+		DisplayName: TM26 Lanzallamas
 	}
 
 	FireBlastTM: {
 		// Tooltip: ""
-		// DisplayName: TM27 Fire Blast
+		DisplayName: TM27 Llamarada
 	}
 
 	ExplosionTM: {
 		// Tooltip: ""
-		// DisplayName: TM28 Explosion
+		DisplayName: TM28 Explosión
 	}
 
 	EarthquakeTM: {
 		// Tooltip: ""
-		// DisplayName: TM29 Earthquake
+		DisplayName: TM29 Terremoto
 	}
 
 	DragonRushTM: {
 		// Tooltip: ""
-		// DisplayName: TM30 Dragon Rush
+		DisplayName: TM30 Carga dragón
 	}
 
 	DigTM: {
 		// Tooltip: ""
-		// DisplayName: TM31 Dig
+		DisplayName: TM31 Excavar
 	}
 
 	BrickBreakTM: {
 		// Tooltip: ""
-		// DisplayName: TM32 Brick Break
+		DisplayName: TM32 Demolición
 	}
 
 	BulletSeedTM: {
 		// Tooltip: ""
-		// DisplayName: TM33 Bullet Seed
+		DisplayName: TM33 Semilladora
 	}
 
 	SolarBeamTM: {
 		// Tooltip: ""
-		// DisplayName: TM34 Solar Beam
+		DisplayName: TM34 Rayo solar
 	}
 
 	IceBeamTM: {
 		// Tooltip: ""
-		// DisplayName: TM35 Ice Beam
+		DisplayName: TM35 Rayo hielo
 	}
 
 	BlizzardTM: {
 		// Tooltip: ""
-		// DisplayName: TM36 Blizzard
+		DisplayName: TM36 Ventisca
 	}
 
 	AgilityTM: {
-		// DisplayName: TM37 Agility
+		DisplayName: TM37 Agilidad
 		// Tooltip: ""
 	}
 
 	AmnesiaTM: {
-		// DisplayName: TM38 Amnesia
+		DisplayName: TM38 Amnesia
 		// Tooltip: ""
 	}
 
 	BubbleBeamTM: {
-		// DisplayName: TM39 Bubble Beam
+		DisplayName: TM39 Rayo burbuja
 		// Tooltip: ""
 	}
 
 	ConfuseRayTM: {
-		// DisplayName: TM40 Confuse Ray
+		DisplayName: TM40 Rayo confuso
 		// Tooltip: ""
 	}
 
 	DoubleEdgeTM: {
-		// DisplayName: TM41 Double Edge
+		DisplayName: TM41 Doble filo
 		// Tooltip: ""
 	}
 
 	DoubleTeamTM: {
-		// DisplayName: TM42 Double Team
+		DisplayName: TM42 Doble equipo
 		// Tooltip: ""
 	}
 
 	DrillRunTM: {
-		// DisplayName: TM43 Drill Run
+		DisplayName: TM43 Taladradora
 		// Tooltip: ""
 	}
 
 	ElectroBallTM: {
-		// DisplayName: TM44 Electro Ball
+		DisplayName: TM44 Bola voltio
 		// Tooltip: ""
 	}
 
 	EnergyBallTM: {
-		// DisplayName: TM45 Energy Ball
+		DisplayName: TM45 Energibola
 		// Tooltip: ""
 	}
 
 	FirePunchTM: {
-		// DisplayName: TM46 Fire Punch
+		DisplayName: TM46 Puño fuego
 		// Tooltip: ""
 	}
 
 	HurricaneTM: {
-		// DisplayName: TM47 Hurricane
+		DisplayName: TM47 Vendaval
 		// Tooltip: ""
 	}
 
 	IcePunchTM: {
-		// DisplayName: TM48 Ice Punch
+		DisplayName: TM48 Puño hielo
 		// Tooltip: ""
 	}
 
 	LeafStormTM: {
-		// DisplayName: TM49 Leaf Storm
+		DisplayName: TM49 Lluevehojas
 		// Tooltip: ""
 	}
 
 	MagicalLeafTM: {
-		// DisplayName: TM50 Magical Leaf
+		DisplayName: TM50 Hoja mágica
 		// Tooltip: ""
 	}
 
 	MegaDrainTM: {
-		// DisplayName: TM51 Mega Drain
+		DisplayName: TM51 Megaagotar
 		// Tooltip: ""
 	}
 
 	MudShotTM: {
-		// DisplayName: TM52 Mud Shot
+		DisplayName: TM52 Disparo lodo
 		// Tooltip: ""
 	}
 
 	MudSlapTM: {
-		// DisplayName: TM53 Mud Slap
+		DisplayName: TM53 Bofetón lodo
 		// Tooltip: ""
 	}
 
 	PoisonTailTM: {
-		// DisplayName: TM54 Poison Tail
+		DisplayName: TM54 Cola veneno
 		// Tooltip: ""
 	}
 
 	PowerGemTM: {
-		// DisplayName: TM55 Power Gem
+		DisplayName: TM55 Joya de luz
 		// Tooltip: ""
 	}
 
 	ScreechTM: {
-		// DisplayName: TM56 Screech
+		DisplayName: TM56 Chirrido
 		// Tooltip: ""
 	}
 
 	SelfDestructTM: {
-		// DisplayName: TM57 Self Destruct
+		DisplayName: TM57 Autodestrucción
 		// Tooltip: ""
 	}
 
 	TakeDownTM: {
-		// DisplayName: TM58 Take Down
+		DisplayName: TM58 Derribo
 		// Tooltip: ""
 	}
 
 	ThunderPunchTM: {
-		// DisplayName: TM59 Thunder Punch
+		DisplayName: TM59 Puño trueno
 		// Tooltip: ""
 	}
 
@@ -2297,8 +2297,8 @@ Items: {
 	MegaShardItem: {
 		Tooltip:
 			'''
-			'Strange Fragments of a celestial stone'
-			Radiates an incredible power 
+			'Extraños fragmentos de una piedra celestial'
+			Irradia un poder increíble
 			'''
 		DisplayName: Mega fragmento
 	}
@@ -4344,312 +4344,312 @@ Buffs: {
 NPCs: {
 	EeveeCritterNPC: {
 		DisplayName: Eevee
-		// Description: Its ability to evolve into many forms allows it to adapt smoothly and perfectly to any environment.
+		Description: Es capaz de evolucionar de muchas maneras para adaptarse sin problemas a cualquier medio.
 	}
 
 	PikachuCritterNPC: {
 		DisplayName: Pikachu
-		// Description: When it is angered, it immediately discharges the energy stored in the pouches in its cheeks.
+		Description: Cuando se pone en alerta, las bolsas de sus mejillas emiten chisporroteos de electricidad.
 	}
 
 	BulbasaurCritterNPC: {
 		DisplayName: Bulbasaur
-		// Description: For some time after its birth, it grows by taking nourishment from the seed on its back.
+		Description: Durante un tiempo tras nacer, se alimenta de la semilla que tiene en el lomo para crecer.
 	}
 
 	CharmanderCritterNPC: {
 		DisplayName: Charmander
-		// Description: The fire on the tip of its tail is a measure of its life. If the Pokémon is healthy, its tail burns intensely.
+		Description: La llama de la punta de la cola es un indicador de su salud. Si Charmander está sano, arderá con más fuerza.
 	}
 
 	SquirtleCritterNPC: {
 		DisplayName: Squirtle
-		// Description: It hides in its shell to protect itself, then strikes back with spouts of water at every opportunity.
+		Description: Se mete en el caparazón para protegerse y no desaprovecha ninguna oportunidad para contraatacar con un chorro de agua a presión.
 	}
 
 	BlacephalonCritterNPC: {
 		DisplayName: Blacephalon
-		// Description: The fire on the tip of its tail is a measure of its life. If the Pokémon is healthy, its tail burns intensely.
+		Description: ""
 	}
 
 	ChikoritaCritterNPC: {
 		DisplayName: Chikorita
-		// Description: It uses the leaf on its head to determine the air's temperature and humidity. It loves to sunbathe.
+		Description: Con la hoja de su cabeza puede medir la temperatura y la humedad. Le encanta tomar el sol.
 	}
 
 	CharizardCritterNPC: {
 		DisplayName: Charizard
-		// Description: It is said that Charizard's fire burns hotter if it has experienced harsh battles.
+		Description: Se dice que el fuego de Charizard arde con más fuerza cuantas más duras batallas haya vivido.
 	}
 
 	CharizardMegaXCritterNPC: {
 		DisplayName: Mega Charizard X
-		// Description: The overwhelming power that fills its entire body causes it to turn black and creates intense blue flames.
+		Description: La extraordinaria energía que fluye por su cuerpo le oscureció la piel y provocó la aparición de intensas llamas azules.
 	}
 
 	CharizardMegaYCritterNPC: {
-		// DisplayName: Mega Charizard Y
-		// Description: Its bond with its Trainer is the source of its power. It boasts speed and maneuverability greater than that of a jet.
+		DisplayName: Mega Charizard Y
+		Description: El vínculo que lo une a su Entrenador es la fuente de su poder. Su capacidad de vuelo supera la de un avión de combate.
 	}
 
 	CyndaquilCritterNPC: {
 		DisplayName: Cyndaquil
-		// Description: It has a timid nature. If it is startled, the flames on its back burn more vigorously.
+		Description: Un Pokémon de carácter tímido. Si se asusta, las llamas de su lomo arden con más fuerza.
 	}
 
 	BlastoiseCritterNPC: {
 		DisplayName: Blastoise
-		// Description: The jets of water it spouts from the rocket cannons on its shell can punch through thick steel.
+		Description: Los chorros de agua que lanza por los cañones de su caparazón pueden perforar incluso una gruesa plancha de acero.
 	}
 
 	BlastoiseMegaCritterNPC: {
 		DisplayName: Mega Blastoise
-		// Description: The cannon on its back is as powerful as a tank gun. Its tough legs and back enable it to withstand the recoil from firing the cannon.
+		Description: Sus fornidas patas y lomo le permiten aguantar el retroceso del cañón de su caparazón, cuya potencia es tan poderosa como la de un tanque.
 	}
 
 	BayleefCritterNPC: {
 		DisplayName: Bayleef
-		// Description: The buds that ring its neck give off a spicy aroma that perks people up.
+		Description: Los capullos que tiene alrededor del cuello desprenden un aroma a especias que anima a todo el que lo huele.
 	}
 
 	CharmeleonCritterNPC: {
 		DisplayName: Charmeleon
-		// Description: In the rocky mountains where Charmeleon live, their fiery tails shine at night like stars.
+		Description: En las montañas rocosas donde viven los Charmeleon, sus colas ardientes brillan como estrellas en la noche.
 	}
 
 	FlareonCritterNPC: {
 		DisplayName: Flareon
-		// Description: It has a flame sac in its body. Its body temperature tops 1,650 degrees Fahrenheit before battle.
+		Description: Posee una saca de fuego en su interior. Antes de un combate, su temperatura corporal asciende hasta los 900 ºC.
 	}
 
 	IvysaurCritterNPC: {
 		DisplayName: Ivysaur
-		// Description: When the bud on its back starts swelling, a sweet aroma wafts to indicate the flower's coming bloom.
+		Description: Cuando se le hincha el bulbo del lomo, desprende un dulce aroma para indicar que su gran flor se va a abrir.
 	}
 
 	JolteonCritterNPC: {
 		DisplayName: Jolteon
-		// Description: It controls 10,000-volt power. When the fur covering its body stands on end, the fur is hard and sharp, like needles.
+		Description: La electricidad que maneja alcanza una potencia de 10 000 V. Cuando eriza el pelaje que le recubre el cuerpo, este forma púas afiladísimas.
 	}
 
 	MeganiumCritterNPC: {
 		DisplayName: Meganium
-		// Description: Its breath has the fantastic ability to revive dead plants and flowers.
+		Description: Su aliento tiene la maravillosa capacidad de revivir plantas y flores marchitas.
 	}
 
 	RaichuCritterNPC: {
 		DisplayName: Raichu
-		// Description: When it is angered, it immediately discharges the energy stored in the pouches in its cheeks.
+		Description: Puede emitir ráfagas de 100 000 V capaces de acabar de un solo golpe con rivales mucho más grandes que él.
 	}
 
 	VaporeonCritterNPC: {
 		DisplayName: Vaporeon
-		// Description: It has evolved to be suited for an aquatic life. It can become invisible when it melts away into water.
+		Description: Ha evolucionado para adaptarse a la vida acuática. Se mimetiza a la perfección con el agua.
 	}
 
 	VenusaurCritterNPC: {
 		DisplayName: Venusaur
-		// Description: After a rainy day, the flower on its back smells stronger. The scent attracts other Pokémon.
+		Description: Después de un día de lluvia, el aroma de la flor que tiene en el lomo se intensifica y atrae a otros Pokémon.
 	}
 
 	VenusaurMegaCritterNPC: {
 		DisplayName: Mega Venusaur
-		// Description: In order to support its flower, which has grown larger due to Mega Evolution, its back and legs have become stronger.
+		Description: Sus patas y lomo se fortalecieron para soportar el peso de la flor, que creció considerablemente tras la megaevolución.
 	}
 
 	WartortleCritterNPC: {
 		DisplayName: Wartortle
-		// Description: It is said to live 10,000 years. Its furry tail is popular as a symbol of longevity.
+		Description: Se dice que vive diez mil años. Su peluda cola es popular como símbolo de longevidad.
 	}
 
 	CaterpieCritterNPC: {
 		DisplayName: Caterpie
-		// Description: It releases a stench from its red antennae to repel enemies. It grows by molting repeatedly.
+		Description: Su antena roja desprende un gran hedor para repeler a los enemigos. Muda repetidamente al crecer.
 	}
 
 	MetapodCritterNPC: {
 		DisplayName: Metapod
-		// Description: A steel-hard shell protects its tender body. The Pokémon quietly endures hardships while awaiting evolution.
+		Description: Su débil cuerpo está recubierto de una coraza dura como el acero. Permanece inmóvil hasta que evoluciona.
 	}
 
 	KakunaCritterNPC: {
 		DisplayName: Kakuna
-		// Description: While awaiting evolution, it hides from predators under leaves and in nooks of branches.
+		Description: Se esconde de sus atacantes entre las ramas de los árboles mientras espera a evolucionar.
 	}
 
 	WeedleCritterNPC: {
 		DisplayName: Weedle
-		// Description: It eats its weight in leaves every day. It fends off attackers with the needle on its head.
+		Description: Come el equivalente a su peso en hojas todos los días. Se defiende con el aguijón que tiene en la cabeza.
 	}
 
 	ButterfreeCritterNPC: {
 		DisplayName: Butterfree
-		// Description: It loves the nectar of flowers and can locate flower patches that have even tiny amounts of pollen.
+		Description: Adora el néctar de las flores. Una pequeña cantidad de polen le basta para localizar prados floridos.
 	}
 
 	BeedrillCritterNPC: {
 		DisplayName: Beedrill
-		// Description: Its best attack involves flying around at high speed, striking with poison needles, then flying off.
+		Description: Su táctica más efectiva consiste en volar a gran velocidad alrededor del enemigo, atacar con sus aguijones venenosos y huir inmediatamente.
 	}
 
 	GastlyCritterNPC: {
 		DisplayName: Gastly
-		// Description: It's a Pokémon born from poison gases. It defeats even the largest foes by enveloping them in gas.
+		Description: Nació a partir de gases venenosos, con los que asfixia incluso a enemigos de gran tamaño.
 	}
 
 	VoltorbCritterNPC: {
 		DisplayName: Voltorb
-		// Description: It looks just like a Poké Ball. It is dangerous because it may electrocute or explode on touch.
+		Description: Parece una Poké Ball. Es muy peligroso, ya que puede lanzar descargas eléctricas o estallar si lo tocan por accidente.
 	}
 
 	ElectrodeCritterNPC: {
 		DisplayName: Electrode
-		// Description: It is known to drift on winds if it is bloated to bursting with stored electricity.
+		Description: El viento a veces arrastra Electrode hinchados por almacenar demasiada electricidad.
 	}
 
 	MagnemiteCritterNPC: {
 		DisplayName: Magnemite
-		// Description: The units at its sides generate electromagnetic waves that keep it airborne. It feeds on electricity.
+		Description: Las unidades laterales crean ondas electromagnéticas que le permiten flotar. Se alimenta de electricidad.
 	}
 
 	MagnetonCritterNPC: {
 		DisplayName: Magneton
-		// Description: A Magneton is actually three Magnemite linked by magnetism. A group of these Pokémon can set off a magnetic storm.
+		Description: Realmente son tres Magnemite unidos por un campo magnético. Cuando se juntan varios, provocan tormentas magnéticas.
 	}
 
 	HaunterCritterNPC: {
 		DisplayName: Haunter
-		// Description: It licks with its gaseous tongue to steal its victim's life-force. It lurks in darkness, waiting for prey.
+		Description: Utiliza su lengua gaseosa para absorberles la vida a sus víctimas. Acecha a sus presas en la oscuridad.
 	}
 
 	QuilavaCritterNPC: {
 		DisplayName: Quilava
-		// Description: It intimidates foes with the heat of its flames. The fire burns stronger as it prepares to fight.
+		Description: Intimida a sus enemigos con el calor de sus llamas. Su fuego arde con mayor fuerza cuando va a luchar.
 	}
 
 	TyphlosionCritterNPC: {
 		DisplayName: Typhlosion
-		// Description: It attacks using blasts of fire. It creates heat shimmers with intense fire to hide itself.
+		Description: Ataca con explosiones de fuego y utiliza sus intensas y sofocantes llamaradas para crear un haz de calor tras el que ocultarse.
 	}
 
 	TotodileCritterNPC: {
 		DisplayName: Totodile
-		// Description: It has a habit of biting everything with its well-developed jaws. Even its Trainer needs to be careful.
+		Description: Tiene la costumbre de morderlo todo con sus poderosas mandíbulas. Incluso su Entrenador debe andarse con ojo.
 	}
 
 	CroconawCritterNPC: {
 		DisplayName: Croconaw
-		// Description: Once it bites down, it won't let go until it loses its fangs. New fangs quickly grow into place.
+		Description: Cuando muerde algo, no lo suelta hasta que se le desprenden los colmillos. Estos se regeneran rápidamente.
 	}
 
 	FeraligatrCritterNPC: {
 		DisplayName: Feraligatr
-		// Description: It usually moves slowly, but it goes at blinding speed when it attacks and bites prey.
+		Description: Suele moverse con lentitud, pero alcanza velocidades de vértigo al atacar y morder a su presa.
 	}
 
 	PidgeotCritterNPC: {
 		DisplayName: Pidgeot
-		// Description: By flapping its wings with all its might, Pidgeot can make a gust of wind capable of bending tall trees.
+		Description: Cuando aletea con toda su fuerza, crea corrientes de aire capaces de doblar grandes árboles.
 	}
 
 	PidgeottoCritterNPC: {
 		DisplayName: Pidgeotto
-		// Description: It flies over its wide territory in search of prey, downing it with its highly developed claws.
+		Description: Sobrevuela su extenso territorio en busca de presas, a las que abate con sus poderosas garras.
 	}
 
 	PidgeyCritterNPC: {
 		DisplayName: Pidgey
-		// Description: It is docile and prefers to avoid conflict. If disturbed, however, it can ferociously strike back.
+		Description: Es de carácter pacífico y prefiere no combatir, pero contraatacará ferozmente si lo molestan.
 	}
 
 	RattataCritterNPC: {
 		DisplayName: Rattata
-		// Description: It's cautious in the extreme, and its hardy vitality lets it live in any kind of environment.
+		Description: Su capacidad de adaptación le permite vivir en cualquier lugar. Es tremendamente cauteloso.
 	}
 
 	ZeraoraCritterNPC: {
-		// DisplayName: Zeraora
-		// Description: Zeraora creates a powerful magnetic field by emitting strong electric currents from the pads on its hands and feet. Unlike most Electric-type Pokémon, Zeraora doesn’t have an organ within its body that can produce electricity. However, it is able to gather and store electricity from outside sources, then use it as its own electric energy.
+		DisplayName: Zeraora
+		Description: Las almohadillas de sus patas desprenden descargas eléctricas. Cuando corre, hace que los rayos caigan y que los truenos resuenen.
 	}
 
 	ChanseyCritterNPC: {
-		// DisplayName: Chansey
-		// Description: It is said to deliver happiness. Being compassionate, it shares its eggs with injured people.
+		DisplayName: Chansey
+		Description: Se dice que trae la felicidad. Es un Pokémon amable que comparte sus huevos con la gente herida.
 	}
 
 	NidoranMCritterNPC: {
-		// DisplayName: Nidoran♂
-		// Description: It scans its surroundings by raising its ears out of the grass. Its toxic horn is for protection.
+		DisplayName: Nidoran♂
+		Description: Saca las orejas por encima de la hierba para explorar el terreno. Usa su cuerno venenoso para defenderse.
 	}
 
 	NidorinoCritterNPC: {
-		// DisplayName: Nidorino
-		// Description: It has a violent disposition and stabs foes with its horn, which oozes venom upon impact.
+		DisplayName: Nidorino
+		Description: Un Pokémon de carácter violento. Ataca a los enemigos con el cuerno, que libera un potente veneno al ensartarlos.
 	}
 
 	RaticateCritterNPC: {
-		// DisplayName: Raticate
-		// Description: It whittles down its constantly growing fangs by gnawing on hard things. It can chew apart cinder block walls.
+		DisplayName: Raticate
+		Description: Roe objetos duros para limar sus incisivos, que nunca dejan de crecer. Con ellos puede destruir incluso paredes de hormigón.
 	}
 
 	FearowCritterNPC: {
-		// DisplayName: Fearow
-		// Description: It has the stamina to fly all day on its broad wings. It fights by using its sharp beak.
+		DisplayName: Fearow
+		Description: Este Pokémon ha existido desde tiempos remotos. Al menor atisbo de peligro, alza el vuelo y huye.
 	}
 
 	SpearowCritterNPC: {
-		// DisplayName: Spearow
-		// Description: It flaps its small wings busily to fly. Using its beak, it searches in grass for prey.
+		DisplayName: Spearow
+		Description: A la hora de proteger su territorio, compensa su incapacidad para volar a gran altura con una increíble velocidad.
 	}
 
 	ArbokCritterNPC: {
-		// DisplayName: Arbok
-		// Description: It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however.
+		DisplayName: Arbok
+		Description: Intimida a sus presas con el dibujo de su vientre y, una vez paralizadas por el miedo, se enrosca a su alrededor y las asfixia.
 	}
 
 	EkansCritterNPC: {
-		// DisplayName: Ekans
-		// Description: ""
+		DisplayName: Ekans
+		Description: Se mueve por la hierba en silencio y sorprende a sus presas atacando por detrás.
 	}
 
 	SandshrewCritterNPC: {
-		// DisplayName: Sandshrew
-		// Description: It digs deep burrows to live in. When in danger, it rolls up its body to withstand attacks.
+		DisplayName: Sandshrew
+		Description: Vive en zonas áridas donde casi no llueve. Se enrosca formando una bola para defenderse.
 	}
 
 	SandslashCritterNPC: {
-		// DisplayName: Sandslash
-		// Description: It curls up, then rolls into foes with its back. Its sharp spines inflict severe damage.
+		DisplayName: Sandslash
+		Description: Se hace una bola y se lanza rodando hacia los enemigos para clavarles las afiladas púas de la espalda, con las que les causa un gran daño.
 	}
 
 	ClefairyCritterNPC: {
-		// DisplayName: Clefairy
-		// Description: It can be found in quiet mountain areas on a full moon’s night. Its dancing and its tiny, faintly glowing wings confer upon it a lovely fairylike quality.
+		DisplayName: Clefairy
+		Description: Es posible avistarlo en montañas tranquilas durante las noches de luna llena. El tenue brillo que emiten sus alas le confiere el aspecto de una adorable hada cuando baila.
 	}
 
 	ClefableCritterNPC: {
-		// DisplayName: Clefable
-		// Description: Legend says that on clear, quiet nights, it listens for the voices of its kin living on the moon. I, too, often think of my homeland, so far away.
+		DisplayName: Clefable
+		Description: Dicen que, en noches tranquilas y despejadas, este Pokémon se para a escuchar las voces de los compañeros que dejó atrás en la luna. Se ve que no soy el único que extraña su tierra natal.
 	}
 
 	AbraCritterNPC: {
-		// DisplayName: Abra
-		// Description: Even while asleep, it maintains a telepathic radar. It teleports when it is threatened.
+		DisplayName: Abra
+		Description: Su radar telepático está activo incluso cuando duerme. Si se ve amenazado, se teletransporta.
 	}
 
 	AerodactylCritterNPC: {
-		// DisplayName: Aerodactyl
-		// Description: In prehistoric times, this Pokémon flew freely and fearlessly through the skies.
+		DisplayName: Aerodactyl
+		Description: Al parecer, en tiempos prehistóricos, volaba por los cielos libre sin temer a nada ni a nadie.
 	}
 
 	AlakazamCritterNPC: {
-		// DisplayName: Alakazam
-		// Description: Its superb memory lets it recall everything it has experienced from birth.
+		DisplayName: Alakazam
+		Description: Su gran memoria le permite recordar todo lo que ha vivido desde su nacimiento. Su coeficiente intelectual es superior a 5000.
 	}
 
 	AlakazamMegaCritterNPC: {
-		// DisplayName: Mega Alakazam
-		// Description: Alakazam has traded away its muscles, unleashing its true power. With its psychic powers, it can foresee all things.
+		DisplayName: Mega Alakazam
+		Description: Sacrifica su musculatura a cambio de liberar su verdadero poder. Gracias a sus habilidades psíquicas, no hay nada que se le escape.
 	}
 
 	ArcanineCritterNPC: {
@@ -4663,18 +4663,18 @@ NPCs: {
 	}
 
 	BellsproutCritterNPC: {
-		// DisplayName: Bellsprout
-		// Description: It prefers hot and humid environments. It is quick at capturing prey with its vines.
+		DisplayName: Bellsprout
+		Description: Prefiere los lugares cálidos y húmedos. Captura presas alargando sus lianas a gran velocidad.
 	}
 
 	CloysterCritterNPC: {
-		// DisplayName: Cloyster
-		// Description: It fights by keeping its shell tightly shut for protection and by shooting spikes to repel foes.
+		DisplayName: Cloyster
+		Description: Su táctica de combate consiste en encerrarse en la concha y arrojar púas a sus enemigos para repelerlos.
 	}
 
 	CuboneCritterNPC: {
-		// DisplayName: Cubone
-		// Description: When the memory of its departed mother brings it to tears, its cries echo mournfully within the skull it wears on its head.
+		DisplayName: Cubone
+		Description: Cuando llora al acordarse de su madre fallecida, su llanto resuena en el cráneo que lleva en la cabeza.
 	}
 
 	DewgongCritterNPC: {
@@ -4683,8 +4683,8 @@ NPCs: {
 	}
 
 	DiglettCritterNPC: {
-		// DisplayName: Diglett
-		// Description: This Pokemon lives underground. Because of its dark habitat, it is repelled by bright sunlight.
+		DisplayName: Diglett
+		Description: Este Pokémon vive a oscuras bajo tierra, por lo que la luz solar le espanta.
 	}
 
 	DittoCritterNPC: {
@@ -4703,23 +4703,23 @@ NPCs: {
 	}
 
 	DragonairCritterNPC: {
-		// DisplayName: Dragonair
-		// Description: If its body takes on an aura, the weather changes instantly. It is said to live in seas and lakes.
+		DisplayName: Dragonair
+		Description: Cuando un aura le rodea el cuerpo, el clima cambia de repente. Se dice que vive en mares y lagos.
 	}
 
 	DragoniteCritterNPC: {
-		// DisplayName: Dragonite
-		// Description: It is said to make its home somewhere in the sea. It guides wrecked ships to shore.
+		DisplayName: Dragonite
+		Description: Se dice que vive en algún lugar del mar. Guía a la costa a las tripulaciones de los barcos que han naufragado.
 	}
 
 	DragoniteMegaCritterNPC: {
-		// DisplayName: Mega Dragonite
-		// Description: Mega Evolution has excessively powered up this Pokémon's feelings of kindness. It finishes off its opponents with mercy in its heart.
+		DisplayName: Mega Dragonite
+		Description: La energía de la megaevolución eleva su piedad hasta niveles inusitados. Demuestra una gran misericordia al dar el golpe de gracia a sus rivales.
 	}
 
 	DratiniCritterNPC: {
-		// DisplayName: Dratini
-		// Description: It is called the Mirage Pokémon because so few have seen it, but its shed skin has been found.
+		DisplayName: Dratini
+		Description: Lo llaman el Pokémon Espejismo porque son muy pocos los que lo han visto, aunque se han encontrado ejemplares de su muda.
 	}
 
 	DrowzeeCritterNPC: {
@@ -4728,73 +4728,73 @@ NPCs: {
 	}
 
 	DugtrioCritterNPC: {
-		// DisplayName: Dugtrio
-		// Description: Its three heads move alternately, driving it through tough soil to depths of over 60 miles.
+		DisplayName: Dugtrio
+		Description: Es capaz de llegar hasta los 100 km de profundidad incluso en la más dura tierra gracias a sus tres cabezas que excavan por turnos.
 	}
 
 	ElectabuzzCritterNPC: {
-		// DisplayName: Electabuzz
-		// Description: Half of all blackouts occur when this Pokémon appears at power plants and eats electricity.
+		DisplayName: Electabuzz
+		Description: La mitad de los apagones los provoca este Pokémon tras colarse en las centrales eléctricas para alimentarse de electricidad.
 	}
 
 	ExeggcuteCritterNPC: {
-		// DisplayName: Exeggcute
-		// Description: Though it may look like it's just a bunch of eggs, it's a proper Pokémon. Exeggcute communicates with others of its kind via telepathy, apparently.
+		DisplayName: Exeggcute
+		Description: Pese a su aspecto de mera piña de huevos, se trata de un Pokémon. Al parecer, sus cabezas se comunican entre sí por telepatía.
 	}
 
 	ExeggutorCritterNPC: {
-		// DisplayName: Exeggutor
-		// Description: When they work together, Exeggutor's three heads can put out powerful psychic energy. Cloudy days make this Pokémon sluggish.
+		DisplayName: Exeggutor
+		Description: Puede lanzar ataques psíquicos de gran potencia si sus tres cabezas se ponen de acuerdo. Cuando se nubla el cielo, sus movimientos se ralentizan.
 	}
 
 	FarfetchdCritterNPC: {
-		// DisplayName: Farfetchd
+		DisplayName: Farfetch'd
 		// Description: ""
 	}
 
 	GengarCritterNPC: {
-		// DisplayName: Gengar
-		// Description: Lurking in the shadowy corners of rooms, it awaits chances to steal its prey's life force.
+		DisplayName: Gengar
+		Description: Acecha en las esquinas oscuras a la espera de una oportunidad para arrebatarle la vida a su presa.
 	}
 
 	GengarMegaCritterNPC: {
-		// DisplayName: Mega Gengar
-		// Description: It can pass through other dimensions and appear anywhere. It caused a stir one time when it stuck just one leg out of a wall.
+		DisplayName: Mega Gengar
+		Description: Puede pasar de una dimensión a otra y aparecer donde quiera. Una vez causó gran revuelo al mostrar tan solo una pata a través de una pared.
 	}
 
 	GeodudeCritterNPC: {
-		// DisplayName: Geodude
-		// Description: At rest, it looks just like a rock. Carelessly stepping on it will make it swing its fists angrily.
+		DisplayName: Geodude
+		Description: En reposo parece una roca normal, pero si se pisa por error, responde agitando los puños con agresividad.
 	}
 
 	GloomCritterNPC: {
-		// DisplayName: Gloom
-		// Description: It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however.
+		DisplayName: Gloom
+		Description: La miel que emana de su boca posee un hedor insoportable que puede percibirse incluso a 2 km de distancia.
 	}
 
 	GolbatCritterNPC: {
-		// DisplayName: Golbat
-		// Description: Its sharp fangs puncture the toughest of hides and have small holes for greedily sucking blood.
+		DisplayName: Golbat
+		Description: Sus afilados colmillos atraviesan las pieles más duras y tienen orificios para chupar sangre.
 	}
 
 	GoldeenCritterNPC: {
-		// DisplayName: Goldeen
-		// Description: It can freely detach its jaw to swallow large prey whole. It can become too heavy to move, however.
+		DisplayName: Goldeen
+		Description: Nada elegantemente moviendo la aleta caudal como un vestido, cual reina de los mares.
 	}
 
 	GolduckCritterNPC: {
-		// DisplayName: Golduck
-		// Description: Old tales tell of Golduck punishing those that defiled its river. The guilty were dragged into the water and taken away.
+		DisplayName: Golduck
+		Description: Cuenta una antigua leyenda que los Golduck arrastraban a quienes contaminaran sus ríos al fondo de las aguas.
 	}
 
 	GolemCritterNPC: {
-		// DisplayName: Golem
-		// Description: It sheds its hide once a year. Its boulderlike body is so tough, even dynamite can't harm it.
+		DisplayName: Golem
+		Description: Muda su piel una vez al año. Su cuerpo rocoso es tan duro que ni la dinamita lo daña.
 	}
 
 	GravelerCritterNPC: {
-		// DisplayName: Graveler
-		// Description: It tumbles down slopes, heedless of any body parts chipping off. It eats a ton of rocks daily.
+		DisplayName: Graveler
+		Description: Se lanza ladera abajo sin importarle astillarse el cuerpo. Come una tonelada de roca al día.
 	}
 
 	GrimerCritterNPC: {
@@ -4808,13 +4808,13 @@ NPCs: {
 	}
 
 	GyaradosCritterNPC: {
-		// DisplayName: Gyarados
-		// Description: Once it appears, its rage never settles until it has razed the fields and mountains around it.
+		DisplayName: Gyarados
+		Description: Cuando se enfada, su furia solo se calma tras haber arrasado los campos y montañas vecinos.
 	}
 
 	GyaradosMegaCritterNPC: {
-		// DisplayName: Mega Gyarados
-		// Description: It jets water from the orifices on its sides, streaking above the water surface at supersonic speed.
+		DisplayName: Mega Gyarados
+		Description: Expulsa agua a presión por las agallas de sus costados para así poder volar sobre la superficie del agua a una velocidad supersónica.
 	}
 
 	HitmonchanCritterNPC: {
@@ -4838,8 +4838,8 @@ NPCs: {
 	}
 
 	JigglypuffCritterNPC: {
-		// DisplayName: Jigglypuff
-		// Description: When it wavers its big, round eyes, it begins singing a lullaby that makes everyone drowsy.
+		DisplayName: Jigglypuff
+		Description: Cuando le tiemblan sus enormes y redondas pupilas, comienza a cantar una nana que duerme a quien la oiga.
 	}
 
 	JynxCritterNPC: {
@@ -4848,18 +4848,18 @@ NPCs: {
 	}
 
 	KabutoCritterNPC: {
-		// DisplayName: Kabuto
-		// Description: This Pokémon lived in ancient times. On rare occasions, it has been discovered as a living fossil.
+		DisplayName: Kabuto
+		Description: Este Pokémon vivió en la antigüedad. Rara vez se ha conseguido revivir sus fósiles.
 	}
 
 	KabutopsCritterNPC: {
-		// DisplayName: Kabutops
-		// Description: With sharp claws, this ferocious, ancient Pokémon rips apart prey and sucks their body fluids.
+		DisplayName: Kabutops
+		Description: Con sus garras,este feroz y antiguo Pokémon,despedaza a su presa y absorbe sus fluidos.
 	}
 
 	KadabraCritterNPC: {
-		// DisplayName: Kadabra
-		// Description: When it uses its psychic power, it emits strong alpha waves that can ruin precision devices.
+		DisplayName: Kadabra
+		Description: Cuando utiliza su poder psíquico, emite poderosas ondas alfa que pueden destruir instrumentos de precisión.
 	}
 
 	KangaskhanCritterNPC: {
@@ -4868,23 +4868,23 @@ NPCs: {
 	}
 
 	KinglerCritterNPC: {
-		// DisplayName: Kingler
-		// Description: The larger pincer has 10,000-horsepower strength. However, it is so heavy, it is difficult to aim.
+		DisplayName: Kingler
+		Description: La pinza mayor posee una fuerza devastadora, pero es tan pesada que le cuesta usarla con precisión.
 	}
 
 	KoffingCritterNPC: {
-		// DisplayName: Koffing
-		// Description: Lighter-than-air gases in its body keep it aloft. The gases not only smell; they are also explosive.
+		DisplayName: Koffing
+		Description: Los gases del interior de su cuerpo son más ligeros que el aire, lo que le permite flotar. Además de oler mal, también son explosivos.
 	}
 
 	KrabbyCritterNPC: {
-		// DisplayName: Krabby
-		// Description: It lives in burrows dug on sandy beaches. Its pincers fully grow back if they are lost in battle.
+		DisplayName: Krabby
+		Description: Vive en madrigueras excavadas en playas arenosas. Sus pinzas vuelven a crecer si se desprenden.
 	}
 
 	LaprasCritterNPC: {
-		// DisplayName: Lapras
-		// Description: A smart and kindhearted Pokémon, it glides across the surface of the sea while its beautiful song echoes around it.
+		DisplayName: Lapras
+		Description: Este Pokémon posee una notable inteligencia y un corazón de oro. Entona un canto melodioso mientras surca el mar.
 	}
 
 	LickitungCritterNPC: {
@@ -4893,23 +4893,23 @@ NPCs: {
 	}
 
 	MachampCritterNPC: {
-		// DisplayName: Machamp
-		// Description: It quickly swings its four arms to rock its opponents with ceaseless punches and chops from all angles.
+		DisplayName: Machamp
+		Description: Mueve rápidamente sus cuatro brazos para asestar incesantes golpes y puñetazos desde todos los ángulos.
 	}
 
 	MachokeCritterNPC: {
-		// DisplayName: Machoke
-		// Description: Machoke's boundless power is very dangerous, so it wears a belt that suppresses its energy.
+		DisplayName: Machoke
+		Description: Posee una extraordinaria fuerza que puede resultar muy peligrosa, por lo que lleva un cinturón que la limita.
 	}
 
 	MachopCritterNPC: {
-		// DisplayName: Machop
-		// Description: It hefts a Graveler repeatedly to strengthen its entire body. It uses every type of martial arts.
+		DisplayName: Machop
+		Description: Levanta Graveler para entrenar los músculos de todo el cuerpo. Practica todas las artes marciales.
 	}
 
 	MagikarpCritterNPC: {
-		// DisplayName: Magikarp
-		// Description: It is said to be the world's weakest Pokémon. No one knows why it has managed to survive.
+		DisplayName: Magikarp
+		Description: Dicen que es el Pokémon más débil del mundo. No se sabe cómo ha logrado sobrevivir.
 	}
 
 	MagmarCritterNPC: {
@@ -4918,18 +4918,18 @@ NPCs: {
 	}
 
 	MankeyCritterNPC: {
-		// DisplayName: Mankey
-		// Description: It lives in treetop colonies. If one member of the group becomes enraged, the whole colony rampages for no reason.
+		DisplayName: Mankey
+		Description: Vive en colonias en los árboles. Si uno se enfada, el resto de la manada se enfurece sin motivo.
 	}
 
 	MarowakCritterNPC: {
-		// DisplayName: Marowak
-		// Description: This Pokémon overcame its sorrow to evolve a sturdy new body. Marowak faces its opponents bravely, using a bone as a weapon.
+		DisplayName: Marowak
+		Description: Ha evolucionado tras fortalecerse y superar su pena. Ahora lucha con arrojo blandiendo su hueso a modo de arma.
 	}
 
 	MeowthCritterNPC: {
-		// DisplayName: Meowth
-		// Description: It loves anything that shines. It especially adores coins that it picks up and secretly hoards.
+		DisplayName: Meowth
+		Description: Le encanta todo lo que brilla. Adora en especial las monedas, que recoge y guarda en un lugar secreto.
 	}
 
 	MewCritterNPC: {
@@ -4948,8 +4948,8 @@ NPCs: {
 	}
 
 	MrMimeCritterNPC: {
-		// DisplayName: Mr Mime
-		// Description: It is a pantomime expert that can create invisible but solid walls using miming gestures.
+		DisplayName: Mr Mime
+		Description: Un experto de la pantomima capaz de crear paredes invisibles pero sólidas solo con sus gestos.
 	}
 
 	MukCritterNPC: {
@@ -4958,63 +4958,63 @@ NPCs: {
 	}
 
 	NidokingCritterNPC: {
-		// DisplayName: Nidoking
-		// Description: One swing of its mighty tail can snap a telephone pole as if it were a matchstick.
+		DisplayName: Nidoking
+		Description: Con un golpe de su poderosa cola puede partir un poste de teléfono como si fuese una cerilla.
 	}
 
 	NidoqueenCritterNPC: {
-		// DisplayName: Nidoqueen
-		// Description: Its entire body is armored with hard scales. It will protect the young in its burrow with its life.
+		DisplayName: Nidoqueen
+		Description: Tiene el cuerpo recubierto de duras escamas. No duda en arriesgar su vida para proteger a las crías de su madriguera.
 	}
 
 	NidoranFCritterNPC: {
-		// DisplayName: Nidoran♀
-		// Description: While it does not prefer to fight, even one drop of the poison it secretes from barbs can be fatal.
+		DisplayName: Nidoran♀
+		Description: Aunque no le gusta luchar, una sola gota del veneno de sus púas puede resultar letal.
 	}
 
 	NidorinaCritterNPC: {
-		// DisplayName: Nidorina
-		// Description: When it senses danger, it raises all the barbs on its body. These barbs grow slower than Nidorino's.
+		DisplayName: Nidorina
+		Description: Si percibe peligro, eriza las púas de todo el cuerpo. Sus púas crecen más despacio que las de Nidorino.
 	}
 
 	NinetalesCritterNPC: {
-		// DisplayName: Ninetales
-		// Description: ""
+		DisplayName: Ninetales
+		Description: Posee un maravilloso pelaje con un brillo dorado. Cuentan que sus nueve largas colas encierran un poder sagrado y que puede vivir mil años.
 	}
 
 	OddishCritterNPC: {
-		// DisplayName: Oddish
-		// Description: ""
+		DisplayName: Oddish
+		Description: Sus patas le sirven de raíces, que emplea para plantarse en el suelo durante el día. Por la noche merodea esparciendo semillas.
 	}
 
 	OmanyteCritterNPC: {
-		// DisplayName: Omanyte
-		// Description: In prehistoric times, it swam on the sea floor, eating plankton. Its fossils are sometimes found.
+		DisplayName: Omanyte
+		Description: En tiempos prehistóricos, vivía en el fondo del mar y se alimenta de plancton. Aún se ven sus fósiles.
 	}
 
 	OmastarCritterNPC: {
-		// DisplayName: Omastar
-		// Description: Its heavy shell allowed it to reach only nearby food. This could be the reason it is extinct.
+		DisplayName: Omastar
+		Description: El tamaño de la concha le impedía llegar a ciertos alimentos. Quizá fue el motivo de su extinción.
 	}
 
 	OnixCritterNPC: {
-		// DisplayName: Onix
-		// Description: As it digs through the ground, it absorbs many hard objects. This is what makes its body so solid.
+		DisplayName: Onix
+		Description: Al abrirse paso bajo tierra, va absorbiendo todo lo que encuentra. Eso hace que su cuerpo sea así de sólido.
 	}
 
 	ParasCritterNPC: {
-		// DisplayName: Paras
-		// Description: Mushrooms named tochukaso grow on its back. They grow along with the host Paras.
+		DisplayName: Paras
+		Description: Tiene en el lomo unas setas parásitas llamadas tochukaso que crecen con él.
 	}
 
 	ParasectCritterNPC: {
-		// DisplayName: Parasect
-		// Description: Parasect is controlled by a mushroom that has grown larger than its host's body. The Pokémon scatters poisonous spores.
+		DisplayName: Parasect
+		Description: Este Pokémon está dominado por una seta parásita que lo supera en tamaño y que dispersa esporas venenosas.
 	}
 
 	PersianCritterNPC: {
-		// DisplayName: Persian
-		// Description: It is a very haughty Pokémon. Among fans of Persian, the size of the jewel in its forehead is a topic of much talk.
+		DisplayName: Persian
+		Description: Un Pokémon muy arrogante. El tamaño de la joya que luce en la frente suele dar mucho que hablar entre sus admiradores.
 	}
 
 	PinsirCritterNPC: {
@@ -5023,18 +5023,18 @@ NPCs: {
 	}
 
 	PoliwagCritterNPC: {
-		// DisplayName: Poliwag
-		// Description: Its skin is so thin, its internal organs are visible. It has trouble walking on its newly grown feet.
+		DisplayName: Poliwag
+		Description: Su piel es tan fina que permite ver sus órganos. Le cuesta andar con sus nuevas patas.
 	}
 
 	PoliwhirlCritterNPC: {
-		// DisplayName: Poliwhirl
-		// Description: The spiral pattern on its belly subtly undulates. Staring at it gradually causes drowsiness.
+		DisplayName: Poliwhirl
+		Description: La espiral de su panza ondea levemente. Si se mira fijamente, provoca somnolencia.
 	}
 
 	PoliwrathCritterNPC: {
-		// DisplayName: Poliwrath
-		// Description: With its extremely tough muscles, it could keep swimming in the Pacific Ocean without resting.
+		DisplayName: Poliwrath
+		Description: Tiene unos músculos tan desarrollados que es capaz de atravesar enormes océanos a nado sin descanso.
 	}
 
 	PonytaCritterNPC: {
@@ -5043,18 +5043,18 @@ NPCs: {
 	}
 
 	PorygonCritterNPC: {
-		// DisplayName: Porygon
-		// Description: The world's first artificially created Pokémon. It can travel through electronic space.
+		DisplayName: Porygon
+		Description: Es el primer Pokémon creado de forma artificial. Puede viajar por el ciberespacio.
 	}
 
 	PrimeapeCritterNPC: {
-		// DisplayName: Primeape
-		// Description: ""
+		DisplayName: Primeape
+		Description: Un cruce de miradas basta para provocar su ira, que aumenta si el rival echa a correr y no amaina aun después de haberlo derrotado.
 	}
 
 	PsyduckCritterNPC: {
-		// DisplayName: Psyduck
-		// Description: As Psyduck gets stressed out, its headache gets progressively worse. It uses intense psychic energy to overwhelm those around it.
+		DisplayName: Psyduck
+		Description: Sus dolores de cabeza empeoran a medida que aumenta su nivel de estrés. Su increíble poder psíquico puede causar estragos a su alrededor.
 	}
 
 	RapidashCritterNPC: {
@@ -5093,18 +5093,18 @@ NPCs: {
 	}
 
 	ShellderCritterNPC: {
-		// DisplayName: Shellder
-		// Description: It swims backward by opening and closing its two shells. Its large tongue is always kept hanging out.
+		DisplayName: Shellder
+		Description: Nada hacia atrás abriendo y cerrando la concha. Siempre tiene la lengua fuera.
 	}
 
 	SlowpokeCritterNPC: {
-		// DisplayName: Slowpoke
-		// Description: Although slow, it is skilled at fishing with its tail. It does not feel pain if its tail is bitten.
+		DisplayName: Slowpoke
+		Description: A pesar de su lentitud, tiene una gran habilidad para pescar con la cola, que es insensible al dolor.
 	}
 
 	SlowbroCritterNPC: {
-		// DisplayName: Slowbro
-		// Description: Though usually dim-witted, it seems to become inspired if the Shellder on its tail bites down.
+		DisplayName: Slowbro
+		Description: Normalmente se muestra distraído, pero parece espabilar si el Shellder le muerde con fuerza la cola.
 	}
 
 	SnorlaxCritterNPC: {
@@ -5113,18 +5113,18 @@ NPCs: {
 	}
 
 	StarmieCritterNPC: {
-		// DisplayName: Starmie
-		// Description: At the center of its body is a red core that sends mysterious radio signals into the night sky.
+		DisplayName: Starmie
+		Description: El núcleo rojo que tiene en el centro del cuerpo emite extrañas señales de radio en la noche.
 	}
 
 	StaryuCritterNPC: {
-		// DisplayName: Staryu
-		// Description: If Staryu's body is damaged, it will regenerate as long as the red core remains. The core flashes at midnight.
+		DisplayName: Staryu
+		Description: Puede recuperar las extremidades que pierde si mantiene intacto su núcleo rojo, que brilla en la noche.
 	}
 
 	TangelaCritterNPC: {
-		// DisplayName: Tangela
-		// Description: It is shrouded by blue vines. No one has seen the face hidden behind this growth of vines.
+		DisplayName: Tangela
+		Description: Está envuelto en lianas azules. Nadie ha logrado ver el rostro que se oculta tras ellas.
 	}
 
 	TaurosCritterNPC: {
@@ -5133,58 +5133,58 @@ NPCs: {
 	}
 
 	TentacoolCritterNPC: {
-		// DisplayName: Tentacool
-		// Description: It drifts in sea currents. Countless fishermen are hurt by its poison stingers.
+		DisplayName: Tentacool
+		Description: Se deja arrastrar por las corrientes marinas. Numerosos pescadores sufren la punzada de sus aguijones venenosos.
 	}
 
 	TentacruelCritterNPC: {
-		// DisplayName: Tentacruel
-		// Description: It alerts others to danger by stridently flashing the red orbs on its head.
+		DisplayName: Tentacruel
+		Description: Para alertar a sus congéneres de un peligro, emite destellos con las esferas rojas que tiene en la cabeza.
 	}
 
 	VenonatCritterNPC: {
-		// DisplayName: Venonat
-		// Description: Its big eyes are actually clusters of tiny eyes. At night, its kind is drawn by light.
+		DisplayName: Venonat
+		Description: Sus grandes ojos son en realidad grupos de ojos diminutos. Por la noche se siente atraído por la luz.
 	}
 
 	VenomothCritterNPC: {
-		// DisplayName: Venomoth
-		// Description: It flutters its wings to scatter dustlike scales. The scales leach toxins if they contact skin.
+		DisplayName: Venomoth
+		Description: Agita las alas para dispersar un polvillo de escamas cuyas toxinas penetran la piel al entrar en contacto con ella.
 	}
 
 	VictreebelCritterNPC: {
-		// DisplayName: Victreebel
-		// Description: In its mouth, it pools a fragrant nectar-like fluid. The fluid is really an acid that dissolves anything.
+		DisplayName: Victreebel
+		Description: Su boca segrega un fluido de olor parecido al de la miel. En realidad, se trata de un potente ácido que disuelve cualquier cosa.
 	}
 
 	VictreebelMegaCritterNPC: {
-		// DisplayName: Mega Victreebel
-		// Description: The volume of this Pokémon's acid has increased due to Mega Evolution, filling its mouth. If it's not careful, the acid will overflow and spill out.
+		DisplayName: Mega Victreebel
+		Description: Tras la megaevolución, su volumen de ácido aumentó hasta llenarle la boca por completo. Si se descuida, se le derrama.
 	}
 
 	VileplumeCritterNPC: {
-		// DisplayName: Vileplume
-		// Description: ""
+		DisplayName: Vileplume
+		Description: Sus pétalos son los más grandes del mundo. Cuando anda, desprende un polen tóxico que provoca alergias.
 	}
 
 	VulpixCritterNPC: {
-		// DisplayName: Vulpix
-		// Description: It controls balls of fire. As it grows, its six tails split from their tips to make more tails.
+		DisplayName: Vulpix
+		Description: Expulsa las llamas de su interior en forma de bolas de fuego. La cola blanca que tiene de pequeño se divide en seis puntas a medida que crece.
 	}
 
 	WeepinbellCritterNPC: {
-		// DisplayName: Weepinbell
-		// Description: This Pokémon has the appearance of a plant. It captures unwary prey by dousing them with a toxic powder.
+		DisplayName: Weepinbell
+		Description: Este Pokémon parece una planta. Cuando se le acerca una presa desprevenida, le escupe un polvo tóxico y la captura.
 	}
 
 	WeezingCritterNPC: {
-		// DisplayName: Weezing
-		// Description: It grows by feeding on gases released by garbage. Though very rare, triplets have been found.
+		DisplayName: Weezing
+		Description: Crece alimentándose de los gases emanados por la basura. Se han dado raros casos de trillizos.
 	}
 
 	WigglytuffCritterNPC: {
-		// DisplayName: Wigglytuff
-		// Description: Its fine fur feels sublime to the touch. It can expand its body by inhaling air.
+		DisplayName: Wigglytuff
+		Description: Tiene un finísimo pelaje muy agradable al tacto. Traga aire para hinchar su cuerpo.
 	}
 
 	ZapdosCritterNPC: {
@@ -5193,203 +5193,203 @@ NPCs: {
 	}
 
 	ZubatCritterNPC: {
-		// DisplayName: Zubat
-		// Description: Even though it has no eyes, it can sense obstacles using ultrasonic waves it emits from its mouth.
+		DisplayName: Zubat
+		Description: Aunque carezca de ojos, puede detectar obstáculos con las ondas ultrasónicas que emite por la boca.
 	}
 
 	PichuCritterNPC: {
-		// DisplayName: Pichu
-		// Description: The electric sacs on its cheeks are still small. They cannot store much electricity yet.
+		DisplayName: Pichu
+		Description: Las bolsas de sus mejillas son aún demasiado pequeñas para almacenar mucha electricidad.
 	}
 
 	IgglybuffCritterNPC: {
-		// DisplayName: Igglybuff
-		// Description: It has a soft and bouncy body. Once it starts bouncing, it becomes impossible to stop.
+		DisplayName: Igglybuff
+		Description: Su cuerpo es tan blando y elástico que, una vez que empieza a rebotar, ya no puede parar.
 	}
 
 	CleffaCritterNPC: {
-		// DisplayName: Cleffa
-		// Description: Its silhouette is like a star. It is believed to arrive riding on shooting stars.
+		DisplayName: Cleffa
+		Description: Su silueta recuerda a una estrella y se cree que llegan montados en estrellas fugaces.
 	}
 
 	MareepCritterNPC: {
-		// DisplayName: Mareep
-		// Description: Its fluffy coat doubles in size when static electricity builds up. Touching it can be shocking.
+		DisplayName: Mareep
+		Description: Su pelaje lanudo dobla su volumen al acumular electricidad estática. Tocarlo puede dar calambre.
 	}
 
 	FlaaffyCritterNPC: {
-		// DisplayName: Flaaffy
-		// Description: If its coat becomes fully charged with electricity, its tail lights up. Flaaffy can fire hair that zaps on impact.
+		DisplayName: Flaaffy
+		Description: Cuando su pelaje se carga de electricidad, su cola se enciende. Lanza pelo que electrocuta al contacto.
 	}
 
 	AmpharosCritterNPC: {
-		// DisplayName: Ampharos
-		// Description: The tip of its tail shines brightly. In the olden days, people sent signals using the light from this Pokémon's tail.
+		DisplayName: Ampharos
+		Description: La punta de su cola emite una luz intensa que antiguamente la gente usaba para enviar señales.
 	}
 
 	HoppipCritterNPC: {
-		// DisplayName: Hoppip
-		// Description: They are blown adrift by winds. It is said that when Hoppip gather in fields and mountains, spring is on the way.
+		DisplayName: Hoppip
+		Description: Se deja llevar por el viento. Dicen que, cuando empiezan a reunirse en los prados y los montes, la primavera está al caer.
 	}
 
 	SkiploomCritterNPC: {
-		// DisplayName: Skiploom
-		// Description: It blooms when the weather warms. It floats in the sky to soak up as much sunlight as possible.
+		DisplayName: Skiploom
+		Description: Florece en épocas cálidas. Flota en el aire para absorber toda la luz solar que puede.
 	}
 
 	JumpluffCritterNPC: {
-		// DisplayName: Jumpluff
-		// Description: Blown by seasonal winds, it circles the globe, scattering cotton spores as it goes.
+		DisplayName: Jumpluff
+		Description: Va soltando sus esporas de algodón por todo el mundo, arrastrado por los vientos estacionales.
 	}
 
 	MarillCritterNPC: {
-		// DisplayName: Marill
-		// Description: Using its tail as a float, it dives underwater. It likes eating plants that grow in riverbeds.
+		DisplayName: Marill
+		Description: Bucea usando su cola a modo de boya. Le gusta comer las plantas del fondo fluvial.
 	}
 
 	AzumarillCritterNPC: {
-		// DisplayName: Azumarill
-		// Description: It lives in rivers and lakes. In water, its coloring and patterns trick the vision of foes.
+		DisplayName: Azumarill
+		Description: Vive en ríos y lagos. Cuando está en el agua, sus colores y dibujos engañan a los enemigos.
 	}
 
 	SudowoodoCritterNPC: {
-		// DisplayName: Sudowoodo
-		// Description: It stands along paths pretending to be a tree. If it starts raining, it seems to disappear.
+		DisplayName: Sudowoodo
+		Description: Se planta junto a los caminos fingiendo ser un árbol, pero desaparece en cuanto empieza a llover.
 	}
 
 	EspeonCritterNPC: {
-		// DisplayName: Espeon
-		// Description: Its fur has the look and feel of velvet. The orb on its forehead glows when it uses psychic power.
+		DisplayName: Espeon
+		Description: Su pelaje es suave y lustroso como el terciopelo. La esfera que tiene en la frente brilla cuando usa sus poderes psíquicos.
 	}
 
 	UmbreonCritterNPC: {
-		// DisplayName: Umbreon
-		// Description: The light of the moon changed Eevee's genetic structure. It lurks in the darkness, waiting for prey.
+		DisplayName: Umbreon
+		Description: Surgió cuando la luz lunar alteró la estructura genética de Eevee. Acecha a sus presas en la oscuridad.
 	}
 
 	UnownCritterNPC: {
-		// DisplayName: Unown
-		// Description: Because the Pokémon is shaped like ancient writing, it is a huge mystery whether written language or Unown came first.
+		DisplayName: Unown
+		Description: Su aspecto evoca las letras de una antigua civilización. Se desconoce qué fue antes: si la escritura o los Unown.
 	}
 
 	DelibirdCritterNPC: {
-		// DisplayName: Delibird
-		// Description: It carries food rolled up in its tail. It has a habit of sharing food with people lost in the mountains.
+		DisplayName: Delibird
+		Description: Transporta alimentos en la cola. Le gusta compartir su comida con los montañistas perdidos.
 	}
 
 	WooperCritterNPC: {
-		// DisplayName: Wooper
-		// Description: It lives in cold water, half burying itself in mud at the bottom to sleep.
+		DisplayName: Wooper
+		Description: Vive en aguas frías. Para dormir, entierra la mitad del cuerpo en el cieno del fondo.
 	}
 
 	QuagsireCritterNPC: {
-		// DisplayName: Quagsire
-		// Description: It has a sluggish nature. It lies at the river's bottom, waiting for prey to stray into its mouth.
+		DisplayName: Quagsire
+		Description: Un Pokémon bastante perezoso, cuya técnica de pesca consiste en plantarse con la boca abierta en el fondo del río y esperar a que entre algo.
 	}
 
 	SlowkingCritterNPC: {
-		// DisplayName: Slowking
-		// Description: Being bitten by Shellder gave it intelligence comparable to that of internationally recognized scientists.
+		DisplayName: Slowking
+		Description: Al ser mordido por un Shellder, desarrolló una inteligencia comparable a la de una eminencia científica mundial.
 	}
 
 	MawileCritterNPC: {
-		// DisplayName: Mawile
-		// Description: Attached to its head is a huge set of jaws formed by horns. It can chew through iron beams.
+		DisplayName: Mawile
+		Description: Las grandes fauces de su cabeza fueron cuernos en su día. Puede triturar vigas de acero con ellas.
 	}
 
 	CranidosCritterNPC: {
-		// DisplayName: Cranidos
-		// Description: Cranidos toughen up their already rock-hard heads by headbutting one another.
+		DisplayName: Cranidos
+		Description: Hace chocar su ya robusta cabeza contra la de otros Cranidos para fortalecerla aún más si cabe.
 	}
 
 	RampardosCritterNPC: {
-		// DisplayName: Rampardos
-		// Description: Its skull withstands impacts of any magnitude. As a result, its brain never gets the chance to grow.
+		DisplayName: Rampardos
+		Description: Su cerebro no ha podido desarrollarse al verse limitado por el espesor de su cráneo, capaz de soportar cualquier golpe.
 	}
 
 	MagnezoneCritterNPC: {
-		// DisplayName: Magnezone
-		// Description: It evolved from exposure to a special magnetic field. Its three units generate magnetism.
+		DisplayName: Magnezone
+		Description: Evolucionó por la exposición a un campo magnético especial. Tres unidades generan magnetismo.
 	}
 
 	JoltikCritterNPC: {
-		// DisplayName: Joltik
-		// Description: Since it can't generate its own electricity, it sticks onto large-bodied Pokémon and absorbs static electricity.
+		DisplayName: Joltik
+		Description: No puede generar electricidad por sí mismo, así que se encarama a otros Pokémon y absorbe su energía estática.
 	}
 
 	GalvantulaCritterNPC: {
-		// DisplayName: Galvantula
-		// Description: It launches electrified fur from its abdomen as its means of attack. Opponents hit by the fur could be in for three full days and nights of paralysis.
+		DisplayName: Galvantula
+		Description: Ataca lanzando hilos electrificados por el abdomen, que inmovilizan por completo al enemigo durante tres días y tres noches.
 	}
 
 	TinkatinkCritterNPC: {
-		// DisplayName: Tinkatink
-		// Description: This Pokemon pounds iron scraps together to make a hammer. It will remake the hammer again and again until it's satisfied with the result.
+		DisplayName: Tinkatink
+		Description: Forja su martillo golpeando residuos metálicos. Repite este proceso todas las veces que sean necesarias hasta que le satisfaga el resultado.
 	}
 
 	TinkatuffCritterNPC: {
-		// DisplayName: Tinkatuff
-		// Description: These Pokemon make their homes in piles of scrap metal. They test the strength of each other's hammers by smashing them together.
+		DisplayName: Tinkatuff
+		Description: Convierte montañas de chatarra en su guarida. Estos Pokémon suelen medir la fuerza de sus martillos golpeándolos contra los de los demás.
 	}
 
 	TinkatonCritterNPC: {
-		// DisplayName: Tinkaton
-		// Description: The hammer tops 220 pounds, yet it gets swung around easily by Tinkaton as it steals whatever it pleases and carries its plunder back home.
+		DisplayName: Tinkaton
+		Description: Blande sin esfuerzo su pesado martillo de más de 100 kg. Cuando quiere algo, lo roba y se lo lleva de vuelta a su guarida.
 	}
 
 	TerrarianKabutoCritterNPC: {
-		// DisplayName: Terrarian Kabuto
-		// Description: Sealed long ago within the dungeon, this Pokemon inhabits the bones of a Pokemon even more ancient.
+		DisplayName: Kabuto de Terraria
+		Description: Sellado hace mucho tiempo en la mazmorra, este Pokémon habita en los huesos de un Pokémon aún más antiguo.
 	}
 
 	TerrarianKabutopsCritterNPC: {
-		// DisplayName: Terrarian Kabutops
-		// Description: The phantom that inhabits these bones may not even be a Pokemon at all.
+		DisplayName: Kabutops de Terraria
+		Description: Puede que el fantasma que habita estos huesos ni siquiera sea un Pokémon.
 	}
 
 	TerrarianAerodactylCritterNPC: {
-		// DisplayName: Terrarian Aerodactyl
-		// Description: This Pokemon's fiery breath is cold to the touch, but still burns.
+		DisplayName: Aerodactyl de Terraria
+		Description: El aliento ardiente de este Pokémon está frío al tacto, pero aun así quema.
 	}
 
 	TerrarianOmanyteCritterNPC: {
-		// DisplayName: Terrarian Omanyte
-		// Description: Those who first discovered this ancient Pokemon were said to have gone mad.
+		DisplayName: Omanyte de Terraria
+		Description: Se decía que quienes descubrieron por primera vez a este antiguo Pokémon enloquecieron.
 	}
 
 	TerrarianOmastarCritterNPC: {
-		// DisplayName: Terrarian Omastar
-		// Description: This Pokemon's many eyes allow it to peer into deep space.
+		DisplayName: Omastar de Terraria
+		Description: Los numerosos ojos de este Pokémon le permiten observar el espacio profundo.
 	}
 
 	AlolanRattataCritterNPC: {
-		// DisplayName: Alolan Rattata
-		// Description: Its whiskers provide it with a keen sense of smell, enabling it to pick up the scent of hidden food and locate it instantly.
+		DisplayName: Rattata de Alola
+		Description: Sus bigotes son órganos olfativos muy agudos que le permiten localizar el alimento ipso facto, aunque esté oculto.
 	}
 
 	AlolanRaticateCritterNPC: {
-		// DisplayName: Alolan Raticate
-		// Description: It makes its Rattata underlings gather food for it, dining solely on the most nutritious and delicious fare.
+		DisplayName: Raticate de Alola
+		Description: Obliga a los Rattata a llevar comida a su madriguera. Solo acepta los manjares más deliciosos y nutritivos.
 	}
 
 	AlolanDiglettCritterNPC: {
-		// DisplayName: Alolan Diglett
-		// Description: The metal-rich geology of this Pokémon's habitat caused it to develop steel whiskers on its head.
+		DisplayName: Diglett de Alola
+		Description: La alta concentración de hierro en la tierra de su hábitat ha provocado que le crezcan tres filamentos acerados en la cabeza.
 	}
 
 	AlolanDugtrioCritterNPC: {
-		// DisplayName: Alolan Dugtrio
-		// Description: Their beautiful, metallic whiskers create a sort of protective helmet on their heads, and they also function as highly precise sensors.
+		DisplayName: Dugtrio de Alola
+		Description: Pese a considerarse trillizos, los metales que componen sus cuerpos difieren levemente, como muestra la variedad de sus peinados.
 	}
 
 	AlolanSandshrewCritterNPC: {
-		// DisplayName: Alolan Sandshrew
-		// Description: The skin on its back is as hard as steel. Predators go after its soft belly, so it clings to the ground desperately.
+		DisplayName: Sandshrew de Alola
+		Description: El hielo que recubre su cuerpo le permite deslizarse para embestir a sus enemigos y proyectarlos con la rapidez de una bala.
 	}
 
 	AlolanSandslashCritterNPC: {
-		// DisplayName: Alolan Sandslash
-		// Description: This Pokémon's steel spikes are sheathed in ice. Stabs from these spikes cause deep wounds and severe frostbite as well.
+		DisplayName: Sandslash de Alola
+		Description: Esta es la forma que adquiere Sandslash al adaptarse a un hábitat sumamente frío. El aire helado que exuda afila las púas de su cuerpo.
 	}
 
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
@@ -5726,43 +5726,43 @@ Dialogue: {
 	}
 
 	G1T1_Brock: {
-		StandardDialogue1: ¡Creo en la defensa férrea y la determinación! ¿Estás listo para desafiarme?
-		// DefeatedDialogue: Your Pokemon's powerful attacks overcame my rock-hard resistance... You're stronger than I expected...
+		StandardDialogue1: ¡Creo en la gran resistencia de la roca y en la determinación! ¿Todavía quieres desafiarme?
+		DefeatedDialogue: Mi dura defensa no soportó los ataques de tu equipo Pokémon... Eres más fuerte de lo que pensaba...
 	}
 
 	G1T2_Misty: {
-		StandardDialogue1: ¡Mi táctica es la ofensiva total con los Pokémon del tipo agua!
-		// DefeatedDialogue: Wow! You're too much! All right! You can have the Cascade Badge to show you beat me!
+		StandardDialogue1: ¡Mi táctica es la ofensiva total con los Pokemon de tipo agua!
+		DefeatedDialogue: ¡Uauuu! ¡Eres demasiado! ¡Muy bien! ¡Toma la Medalla Cascada para que todos sepan que me has ganado!
 	}
 
 	G1T3_LtSurge: {
-		// StandardDialogue1: What do you think you're doing here? You won't live long in combat! That's for sure!
-		// DefeatedDialogue: You electrified me in our battle! I didn't know that there were gutsy trainers like you. It made me change my mind about you!
+		StandardDialogue1: ¡Oye! ¿Pero qué haces? ¡No resistirás mucho luchando! ¡Seguro!
+		DefeatedDialogue: ¡Rayos, me has ganado! Te mereces la Medalla Trueno, sin lugar a dudas. ¡Ha sido un combate emocionante!
 	}
 
 	G1T4_Erika: {
-		// StandardDialogue1: Hello. Lovely weather isn't it? It's so pleasant.
-		// DefeatedDialogue: You are cataloging Pokemon? I must say I'm impressed. I would never collect Pokemon if they were unattractive.
+		StandardDialogue1: Hola... bonito día, ¿verdad? Se está tan bien... Podría hasta dormirme... Me llamo Erika.
+		DefeatedDialogue: ¿Estás catalogando Pokémon? Debo decir que estoy impresionada. Yo nunca recogería un Pokémon con poco atractivo.
 	}
 
 	G1T5_Koga: {
-		// StandardDialogue1: I shall show you true terror as a ninja master! You shall feel the despair of poison and sleep techniques!
-		// DefeatedDialogue: Humph! You have proven your worth!
+		StandardDialogue1: ¡Como maestro ninja, te enseñaré qué es el miedo! ¡Sentirás la desesperación de las técnicas del envenenamiento y del sueño!
+		DefeatedDialogue: ¡Hmph! ¡Has demostrado tu valía!
 	}
 
 	G1T6_Sabrina: {
-		// StandardDialogue1: I had a vision of your arrival! I have had psychic powers since I was a child. I dislike fighting, but if you wish, I will show you my powers!
-		// DefeatedDialogue: I'm shocked! But, a loss is a loss. I admit I didn't work hard enough to win!
+		StandardDialogue1: Aquí estás, tal y como predije. Tengo poderes psíquicos desde que era niña. No me gusta combatir, pero si así lo deseas... ¡Te demostraré de lo que soy capaz!
+		DefeatedDialogue: Tu poder... Quizá no pueda predecir del todo lo que nos depara el futuro...
 	}
 
 	G1T7_Blaine: {
-		// StandardDialogue1: My fiery pokemon are all ready with intense heat! They incinerate all challengers! Hah! You better have Burn Heal!"
-		// DefeatedDialogue: I have burned down to nothing! Not even ashes remain!
+		StandardDialogue1: ¡Mis feroces Pokemon quemarán a todo aquel que me desafíe! ¡Ja! ¡Mejor que tengas un antiquemaduras!
+		DefeatedDialogue: ¡Increíble! Mi poder se ha consumido por completo. Pero la llama de mi voluntad no solo no se ha apagado, ¡sino que se ha avivado todavía más!
 	}
 
 	G1T8_Giovanni: {
-		// StandardDialogue1: I'm not holding back! You shall face Giovanni, the greatest Trainer!
-		// DefeatedDialogue: Ha! That was a truly intense fight. You have won!
+		StandardDialogue1: ¡No me contendré! ¡Te enfrentarás a Giovanni, el mejor Entrenador!
+		DefeatedDialogue: ¡Ja! Fue una pelea realmente intensa. ¡Has ganado!
 	}
 }
 
@@ -5838,17 +5838,21 @@ PokemonInfo: {
 }
 
 PokedexUI: {
-	// InfoSection: Info
-	// AreaSection: Area
-	// FormsSection: Forms
-	// InitialInfoTitle: Total records
-	// ShinyButton: Toggle shiny
+	InfoSection: Info
+	AreaSection: Área
+	FormsSection: Formas
+	InitialInfoTitle: Registros totales
+	TotalPokemon: Total de Pokemon disponibles
+	Seen: Vistos
+	Owned: Capturados
+	OwnedShinies: Shinies capturados
+	ShinyButton: Alternar shiny
 }
 
 PokedexMsg: {
 	SeenMsg: ¡{0} se registró en la Pokedex!
 	ObtainedMsg: ¡La información completa de {0} se registró en la Pokedex!
-	// ObtainedShinyMsg: Shiny {0} registered in the Pokedex!
+	ObtainedShinyMsg: ¡Shiny {0} registrado en la Pokedex!
 }
 
 PokemonBattle: {
@@ -6090,8 +6094,8 @@ Configs: {
 		}
 
 		AddedContentStatScaling: {
-			// Label: Pokemon Stat Scaling
-			// Tooltip: Used to make Pokemod more compatible with other mods which add post-game content. (Value of 0.7 recommended for Calamity, changes most notable beyond level 50)
+			Label: Pokemon Stat Scaling
+			Tooltip: Usado para que Pokemod sea más compatible con otros mods que añaden contenido posterior al juego. (Se recomienda un valor de 0,7 para Calamity, los cambios son más notables a partir del nivel 50)
 		}
 	}
 

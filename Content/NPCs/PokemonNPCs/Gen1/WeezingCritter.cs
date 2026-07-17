@@ -25,6 +25,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkFlyStartEnd => [0,0];
 		public override int[] attackFlyStartEnd => [1,1];
 
+		public override string[] variants => ["Triplets"];
+
 		public override float catchRate => 60;
         public override int minLevel => 35;
 		
