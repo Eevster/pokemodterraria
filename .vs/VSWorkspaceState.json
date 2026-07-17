@@ -2,16 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Textures",
     "\\Common",
-    "\\Common\\Players",
-    "\\Content",
-    "\\Content\\Items",
-    "\\Content\\Items\\MegaStones",
-    "\\Content\\NPCs\\TrainerNPCs",
-    "\\Content\\NPCs\\TrainerNPCs\\GymLeaders",
-    "\\Content\\Pets\\AbraPet"
+    "\\Content"
   ],
-  "SelectedNode": "\\Content\\Items\\MegaStones\\MegaCuffItem.cs",
   "PreviewInSolutionExplorer": false
 }
