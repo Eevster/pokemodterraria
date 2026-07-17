@@ -305,7 +305,7 @@ namespace Pokemod.Content.Items.Pokeballs
 				{
 					PokemonPlayer trainer = player.GetModPlayer<PokemonPlayer>();
 
-					trainer.RegisterPokemon(pokemonName, true);
+					trainer.RegisterPokemon(pokemonName, true, shiny);
 				}
 
 				if (Main.netMode == NetmodeID.SinglePlayer)

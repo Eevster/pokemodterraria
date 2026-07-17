@@ -473,7 +473,7 @@ namespace Pokemod.Content.NPCs
             {"Croconaw", new PokemonInfo(0159, [65, 80, 80, 59, 63, 58], [(int)TypeIndex.Water], [new MoveLvl("Tackle", 1), new MoveLvl("WaterGun", 6), new MoveLvl("MudShot", 13), new MoveLvl("IceFang", 21), new MoveLvl("Crunch", 30), new MoveLvl("Screech", 37), new MoveLvl("Slash", 39), new MoveLvl("AquaTail", 47), new MoveLvl("Waterfall", 48), new MoveLvl("FocusPunch", 57), new MoveLvl("HydroPump", 60)], [(int)EggGroups.Monster, (int)EggGroups.Water1], 1.1f, 25.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow, artist: "JACSMITH")},
             {"Feraligatr", new PokemonInfo(0160, [85, 105, 100, 79, 83, 78], [(int)TypeIndex.Water], [new MoveLvl("Tackle", 1), new MoveLvl("Agility", 1), new MoveLvl("WaterGun", 6), new MoveLvl("MudShot", 13), new MoveLvl("IceFang", 21), new MoveLvl("Crunch", 32), new MoveLvl("Screech", 44), new MoveLvl("Slash", 45), new MoveLvl("Waterfall", 58), new MoveLvl("AquaTail", 59), new MoveLvl("FocusPunch", 71), new MoveLvl("HydroPump", 76)], [(int)EggGroups.Monster, (int)EggGroups.Water1], 2.3f, 88.8f, (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow, artist: "JACSMITH")},
             
-            {"Pichu", new PokemonInfo(0173, [20, 40, 15, 35, 35, 60], [(int)TypeIndex.Electric], [new MoveLvl("Tackle"), new MoveLvl("Thunderbolt", 12)], [(int)EggGroups.NoEggs], 0.3f, 2.0f, (int)StageIndex.Baby, (int)ExpTypes.MediumFast, artist: "JACSMITH")},
+            {"Pichu", new PokemonInfo(0172, [20, 40, 15, 35, 35, 60], [(int)TypeIndex.Electric], [new MoveLvl("Tackle"), new MoveLvl("Thunderbolt", 12)], [(int)EggGroups.NoEggs], 0.3f, 2.0f, (int)StageIndex.Baby, (int)ExpTypes.MediumFast, artist: "JACSMITH")},
 
             {"Cleffa", new PokemonInfo(0173, [50, 25, 28, 45, 55, 15], [(int)TypeIndex.Fairy], [new MoveLvl("Tackle"), new MoveLvl("Harden", 8)], [(int)EggGroups.NoEggs], 0.3f, 3.0f, (int)StageIndex.Baby, (int)ExpTypes.Fast, artist: "Digibeast")},
             
@@ -557,13 +557,18 @@ namespace Pokemod.Content.NPCs
             {"TerrarianAerodactyl", new PokemonInfo(0142, [80, 90, 65, 95, 75, 110], [(int)TypeIndex.Dark,(int)TypeIndex.Flying], [new MoveLvl("NightSlash"), new MoveLvl("Gust"), new MoveLvl("AncientPower", 10), new MoveLvl("Crunch", 20), new MoveLvl("DragonBreath", 30), new MoveLvl("NightShade", 40), new MoveLvl("Flamethrower", 50), new MoveLvl("AirSlash", 60), new MoveLvl("HyperBeam", 70)], [(int)EggGroups.Flying], 1.8f, 59.0f, (int)StageIndex.Basic, (int)ExpTypes.Slow, artist: "RollinMan")},
         };
 
-        public static int maxID = 0807;
+        public static int maxID = 0959;
 
         public static List<string> GetAllForms(string original)
         {
             List<string> forms = pokemonInfo.Keys.ToList().FindAll(x => pokemonInfo[x].pokemonID == pokemonInfo[original].pokemonID);
 
             return forms;
+        }
+
+        public static string GetOriginalForm(string formName)
+        {
+            return pokemonInfo.Keys.ToList().Find(x => pokemonInfo[x].pokemonID == pokemonInfo[formName].pokemonID);
         }
 
         public static int GetMaxPokemonIndex()

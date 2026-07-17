@@ -16,6 +16,7 @@ using Terraria.UI;
 using Terraria.ModLoader.UI;
 using Microsoft.Xna.Framework.Design;
 using Pokemod.Content.Pets;
+using System;
 
 namespace Pokemod.Common.UI.PokedexUI
 {
@@ -37,6 +38,11 @@ namespace Pokemod.Common.UI.PokedexUI
 		public Asset<Texture2D> notSeenIcon;
 		public Asset<Texture2D> spawnIcons;
 
+		public Asset<Texture2D> OwnedIcon;
+		public Asset<Texture2D> ShinyIcon;
+
+		public Asset<Texture2D> ShinyButtonIcon;
+
 		public int page;
 
 		public static bool hidden = true;
@@ -46,12 +52,32 @@ namespace Pokemod.Common.UI.PokedexUI
 			notSeenIcon = ModContent.Request<Texture2D>("Terraria/Images/UI/Bestiary/Icon_Locked");
 			spawnIcons = ModContent.Request<Texture2D>("Terraria/Images/UI/Bestiary/Icon_Tags_Shadow");
 
+			OwnedIcon = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/PokeballItem");
+			ShinyIcon = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokeballs/PremierballItem");
+
+			ShinyButtonIcon = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/ShinyButtonIcon");
+
 			page = 0;
 
 			PokedexPanel = new DraggableUIPanel();
 			PokedexPanel.SetPadding(20);
 
 			UIHelpers.SetRectangleAlign(PokedexPanel, left: 0.5f, top: 0.6f, width: 980, height: 680);
+
+			UIPanel TitlePanel = new UIPanel();
+			UIHelpers.SetRectangleAlign(TitlePanel, left: 0.5f, top: 0f, width: 420, height: 60);
+			TitlePanel.Top.Set(-90, 0f);
+
+			var TitleText = new UIText(Language.GetTextValue("Mods.Pokemod.Items.PokedexV1.DisplayName"), 1.5f)
+			{
+				TextColor = Color.White,
+				Width = new(400f, 0f),
+				Height = new(100f, 0f),
+				TextOriginX = 0.5f,
+				TextOriginY = 0.5f,
+			};
+
+			TitlePanel.Append(TitleText);
 
 			ListPanel = new UIPanel();
 			ListPanel.SetPadding(20);
@@ -68,6 +94,7 @@ namespace Pokemod.Common.UI.PokedexUI
 			UIHelpers.SetRectangle(closeButton, left: PokedexPanel.Width.Pixels - PokedexPanel.PaddingLeft - PokedexPanel.PaddingRight - 32, top: 0, width: 32f, height: 32f);
 			closeButton.OnLeftClick += new MouseEvent(CloseButtonClicked);
 
+			PokedexPanel.Append(TitlePanel);
 			PokedexPanel.Append(ListPanel);
 			PokedexPanel.Append(InfoPanel);
 			PokedexPanel.Append(closeButton);
@@ -89,6 +116,7 @@ namespace Pokemod.Common.UI.PokedexUI
 
 		public override void OnActivate()
 		{
+			SetInitialInfoPanel();
 			ChangePage(page);
 		}
 
@@ -97,12 +125,210 @@ namespace Pokemod.Common.UI.PokedexUI
 			InfoPanel.RemoveAllChildren();
 		}
 
+		private void SetInitialInfoPanel()
+		{
+			UIPanel titlePanel = new UIPanel();
+			UIHelpers.SetRectangle(titlePanel, left: 0f, top: 0f, width: 420, height: 50);
+
+			var titleText = new UIText(Language.GetTextValue("Mods.Pokemod.PokedexUI.InitialInfoTitle"), 1.2f)
+			{
+				TextColor = Color.White,
+				Width = new(400f, 0f),
+				Height = new(100f, 0f),
+				TextOriginX = 0.5f,
+				TextOriginY = 0.5f,
+			};
+
+			titlePanel.Append(titleText);
+			
+			InfoPanel.Append(titlePanel);
+
+			UIPanel infoPanel = new UIPanel();
+			UIHelpers.SetRectangle(infoPanel, left: 0f, top: 70f, width: 420, height: 530);
+			infoPanel.SetPadding(20);
+
+			UIPanel totalPokePanel = new UIPanel();
+			UIHelpers.SetRectangle(totalPokePanel, left: 0f, top: 0f, width: 380, height: 80);
+
+			var totalPokeText = new UIText("Total Pokemon available", 1.2f)
+			{
+				IsWrapped = true,
+				TextColor = Color.Yellow,
+				Width = new(380f, 0f),
+				Height = new(30f, 0f),
+				TextOriginX = 0.5f,
+				TextOriginY = 0.5f,
+			};
+			totalPokePanel.Append(totalPokeText);
+			var totalPokeNumber = new UIText($"{pokemonList.Count}", 1.5f)
+			{
+				IsWrapped = true,
+				TextColor = Color.White,
+				Width = new(380f, 0f),
+				Height = new(50f, 0f),
+				TextOriginX = 0.5f,
+				TextOriginY = 0.5f,
+			};
+			totalPokeNumber.Top.Set(30, 0f);
+			totalPokePanel.Append(totalPokeNumber);
+			infoPanel.Append(totalPokePanel);
+			
+			UIHorizontalSeparator separator = new UIHorizontalSeparator(1) {Color = new Color(0f,0f,0f,0.5f)};
+			UIHelpers.SetRectangle(separator, left: 0f, top: 90f, width: 420, height: 1);
+			infoPanel.Append(separator);
+
+			if (Main.player[Main.myPlayer].TryGetModPlayer(out PokemonPlayer pkPlayer))
+			{
+				int SeenCount = 0;
+				int OwnedCount = 0;
+				int OwnedShiniesCount = 0;
+
+				List<string> registeredList = pkPlayer.registeredPokemon.Keys.ToList();
+
+				int i = 0;
+				
+				// Obtaining the highest capture value for each species
+				while(registeredList.Count > 0 && i < 8000)
+				{
+					string auxPokeName = PokemonData.GetOriginalForm(registeredList[0]);
+					int registeredValue = pkPlayer.registeredPokemon.Where(x => x.Key.EndsWith(auxPokeName)).ToDictionary().Values.Max();
+
+					if(registeredValue > 0) OwnedCount++;
+					if(registeredValue > 1) OwnedShiniesCount++;
+					SeenCount++;
+
+					int removedCount = registeredList.RemoveAll(x => x.EndsWith(auxPokeName));
+
+					//Console.WriteLine(registeredList.Count + " Tries: " + i + " Removing all " + auxPokeName + ": " + removedCount);
+					i++;
+				}
+
+				/*for(int i = 0; i < pkPlayer.registeredPokemon.Count; i++)
+				{
+					string auxPokeName = pkPlayer.registeredPokemon.Keys.ToList()[i];
+
+					if (!auxPokeName.Contains("Alolan") && !auxPokeName.Contains("Galarian") && !auxPokeName.Contains("Paldean"))
+					{
+						int registeredValue = pkPlayer.registeredPokemon.Values.ToList()[i];
+						if(registeredValue > 0) OwnedCount++;
+						if(registeredValue > 1) OwnedShiniesCount++;
+						SeenCount++;
+					}
+				}*/
+
+				// Seen
+				var seenPokeText = new UIText($"Seen: {SeenCount}/{pokemonList.Count}", 1.2f)
+				{
+					IsWrapped = true,
+					TextColor = Color.White,
+					Width = new(355f, 0f),
+					Height = new(30f, 0f),
+					Left = new(25,0),
+					Top = new(110,0),
+					TextOriginX = 0f,
+					TextOriginY = 0.5f,
+				};
+
+				UIImage seenImage = new UIImage(OwnedIcon) {Color = Color.Black};
+				UIHelpers.SetRectangle(seenImage, left: -25, top: 5, width: 14, height: 14);
+				seenPokeText.Append(seenImage);
+
+				infoPanel.Append(seenPokeText);
+
+				ColorBarUIPanel seenPanel = new ColorBarUIPanel((float)SeenCount/pokemonList.Count) {BarColor = Color.White};
+				UIHelpers.SetRectangle(seenPanel, 0, top: 150, width: 380, height: 40);
+				seenPanel.SetPadding(0);
+
+				var seenBarText = new UIText((int)(100*(float)SeenCount/pokemonList.Count)+"%", 1.2f)
+				{
+					TextColor = Color.White,
+					Width = new(380f, 0f),
+					Height = new(40f, 0f),
+					TextOriginX = 0.5f,
+					TextOriginY = 0.5f,
+				};
+				seenPanel.Append(seenBarText);
+				infoPanel.Append(seenPanel);
+
+				// Owned
+				var ownedPokeText = new UIText($"Owned: {OwnedCount}/{pokemonList.Count}", 1.2f)
+				{
+					IsWrapped = true,
+					TextColor = Color.White,
+					Width = new(355f, 0f),
+					Height = new(30f, 0f),
+					Left = new(25,0),
+					Top = new(210,0),
+					TextOriginX = 0f,
+					TextOriginY = 0.5f,
+				};
+				
+				UIImage ownedImage = new UIImage(OwnedIcon);
+				UIHelpers.SetRectangle(ownedImage, left: -25, top: 5, width: 14, height: 14);
+				ownedPokeText.Append(ownedImage);
+
+				infoPanel.Append(ownedPokeText);
+
+				ColorBarUIPanel ownedPanel = new ColorBarUIPanel((float)OwnedCount/pokemonList.Count) {BarColor = Color.White};
+				UIHelpers.SetRectangle(ownedPanel, 0, top: 250, width: 380, height: 40);
+				ownedPanel.SetPadding(0);
+
+				var ownedBarText = new UIText((int)(100*(float)OwnedCount/pokemonList.Count)+"%", 1.2f)
+				{
+					TextColor = Color.White,
+					Width = new(380f, 0f),
+					Height = new(40f, 0f),
+					TextOriginX = 0.5f,
+					TextOriginY = 0.5f,
+				};
+				ownedPanel.Append(ownedBarText);
+				infoPanel.Append(ownedPanel);
+
+				// Shinies
+				var ownedShiniesPokeText = new UIText($"Owned Shinies: {OwnedShiniesCount}/{pokemonList.Count}", 1.2f)
+				{
+					IsWrapped = true,
+					TextColor = Color.White,
+					Width = new(355f, 0f),
+					Height = new(30f, 0f),
+					Left = new(25,0),
+					Top = new(310,0),
+					TextOriginX = 0f,
+					TextOriginY = 0.5f,
+				};
+				
+				UIImage ownedShiniesImage = new UIImage(ShinyIcon);
+				UIHelpers.SetRectangle(ownedShiniesImage, left: -25, top: 5, width: 14, height: 14);
+				ownedShiniesPokeText.Append(ownedShiniesImage);
+
+				infoPanel.Append(ownedShiniesPokeText);
+
+				ColorBarUIPanel ownedShiniesPanel = new ColorBarUIPanel((float)OwnedShiniesCount/pokemonList.Count) {BarColor = Color.White};
+				UIHelpers.SetRectangle(ownedShiniesPanel, 0, top: 350, width: 380, height: 40);
+				ownedShiniesPanel.SetPadding(0);
+
+				var ownedShiniesBarText = new UIText((int)(100*(float)OwnedShiniesCount/pokemonList.Count)+"%", 1.2f)
+				{
+					TextColor = Color.White,
+					Width = new(380f, 0f),
+					Height = new(40f, 0f),
+					TextOriginX = 0.5f,
+					TextOriginY = 0.5f,
+				};
+				ownedShiniesPanel.Append(ownedShiniesBarText);
+				infoPanel.Append(ownedShiniesPanel);
+			}
+
+			InfoPanel.Append(infoPanel);
+		}
+
 		public void ChangePage(int page)
 		{
-			int maxpage = pokemonList.Count / maxPerPage;
+			int maxpage = (pokemonList.Count-1) / maxPerPage;
+			if(maxpage < 0) maxpage = 0;
 
 			if (page < 0) page = 0;
-			else if (page > (float)(pokemonList.Count / maxPerPage)) page = maxpage;
+			else if (page > maxpage) page = maxpage;
 
 			this.page = page;
 
@@ -124,21 +350,26 @@ namespace Pokemod.Common.UI.PokedexUI
 
 					int phase = 0;
 
-					if (pkPlayer.registeredPokemon.Keys.ToList().Contains(PokemonName))
+					if (pkPlayer.registeredPokemon.Keys.ToList().Any(x => x.EndsWith(PokemonName)))
 					{
+						foreach(string pokeForm in pkPlayer.registeredPokemon.Keys.ToList().Where(x => x.EndsWith(PokemonName)))
+						{
+							if(pkPlayer.registeredPokemon[pokeForm]+1 > phase){
+								phase = pkPlayer.registeredPokemon[pokeForm]+1;
+								PokemonName = pokeForm;
+							}
+						}
+
 						buttonTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/Pokesprites/Icons/" + PokemonName);
 						pokeButton = new UIHoverPanelImageButton(buttonTexture, Language.GetTextValue("Mods.Pokemod.NPCs." + PokemonName + "CritterNPC.DisplayName"));
-						if (pkPlayer.registeredPokemon[PokemonName] <= 0)
-						{
-							pokeButton.ButtonColor = Color.Black;
-							phase = 1;
-						}
-						else phase = 2;
+						
+						if (phase <= 1) pokeButton.ButtonColor = Color.Black;
 					}
 
 					UIHelpers.SetRectangle(pokeButton, left: (i % nColumns) * 70f, top: ((i - (i % nColumns)) / nColumns) * 70f, width: 64f, height: 64f);
 
 					if (phase == 0) pokeButton.BackgroundColor = new Color(21, 27, 50) * 0.7f;
+					else if(phase == 3) pokeButton.BackgroundColor = new Color(255, 198, 59) * 0.7f;
 
 					var buttonText = new UIText("" + info.pokemonID, 0.8f)
 					{
@@ -150,6 +381,13 @@ namespace Pokemod.Common.UI.PokedexUI
 						TextOriginX = 0,
 						TextOriginY = 1f
 					};
+
+					if (phase > 1)
+					{
+						UIImage phaseImage = new UIImage(phase==2?OwnedIcon:ShinyIcon);
+						UIHelpers.SetRectangleAlign(phaseImage, left: 1f, top: 1f, width: 14, height: 14);
+						pokeButton.Append(phaseImage);
+					}
 
 					pokeButton.OnLeftClick += (a, b) => SelectPokemon(PokemonName, phase);
 
@@ -186,7 +424,7 @@ namespace Pokemod.Common.UI.PokedexUI
 			//SoundEngine.PlaySound(SoundID.MenuOpen);
 		}
 
-		public void SelectPokemon(string pokemonName, int phase = 0)
+		public void SelectPokemon(string pokemonName, int phase = 0, bool shiny = false)
 		{
 			InfoPanel.RemoveAllChildren();
 
@@ -232,7 +470,7 @@ namespace Pokemod.Common.UI.PokedexUI
 			{
 				PokemonWildNPC npc = null;
 
-				if (ModContent.RequestIfExists("Pokemod/Assets/Textures/Pokesprites/Pets/" + pokemonName + "PetProjectile", out Asset<Texture2D> pokeTexture))
+				if (ModContent.RequestIfExists("Pokemod/Assets/Textures/Pokesprites/Pets/" + pokemonName + (shiny?"PetProjectileShiny":"PetProjectile"), out Asset<Texture2D> pokeTexture))
 				{
 					if (ModContent.TryFind<ModNPC>("Pokemod", pokemonName + "CritterNPC", out var npcBase))
 					{
@@ -275,7 +513,16 @@ namespace Pokemod.Common.UI.PokedexUI
 						imageFrame.Append(artistText);
 					}
 
-					pokeInfoDisplay = new UIPokedexInfoDisplay(pokemonName, phase == 2);
+					if(phase > 2){
+						UIHoverImageButton shinyButton = new UIHoverImageButton(ShinyButtonIcon, Language.GetTextValue("Mods.Pokemod.PokedexUI.ShinyButton"));
+						UIHelpers.SetRectangle(shinyButton, left: imageFrame.Width.Pixels - imageFrame.PaddingLeft - imageFrame.PaddingRight - 32, top: 0, width: 32f, height: 32f);
+
+						shinyButton.OnLeftClick += (a, b) => ShinyButtonClicked(pokemonName, phase, !shiny);
+
+						imageFrame.Append(shinyButton);
+					}
+
+					pokeInfoDisplay = new UIPokedexInfoDisplay(pokemonName, phase > 1);
 					UIHelpers.SetRectangle(pokeInfoDisplay, left: 0f, top: 275f, width: 420, height: 320);
 					pokeInfoDisplay.SetPadding(0);
 
@@ -411,6 +658,11 @@ namespace Pokemod.Common.UI.PokedexUI
 			//SoundEngine.PlaySound(SoundID.MenuOpen);
 		}
 
+		private void ShinyButtonClicked(string PokemonName, int phase, bool shiny)
+		{
+			SelectPokemon(PokemonName, phase, shiny);
+		}
+
 		private void CloseButtonClicked(UIMouseEvent evt, UIElement listeningElement)
 		{
 			SoundEngine.PlaySound(SoundID.MenuClose);
@@ -435,15 +687,15 @@ namespace Pokemod.Common.UI.PokedexUI
 
 		private void SetInitialContent()
 		{
-			UIButton<string> infoButton = new("Info");
+			UIButton<string> infoButton = new(Language.GetTextValue("Mods.Pokemod.PokedexUI.InfoSection"));
 			UIHelpers.SetRectangle(infoButton, left: 0f, top: 0f, width: 100, height: 40);
 			infoButton.OnLeftClick += (a, b) => SetContent(infoPanel);
 
-			UIButton<string> areaButton = new("Area");
+			UIButton<string> areaButton = new(Language.GetTextValue("Mods.Pokemod.PokedexUI.AreaSection"));
 			UIHelpers.SetRectangle(areaButton, left: 100f, top: 0f, width: 100, height: 40);
 			areaButton.OnLeftClick += (a, b) => SetContent(areaPanel);
 
-			UIButton<string> formsButton = new("Forms");
+			UIButton<string> formsButton = new(Language.GetTextValue("Mods.Pokemod.PokedexUI.FormsSection"));
 			UIHelpers.SetRectangle(formsButton, left: 200f, top: 0f, width: 100, height: 40);
 			formsButton.OnLeftClick += (a, b) => SetContent(formsPanel);
 

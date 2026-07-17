@@ -516,7 +516,7 @@ namespace Pokemod.Common.Players
 			bool shiny = pokemonName.EndsWith("Shiny");
 			if (shiny) pokemonName = pokemonName[..^5];
 
-			RegisterPokemon(pokemonName, true);
+			RegisterPokemon(pokemonName, true, shiny);
 
 			if (Main.netMode == NetmodeID.SinglePlayer)
 			{
@@ -534,7 +534,7 @@ namespace Pokemod.Common.Players
 			}
 		}
 
-		public void RegisterPokemon(string pokemonName, bool captured)
+		public void RegisterPokemon(string pokemonName, bool captured, bool shiny = false)
 		{
 			List<string> allForms = PokemonData.GetAllForms(pokemonName);
 
@@ -546,8 +546,8 @@ namespace Pokemod.Common.Players
 				{
 					if(captured && form == pokemonName)
 					{
-						registeredPokemon.Add(form, 1);
-						pokemonDexStatus = 1;
+						registeredPokemon.Add(form, shiny?2:1);
+						pokemonDexStatus = shiny?2:1;
 					}
 					else
 					{
@@ -555,9 +555,15 @@ namespace Pokemod.Common.Players
 						registeredPokemon.Add(form, 0);
 					}
 				}
-				else if (captured && form == pokemonName && registeredPokemon[form] < 1){
-					registeredPokemon[form] = 1;
-					pokemonDexStatus = 1;
+				else if (captured && form == pokemonName && registeredPokemon[form] < 1)
+				{
+					registeredPokemon[form] = shiny?2:1;
+					pokemonDexStatus = shiny?2:1;
+				}
+				else if (shiny && captured && form == pokemonName && registeredPokemon[form] < 2)
+				{
+					registeredPokemon[form] = 2;
+					pokemonDexStatus = 2;
 				}
 			}
 
@@ -573,6 +579,10 @@ namespace Pokemod.Common.Players
 						case 1:
 							SoundEngine.PlaySound(SoundID.ResearchComplete with { Pitch = -0.5f }, Player.Center);
 							Main.NewText("[c/FFE270:"+Language.GetText("Mods.Pokemod.PokedexMsg.ObtainedMsg").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName")).Value+"]");
+							break;
+						case 2:
+							SoundEngine.PlaySound(SoundID.ResearchComplete with { Pitch = -0.5f }, Player.Center);
+							Main.NewText("[c/FFE270:"+Language.GetText("Mods.Pokemod.PokedexMsg.ObtainedShinyMsg").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName")).Value+"]");
 							break;
 					}
 				}

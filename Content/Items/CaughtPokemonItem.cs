@@ -617,7 +617,7 @@ namespace Pokemod.Content.Items
 
 				if (trainer.TrainerID == CurrentTrainerID)
 				{
-					trainer.RegisterPokemon(PokemonName, true);
+					trainer.RegisterPokemon(PokemonName, true, Shiny);
 				}
 			}
 		}
