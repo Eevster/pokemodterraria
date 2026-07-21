@@ -574,6 +574,10 @@ Projectiles: {
 	TinkatonPetProjectileShiny.DisplayName: Tinkaton Pet Projectile Shiny
 	TinkatuffPetProjectile.DisplayName: Tinkatuff Pet Projectile
 	TinkatuffPetProjectileShiny.DisplayName: Tinkatuff Pet Projectile Shiny
+	SentretPetProjectileShiny.DisplayName: Sentret Pet Projectile Shiny
+	SentretPetProjectile.DisplayName: Sentret Pet Projectile
+	FurretPetProjectileShiny.DisplayName: Furret Pet Projectile Shiny
+	FurretPetProjectile.DisplayName: Furret Pet Projectile
 }
 
 Items: {
@@ -5686,6 +5690,10 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
 	G1T7_Blaine.DisplayName: Fire-type Gym Leader
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
+	SentretCritterNPCShiny.DisplayName: Sentret Critter N P C Shiny
+	SentretCritterNPC.DisplayName: Sentret Critter N P C
+	FurretCritterNPCShiny.DisplayName: Furret Critter N P C Shiny
+	FurretCritterNPC.DisplayName: Furret Critter N P C
 }
 
 Bestiary: {
