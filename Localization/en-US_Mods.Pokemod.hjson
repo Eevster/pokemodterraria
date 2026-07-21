@@ -5599,6 +5599,10 @@ NPCs: {
 	AlolanDugtrioCritterNPCShiny.DisplayName: Alolan Dugtrio Shiny
 	AlolanSandshrewCritterNPCShiny.DisplayName: Alolan Sandshrew Shiny
 	AlolanSandslashCritterNPCShiny.DisplayName: Alolan Sandslash Shiny
+	OnixCritterNPC_Body.DisplayName: Onix
+	OnixCritterNPC_Tail.DisplayName: Onix
+	OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
+	OnixCritterNPCShiny_Tail.DisplayName: Onix Shiny
 
 	PokemonProfessor: {
 		DisplayName: Pokemon Professor

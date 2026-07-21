@@ -37,7 +37,7 @@ namespace Pokemod.Content.NPCs
 			set => NPC.ai[3] = value;
 		}
 		public virtual float catchRate => 45;
-		public virtual string pokemonName => GetType().Name.Replace("CritterNPC","").Replace("Shiny","");
+		public virtual string pokemonName => GetType().Name.Replace("CritterNPC","").Replace("Shiny","").Replace("_Body","").Replace("_Head","").Replace("_Tail","");
 		public virtual bool shiny => GetType().Name.Contains("Shiny");
 		public override string Texture => "Pokemod/Assets/Textures/Pokesprites/Pets/"+pokemonName+(shiny?"PetProjectileShiny":"PetProjectile");
 		public virtual int totalFrames => 0;
