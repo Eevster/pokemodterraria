@@ -4658,12 +4658,12 @@ NPCs: {
 
 	ArcanineCritterNPC: {
 		DisplayName: Arcanine
-		Description: ""
+		Description: Its proud and regal appearance has captured the hearts of people since long ago.
 	}
 
 	ArticunoCritterNPC: {
 		DisplayName: Articuno
-		Description: ""
+		Description: This legendary bird Pokémon can create blizzards by freezing moisture in the air.
 	}
 
 	BellsproutCritterNPC: {
@@ -4683,7 +4683,7 @@ NPCs: {
 
 	DewgongCritterNPC: {
 		DisplayName: Dewgong
-		Description: ""
+		Description: In snow, the pure white coat covering its body obscures it from predators.
 	}
 
 	DiglettCritterNPC: {
@@ -4693,17 +4693,17 @@ NPCs: {
 
 	DittoCritterNPC: {
 		DisplayName: Ditto
-		Description: ""
+		Description: It has the ability to reconstitute its entire cellular structure to transform into whatever it sees.
 	}
 
 	DodrioCritterNPC: {
 		DisplayName: Dodrio
-		Description: ""
+		Description: When Doduo evolves into this odd breed, one of its heads splits into two. This Pokémon runs at nearly 40 mph.
 	}
 
 	DoduoCritterNPC: {
 		DisplayName: Doduo
-		Description: ""
+		Description: The brains in its two heads appear to communicate emotions to each other with a telepathic power.
 	}
 
 	DragonairCritterNPC: {
@@ -4728,7 +4728,7 @@ NPCs: {
 
 	DrowzeeCritterNPC: {
 		DisplayName: Drowzee
-		Description: ""
+		Description: It can tell what people are dreaming by sniffing with its big nose. It loves fun dreams.
 	}
 
 	DugtrioCritterNPC: {
@@ -4753,7 +4753,7 @@ NPCs: {
 
 	FarfetchdCritterNPC: {
 		DisplayName: Farfetch'd
-		Description: ""
+		Description: It can't live without the stalk it holds. That's why it defends the stalk from attackers with its life.
 	}
 
 	GengarCritterNPC: {
@@ -4803,12 +4803,12 @@ NPCs: {
 
 	GrimerCritterNPC: {
 		DisplayName: Grimer
-		Description: ""
+		Description: It was born when sludge in a dirty stream was exposed to the moon's X-rays. It appears among filth.
 	}
 
 	GrowlitheCritterNPC: {
 		DisplayName: Growlithe
-		Description: ""
+		Description: It is a Pokémon with a loyal nature. It will remain motionless until it is given an order by its Trainer.
 	}
 
 	GyaradosCritterNPC: {
@@ -4823,22 +4823,22 @@ NPCs: {
 
 	HitmonchanCritterNPC: {
 		DisplayName: Hitmonchan
-		Description: ""
+		Description: When Hitmonchan twists its arm while throwing a punch, the blow will pulverize even concrete. The Pokémon rests after three minutes of fighting.
 	}
 
 	HitmonleeCritterNPC: {
 		DisplayName: Hitmonlee
-		Description: ""
+		Description: Its legs can stretch to double their length. First-time foes are startled by Hitmonlee's extensible reach.
 	}
 
 	HorseaCritterNPC: {
 		DisplayName: Horsea
-		Description: ""
+		Description: It makes its nest in the shade of corals. If it senses danger, it spits black ink and flees.
 	}
 
 	HypnoCritterNPC: {
 		DisplayName: Hypno
-		Description: ""
+		Description: Seeing its swinging pendulum can induce sleep in three seconds, even in someone who just woke up.
 	}
 
 	JigglypuffCritterNPC: {
@@ -4848,7 +4848,7 @@ NPCs: {
 
 	JynxCritterNPC: {
 		DisplayName: Jynx
-		Description: ""
+		Description: Its cries sound like human speech. However, it is impossible to tell what it is trying to say.
 	}
 
 	KabutoCritterNPC: {
@@ -4868,7 +4868,7 @@ NPCs: {
 
 	KangaskhanCritterNPC: {
 		DisplayName: Kangaskhan
-		Description: ""
+		Description: It raises its offspring in its belly pouch. It lets its baby out to play only when it feels safe to do so.
 	}
 
 	KinglerCritterNPC: {
@@ -4893,7 +4893,7 @@ NPCs: {
 
 	LickitungCritterNPC: {
 		DisplayName: Lickitung
-		Description: ""
+		Description: Instead of its hands, it uses its tongue, which can stretch to twice this Pokémon's height. Lickitung's sticky saliva grips anything.
 	}
 
 	MachampCritterNPC: {
@@ -4918,7 +4918,7 @@ NPCs: {
 
 	MagmarCritterNPC: {
 		DisplayName: Magmar
-		Description: ""
+		Description: It was born in the crater of a volcano. Its body is covered with flames that shimmer like the sun.
 	}
 
 	MankeyCritterNPC: {
@@ -4938,17 +4938,17 @@ NPCs: {
 
 	MewCritterNPC: {
 		DisplayName: Mew
-		Description: ""
+		Description: Because it can use all kinds of moves, many scientists believe Mew to be the ancestor of Pokémon.
 	}
 
 	MewtwoCritterNPC: {
 		DisplayName: Mewtwo
-		Description: ""
+		Description: Mewtwo was created by recombining Mew's genes. It's said to have the most savage heart among Pokémon.
 	}
 
 	MoltresCritterNPC: {
 		DisplayName: Moltres
-		Description: ""
+		Description: It is one of the legendary bird Pokémon. Its appearance is said to indicate the coming of spring.
 	}
 
 	MrMimeCritterNPC: {
@@ -4958,7 +4958,7 @@ NPCs: {
 
 	MukCritterNPC: {
 		DisplayName: Muk
-		Description: ""
+		Description: A toxic fluid seeps from its body. The fluid kills plants and trees immediately upon contact.
 	}
 
 	NidokingCritterNPC: {
@@ -5023,7 +5023,7 @@ NPCs: {
 
 	PinsirCritterNPC: {
 		DisplayName: Pinsir
-		Description: ""
+		Description: It grips prey with its pincers until the prey is torn apart. What it can't tear, it tosses far away.
 	}
 
 	PoliwagCritterNPC: {
@@ -5043,7 +5043,7 @@ NPCs: {
 
 	PonytaCritterNPC: {
 		DisplayName: Ponyta
-		Description: ""
+		Description: Its legs grow strong while it chases after its parents. It runs all day in fields and on mountains.
 	}
 
 	PorygonCritterNPC: {
@@ -5063,37 +5063,37 @@ NPCs: {
 
 	RapidashCritterNPC: {
 		DisplayName: Rapidash
-		Description: ""
+		Description: It has astounding acceleration. From a standstill, it can reach top speed within 10 steps.
 	}
 
 	RhydonCritterNPC: {
 		DisplayName: Rhydon
-		Description: ""
+		Description: Its brain developed after it stood up on its hind legs. Its drill horn bores tunnels through solid rock.
 	}
 
 	RhyhornCritterNPC: {
 		DisplayName: Rhyhorn
-		Description: ""
+		Description: Its body is clad in a thick hide, and its tackles topple buildings. Unfortunately, it is not smart.
 	}
 
 	ScytherCritterNPC: {
 		DisplayName: Scyther
-		Description: ""
+		Description: It is nearly impossible to parry its attacking scythes. Its movements are like a ninja's.
 	}
 
 	SeadraCritterNPC: {
 		DisplayName: Seadra
-		Description: ""
+		Description: Its spines provide protection. Its fins and bones are prized as traditional medicine ingredients.
 	}
 
 	SeakingCritterNPC: {
 		DisplayName: Seaking
-		Description: ""
+		Description: To protect its family, it will fight with its drill-sharp horn. It lives in hollowed rocks in streams.
 	}
 
 	SeelCritterNPC: {
 		DisplayName: Seel
-		Description: ""
+		Description: This Pokémon lives on icebergs. It uses the sharp point on its head to break up ice as it swims in the sea.
 	}
 
 	ShellderCritterNPC: {
@@ -5113,7 +5113,7 @@ NPCs: {
 
 	SnorlaxCritterNPC: {
 		DisplayName: Snorlax
-		Description: ""
+		Description: It stops eating only to sleep. It doesn't feel full unless it eats nearly 900 pounds a day.
 	}
 
 	StarmieCritterNPC: {
@@ -5133,7 +5133,7 @@ NPCs: {
 
 	TaurosCritterNPC: {
 		DisplayName: Tauros
-		Description: ""
+		Description: Once it takes aim at its prey, it makes a headlong charge. It is famous for its violent nature.
 	}
 
 	TentacoolCritterNPC: {
@@ -5193,12 +5193,22 @@ NPCs: {
 
 	ZapdosCritterNPC: {
 		DisplayName: Zapdos
-		Description: ""
+		Description: This legendary Pokémon is said to live in thunderclouds. It freely controls lightning bolts.
 	}
 
 	ZubatCritterNPC: {
 		DisplayName: Zubat
 		Description: Even though it has no eyes, it can sense obstacles using ultrasonic waves it emits from its mouth.
+	}
+
+	SentretCritterNPC: {
+		DisplayName: Sentret
+		Description: It has a very nervous nature. It stands up high on its tail so it can scan wide areas.
+	}
+
+	FurretCritterNPC: {
+		DisplayName: Furret
+		Description: The mother puts its offspring to sleep by curling up around them. It corners foes with speed.
 	}
 
 	PichuCritterNPC: {
@@ -5564,6 +5574,8 @@ NPCs: {
 	WigglytuffCritterNPCShiny.DisplayName: Wigglytuff Shiny
 	ZapdosCritterNPCShiny.DisplayName: Zapdos Shiny
 	ZubatCritterNPCShiny.DisplayName: Zubat Shiny
+	SentretCritterNPCShiny.DisplayName: Sentret Shiny
+	FurretCritterNPCShiny.DisplayName: Furret Shiny
 	PichuCritterNPCShiny.DisplayName: Pichu Shiny
 	IgglybuffCritterNPCShiny.DisplayName: Igglybuff Shiny
 	CleffaCritterNPCShiny.DisplayName: Cleffa Shiny
@@ -5690,10 +5702,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
 	G1T7_Blaine.DisplayName: Fire-type Gym Leader
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
-	SentretCritterNPCShiny.DisplayName: Sentret Critter N P C Shiny
-	SentretCritterNPC.DisplayName: Sentret Critter N P C
-	FurretCritterNPCShiny.DisplayName: Furret Critter N P C Shiny
-	FurretCritterNPC.DisplayName: Furret Critter N P C
 }
 
 Bestiary: {
