@@ -578,6 +578,10 @@ Projectiles: {
 	// SentretPetProjectile.DisplayName: Sentret Pet Projectile
 	// FurretPetProjectileShiny.DisplayName: Furret Pet Projectile Shiny
 	// FurretPetProjectile.DisplayName: Furret Pet Projectile
+	// HisuianElectrodePetProjectile.DisplayName: Hisuian Electrode Pet Projectile
+	// HisuianElectrodePetProjectileShiny.DisplayName: Hisuian Electrode Pet Projectile Shiny
+	// HisuianVoltorbPetProjectile.DisplayName: Hisuian Voltorb Pet Projectile
+	// HisuianVoltorbPetProjectileShiny.DisplayName: Hisuian Voltorb Pet Projectile Shiny
 }
 
 Items: {
@@ -5406,6 +5410,16 @@ NPCs: {
 		Description: Esta es la forma que adquiere Sandslash al adaptarse a un hábitat sumamente frío. El aire helado que exuda afila las púas de su cuerpo.
 	}
 
+	HisuianVoltorbCritterNPC: {
+		DisplayName: Hisuian Voltorb
+		Description: Curioso ejemplar que guarda cierta similitud con una Poké Ball. Cuanto más se altera, mayor es la descarga eléctrica que libera de su vientre, a la que sigue una sonora carcajada.
+	}
+
+	HisuianElectrodeCritterNPC: {
+		DisplayName: Hisuian Electrode
+		Description: Curiosamente, su complexión superficial es muy semejante a la de un bonguri. Cuando se enoja, la electricidad que emite es veinte veces más potente que la de un rayo.
+	}
+
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
 	CharmanderCritterNPCShiny.DisplayName: Charmander
 	SquirtleCritterNPCShiny.DisplayName: Squirtle
@@ -5615,6 +5629,8 @@ NPCs: {
 	// AlolanDugtrioCritterNPCShiny.DisplayName: Alolan Dugtrio Shiny
 	// AlolanSandshrewCritterNPCShiny.DisplayName: Alolan Sandshrew Shiny
 	// AlolanSandslashCritterNPCShiny.DisplayName: Alolan Sandslash Shiny
+	// HisuianVoltorbCritterNPCShiny.DisplayName: Hisuian Voltorb Shiny
+	// HisuianElectrodeCritterNPCShiny.DisplayName: Hisuian Electrode Shiny
 	// OnixCritterNPC_Body.DisplayName: Onix
 	// OnixCritterNPC_Tail.DisplayName: Onix
 	// OnixCritterNPCShiny_Body.DisplayName: Onix Shiny

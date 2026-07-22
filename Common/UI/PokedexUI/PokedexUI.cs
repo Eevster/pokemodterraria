@@ -721,11 +721,14 @@ namespace Pokemod.Common.UI.PokedexUI
 			infoPanel = new UIPanel();
 			UIHelpers.SetRectangle(infoPanel, left: 0f, top: 0f, width: 420, height: 280);
 			infoPanel.SetPadding(20);
-			var descText = new UIText(captured?Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.Description"):"?????", 0.9f)
+			string descTextContent = captured?Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.Description"):"?????";
+			float descTextFontSize = descTextContent.Length>140?(descTextContent.Length>170?0.75f:0.8f):0.9f;
+
+			var descText = new UIText(descTextContent, descTextFontSize)
 			{
 				IsWrapped = true,
 				TextColor = Color.White,
-				Width = new(380f, 0f),
+				Width = new(400f, 0f),
 				Height = new(80f, 0f),
 				TextOriginX = 0.5f,
 				TextOriginY = 0f,

@@ -578,6 +578,10 @@ Projectiles: {
 	SentretPetProjectile.DisplayName: Sentret Pet Projectile
 	FurretPetProjectileShiny.DisplayName: Furret Pet Projectile Shiny
 	FurretPetProjectile.DisplayName: Furret Pet Projectile
+	HisuianElectrodePetProjectile.DisplayName: Hisuian Electrode Pet Projectile
+	HisuianElectrodePetProjectileShiny.DisplayName: Hisuian Electrode Pet Projectile Shiny
+	HisuianVoltorbPetProjectile.DisplayName: Hisuian Voltorb Pet Projectile
+	HisuianVoltorbPetProjectileShiny.DisplayName: Hisuian Voltorb Pet Projectile Shiny
 }
 
 Items: {
@@ -5406,6 +5410,16 @@ NPCs: {
 		Description: This Pokémon's steel spikes are sheathed in ice. Stabs from these spikes cause deep wounds and severe frostbite as well.
 	}
 
+	HisuianVoltorbCritterNPC: {
+		DisplayName: Hisuian Voltorb
+		Description: An enigmatic Pokémon that happens to bear a resemblance to a Poké Ball. When excited, it discharges the electric current it has stored in its belly, then lets out a great, uproarious laugh.
+	}
+
+	HisuianElectrodeCritterNPC: {
+		DisplayName: Hisuian Electrode
+		Description: The tissue on the surface of its body is curiously similar in composition to an Apricorn. When irritated, this Pokémon lets loose an electric current equal to 20 lightning bolts.
+	}
+
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur  Shiny
 	CharmanderCritterNPCShiny.DisplayName: Charmander  Shiny
 	SquirtleCritterNPCShiny.DisplayName: Squirtle  Shiny
@@ -5615,6 +5629,8 @@ NPCs: {
 	AlolanDugtrioCritterNPCShiny.DisplayName: Alolan Dugtrio Shiny
 	AlolanSandshrewCritterNPCShiny.DisplayName: Alolan Sandshrew Shiny
 	AlolanSandslashCritterNPCShiny.DisplayName: Alolan Sandslash Shiny
+	HisuianVoltorbCritterNPCShiny.DisplayName: Hisuian Voltorb Shiny
+	HisuianElectrodeCritterNPCShiny.DisplayName: Hisuian Electrode Shiny
 	OnixCritterNPC_Body.DisplayName: Onix
 	OnixCritterNPC_Tail.DisplayName: Onix
 	OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
