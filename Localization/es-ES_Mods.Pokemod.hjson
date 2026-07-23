@@ -1401,6 +1401,16 @@ Items: {
 		Tooltip: "{$CommonItemTooltip.MegaStone}"
 	}
 
+	AmpharosMegaStoneItem: {
+		DisplayName: Ampharosita
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	SlowbroMegaStoneItem: {
+		DisplayName: Slowbronita
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
 	TMBug: {
 		DisplayName: MT Bicho
 		Tooltip:
@@ -5120,8 +5130,8 @@ NPCs: {
 	}
 
 	SlowbroMegaCritterNPC: {
-		// DisplayName: Mega Slowbro
-		// Description: When bathed in the energy of Mega Evolution, Shellder converts into impregnable armor. There is virtually no change in Slowpoke.
+		DisplayName: Mega Slowbro
+		Description: La energía de la megaevolución convirtió a Shellder en una armadura impenetrable. No hay ningún cambio aparente en Slowpoke.
 	}
 
 	SnorlaxCritterNPC: {
@@ -5255,8 +5265,8 @@ NPCs: {
 	}
 
 	AmpharosMegaCritterNPC: {
-		// DisplayName: Mega Ampharos
-		// Description: Massive amounts of energy intensely stimulated Ampharos's cells, apparently awakening its long-sleeping dragon's blood.
+		DisplayName: Mega Ampharos
+		Description: La descomunal energía de la megaevolución lo afecta a nivel celular, lo que hace resurgir la sangre de dragón que late en su interior.
 	}
 
 	HoppipCritterNPC: {
@@ -5345,28 +5355,28 @@ NPCs: {
 	}
 
 	LickilickyCritterNPC: {
-		// DisplayName: Lickilicky
-		// Description: It wraps things with its extensible tongue. Getting too close to it will leave you soaked with drool.
+		DisplayName: Lickilicky
+		Description: Agarra cualquier cosa con su lengua extensible. Quien se acerca mucho termina lleno de babas.
 	}
 
 	VenipedeCritterNPC: {
-		// DisplayName: Venipede
-		// Description: Its bite injects a venom potent enough to paralyze even the large bird Pokémon that try to prey on it.
+		DisplayName: Venipede
+		Description: Al morder, inyecta un poderoso veneno que inmoviliza hasta a los Pokémon pájaro más grandes, sus enemigos naturales.
 	}
 
 	WhirlipedeCritterNPC: {
-		// DisplayName: Whirlipede
-		// Description: Protected by a hard shell, it spins its body like a wheel and crashes furiously into its enemies.
+		DisplayName: Whirlipede
+		Description: Lo protege un duro caparazón. Gira como una rueda y embiste brutalmente a sus enemigos.
 	}
 
 	ScolipedeCritterNPC: {
-		// DisplayName: Scolipede
-		// Description: It clasps its prey with the claws on its neck until they stop moving. Then it finishes them off with deadly venom.
+		DisplayName: Scolipede
+		Description: Sujeta a sus presas con las garras que le sobresalen del cuello hasta inmovilizarlas y luego las remata con veneno.
 	}
 
 	ScolipedeMegaCritterNPC: {
-		// DisplayName: Mega Scolipede
-		// Description: Its deadly venom gives off a faint glow. The venom affects Scolipede's mind, honing its viciousness.
+		DisplayName: Mega Scolipede
+		Description: Su potente veneno, que desprende una luz tenue, le afectó la mente e incrementó aún más su agresividad.
 	}
 
 	JoltikCritterNPC: {
@@ -5380,23 +5390,23 @@ NPCs: {
 	}
 
 	LitwickCritterNPC: {
-		// DisplayName: Litwick
-		// Description: Litwick shines a light that absorbs the life energy of people and Pokémon, which becomes the fuel that it burns.
+		DisplayName: Litwick
+		Description: Litwick desprende una luz que absorbe la energía vital de humanos y Pokémon, y luego la convierte en combustible.
 	}
 
 	LampentCritterNPC: {
-		// DisplayName: Lampent
-		// Description: Lampent appears at the moment of death and promptly absorbs the spirit as it leaves the body.
+		DisplayName: Lampent
+		Description: Aparece hacia el final de la vida de las personas y absorbe el alma en cuanto esta se separa del cuerpo.
 	}
 
 	ChandelureCritterNPC: {
-		// DisplayName: Chandelure
-		// Description: Being consumed in Chandelure's flame burns up the spirit, leaving the body behind.
+		DisplayName: Chandelure
+		Description: Sus llamas absorben y abrasan el alma de quien envuelvan, y solo queda su cuerpo inerte.
 	}
 
 	ChandelureMegaCritterNPC: {
-		// DisplayName: Mega Chandelure
-		// Description: One of its eyes is a window linking our world with the afterlife. This Pokémon draws in hatred and converts it into power.
+		DisplayName: Mega Chandelure
+		Description: Uno de sus ojos sirve como ventana al más allá. Atrae hacia sí mismo los sentimientos de rencor de otros seres y los transforma en poder.
 	}
 
 	TinkatinkCritterNPC: {
@@ -5753,26 +5763,26 @@ NPCs: {
 	}
 
 	MoveTutor: {
-		// DisplayName: Move Tutor
-		// Census.SpawnCondition: Have a Pokemon forget a move.
+		DisplayName: Tutor de movimientos
+		Census.SpawnCondition: Haz que un Pokémon olvide un movimiento.
 
 		TownNPCMood: {
-			// Content: I feel ready to wrestle a Machoke.
-			// NoHome: I can't train without a home to rest in.
-			// FarFromHome: I'm not lost. I'm just... exploring.
-			// LoveSpace: I've got enough space to practice my kicks without breaking anything!
-			// DislikeCrowded: I'm not so sure I can train with so many people nearby. I'd hate to accidently hit someone.
-			// HateCrowded: I can't even meditate with so many people nearby!
-			// LoveBiome: I love training beside the sounds of {BiomeName}.
-			// LikeBiome: I like that {BiomeName} offers forgiving ground for practicing throws.
-			// DislikeBiome: I can't handle the cold of {BiomeName}.
-			// HateBiome: I hate {BiomeName}. I get too claustrophobic.
-			// LoveNPC: I love the way {NPCName} talks about Pokemon. They get so fired up!
-			// LikeNPC: The muscles on {NPCName} really set a high bar. I need to keep training so I can keep up!
-			// DislikeNPC: "{NPCName} should take their weird gizmos somewhere else."
-			// HateNPC: I don't think {NPCName} has ever worked a day in their life. It makes me sick.
-			// LikeNPC_Princess: "{NPCName} is so lovely, and has surprisingly quick reflexes."
-			// Princess_LovesNPC: "{NPCName} really pushes me to do my best!"
+			Content: Me siento capaz de luchar contra un Machoke.
+			NoHome: No puedo entrenar sin un hogar donde descansar.
+			FarFromHome: No me perdí. Simplemente estoy... explorando.
+			LoveSpace: ¡Tengo suficiente espacio para practicar mis patadas sin romper nada!
+			DislikeCrowded: No sé si puedo entrenar con tanta gente cerca. No me gustaría golpear a alguien por accidente.
+			HateCrowded: ¡Ni siquiera puedo meditar con tanta gente cerca!
+			LoveBiome: Me encanta entrenar con los sonidos de {BiomeName} de fondo.
+			LikeBiome: Me gusta que {BiomeName} ofrezca un terreno indulgente para practicar lanzamientos.
+			DislikeBiome: No soporto el frío de {BiomeName}.
+			HateBiome: Odio {BiomeName}. Siento demasiada claustrofobia.
+			LoveNPC: Me encanta cómo habla {NPCName} de los Pokemon. ¡Se entusiasma muchísimo!
+			LikeNPC: La musculatura de {NPCName} realmente deja el listón muy alto. ¡Tengo que seguir entrenando para estar a su altura!
+			DislikeNPC: "{NPCName} debería llevarse sus artilugios raros a otra parte."
+			HateNPC: No creo que {NPCName} haya trabajado ni un solo día en su vida. Me da náuseas.
+			LikeNPC_Princess: "{NPCName} es increíble y tiene unos reflejos sorprendentemente rápidos."
+			Princess_LovesNPC: ¡{NPCName} realmente me motiva a dar lo mejor de mí!
 		}
 	}
 
@@ -5787,8 +5797,8 @@ NPCs: {
 }
 
 Bestiary: {
-	// PokemonScientist.BestiaryEntry: The brilliant mind at the frontier of Pokemon genetic research, the Pokemon Scientist can use Fossils and other Genetic Samples to Revitalise extinct species of Pokemon.
-	// MoveTutor.BestiaryEntry: The Move Tutor is an experienced Pokemon enthusiast who knows all there is to know about moves. They can teach pokemon moves that they have forgotten.
+	PokemonScientist.BestiaryEntry: Como mente brillante a la vanguardia de la investigación genética Pokemon, el Científico Pokemon puede utilizar fósiles y otras muestras genéticas para revivir especies de Pokemon extintas.
+	MoveTutor.BestiaryEntry: El Tutor de Movimientos es un entusiasta experimentado de los Pokemon que sabe todo lo que hay que saber sobre los movimientos. Puede enseñar a los Pokemon movimientos que hayan olvidado.
 }
 
 Dialogue: {
@@ -5988,6 +5998,12 @@ MoveTutorUI: {
 	Description: "{0} puede aprender:"
 }
 
+MegaEvolveMsg: {
+	NoCharge: ¡Sin carga!
+	NoMegaStone: Mega piedra no equipada
+	NoPokemon: "{0} no encontrado"
+}
+
 PokemonTypes: {
 	Normal: Normal
 	Fighting: Lucha
@@ -6141,7 +6157,7 @@ WeatherStatus: {
 	SandStorm: Tormenta arena
 }
 
-// DamageClasses.PokemonDamageClass.DisplayName: Pokemon Damage Class
+DamageClasses.PokemonDamageClass.DisplayName: Pokemon Damage Class
 
 Configs: {
 	BetaMonsConfig: {
@@ -6158,9 +6174,9 @@ Configs: {
 		// DisplayName: Gameplay Config
 
 		Headers: {
-			// PokemonWorld: Pokemon World
-			// RuleChanges: Rule Changes
-			// GameplayChanges: Gameplay Changes
+			PokemonWorld: Mundo Pokemon
+			RuleChanges: Cambio de reglas
+			GameplayChanges: Cambios de gameplay
 		}
 
 		PokemonSpawnMultiplier: {

@@ -6,6 +6,7 @@ using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Pokemod.Content.Items.MegaStones
@@ -31,25 +32,36 @@ namespace Pokemod.Content.Items.MegaStones
 				return true;
 			}
 
-			if (player.GetModPlayer<PokemonPlayer>().CanMegaEvolve != 0)
+			PokemonPlayer pokemonPlayer = player.GetModPlayer<PokemonPlayer>();
+
+			if (pokemonPlayer.CanMegaEvolve != 0)
 			{
 				SoundEngine.PlaySound(SoundID.MenuTick, player.position);
-				CombatText.NewText(player.Hitbox, new Color(255, 255, 255), "Not Charged!");
+				CombatText.NewText(player.Hitbox, new Color(255, 255, 255), Language.GetTextValue("Mods.Pokemod.MegaEvolveMsg.NoCharge"));
 				return true;
 			}
 
-			if (!player.GetModPlayer<PokemonPlayer>().HasPokemonByName(player.GetModPlayer<PokemonPlayer>().MegaStone.Replace("MegaStoneItemX","").Replace("MegaStoneItemY","").Replace("MegaStoneItem","")))
+			if(pokemonPlayer.MegaStone == null || pokemonPlayer.MegaStone == "" || pokemonPlayer.MegaStone == " ")
 			{
 				SoundEngine.PlaySound(SoundID.MenuTick, player.position);
-				CombatText.NewText(player.Hitbox, new Color(255, 255, 255), "Incorrect Pokemon");
+				CombatText.NewText(player.Hitbox, new Color(255, 255, 255), Language.GetTextValue("Mods.Pokemod.MegaEvolveMsg.NoMegaStone"));
 				return true;
 			}
 
-			if (player.GetModPlayer<PokemonPlayer>().HasMegaStone > 0)
+			string pokemonName = pokemonPlayer.MegaStone.Replace("MegaStoneItemX","").Replace("MegaStoneItemY","").Replace("MegaStoneItemZ","").Replace("MegaStoneItem","");
+
+			if (!pokemonPlayer.HasPokemonByName(pokemonName))
+			{
+				SoundEngine.PlaySound(SoundID.MenuTick, player.position);
+				CombatText.NewText(player.Hitbox, new Color(255, 255, 255), Language.GetText("Mods.Pokemod.MegaEvolveMsg.NoPokemon").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName")).Value);
+				return true;
+			}
+
+			if (pokemonPlayer.HasMegaStone > 0)
 			{
 				SoundEngine.PlaySound(SoundID.Item6, player.position);
 				player.AddBuff(ModContent.BuffType<MegaEvolution>(), 4 * 60 * 60);
-				player.GetModPlayer<PokemonPlayer>().CanMegaEvolve = 2;
+				pokemonPlayer.CanMegaEvolve = 2;
 			}
 
             return true;

@@ -20,6 +20,10 @@ namespace Pokemod.Content.Pets.AmpharosPetMega
 		public override int[] fallStartEnd => [14,15];
         public override int[] attackStartEnd => [16, 23];
 
+		public override bool isMega => true;
+		
+		public override string[] megaEvolutionBase => ["Ampharos"];
+		public override string[] itemToMegaEvolve => ["AmpharosMegaStoneItem"];
     }
 
 	public class AmpharosMegaPetProjectileShiny : AmpharosMegaPetProjectile { }

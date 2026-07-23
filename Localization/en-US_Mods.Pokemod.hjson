@@ -1401,6 +1401,16 @@ Items: {
 		Tooltip: "{$CommonItemTooltip.MegaStone}"
 	}
 
+	AmpharosMegaStoneItem: {
+		DisplayName: Ampharosite
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	SlowbroMegaStoneItem: {
+		DisplayName: Slowbronite
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
 	TMBug: {
 		DisplayName: TM Bug
 		Tooltip:
@@ -5986,6 +5996,12 @@ MoveLearnUI: {
 MoveTutorUI: {
 	Prompt: Insert Pokemon
 	Description: "{0} can learn:"
+}
+
+MegaEvolveMsg: {
+	NoCharge: Not Charged!
+	NoMegaStone: Mega Stone not equipped
+	NoPokemon: "{0} not found"
 }
 
 PokemonTypes: {

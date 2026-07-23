@@ -19,6 +19,11 @@ namespace Pokemod.Content.Pets.SlowbroPetMega
 		public override int[] jumpStartEnd => [17,20];
 		public override int[] fallStartEnd => [21,21];
         public override int[] attackStartEnd => [0, 8];
+
+		public override bool isMega => true;
+		
+		public override string[] megaEvolutionBase => ["Slowbro"];
+		public override string[] itemToMegaEvolve => ["SlowbroMegaStoneItem"];
     }
 
 	public class SlowbroMegaPetProjectileShiny : SlowbroMegaPetProjectile{}

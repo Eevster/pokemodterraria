@@ -184,6 +184,7 @@ namespace Pokemod.Common.UI.PokedexUI
 				int OwnedShiniesCount = 0;
 
 				List<string> registeredList = pkPlayer.registeredPokemon.Keys.ToList();
+				registeredList.RemoveAll(x => x.EndsWith("Mega") || x.EndsWith("MegaX") || x.EndsWith("MegaY") || x.EndsWith("MegaZ"));
 
 				int i = 0;
 				
@@ -239,7 +240,7 @@ namespace Pokemod.Common.UI.PokedexUI
 				UIHelpers.SetRectangle(seenPanel, 0, top: 150, width: 380, height: 40);
 				seenPanel.SetPadding(0);
 
-				var seenBarText = new UIText((int)(100*(float)SeenCount/pokemonList.Count)+"%", 1.2f)
+				var seenBarText = new UIText((100*(float)SeenCount/pokemonList.Count).ToString("0.00")+"%", 1.2f)
 				{
 					TextColor = Color.White,
 					Width = new(380f, 0f),
@@ -273,7 +274,7 @@ namespace Pokemod.Common.UI.PokedexUI
 				UIHelpers.SetRectangle(ownedPanel, 0, top: 250, width: 380, height: 40);
 				ownedPanel.SetPadding(0);
 
-				var ownedBarText = new UIText((int)(100*(float)OwnedCount/pokemonList.Count)+"%", 1.2f)
+				var ownedBarText = new UIText((100*(float)OwnedCount/pokemonList.Count).ToString("0.00")+"%", 1.2f)
 				{
 					TextColor = Color.White,
 					Width = new(380f, 0f),
@@ -307,7 +308,7 @@ namespace Pokemod.Common.UI.PokedexUI
 				UIHelpers.SetRectangle(ownedShiniesPanel, 0, top: 350, width: 380, height: 40);
 				ownedShiniesPanel.SetPadding(0);
 
-				var ownedShiniesBarText = new UIText((int)(100*(float)OwnedShiniesCount/pokemonList.Count)+"%", 1.2f)
+				var ownedShiniesBarText = new UIText((100*(float)OwnedShiniesCount/pokemonList.Count).ToString("0.00")+"%", 1.2f)
 				{
 					TextColor = Color.White,
 					Width = new(380f, 0f),
