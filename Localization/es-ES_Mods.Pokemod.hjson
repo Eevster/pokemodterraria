@@ -582,6 +582,10 @@ Projectiles: {
 	// HisuianElectrodePetProjectileShiny.DisplayName: Hisuian Electrode Pet Projectile Shiny
 	// HisuianVoltorbPetProjectile.DisplayName: Hisuian Voltorb Pet Projectile
 	// HisuianVoltorbPetProjectileShiny.DisplayName: Hisuian Voltorb Pet Projectile Shiny
+	// SlowbroMegaPetProjectileShiny.DisplayName: Slowbro Mega Pet Projectile Shiny
+	// SlowbroMegaPetProjectile.DisplayName: Slowbro Mega Pet Projectile
+	// AmpharosMegaPetProjectileShiny.DisplayName: Ampharos Mega Pet Projectile Shiny
+	// AmpharosMegaPetProjectile.DisplayName: Ampharos Mega Pet Projectile
 }
 
 Items: {
@@ -5115,6 +5119,11 @@ NPCs: {
 		Description: Normalmente se muestra distraído, pero parece espabilar si el Shellder le muerde con fuerza la cola.
 	}
 
+	SlowbroMegaCritterNPC: {
+		// DisplayName: Mega Slowbro
+		// Description: When bathed in the energy of Mega Evolution, Shellder converts into impregnable armor. There is virtually no change in Slowpoke.
+	}
+
 	SnorlaxCritterNPC: {
 		DisplayName: Snorlax
 		Description: Solo deja de comer para dormir. No se siente saciado a menos que ingiera 400 kg diarios.
@@ -5245,6 +5254,11 @@ NPCs: {
 		Description: La punta de su cola emite una luz intensa que antiguamente la gente usaba para enviar señales.
 	}
 
+	AmpharosMegaCritterNPC: {
+		// DisplayName: Mega Ampharos
+		// Description: Massive amounts of energy intensely stimulated Ampharos's cells, apparently awakening its long-sleeping dragon's blood.
+	}
+
 	HoppipCritterNPC: {
 		DisplayName: Hoppip
 		Description: Se deja llevar por el viento. Dicen que, cuando empiezan a reunirse en los prados y los montes, la primavera está al caer.
@@ -5330,6 +5344,31 @@ NPCs: {
 		Description: Evolucionó por la exposición a un campo magnético especial. Tres unidades generan magnetismo.
 	}
 
+	LickilickyCritterNPC: {
+		// DisplayName: Lickilicky
+		// Description: It wraps things with its extensible tongue. Getting too close to it will leave you soaked with drool.
+	}
+
+	VenipedeCritterNPC: {
+		// DisplayName: Venipede
+		// Description: Its bite injects a venom potent enough to paralyze even the large bird Pokémon that try to prey on it.
+	}
+
+	WhirlipedeCritterNPC: {
+		// DisplayName: Whirlipede
+		// Description: Protected by a hard shell, it spins its body like a wheel and crashes furiously into its enemies.
+	}
+
+	ScolipedeCritterNPC: {
+		// DisplayName: Scolipede
+		// Description: It clasps its prey with the claws on its neck until they stop moving. Then it finishes them off with deadly venom.
+	}
+
+	ScolipedeMegaCritterNPC: {
+		// DisplayName: Mega Scolipede
+		// Description: Its deadly venom gives off a faint glow. The venom affects Scolipede's mind, honing its viciousness.
+	}
+
 	JoltikCritterNPC: {
 		DisplayName: Joltik
 		Description: No puede generar electricidad por sí mismo, así que se encarama a otros Pokémon y absorbe su energía estática.
@@ -5338,6 +5377,26 @@ NPCs: {
 	GalvantulaCritterNPC: {
 		DisplayName: Galvantula
 		Description: Ataca lanzando hilos electrificados por el abdomen, que inmovilizan por completo al enemigo durante tres días y tres noches.
+	}
+
+	LitwickCritterNPC: {
+		// DisplayName: Litwick
+		// Description: Litwick shines a light that absorbs the life energy of people and Pokémon, which becomes the fuel that it burns.
+	}
+
+	LampentCritterNPC: {
+		// DisplayName: Lampent
+		// Description: Lampent appears at the moment of death and promptly absorbs the spirit as it leaves the body.
+	}
+
+	ChandelureCritterNPC: {
+		// DisplayName: Chandelure
+		// Description: Being consumed in Chandelure's flame burns up the spirit, leaving the body behind.
+	}
+
+	ChandelureMegaCritterNPC: {
+		// DisplayName: Mega Chandelure
+		// Description: One of its eyes is a window linking our world with the afterlife. This Pokémon draws in hatred and converts it into power.
 	}
 
 	TinkatinkCritterNPC: {
@@ -5613,8 +5672,15 @@ NPCs: {
 	// CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
 	// RampardosCritterNPCShiny.DisplayName: Rampardos Shiny
 	// MagnezoneCritterNPCShiny.DisplayName: Magnezone Shiny
+	// LickilickyCritterNPCShiny.DisplayName: Lickilicky Shiny
+	// VenipedeCritterNPCShiny.DisplayName: Venipede Shiny
+	// WhirlipedeCritterNPCShiny.DisplayName: Whirlipede Shiny
+	// ScolipedeCritterNPCShiny.DisplayName: Scolipede Shiny
 	// JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	// GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
+	// LitwickCritterNPCShiny.DisplayName: Litwick Shiny
+	// LampentCritterNPCShiny.DisplayName: Lampent Shiny
+	// ChandelureCritterNPCShiny.DisplayName: Chandelure Shiny
 	// TinkatinkCritterNPCShiny.DisplayName: Tinkatink Shiny
 	// TinkatonCritterNPCShiny.DisplayName: Tinkaton Shiny
 	// TinkatuffCritterNPCShiny.DisplayName: Tinkatuff Shiny

@@ -8,7 +8,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 	public class LickitungCritterNPC : PokemonWildNPC
 	{
         public override int hitboxWidth => 28;
-        public override int hitboxHeight => 46;
+        public override int hitboxHeight => 36;
 
         public override int totalFrames => 24;
         public override int animationSpeed => 5;

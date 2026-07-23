@@ -7,8 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class SlowkingCritterNPC : PokemonWildNPC
 	{
-        public override int hitboxWidth => 72;
-        public override int hitboxHeight => 80;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 56;
 
         public override int totalFrames => 38;
         public override int animationSpeed => 5;

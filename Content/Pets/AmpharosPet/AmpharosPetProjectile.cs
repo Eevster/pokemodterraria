@@ -5,7 +5,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.DoduoPet
+namespace Pokemod.Content.Pets.AmpharosPet
 {
 	public class AmpharosPetProjectile : PokemonPetProjectile
 	{
