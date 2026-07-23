@@ -586,6 +586,14 @@ Projectiles: {
 	// SlowbroMegaPetProjectile.DisplayName: Slowbro Mega Pet Projectile
 	// AmpharosMegaPetProjectileShiny.DisplayName: Ampharos Mega Pet Projectile Shiny
 	// AmpharosMegaPetProjectile.DisplayName: Ampharos Mega Pet Projectile
+	// VenipedePetProjectile.DisplayName: Venipede Pet Projectile
+	// VenipedePetProjectileShiny.DisplayName: Venipede Pet Projectile Shiny
+	// WhirlipedePetProjectile.DisplayName: Whirlipede Pet Projectile
+	// WhirlipedePetProjectileShiny.DisplayName: Whirlipede Pet Projectile Shiny
+	// ScolipedePetProjectile.DisplayName: Scolipede Pet Projectile
+	// ScolipedePetProjectileShiny.DisplayName: Scolipede Pet Projectile Shiny
+	// ScolipedeMegaPetProjectile.DisplayName: Scolipede Mega Pet Projectile
+	// ScolipedeMegaPetProjectileShiny.DisplayName: Scolipede Mega Pet Projectile Shiny
 }
 
 Items: {
@@ -2623,6 +2631,11 @@ Items: {
 			{1} extra de daño de Pokemon
 			20% de probabilidad de inflingir el debuff Quemadura de hielo
 			'''
+	}
+
+	ScolipedeMegaStoneItem: {
+		// DisplayName: Scolipede Mega Stone Item
+		// Tooltip: ""
 	}
 }
 

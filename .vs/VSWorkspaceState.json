@@ -3,9 +3,13 @@
     "",
     "\\Assets",
     "\\Assets\\Textures",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Common",
     "\\Content",
-    "\\Content\\Pets"
+    "\\Content\\NPCs",
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen1"
   ],
+  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\Gen1\\LickitungCritter.cs",
   "PreviewInSolutionExplorer": false
 }

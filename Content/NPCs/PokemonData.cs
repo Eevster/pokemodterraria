@@ -552,6 +552,7 @@ namespace Pokemod.Content.NPCs
             {"GyaradosMega", new PokemonInfo(0130, [95, 155, 109, 70, 130, 81], [(int)TypeIndex.Water,(int)TypeIndex.Dark], [new MoveLvl("DragonRush")], [(int)EggGroups.NoEggs], 6.5f, 305.0f, (int)StageIndex.Mega, (int)ExpTypes.Slow, artist: "RollinMan")},
             {"DragoniteMega", new PokemonInfo(0149, [91, 124, 115, 145, 125, 100], [(int)TypeIndex.Dragon,(int)TypeIndex.Flying], [new MoveLvl("AirSlash")], [(int)EggGroups.NoEggs], 2.2f, 290.0f, (int)StageIndex.Mega, (int)ExpTypes.Slow, artist: "JACSMITH")},
             {"AmpharosMega", new PokemonInfo(0181, [90, 95, 105, 165, 110, 45], [(int)TypeIndex.Electric, (int)TypeIndex.Dragon], [new MoveLvl("Discharge")], [(int)EggGroups.NoEggs], 1.4f, 61.5f, (int)StageIndex.Mega, (int)ExpTypes.MediumSlow, artist: "Kerpi")},
+            {"ScolipedeMega", new PokemonInfo(0545, [60, 140, 149, 75, 99, 62], [(int)TypeIndex.Bug, (int)TypeIndex.Poison], [new MoveLvl("SludgeBomb")], [(int)EggGroups.NoEggs], 3.2f, 230.5f, (int)StageIndex.Mega, (int)ExpTypes.MediumSlow, artist: "Kerpi")},
 
             //Alolan Regional Forms
             {"AlolanRattata", new PokemonInfo(0019, [30, 56, 35, 25, 35, 72], [(int)TypeIndex.Dark, (int)TypeIndex.Normal], [new MoveLvl("Tackle"), new MoveLvl("Bite", 4), new MoveLvl("QuickAttack", 10), new MoveLvl("HyperFang", 16), new MoveLvl("Crunch", 22), new MoveLvl("IcePunch", 24), new MoveLvl("DoubleEdge", 31)], [(int)EggGroups.Field], 0.3f, 3.8f, (int)StageIndex.Basic, (int)ExpTypes.MediumFast, artist: "JACSMITH")},

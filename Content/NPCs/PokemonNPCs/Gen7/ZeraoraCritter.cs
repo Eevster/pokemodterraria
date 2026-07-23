@@ -27,7 +27,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         {
             if (spawnInfo.Player.ZoneUndergroundDesert)
             {
-                return GetSpawnChance(spawnInfo, SpawnCondition.DesertCave.Chance * 0.00000000000001f);
+                return GetSpawnChance(spawnInfo, SpawnCondition.DesertCave.Chance * 0.0001f);
             }
 
             return 0f;
