@@ -7,16 +7,17 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class LickitungCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 46;
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 46;
 
-		public override int totalFrames => 4;
-		public override int animationSpeed => 5;
-		public override int[] idleStartEnd => [0,0];
-		public override int[] walkStartEnd => [0,3];
-		public override int[] jumpStartEnd => [0,3];
-		public override int[] fallStartEnd => [0,3];
-		public override float catchRate => 190;
+        public override int totalFrames => 24;
+        public override int animationSpeed => 5;
+        public override int[] idleStartEnd => [7, 11];
+        public override int[] walkStartEnd => [12, 19];
+        public override int[] jumpStartEnd => [20, 23];
+        public override int[] fallStartEnd => [21, 22];
+        public override int[] attackStartEnd => [0, 6];
+        public override float catchRate => 190;
 
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
