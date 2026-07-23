@@ -48,7 +48,7 @@ namespace Pokemod.Content.Items.MegaStones
 			if (player.GetModPlayer<PokemonPlayer>().HasMegaStone > 0)
 			{
 				SoundEngine.PlaySound(SoundID.Item6, player.position);
-				player.AddBuff(ModContent.BuffType<MegaEvolution>(), 60 * 60);
+				player.AddBuff(ModContent.BuffType<MegaEvolution>(), 4 * 60 * 60);
 				player.GetModPlayer<PokemonPlayer>().CanMegaEvolve = 2;
 			}
 
