@@ -3,13 +3,12 @@
     "",
     "\\Assets",
     "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites\\Pets",
-    "\\Common",
     "\\Content",
     "\\Content\\NPCs",
-    "\\Content\\NPCs\\PokemonNPCs",
-    "\\Content\\NPCs\\PokemonNPCs\\Gen1"
+    "\\Content\\Pets",
+    "\\Content\\Pets\\ScolipedePet",
+    "\\Content\\Pets\\ScolipedePetMega"
   ],
-  "SelectedNode": "\\Content\\NPCs\\PokemonNPCs\\Gen1\\LickitungCritter.cs",
+  "SelectedNode": "\\Assets\\Textures\\Pokesprites",
   "PreviewInSolutionExplorer": false
 }

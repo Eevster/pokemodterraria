@@ -594,6 +594,12 @@ Projectiles: {
 	// ScolipedePetProjectileShiny.DisplayName: Scolipede Pet Projectile Shiny
 	// ScolipedeMegaPetProjectile.DisplayName: Scolipede Mega Pet Projectile
 	// ScolipedeMegaPetProjectileShiny.DisplayName: Scolipede Mega Pet Projectile Shiny
+	// TerrarianDuosionPetProjectileShiny.DisplayName: Terrarian Duosion Pet Projectile Shiny
+	// TerrarianDuosionPetProjectile.DisplayName: Terrarian Duosion Pet Projectile
+	// TerrarianSolosisPetProjectileShiny.DisplayName: Terrarian Solosis Pet Projectile Shiny
+	// TerrarianSolosisPetProjectile.DisplayName: Terrarian Solosis Pet Projectile
+	// TerrarianReuniclusPetProjectileShiny.DisplayName: Terrarian Reuniclus Pet Projectile Shiny
+	// TerrarianReuniclusPetProjectile.DisplayName: Terrarian Reuniclus Pet Projectile
 }
 
 Items: {
@@ -5807,6 +5813,12 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
+	// TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Critter N P C Shiny
+	// TerrarianSolosisCritterNPC.DisplayName: Terrarian Solosis Critter N P C
+	// TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Critter N P C Shiny
+	// TerrarianReuniclusCritterNPC.DisplayName: Terrarian Reuniclus Critter N P C
+	// TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Critter N P C Shiny
+	// TerrarianDuosionCritterNPC.DisplayName: Terrarian Duosion Critter N P C
 }
 
 Bestiary: {
