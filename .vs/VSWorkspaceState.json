@@ -3,12 +3,12 @@
     "",
     "\\Assets",
     "\\Assets\\Textures",
+    "\\Assets\\Textures\\Pokesprites",
     "\\Content",
     "\\Content\\NPCs",
-    "\\Content\\Pets",
-    "\\Content\\Pets\\ScolipedePet",
-    "\\Content\\Pets\\ScolipedePetMega"
+    "\\Content\\NPCs\\PokemonNPCs",
+    "\\Content\\Pets"
   ],
-  "SelectedNode": "\\Assets\\Textures\\Pokesprites",
+  "SelectedNode": "\\Content\\Pets\\AlolanRaticatePet",
   "PreviewInSolutionExplorer": false
 }
