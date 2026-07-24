@@ -5468,6 +5468,21 @@ NPCs: {
 		Description: Los numerosos ojos de este Pokémon le permiten observar el espacio profundo.
 	}
 
+	TerrarianSolosisCritterNPC: {
+		DisplayName: Solosis de Terraria
+		Description: ""
+	}
+
+	TerrarianDuosionCritterNPC: {
+		DisplayName: Duosion de Terraria
+		Description: ""
+	}
+
+	TerrarianReuniclusCritterNPC: {
+		DisplayName: Reuniclus de Terraria
+		Description: ""
+	}
+
 	AlolanRattataCritterNPC: {
 		DisplayName: Rattata de Alola
 		Description: Sus bigotes son órganos olfativos muy agudos que le permiten localizar el alimento ipso facto, aunque esté oculto.
@@ -5718,6 +5733,9 @@ NPCs: {
 	// TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
 	// TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	// TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
+	// TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Shiny
+	// TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Shiny
+	// TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Shiny
 	// AlolanRaticateCritterNPCShiny.DisplayName: Alolan Raticate Shiny
 	// AlolanRattataCritterNPCShiny.DisplayName: Alolan Rattata Shiny
 	// AlolanDiglettCritterNPCShiny.DisplayName: Alolan Diglett Shiny
@@ -5813,12 +5831,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
-	// TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Critter N P C Shiny
-	// TerrarianSolosisCritterNPC.DisplayName: Terrarian Solosis Critter N P C
-	// TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Critter N P C Shiny
-	// TerrarianReuniclusCritterNPC.DisplayName: Terrarian Reuniclus Critter N P C
-	// TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Critter N P C Shiny
-	// TerrarianDuosionCritterNPC.DisplayName: Terrarian Duosion Critter N P C
 }
 
 Bestiary: {

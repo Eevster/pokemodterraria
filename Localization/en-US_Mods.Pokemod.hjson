@@ -5468,6 +5468,21 @@ NPCs: {
 		Description: This Pokemon's many eyes allow it to peer into deep space.
 	}
 
+	TerrarianSolosisCritterNPC: {
+		DisplayName: Terrarian Solosis
+		Description: ""
+	}
+
+	TerrarianDuosionCritterNPC: {
+		DisplayName: Terrarian Duosion
+		Description: ""
+	}
+
+	TerrarianReuniclusCritterNPC: {
+		DisplayName: Terrarian Reuniclus
+		Description: ""
+	}
+
 	AlolanRattataCritterNPC: {
 		DisplayName: Alolan Rattata
 		Description: Its whiskers provide it with a keen sense of smell, enabling it to pick up the scent of hidden food and locate it instantly.
@@ -5718,6 +5733,9 @@ NPCs: {
 	TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
 	TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
+	TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Shiny
+	TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Shiny
+	TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Shiny
 	AlolanRaticateCritterNPCShiny.DisplayName: Alolan Raticate Shiny
 	AlolanRattataCritterNPCShiny.DisplayName: Alolan Rattata Shiny
 	AlolanDiglettCritterNPCShiny.DisplayName: Alolan Diglett Shiny
@@ -5813,12 +5831,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
 	G1T7_Blaine.DisplayName: Fire-type Gym Leader
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
-	TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Critter N P C Shiny
-	TerrarianSolosisCritterNPC.DisplayName: Terrarian Solosis Critter N P C
-	TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Critter N P C Shiny
-	TerrarianReuniclusCritterNPC.DisplayName: Terrarian Reuniclus Critter N P C
-	TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Critter N P C Shiny
-	TerrarianDuosionCritterNPC.DisplayName: Terrarian Duosion Critter N P C
 }
 
 Bestiary: {

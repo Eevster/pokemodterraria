@@ -23,15 +23,19 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		
 		public override int[][] spawnConditions =>
 		[
-			[(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+			[(int)SpawnArea.Underground, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.UndergroundMushroom, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground);
             base.SetBestiary(database, bestiaryEntry);
         }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
+			if (spawnInfo.Player.ZoneGlowshroom) {
+				return GetSpawnChance(spawnInfo, SpawnCondition.UndergroundMushroom.Chance * 0.2f);
+			}
 			if (spawnInfo.Player.ZoneNormalUnderground) {
 				return GetSpawnChance(spawnInfo, SpawnCondition.Underground.Chance * 0.2f);
 			}

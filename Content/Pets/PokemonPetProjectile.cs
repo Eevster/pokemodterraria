@@ -401,7 +401,7 @@ namespace Pokemod.Content.Pets
 		public void SetPokemonLvl(int lvl, int[] IVs = null, int[] EVs = null, int nature = 0, int happiness = 0){
 			if(pokemonLvl != 0 && pokemonLvl != lvl){
 				//CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile",""), lvl).Value);
-				Main.NewText(Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile",""), lvl).Value, color: Color.Yellow);
+				Main.NewText(Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName"), lvl).Value, color: Color.Yellow);
 			}
 			pokemonLvl = lvl;
 			if(IVs != null) this.IVs = IVs;
@@ -2497,7 +2497,7 @@ namespace Pokemod.Content.Pets
 				//Main.player[Projectile.owner].ClearBuff(PokemonBuff);
 				if(!isEnemy){
 					if(Projectile.owner == Main.myPlayer){
-						Main.NewText(Language.GetText("Mods.Pokemod.PokemonInfo.FaintedMsg").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile","")).Value, 255, 130, 130); 
+						Main.NewText(Language.GetText("Mods.Pokemod.PokemonInfo.FaintedMsg").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName")).Value, 255, 130, 130); 
 					}
 				}
 				else

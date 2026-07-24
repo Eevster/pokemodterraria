@@ -34,7 +34,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneGranite) {
-                return GetSpawnChance(spawnInfo, 0.02f);
+                return GetSpawnChance(spawnInfo, 0.08f);
             }
 
 			return 0f;

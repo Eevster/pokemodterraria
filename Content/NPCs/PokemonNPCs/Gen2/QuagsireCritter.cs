@@ -19,19 +19,28 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackStartEnd => [14, 19];
         public override float catchRate => 180;
 
+		public override int minLevel => 20;
+
+		public override int[][] spawnConditions =>
+		[
+			[(int)SpawnArea.Jungle, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.UndergroundMushroom, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneForest) {
+			if (spawnInfo.Player.ZoneJungle) {
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.01f);
+			}
+			if (spawnInfo.Player.ZoneGlowshroom) {
 				return GetSpawnChance(spawnInfo, SpawnCondition.UndergroundMushroom.Chance * 0.01f);
 			}
 
 			return 0f;
 		}
-
-		
 	}
 
 	public class QuagsireCritterNPCShiny : QuagsireCritterNPC{}
