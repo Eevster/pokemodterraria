@@ -600,6 +600,10 @@ Projectiles: {
 	// TerrarianSolosisPetProjectile.DisplayName: Terrarian Solosis Pet Projectile
 	// TerrarianReuniclusPetProjectileShiny.DisplayName: Terrarian Reuniclus Pet Projectile Shiny
 	// TerrarianReuniclusPetProjectile.DisplayName: Terrarian Reuniclus Pet Projectile
+	// CombeePetProjectile.DisplayName: Combee Pet Projectile
+	// CombeePetProjectileShiny.DisplayName: Combee Pet Projectile Shiny
+	// VespiquenPetProjectile.DisplayName: Vespiquen Pet Projectile
+	// VespiquenPetProjectileShiny.DisplayName: Vespiquen Pet Projectile Shiny
 }
 
 Items: {
@@ -5819,6 +5823,10 @@ NPCs: {
 	// TerrarianReuniclusCritterNPC.DisplayName: Terrarian Reuniclus Critter N P C
 	// TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Critter N P C Shiny
 	// TerrarianDuosionCritterNPC.DisplayName: Terrarian Duosion Critter N P C
+	// VespiquenCritterNPCShiny.DisplayName: Vespiquen Critter N P C Shiny
+	// VespiquenCritterNPC.DisplayName: Vespiquen Critter N P C
+	// CombeeCritterNPCShiny.DisplayName: Combee Critter N P C Shiny
+	// CombeeCritterNPC.DisplayName: Combee Critter N P C
 }
 
 Bestiary: {

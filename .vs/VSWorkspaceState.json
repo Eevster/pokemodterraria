@@ -4,11 +4,12 @@
     "\\Assets",
     "\\Assets\\Textures",
     "\\Assets\\Textures\\Pokesprites",
+    "\\Assets\\Textures\\Pokesprites\\Pets",
     "\\Content",
     "\\Content\\NPCs",
     "\\Content\\NPCs\\PokemonNPCs",
     "\\Content\\Pets"
   ],
-  "SelectedNode": "\\Content\\Pets\\AlolanRaticatePet",
+  "SelectedNode": "\\Assets\\Textures\\Pokesprites\\Pets",
   "PreviewInSolutionExplorer": false
 }

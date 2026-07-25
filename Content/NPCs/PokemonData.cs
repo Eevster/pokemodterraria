@@ -518,7 +518,10 @@ namespace Pokemod.Content.NPCs
             //Gen 4
             {"Cranidos", new PokemonInfo(0408, [67, 125, 40, 30, 30, 58], [(int)TypeIndex.Rock], [new MoveLvl("Tackle"), new MoveLvl("Harden", 8), new MoveLvl("TakeDown", 15), new MoveLvl("Bite", 16), new MoveLvl("Slam", 22), new MoveLvl("AncientPower", 28), new MoveLvl("PsychoCut", 35), new MoveLvl("DoubleEdge", 40), new MoveLvl("Screech", 42), new MoveLvl("StoneEdge", 45)], [(int)EggGroups.Monster], 0.9f, 31.5f, (int)StageIndex.Basic, (int)ExpTypes.Erratic, artist: "Digibeast")},
             {"Rampardos", new PokemonInfo(0409, [97, 165, 60, 65, 50, 58], [(int)TypeIndex.Rock], [new MoveLvl("Crunch"), new MoveLvl("Tackle", 1), new MoveLvl("Harden", 8), new MoveLvl("TakeDown", 15), new MoveLvl("Bite", 16), new MoveLvl("Slam", 22), new MoveLvl("AncientPower", 28), new MoveLvl("PsychoCut", 38), new MoveLvl("DoubleEdge", 46), new MoveLvl("Screech", 51), new MoveLvl("StoneEdge", 54)], [(int)EggGroups.Monster], 1.6f, 102.5f, (int)StageIndex.Stage1, (int)ExpTypes.Erratic, artist: "Digibeast")},
-            
+
+            {"Combee", new PokemonInfo(0415, [30, 30, 42, 30, 42, 70], [(int)TypeIndex.Bug, (int)TypeIndex.Flying], [new MoveLvl("Gust")], [(int)EggGroups.Bug], 0.3f, 5.5f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow, artist: "Gosper Curve")},
+            {"Vespiquen", new PokemonInfo(0416, [70, 80, 102, 80, 102, 40], [(int)TypeIndex.Bug, (int)TypeIndex.Flying], [new MoveLvl("Gust")], [(int)EggGroups.Bug], 1.2f, 38.5f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow, artist: "Gosper Curve")},
+
             {"Magnezone", new PokemonInfo(0462, [70, 70, 115, 130, 90, 60], [(int)TypeIndex.Electric,(int)TypeIndex.Steel], [new MoveLvl("Thunderbolt"), new MoveLvl("Tackle", 1), new MoveLvl("ConfuseRay", 1), new MoveLvl("ThunderWave", 1), new MoveLvl("ElectroBall", 12), new MoveLvl("Swift", 20), new MoveLvl("Screech", 24), new MoveLvl("FlashCannon", 28), new MoveLvl("Discharge", 40), new MoveLvl("Thunder", 52)], [(int)EggGroups.Mineral], 1.2f, 180.0f, (int)StageIndex.Stage2, (int)ExpTypes.MediumFast, artist: "JACSMITH")},
             {"lickilicky", new PokemonInfo(0463, [110, 85, 95, 80, 95, 50], [(int)TypeIndex.Normal], [new MoveLvl("Tackle"), new MoveLvl("DoubleEdge", 25)], [(int)EggGroups.Monster], 1.7f, 140.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast, artist: "Kerpi")},
 
