@@ -600,6 +600,10 @@ Projectiles: {
 	// TerrarianSolosisPetProjectile.DisplayName: Terrarian Solosis Pet Projectile
 	// TerrarianReuniclusPetProjectileShiny.DisplayName: Terrarian Reuniclus Pet Projectile Shiny
 	// TerrarianReuniclusPetProjectile.DisplayName: Terrarian Reuniclus Pet Projectile
+	// VespiquenPetProjectileShiny.DisplayName: Vespiquen Pet Projectile Shiny
+	// VespiquenPetProjectile.DisplayName: Vespiquen Pet Projectile
+	// CombeePetProjectileShiny.DisplayName: Combee Pet Projectile Shiny
+	// CombeePetProjectile.DisplayName: Combee Pet Projectile
 }
 
 Items: {
@@ -5831,6 +5835,10 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
+	// VespiquenCritterNPCShiny.DisplayName: Vespiquen Critter N P C Shiny
+	// VespiquenCritterNPC.DisplayName: Vespiquen Critter N P C
+	// CombeeCritterNPCShiny.DisplayName: Combee Critter N P C Shiny
+	// CombeeCritterNPC.DisplayName: Combee Critter N P C
 }
 
 Bestiary: {
