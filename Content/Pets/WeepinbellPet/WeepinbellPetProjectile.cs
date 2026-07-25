@@ -22,6 +22,9 @@ namespace Pokemod.Content.Pets.WeepinbellPet
 
 		public override string[] evolutions => ["Victreebel"];
         public override string[] itemToEvolve => ["LeafStoneItem"];
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(0,0);
 	}
 
 	public class WeepinbellPetProjectileShiny : WeepinbellPetProjectile{}

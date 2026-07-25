@@ -98,6 +98,7 @@ namespace Pokemod.Content.Pets
 
 		public virtual int hitboxWidth => 0;
 		public virtual int hitboxHeight => 0;
+		public virtual bool hitboxCentered => false;
 
 		public virtual int totalFrames => 0;
 		public virtual int animationSpeed => 5;
@@ -280,6 +281,7 @@ namespace Pokemod.Content.Pets
 			Projectile.width = hitboxWidth;
 			DrawOffsetX = -(pokeTexture.Width() - Projectile.width)/2;
 			Projectile.height = hitboxHeight;
+			//DrawOriginOffsetY = -(pokeTexture.Height()/(totalFrames)-hitboxHeight-4);
 			DrawOriginOffsetY = -(pokeTexture.Height()/(totalFrames)-hitboxHeight-4);
 			Projectile.light = 0f;
 			Projectile.aiStyle = -1; // Use custom AI
@@ -833,7 +835,8 @@ namespace Pokemod.Content.Pets
 					idlePosition = npcOwner.Center;
 				}
 			}
-			idlePosition.Y -= 16-(owner.height-Projectile.height)/2; // Go up 48 coordinates (three tiles from the center of the player)
+			//idlePosition.Y -= 16-(owner.height-Projectile.height)/2; // Go up 48 coordinates (three tiles from the center of the player)
+			idlePosition.Y -= 2-(owner.height-Projectile.height)/2;
 
 			if (!isEnemy)
 			{
@@ -846,12 +849,7 @@ namespace Pokemod.Content.Pets
 			distanceToIdlePosition = vectorToIdlePosition.Length();
 
 			if (Main.myPlayer == owner.whoAmI && !isEnemy && distanceToIdlePosition > 1200f) {
-				// Whenever you deal with non-regular events that change the behavior or position drastically, make sure to only run the code on the owner of the projectile,
-				// and then set netUpdate to true
-				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKFainted") with {Volume = 0.7f}, Projectile.Center);
-				Projectile.position = idlePosition;
-				Projectile.velocity *= 0.1f;
-				Projectile.netUpdate = true;
+				TeleportToPoint(owner, idlePosition);
 			}
 
 			// If your minion is flying, you want to do this independently of any conditions
@@ -877,6 +875,19 @@ namespace Pokemod.Content.Pets
 					}
 				}
 			}*/
+		}
+
+		public virtual void TeleportToPoint(Player owner, Vector2 pointPosition)
+		{
+			// Whenever you deal with non-regular events that change the behavior or position drastically, make sure to only run the code on the owner of the projectile,
+			// and then set netUpdate to true
+			if (Main.myPlayer == owner.whoAmI)
+			{
+				SoundEngine.PlaySound(new SoundStyle($"{nameof(Pokemod)}/Assets/Sounds/PKFainted") with {Volume = 0.7f}, Projectile.Center);
+				Projectile.Center = pointPosition;
+				Projectile.velocity *= 0.1f;
+				Projectile.netUpdate = true;
+			}
 		}
 
 		public virtual void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter, out bool hostilesNearby) {
@@ -1148,10 +1159,20 @@ namespace Pokemod.Content.Pets
 
 						if ((targetCenter - Projectile.Center).Y * directionMod < 0 && -(targetCenter - Projectile.Center).Y * directionMod > Math.Abs((targetCenter - Projectile.Center).X))
 						{
-							if (Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
+							if (Projectile.velocity.Y > -fallLimit && currentStatus != (int)ProjStatus.Jump && currentStatus != (int)ProjStatus.Fall && (!Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) || moveStyle == (int)MovementStyle.Jump) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
 							{
-								currentStatus = (int)ProjStatus.Jump;
-								Projectile.velocity.Y -= (int)Math.Sqrt(2 * 0.3f * Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y), 0, 160));
+								if (Collision.SolidCollision(Projectile.BottomLeft, hitboxWidth, 8, true))
+								{
+									currentStatus = (int)ProjStatus.Jump;
+									if (moveStyle != (int)MovementStyle.Jump)
+									{
+										Projectile.velocity.Y -= (int)Math.Sqrt(2 * 0.3f * Math.Clamp(Math.Abs((targetCenter - Projectile.Center).Y), 0, 160));
+									}
+									else
+									{
+										Projectile.velocity.Y -= maxJumpHeight;
+									}
+								}
 							}
 						}
 					}
@@ -1402,6 +1423,7 @@ namespace Pokemod.Content.Pets
 							Projectile.velocity.X = 0;
 						}
 					}
+					vectorToIdlePosition = toIdlePositionAux;
 				}
 				else
 				{
@@ -1449,7 +1471,7 @@ namespace Pokemod.Content.Pets
 				{
 					if (currentStatus != (int)ProjStatus.Jump && currentStatus != (int)ProjStatus.Fall)
 					{
-						if (Math.Abs(Projectile.velocity.X) > float.Epsilon && Math.Abs(Projectile.velocity.Y) < fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
+						if (Math.Abs(Projectile.velocity.X) > float.Epsilon && Projectile.velocity.Y > -fallLimit && Collision.SolidCollision(Projectile.BottomLeft, hitboxWidth, 8, true) && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
 						{
 							currentStatus = (int)ProjStatus.Jump;
 							Projectile.velocity.Y = -maxJumpHeight;
@@ -1476,10 +1498,31 @@ namespace Pokemod.Content.Pets
 						currentStatus = (int)ProjStatus.Fall;
 					}
 
-					if (moveStyle != (int)MovementStyle.Jump && Projectile.velocity.Y > -fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
+					Vector2 vectorToTargetPoint = foundTarget?(targetCenter-Projectile.Center):vectorToIdlePosition;
+
+					bool canJumpFromBelow = vectorToTargetPoint.Y < -16*maxJumpHeight && Math.Abs(vectorToTargetPoint.X) < 8f;
+					bool canJumpOverHole = Math.Abs(Projectile.velocity.X) > 0 && Math.Abs(Projectile.velocity.X) > 0.7f* speedMultiplier * speed && !Collision.SolidCollision(Projectile.Bottom + new Vector2(hitboxWidth*Math.Sign(Projectile.velocity.X),2), hitboxWidth/2, 16, true) && vectorToTargetPoint.X > 10*Projectile.velocity.X && Math.Abs(vectorToTargetPoint.Y) < 6*16f;
+
+					if(canJumpFromBelow || canJumpOverHole)
 					{
-						if (Collision.SolidCollision(Projectile.BottomLeft, hitboxWidth, 8, true)) TryJump();
-						else TryJump(true);
+						if (currentStatus != (int)ProjStatus.Jump && currentStatus != (int)ProjStatus.Fall)
+						{
+							if (Projectile.velocity.Y > -fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
+							{
+								currentStatus = (int)ProjStatus.Jump;
+								Projectile.velocity.Y -= (int)Math.Sqrt(2 * (Projectile.wet ? 0.5f : 0.3f) * maxJumpHeight * 16f);
+							}
+						}
+					}
+
+					if (moveStyle != (int)MovementStyle.Jump && currentStatus != (int)ProjStatus.Fall && Projectile.velocity.Y > -fallLimit && !Collision.SolidCollision(Projectile.Top - new Vector2(8, 16), 16, 16) && !(statusCondition == (int)StatusConditions.Freeze || statusCondition == (int)StatusConditions.Sleep))
+					{
+						if (Collision.SolidCollision(Projectile.BottomLeft, hitboxWidth, 8, true)){
+							TryJump();
+						}
+						else{
+							TryJump(true);
+						}
 					}
 				}
 			}
@@ -1488,6 +1531,17 @@ namespace Pokemod.Content.Pets
 			{
 				Projectile.tileCollide = true;
 				Projectile.velocity.X *= 0.9f;
+			}
+			else
+			{
+				if(foundTarget){
+					float distanceToTeleport = 2*Math.Clamp(distanceToAttack, 400, 10000);
+					Player owner = Main.player[Projectile.owner];
+					if (Vector2.Distance(Projectile.Center, targetCenter) > distanceToTeleport && Vector2.Distance(Projectile.Center, owner.Center) > distanceToTeleport)
+					{
+						TeleportToPoint(owner, owner.Bottom + new Vector2(0,-2-0.5f*Projectile.height));
+					}
+				}
 			}
 
 			if (!isHeldByPlayer && !(isFlying || isSwimming)){
@@ -2233,7 +2287,7 @@ namespace Pokemod.Content.Pets
         }
 
         public virtual void TryJump(bool clambering = false){
-			int localMaxHeight = clambering ? 1 : maxJumpHeight;
+			int localMaxHeight = clambering ? 2 : maxJumpHeight;
             int checkingRange = (int)Math.Clamp(Math.Abs(Projectile.velocity.X) * Math.Sqrt(2 * localMaxHeight * 16 / fallAccel) / 16, clambering ? 0 : 1, 100);
             //The distance (in tiles) of the largest possible jump at this speed.
 
@@ -2270,7 +2324,7 @@ namespace Pokemod.Content.Pets
                         break;
 					}
 
-					if (Collision.SolidCollision(scanPosition - new Vector2(8, hitboxHeight), hitboxWidth, hitboxHeight) || Main.tile[(int)scanPosition.X / 16, (int)scanPosition.Y / 16].IsHalfBlock)
+					if (Collision.SolidCollision(scanPosition - new Vector2(8, hitboxHeight), hitboxWidth, hitboxHeight) || Main.tile[(int)scanPosition.X / 16, (int)scanPosition.Y / 16].IsHalfBlock || Main.tile[(int)scanPosition.X / 16, (int)scanPosition.Y / 16].Slope != SlopeType.Solid)
 					{
 						jumpHeight += 1f;
 					}

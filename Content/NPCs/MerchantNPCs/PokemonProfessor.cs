@@ -224,6 +224,7 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 		public override void SetChatButtons(ref string button, ref string button2) {
 			button = Language.GetTextValue("LegacyInterface.28");
 			if(!Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().HasStarter) button2 = "Starter Pokemon";
+			else button2 = "Help";
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref string shop) {
@@ -231,6 +232,10 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
                 shop = Shop.Name; // Opens the shop
 			}else{
 				if (!Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().HasStarter) ModContent.GetInstance<StarterPanelUISystem>().ShowMyUI();
+				else
+				{
+					Main.npcChatText = Language.GetTextValue($"Mods.Pokemod.Dialogue.PokemonProfessor.HelpDialogue{Main.rand.Next(5)+1}");
+				}
 			}
 		}
 

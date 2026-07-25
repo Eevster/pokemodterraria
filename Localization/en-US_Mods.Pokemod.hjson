@@ -1425,6 +1425,11 @@ Items: {
 		Tooltip: "{$CommonItemTooltip.MegaStone}"
 	}
 
+	ScolipedeMegaStoneItem: {
+		DisplayName: Scolipite
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
 	TMBug: {
 		DisplayName: TM Bug
 		Tooltip:
@@ -2637,11 +2642,6 @@ Items: {
 			{1} extra Pokemon damage
 			20% chance of inflicting the Frostburn debuff
 			'''
-	}
-
-	ScolipedeMegaStoneItem: {
-		DisplayName: Scolipede Mega Stone Item
-		Tooltip: ""
 	}
 }
 
@@ -5843,6 +5843,11 @@ Dialogue: {
 		StandardDialogue1: Hello there! Welcome to the world of Pokémod! My name is Oak! People call me the Pokémon Prof!
 		StandardDialogue2: For some people, Pokémon are pets. Other use them for fights. Myself… I study Pokémon as a profession.
 		StandardDialogue3: I can give you everything you need to start your journey!
+		HelpDialogue1: The Pokemon you interact with and catch will be recorded in the Pokedex, remember to always carry it with you!
+		HelpDialogue2: Weakening a Pokemon a little before throwing the Poke Ball will increase the chances of catching it.
+		HelpDialogue3: Don't be afraid to help your Pokemon during battle; make sure to improve alongside them!
+		HelpDialogue4: There are many items that will help your Pokemon become stronger. You can start by getting a Trainer's Glove!
+		HelpDialogue5: You can use Repel to stop Pokemon from appearing for a while and let more local creatures show up.
 	}
 
 	FishermanTrainer: {

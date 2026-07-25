@@ -22,6 +22,9 @@ namespace Pokemod.Content.Pets.CleffaPet
 
         public override string[] evolutions => ["Clefairy"];
         public override string[] specialConditionToEvolve => ["Happiness"];
+
+        public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(0,0);
     }
 
 	public class CleffaPetProjectileShiny : CleffaPetProjectile{}

@@ -1425,6 +1425,11 @@ Items: {
 		Tooltip: "{$CommonItemTooltip.MegaStone}"
 	}
 
+	ScolipedeMegaStoneItem: {
+		DisplayName: Scolipedita
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
 	TMBug: {
 		DisplayName: MT Bicho
 		Tooltip:
@@ -2637,11 +2642,6 @@ Items: {
 			{1} extra de daño de Pokemon
 			20% de probabilidad de inflingir el debuff Quemadura de hielo
 			'''
-	}
-
-	ScolipedeMegaStoneItem: {
-		// DisplayName: Scolipede Mega Stone Item
-		// Tooltip: ""
 	}
 }
 
@@ -5843,6 +5843,11 @@ Dialogue: {
 		StandardDialogue1: ¡Hola! ¡Bienvenido al mundo de Pokémod! ¡Me llamo OAK! ¡Pero la gente me llama el Profesor Pokémon!
 		StandardDialogue2: Para algunos, los Pokémon son mascotas. Pero otros los usan para pelear. En cuanto a mí... Estudio a los Pokémon como profesión.
 		StandardDialogue3: ¡Puedo darte todo lo que necesitas para comenzar tu viaje!
+		HelpDialogue1: Los Pokemon con los que interactúes y los que captures quedarán registrados en la Pokedex. ¡Recuerda llevarla siempre contigo!
+		HelpDialogue2: Debilitar un poco a un Pokemon antes de lanzar la Poke Ball aumentará las probabilidades de capturarlo.
+		HelpDialogue3: No dudes en ayudar a tus Pokemon durante la batalla, ¡asegúrate de mejorar junto a ellos!
+		HelpDialogue4: Hay muchos objetos que ayudarán a tus Pokemon a hacerse más fuertes. ¡Puedes empezar consiguiendo un Guante de Entrenador!
+		HelpDialogue5: Puedes usar Repelente para evitar que aparezcan Pokemon durante un tiempo y que aparezcan más criaturas locales.
 	}
 
 	FishermanTrainer: {
