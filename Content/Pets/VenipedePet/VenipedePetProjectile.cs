@@ -9,10 +9,8 @@ namespace Pokemod.Content.Pets.VenipedePet
 {
 	public class VenipedePetProjectile : PokemonPetProjectile
 	{
-        public override int hitboxWidth => 60;
-        public override int hitboxHeight => 44;
-
-
+        public override int hitboxWidth => 32;
+        public override int hitboxHeight => 18;
 
         public override int totalFrames => 36;
         public override int animationSpeed => 5;
@@ -26,7 +24,8 @@ namespace Pokemod.Content.Pets.VenipedePet
 		public override int levelToEvolve => 22;
 		public override int levelEvolutionsNumber => 1;
 
-		
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(0,0);
 	}
 
 	public class VenipedePetProjectileShiny : VenipedePetProjectile{}

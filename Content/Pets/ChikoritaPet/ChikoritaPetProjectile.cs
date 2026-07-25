@@ -23,6 +23,9 @@ namespace Pokemod.Content.Pets.ChikoritaPet
 		public override string[] evolutions => ["Bayleef"];
 		public override int levelToEvolve => 16;
 		public override int levelEvolutionsNumber => 1;
+
+		public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(0,0);
 	}
 
 	public class ChikoritaPetProjectileShiny : ChikoritaPetProjectile{}

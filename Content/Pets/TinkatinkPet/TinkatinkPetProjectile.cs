@@ -23,6 +23,9 @@ namespace Pokemod.Content.Pets.TinkatinkPet
         public override string[] evolutions => ["Tinkatuff"];
 		public override int levelToEvolve => 24;
 		public override int levelEvolutionsNumber => 1;
+
+        public override bool canBeHeld => true;
+        public override Vector2 heldByPlayerPosition => new Vector2(-4,0);
     }
 
 	public class TinkatinkPetProjectileShiny : TinkatinkPetProjectile{}

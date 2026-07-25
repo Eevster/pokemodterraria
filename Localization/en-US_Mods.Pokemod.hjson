@@ -600,10 +600,6 @@ Projectiles: {
 	TerrarianSolosisPetProjectile.DisplayName: Terrarian Solosis Pet Projectile
 	TerrarianReuniclusPetProjectileShiny.DisplayName: Terrarian Reuniclus Pet Projectile Shiny
 	TerrarianReuniclusPetProjectile.DisplayName: Terrarian Reuniclus Pet Projectile
-	CombeePetProjectile.DisplayName: Combee Pet Projectile
-	CombeePetProjectileShiny.DisplayName: Combee Pet Projectile Shiny
-	VespiquenPetProjectile.DisplayName: Vespiquen Pet Projectile
-	VespiquenPetProjectileShiny.DisplayName: Vespiquen Pet Projectile Shiny
 }
 
 Items: {
@@ -1426,6 +1422,11 @@ Items: {
 
 	SlowbroMegaStoneItem: {
 		DisplayName: Slowbronite
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	ScolipedeMegaStoneItem: {
+		DisplayName: Scolipite
 		Tooltip: "{$CommonItemTooltip.MegaStone}"
 	}
 
@@ -2641,11 +2642,6 @@ Items: {
 			{1} extra Pokemon damage
 			20% chance of inflicting the Frostburn debuff
 			'''
-	}
-
-	ScolipedeMegaStoneItem: {
-		DisplayName: Scolipede Mega Stone Item
-		Tooltip: ""
 	}
 }
 
@@ -5472,6 +5468,21 @@ NPCs: {
 		Description: This Pokemon's many eyes allow it to peer into deep space.
 	}
 
+	TerrarianSolosisCritterNPC: {
+		DisplayName: Terrarian Solosis
+		Description: ""
+	}
+
+	TerrarianDuosionCritterNPC: {
+		DisplayName: Terrarian Duosion
+		Description: ""
+	}
+
+	TerrarianReuniclusCritterNPC: {
+		DisplayName: Terrarian Reuniclus
+		Description: ""
+	}
+
 	AlolanRattataCritterNPC: {
 		DisplayName: Alolan Rattata
 		Description: Its whiskers provide it with a keen sense of smell, enabling it to pick up the scent of hidden food and locate it instantly.
@@ -5722,6 +5733,9 @@ NPCs: {
 	TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
 	TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
+	TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Shiny
+	TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Shiny
+	TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Shiny
 	AlolanRaticateCritterNPCShiny.DisplayName: Alolan Raticate Shiny
 	AlolanRattataCritterNPCShiny.DisplayName: Alolan Rattata Shiny
 	AlolanDiglettCritterNPCShiny.DisplayName: Alolan Diglett Shiny
@@ -5817,16 +5831,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
 	G1T7_Blaine.DisplayName: Fire-type Gym Leader
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
-	TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Critter N P C Shiny
-	TerrarianSolosisCritterNPC.DisplayName: Terrarian Solosis Critter N P C
-	TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Critter N P C Shiny
-	TerrarianReuniclusCritterNPC.DisplayName: Terrarian Reuniclus Critter N P C
-	TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Critter N P C Shiny
-	TerrarianDuosionCritterNPC.DisplayName: Terrarian Duosion Critter N P C
-	VespiquenCritterNPCShiny.DisplayName: Vespiquen Critter N P C Shiny
-	VespiquenCritterNPC.DisplayName: Vespiquen Critter N P C
-	CombeeCritterNPCShiny.DisplayName: Combee Critter N P C Shiny
-	CombeeCritterNPC.DisplayName: Combee Critter N P C
 }
 
 Bestiary: {
@@ -5839,6 +5843,11 @@ Dialogue: {
 		StandardDialogue1: Hello there! Welcome to the world of Pokémod! My name is Oak! People call me the Pokémon Prof!
 		StandardDialogue2: For some people, Pokémon are pets. Other use them for fights. Myself… I study Pokémon as a profession.
 		StandardDialogue3: I can give you everything you need to start your journey!
+		HelpDialogue1: The Pokemon you interact with and catch will be recorded in the Pokedex, remember to always carry it with you!
+		HelpDialogue2: Weakening a Pokemon a little before throwing the Poke Ball will increase the chances of catching it.
+		HelpDialogue3: Don't be afraid to help your Pokemon during battle; make sure to improve alongside them!
+		HelpDialogue4: There are many items that will help your Pokemon become stronger. You can start by getting a Trainer's Glove!
+		HelpDialogue5: You can use Repel to stop Pokemon from appearing for a while and let more local creatures show up.
 	}
 
 	FishermanTrainer: {

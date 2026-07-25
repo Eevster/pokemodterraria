@@ -600,10 +600,6 @@ Projectiles: {
 	// TerrarianSolosisPetProjectile.DisplayName: Terrarian Solosis Pet Projectile
 	// TerrarianReuniclusPetProjectileShiny.DisplayName: Terrarian Reuniclus Pet Projectile Shiny
 	// TerrarianReuniclusPetProjectile.DisplayName: Terrarian Reuniclus Pet Projectile
-	// CombeePetProjectile.DisplayName: Combee Pet Projectile
-	// CombeePetProjectileShiny.DisplayName: Combee Pet Projectile Shiny
-	// VespiquenPetProjectile.DisplayName: Vespiquen Pet Projectile
-	// VespiquenPetProjectileShiny.DisplayName: Vespiquen Pet Projectile Shiny
 }
 
 Items: {
@@ -1426,6 +1422,11 @@ Items: {
 
 	SlowbroMegaStoneItem: {
 		DisplayName: Slowbronita
+		Tooltip: "{$CommonItemTooltip.MegaStone}"
+	}
+
+	ScolipedeMegaStoneItem: {
+		DisplayName: Scolipedita
 		Tooltip: "{$CommonItemTooltip.MegaStone}"
 	}
 
@@ -2641,11 +2642,6 @@ Items: {
 			{1} extra de daño de Pokemon
 			20% de probabilidad de inflingir el debuff Quemadura de hielo
 			'''
-	}
-
-	ScolipedeMegaStoneItem: {
-		// DisplayName: Scolipede Mega Stone Item
-		// Tooltip: ""
 	}
 }
 
@@ -5472,6 +5468,21 @@ NPCs: {
 		Description: Los numerosos ojos de este Pokémon le permiten observar el espacio profundo.
 	}
 
+	TerrarianSolosisCritterNPC: {
+		DisplayName: Solosis de Terraria
+		Description: ""
+	}
+
+	TerrarianDuosionCritterNPC: {
+		DisplayName: Duosion de Terraria
+		Description: ""
+	}
+
+	TerrarianReuniclusCritterNPC: {
+		DisplayName: Reuniclus de Terraria
+		Description: ""
+	}
+
 	AlolanRattataCritterNPC: {
 		DisplayName: Rattata de Alola
 		Description: Sus bigotes son órganos olfativos muy agudos que le permiten localizar el alimento ipso facto, aunque esté oculto.
@@ -5722,6 +5733,9 @@ NPCs: {
 	// TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
 	// TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	// TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
+	// TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Shiny
+	// TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Shiny
+	// TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Shiny
 	// AlolanRaticateCritterNPCShiny.DisplayName: Alolan Raticate Shiny
 	// AlolanRattataCritterNPCShiny.DisplayName: Alolan Rattata Shiny
 	// AlolanDiglettCritterNPCShiny.DisplayName: Alolan Diglett Shiny
@@ -5817,16 +5831,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
-	// TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Critter N P C Shiny
-	// TerrarianSolosisCritterNPC.DisplayName: Terrarian Solosis Critter N P C
-	// TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Critter N P C Shiny
-	// TerrarianReuniclusCritterNPC.DisplayName: Terrarian Reuniclus Critter N P C
-	// TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Critter N P C Shiny
-	// TerrarianDuosionCritterNPC.DisplayName: Terrarian Duosion Critter N P C
-	// VespiquenCritterNPCShiny.DisplayName: Vespiquen Critter N P C Shiny
-	// VespiquenCritterNPC.DisplayName: Vespiquen Critter N P C
-	// CombeeCritterNPCShiny.DisplayName: Combee Critter N P C Shiny
-	// CombeeCritterNPC.DisplayName: Combee Critter N P C
 }
 
 Bestiary: {
@@ -5839,6 +5843,11 @@ Dialogue: {
 		StandardDialogue1: ¡Hola! ¡Bienvenido al mundo de Pokémod! ¡Me llamo OAK! ¡Pero la gente me llama el Profesor Pokémon!
 		StandardDialogue2: Para algunos, los Pokémon son mascotas. Pero otros los usan para pelear. En cuanto a mí... Estudio a los Pokémon como profesión.
 		StandardDialogue3: ¡Puedo darte todo lo que necesitas para comenzar tu viaje!
+		HelpDialogue1: Los Pokemon con los que interactúes y los que captures quedarán registrados en la Pokedex. ¡Recuerda llevarla siempre contigo!
+		HelpDialogue2: Debilitar un poco a un Pokemon antes de lanzar la Poke Ball aumentará las probabilidades de capturarlo.
+		HelpDialogue3: No dudes en ayudar a tus Pokemon durante la batalla, ¡asegúrate de mejorar junto a ellos!
+		HelpDialogue4: Hay muchos objetos que ayudarán a tus Pokemon a hacerse más fuertes. ¡Puedes empezar consiguiendo un Guante de Entrenador!
+		HelpDialogue5: Puedes usar Repelente para evitar que aparezcan Pokemon durante un tiempo y que aparezcan más criaturas locales.
 	}
 
 	FishermanTrainer: {
