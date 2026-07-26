@@ -9,8 +9,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class CombeeCritterNPC : PokemonWildNPC
 	{
-        public override int hitboxWidth => 38;
-        public override int hitboxHeight => 30;
+        public override int hitboxWidth => 22;
+        public override int hitboxHeight => 22;
 
         public override int totalFrames => 4;
         public override int animationSpeed => 8;
@@ -23,7 +23,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackFlyStartEnd => [2, 3];
 
         public override float catchRate => 120;
-        
+
+        public override float maleChance => 0.875f;
+
         public override int[][] spawnConditions =>
         [
             [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]

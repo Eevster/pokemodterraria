@@ -24,6 +24,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackSwimStartEnd => [12,17];
 
 		public override int minLevel => 36;
+
+		public override float maleChance => 0.875f;
 		
 		public override int[][] spawnConditions =>
 		[

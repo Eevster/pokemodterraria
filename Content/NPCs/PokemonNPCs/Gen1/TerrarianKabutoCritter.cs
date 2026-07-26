@@ -26,6 +26,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override bool tangible => false;
 
         public override float catchRate => 90;
+
+        public override float maleChance => 0.875f;
         
         public override int[][] spawnConditions =>
         [

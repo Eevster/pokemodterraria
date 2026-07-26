@@ -26,7 +26,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override string[] variants => ["B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "ExclamationMark", "QuestionMark"];
         public override int variantProbDenominator => 2;
-
+		
+		public override float maleChance => -1f;
 		
 		public override int[][] spawnConditions =>
 		[

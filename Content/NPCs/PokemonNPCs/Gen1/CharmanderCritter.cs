@@ -18,6 +18,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackStartEnd => [14,19];
 
 		public override string[] variants => ["Christmas"];
+
+		public override float maleChance => 0.875f;
 		
 		public override int[][] spawnConditions =>
 		[

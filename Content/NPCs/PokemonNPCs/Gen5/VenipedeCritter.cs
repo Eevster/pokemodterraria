@@ -7,11 +7,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class VenipedeCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 60;
-		public override int hitboxHeight => 44;
-
+		public override int hitboxWidth => 32;
+        public override int hitboxHeight => 18;
 		
-
 		public override int totalFrames => 36;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [7,15];

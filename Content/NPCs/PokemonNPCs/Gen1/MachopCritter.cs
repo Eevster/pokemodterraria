@@ -18,6 +18,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [4,4];
 		public override float catchRate => 180;
 
+		public override float maleChance => 0.75f;
+
         public override int[][] spawnConditions =>
         [
             [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]

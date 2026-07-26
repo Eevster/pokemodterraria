@@ -7,11 +7,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class TerrarianSolosisCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 34;
-		public override int hitboxHeight => 32;
-
+		public override int hitboxWidth => 22;
+        public override int hitboxHeight => 18;
 		
-
 		public override int totalFrames => 25;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,7];

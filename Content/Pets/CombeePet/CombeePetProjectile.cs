@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.CombeePet
 {
 	public class CombeePetProjectile : PokemonPetProjectile
 	{
-        public override int hitboxWidth => 38;
-        public override int hitboxHeight => 30;
+        public override int hitboxWidth => 22;
+        public override int hitboxHeight => 22;
 
         public override int totalFrames => 4;
         public override int animationSpeed => 8;
@@ -23,6 +23,7 @@ namespace Pokemod.Content.Pets.CombeePet
         public override int[] attackFlyStartEnd => [2, 3];
 
         public override string[] evolutions => ["Vespiquen"];
+        public override string[] specialConditionToEvolve => ["Female"];
 		public override int levelToEvolve => 21;
 		public override int levelEvolutionsNumber => 1;
 

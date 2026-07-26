@@ -33,6 +33,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 25;
 
+		public override float maleChance => -1f;
+
 		public override int[][] spawnConditions =>
 		[
             [(int)SpawnArea.Beach, (int)DayTimeStatus.All, (int)WeatherStatus.All]

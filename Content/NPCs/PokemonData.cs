@@ -21,6 +21,7 @@ namespace Pokemod.Content.NPCs
         public bool isPokemon = false;
         public string pokemonName = "";
         public bool shiny = false;
+        public int gender = 0; 
         public int lvl;
         public int[] baseStats;
         public int[] IVs = new int[6];
@@ -34,6 +35,7 @@ namespace Pokemod.Content.NPCs
             bitWriter.WriteBit(shiny);
             bitWriter.WriteBit(ultrabeast);
             binaryWriter.Write(pokemonName);
+            binaryWriter.Write(gender);
             binaryWriter.Write(lvl);
             binaryWriter.Write(nature);
             for (int i = 0; i < 6; i++)
@@ -51,6 +53,7 @@ namespace Pokemod.Content.NPCs
             shiny = bitReader.ReadBit();
             ultrabeast = bitReader.ReadBit();
             pokemonName = binaryReader.ReadString();
+            gender = binaryReader.ReadInt32();
             lvl = binaryReader.ReadInt32();
             nature = binaryReader.ReadInt32();
             IVs = [0, 0, 0, 0, 0, 0];
@@ -62,12 +65,13 @@ namespace Pokemod.Content.NPCs
         }
 
 
-        public void SetPokemonNPCData(string pokemonName, bool shiny = false, int lvl = 5, int[] baseStats = null, int[] IVs = null, int nature = -1, bool ultrabeast = false, string variant = "")
+        public void SetPokemonNPCData(string pokemonName, bool shiny = false, int gender = 0, int lvl = 5, int[] baseStats = null, int[] IVs = null, int nature = -1, bool ultrabeast = false, string variant = "")
         {
             isPokemon = true;
             this.pokemonName = pokemonName;
             this.shiny = shiny;
             this.lvl = lvl;
+            this.gender = gender;
             this.baseStats = baseStats;
             this.IVs = IVs;
             if (nature < 0) nature = 10 * Main.rand.Next(5) + Main.rand.Next(5);
@@ -214,6 +218,22 @@ namespace Pokemod.Content.NPCs
 
             return "";
         }
+
+        public static int GetRandomPosibleGender(string pokemonName)
+		{
+			int newGender = 0;
+
+			if (ModContent.TryFind<ModNPC>("Pokemod", pokemonName + "CritterNPC", out var npcBase))
+			{
+				PokemonWildNPC npc = (PokemonWildNPC)npcBase;
+				if(npc is not null && npc.maleChance >= 0)
+				{
+					newGender = Main.rand.NextFloat(0f, 1f) < npc.maleChance ? 1 : 2;
+				}
+			}
+
+			return newGender;
+		}
 
         public static string GetTypeColor(int type)
         {
@@ -519,8 +539,8 @@ namespace Pokemod.Content.NPCs
             {"Cranidos", new PokemonInfo(0408, [67, 125, 40, 30, 30, 58], [(int)TypeIndex.Rock], [new MoveLvl("Tackle"), new MoveLvl("Harden", 8), new MoveLvl("TakeDown", 15), new MoveLvl("Bite", 16), new MoveLvl("Slam", 22), new MoveLvl("AncientPower", 28), new MoveLvl("PsychoCut", 35), new MoveLvl("DoubleEdge", 40), new MoveLvl("Screech", 42), new MoveLvl("StoneEdge", 45)], [(int)EggGroups.Monster], 0.9f, 31.5f, (int)StageIndex.Basic, (int)ExpTypes.Erratic, artist: "Digibeast")},
             {"Rampardos", new PokemonInfo(0409, [97, 165, 60, 65, 50, 58], [(int)TypeIndex.Rock], [new MoveLvl("Crunch"), new MoveLvl("Tackle", 1), new MoveLvl("Harden", 8), new MoveLvl("TakeDown", 15), new MoveLvl("Bite", 16), new MoveLvl("Slam", 22), new MoveLvl("AncientPower", 28), new MoveLvl("PsychoCut", 38), new MoveLvl("DoubleEdge", 46), new MoveLvl("Screech", 51), new MoveLvl("StoneEdge", 54)], [(int)EggGroups.Monster], 1.6f, 102.5f, (int)StageIndex.Stage1, (int)ExpTypes.Erratic, artist: "Digibeast")},
 
-            {"Combee", new PokemonInfo(0415, [30, 30, 42, 30, 42, 70], [(int)TypeIndex.Bug, (int)TypeIndex.Flying], [new MoveLvl("Gust")], [(int)EggGroups.Bug], 0.3f, 5.5f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow, artist: "Gosper Curve")},
-            {"Vespiquen", new PokemonInfo(0416, [70, 80, 102, 80, 102, 40], [(int)TypeIndex.Bug, (int)TypeIndex.Flying], [new MoveLvl("Gust")], [(int)EggGroups.Bug], 1.2f, 38.5f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow, artist: "Gosper Curve")},
+            {"Combee", new PokemonInfo(0415, [30, 30, 42, 30, 42, 70], [(int)TypeIndex.Bug, (int)TypeIndex.Flying], [new MoveLvl("Gust", 1)], [(int)EggGroups.Bug], 0.3f, 5.5f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow, artist: "Gosper Curve")},
+            {"Vespiquen", new PokemonInfo(0416, [70, 80, 102, 80, 102, 40], [(int)TypeIndex.Bug, (int)TypeIndex.Flying], [new MoveLvl("Slash"), new MoveLvl("Gust", 1), new MoveLvl("PoisonSting", 1), new MoveLvl("ConfuseRay", 1), new MoveLvl("FuryCutter", 4), new MoveLvl("PinMissile", 16), new MoveLvl("AirSlash", 28), new MoveLvl("PowerGem", 32), new MoveLvl("Toxic", 36)], [(int)EggGroups.Bug], 1.2f, 38.5f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow, artist: "Gosper Curve")},
 
             {"Magnezone", new PokemonInfo(0462, [70, 70, 115, 130, 90, 60], [(int)TypeIndex.Electric,(int)TypeIndex.Steel], [new MoveLvl("Thunderbolt"), new MoveLvl("Tackle", 1), new MoveLvl("ConfuseRay", 1), new MoveLvl("ThunderWave", 1), new MoveLvl("ElectroBall", 12), new MoveLvl("Swift", 20), new MoveLvl("Screech", 24), new MoveLvl("FlashCannon", 28), new MoveLvl("Discharge", 40), new MoveLvl("Thunder", 52)], [(int)EggGroups.Mineral], 1.2f, 180.0f, (int)StageIndex.Stage2, (int)ExpTypes.MediumFast, artist: "JACSMITH")},
             {"lickilicky", new PokemonInfo(0463, [110, 85, 95, 80, 95, 50], [(int)TypeIndex.Normal], [new MoveLvl("Tackle"), new MoveLvl("DoubleEdge", 25)], [(int)EggGroups.Monster], 1.7f, 140.0f, (int)StageIndex.Stage1, (int)ExpTypes.MediumFast, artist: "Kerpi")},
@@ -784,6 +804,13 @@ namespace Pokemod.Content.NPCs
         Fast,
         Erratic,
         Fluctuating
+    }
+
+    public enum GenderIndex
+    {
+        Unknown,
+        Male,
+        Female
     }
 
     public enum EggGroups

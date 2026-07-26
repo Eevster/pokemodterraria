@@ -7,10 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class WhirlipedeCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 70;
-		public override int hitboxHeight => 48;
-
-		
+		public override int hitboxWidth => 32;
+        public override int hitboxHeight => 32;
 
 		public override int totalFrames => 22;
 		public override int animationSpeed => 5;

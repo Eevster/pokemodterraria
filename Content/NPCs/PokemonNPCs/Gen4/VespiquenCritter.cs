@@ -9,8 +9,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class VespiquenCritterNPC : PokemonWildNPC
 	{
-        public override int hitboxWidth => 46;
-        public override int hitboxHeight => 66;
+        public override int hitboxWidth => 32;
+        public override int hitboxHeight => 58;
 
         public override int totalFrames => 18;
         public override int animationSpeed => 8;
@@ -26,6 +26,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override float catchRate => 45;
         public override int minLevel => 21;
+
+        public override float maleChance => 0f;
         
         public override int[][] spawnConditions =>
         [

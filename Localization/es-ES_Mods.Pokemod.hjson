@@ -5372,6 +5372,16 @@ NPCs: {
 		Description: Su cerebro no ha podido desarrollarse al verse limitado por el espesor de su cráneo, capaz de soportar cualquier golpe.
 	}
 
+	CombeeCritterNPC: {
+		DisplayName: Combee
+		Description: Recolectan miel y la almacenan en su colonia. Por la noche, se apiñan para formar una colmena y dormir.
+	}
+
+	VespiquenCritterNPC: {
+		DisplayName: Vespiquen
+		Description: Si se encuentra en peligro, salen larvas de su panal de seis celdas y emprenden el ataque. Solo hay un único ejemplar por colonia.
+	}
+
 	MagnezoneCritterNPC: {
 		DisplayName: Magnezone
 		Description: Evolucionó por la exposición a un campo magnético especial. Tres unidades generan magnetismo.
@@ -5719,6 +5729,8 @@ NPCs: {
 	// MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	// CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
 	// RampardosCritterNPCShiny.DisplayName: Rampardos Shiny
+	// CombeeCritterNPCShiny.DisplayName: Combee Shiny
+	// VespiquenCritterNPCShiny.DisplayName: Vespiquen Shiny
 	// MagnezoneCritterNPCShiny.DisplayName: Magnezone Shiny
 	// LickilickyCritterNPCShiny.DisplayName: Lickilicky Shiny
 	// VenipedeCritterNPCShiny.DisplayName: Venipede Shiny
@@ -5835,10 +5847,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
-	// VespiquenCritterNPCShiny.DisplayName: Vespiquen Critter N P C Shiny
-	// VespiquenCritterNPC.DisplayName: Vespiquen Critter N P C
-	// CombeeCritterNPCShiny.DisplayName: Combee Critter N P C Shiny
-	// CombeeCritterNPC.DisplayName: Combee Critter N P C
 }
 
 Bestiary: {

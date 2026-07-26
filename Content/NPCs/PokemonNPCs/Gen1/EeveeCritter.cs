@@ -16,6 +16,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] jumpStartEnd => [9,10];
 		public override int[] fallStartEnd => [12,14];
 		public override int[] attackStartEnd => [18,18];
+
+		public override float maleChance => 0.875f;
 		
 		public override int[][] spawnConditions =>
 		[

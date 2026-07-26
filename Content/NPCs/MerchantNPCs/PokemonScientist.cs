@@ -99,7 +99,7 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			NPC.friendly = true; // NPC Will not attack player
 			NPC.width = 18;
 			NPC.height = 40;
-			NPC.aiStyle = 7;
+			NPC.aiStyle = NPCAIStyleID.Passive;
 			NPC.damage = 10;
 			NPC.defense = 15;
 			NPC.lifeMax = 250;
@@ -396,7 +396,7 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
 			{
 				int item = Item.NewItem(entitySource, (int)player.position.X, (int)player.position.Y, player.width, player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
 				CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-				pokeItem.SetPokemonData(sampleItem.pokemonName, Shiny: shiny, BallType: ball.Name, lvl, IVs, nature);
+				pokeItem.SetPokemonData(sampleItem.pokemonName, Shiny: shiny, BallType: ball.Name, level: lvl, IVs: IVs, nature: nature);
 				pokeItem.currentHP = pokeItem.GetPokemonStats()[0];
 				if (ModContent.TryFind<ModProjectile>("Pokemod", ball.Name.Replace("Item", "Proj"), out ModProjectile proj))
 				{

@@ -61,6 +61,9 @@ namespace Pokemod.Content.NPCs
             [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
+		public virtual float maleChance => 0.5f;
+
+		public int gender;
 		public int nature;
 		public bool hostilePokemon;
 		
@@ -77,6 +80,7 @@ namespace Pokemod.Content.NPCs
 			writer.Write(isFlying);
 			writer.Write(isSwimming);
 			writer.Write(variantID);
+			writer.Write(gender);
         }
 
 		public override void ReceiveExtraAI(BinaryReader reader) {
@@ -91,6 +95,7 @@ namespace Pokemod.Content.NPCs
 			isFlying = reader.ReadBoolean();
 			isSwimming = reader.ReadBoolean();
 			variantID = reader.ReadInt32();
+			gender = reader.ReadInt32();
 		}
 
 		public override void SetStaticDefaults() {
@@ -178,7 +183,11 @@ namespace Pokemod.Content.NPCs
 			{
 				variantName = variants[variantID];
 			}
-			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, IVs, nature, variant: variantName);
+			if(maleChance >= 0)
+			{
+				gender = Main.rand.NextFloat(0f, 1f) < maleChance ? 1 : 2;
+			}
+			NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, gender, baseStats, IVs, nature, variant: variantName);
 
 			/*if (Main.netMode == NetmodeID.Server)
 			{
@@ -193,7 +202,6 @@ namespace Pokemod.Content.NPCs
 			NPC.lifeMax = finalStats[0];
 			NPC.life = NPC.lifeMax;
 			NPC.defense = Math.Max(finalStats[2], finalStats[4]);
-
 
 			NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
 
@@ -217,7 +225,7 @@ namespace Pokemod.Content.NPCs
 
         public override void ModifyTypeName(ref string typeName)
         {
-			typeName += " lvl " + lvl;
+			typeName += ((!pokemonName.Contains("Nidoran") && gender != 0)?(gender==1?" ♂":" ♀"):"")+ " lvl " + lvl;
             base.ModifyTypeName(ref typeName);
         }
 

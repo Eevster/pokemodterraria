@@ -24,6 +24,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] attackSwimStartEnd => [14,14];
 
         public override string[] variants => ["SquirtleSquad"];
+
+		public override float maleChance => 0.875f;
 		
 		public override int[][] spawnConditions =>
 		[

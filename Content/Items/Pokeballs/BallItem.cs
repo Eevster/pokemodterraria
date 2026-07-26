@@ -284,6 +284,7 @@ namespace Pokemod.Content.Items.Pokeballs
 				Player player = Main.player[Projectile.owner];
 				int item;
 				string pokemonName = targetPokemon.GetGlobalNPC<PokemonNPCData>().pokemonName;
+				int gender = targetPokemon.GetGlobalNPC<PokemonNPCData>().gender;
 				bool shiny = targetPokemon.GetGlobalNPC<PokemonNPCData>().shiny;
 				int lvl = targetPokemon.GetGlobalNPC<PokemonNPCData>().lvl;
 				int[] IVs = targetPokemon.GetGlobalNPC<PokemonNPCData>().IVs;
@@ -312,7 +313,7 @@ namespace Pokemod.Content.Items.Pokeballs
 				{
 					item = Item.NewItem(targetPokemon.GetSource_Death(), targetPokemon.position, targetPokemon.Size, ModContent.ItemType<CaughtPokemonItem>());
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), lvl, IVs, nature, variant: variant);
+					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), gender, lvl, IVs, nature, variant: variant);
 					pokeItem.currentHP = Math.Max(targetPokemon.life,0);
 					SetExtraPokemonEffects(ref pokeItem);
 				}
@@ -321,7 +322,7 @@ namespace Pokemod.Content.Items.Pokeballs
 					//item = player.QuickSpawnItem(Projectile.InheritSource(Projectile), ModContent.ItemType<CaughtPokemonItem>());
 					item = Item.NewItem(Projectile.InheritSource(Projectile), (int)player.position.X, (int)player.position.Y, player.width, player.height, ModContent.ItemType<CaughtPokemonItem>(), 1, noBroadcast: false, -1);
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
-					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), lvl, IVs, nature, variant: variant);
+					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), gender, lvl, IVs, nature, variant: variant);
 					pokeItem.currentHP = Math.Max(targetPokemonLife,0);
 					SetExtraPokemonEffects(ref pokeItem);
 					NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item, 1f);

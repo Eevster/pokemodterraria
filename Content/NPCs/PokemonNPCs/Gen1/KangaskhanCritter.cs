@@ -18,6 +18,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [0,3];
 		public override float catchRate => 90;
 
+		public override float maleChance => 0f;
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);

@@ -21,6 +21,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackStartEnd => [10, 12];
 
         public override float catchRate => 45;
+
+        public override float maleChance => 0.875f;
         
         public override int[][] spawnConditions =>
         [

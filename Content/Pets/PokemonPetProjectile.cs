@@ -38,6 +38,7 @@ namespace Pokemod.Content.Pets
 		//public int PokemonBuff = 0;
 		private int expGained = 0;
 		public int pokemonLvl;
+		public int gender;
 		private int currentLevelCap;
 
 		public string pokemonName => GetType().Name.Replace("PetProjectile", "").Replace("Shiny", "");
@@ -224,6 +225,7 @@ namespace Pokemod.Content.Pets
 			writer.Write(ballType);
 			writer.Write(Projectile.timeLeft);
 			writer.Write(variant);
+			writer.Write(gender);
 			writer.Write(isHeldByPlayer);
 			writer.Write(pokemonOrder);
 			writer.Write(isMount);
@@ -247,6 +249,7 @@ namespace Pokemod.Content.Pets
 			ballType = reader.ReadString();
 			Projectile.timeLeft = reader.ReadInt32();
 			variant = reader.ReadString();
+			gender = reader.ReadInt32();
 			isHeldByPlayer = reader.ReadBoolean();
 			pokemonOrder = reader.ReadInt32();
 			isMount = reader.ReadBoolean();
@@ -400,7 +403,7 @@ namespace Pokemod.Content.Pets
 			return cooldown;
 		}
 
-		public void SetPokemonLvl(int lvl, int[] IVs = null, int[] EVs = null, int nature = 0, int happiness = 0){
+		public void SetPokemonLvl(int lvl, int[] IVs = null, int[] EVs = null, int nature = 0, int happiness = 0, int gender = 0){
 			if(pokemonLvl != 0 && pokemonLvl != lvl){
 				//CombatText.NewText(Projectile.Hitbox, new Color(255, 255, 255), Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(GetType().Name.Replace("PetProjectileShiny","PetProjectile").Replace("PetProjectile",""), lvl).Value);
 				Main.NewText(Language.GetText("Mods.Pokemod.PokemonInfo.LevelUp").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName"), lvl).Value, color: Color.Yellow);
@@ -410,14 +413,20 @@ namespace Pokemod.Content.Pets
 			if(EVs != null) this.EVs = EVs;
 			this.nature = nature;
 			this.happiness = happiness;
+			this.gender = gender;
 		}
 
 		//Evolution methods
-		public virtual void SetEvolution(){
-			if(canEvolve == -1){
+		public virtual bool SetEvolution(List<int> possibleEvos){
+			if(canEvolve == -1 && possibleEvos.Count > 0){
 				isEvolving = true;
 				evolveTimer = maxEvolveTimer;
+
+				canEvolve = possibleEvos[Main.rand.Next(possibleEvos.Count)];
+				return true;
 			}
+
+			return false;
 		}
 
 		public virtual void SetCanEvolve(){
@@ -431,20 +440,16 @@ namespace Pokemod.Content.Pets
 			if(canEvolve == -1){
 				if(levelEvolutionsNumber>0){
 					if(pokemonLvl >= levelToEvolve){
-						SetEvolution();
-						canEvolve = Main.rand.Next(0,levelEvolutionsNumber);
+						List<int> posibleEvos = Enumerable.Range(0, levelEvolutionsNumber).ToList();
+						posibleEvos.RemoveAll(x => specialConditionToEvolve.Length > x && !CheckEvoSpecialCondition(specialConditionToEvolve[x]));
+						SetEvolution(posibleEvos);
 					}
 				}
-				if(specialConditionToEvolve.Length > 0)
+				if(specialConditionToEvolve.Length > levelEvolutionsNumber + itemToEvolve.Length)
                 {
-                    for(int i = 0; i < specialConditionToEvolve.Length; i++)
-                    {
-                        if (CheckEvoSpecialCondition(specialConditionToEvolve[i]))
-						{
-							SetEvolution();
-							canEvolve = levelEvolutionsNumber + itemToEvolve.Length + i;
-                        }
-                    }
+					List<int> posibleEvos = Enumerable.Range(levelEvolutionsNumber + itemToEvolve.Length, specialConditionToEvolve.Length-(levelEvolutionsNumber + itemToEvolve.Length)).ToList();
+					posibleEvos.RemoveAll(x => specialConditionToEvolve.Length > x && !CheckEvoSpecialCondition(specialConditionToEvolve[x]));
+					SetEvolution(posibleEvos);
                 }
 			}
 		}
@@ -454,9 +459,17 @@ namespace Pokemod.Content.Pets
 			bool met = true;
 			bool conditionChecked = false;
 
+			if(condition == "" || condition == " ") return true;
+
 			if (condition.Contains("Happiness"))
 			{
 				met = met && (happiness >= 160);
+				conditionChecked = true;
+			}
+
+			if (condition.Contains("Female"))
+			{
+				met = met && gender == 2;
 				conditionChecked = true;
 			}
 
@@ -476,13 +489,12 @@ namespace Pokemod.Content.Pets
 
 		public virtual bool UseEvoItem(string itemName){
 			if(itemToEvolve.Length>0){
-				for(int i = 0; i < itemToEvolve.Length; i++){
-					if(itemName == itemToEvolve[i]){
-						SetEvolution();
-						canEvolve = levelEvolutionsNumber+i;
-						itemEvolve = true;
-						return true;
-					}
+				List<int> posibleEvos = Enumerable.Range(levelEvolutionsNumber, itemToEvolve.Length).ToList();
+				posibleEvos.RemoveAll(x => itemName != itemToEvolve[x-levelEvolutionsNumber] || (specialConditionToEvolve.Length > x && !CheckEvoSpecialCondition(specialConditionToEvolve[x])));
+				if(SetEvolution(posibleEvos))
+				{
+					itemEvolve = true;
+					return true;
 				}
 			}
 			return false;

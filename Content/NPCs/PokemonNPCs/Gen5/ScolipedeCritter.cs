@@ -7,10 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class ScolipedeCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 104;
-		public override int hitboxHeight => 94;
-
-		
+		public override int hitboxWidth => 64;
+        public override int hitboxHeight => 60;
 
 		public override int totalFrames => 30;
 		public override int animationSpeed => 5;

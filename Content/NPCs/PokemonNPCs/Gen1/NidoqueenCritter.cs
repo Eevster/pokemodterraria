@@ -20,6 +20,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override int minLevel => 40;
         public override float catchRate => 50;
+
+		public override float maleChance => 0f;
 		
 		public override int[][] spawnConditions =>
 		[

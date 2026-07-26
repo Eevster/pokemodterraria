@@ -84,7 +84,7 @@ namespace Pokemod.Content.NPCs
 			{
 				if (FollowingNPC is not null && FollowingNPC.ModNPC is PokemonWildNPC FollowingPoke)
 				{
-					NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, baseStats, FollowingNPC.GetGlobalNPC<PokemonNPCData>().IVs, nature, variant: FollowingPoke.variants[FollowingPoke.variantID]);
+					NPC.GetGlobalNPC<PokemonNPCData>().SetPokemonNPCData(pokemonName, shiny, lvl, FollowingPoke.gender, baseStats, FollowingNPC.GetGlobalNPC<PokemonNPCData>().IVs, nature, variant: FollowingPoke.variants[FollowingPoke.variantID]);
 
 					NPC.defense = Math.Max(finalStats[2], finalStats[4]);
 

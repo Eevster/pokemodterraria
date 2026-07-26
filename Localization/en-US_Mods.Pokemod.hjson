@@ -5372,6 +5372,16 @@ NPCs: {
 		Description: Its skull withstands impacts of any magnitude. As a result, its brain never gets the chance to grow.
 	}
 
+	CombeeCritterNPC: {
+		DisplayName: Combee
+		Description: They collect and deliver honey to their colony. At night, they cluster to form a beehive and sleep.
+	}
+
+	VespiquenCritterNPC: {
+		DisplayName: Vespiquen
+		Description: When it is in danger, grubs from its six-cell honeycomb strike back. There is only one in a colony.
+	}
+
 	MagnezoneCritterNPC: {
 		DisplayName: Magnezone
 		Description: It evolved from exposure to a special magnetic field. Its three units generate magnetism.
@@ -5719,6 +5729,8 @@ NPCs: {
 	MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
 	RampardosCritterNPCShiny.DisplayName: Rampardos Shiny
+	CombeeCritterNPCShiny.DisplayName: Combee Shiny
+	VespiquenCritterNPCShiny.DisplayName: Vespiquen Shiny
 	MagnezoneCritterNPCShiny.DisplayName: Magnezone Shiny
 	LickilickyCritterNPCShiny.DisplayName: Lickilicky Shiny
 	VenipedeCritterNPCShiny.DisplayName: Venipede Shiny
@@ -5835,10 +5847,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
 	G1T7_Blaine.DisplayName: Fire-type Gym Leader
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
-	VespiquenCritterNPCShiny.DisplayName: Vespiquen Critter N P C Shiny
-	VespiquenCritterNPC.DisplayName: Vespiquen Critter N P C
-	CombeeCritterNPCShiny.DisplayName: Combee Critter N P C Shiny
-	CombeeCritterNPC.DisplayName: Combee Critter N P C
 }
 
 Bestiary: {

@@ -23,6 +23,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] walkSwimStartEnd => [6,11];
 		public override int[] attackSwimStartEnd => [12,12];
 
+		public override float maleChance => 0.875f;
+
 		public override int[][] spawnConditions =>
 		[
 			[(int)SpawnArea.Beach, (int)DayTimeStatus.Day, (int)WeatherStatus.All]

@@ -19,6 +19,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override int minLevel => 32;
         public override string[] variants => ["Halloween"];
+
+		public override float maleChance => 0.875f;
 		
 		public override int[][] spawnConditions =>
 		[

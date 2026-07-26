@@ -630,7 +630,7 @@ namespace Pokemod.Common.Players
 
 				if(mouseOverPokemon != null)
 				{
-					string PokemonInfo = Language.GetTextValue("Mods.Pokemod.NPCs." + mouseOverPokemon.pokemonName + "CritterNPC.DisplayName") + " Lvl " + mouseOverPokemon.pokemonLvl;
+					string PokemonInfo = Language.GetTextValue("Mods.Pokemod.NPCs." + mouseOverPokemon.pokemonName + "CritterNPC.DisplayName") + ((!mouseOverPokemon.pokemonName.Contains("Nidoran") && mouseOverPokemon.gender != 0)?(mouseOverPokemon.gender==1?" ♂":" ♀"):"") + " Lvl " + mouseOverPokemon.pokemonLvl;
 
 					if(Vector2.Distance(mouseOverPokemon.Projectile.Center, Player.Center) <= distanceToInteract && mouseOverPokemon.currentStatus != (int)PokemonPetProjectile.ProjStatus.Attack && !mouseOverPokemon.dynamax)
 					{

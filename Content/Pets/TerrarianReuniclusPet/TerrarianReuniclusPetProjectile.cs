@@ -9,10 +9,8 @@ namespace Pokemod.Content.Pets.TerrarianReuniclusPet
 {
 	public class TerrarianReuniclusPetProjectile : PokemonPetProjectile
 	{
-        public override int hitboxWidth => 94;
-        public override int hitboxHeight => 84;
-
-
+        public override int hitboxWidth => 62;
+        public override int hitboxHeight => 54;
 
         public override int totalFrames => 26;
         public override int animationSpeed => 5;
@@ -21,12 +19,6 @@ namespace Pokemod.Content.Pets.TerrarianReuniclusPet
         public override int[] jumpStartEnd => [21, 25];
         public override int[] fallStartEnd => [24, 24];
         public override int[] attackStartEnd => [15, 21];
-
-
-
-
-
-
     }
 
 	public class TerrarianReuniclusPetProjectileShiny : TerrarianReuniclusPetProjectile { }

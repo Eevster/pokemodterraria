@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.DoduoPet
 {
 	public class FlaaffyPetProjectile : PokemonPetProjectile
 	{
-        public override int hitboxWidth => 62;
-		public override int hitboxHeight => 58;
+        public override int hitboxWidth => 22;
+		public override int hitboxHeight => 36;
 
 		public override int totalFrames => 33;
 		public override int animationSpeed => 5;

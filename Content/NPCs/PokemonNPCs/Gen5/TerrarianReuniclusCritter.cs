@@ -7,10 +7,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class TerrarianReuniclusCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 94;
-		public override int hitboxHeight => 84;
-
-		
+		public override int hitboxWidth => 62;
+        public override int hitboxHeight => 54;
 
 		public override int totalFrames => 26;
 		public override int animationSpeed => 5;

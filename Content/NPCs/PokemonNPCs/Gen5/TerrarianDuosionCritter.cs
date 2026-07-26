@@ -7,11 +7,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class TerrarianDuosionCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 35;
-		public override int hitboxHeight => 59;
-
+		public override int hitboxWidth => 28;
+        public override int hitboxHeight => 36;
 		
-
 		public override int totalFrames => 22;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,6];

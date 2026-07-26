@@ -9,10 +9,8 @@ namespace Pokemod.Content.Pets.WhirlipedePet
 {
 	public class TerrarianDuosionPetProjectile : PokemonPetProjectile
 	{
-        public override int hitboxWidth => 70;
-        public override int hitboxHeight => 48;
-
-
+        public override int hitboxWidth => 28;
+        public override int hitboxHeight => 36;
 
         public override int totalFrames => 22;
         public override int animationSpeed => 5;
@@ -25,8 +23,6 @@ namespace Pokemod.Content.Pets.WhirlipedePet
         public override string[] evolutions => ["TerrarianReuniclus"];
 		public override int levelToEvolve => 41;
 		public override int levelEvolutionsNumber => 1;
-
-		
 	}
 
 	public class TerrarianDuosionPetProjectileShiny : TerrarianDuosionPetProjectile { }

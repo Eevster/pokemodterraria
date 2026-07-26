@@ -144,7 +144,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 				Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.NextPokemonCommon").WithFormatArgs(NPC.FullName, PokemonProj.pokemonName).Value, 237, 206, 2);
 			}
 			
-			PokemonProj?.SetPokemonLvl(pokemonTeam[0].level, pokemonTeam[0].IVs, pokemonTeam[0].EVs, pokemonTeam[0].nature, pokemonTeam[0].happiness);
+			PokemonProj?.SetPokemonLvl(pokemonTeam[0].level, pokemonTeam[0].IVs, pokemonTeam[0].EVs, pokemonTeam[0].nature, pokemonTeam[0].happiness, pokemonTeam[0].gender);
 			PokemonProj?.SetAsEnemyPokemon(NPC, pokemonTeam[0].moveSet);
 		}
 
@@ -260,6 +260,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 		public int[] EVs;
 		public int nature;
 		public int happiness;
+		public int gender;
 
         public EnemyPokemonInfo(string name, int level)
         {
@@ -270,6 +271,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			EVs = [0,0,0,0,0,0];
 			nature = 10 * Main.rand.Next(5) + Main.rand.Next(5);
 			happiness = 100;
+			gender = PokemonNPCData.GetRandomPosibleGender(name);
         }
 
 		public EnemyPokemonInfo(string name, int level, string[] moveSet)
@@ -281,6 +283,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			EVs = [0,0,0,0,0,0];
 			nature = 10 * Main.rand.Next(5) + Main.rand.Next(5);
 			happiness = 100;
+			gender = PokemonNPCData.GetRandomPosibleGender(name);
         }
 
 		public EnemyPokemonInfo(string name, int level, int[] IVs, int[] EVs, int nature, int happiness)
@@ -292,6 +295,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			this.EVs = EVs;
 			this.nature = nature;
 			this.happiness = happiness;
+			gender = PokemonNPCData.GetRandomPosibleGender(name);
         }
 
 		public EnemyPokemonInfo(string name, int level, string[] moveSet, int[] IVs, int[] EVs, int nature, int happiness)
@@ -303,6 +307,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			this.EVs = EVs;
 			this.nature = nature;
 			this.happiness = happiness;
+			gender = PokemonNPCData.GetRandomPosibleGender(name);
         }
 
 		private string[] GetPokemonMoves(string PokemonName, int level)

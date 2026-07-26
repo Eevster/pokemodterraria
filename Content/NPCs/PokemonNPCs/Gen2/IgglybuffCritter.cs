@@ -19,6 +19,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackStartEnd => [16, 19];
         public override float catchRate => 180;
 
+		public override float maleChance => 0.25f;
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);

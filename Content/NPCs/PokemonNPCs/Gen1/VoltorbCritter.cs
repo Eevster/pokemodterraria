@@ -23,6 +23,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override bool canRotate => true;
 		public override float catchRate => 190;
 
+		public override float maleChance => -1f;
+
 		public override int[][] spawnConditions =>
 		[
             [(int)SpawnArea.Marble, (int)DayTimeStatus.All, (int)WeatherStatus.All]

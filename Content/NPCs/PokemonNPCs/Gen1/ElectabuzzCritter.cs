@@ -21,6 +21,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override int minLevel => 30;
 
+		public override float maleChance => 0.75f;
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) 
 		{ 

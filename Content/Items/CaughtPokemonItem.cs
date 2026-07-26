@@ -32,6 +32,7 @@ namespace Pokemod.Content.Items
 		public string CurrentTrainerID;
         public string PokemonName;
 		public string PokemonNick;
+		public int gender;
 
         public int level;
 		public int exp;
@@ -84,6 +85,7 @@ namespace Pokemod.Content.Items
         public override void NetSend(BinaryWriter writer) {
 			writer.Write(PokemonName ?? "");
 			writer.Write(PokemonNick ?? "");
+			writer.Write(gender);
 			writer.Write(Shiny);
 			writer.Write(variant ?? "");
 			writer.Write(BallType ?? "");
@@ -111,6 +113,7 @@ namespace Pokemod.Content.Items
 		public override void NetReceive(BinaryReader reader) {
 			PokemonName = reader.ReadString();
 			PokemonNick = reader.ReadString();
+			gender = reader.ReadInt32();
 			Shiny = reader.ReadBoolean();
 			variant = reader.ReadString();
 			BallType = reader.ReadString();
@@ -205,7 +208,7 @@ namespace Pokemod.Content.Items
 			{
 				if (line.Mod == "Terraria" && line.Name == "ItemName")
 				{
-					line.Text = Language.GetTextValue("Mods.Pokemod.NPCs." + PokemonName + "CritterNPC.DisplayName");
+					line.Text = Language.GetTextValue("Mods.Pokemod.NPCs." + PokemonName + "CritterNPC.DisplayName") + ((!PokemonName.Contains("Nidoran") && gender != 0)?(gender==1?" ♂":" ♀"):"");
 					if (Shiny) line.OverrideColor = Main.DiscoColor;
 				}
 				if (line.Mod == "Terraria" && line.Name == "Tooltip0")
@@ -282,11 +285,13 @@ namespace Pokemod.Content.Items
 			return typeString;
 		}
 
-        public void SetPokemonData(string PokemonName, bool Shiny, string BallType, int level = 5, int[] IVs = null, int nature = -1, string variant = ""){
-            this.PokemonName = PokemonName;
+		public void SetPokemonData(string PokemonName, bool Shiny, string BallType, int level = 5, int gender = -1, int[] IVs = null, int nature = -1, string variant = "")
+		{
+			this.PokemonName = PokemonName;
 			this.Shiny = Shiny;
 			this.BallType = BallType;
 			this.level = level;
+			this.gender = (gender < 0)?PokemonNPCData.GetRandomPosibleGender(PokemonName):gender;
 			this.exp = GetExpToLevel(level);
 			if(IVs != null){
 				this.IVs = IVs;
@@ -298,7 +303,7 @@ namespace Pokemod.Content.Items
 			
 			SetPetInfo();
 			GetPokemonMoves(notLearn: true); // Pokemon caught in the wild shouldn't prompt the player to choose between moves. 
-        }
+		}
 
 		public int[] GetPokemonStats(Player player = null){
 			return PokemonNPCData.CalcAllStats(player != null?player.GetModPlayer<PokemonPlayer>().GetClampedLevel(level):level, PokemonData.pokemonInfo[PokemonName].pokemonStats, IVs, EVs, nature);
@@ -517,6 +522,23 @@ namespace Pokemod.Content.Items
 			if (!notLearn) toLearnMoves = learningMoves.ToArray();
 		}
 
+		private void GetPokemonEvolutionMoves()
+		{
+			List<MoveLvl> newMoveList = PokemonData.pokemonInfo[PokemonName].movePool.Where(x => x.levelToLearn == 0).ToList();
+
+			if (newMoveList.Count > 0)
+			{
+				List<string> newToLearnMoves = toLearnMoves.ToList();
+				foreach (MoveLvl move in newMoveList)
+				{
+					if (move.levelToLearn == 0) {
+						newToLearnMoves.Add(move.moveName);
+					}
+				}
+				toLearnMoves = newToLearnMoves.ToArray();
+			}
+		}
+
 		private void GetPokemonLvlMoves(int lvl)
 		{
 			List<MoveLvl> newMoveList = PokemonData.pokemonInfo[PokemonName].movePool.ToList();
@@ -586,7 +608,7 @@ namespace Pokemod.Content.Items
 					UnlockBestiary(PokemonName);
 					RegisterPokemon(player);
 
-					GetPokemonMoves(); //When evolving the player can choose from any evolution moves (Learned at level "0") or any move learned at the current level.
+					if(!didMegaEvolve) GetPokemonEvolutionMoves(); //When evolving the player can choose from any evolution moves (Learned at level "0") or any move learned at the current level.
 					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 					if (player != null)
 					{
@@ -653,7 +675,7 @@ namespace Pokemod.Content.Items
 					proj.Kill();
 					PokemonName = newPokemonName;
 					RegisterPokemon(player);
-					if (!didMegaEvolve) GetPokemonMoves(); //Like any evolution or level up, a pokemon should only ever get this opportunity once (previously it could theoretically re-learn a move from mega evolving if it somehow removed it and had less than 4 moves).
+					if (!didMegaEvolve) GetPokemonEvolutionMoves(); //Like any evolution or level up, a pokemon should only ever get this opportunity once (previously it could theoretically re-learn a move from mega evolving if it somehow removed it and had less than 4 moves).
 					didMegaEvolve = true;
 					Item.shoot = ModContent.Find<ModProjectile>("Pokemod", PokemonName+(Shiny?"PetProjectileShiny":"PetProjectile")).Type;
 					if (player != null)
@@ -701,7 +723,7 @@ namespace Pokemod.Content.Items
 					if(level > 0){
 						PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
 						if(PokemonProj != null){
-							PokemonProj.SetPokemonLvl(level, IVs, EVs, nature, happiness);
+							PokemonProj.SetPokemonLvl(level, IVs, EVs, nature, happiness, gender);
 							if(canEvolve){
 								PokemonProj.SetCanEvolve();
 							}
@@ -782,7 +804,7 @@ namespace Pokemod.Content.Items
 			Player player = Main.LocalPlayer;
 			if (player == Main.player[Item.playerIndexTheItemIsReservedFor]) {
 				Color typeColor = ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor(PokemonData.pokemonAttacks[move].attackType));
-                Main.NewText(Language.GetText("Mods.Pokemod.MoveLearnUI.Success").WithFormatArgs(PokemonName, Language.GetTextValue($"Mods.Pokemod.Projectiles.{move}.DisplayName")).ToString(), color: typeColor);
+                Main.NewText(Language.GetText("Mods.Pokemod.MoveLearnUI.Success").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + PokemonName + "CritterNPC.DisplayName"), Language.GetTextValue($"Mods.Pokemod.Projectiles.{move}.DisplayName")).ToString(), color: typeColor);
 				
 				Vector2 effectPosition = proj != null && proj.active ? proj.Center : player.Center;
 
@@ -823,6 +845,7 @@ namespace Pokemod.Content.Items
 			tag["CurrentTrainerID"] = CurrentTrainerID;
 			tag["PokemonName"] = PokemonName;
 			tag["PokemonNick"] = PokemonNick;
+			tag["Gender"] = gender;
 			tag["Level"] = level;
 			tag["Exp"] = exp;
 			tag["Shiny"] = Shiny;
@@ -843,11 +866,16 @@ namespace Pokemod.Content.Items
 			CurrentTrainerID = tag.GetString("CurrentTrainerID");
 			PokemonName = tag.GetString("PokemonName");
 			PokemonNick = tag.GetString("PokemonNick");
+			if(tag.TryGet("Gender", out int genderAux)){
+				gender = genderAux;
+			}else{
+				gender = PokemonNPCData.GetRandomPosibleGender(PokemonName);
+			}
 			level = tag.GetInt("Level");
 			exp = tag.GetInt("Exp");
 			Shiny = tag.GetBool("Shiny");
 			variant = tag.GetString("Variant");
-			if(tag.TryGet<int>("Nature", out int natureAux)){
+			if(tag.TryGet("Nature", out int natureAux)){
 				nature = natureAux;
 			}else{
 				nature = 10*Main.rand.Next(5)+Main.rand.Next(5);
@@ -997,7 +1025,7 @@ namespace Pokemod.Content.Items
 
 		public bool ComparePokemon(CaughtPokemonItem other){
 			if(OriginalTrainerID == other.OriginalTrainerID && CurrentTrainerID == other.CurrentTrainerID
-			&& PokemonName == other.PokemonName && PokemonNick == other.PokemonNick && exp == other.exp
+			&& PokemonName == other.PokemonName && PokemonNick == other.PokemonNick && gender == other.gender && exp == other.exp
 			&& nature == other.nature && EVs == other.EVs && Shiny == other.Shiny && variant == other.variant
 			&& BallType == other.BallType){
 				return true;
