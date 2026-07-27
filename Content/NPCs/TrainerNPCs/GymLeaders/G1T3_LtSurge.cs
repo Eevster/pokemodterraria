@@ -20,7 +20,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 			pokemonTeam =
             [
                 new EnemyPokemonInfo("Voltorb", 21, ["ShockWave", "Tackle", "Screech", "SonicBoom"]),
-                new EnemyPokemonInfo("Pikachu", 18, ["ShockWave", "Thunderwave", "QuickAttack", "DoubleTeam"]),
+                new EnemyPokemonInfo("Pikachu", 18, ["ShockWave", "ThunderWave", "QuickAttack", "DoubleTeam"]),
                 new EnemyPokemonInfo("Raichu", 24, ["Thunderbolt", "QuickAttack", "ElectroBall", "Discharge"]),
             ];
 		}

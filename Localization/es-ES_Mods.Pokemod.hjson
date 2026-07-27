@@ -2647,6 +2647,26 @@ Items: {
 			20% de probabilidad de inflingir el debuff Quemadura de hielo
 			'''
 	}
+
+	SafetyVest: {
+		DisplayName: Chaleco de seguridad
+		Tooltip:
+			'''
+			Aumenta la Defensa y la Defensa Especial de tu pokemon en un 15%
+			Cuando tu pokemon activo queda con 20% de HP o menos regresa a su pokeball
+			Tu pokemon emite algo de luz
+			'''
+	}
+
+	ReinforcedBand: {
+		DisplayName: Cinta reforzada
+		Tooltip:
+			'''
+			Aumenta el daño de los movimientos de contacto en un 10%
+			Restaura una parte del daño infligido con movimientos de contacto
+			Cuando tu pokemon recibe daño por contacto, devuelve parte del daño al atacante
+			'''
+	}
 }
 
 Buffs: {
@@ -5983,6 +6003,7 @@ PokemonInfo: {
 	CaughtInBy: Capturado en una {0} por {1}
 	LevelUp: "{0} subió al nivel {1}"
 	FaintedMsg: ¡Tu {0} se debilitó!
+	EjectedMsg: ¡Tu {0} regresó a su pokeball!
 	ItemUse: Para usar el objeto haz clic sobre tu pokemon o haz clic derecho en su pokeball
 	ItemActiveUse: Para usar el objeto haz clic sobre tu pokemon activo
 	ItemNoActiveUse: Para usar el objeto haz clic derecho en la pokeball de uno de tus pokemon

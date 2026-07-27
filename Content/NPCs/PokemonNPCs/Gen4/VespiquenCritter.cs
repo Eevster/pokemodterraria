@@ -44,7 +44,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         {
             if (spawnInfo.Player.ZoneJungle)
             {
-                return GetSpawnChance(spawnInfo, 0.4f);
+                return GetSpawnChance(spawnInfo, 0.01f);
             }
 
             return 0f;

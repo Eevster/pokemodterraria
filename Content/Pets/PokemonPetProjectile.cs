@@ -2555,6 +2555,7 @@ namespace Pokemod.Content.Pets
 
 			if(currentHp <= 0.2f*finalStats[0] && !isEnemy && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasEjectButton > 0)
 			{
+				Main.NewText(Language.GetText("Mods.Pokemod.PokemonInfo.EjectedMsg").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName")).Value, 245, 197, 39); 
 				Projectile.Kill();
 			}
 

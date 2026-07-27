@@ -2647,6 +2647,26 @@ Items: {
 			20% chance of inflicting the Frostburn debuff
 			'''
 	}
+
+	SafetyVest: {
+		DisplayName: Safety Vest
+		Tooltip:
+			'''
+			Increases your Pokemon's Defense and Special Defense by 15%
+			When your active pokemon has 20% HP or less, it returns to its pokeball
+			Your pokemon emit some light
+			'''
+	}
+
+	ReinforcedBand: {
+		DisplayName: Reinforced Band
+		Tooltip:
+			'''
+			Increases the damage of contact moves by 10%
+			Heals a percentage of the damage dealt with contact moves
+			When your pokemon takes contact damage, it returns damage to the attacker
+			'''
+	}
 }
 
 Buffs: {
@@ -5983,6 +6003,7 @@ PokemonInfo: {
 	CaughtInBy: Caught in a {0} by {1}
 	LevelUp: "{0} grew to lvl {1}"
 	FaintedMsg: Your {0} fainted!
+	EjectedMsg: Your {0} returned to its pokeball!
 	ItemUse: To use it, click on your pokemon or right click on the corresponding pokeball
 	ItemActiveUse: To use it, click on your active pokemon
 	ItemNoActiveUse: To use it, right click on the corresponding pokeball
