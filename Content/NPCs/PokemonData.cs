@@ -679,7 +679,7 @@ namespace Pokemod.Content.NPCs
             {"FireBlast", new PokemonAttackInfo(110,40,60,800f,true,true,(int)TypeIndex.Fire, true)},
             {"FirePunch", new PokemonAttackInfo(75,20,60,400f,false,false,(int)TypeIndex.Fire, contact: true)},
             {"Flamethrower", new PokemonAttackInfo(90,40,80,300f,true,false,(int)TypeIndex.Fire, true)},
-            {"FlameWheel", new PokemonAttackInfo(60,60,60,500f,false,false,(int)TypeIndex.Fire, contact: true)},
+            {"FlameWheel", new PokemonAttackInfo(60,60,60,400f,false,false,(int)TypeIndex.Fire, contact: true)},
             {"FlashCannon", new PokemonAttackInfo(80,40,60,800f,false,true,(int)TypeIndex.Steel, true)},
             {"FocusPunch", new PokemonAttackInfo(150,90,60,600f,false,false,(int)TypeIndex.Fighting, contact: true)},
             {"FuryCutter", new PokemonAttackInfo(40,42,40,250f,false,false,(int)TypeIndex.Bug, contact: true)},
@@ -751,7 +751,7 @@ namespace Pokemod.Content.NPCs
             {"Waterfall", new PokemonAttackInfo(80,42,60,600f,false,true,(int)TypeIndex.Water, contact: true)},
             {"WaterGun", new PokemonAttackInfo(40,30,40,600f,false,false,(int)TypeIndex.Water, true)},
             {"WaterPulse", new PokemonAttackInfo(60,40,60,800f,false,true,(int)TypeIndex.Water, true)},
-            {"WingAttack", new PokemonAttackInfo(60,40,60,600f,false,false,(int)TypeIndex.Flying, contact: true)},
+            {"WingAttack", new PokemonAttackInfo(60,40,60,500f,false,false,(int)TypeIndex.Flying, contact: true)},
         };
 
         public static string SetMoveTooltip(CaughtPokemonItem pokemon, string moveName)

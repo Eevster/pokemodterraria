@@ -19,6 +19,11 @@ namespace Pokemod.Content.Items.Accessories
 			player.GetModPlayer<PokemonPlayer>().HasLuminousMoss = 3;
 		}
 
+		public override void UpdateVanity(Player player)
+        {
+            player.GetModPlayer<PokemonPlayer>().HasLuminousMoss = 3;
+        }
+
 		public override void AddRecipes()
 		{
 			CreateRecipe()
