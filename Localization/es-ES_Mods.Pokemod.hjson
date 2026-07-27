@@ -604,6 +604,8 @@ Projectiles: {
 	// VespiquenPetProjectile.DisplayName: Vespiquen Pet Projectile
 	// CombeePetProjectileShiny.DisplayName: Combee Pet Projectile Shiny
 	// CombeePetProjectile.DisplayName: Combee Pet Projectile
+	SeedBomb.DisplayName: Bomba germen
+	FlameCharge.DisplayName: Nitrocarga
 }
 
 Items: {

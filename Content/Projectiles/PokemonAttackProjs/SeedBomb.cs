@@ -9,20 +9,20 @@ using Pokemod.Content.NPCs.PokemonNPCs;
 using Pokemod.Content.Pets;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-    public class LeechSeed : PokemonAttack
+    public class SeedBomb : PokemonAttack
     {
         public override void SetDefaults()
         {
-
             Projectile.timeLeft = 150;
 
-            Projectile.width = 12;
-            Projectile.height = 12;
+            Projectile.width = 24;
+            Projectile.height = 24;
 
             Projectile.friendly = true;
             Projectile.hostile = false;
@@ -86,7 +86,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                             }
                             shootVelocity.Y -= timeToTarget * 0.35f;
 
-                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, shootVelocity, ModContent.ProjectileType<LeechSeed>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
+                            pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, shootVelocity, ModContent.ProjectileType<SeedBomb>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
                             SoundEngine.PlaySound(SoundID.Item5, pokemon.position);
                             pokemonOwner.remainAttacks--;
 							break;
@@ -94,6 +94,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     }
                 }
             }
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            Projectile.damage = (int)(Projectile.damage*0.33f);
+            base.OnSpawn(source);
         }
 
         public override void AI()
@@ -110,7 +116,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 Projectile.rotation = Projectile.velocity.ToRotation() - MathHelper.PiOver4;
             }
 
-            Dust.NewDust(Projectile.Center - 0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.DirtSpray, 0, 0, default, default, 0.5f);
+            DustTrail();
 
             if (Projectile.owner == Main.myPlayer)
             {
@@ -118,36 +124,61 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             }
         }
 
-        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width = 6;
-            height = 6;
-            fallThrough = true;
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
-
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (target.CanBeChasedBy())
-            {
-                target.AddBuff(ModContent.BuffType<LeechSeedDebuff>(), 5*60);
-                target.GetGlobalNPC<LeechSeedGlobalNPC>().targetPlayer = Main.player[Projectile.owner];
-            }
+            DustBomb(Projectile.velocity, target.Center);
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<LeechSeedDebuff>(), 5*60);
-            target.GetModPlayer<LeechSeedPlayer>().targetPlayer = Main.player[Projectile.owner];
+            DustBomb(Projectile.velocity, target.Center);
             base.OnHitPlayer(target, info);
+        }
+
+        public override void OnHitPokemonPet(PokemonPetProjectile target, int damageDone)
+        {
+            DustBomb(Projectile.velocity, target.Projectile.Center);
+            base.OnHitPokemonPet(target, damageDone);
+        }
+
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+			width = 6;
+			height = 6;
+			fallThrough = true;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity)
+		{
+			DustBomb(oldVelocity, Projectile.Center);
+			base.OnTileCollide(oldVelocity);
+			return true;
+		}
+
+        private void DustTrail()
+        {
+            Dust.NewDust(Projectile.Center, 0, 0, DustID.Sluggy, Scale: 1f);
+            if (Main.rand.NextBool(10))
+            {
+                SoundEngine.PlaySound(SoundID.SplashWeak with { Volume = 0.3f}, Projectile.position);
+            }
+        }
+
+        private void DustBomb(Vector2 velocity, Vector2 targetPosition)
+        {   
+            for (int i = 0; i < 20; i++)
+			{
+				Dust.NewDust(Projectile.Center - 0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.Sluggy, Main.rand.Next(-2, 3), Main.rand.Next(-2, 3), default, default, 1.5f);
+                Dust.NewDust(targetPosition - 0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.Sluggy, Main.rand.Next(-2, 3) + velocity.X * 0.1f, Main.rand.Next(-2, 3) + velocity.Y * 0.1f, default, default, 1f);
+            }
         }
 
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Grass, Projectile.position);
+            SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
             base.OnKill(timeLeft);
         }
-
     }
 }

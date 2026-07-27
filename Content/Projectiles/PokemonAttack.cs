@@ -176,13 +176,16 @@ namespace Pokemod.Content.Projectiles
 
 		public virtual void AfterHitTarget(Entity target, int damageDone)
 		{
-			if (Trainer.HasShellBell > 0 && !healed)
+			if (target is not NPC || (target is NPC targetNPC && targetNPC.CanBeChasedBy()))
 			{
-				if(pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj)
+				if (Trainer.HasShellBell > 0 && !healed && PokemonData.pokemonAttacks.ContainsKey(GetType().Name.Replace("_Front", "")) && PokemonData.pokemonAttacks[GetType().Name.Replace("_Front", "")].contact)
 				{
-					if(!pokemonPetProj.isEnemy) HealEffect(pokemonPetProj, (int)(damageDone*0.1f), true);
+					if(pokemonProj.ModProjectile is PokemonPetProjectile pokemonPetProj)
+					{
+						if(!pokemonPetProj.isEnemy) HealEffect(pokemonPetProj, (int)(damageDone*0.1f), true);
+					}
+					healed = true;
 				}
-				healed = true;
 			}
 		}
 
