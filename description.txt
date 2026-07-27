@@ -11,69 +11,222 @@ External Credits:
 Pokesprite: Icons Gen 1-8
 MBCMechachu: Icons Gen 9 
 
-Changelog 1.3:
--Shiny Starters now appear on starter selection
--New Moves
--Harden Buffs Defense
--Mint Plants
--Many Halloween Forms
--New Pokemon
--The Pokedex (Subject to change)!
--Changed Nidoking and Gengar's Shinies
--Professor Oak is now a town npc
--Fossil System!
--Scientist NPC
--"Learn Moves By Level" system is now partially implemented
--Level Cap config
--Partial Trainer Suit implementation (Will have more of a use next update)
+Pokemod v1.4
 
-Changelog 1.3.1:
--Dratini Line
--Umbreon and Espeon
--Fixed Armor Recipes
--Fixes with Vine Whip
--EXP is now correctly divided between Pokemon
--Fixed Move Swapping Bug
--Decreases Ice Shard knockback
--Pokemon Items now have a HP Bar in the description
 
-Changelog 1.3.2:
--Fixed Fossil revival not working in multiplayer (hopefully)
--Fixed Gyarados "WaterFall" misspelling
--Improved damage of Dragon Breath
--Reduced saturations for some fossil types
--Mints bug fixed + polish
--1 exp bug fixed
--Splash range increased
--Redesign of the evolution stone armor sets
--Nerfed trainer glove recipe
--Fixed hp regen bug
--Many TM System Edits + Focus Punch Fix
+Update Summary:
+You can now battle npc trainers.
+You can now battle Gym Leaders.
+The Move Tutor NPC has arrived.
+Prototype Dynamax system
+Mega stones are now crafted instead of purchased. 
+New varieties of trainer gloves.
+New type-boosting accessories.
+Heaps of new Pokemon.
+A bunch of new moves.
+Various bug fixes.
+Genders
+New Behaviors
+Pokemon Loot Drops
+Status Conditions
+Mounts
+Carry Pokemon
 
--TMs:
---TMs now hold one specific move and drop from specific enemies.
---There are now TMs for every Type but fairy (Totalling 36).
---Type-grouped TMs can still exist as they are in player's inventories but will no longer spawn in the world or from enemies. (These could be re-introduced in some way maybe if they were re-named)
 
--Move Learn UI updated and more stable:
---Will no longer close if the close button is clicked immediately on opening
---Will no longer close when opening or closing the inventory.
---Layout adjusted slightly.
---UI window can now be grabbed from anywhere that isn't a button.
---Button for Confirming move choice is now more clear.
---Tooltips now appear, providing some stats to compare moves.
---Move Learning is now accompanied by audio-visual feedback and a notification.
+Detailed Change Log:
+Systems:
+Added Trainer Battles.
+Added Dynamaxing with the Dynamax Band item. Functions similarly to the mega cuff. Still in early stages of development. 
+New Move Tutor NPC
+Arrives in town after a pokemon forgets a move.
+Can teach a pokemon moves it has forgotten, for a small fee.
+Added a config option for stat scaling to help make Pokemod compatible with other mods such as Calamity.
+Small Pokemon can now be picked up.
+Some big Pokemon can now be ridden.
+Basic implementation of status conditions
+Some Pokemon now have loot drops
+Some Pokemon now use Vanilla Worm like behavior.
+Gender Implementation
 
--Focus Punch now works
+Items:
+Added the Dynamax Band (8 Hallowed Bars)
+Improvements to the trainer glove which now buffs pokemon attacks when used.
+New Trainer glove varieties:
+Blue Trainer Glove (7 silk, 7 flinx fur, 5 water candles)
+Green Trainer Glove (7 silk, 7 jungle spores, 5 bee wax)
+Red Trainer Glove (7 silk, 7 hellstone, 5 obsidian)
+Great Trainer Glove (7 silk, 5 demonite/crimtane bars)
+Hyper Trainer Glove (7 silk, 5 bones, 5 gold/platinum bars)
+New Accessories:
+Added Type Gems, accessories that boost attacks of their given type (drops from Pokemon)
+Tera Gem boosts all pokemon damage (crafted from one of each other gem).
+Added several similar accessories, each boosting damage of a certain type:
+Black Belt was edited (3 Fighting Gems and a Water Candle)
+Black Glasses, (3 Dark Gems, 1 Water Candle)
+Charcoal, (3 Fire Gems, 1 Water Candle)
+Dragon Fang, (3 Dragon Gems, 1 Water Candle)
+Fairy Feather, (3 Fairy Gems, 1 Water Candle)
+Hard Stone, (3 Rock Gems, 1 Water Candle)
+Magnet, (3 Electric Gems, 1 Water Candle)
+Metal Coat, (3 Steel Gems, 1 Water Candle)
+Miracle Seed, (3 Grass Gems, 1 Water Candle)
+Mystic Water, (3 Water Gems, 1 Water Candle)
+Never Melt Ice, (3 Ice Gems, 1 Water Candle)
+Poison Barb, (3 Poison Gems, 1 Water Candle)
+Sharp Beak, (3 Flying Gems, 1 Water Candle)
+Silk Scarf, (3 Normal Gems, 1 Water Candle)
+Silver Powder, (3 Bug Gems, 1 Water Candle)
+Soft Sand, (3 Ground Gems, 1 Water Candle)
+Spell Tag, (3 Ghost Gems, 1 Water Candle)
+Twisted Spoon, (3 Psychic Gems, 1 Water Candle)
+Big Root, (3 Vines, 10 Mushroom Roots, 3 Bottled Honey)
+Muscle Band (5 Hellstone Bars, 10 Soul of Night, 10 Soul of Light)
+Shell Bell (15 Seashells, 5 Chains)
+TMs are refunded if the move is not learned.
+Mega stone changes:
+Added Mega Shards (Found in meteor craters and mined with a cobalt pick or better)
+Mega stones are no longer sold by Prof Oak, but are now crafted using mega shards, type gems, and various hardmode souls (Night, Flight, Might, etc).
+The key stone crafting recipe also now uses mega shards instead of a white pearl. 
+Added skull fossil for reviving Cranidos (found among primordial fossil blocks)
 
--Fixed the Gender Symbol on Shiny Nidoran
 
--Fixing outlines and improving sprites
+Pokemon:
+New Pokemon:
+Porygon
+Cranidos
+Rampardos
+Meowth
+Persian
+Cleffa
+Clefairy
+Clefable
+Krabby
+Kingler
+Dragonite
+Staryu
+Starmie
+Mawile
+Spearow
+Fearow
+Zubat
+Golbat
+Sudowoodo
+Igglybuff
+Jigglypuff
+Wigglytuff
+Sandshrew
+Sandslash
+Magnezone
+Delibird
+Mareep
+Flaaffy
+Ampharos
+Tentacool
+Hoppip
+Jumpluff
+Skiploom
+Vulpix
+Bagon
+Shelgon
+Wooper
+Quagsire
+Venipede
+Whirlipede
+Scolipede
+Tinkatink
+Tinkatuff
+Tinkaton
+Sentret
+Furret
+Alolan Rattata
+Alolan Raticate
+Hisuian Voltorb
+Hisuian Electrode
+Terrarian Solosis
+Terrarian Duosion
+Terrarian Reuniclus
+Combee
+Vespiquen
+Zeraora (Can now spawn, happy late BDay Rah!)
+Mega Evolutions:
+Mega Dragonite
+Mega Victreebel
+Mega Scolipede
+Mega Ampharos
+Mega Slowbronite
+Several tweaks to existing pokemon sprites.
+Gave more water pokemon the ability to swim.
+Improvements to Pokemon movement and navigation.
 
--Added move names to TM names, Changed Move Learn button to red.
+Moves:
+New Moves:
+Normal
+Rapid Spin
+Extreme Speed
+Recover
+Screech
+Sonic Boom
+Super Sonic
+Double Team
+Take Down
+Fire
+Fire Punch
+Flame Charge
+Water
+Aqua Tail
+Grass
+Energy Ball
+Leech seed
+Absorb
+Seed Bomb
+Electric
+Shock Wave
+Thunder Punch
+Ice
+Aurora Beam
+Ice Punch
+Flying
+Hurricane 
+Fighting
 
--Captured Pokémon no longer can have less than 0 HP when fainted during capture
--The number by which the experience received was divided increased each time the same Pokemon was summoned again, this is now fixed.
+
+Ground
+Bonemerang
+Bone Rush
+Rock
+Power Gem
+Psychic
+Cosmic Power
+Amnesia
+Agility
+Future Sight
+Dragon
+Dragon Tail
+Dark
+Poison
+Acid
+Acid Armor
+Sludge
+Poison Tail
+Edited movesets for:
+Squirtle, Wartortle, Blastoise
+Paras, Parasect
+Psyduck, Golduck
+Gyarados
+Dratini, Dragonair, Dragonite
+Totodile, Croconaw, Feraligatr
+Kadabra, Alakazam
+Healing moves now work on Pokemon.
+
+Bug Fixes:
+Added some missing pokedex entries.
+Fixed a multiplayer bug where some pokemon became invisible. 
+Fixed a multiplayer bug where variant pokemon wouldn’t appear.
+Fixed Pokemon getting stuck on half-blocks and flickering on slopes.
+Corrected the stat formula (IVs no longer have double the effect)
+Pokemon can now correctly land critical hits.
+
+
 
 Legal:
 This mod is inspired by the Pokémon franchise and aims to bring Pokémon-like mechanics to Terraria. 
