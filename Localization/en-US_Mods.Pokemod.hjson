@@ -606,6 +606,8 @@ Projectiles: {
 	CombeePetProjectile.DisplayName: Combee Pet Projectile
 	SeedBomb.DisplayName: Seed Bomb
 	FlameCharge.DisplayName: Flame Charge
+	LickilickyPetProjectileShiny.DisplayName: Lickilicky Pet Projectile Shiny
+	LickilickyPetProjectile.DisplayName: Lickilicky Pet Projectile
 }
 
 Items: {
@@ -5432,6 +5434,21 @@ NPCs: {
 	ScolipedeMegaCritterNPC: {
 		DisplayName: Mega Scolipede
 		Description: Its deadly venom gives off a faint glow. The venom affects Scolipede's mind, honing its viciousness.
+	}
+
+	SolosisCritterNPC: {
+		DisplayName: Solosis
+		Description: ""
+	}
+
+	DuosionCritterNPC: {
+		DisplayName: Duosion
+		Description: ""
+	}
+
+	ReuniclusCritterNPC: {
+		DisplayName: Reuniclus
+		Description: ""
 	}
 
 	JoltikCritterNPC: {
