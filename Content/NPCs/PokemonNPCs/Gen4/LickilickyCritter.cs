@@ -5,18 +5,18 @@ using Pokemod.Common.Configs;
 
 namespace Pokemod.Content.NPCs.PokemonNPCs
 {
-	public class LickitungCritterNPC : PokemonWildNPC
+	public class LickilickyCritterNPC : PokemonWildNPC
 	{
-        public override int hitboxWidth => 28;
-        public override int hitboxHeight => 36;
+        public override int hitboxWidth => 40;
+        public override int hitboxHeight => 52;
 
-        public override int totalFrames => 24;
+        public override int totalFrames => 31;
         public override int animationSpeed => 5;
-        public override int[] idleStartEnd => [7, 11];
-        public override int[] walkStartEnd => [12, 19];
-        public override int[] jumpStartEnd => [20, 23];
-        public override int[] fallStartEnd => [21, 22];
-        public override int[] attackStartEnd => [0, 6];
+        public override int[] idleStartEnd => [8, 23];
+        public override int[] walkStartEnd => [27, 30];
+        public override int[] jumpStartEnd => [24, 26];
+        public override int[] fallStartEnd => [24, 24];
+        public override int[] attackStartEnd => [0, 7];
         public override float catchRate => 190;
 
 
@@ -34,5 +34,5 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		
 	}
 
-	public class LickitungCritterNPCShiny : LickitungCritterNPC{}
+	public class LickilickyCritterNPCShiny : LickilickyCritterNPC{}
 }

@@ -19,6 +19,10 @@ namespace Pokemod.Content.Pets.LickitungPet
 		public override int[] jumpStartEnd => [20,23];
 		public override int[] fallStartEnd => [21,22];
         public override int[] attackStartEnd => [0, 6];
+
+		public override string[] evolutions => ["Lickilicky"];
+		public override int levelToEvolve => 24;
+		public override int levelEvolutionsNumber => 1;
     }
 
 	public class LickitungPetProjectileShiny : LickitungPetProjectile{}

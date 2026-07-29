@@ -22,13 +22,18 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float maleChance => 0.25f;
 
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
+
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-				if (spawnInfo.Player.ZoneForest) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.2f);
+			if (spawnInfo.Player.ZoneForest) {
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.05f);
 			}
 
 			return 0f;

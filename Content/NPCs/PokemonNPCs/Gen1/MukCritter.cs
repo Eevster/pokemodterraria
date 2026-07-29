@@ -22,13 +22,11 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneDungeon) {
-					return GetSpawnChance(spawnInfo, SpawnCondition.DungeonNormal.Chance * 0.3f);
-			}
+			if (spawnInfo.Player.ZoneDungeon) {
+				return GetSpawnChance(spawnInfo, SpawnCondition.DungeonNormal.Chance * 0.3f);
 			}
 
 			return 0f;

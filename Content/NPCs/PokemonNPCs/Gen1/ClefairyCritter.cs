@@ -21,6 +21,11 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float maleChance => 0.25f;
 
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.Surface, (int)DayTimeStatus.Night, (int)WeatherStatus.All]
+        ];
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);

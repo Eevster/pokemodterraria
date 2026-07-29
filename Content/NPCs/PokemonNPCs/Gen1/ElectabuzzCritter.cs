@@ -32,7 +32,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
 				if (spawnInfo.Player.ZoneForest) {
 					return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
-			}
+				}
 			}
 
 			return 0f;
