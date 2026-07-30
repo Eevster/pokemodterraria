@@ -2353,7 +2353,7 @@ Items: {
 	}
 
 	SuperRod: {
-		Tooltip: ""
+		Tooltip: Permite pescar pokemon aun más fuertes
 		DisplayName: Supercaña
 	}
 

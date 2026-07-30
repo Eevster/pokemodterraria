@@ -21,8 +21,7 @@ namespace Pokemod.Content.Pets.ClefairyPet
         public override int[] attackStartEnd => [12, 15];
 
         public override string[] evolutions => ["Clefable"];
-		public override int levelToEvolve => 20;
-		public override int levelEvolutionsNumber => 1;
+        public override string[] itemToEvolve => ["MoonStoneItem"];
 	}
 
 	public class ClefairyPetProjectileShiny : ClefairyPetProjectile{}
