@@ -51,7 +51,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(pokemon.owner == Main.myPlayer){
 				for(int i = 0; i < pokemonOwner.nAttackProjs; i++){
 					if(pokemonOwner.attackProjs[i] == null){
-						SoundEngine.PlaySound(SoundID.Item6 with {Volume = 0.5f}, pokemon.position);
+						//SoundEngine.PlaySound(SoundID.Item6 with {Pitch = -0.2f, Volume = 0.3f}, pokemon.position);
 						pokemonOwner.attackProjs[i] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), targetCenter, Vector2.Zero, ModContent.ProjectileType<Confusion>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner)];
 						pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
 						pokemonOwner.timer = pokemonOwner.attackDuration;
@@ -109,6 +109,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 				}else if(Trainer.targetNPC != null){
 					targetEnemy = Trainer.targetNPC;
 				}
+			}
+
+			if(--Projectile.frameCounter <= 0)
+			{
+				SoundEngine.PlaySound(SoundID.Item130 with {Pitch = 0.5f, Volume = 0.6f}, Projectile.position);
+				Projectile.frameCounter = 30;
 			}
 
 			if(Projectile.timeLeft < 20){
