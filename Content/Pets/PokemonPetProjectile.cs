@@ -58,6 +58,8 @@ namespace Pokemod.Content.Pets
         public int currentHp = 0;
 		public string variant = "";
         public bool showHp;
+
+		public bool shouldReturnToPokeball;
 		
 		//Stats mods
 		public float[] statMods = [1,1,1,1,1,1,1]; //[attack, def, spatk, spdef, speed, accuracy, evasion]
@@ -2553,10 +2555,10 @@ namespace Pokemod.Content.Pets
 
             CombatText.NewText(Projectile.Hitbox, new Color(R,G,B), dmg);
 
-			if(currentHp <= 0.2f*finalStats[0] && !isEnemy && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasEjectButton > 0)
+			if(currentHp <= 0.2f*finalStats[0] && currentHp > 0 && !isEnemy && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().HasEjectButton > 0)
 			{
-				Main.NewText(Language.GetText("Mods.Pokemod.PokemonInfo.EjectedMsg").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName")).Value, 245, 197, 39); 
-				Projectile.Kill();
+				Main.NewText(Language.GetText("Mods.Pokemod.PokemonInfo.EjectedMsg").WithFormatArgs(Language.GetTextValue("Mods.Pokemod.NPCs." + pokemonName + "CritterNPC.DisplayName")).Value, 245, 197, 39);
+				shouldReturnToPokeball = true;
 			}
 
             if (currentHp <= 0) {

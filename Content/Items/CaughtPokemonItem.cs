@@ -309,6 +309,19 @@ namespace Pokemod.Content.Items
 			return PokemonNPCData.CalcAllStats(player != null?player.GetModPlayer<PokemonPlayer>().GetClampedLevel(level):level, PokemonData.pokemonInfo[PokemonName].pokemonStats, IVs, EVs, nature);
 		}
 
+		public bool CheckPokemonFainted(Player player = null)
+		{
+			if(proj != null){
+				PokemonPetProjectile pokemonProj = SafeGetPokemonProj(proj);
+				if((currentHP == 0 || (pokemonProj != null && pokemonProj.shouldReturnToPokeball)) && proj.active){
+					DespawnPokemon();
+					return true;
+				}
+			}
+
+			return false;
+		}
+
         public override void UpdateInventory(Player player)
         {
 			if(OriginalTrainerID == null || OriginalTrainerID == "") OriginalTrainerID = player.GetModPlayer<PokemonPlayer>()?.TrainerID;
@@ -326,12 +339,7 @@ namespace Pokemod.Content.Items
 			{
 				GetProjInfo(player);
 			}
-			if(proj != null){
-				if(currentHP == 0 && proj.active){
-					proj?.Kill();
-					proj = null;
-				}
-			}
+			CheckPokemonFainted(player);
 
 			SetPetInfo(player);
 
@@ -372,12 +380,8 @@ namespace Pokemod.Content.Items
 						if(ball.PokemonName != null && ball.PokemonName != ""){
 							ball.GetProjInfo(player);
 						}
-						if(ball.proj != null){
-							if(ball.currentHP == 0 && ball.proj.active){
-								ball.proj?.Kill();
-								ball.proj = null;
-							}
-						}
+						ball.CheckPokemonFainted(player);
+
 						ball.SetPetInfo(player);
 						ball.shouldDespawn = despawnTime;
 						if (Main.netMode != NetmodeID.SinglePlayer && ball.proj != null) ball.proj.timeLeft = 10;
@@ -390,12 +394,7 @@ namespace Pokemod.Content.Items
 				if(PokemonName != null && PokemonName != ""){
 					GetProjInfo(player);
 				}
-				if(proj != null){
-					if(currentHP == 0 && proj.active){
-						proj?.Kill();
-						proj = null;
-					}
-				}
+				CheckPokemonFainted(player);
 				SetPetInfo(player);
 			}
 
