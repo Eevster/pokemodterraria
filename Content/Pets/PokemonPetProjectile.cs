@@ -74,6 +74,8 @@ namespace Pokemod.Content.Pets
 
 		public int isConfused = 0;
 		public int isSeeded = 0;
+		
+		public bool isCharged;
 
 		//Manual control
 		public bool manualControl;
@@ -385,6 +387,12 @@ namespace Pokemod.Content.Pets
 			{
 				var trainer = Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>();
 
+				//Charge effect
+				if(isCharged && power != 0){
+					power *= 2;
+					isCharged = false;
+				}
+
 				//Stab
 				multiplier *= PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains(attackType)?(1f+trainer.stabAdd):1f;
 				//TypeMult
@@ -394,6 +402,12 @@ namespace Pokemod.Content.Pets
 			}
 			else
 			{
+				//Charge effect
+				if(isCharged && power != 0){
+					power *= 2;
+					isCharged = false;
+				}
+
 				//Stab
 				multiplier *= PokemonData.pokemonInfo[pokemonName].pokemonTypes.Contains(attackType)?1.5f:1f;
 			}

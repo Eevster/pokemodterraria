@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 
 namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
-	public class Thunderbolt : PokemonAttack
+	public class ThunderShock : PokemonAttack
 	{
         public override bool CanExistIfNotActualMove => false;
 		public override void SetStaticDefaults()
@@ -24,7 +24,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         
         public override void Load()
         { 
-            chainTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/ThunderboltChain");
+            chainTexture = ModContent.Request<Texture2D>("Pokemod/Content/Projectiles/PokemonAttackProjs/ThunderShockChain");
         }
 
         public override void Unload()
@@ -34,8 +34,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
 		public override void SetDefaults()
         {
-            Projectile.width = 96;
-            Projectile.height = 96;
+            Projectile.width = 48;
+            Projectile.height = 48;
 
             Projectile.friendly = true;
             Projectile.hostile = false;
@@ -59,7 +59,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			pokemonOwner.currentStatus = (int)PokemonPetProjectile.ProjStatus.Attack;
 			SoundEngine.PlaySound(SoundID.Item94, pokemon.position);
 			if(pokemon.owner == Main.myPlayer){
-				pokemonOwner.attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<Thunderbolt>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner, targetCenter.X, targetCenter.Y)];
+				pokemonOwner.attackProjs[0] = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(pokemon), pokemon.Center, Vector2.Zero, ModContent.ProjectileType<ThunderShock>(), pokemonOwner.GetPokemonAttackDamage(GetType().Name), 2f, pokemon.owner, targetCenter.X, targetCenter.Y)];
 			}
 			pokemonOwner.timer = pokemonOwner.attackDuration;
 			pokemonOwner.canAttack = false;
@@ -152,15 +152,15 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
 			// "Hit anything between the player and the tip of the sword"
 			// shootSpeed is 2.1f for reference, so this is basically plotting 12 pixels ahead from the center
-			Vector2 start = Projectile.Center + new Vector2(48,0);
-			Vector2 end = Projectile.Center - new Vector2(48,0);
+			Vector2 start = Projectile.Center + new Vector2(24,0);
+			Vector2 end = Projectile.Center - new Vector2(24,0);
 			float collisionPoint = 0f; // Don't need that variable, but required as parameter
 
 			if(!foundTarget){
-				return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 96f, ref collisionPoint);
+				return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 48f, ref collisionPoint);
 			}else{
                 if(targetEnemy != null) targetPosition = targetEnemy.Center;
-				return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 96f, ref collisionPoint) ||
+				return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 48f, ref collisionPoint) ||
 					Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, targetPosition, 32f, ref collisionPoint);
 			}
 		}

@@ -17,6 +17,21 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 {
     public class SeedBomb : PokemonAttack
     {
+        const int explosionSize = 96;
+        bool exploded = false;
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(exploded);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            exploded = reader.ReadBoolean();
+            base.ReceiveExtraAI(reader);
+        }
+
         public override void SetDefaults()
         {
             Projectile.timeLeft = 150;
@@ -31,9 +46,17 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             Projectile.penetrate = 1;
 
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 20;
+            Projectile.localNPCHitCooldown = 10;
             base.SetDefaults();
         }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            if(exploded) return false;
+
+            return base.PreDraw(ref lightColor);
+        }
+
 
         public override void Attack(Projectile pokemon, float distanceFromTarget, Vector2 targetCenter)
         {
@@ -105,7 +128,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override void AI()
         {
             //Gravity
-            Projectile.velocity.Y += 0.7f;
+            if(!exploded)Projectile.velocity.Y += 0.7f;
+            
             if (Projectile.velocity.Y > 20f)
             {
                 Projectile.velocity.Y = 20f;
@@ -153,8 +177,17 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         public override bool OnTileCollide(Vector2 oldVelocity)
 		{
 			DustBomb(oldVelocity, Projectile.Center);
-			base.OnTileCollide(oldVelocity);
-			return true;
+			return false;
+		}
+
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
+            float colliderSize = exploded?explosionSize:Projectile.width;
+
+			Vector2 start = Projectile.Center + new Vector2(colliderSize*0.5f,0);
+			Vector2 end = Projectile.Center - new Vector2(colliderSize*0.5f,0);
+			float collisionPoint = 0f;
+
+			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, colliderSize, ref collisionPoint);
 		}
 
         private void DustTrail()
@@ -167,18 +200,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         }
 
         private void DustBomb(Vector2 velocity, Vector2 targetPosition)
-        {   
-            for (int i = 0; i < 20; i++)
-			{
-				Dust.NewDust(Projectile.Center - 0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.Sluggy, Main.rand.Next(-2, 3), Main.rand.Next(-2, 3), default, default, 1.5f);
-                Dust.NewDust(targetPosition - 0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.Sluggy, Main.rand.Next(-2, 3) + velocity.X * 0.1f, Main.rand.Next(-2, 3) + velocity.Y * 0.1f, default, default, 1f);
-            }
-        }
-
-        public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
-            base.OnKill(timeLeft);
+            if (!exploded)
+            {
+                Projectile.velocity = Vector2.Zero;
+                Projectile.timeLeft = 10;
+                exploded = true;
+                SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
+
+                for (int i = 0; i < 20; i++)
+                {
+                    Dust.NewDust(Projectile.Center - 0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.Sluggy, Main.rand.Next(-2, 3), Main.rand.Next(-2, 3), default, default, 1.5f);
+                    Dust.NewDust(targetPosition - 0.5f*new Vector2(Projectile.width, Projectile.height), Projectile.width, Projectile.height, DustID.Sluggy, Main.rand.Next(-2, 3) + velocity.X * 0.1f, Main.rand.Next(-2, 3) + velocity.Y * 0.1f, default, default, 1f);
+                }
+            }
         }
     }
 }

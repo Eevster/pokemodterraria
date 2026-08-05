@@ -608,6 +608,9 @@ Projectiles: {
 	FlameCharge.DisplayName: Flame Charge
 	LickilickyPetProjectileShiny.DisplayName: Lickilicky Pet Projectile Shiny
 	LickilickyPetProjectile.DisplayName: Lickilicky Pet Projectile
+	ThunderShock.DisplayName: Thunder Shock
+	Charge.DisplayName: Charge
+	CottonGuard.DisplayName: Cotton Guard
 }
 
 Items: {
