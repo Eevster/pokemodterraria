@@ -110,7 +110,7 @@ namespace Pokemod.Common.UI.MoveTutorUI
 
 				//Item Slot
 				{
-                    UIItemSlot itemSlot = new(pokeballItem, 0, ItemSlot.Context.ChestItem)
+                    UIItemSlot itemSlot = new(pokeballItem, 0, ItemSlot.Context.BankItem)
                     {
                         Left = new(0f, 0f),
                         Top = new(0f, 0f),
