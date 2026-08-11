@@ -103,6 +103,7 @@ namespace Pokemod.Common.Players
 		private int distanceToInteract = 6*16;
 		public bool isMounted;
 		public bool didRightClick;
+		public bool rightClickAux;
 
 		//Battle Mode
 
@@ -869,10 +870,10 @@ namespace Pokemod.Common.Players
 
 		public override void PostUpdateBuffs()
 		{
+			rightClickAux = Player.controlUseTile;
+
 			if (manualControl)
 			{
-				Player.controlUseTile = false;
-
 				/*if (!Player.HeldItem.IsAir && Player.HeldItem.ModItem is not SynchroMachine)
 				{
 					Player.delayUseItem = true;
@@ -888,16 +889,15 @@ namespace Pokemod.Common.Players
 						MountPokemon();
 					}
 				}
-				else
-				{
-					didRightClick = false;
-				}
 			}
 
 			if (onBattle)
 			{
 				Player.aggro -= 3000;
 			}
+
+			if (!Player.controlUseTile) didRightClick = false;
+			if (manualControl) Player.controlUseTile = false;
 		}
 
 		public override bool CanUseItem(Item item)
@@ -923,7 +923,7 @@ namespace Pokemod.Common.Players
 				{
 					onBattle = true;
 
-					if(attackMode == (int)AttackMode.Directed_Attack) attackMode = (int)AttackMode.Auto_Attack;
+					if(attackMode != (int)AttackMode.Auto_Attack) attackMode = (int)AttackMode.Auto_Attack;
 
 					DespawnAllPokemon();
 					SendNextPokemon();
@@ -950,8 +950,10 @@ namespace Pokemod.Common.Players
 
 		public void SendNextPokemon()
 		{
+			Console.WriteLine(currentPokemonTeam + " {"+currentPokemonTeam.Length+"}");
 			foreach(CaughtPokemonItem nextPokemon in currentPokemonTeam)
 			{
+				Console.WriteLine($"HP: {nextPokemon.currentHP}, nextPokemon.proj: {nextPokemon.proj}");
 				if (nextPokemon.currentHP > 0 && !(nextPokemon.proj != null && nextPokemon.proj.ModProjectile is PokemonPetProjectile && ((PokemonPetProjectile)nextPokemon.proj.ModProjectile).currentHp <= 0))
 				{
 					if (nextPokemon.proj == null)
