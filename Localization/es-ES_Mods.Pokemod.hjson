@@ -2674,6 +2674,11 @@ Items: {
 			Cuando tu pokemon recibe daño por contacto, devuelve parte del daño al atacante
 			'''
 	}
+
+	MewDNAItem: {
+		// Tooltip: ""
+		// DisplayName: Mew D N A Item
+	}
 }
 
 Buffs: {
