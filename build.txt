@@ -1,4 +1,4 @@
 displayName = Pokemod V1.4 (The Bigger and Better Update)
 author = Eevster
-version = 1.4
-modReferences = SubworldLibrary
+version = 1.4.1
+modReferences = SubworldLibrary, StructureHelper

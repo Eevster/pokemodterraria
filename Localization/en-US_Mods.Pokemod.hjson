@@ -2674,6 +2674,11 @@ Items: {
 			When your pokemon takes contact damage, it returns damage to the attacker
 			'''
 	}
+
+	MewDNAItem: {
+		Tooltip: ""
+		DisplayName: Mew D N A Item
+	}
 }
 
 Buffs: {
