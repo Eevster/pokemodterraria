@@ -25,6 +25,10 @@ namespace Pokemod.Content.Pets.CleffaPet
         public override int[] idleFlyStartEnd => [8,31];
 		public override int[] walkFlyStartEnd => [8,31];
 		public override int[] attackFlyStartEnd => [0, 7];
+
+        public override string[] evolutions => ["Skiploom"];
+		public override int levelToEvolve => 18;
+		public override int levelEvolutionsNumber => 1;
     }
 
 	public class HoppipPetProjectileShiny : HoppipPetProjectile { }
