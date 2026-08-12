@@ -26,6 +26,8 @@ using Pokemod.Content.Buffs;
 using Pokemod.Common.Configs;
 using Terraria.Localization;
 using Pokemod.Content.Buffs.MountBuffs;
+using Pokemod.Common.UI.PokedexUI;
+using Pokemod.Common.UI.BattleUI;
 
 namespace Pokemod.Common.Players
 {
@@ -923,6 +925,8 @@ namespace Pokemod.Common.Players
 				{
 					onBattle = true;
 
+					ModContent.GetInstance<BattleUISystem>().ShowMyUI();
+
 					if(attackMode != (int)AttackMode.Auto_Attack) attackMode = (int)AttackMode.Auto_Attack;
 
 					DespawnAllPokemon();
@@ -940,6 +944,8 @@ namespace Pokemod.Common.Players
 				onBattle = false;
 				manualControl = false;
 
+				ModContent.GetInstance<BattleUISystem>().HideMyUI();
+
 				Player.SetImmuneTimeForAllTypes(Player.longInvince ? 120 : 80);
 
 				return true;
@@ -950,10 +956,8 @@ namespace Pokemod.Common.Players
 
 		public void SendNextPokemon()
 		{
-			Console.WriteLine(currentPokemonTeam + " {"+currentPokemonTeam.Length+"}");
 			foreach(CaughtPokemonItem nextPokemon in currentPokemonTeam)
 			{
-				Console.WriteLine($"HP: {nextPokemon.currentHP}, nextPokemon.proj: {nextPokemon.proj}");
 				if (nextPokemon.currentHP > 0 && !(nextPokemon.proj != null && nextPokemon.proj.ModProjectile is PokemonPetProjectile && ((PokemonPetProjectile)nextPokemon.proj.ModProjectile).currentHp <= 0))
 				{
 					if (nextPokemon.proj == null)
@@ -966,6 +970,9 @@ namespace Pokemod.Common.Players
 					{
 						manualControl = true;
 						pokemonProj.manualControl = true;
+
+						ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.playerPokemon = pokemonProj;
+						ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.UpdateMove(nextPokemon.moves[nextPokemon.moveIndex]);
 					}
 
 					Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.NextPokemon").WithFormatArgs(nextPokemon.PokemonName).Value, 0, 191, 35); 

@@ -13,6 +13,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.DataStructures;
+using Pokemod.Common.UI.BattleUI;
 
 namespace Pokemod.Content.NPCs.TrainerNPCs
 {
@@ -141,6 +142,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			PokemonPetProjectile PokemonProj = null;
 			if(proj.ModProjectile is PokemonPetProjectile){
 				PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
+				ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.enemyPokemon = PokemonProj;
 				Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.NextPokemonCommon").WithFormatArgs(NPC.FullName, PokemonProj.pokemonName).Value, 237, 206, 2);
 			}
 			

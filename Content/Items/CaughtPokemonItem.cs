@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Configs;
 using Pokemod.Common.Players;
+using Pokemod.Common.UI.BattleUI;
 using Pokemod.Common.UI.MoveLearnUI;
 using Pokemod.Common.UI.MoveTutorUI;
 using Pokemod.Content.Items.Consumables;
@@ -193,6 +194,11 @@ namespace Pokemod.Content.Items
 		public void SwitchMove()
 		{
 			moveIndex = (moveIndex+1)%moves.Length;
+
+			if (ModContent.GetInstance<BattleUISystem>().IsActive())
+			{
+				ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.UpdateMove(moves[moveIndex]);
+			}
 		}
 
         public override bool ConsumeItem(Player player)

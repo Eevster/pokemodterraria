@@ -6082,6 +6082,8 @@ PokemonBattle: {
 	BattleWin: ¡{0} fue derrotado! ¡Ganaste!
 	TeamDefeated: Todo tu equipo fue derrotado...
 	NoTeam: No tienes ningún pokemon capaz de luchar
+	ToAttack: "[c/FFE270:Clic izquierdo] para atacar"
+	ToSwitchMove: "[c/FFE270:Clic derecho] para cambiar movimiento"
 }
 
 MoveLearnUI: {
