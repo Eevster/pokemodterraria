@@ -12,11 +12,11 @@ namespace Pokemod.Common.UI.BattleUI
         internal BattleUI PokemonBattleUI;
 
         public void ShowMyUI() {
-            //PokemonBattleInterface?.SetState(PokemonBattleUI);
+            PokemonBattleInterface?.SetState(PokemonBattleUI);
 		}
 		
 		public void HideMyUI() {
-            //PokemonBattleInterface?.SetState(null);
+            PokemonBattleInterface?.SetState(null);
 		}
 
         public bool IsActive()
@@ -32,7 +32,6 @@ namespace Pokemod.Common.UI.BattleUI
 				PokemonBattleUI = new BattleUI();
 
 				PokemonBattleUI.Activate();
-                PokemonBattleInterface?.SetState(PokemonBattleUI);
 			}
 		}
 

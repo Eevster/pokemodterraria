@@ -925,6 +925,7 @@ namespace Pokemod.Common.Players
 				{
 					onBattle = true;
 
+					ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetTeamInitialInfo(currentPokemonTeam.Length);
 					ModContent.GetInstance<BattleUISystem>().ShowMyUI();
 
 					if(attackMode != (int)AttackMode.Auto_Attack) attackMode = (int)AttackMode.Auto_Attack;
@@ -971,11 +972,10 @@ namespace Pokemod.Common.Players
 						manualControl = true;
 						pokemonProj.manualControl = true;
 
-						ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.playerPokemon = pokemonProj;
 						ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.UpdateMove(nextPokemon.moves[nextPokemon.moveIndex]);
 					}
 
-					Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.NextPokemon").WithFormatArgs(nextPokemon.PokemonName).Value, 0, 191, 35); 
+					Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.NextPokemon").WithFormatArgs(nextPokemon.PokemonName).Value, 0, 191, 35);
 
 					return;
 				}

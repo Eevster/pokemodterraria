@@ -4,6 +4,7 @@ using Pokemod.Common.Configs;
 using Pokemod.Common.GlobalNPCs;
 using Pokemod.Common.Players;
 using Pokemod.Common.Systems;
+using Pokemod.Common.UI.BattleUI;
 using Pokemod.Content.Buffs;
 using Pokemod.Content.Buffs.MountBuffs;
 using Pokemod.Content.DamageClasses;
@@ -430,6 +431,14 @@ namespace Pokemod.Content.Pets
 			this.nature = nature;
 			this.happiness = happiness;
 			this.gender = gender;
+
+			if(Projectile.owner == Main.myPlayer)
+			{
+				if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().onBattle)
+				{
+					if(!isEnemy) ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetPlayerPokemon(this);
+				}
+			}
 		}
 
 		//Evolution methods

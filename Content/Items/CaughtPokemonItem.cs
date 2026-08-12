@@ -502,6 +502,7 @@ namespace Pokemod.Content.Items
 					{
 						if (Main.player[PokemonProj.Projectile.owner].GetModPlayer<PokemonPlayer>().onBattle)
 						{
+							if(PokemonProj.Projectile.owner == Main.myPlayer) ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetDefeatedPokemon();
 							Main.player[PokemonProj.Projectile.owner].GetModPlayer<PokemonPlayer>().SendNextPokemon();
 						}
 					}

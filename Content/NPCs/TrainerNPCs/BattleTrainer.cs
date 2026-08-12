@@ -97,6 +97,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 
 				LoadTeam();
 				if(opponent.whoAmI == Main.myPlayer){
+					ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetTeamInitialInfo(pokemonTeam.Count, true);
 					SendPokemon(opponent);
 				}
 			}
@@ -142,11 +143,11 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			PokemonPetProjectile PokemonProj = null;
 			if(proj.ModProjectile is PokemonPetProjectile){
 				PokemonProj = (PokemonPetProjectile)proj?.ModProjectile;
-				ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.enemyPokemon = PokemonProj;
 				Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.NextPokemonCommon").WithFormatArgs(NPC.FullName, PokemonProj.pokemonName).Value, 237, 206, 2);
 			}
 			
 			PokemonProj?.SetPokemonLvl(pokemonTeam[0].level, pokemonTeam[0].IVs, pokemonTeam[0].EVs, pokemonTeam[0].nature, pokemonTeam[0].happiness, pokemonTeam[0].gender);
+			if(PokemonProj != null) ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetEnemyPokemon(PokemonProj);
 			PokemonProj?.SetAsEnemyPokemon(NPC, pokemonTeam[0].moveSet);
 		}
 
@@ -190,6 +191,8 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 					}*/
 				}
 			}
+
+			if(opponent.whoAmI == Main.myPlayer) ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetDefeatedPokemon(true);
 		}
 
 		public bool WasDefeatedBy(Player player)

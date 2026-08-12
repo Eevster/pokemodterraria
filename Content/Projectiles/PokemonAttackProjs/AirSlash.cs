@@ -94,7 +94,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.rotation = Projectile.velocity.RotatedByRandom(MathHelper.ToRadians(45)).ToRotation();
+            Projectile.rotation = Projectile.ai[2] = Projectile.velocity.RotatedByRandom(MathHelper.ToRadians(45)).ToRotation();
 			Projectile.netUpdate = true;
             base.OnSpawn(source);
         }
@@ -104,6 +104,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             if(Projectile.timeLeft < 10){
                 Projectile.Opacity = 0.6f*Projectile.timeLeft*0.1f;
             }
+
+			Projectile.rotation = Projectile.ai[2];
 
 			if(Projectile.owner == Main.myPlayer){
 				Projectile.netUpdate = true;
