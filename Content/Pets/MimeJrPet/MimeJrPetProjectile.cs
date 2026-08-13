@@ -26,7 +26,7 @@ namespace Pokemod.Content.Pets.MimeJrPet
 		public override int levelEvolutionsNumber => 1;
 
         public override bool canBeHeld => true;
-        public override Vector2 heldByPlayerPosition => new Vector2(-1.2 ,0);
+        public override Vector2 heldByPlayerPosition => new Vector2(-1,0);
 		
 	}
 

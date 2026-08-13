@@ -613,6 +613,8 @@ Projectiles: {
 	CottonGuard.DisplayName: Rizo Algodón
 	// MimejrPetProjectile.DisplayName: Mime Jr. Pet Projectile
 	// MimejrPetProjectileShiny.DisplayName: Mime Jr. Pet Projectile Shiny
+	// MimeJrPetProjectile.DisplayName: Mime Jr Pet Projectile
+	// MimeJrPetProjectileShiny.DisplayName: Mime Jr Pet Projectile Shiny
 }
 
 Items: {
@@ -1219,7 +1221,7 @@ Items: {
 
 	KingsRockItem: {
 		DisplayName: Roca del Rey
-		Tooltip: "Increases pokemon damage by 35%"
+		Tooltip: Increases pokemon damage by 35%
 	}
 
 	MoonStoneItem: {
@@ -5818,8 +5820,9 @@ NPCs: {
 	// OnixCritterNPC_Tail.DisplayName: Onix
 	// OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
 	// OnixCritterNPCShiny_Tail.DisplayName: Onix Shiny
-	// MimeJrCritterNPCShiny.DisplayName: Mime Jr. Shiny
 
+	// MimeJrCritterNPCShiny.DisplayName: Mime Jr. Shiny
+	
 	PokemonProfessor: {
 		DisplayName: Profesor Pokemon
 		Census.SpawnCondition: Disponible inmediatamente
@@ -5902,6 +5905,7 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
+	// MimeJrCritterNPCShiny.DisplayName: Mime Jr Critter N P C Shiny
 }
 
 Bestiary: {
