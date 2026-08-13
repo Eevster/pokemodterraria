@@ -21,7 +21,7 @@ namespace Pokemod.Content.Pets.PichuPet
 		public override int[] fallStartEnd => [13,15];
 		public override int[] attackStartEnd => [18,25];
 
-		public override string[] evolutions => ["Pichu"];
+		public override string[] evolutions => ["Pikachu"];
 		public override string[] specialConditionToEvolve => ["Happiness"];
 
 		public override bool canBeHeld => true;

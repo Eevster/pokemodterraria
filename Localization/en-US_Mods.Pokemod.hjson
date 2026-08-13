@@ -611,6 +611,8 @@ Projectiles: {
 	ThunderShock.DisplayName: Thunder Shock
 	Charge.DisplayName: Charge
 	CottonGuard.DisplayName: Cotton Guard
+	MimejrPetProjectile.DisplayName: Mime Jr. Pet Projectile
+	MimejrPetProjectileShiny.DisplayName: Mime Jr. Pet Projectile Shiny
 }
 
 Items: {
@@ -1217,7 +1219,7 @@ Items: {
 
 	KingsRockItem: {
 		DisplayName: Kings Rock
-		Tooltip: ""
+		Tooltip: "Increases pokemon damage by 35%"
 	}
 
 	MoonStoneItem: {
@@ -5579,6 +5581,11 @@ NPCs: {
 		Description: The tissue on the surface of its body is curiously similar in composition to an Apricorn. When irritated, this Pokémon lets loose an electric current equal to 20 lightning bolts.
 	}
 
+	MimeJrCritterNPC: {
+		DisplayName: Mime Jr.
+		Description: When this gifted mimic surprises an opponent, Mime Jr. feels so happy that it ends up forgetting it was imitating something.
+	}
+
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur  Shiny
 	CharmanderCritterNPCShiny.DisplayName: Charmander  Shiny
 	SquirtleCritterNPCShiny.DisplayName: Squirtle  Shiny
@@ -5806,6 +5813,7 @@ NPCs: {
 	OnixCritterNPC_Tail.DisplayName: Onix
 	OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
 	OnixCritterNPCShiny_Tail.DisplayName: Onix Shiny
+	// MimeJrCritterNPCShiny.DisplayName: Mime Jr. Shiny
 
 	PokemonProfessor: {
 		DisplayName: Pokemon Professor

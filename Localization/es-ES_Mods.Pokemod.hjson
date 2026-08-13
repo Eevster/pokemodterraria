@@ -611,6 +611,8 @@ Projectiles: {
 	ThunderShock.DisplayName: Impactrueno
 	Charge.DisplayName: Carga
 	CottonGuard.DisplayName: Rizo Algodón
+	// MimejrPetProjectile.DisplayName: Mime Jr. Pet Projectile
+	// MimejrPetProjectileShiny.DisplayName: Mime Jr. Pet Projectile Shiny
 }
 
 Items: {
@@ -1217,7 +1219,7 @@ Items: {
 
 	KingsRockItem: {
 		DisplayName: Roca del Rey
-		Tooltip: ""
+		Tooltip: "Increases pokemon damage by 35%"
 	}
 
 	MoonStoneItem: {
@@ -5579,6 +5581,11 @@ NPCs: {
 		Description: Curiosamente, su complexión superficial es muy semejante a la de un bonguri. Cuando se enoja, la electricidad que emite es veinte veces más potente que la de un rayo.
 	}
 
+	MimeJrCritterNPC: {
+		DisplayName: Mime Jr.
+		Description: When this gifted mimic surprises an opponent, Mime Jr. feels so happy that it ends up forgetting it was imitating something.
+	}
+
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
 	CharmanderCritterNPCShiny.DisplayName: Charmander
 	SquirtleCritterNPCShiny.DisplayName: Squirtle
@@ -5806,6 +5813,7 @@ NPCs: {
 	// OnixCritterNPC_Tail.DisplayName: Onix
 	// OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
 	// OnixCritterNPCShiny_Tail.DisplayName: Onix Shiny
+	// MimeJrCritterNPCShiny.DisplayName: Mime Jr. Shiny
 
 	PokemonProfessor: {
 		DisplayName: Profesor Pokemon
