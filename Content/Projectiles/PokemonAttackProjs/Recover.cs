@@ -74,9 +74,12 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
             if (Projectile.timeLeft == 60)
             {
                 SetExpTarget(out NPC target);
-                if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonOwnerProj)
+                if (pokemonProj != null && pokemonProj.active)
                 {
-                    HealEffect(pokemonOwnerProj, 0.25f);
+                    if (pokemonProj.ModProjectile is PokemonPetProjectile pokemonOwnerProj)
+                    {
+                        HealEffect(pokemonOwnerProj, 0.25f);
+                    }
                 }
             }
 

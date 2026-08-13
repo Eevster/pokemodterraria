@@ -4,6 +4,7 @@ using Pokemod.Common.Configs;
 using Pokemod.Common.GlobalNPCs;
 using Pokemod.Common.Players;
 using Pokemod.Common.Systems;
+using Pokemod.Common.UI.BattleUI;
 using Pokemod.Content.Buffs;
 using Pokemod.Content.Buffs.MountBuffs;
 using Pokemod.Content.DamageClasses;
@@ -430,6 +431,14 @@ namespace Pokemod.Content.Pets
 			this.nature = nature;
 			this.happiness = happiness;
 			this.gender = gender;
+
+			if(Projectile.owner == Main.myPlayer)
+			{
+				if (Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().onBattle)
+				{
+					if(!isEnemy) ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetPlayerPokemon(this);
+				}
+			}
 		}
 
 		//Evolution methods
@@ -2546,11 +2555,11 @@ namespace Pokemod.Content.Pets
                 float statScaleConfig = ModContent.GetInstance<GameplayConfig>().AddedContentStatScaling;
 				float defenceScale = 1 + statScaleConfig * (float)Math.Clamp(0.003 * Math.Pow(1.056, pokemonLvl), 0.1, 1);
 
-            dmg = 1 + (int)(Math.Clamp(npcdmg - 1, 0f, 9999f) / (defenseValue * defenseModVsTerrariaNPC * defenceScale));
+            dmg = 1 + (int)(Math.Clamp(npcdmg - 1, 0f, 99999f) / (defenseValue * defenseModVsTerrariaNPC * defenceScale));
             }
 			else //scale the pokemon's defense normally against other pokemon (multiplied by 14 to reverse the assumed 14 defense of vanilla enemies)(Multiplied by 5 to account for the global health scaling)(divided by 3 as most pokemon attacks hit 3 times).
 			{
-				dmg = (int)((2 + Math.Clamp((npcdmg - 2f) * 5f * 14f / 3f, 0f, 9999f) / (defenseValue + 2))*typeEffectiveness);
+				dmg = (int)((2 + Math.Clamp((npcdmg - 2f) * 5f * 14f / 3f, 0f, 99999f) / (defenseValue + 2))*typeEffectiveness);
             }
 
 			Color dmgColor = new Color(255, 50, 50);
@@ -2595,6 +2604,11 @@ namespace Pokemod.Content.Pets
 					}
 					Projectile.Kill();
 				}
+			}
+
+			if(Main.myPlayer == Projectile.owner)
+			{
+				Projectile.netUpdate = true;
 			}
 		}
         
@@ -2659,6 +2673,7 @@ namespace Pokemod.Content.Pets
 						if (/*Projectile.Hitbox.Intersects(bullet.getRect())*/bullet.Colliding(bullet.Hitbox,Projectile.Hitbox) && !immune)
 						{
 							int bulletdmg = bullet.damage;
+							
 							if (bullet.owner == 0) //if the bullet comes from an npc, it's damage needs to be manually scaled for the world difficulty. *Currently doesn't scale correctly in Journey mode* ----------------------------
                             {
 								switch (Main.GameMode)

@@ -2,11 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\Assets",
-    "\\Assets\\Textures",
-    "\\Assets\\Textures\\Pokesprites",
+    "\\Common",
+    "\\Common\\Systems",
+    "\\Common\\UI\\MoveTutorUI",
     "\\Content",
-    "\\Content\\NPCs"
+    "\\Content\\Items",
+    "\\Content\\Items\\Apricorns",
+    "\\Content\\NPCs\\PokemonNPCs\\Gen2"
   ],
-  "SelectedNode": "\\Content",
+  "SelectedNode": "\\Content\\Items\\Apricorns\\ApricornSeed.cs",
   "PreviewInSolutionExplorer": false
 }

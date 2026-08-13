@@ -19,6 +19,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] attackStartEnd => [0, 7];
         public override float catchRate => 190;
 
+		public override int minLevel => 20;
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
@@ -26,7 +27,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneForest) {
-				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.5f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.02f);
 			}
 
 			return 0f;

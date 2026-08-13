@@ -26,6 +26,8 @@ using Pokemod.Content.Buffs;
 using Pokemod.Common.Configs;
 using Terraria.Localization;
 using Pokemod.Content.Buffs.MountBuffs;
+using Pokemod.Common.UI.PokedexUI;
+using Pokemod.Common.UI.BattleUI;
 
 namespace Pokemod.Common.Players
 {
@@ -103,6 +105,7 @@ namespace Pokemod.Common.Players
 		private int distanceToInteract = 6*16;
 		public bool isMounted;
 		public bool didRightClick;
+		public bool rightClickAux;
 
 		//Battle Mode
 
@@ -869,10 +872,10 @@ namespace Pokemod.Common.Players
 
 		public override void PostUpdateBuffs()
 		{
+			rightClickAux = Player.controlUseTile;
+
 			if (manualControl)
 			{
-				Player.controlUseTile = false;
-
 				/*if (!Player.HeldItem.IsAir && Player.HeldItem.ModItem is not SynchroMachine)
 				{
 					Player.delayUseItem = true;
@@ -888,16 +891,15 @@ namespace Pokemod.Common.Players
 						MountPokemon();
 					}
 				}
-				else
-				{
-					didRightClick = false;
-				}
 			}
 
 			if (onBattle)
 			{
 				Player.aggro -= 3000;
 			}
+
+			if (!Player.controlUseTile) didRightClick = false;
+			if (manualControl) Player.controlUseTile = false;
 		}
 
 		public override bool CanUseItem(Item item)
@@ -923,7 +925,10 @@ namespace Pokemod.Common.Players
 				{
 					onBattle = true;
 
-					if(attackMode == (int)AttackMode.Directed_Attack) attackMode = (int)AttackMode.Auto_Attack;
+					ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetTeamInitialInfo(currentPokemonTeam.Length);
+					ModContent.GetInstance<BattleUISystem>().ShowMyUI();
+
+					if(attackMode != (int)AttackMode.Auto_Attack) attackMode = (int)AttackMode.Auto_Attack;
 
 					DespawnAllPokemon();
 					SendNextPokemon();
@@ -939,6 +944,8 @@ namespace Pokemod.Common.Players
 			{
 				onBattle = false;
 				manualControl = false;
+
+				ModContent.GetInstance<BattleUISystem>().HideMyUI();
 
 				Player.SetImmuneTimeForAllTypes(Player.longInvince ? 120 : 80);
 
@@ -964,9 +971,11 @@ namespace Pokemod.Common.Players
 					{
 						manualControl = true;
 						pokemonProj.manualControl = true;
+
+						ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.UpdateMove(nextPokemon.moves[nextPokemon.moveIndex]);
 					}
 
-					Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.NextPokemon").WithFormatArgs(nextPokemon.PokemonName).Value, 0, 191, 35); 
+					Main.NewText(Language.GetText("Mods.Pokemod.PokemonBattle.NextPokemon").WithFormatArgs(nextPokemon.PokemonName).Value, 0, 191, 35);
 
 					return;
 				}

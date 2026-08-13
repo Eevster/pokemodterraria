@@ -46,30 +46,30 @@ namespace Pokemod.Content.Tiles
                 ModContent.ItemType<LeafStoneItem>(),
                 ModContent.ItemType<IceStoneItem>(),
 
-                ModContent.ItemType<Potion>(),
+                //ModContent.ItemType<Potion>(),
                 ModContent.ItemType<SuperPotion>(),
                 ModContent.ItemType<HyperPotion>(),
                 ModContent.ItemType<Revive>(),
                 ModContent.ItemType<MaxRevive>(),
 
                 ModContent.ItemType<PokeballItem>(),
-                ModContent.ItemType<AzureballItem>(),
-                ModContent.ItemType<BeastballItem>(),
+                //ModContent.ItemType<AzureballItem>(),
+                //ModContent.ItemType<BeastballItem>(),
                 ModContent.ItemType<CherishballItem>(),
-                ModContent.ItemType<CitrineballItem>(),
+                //ModContent.ItemType<CitrineballItem>(),
                 ModContent.ItemType<DuskballItem>(),
-                ModContent.ItemType<FeatherballItem>(),
+                //ModContent.ItemType<FeatherballItem>(),
                 ModContent.ItemType<GigatonballItem>(),
                 ModContent.ItemType<GreatballItem>(),
-                ModContent.ItemType<HeavyballItem>(),
+                //ModContent.ItemType<HeavyballItem>(),
                 ModContent.ItemType<JetballItem>(),
-                ModContent.ItemType<LeadenballItem>(),
-                ModContent.ItemType<PeridotballItem>(),
-                ModContent.ItemType<PremierballItem>(),
+                //ModContent.ItemType<LeadenballItem>(),
+                //ModContent.ItemType<PeridotballItem>(),
+                //ModContent.ItemType<PremierballItem>(),
                 ModContent.ItemType<StrangeballItem>(),
                 ModContent.ItemType<UltraballItem>(),
-                ModContent.ItemType<VioletballItem>(),
-                ModContent.ItemType<WingballItem>(),
+                //ModContent.ItemType<VioletballItem>(),
+                //ModContent.ItemType<WingballItem>(),
 
                 ModContent.ItemType<KingsRockItem>(),
             };
@@ -129,7 +129,7 @@ namespace Pokemod.Content.Tiles
 			// Try to make your message clear. You can be a little bit clever, but make sure it is descriptive enough for troubleshooting purposes.
 			progress.Message = PokeballItemTileSystem.PokeballItemTilePassMessage.Value;
 
-            for (int i = 0; i < 30; i++) {
+            for (int i = 0; i < 100; i++) {
                 bool success = false;
                 int attempts = 0;
                 while (!success) {

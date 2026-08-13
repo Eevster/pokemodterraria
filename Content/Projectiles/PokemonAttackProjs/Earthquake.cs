@@ -15,6 +15,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
     internal class Earthquake : PokemonAttack
     {
         public List<NPC> targets = new List<NPC>();
+        public List<Rectangle> projTargets = new List<Rectangle>();
 
         public override string Texture => "Pokemod/Content/Projectiles/PokemonAttackProjs/MagicalLeaf";
         public override void SetDefaults()
@@ -101,6 +102,24 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                 }
             }
 
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+                Projectile projectile = Main.projectile[i];
+                if (projectile.ModProjectile is PokemonPetProjectile pokemonPetProjectile)
+                {
+                    if (pokemonPetProjectile.currentHp > 0)
+                    {
+                        if ((projectile.Center - Projectile.Center).Length() < PokemonData.pokemonAttacks["Earthquake"].distanceToAttack)
+                        {
+                            if (Collision.SolidCollision(projectile.BottomLeft, projectile.width, 4))
+                            {
+                                projTargets.Add(projectile.Hitbox);
+                            }
+                        }
+                    }
+                }
+            }
+
             SoundEngine.PlaySound(SoundID.Item70, Projectile.Center);
             PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 7f, 5f, 25, PokemonData.pokemonAttacks["Earthquake"].distanceToAttack * 2f, FullName);
             Main.instance.CameraModifiers.Add(modifier);
@@ -112,7 +131,27 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
             bool targetsRemaining = false;
 
-            if (targets.Count > 0)
+            if(projTargets.Count > 0)
+            {
+                foreach(Rectangle projRect in projTargets)
+                {
+                    targetsRemaining = true;
+                    if (Collision.SolidCollision(projRect.BottomLeft(), projRect.Width, 4))
+                    {
+                        Projectile.height = projRect.Height;
+                        Projectile.position = projRect.TopLeft();
+
+                        for (int i = 0; i < 10; i++)
+                        {
+                            Dust.NewDust(Projectile.Bottom, 10, 6, DustID.Dirt, 0, -3);
+                        }
+                        projTargets.Remove(projRect);
+                        break;
+                    }
+                }
+            }
+
+            if (!targetsRemaining && targets.Count > 0)
             {
                 foreach (NPC npc in targets) {
                     if (npc != null)
@@ -133,6 +172,7 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
                     }
                 }
             }
+
             if (!targetsRemaining)
             {
                 Projectile.Kill();

@@ -1,6 +1,7 @@
 Welcome to Pokemod! My take on the Pokemon X Terraria scene. Here you can catch, battle, and train Pokemon to your hearts content, all in Terraria! 
 
 Discord Link: https://discord.gg/pT5UagAB3n
+Wiki Link: https://terrariamods.wiki.gg/wiki/Pokemod
 
 Contributers:
 -JACSMITH (Discord) Artist/Developer
@@ -16,213 +17,25 @@ External Credits:
 Pokesprite: Icons Gen 1-8
 MBCMechachu: Icons Gen 9 
 
-Pokemod v1.4
+Pokemod v1.4.1
 
 Detailed Change Log:
--Systems:
---Added Trainer Battles.
---Added Dynamaxing with the Dynamax Band item. Functions similarly to the mega cuff. Still in early stages of development. 
---New Move Tutor NPC
---Arrives in town after a pokemon forgets a move.
---Can teach a pokemon moves it has forgotten, for a small fee.
---Added a config option for stat scaling to help make Pokemod compatible with other mods such as Calamity.
---Small Pokemon can now be picked up.
---Some big Pokemon can now be ridden.
---Basic implementation of status conditions
---Some Pokemon now have loot drops
---Some Pokemon now use Vanilla Worm like behavior.
---Gender Implementation
 
--Items:
---Added the Dynamax Band (8 Hallowed Bars)
---Improvements to the trainer glove which now buffs pokemon attacks when used.
---New Trainer glove varieties:
---Blue Trainer Glove (7 silk, 7 flinx fur, 5 water candles)
---Green Trainer Glove (7 silk, 7 jungle spores, 5 bee wax)
---Red Trainer Glove (7 silk, 7 hellstone, 5 obsidian)
---Great Trainer Glove (7 silk, 5 demonite/crimtane bars)
---Hyper Trainer Glove (7 silk, 5 bones, 5 gold/platinum bars)
-
--New Accessories:
---Added Type Gems, accessories that boost attacks of their given type (drops from Pokemon)
---Tera Gem boosts all pokemon damage (crafted from one of each other gem).
---Added several similar accessories, each boosting damage of a certain type:
---Black Belt was edited (3 Fighting Gems and a Water Candle)
---Black Glasses, (3 Dark Gems, 1 Water Candle)
---Charcoal, (3 Fire Gems, 1 Water Candle)
---Dragon Fang, (3 Dragon Gems, 1 Water Candle)
---Fairy Feather, (3 Fairy Gems, 1 Water Candle)
---Hard Stone, (3 Rock Gems, 1 Water Candle)
---Magnet, (3 Electric Gems, 1 Water Candle)
---Metal Coat, (3 Steel Gems, 1 Water Candle)
---Miracle Seed, (3 Grass Gems, 1 Water Candle)
---Mystic Water, (3 Water Gems, 1 Water Candle)
---Never Melt Ice, (3 Ice Gems, 1 Water Candle)
---Poison Barb, (3 Poison Gems, 1 Water Candle)
---Sharp Beak, (3 Flying Gems, 1 Water Candle)
---Silk Scarf, (3 Normal Gems, 1 Water Candle)
---Silver Powder, (3 Bug Gems, 1 Water Candle)
---Soft Sand, (3 Ground Gems, 1 Water Candle)
---Spell Tag, (3 Ghost Gems, 1 Water Candle)
---Twisted Spoon, (3 Psychic Gems, 1 Water Candle)
---Big Root, (3 Vines, 10 Mushroom Roots, 3 Bottled Honey)
---Muscle Band (5 Hellstone Bars, 10 Soul of Night, 10 Soul of Light)
---Shell Bell (15 Seashells, 5 Chains)
---TMs are refunded if the move is not learned.
---Mega stone changes:
---Added Mega Shards (Found in meteor craters and mined with a cobalt pick or better)
---Mega stones are no longer sold by Prof Oak, but are now crafted using mega shards, type gems, and various hardmode souls (Night, Flight, Might, etc).
---The key stone crafting recipe also now uses mega shards instead of a white pearl. 
---Added skull fossil for reviving Cranidos (found among primordial fossil blocks)
-
-
--Pokemon:
 -New Pokemon:
---Porygon
---Cranidos
---Rampardos
---Meowth
---Persian
---Cleffa
---Clefairy
---Clefable
---Krabby
---Kingler
---Dragonite
---Staryu
---Starmie
---Mawile
---Spearow
---Fearow
---Zubat
---Golbat
---Sudowoodo
---Igglybuff
---Jigglypuff
---Wigglytuff
---Sandshrew
---Sandslash
---Magnezone
---Delibird
---Mareep
---Flaaffy
---Ampharos
---Tentacool
---Hoppip
---Jumpluff
---Skiploom
---Vulpix
---Bagon
---Shelgon
---Wooper
---Quagsire
---Venipede
---Whirlipede
---Scolipede
---Tinkatink
---Tinkatuff
---Tinkaton
---Sentret
---Furret
---Alolan Rattata
---Alolan Raticate
---Hisuian Voltorb
---Hisuian Electrode
---Terrarian Solosis
---Terrarian Duosion
---Terrarian Reuniclus
---Combee
---Vespiquen
---Zeraora (Can now spawn)
-
--Mega Evolutions:
---Mega Dragonite
---Mega Victreebel
---Mega Scolipede
---Mega Ampharos
---Mega Slowbronite
-
--Several tweaks to existing pokemon sprites.
--Gave more water pokemon the ability to swim.
--Improvements to Pokemon movement and navigation.
-
+--Lickilicky
 -Moves:
+--Confusion: Sound has been changed
 -New Moves:
-
--Normal
---Rapid Spin
---Extreme Speed
---Recover
---Screech
---Sonic Boom
---Super Sonic
---Double Team
---Take Down
-
--Fire
---Fire Punch
---Flame Charge
---Water
---Aqua Tail
-
--Grass
---Energy Ball
---Leech seed
---Absorb
---Seed Bomb
-
--Electric
---Shock Wave
---Thunder Punch
-
--Ice
---Aurora Beam
---Ice Punch
-
--Flying
---Hurricane 
---Fighting
-
--Ground
---Bonemerang
---Bone Rush
-
--Rock
---Power Gem
-
--Psychic
---Cosmic Power
---Amnesia
---Agility
---Future Sight
-
--Dragon
---Dragon Tail
-
--Poison
---Acid
---Acid Armor
---Sludge
---Poison Tail
-
--Edited movesets for:
---Squirtle, Wartortle, Blastoise
---Paras, Parasect
---Psyduck, Golduck
---Gyarados
---Dratini, Dragonair, Dragonite
---Totodile, Croconaw, Feraligatr
---Kadabra, Alakazam
-
--Healing moves now work on Pokemon.
-
+--Charge
+--Cotton Guard
+--Thunder Shock
 -Bug Fixes:
---Added some missing pokedex entries.
---Fixed a multiplayer bug where some pokemon became invisible. 
---Fixed a multiplayer bug where variant pokemon wouldn’t appear.
---Fixed Pokemon getting stuck on half-blocks and flickering on slopes.
---Corrected the stat formula (IVs no longer have double the effect)
---Pokemon can now correctly land critical hits.
+--Fixed Move Tutor deleting Pokemon in Multiplayer
+--Fixed Eject Button not working as intended
+--Fixed Super Rod description
+--Fixed Clefairy Evolution condition
+--Fixed issues with Skiploom and Jumpluff
+
 
 
 

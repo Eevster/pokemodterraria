@@ -13,6 +13,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.DataStructures;
+using Pokemod.Common.UI.BattleUI;
 
 namespace Pokemod.Content.NPCs.TrainerNPCs
 {
@@ -96,6 +97,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 
 				LoadTeam();
 				if(opponent.whoAmI == Main.myPlayer){
+					ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetTeamInitialInfo(pokemonTeam.Count, true);
 					SendPokemon(opponent);
 				}
 			}
@@ -145,6 +147,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 			}
 			
 			PokemonProj?.SetPokemonLvl(pokemonTeam[0].level, pokemonTeam[0].IVs, pokemonTeam[0].EVs, pokemonTeam[0].nature, pokemonTeam[0].happiness, pokemonTeam[0].gender);
+			if(PokemonProj != null) ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetEnemyPokemon(PokemonProj);
 			PokemonProj?.SetAsEnemyPokemon(NPC, pokemonTeam[0].moveSet);
 		}
 
@@ -188,6 +191,8 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 					}*/
 				}
 			}
+
+			if(opponent.whoAmI == Main.myPlayer) ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetDefeatedPokemon(true);
 		}
 
 		public bool WasDefeatedBy(Player player)

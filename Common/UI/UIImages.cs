@@ -81,4 +81,46 @@ namespace Pokemod.Common.UI
 			base.Update(gameTime);
 		}
 	}
+
+	public class UIImageFlip : UIImage
+	{
+		private Asset<Texture2D> _texture;
+		private Texture2D _nonReloadingTexture;
+
+		public bool flipX;
+		public bool flipY;
+
+        public UIImageFlip(Asset<Texture2D> texture) : base(texture)
+		{
+			_texture = texture;
+		}
+
+		public UIImageFlip(Texture2D nonReloadingTexture) : base(nonReloadingTexture)
+		{
+			_nonReloadingTexture = nonReloadingTexture;
+		}
+
+        protected override void DrawSelf(SpriteBatch spriteBatch)
+		{
+			CalculatedStyle dimensions = GetDimensions();
+			Texture2D texture2D = null;
+			if (_texture != null)
+				texture2D = _texture.Value;
+
+			if (_nonReloadingTexture != null)
+				texture2D = _nonReloadingTexture;
+
+			if (ScaleToFit) {
+				spriteBatch.Draw(texture2D, dimensions.ToRectangle(), Color);
+				return;
+			}
+
+			Vector2 vector = texture2D.Size();
+			Vector2 vector2 = dimensions.Position() + vector * (1f - ImageScale) / 2f + vector * NormalizedOrigin;
+			if (RemoveFloatingPointsFromDrawPosition)
+				vector2 = vector2.Floor();
+
+			spriteBatch.Draw(texture2D, vector2, null, Color, Rotation, vector * NormalizedOrigin, ImageScale, (flipX && flipY)?(SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically):(flipX?SpriteEffects.FlipHorizontally:(flipY?SpriteEffects.FlipVertically:SpriteEffects.None)), 0f);
+		}
+	}
 }

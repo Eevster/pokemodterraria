@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Common.Configs;
 using Pokemod.Common.Players;
+using Pokemod.Common.UI.BattleUI;
 using Pokemod.Common.UI.MoveLearnUI;
 using Pokemod.Common.UI.MoveTutorUI;
 using Pokemod.Content.Items.Consumables;
@@ -176,15 +177,29 @@ namespace Pokemod.Content.Items
         public override void RightClick(Player player)
         {
 			if(player.ItemTimeIsZero){
-				if(Main.mouseItem.IsAir){
-					moveIndex = (moveIndex+1)%moves.Length;
-				}else if(player.HeldItem.ModItem is PokemonConsumableItem item){
-					if(item.OnItemInvUse(this, player)){
+				if(Main.mouseItem.IsAir)
+				{
+					SwitchMove();
+				}
+				else if(player.HeldItem.ModItem is PokemonConsumableItem item)
+				{
+					if(item.OnItemInvUse(this, player))
+					{
 						player.itemTime = 10;
 					}
 				}
 			}
         }
+
+		public void SwitchMove()
+		{
+			moveIndex = (moveIndex+1)%moves.Length;
+
+			if (ModContent.GetInstance<BattleUISystem>().IsActive())
+			{
+				ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.UpdateMove(moves[moveIndex]);
+			}
+		}
 
         public override bool ConsumeItem(Player player)
         {
@@ -357,6 +372,24 @@ namespace Pokemod.Content.Items
 				}
 			}
 
+			if(player != null && player.GetModPlayer<PokemonPlayer>().onBattle)
+			{
+				PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
+				if(PokemonProj != null)
+				{
+					if (player.GetModPlayer<PokemonPlayer>().rightClickAux)
+					{
+						if (!player.GetModPlayer<PokemonPlayer>().didRightClick)
+						{
+							SwitchMove();
+							
+							CombatText.NewText(proj.Hitbox, ColorConverter.HexToXnaColor(PokemonNPCData.GetTypeColor(PokemonData.pokemonAttacks[moves[moveIndex]].attackType)), Language.GetTextValue("Mods.Pokemod.Projectiles." + moves[moveIndex] + ".DisplayName"));
+							player.GetModPlayer<PokemonPlayer>().didRightClick = true;
+						}
+					}
+				}
+			}
+
             base.UpdateInventory(player);
 
 			if(ModContent.GetInstance<GameplayConfig>().ReleaseFaintedPokemon){
@@ -459,13 +492,19 @@ namespace Pokemod.Content.Items
 
 		private void GetProjHP(){
 			PokemonPetProjectile PokemonProj = SafeGetPokemonProj(proj);
+
 			if(PokemonProj != null){
+				
 				if(currentHP != 0 && PokemonProj.currentHp == 0){
 					AddHappiness(-3, -3, -5);
 
-					if (Item.playerIndexTheItemIsReservedFor >= 0 && Item.playerIndexTheItemIsReservedFor < Main.player.Length && Main.player[Item.playerIndexTheItemIsReservedFor].GetModPlayer<PokemonPlayer>().onBattle)
+					if (PokemonProj.Projectile.owner < Main.player.Length && Main.player[PokemonProj.Projectile.owner] != null)
 					{
-						Main.player[Item.playerIndexTheItemIsReservedFor].GetModPlayer<PokemonPlayer>().SendNextPokemon();
+						if (Main.player[PokemonProj.Projectile.owner].GetModPlayer<PokemonPlayer>().onBattle)
+						{
+							if(PokemonProj.Projectile.owner == Main.myPlayer) ModContent.GetInstance<BattleUISystem>().PokemonBattleUI.SetDefeatedPokemon();
+							Main.player[PokemonProj.Projectile.owner].GetModPlayer<PokemonPlayer>().SendNextPokemon();
+						}
 					}
 				}
 				currentHP = PokemonProj.currentHp;

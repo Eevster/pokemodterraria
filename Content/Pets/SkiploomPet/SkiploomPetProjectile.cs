@@ -25,6 +25,10 @@ namespace Pokemod.Content.Pets.SkiploomPet
         public override int[] idleFlyStartEnd => [8,13];
 		public override int[] walkFlyStartEnd => [8,13];
 		public override int[] attackFlyStartEnd => [0, 7];
+
+        public override string[] evolutions => ["Jumpluff"];
+		public override int levelToEvolve => 27;
+		public override int levelEvolutionsNumber => 1;
     }
 
 	public class SkiploomPetProjectileShiny : SkiploomPetProjectile { }

@@ -2676,6 +2676,11 @@ Items: {
 			When your pokemon takes contact damage, it returns damage to the attacker
 			'''
 	}
+
+	MewDNAItem: {
+		Tooltip: ""
+		DisplayName: Mew D N A Item
+	}
 }
 
 Buffs: {
@@ -6085,6 +6090,8 @@ PokemonBattle: {
 	BattleWin: "{0} was defeated! You won!"
 	TeamDefeated: Your entire team was defeated...
 	NoTeam: You don't have any Pokémon that can fight
+	ToAttack: "[c/FFE270:Left click] to attack"
+	ToSwitchMove: "[c/FFE270:Right click] to switch move"
 }
 
 MoveLearnUI: {

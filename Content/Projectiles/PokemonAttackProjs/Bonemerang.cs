@@ -19,6 +19,20 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 	{
         const float projSpeed = 25f;
 
+        Vector2 pokemonProjCenter = Vector2.Zero;
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.WriteVector2(pokemonProjCenter);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            pokemonProjCenter = reader.ReadVector2();
+            base.ReceiveExtraAI(reader);
+        }
+
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5; // The length of old position to be recorded
@@ -77,18 +91,31 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			return true;
 		}
 
+        public override void OnSpawn(IEntitySource source)
+        {
+            pokemonProjCenter = Projectile.Center;
+
+            if(Projectile.owner == Main.myPlayer){
+				Projectile.netUpdate = true;
+			}
+
+            base.OnSpawn(source);
+        }
+
         public override void AI()
         {
+            if(pokemonProj != null && pokemonProj.ModProjectile is PokemonPetProjectile) pokemonProjCenter = pokemonProj.Center;
+
             if(++Projectile.frameCounter > Projectile.ai[0])
             {
-                Projectile.velocity += 2f*(pokemonProj.Center-Projectile.Center).SafeNormalize(Vector2.Zero);
+                Projectile.velocity += 2f*(pokemonProjCenter-Projectile.Center).SafeNormalize(Vector2.Zero);
 
                 if(Projectile.velocity.Length() > projSpeed)
                 {
                     Projectile.velocity = projSpeed*Projectile.velocity.SafeNormalize(Vector2.Zero);
                 }
 
-                if(Vector2.Distance(Projectile.Center, pokemonProj.Center) < Math.Max(Projectile.velocity.Length(),20))
+                if(Vector2.Distance(Projectile.Center, pokemonProjCenter) < Math.Max(Projectile.velocity.Length(),20))
                 {
                     Projectile.Kill();
                 }

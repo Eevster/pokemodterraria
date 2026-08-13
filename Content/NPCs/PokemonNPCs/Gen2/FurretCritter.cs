@@ -18,6 +18,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [17,18];
 		public override int[] attackStartEnd => [0,6];
 		public override float catchRate => 120;
+
+		public override int minLevel => 15;
 		
 		public override int[][] spawnConditions =>
 		[
