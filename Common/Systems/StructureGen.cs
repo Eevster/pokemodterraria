@@ -65,6 +65,7 @@ namespace Pokemod.Common.Systems
                     StructureHelper.API.Generator.GenerateStructure("Content/Structures/AbandonedPokecenterJungle", new Point16(x, finalY), ModContent.GetInstance<Pokemod>());
                     ModContent.GetInstance<Pokemod>().Logger.Info($"Pokemon Center placed at {x} {finalY}");
                     success = true;
+                    
 
                 }
             }
