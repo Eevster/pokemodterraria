@@ -41,5 +41,5 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		}
 	}
 
-	public class WooperCritterNPCShiny : QuagsireCritterNPC{}
+	public class WooperCritterNPCShiny : WooperCritterNPC{}
 }

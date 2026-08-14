@@ -406,6 +406,8 @@ namespace Pokemod.Content.NPCs.MerchantNPCs
                     }
                 }
 
+				player.GetModPlayer<PokemonPlayer>().RegisterPokemon(sampleItem.pokemonName, true, shiny);
+
                 // Manually Adds the pokemon to the Bestiary when obtained
                 string persistentId = "Pokemod/" + sampleItem.pokemonName + "CritterNPC" + (shiny ? "Shiny" : "");
 				NPCKillsTracker tracker = Main.BestiaryTracker.Kills;
