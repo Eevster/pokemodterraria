@@ -2896,6 +2896,12 @@ namespace Pokemod.Content.Pets
 							megaEvolveSymbolTexture.Frame(1, 15).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
 					}
 				}
+				if (Projectile.owner == Main.myPlayer && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().mouseOverPokemon == this)
+				{
+					Asset<Texture2D> happinessTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/HappinessVisuals");
+
+					Main.EntitySpriteDraw(happinessTexture.Value, (Projectile.spriteDirection<0?(Projectile.TopLeft + new Vector2(-12,-12)):(Projectile.TopRight + new Vector2(12,-12))) - Main.screenPosition, happinessTexture.Frame(1, 7, 0, PokemonData.GetHappinessLevel(happiness)), Color.White, 0, happinessTexture.Frame(1, 7).Size() * 0.5f, 1, Projectile.spriteDirection<0?SpriteEffects.FlipHorizontally:SpriteEffects.None, 0);
+				}
 			}
         }
 

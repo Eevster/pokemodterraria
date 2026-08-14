@@ -634,6 +634,38 @@ namespace Pokemod.Content.NPCs
             return pokemonInfo.Keys.ToList()[index];
         }
 
+        public static int GetHappinessLevel(int happiness)
+        {
+            int happinessLevel = 6;
+
+            if(happiness >= 255)
+            {
+                happinessLevel = 0;
+            }
+            else if(happiness >= 220)
+            {
+                happinessLevel = 1;
+            }
+            else if(happiness >= 150)
+            {
+                happinessLevel = 2;
+            }
+            else if(happiness >= 100)
+            {
+                happinessLevel = 3;
+            }
+            else if(happiness >= 50)
+            {
+                happinessLevel = 4;
+            }
+            else if(happiness > 0)
+            {
+                happinessLevel = 5;
+            }
+
+            return happinessLevel;
+        }
+
         public static string[][] PokemonNatures = [
             ["Hardy", "Lonely", "Adamant", "Naughty", "Brave"],
             ["Bold", "Docile", "Impish", "Lax", "Relaxed"],
