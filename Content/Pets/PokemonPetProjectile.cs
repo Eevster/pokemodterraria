@@ -1237,7 +1237,7 @@ namespace Pokemod.Content.Pets
 							isFlying = true;
 						}
 					}
-					if (timer <= 0)
+					if (timer <= 0 && !dynamax)
 					{
 						if (canAttack && !(isHeldByPlayer && PokemonData.pokemonAttacks[currentAttack].contact))
 						{
@@ -1645,7 +1645,7 @@ namespace Pokemod.Content.Pets
 			}
 
 			if (isSwimming) speedMultiplier *= 1.5f;
-
+			if (dynamax) speedMultiplier = 0;
 
 			if (timer <= 0)
 			{
@@ -1697,7 +1697,7 @@ namespace Pokemod.Content.Pets
 				canFall = true;
 			}
 
-			if (timer <= 0)
+			if (timer <= 0 && !dynamax)
 			{
 				if (canAttack && Main.player[Projectile.owner].controlUseItem)
 				{

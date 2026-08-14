@@ -2551,9 +2551,10 @@ Items: {
 	}
 
 	DynamaxBand: {
-		DisplayName: Dynamax Band
+		DisplayName: Dynamax Band (WIP)
 		Tooltip:
 			'''
+			WORK IN PROGRESS (Pokemon cannot attack in this state)
 			Allows you to dynamax your pokemon once per day
 			When used, the next pokemon sent will be affected by the Dynamax phenomenon
 			'''

@@ -2551,9 +2551,10 @@ Items: {
 	}
 
 	DynamaxBand: {
-		DisplayName: Banda Dinamax
+		DisplayName: Banda Dinamax (WIP)
 		Tooltip:
 			'''
+			TRABAJO EN PROCESO (Los pokemon no pueden atacar en este estado)
 			Permite dinamaxizar a tus pokemon una vez al día
 			Al usarse, el siguiente pokemon enviado será afectado por el fenómeno Dynamax
 			'''
