@@ -611,6 +611,10 @@ Projectiles: {
 	ThunderShock.DisplayName: Thunder Shock
 	Charge.DisplayName: Charge
 	CottonGuard.DisplayName: Cotton Guard
+	MimejrPetProjectile.DisplayName: Mime Jr. Pet Projectile
+	MimejrPetProjectileShiny.DisplayName: Mime Jr. Pet Projectile Shiny
+	MimeJrPetProjectile.DisplayName: Mime Jr Pet Projectile
+	MimeJrPetProjectileShiny.DisplayName: Mime Jr Pet Projectile Shiny
 }
 
 Items: {
@@ -1217,7 +1221,7 @@ Items: {
 
 	KingsRockItem: {
 		DisplayName: Kings Rock
-		Tooltip: ""
+		Tooltip: Increases pokemon damage by 35%
 	}
 
 	MoonStoneItem: {
@@ -5584,6 +5588,11 @@ NPCs: {
 		Description: The tissue on the surface of its body is curiously similar in composition to an Apricorn. When irritated, this Pokémon lets loose an electric current equal to 20 lightning bolts.
 	}
 
+	MimeJrCritterNPC: {
+		DisplayName: Mime Jr.
+		Description: When this gifted mimic surprises an opponent, Mime Jr. feels so happy that it ends up forgetting it was imitating something.
+	}
+
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur  Shiny
 	CharmanderCritterNPCShiny.DisplayName: Charmander  Shiny
 	SquirtleCritterNPCShiny.DisplayName: Squirtle  Shiny
@@ -5812,6 +5821,8 @@ NPCs: {
 	OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
 	OnixCritterNPCShiny_Tail.DisplayName: Onix Shiny
 
+	// MimeJrCritterNPCShiny.DisplayName: Mime Jr. Shiny
+	
 	PokemonProfessor: {
 		DisplayName: Pokemon Professor
 		Census.SpawnCondition: Available immediately
@@ -5894,6 +5905,7 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
 	G1T7_Blaine.DisplayName: Fire-type Gym Leader
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
+	MimeJrCritterNPCShiny.DisplayName: Mime Jr Critter N P C Shiny
 }
 
 Bestiary: {
