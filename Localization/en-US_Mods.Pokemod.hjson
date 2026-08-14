@@ -2655,6 +2655,54 @@ Items: {
 			'''
 	}
 
+	GoldenTrainerGlove: {
+		DisplayName: Golden Trainer Glove
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			20% chance of inflicting the Ichor debuff
+			'''
+	}
+
+	SilverTrainerGlove: {
+		DisplayName: Silver Trainer Glove
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			20% chance of inflicting the Cursed Inferno debuff
+			'''
+	}
+
+	CrystalTrainerGlove: {
+		DisplayName: Crystal Trainer Glove
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			'''
+	}
+
+	HallowedTrainerGlove: {
+		DisplayName: Hallowed Trainer Glove
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			'''
+	}
+
+	ChlorophyteTrainerGlove: {
+		DisplayName: Chlorophyte Trainer Glove
+		Tooltip:
+			'''
+			When your Pokemon hits an enemy within a radius of {0} blocks:
+			{1} extra Pokemon damage
+			Trainer gets the Dryad's Blessing buff
+			'''
+	}
+
 	SafetyVest: {
 		DisplayName: Safety Vest
 		Tooltip:

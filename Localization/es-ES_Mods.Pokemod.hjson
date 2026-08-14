@@ -2655,6 +2655,54 @@ Items: {
 			'''
 	}
 
+	GoldenTrainerGlove: {
+		DisplayName: Guante dorado de entrenador
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			20% de probabilidad de inflingir el debuff Ichor
+			'''
+	}
+
+	SilverTrainerGlove: {
+		DisplayName: Guante plateado de entrenador
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			20% de probabilidad de inflingir el debuff El Averno
+			'''
+	}
+
+	CrystalTrainerGlove: {
+		DisplayName: Guante de cristal de entrenador
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			'''
+	}
+
+	HallowedTrainerGlove: {
+		DisplayName: Guante bendito de entrenador
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			'''
+	}
+
+	ChlorophyteTrainerGlove: {
+		DisplayName: Guante de clorofita de entrenador
+		Tooltip:
+			'''
+			Cuando tu Pokemon golpea a un enemigo en un radio de {0} bloques:
+			{1} extra de daño de Pokemon
+			El entrenador obtiene el buff Bendición de la dríada
+			'''
+	}
+
 	SafetyVest: {
 		DisplayName: Chaleco de seguridad
 		Tooltip:

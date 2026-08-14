@@ -315,6 +315,7 @@ namespace Pokemod.Content.Items.Pokeballs
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
 					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), gender, lvl, IVs, nature, variant: variant);
 					pokeItem.currentHP = Math.Max(targetPokemon.life,0);
+					pokeItem.happiness = 70;
 					SetExtraPokemonEffects(ref pokeItem);
 				}
 				else if (Main.netMode == NetmodeID.MultiplayerClient && Main.myPlayer == Projectile.owner)
@@ -324,6 +325,7 @@ namespace Pokemod.Content.Items.Pokeballs
 					CaughtPokemonItem pokeItem = (CaughtPokemonItem)Main.item[item].ModItem;
 					pokeItem.SetPokemonData(pokemonName, Shiny: shiny, BallType: GetType().Name.Replace("Proj", "Item"), gender, lvl, IVs, nature, variant: variant);
 					pokeItem.currentHP = Math.Max(targetPokemonLife,0);
+					pokeItem.happiness = 70;
 					SetExtraPokemonEffects(ref pokeItem);
 					NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item, 1f);
 				}

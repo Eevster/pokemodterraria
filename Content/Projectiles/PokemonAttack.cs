@@ -230,6 +230,18 @@ namespace Pokemod.Content.Projectiles
 										{
 											if(Main.rand.NextBool(5)) target.AddBuff(BuffID.Frostburn, 3*60);
 										}
+										if(Owner.HeldItem.ModItem is GoldenTrainerGlove)
+										{
+											if(Main.rand.NextBool(5)) target.AddBuff(BuffID.Ichor, 3*60);
+										}
+										if(Owner.HeldItem.ModItem is SilverTrainerGlove)
+										{
+											if(Main.rand.NextBool(5)) target.AddBuff(BuffID.CursedInferno, 3*60);
+										}
+										if(Owner.HeldItem.ModItem is ChlorophyteTrainerGlove)
+										{
+											Owner.AddBuff(BuffID.DryadsWard, 3*60);
+										}
 									}
 								}
 							}
