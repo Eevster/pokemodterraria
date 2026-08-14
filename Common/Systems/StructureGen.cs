@@ -124,7 +124,7 @@ namespace Pokemod.Common.Systems
                     int finalY = y - heightOfStructure + 2; //its offset by 2 upwards for whatever reason, idk why.
 
 
-                    StructureHelper.API.Generator.GenerateStructure("Content/Structures/MewDNATemple", new Point16(x, finalY), ModContent.GetInstance<Pokemod>());
+                    //StructureHelper.API.Generator.GenerateStructure("Content/Structures/MewDNATemple", new Point16(x, finalY), ModContent.GetInstance<Pokemod>());
                     ModContent.GetInstance<Pokemod>().Logger.Info($"Mew DNA Temple placed at {x} {finalY}");
                     success = true;
 
