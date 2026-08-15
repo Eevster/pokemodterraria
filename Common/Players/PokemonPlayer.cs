@@ -390,7 +390,7 @@ namespace Pokemod.Common.Players
 
 			if (Player.dead)
 			{
-				if(onBattle) onBattle = false;
+				if(onBattle) SetBattle(false);
 				if(manualControl) manualControl = false;
 			}
 		}
