@@ -522,6 +522,8 @@ Projectiles: {
 	// FlaaffyPetProjectileShiny.DisplayName: Flaaffy Pet Projectile Shiny
 	// MareepPetProjectile.DisplayName: Mareep Pet Projectile
 	// MareepPetProjectileShiny.DisplayName: Mareep Pet Projectile Shiny
+	// TerrarianMewtwoPetProjectile.DisplayName: Terrarian Mewtwo Pet Projectile
+	// TerrarianMewtwoPetProjectileShiny.DisplayName: Terrarian Mewtwo Pet Projectile Shiny
 	// PichuPetProjectileShiny.DisplayName: Pichu Pet Projectile Shiny
 	// PichuPetProjectile.DisplayName: Pichu Pet Projectile
 	// MarillPetProjectileShiny.DisplayName: Marill Pet Projectile Shiny
@@ -611,6 +613,8 @@ Projectiles: {
 	ThunderShock.DisplayName: Impactrueno
 	Charge.DisplayName: Carga
 	CottonGuard.DisplayName: Rizo Algodón
+	// MewtwoBossOverheat.DisplayName: Mewtwo Boss Overheat
+	// MewtwoBossShadowBall.DisplayName: Mewtwo Boss Shadow Ball
 }
 
 Items: {
@@ -2685,6 +2689,26 @@ Items: {
 			'''
 	}
 
+	MalformedSample: {
+		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		// DisplayName: Malformed Sample
+	}
+
+	MewtwoBossSummonItem: {
+		// Tooltip: Summons the Malformed Subject.
+		// DisplayName: Experimental Transmitter
+	}
+
+	MewtwoBossBag: {
+		// Tooltip: ""
+		// DisplayName: Treasure Bag
+	}
+
+	MewtwoBossMask: {
+		// Tooltip: ""
+		// DisplayName: Malformed Subject Mask
+	}
+
 	HallowedTrainerGlove: {
 		DisplayName: Guante bendito de entrenador
 		Tooltip:
@@ -2712,6 +2736,21 @@ Items: {
 			Cuando tu pokemon activo queda con 20% de HP o menos regresa a su pokeball
 			Tu pokemon emite algo de luz
 			'''
+	}
+
+	PerfectedSample: {
+		// DisplayName: Perfected Sample
+		// Tooltip: "{$CommonItemTooltip.GeneticSample}"
+	}
+
+	MewtwoBossRelicItem: {
+		// DisplayName: Malformed Subject Relic
+		// Tooltip: ""
+	}
+
+	MewtwoBossTrophyItem: {
+		// DisplayName: Malformed Subject Trophy
+		// Tooltip: ""
 	}
 
 	ReinforcedBand: {
@@ -5359,13 +5398,13 @@ NPCs: {
 	}
 
 	FlaaffyCritterNPC: {
-		DisplayName: Flaaffy
 		Description: Cuando su pelaje se carga de electricidad, su cola se enciende. Lanza pelo que electrocuta al contacto.
+		DisplayName: Flaaffy
 	}
 
 	AmpharosCritterNPC: {
-		DisplayName: Ampharos
 		Description: La punta de su cola emite una luz intensa que antiguamente la gente usaba para enviar señales.
+		DisplayName: Ampharos
 	}
 
 	AmpharosMegaCritterNPC: {
@@ -5807,8 +5846,8 @@ NPCs: {
 	// IgglybuffCritterNPCShiny.DisplayName: Igglybuff Shiny
 	// CleffaCritterNPCShiny.DisplayName: Cleffa Shiny
 	// EspeonCritterNPCShiny.DisplayName: Espeon Shiny
-	// AmpharosCritterNPCShiny.DisplayName: Ampharos Shiny
-	// FlaaffyCritterNPCShiny.DisplayName: Flaaffy Shiny
+	// AmpharosCritterNPCShiny.DisplayName: Ampharos Critter N P C Shiny
+	// FlaaffyCritterNPCShiny.DisplayName: Flaaffy Critter N P C Shiny
 	// MarillCritterNPCShiny.DisplayName: Marill Shiny
 	// AzumarillCritterNPCShiny.DisplayName: Azumarill Shiny
 	// SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Shiny
@@ -5937,6 +5976,10 @@ NPCs: {
 
 	G1T1_Brock.DisplayName: Lider de gimnasio de tipo Roca
 	G1T2_Misty.DisplayName: Lider de gimnasio de tipo Agua
+	// MewtwoBossBody.DisplayName: Malformed Subject
+	// MewtwoBossMinion.DisplayName: Experiement Controller
+	// TerrarianMewtwoCritterNPC.DisplayName: Terrarian Mewtwo Critter N P C
+	// TerrarianMewtwoCritterNPCShiny.DisplayName: Terrarian Mewtwo Critter N P C Shiny
 	G1T3_LtSurge.DisplayName: Lider de gimnasio de tipo Eléctrico
 	G1T4_Erika.DisplayName: Lider de gimnasio de tipo Planta
 	G1T5_Koga.DisplayName: Lider de gimnasio de tipo Veneno

@@ -522,6 +522,8 @@ Projectiles: {
 	FlaaffyPetProjectileShiny.DisplayName: Flaaffy Pet Projectile Shiny
 	MareepPetProjectile.DisplayName: Mareep Pet Projectile
 	MareepPetProjectileShiny.DisplayName: Mareep Pet Projectile Shiny
+	TerrarianMewtwoPetProjectile.DisplayName: Terrarian Mewtwo Pet Projectile
+	TerrarianMewtwoPetProjectileShiny.DisplayName: Terrarian Mewtwo Pet Projectile Shiny
 	PichuPetProjectileShiny.DisplayName: Pichu Pet Projectile Shiny
 	PichuPetProjectile.DisplayName: Pichu Pet Projectile
 	MarillPetProjectileShiny.DisplayName: Marill Pet Projectile Shiny
@@ -611,6 +613,8 @@ Projectiles: {
 	ThunderShock.DisplayName: Thunder Shock
 	Charge.DisplayName: Charge
 	CottonGuard.DisplayName: Cotton Guard
+	MewtwoBossOverheat.DisplayName: Mewtwo Boss Overheat
+	MewtwoBossShadowBall.DisplayName: Mewtwo Boss Shadow Ball
 }
 
 Items: {
@@ -2685,6 +2689,26 @@ Items: {
 			'''
 	}
 
+	MalformedSample: {
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+		DisplayName: Malformed Sample
+	}
+
+	MewtwoBossSummonItem: {
+		Tooltip: Summons the Malformed Subject.
+		DisplayName: Experimental Transmitter
+	}
+
+	MewtwoBossBag: {
+		Tooltip: ""
+		DisplayName: Treasure Bag
+	}
+
+	MewtwoBossMask: {
+		Tooltip: ""
+		DisplayName: Malformed Subject Mask
+	}
+
 	HallowedTrainerGlove: {
 		DisplayName: Hallowed Trainer Glove
 		Tooltip:
@@ -2712,6 +2736,21 @@ Items: {
 			When your active pokemon has 20% HP or less, it returns to its pokeball
 			Your pokemon emit some light
 			'''
+	}
+
+	PerfectedSample: {
+		DisplayName: Perfected Sample
+		Tooltip: "{$CommonItemTooltip.GeneticSample}"
+	}
+
+	MewtwoBossRelicItem: {
+		DisplayName: Malformed Subject Relic
+		Tooltip: ""
+	}
+
+	MewtwoBossTrophyItem: {
+		DisplayName: Malformed Subject Trophy
+		Tooltip: ""
 	}
 
 	ReinforcedBand: {
@@ -5359,13 +5398,13 @@ NPCs: {
 	}
 
 	FlaaffyCritterNPC: {
-		DisplayName: Flaaffy
 		Description: If its coat becomes fully charged with electricity, its tail lights up. Flaaffy can fire hair that zaps on impact.
+		DisplayName: Flaaffy Critter N P C
 	}
 
 	AmpharosCritterNPC: {
-		DisplayName: Ampharos
 		Description: The tip of its tail shines brightly. In the olden days, people sent signals using the light from this Pokémon's tail.
+		DisplayName: Ampharos Critter N P C
 	}
 
 	AmpharosMegaCritterNPC: {
@@ -5807,8 +5846,8 @@ NPCs: {
 	IgglybuffCritterNPCShiny.DisplayName: Igglybuff Shiny
 	CleffaCritterNPCShiny.DisplayName: Cleffa Shiny
 	EspeonCritterNPCShiny.DisplayName: Espeon Shiny
-	AmpharosCritterNPCShiny.DisplayName: Ampharos Shiny
-	FlaaffyCritterNPCShiny.DisplayName: Flaaffy Shiny
+	AmpharosCritterNPCShiny.DisplayName: Ampharos Critter N P C Shiny
+	FlaaffyCritterNPCShiny.DisplayName: Flaaffy Critter N P C Shiny
 	MarillCritterNPCShiny.DisplayName: Marill Shiny
 	AzumarillCritterNPCShiny.DisplayName: Azumarill Shiny
 	SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Shiny
@@ -5937,6 +5976,10 @@ NPCs: {
 
 	G1T1_Brock.DisplayName: Rock-type Gym Leader
 	G1T2_Misty.DisplayName: Water-type Gym Leader
+	MewtwoBossBody.DisplayName: Malformed Subject
+	MewtwoBossMinion.DisplayName: Experiement Controller
+	TerrarianMewtwoCritterNPC.DisplayName: Terrarian Mewtwo Critter N P C
+	TerrarianMewtwoCritterNPCShiny.DisplayName: Terrarian Mewtwo Critter N P C Shiny
 	G1T3_LtSurge.DisplayName: Electric-type Gym Leader
 	G1T4_Erika.DisplayName: Grass-type Gym Leader
 	G1T5_Koga.DisplayName: Poison-type Gym Leader

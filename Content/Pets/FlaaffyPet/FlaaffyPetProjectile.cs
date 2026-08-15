@@ -5,7 +5,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Pokemod.Content.Pets.DoduoPet
+namespace Pokemod.Content.Pets.FlaaffyPet
 {
 	public class FlaaffyPetProjectile : PokemonPetProjectile
 	{
