@@ -9,8 +9,8 @@ namespace Pokemod.Content.Pets.WeedlePet
 {
 	public class WooperPetProjectile : PokemonPetProjectile
 	{
-        public override int hitboxWidth => 56;
-        public override int hitboxHeight => 40;
+        public override int hitboxWidth => 18;
+        public override int hitboxHeight => 26;
 
         public override int totalFrames => 32;
         public override int animationSpeed => 5;
