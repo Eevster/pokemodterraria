@@ -35,6 +35,12 @@ namespace Pokemod.Common.UI.BattleUI
 			}
 		}
 
+        public override void PreSaveAndQuit()
+        {
+            base.PreSaveAndQuit();
+            HideMyUI();
+        }
+
 		public override void UpdateUI(GameTime gameTime) {
 			if (PokemonBattleInterface?.CurrentState != null){
 				PokemonBattleInterface?.Update(gameTime);

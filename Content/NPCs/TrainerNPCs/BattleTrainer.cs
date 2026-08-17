@@ -223,6 +223,10 @@ namespace Pokemod.Content.NPCs.TrainerNPCs
 					OnBattle = false;
 				}
 			}
+			else
+			{
+				if(OnBattle) OnBattle = false;
+			}
 
 			if(OnBattle) NPC.velocity.X = 0;
         }

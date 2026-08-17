@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Pokemod.Content.Items.Consumables
 {
     public class Potion : PokemonConsumableItem{
+        public override bool usableInBattle => true;
         int healAmount = 20 * 5;
         public override void SetDefaults() {
 			Item.width = 24; // The item texture's width

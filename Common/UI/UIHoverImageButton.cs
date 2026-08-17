@@ -111,6 +111,13 @@ namespace Pokemod.Common.UI
 			_needsTextureLoading = true;
 		}
 
+		public void SetNewImage(Asset<Texture2D> texture, string hoverText)
+		{
+			_Texture = texture;
+			_needsTextureLoading = true;
+			tooltipText = hoverText;
+		}
+
 		protected override void DrawSelf(SpriteBatch spriteBatch)
 		{
 			if (_needsTextureLoading)

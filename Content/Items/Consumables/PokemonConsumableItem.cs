@@ -10,6 +10,7 @@ namespace Pokemod.Content.Items.Consumables
 {
 	public abstract class PokemonConsumableItem : ModItem
 	{
+		public virtual bool usableInBattle => false;
 		public override void SetStaticDefaults() {
 			// The text shown below some item names is called a tooltip. Tooltips are defined in the localization files. See en-US.hjson.
 

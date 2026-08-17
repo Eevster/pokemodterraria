@@ -44,6 +44,12 @@ namespace Pokemod.Common.UI.PokedexUI
 			}
 		}
 
+		public override void PreSaveAndQuit()
+        {
+            base.PreSaveAndQuit();
+            HideMyUI();
+        }
+
 		public override void UpdateUI(GameTime gameTime) {
 			// Here we call .Update on our custom UI and propagate it to its state and underlying elements
 			if (PokedexUserInterface?.CurrentState != null){

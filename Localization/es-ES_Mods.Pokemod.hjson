@@ -5617,6 +5617,11 @@ NPCs: {
 		Description: Los numerosos ojos de este Pokémon le permiten observar el espacio profundo.
 	}
 
+	TerrarianMewtwoCritterNPC: {
+		DisplayName: Mewtwo de Terraria
+		Description: ""
+	}
+
 	TerrarianSolosisCritterNPC: {
 		DisplayName: Solosis de Terraria
 		Description: ""
@@ -5846,8 +5851,8 @@ NPCs: {
 	// IgglybuffCritterNPCShiny.DisplayName: Igglybuff Shiny
 	// CleffaCritterNPCShiny.DisplayName: Cleffa Shiny
 	// EspeonCritterNPCShiny.DisplayName: Espeon Shiny
-	// AmpharosCritterNPCShiny.DisplayName: Ampharos Critter N P C Shiny
-	// FlaaffyCritterNPCShiny.DisplayName: Flaaffy Critter N P C Shiny
+	// AmpharosCritterNPCShiny.DisplayName: Ampharos Shiny
+	// FlaaffyCritterNPCShiny.DisplayName: Flaaffy Shiny
 	// MarillCritterNPCShiny.DisplayName: Marill Shiny
 	// AzumarillCritterNPCShiny.DisplayName: Azumarill Shiny
 	// SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Shiny
@@ -5879,22 +5884,23 @@ NPCs: {
 	// TinkatinkCritterNPCShiny.DisplayName: Tinkatink Shiny
 	// TinkatonCritterNPCShiny.DisplayName: Tinkaton Shiny
 	// TinkatuffCritterNPCShiny.DisplayName: Tinkatuff Shiny
-	// TerrarianKabutoCritterNPCShiny.DisplayName: Terrarian Kabuto Shiny
-	// TerrarianKabutopsCritterNPCShiny.DisplayName: Terrarian Kabutops Shiny
-	// TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
-	// TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
-	// TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
-	// TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Shiny
-	// TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Shiny
-	// TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Shiny
-	// AlolanRaticateCritterNPCShiny.DisplayName: Alolan Raticate Shiny
-	// AlolanRattataCritterNPCShiny.DisplayName: Alolan Rattata Shiny
-	// AlolanDiglettCritterNPCShiny.DisplayName: Alolan Diglett Shiny
-	// AlolanDugtrioCritterNPCShiny.DisplayName: Alolan Dugtrio Shiny
-	// AlolanSandshrewCritterNPCShiny.DisplayName: Alolan Sandshrew Shiny
-	// AlolanSandslashCritterNPCShiny.DisplayName: Alolan Sandslash Shiny
-	// HisuianVoltorbCritterNPCShiny.DisplayName: Hisuian Voltorb Shiny
-	// HisuianElectrodeCritterNPCShiny.DisplayName: Hisuian Electrode Shiny
+	TerrarianKabutoCritterNPCShiny.DisplayName: Kabuto de Terraria Shiny
+	TerrarianKabutopsCritterNPCShiny.DisplayName: Kabutops de Terraria Shiny
+	TerrarianAerodactylCritterNPCShiny.DisplayName: Aerodactyl de Terraria Shiny
+	TerrarianOmanyteCritterNPCShiny.DisplayName: Omanyte de Terraria Shiny
+	TerrarianOmastarCritterNPCShiny.DisplayName: Omastar de Terraria Shiny
+	TerrarianMewtwoCritterNPCShiny.DisplayName: Mewtwo de Terraria Shiny
+	TerrarianSolosisCritterNPCShiny.DisplayName: Solosis de Terraria Shiny
+	TerrarianReuniclusCritterNPCShiny.DisplayName: Reuniclus de Terraria Shiny
+	TerrarianDuosionCritterNPCShiny.DisplayName: Duosion de Terraria Shiny
+	AlolanRaticateCritterNPCShiny.DisplayName: Raticate de Alola Shiny
+	AlolanRattataCritterNPCShiny.DisplayName: Rattata de Alola Shiny
+	AlolanDiglettCritterNPCShiny.DisplayName: Diglett de Alola Shiny
+	AlolanDugtrioCritterNPCShiny.DisplayName: Dugtrio de Alola Shiny
+	AlolanSandshrewCritterNPCShiny.DisplayName: Sandshrew de Alola Shiny
+	AlolanSandslashCritterNPCShiny.DisplayName: Sandslash de Alola Shiny
+	HisuianVoltorbCritterNPCShiny.DisplayName: Voltorb de Hisui Shiny
+	HisuianElectrodeCritterNPCShiny.DisplayName: Electrode de Hisui Shiny
 	// OnixCritterNPC_Body.DisplayName: Onix
 	// OnixCritterNPC_Tail.DisplayName: Onix
 	// OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
@@ -5976,16 +5982,14 @@ NPCs: {
 
 	G1T1_Brock.DisplayName: Lider de gimnasio de tipo Roca
 	G1T2_Misty.DisplayName: Lider de gimnasio de tipo Agua
-	// MewtwoBossBody.DisplayName: Malformed Subject
-	// MewtwoBossMinion.DisplayName: Experiement Controller
-	// TerrarianMewtwoCritterNPC.DisplayName: Terrarian Mewtwo Critter N P C
-	// TerrarianMewtwoCritterNPCShiny.DisplayName: Terrarian Mewtwo Critter N P C Shiny
 	G1T3_LtSurge.DisplayName: Lider de gimnasio de tipo Eléctrico
 	G1T4_Erika.DisplayName: Lider de gimnasio de tipo Planta
 	G1T5_Koga.DisplayName: Lider de gimnasio de tipo Veneno
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
+	// MewtwoBossBody.DisplayName: Malformed Subject
+	// MewtwoBossMinion.DisplayName: Experiement Controller
 }
 
 Bestiary: {

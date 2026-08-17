@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Pets;
+using Pokemod.Common.UI;
+using Pokemod.Content.Items.Consumables;
 using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent;
@@ -10,6 +14,8 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Terraria.Audio;
+using Terraria.ID;
 
 namespace Pokemod.Common.UI.BattleUI
 {
@@ -20,6 +26,7 @@ namespace Pokemod.Common.UI.BattleUI
         public UIText currentMove;
 
         Asset<Texture2D> pokeballTexture;
+        Asset<Texture2D> noItemTexture;
 
         int barFrameWidth = 388;
         int barFrameHeight = 60;
@@ -34,6 +41,17 @@ namespace Pokemod.Common.UI.BattleUI
         UIElement infoPanel;
         UIElement barPanel;
         UIElement iconPanel;
+        UIHoverPanelImageButton itemButton;
+        UIText itemText;
+
+        List<int> itemsIndex;
+        int currentItemIndex = 0;
+
+        bool canUseItem = false;
+        int itemTimer = 0;
+        int itemCooldown = 60*60;
+
+        UIText itemCooldownText;
 
         int teamCount = 6;
         int defeatedCount = 2;
@@ -49,8 +67,11 @@ namespace Pokemod.Common.UI.BattleUI
         
         public override void OnInitialize()
         {
+            itemsIndex = new List<int>();
+
             Asset<Texture2D> pokemonBarImage = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/BattlePokemonBar");
             pokeballTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/UI/BattlePokeball");
+            noItemTexture = ModContent.Request<Texture2D>("Terraria/Images/UI/Bestiary/Icon_Locked");
 
             // Player UI Elements
             pokemonBar = new UIImage(pokemonBarImage) {};
@@ -104,6 +125,59 @@ namespace Pokemod.Common.UI.BattleUI
             UIHelpers.SetRectangleAlign(helpText, left: 0.5f, top: 0.92f, width: 400, height: 80);
 
 			Append(helpText);
+
+            UIElement itemPanel = new UIElement();
+            UIHelpers.SetRectangleAlign(itemPanel, left: 0.5f, top: 0f, width: 128f, height: 64f);
+            itemPanel.Left.Set(-barFrameWidth - barSeparation/2 - 72, 0);
+            itemPanel.Top.Set(100, 0);
+
+            itemButton = new UIHoverPanelImageButton(noItemTexture, "???");
+            UIHelpers.SetRectangleAlign(itemButton, left: 0.5f, top: 0.5f, width: 64f, height: 64f);
+            itemButton.OnLeftClick += new MouseEvent(UseSelectedItem);
+            itemCooldownText = new UIText(""){
+				TextColor = Color.White,
+				TextOriginX = 0f,
+				TextOriginY = 0f,
+			};
+            itemButton.Append(itemCooldownText);
+            itemPanel.Append(itemButton);
+
+            itemText = new UIText("")
+            {
+                TextColor = Color.White,
+				TextOriginX = 0.5f,
+				TextOriginY = 0.5f,
+            };
+            UIHelpers.SetRectangleAlign(itemText, left: 0.5f, top: 1f, width: 128f, height: 32f);
+            itemText.Top.Set(32,0);
+            itemPanel.Append(itemText);
+
+            Asset<Texture2D> buttonPrevTexture = ModContent.Request<Texture2D>("Terraria/Images/UI/Bestiary/Button_Back");
+			UIHoverImageButton prevButton = new UIHoverImageButton(buttonPrevTexture, Language.GetTextValue("LegacyMenu.239"));
+            UIHelpers.SetRectangleAlign(prevButton, left: 0f, top: 0.5f, width: 32f, height: 32f);
+            prevButton.OnLeftClick += (a, b) => ChangeItem(-1);
+            itemPanel.Append(prevButton);
+
+            Asset<Texture2D> buttonNextTexture = ModContent.Request<Texture2D>("Terraria/Images/UI/Bestiary/Button_Forward");
+			UIHoverImageButton nextButton = new UIHoverImageButton(buttonNextTexture, Language.GetTextValue("LegacyMenu.240"));
+            UIHelpers.SetRectangleAlign(nextButton, left: 1f, top: 0.5f, width: 32f, height: 32f);
+            nextButton.OnLeftClick += (a, b) => ChangeItem(+1);
+            itemPanel.Append(nextButton);
+
+            Append(itemPanel);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if (!Main.gamePaused)
+            {
+                if(itemTimer > 0){
+                    itemTimer--;
+                    itemCooldownText.SetText(""+(itemTimer>0?(itemTimer/60):""));
+                }
+                SetItemButtonState(itemTimer <= 0 && itemsIndex.Count > 0); 
+            }
         }
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
@@ -220,6 +294,7 @@ namespace Pokemod.Common.UI.BattleUI
             if (!isEnemy){
                 teamCount = total;
                 defeatedCount = 0;
+                SearchItems();
             }
             else
             {
@@ -232,6 +307,77 @@ namespace Pokemod.Common.UI.BattleUI
         {
             if(!isEnemy) defeatedCount++;
             else defeatedEnemyCount++;
+        }
+
+        private void SearchItems()
+        {
+            Player player = Main.player[Main.myPlayer];
+
+            itemsIndex = new List<int>();
+            itemTimer = 0;
+
+            for(int i = 0; i < player.inventory.Length; i++)
+            {
+                if (player.inventory[i].ModItem is PokemonConsumableItem pokeItem && pokeItem.usableInBattle)
+                {
+                    itemsIndex.Add(i);
+                }
+            }
+
+            if(itemsIndex.Count > 0)
+            {
+                currentItemIndex = 0;
+                ChangeItem(0);
+            }
+        }
+
+        private void UseSelectedItem(UIMouseEvent evt, UIElement listeningElement)
+        {
+            Player player = Main.player[Main.myPlayer];
+
+            if(canUseItem)
+            {
+                Item currentItem = player.inventory[itemsIndex[currentItemIndex]];
+                if(currentItem.ModItem is PokemonConsumableItem pokeItem && pokeItem.usableInBattle)
+                {
+                    pokeItem.OnItemUse(playerPokemon.Projectile);
+                }
+
+                itemTimer = itemCooldown;
+
+                SoundEngine.PlaySound(SoundID.Item25);
+            }
+
+            itemsIndex.RemoveAll(x => player.inventory[x].stack == 0 || player.inventory[x].ModItem is not PokemonConsumableItem || (player.inventory[x].ModItem is PokemonConsumableItem pokeItem && !pokeItem.usableInBattle));
+
+            ChangeItem(0);
+        }
+
+        private void ChangeItem(int amount)
+        {
+            if(itemsIndex.Count <= 0)
+            {
+                currentItemIndex = 0;
+                itemButton.SetNewImage(noItemTexture, "???");
+                return;
+            }
+
+            currentItemIndex += amount;
+            if(currentItemIndex < 0) currentItemIndex += itemsIndex.Count;
+            if(currentItemIndex >= itemsIndex.Count) currentItemIndex -= itemsIndex.Count;
+
+            Player player = Main.player[Main.myPlayer];
+
+            Item currentItem = player.inventory[itemsIndex[currentItemIndex]];
+
+            itemButton.SetNewImage(ModContent.Request<Texture2D>("Pokemod/Content/Items/Consumables/"+currentItem.ModItem.GetType().Name), Language.GetTextValue("Mods.Pokemod.Items."+currentItem.ModItem.GetType().Name+".DisplayName"));
+            itemText.SetText(Language.GetTextValue("Mods.Pokemod.Items."+currentItem.ModItem.GetType().Name+".DisplayName"));
+        }
+
+        private void SetItemButtonState(bool unlocked)
+        {
+            itemButton.BackgroundColor = (unlocked?new Color(63, 82, 151):Color.Black) * 0.7f;
+            canUseItem = unlocked;
         }
     }
 }

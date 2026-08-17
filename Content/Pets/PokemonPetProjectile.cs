@@ -56,6 +56,8 @@ namespace Pokemod.Content.Pets
 		//Damage system variables
 		public bool immune = true;
         public int hurtTime = 60;
+		private int worldHurtTime = 30;
+		private int battleHurtTime = 30;
         public int currentHp = 0;
 		public string variant = "";
         public bool showHp;
@@ -2732,7 +2734,8 @@ namespace Pokemod.Content.Pets
                 hurtTime--;
 
                 if (hurtTime <= 0){
-                    hurtTime = 60;
+					if(Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().onBattle) hurtTime = battleHurtTime;
+					else hurtTime = worldHurtTime;
                     immune = false;
                 }
             }
@@ -2896,7 +2899,7 @@ namespace Pokemod.Content.Pets
 							megaEvolveSymbolTexture.Frame(1, 15).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
 					}
 				}
-				if (Projectile.owner == Main.myPlayer && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().mouseOverPokemon == this)
+				if (Projectile.owner == Main.myPlayer && !dynamax && !isEnemy && Main.player[Projectile.owner].GetModPlayer<PokemonPlayer>().mouseOverPokemon == this)
 				{
 					Asset<Texture2D> happinessTexture = ModContent.Request<Texture2D>("Pokemod/Assets/Textures/PlayerVisuals/HappinessVisuals");
 

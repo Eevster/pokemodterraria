@@ -5399,12 +5399,12 @@ NPCs: {
 
 	FlaaffyCritterNPC: {
 		Description: If its coat becomes fully charged with electricity, its tail lights up. Flaaffy can fire hair that zaps on impact.
-		DisplayName: Flaaffy Critter N P C
+		DisplayName: Flaaffy
 	}
 
 	AmpharosCritterNPC: {
 		Description: The tip of its tail shines brightly. In the olden days, people sent signals using the light from this Pokémon's tail.
-		DisplayName: Ampharos Critter N P C
+		DisplayName: Ampharos
 	}
 
 	AmpharosMegaCritterNPC: {
@@ -5615,6 +5615,11 @@ NPCs: {
 	TerrarianOmastarCritterNPC: {
 		DisplayName: Terrarian Omastar
 		Description: This Pokemon's many eyes allow it to peer into deep space.
+	}
+
+	TerrarianMewtwoCritterNPC: {
+		DisplayName: Terrarian Mewtwo
+		Description: ""
 	}
 
 	TerrarianSolosisCritterNPC: {
@@ -5846,8 +5851,8 @@ NPCs: {
 	IgglybuffCritterNPCShiny.DisplayName: Igglybuff Shiny
 	CleffaCritterNPCShiny.DisplayName: Cleffa Shiny
 	EspeonCritterNPCShiny.DisplayName: Espeon Shiny
-	AmpharosCritterNPCShiny.DisplayName: Ampharos Critter N P C Shiny
-	FlaaffyCritterNPCShiny.DisplayName: Flaaffy Critter N P C Shiny
+	AmpharosCritterNPCShiny.DisplayName: Ampharos Shiny
+	FlaaffyCritterNPCShiny.DisplayName: Flaaffy Shiny
 	MarillCritterNPCShiny.DisplayName: Marill Shiny
 	AzumarillCritterNPCShiny.DisplayName: Azumarill Shiny
 	SudowoodoCritterNPCShiny.DisplayName: Sudowoodo Shiny
@@ -5884,6 +5889,7 @@ NPCs: {
 	TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
 	TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
+	TerrarianMewtwoCritterNPCShiny.DisplayName: Terrarian Mewtwo Shiny
 	TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Shiny
 	TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Shiny
 	TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Shiny
@@ -5976,16 +5982,14 @@ NPCs: {
 
 	G1T1_Brock.DisplayName: Rock-type Gym Leader
 	G1T2_Misty.DisplayName: Water-type Gym Leader
-	MewtwoBossBody.DisplayName: Malformed Subject
-	MewtwoBossMinion.DisplayName: Experiement Controller
-	TerrarianMewtwoCritterNPC.DisplayName: Terrarian Mewtwo Critter N P C
-	TerrarianMewtwoCritterNPCShiny.DisplayName: Terrarian Mewtwo Critter N P C Shiny
 	G1T3_LtSurge.DisplayName: Electric-type Gym Leader
 	G1T4_Erika.DisplayName: Grass-type Gym Leader
 	G1T5_Koga.DisplayName: Poison-type Gym Leader
 	G1T6_Sabrina.DisplayName: Psychic-type Gym Leader
 	G1T7_Blaine.DisplayName: Fire-type Gym Leader
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
+	MewtwoBossBody.DisplayName: Malformed Subject
+	MewtwoBossMinion.DisplayName: Experiement Controller
 }
 
 Bestiary: {
