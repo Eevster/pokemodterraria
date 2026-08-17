@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Pokemod.Common.Players;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -43,7 +44,14 @@ namespace Pokemod.Common.UI.BattleUI
 
 		public override void UpdateUI(GameTime gameTime) {
 			if (PokemonBattleInterface?.CurrentState != null){
-				PokemonBattleInterface?.Update(gameTime);
+                if (Main.player[Main.myPlayer].GetModPlayer<PokemonPlayer>().onBattle)
+                {
+                    PokemonBattleInterface?.Update(gameTime);
+                }
+                else
+                {
+                    HideMyUI();
+                }
 			}
 		}
 
