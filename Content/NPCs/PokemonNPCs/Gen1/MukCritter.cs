@@ -20,13 +20,18 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override float catchRate => 75;
         public override int minLevel => 38;
 
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.TheDungeon, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheDungeon);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneDungeon) {
-				return GetSpawnChance(spawnInfo, SpawnCondition.DungeonNormal.Chance * 0.3f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.DungeonNormal.Chance * 0.1f);
 			}
 
 			return 0f;

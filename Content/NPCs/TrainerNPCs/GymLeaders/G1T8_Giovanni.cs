@@ -51,7 +51,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheDungeon,
 				new FlavorTextBestiaryInfoElement($"Mods.Pokemod.Bestiary.{GetType().Name}"),
 			});
 		}
@@ -65,7 +65,7 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			if (Main.hardMode && spawnInfo.Player.ZoneForest && !NPC.AnyNPCs(Type))
+			if (Main.hardMode && (spawnInfo.Player.ZoneForest || spawnInfo.Player.ZoneDungeon) && !NPC.AnyNPCs(Type))
 			{
 				return 0.01f;
 			}

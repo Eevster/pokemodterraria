@@ -43,7 +43,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         {
             if (spawnInfo.Player.ZoneDungeon)
             {
-                return GetSpawnChance(spawnInfo, SpawnCondition.Dungeon.Chance * 0.005f);
+                return GetSpawnChance(spawnInfo, SpawnCondition.DungeonNormal.Chance * 0.005f);
             }
 
             return 0f;

@@ -20,6 +20,12 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
 		public override float catchRate => 190;
 
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.TheCorruption, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.TheCrimson, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
+
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
 			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption);
@@ -27,7 +33,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneCorrupt || spawnInfo.Player.ZoneCrimson)
 			{
-				return GetSpawnChance(spawnInfo, (SpawnCondition.Crimson.Chance + SpawnCondition.Corruption.Chance) * 0.5f);
+				return GetSpawnChance(spawnInfo, (SpawnCondition.Crimson.Chance + SpawnCondition.Corruption.Chance) * 0.3f);
 			}
 
 			return 0f;
