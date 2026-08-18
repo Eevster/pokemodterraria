@@ -615,6 +615,8 @@ Projectiles: {
 	CottonGuard.DisplayName: Rizo Algodón
 	// MewtwoBossOverheat.DisplayName: Mewtwo Boss Overheat
 	// MewtwoBossShadowBall.DisplayName: Mewtwo Boss Shadow Ball
+	// RotomPetProjectileShiny.DisplayName: Rotom Pet Projectile Shiny
+	// RotomPetProjectile.DisplayName: Rotom Pet Projectile
 }
 
 Items: {
@@ -5512,6 +5514,11 @@ NPCs: {
 		Description: Agarra cualquier cosa con su lengua extensible. Quien se acerca mucho termina lleno de babas.
 	}
 
+	RotomCritterNPC: {
+		DisplayName: Rotom
+		Description: Su cuerpo está hecho de plasma. Se lo conoce por su capacidad para infiltrarse en dispositivos electrónicos y cometer fechorías.
+	}
+
 	VenipedeCritterNPC: {
 		DisplayName: Venipede
 		Description: Al morder, inyecta un poderoso veneno que inmoviliza hasta a los Pokémon pájaro más grandes, sus enemigos naturales.
@@ -5873,6 +5880,7 @@ NPCs: {
 	// VespiquenCritterNPCShiny.DisplayName: Vespiquen Shiny
 	// MagnezoneCritterNPCShiny.DisplayName: Magnezone Shiny
 	// LickilickyCritterNPCShiny.DisplayName: Lickilicky Shiny
+	// RotomCritterNPCShiny.DisplayName: Rotom Shiny
 	// VenipedeCritterNPCShiny.DisplayName: Venipede Shiny
 	// WhirlipedeCritterNPCShiny.DisplayName: Whirlipede Shiny
 	// ScolipedeCritterNPCShiny.DisplayName: Scolipede Shiny
