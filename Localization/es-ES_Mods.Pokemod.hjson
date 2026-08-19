@@ -617,6 +617,8 @@ Projectiles: {
 	// MewtwoBossShadowBall.DisplayName: Mewtwo Boss Shadow Ball
 	// RotomPetProjectileShiny.DisplayName: Rotom Pet Projectile Shiny
 	// RotomPetProjectile.DisplayName: Rotom Pet Projectile
+	// AzurillPetProjectileShiny.DisplayName: Azurill Pet Projectile Shiny
+	// AzurillPetProjectile.DisplayName: Azurill Pet Projectile
 }
 
 Items: {
@@ -5479,6 +5481,11 @@ NPCs: {
 		Description: Al ser mordido por un Shellder, desarrolló una inteligencia comparable a la de una eminencia científica mundial.
 	}
 
+	AzurillCritterNPC: {
+		DisplayName: Azurill
+		Description: Vive cerca del agua. Cuando está en tierra firme, se desplaza a gran velocidad botando sobre su gran cola.
+	}
+
 	MawileCritterNPC: {
 		DisplayName: Mawile
 		Description: Las grandes fauces de su cabeza fueron cuernos en su día. Puede triturar vigas de acero con ellas.
@@ -5873,6 +5880,7 @@ NPCs: {
 	// WooperCritterNPCShiny.DisplayName: Wooper Shiny
 	// QuagsireCritterNPCShiny.DisplayName: Quagsire Shiny
 	// SlowkingCritterNPCShiny.DisplayName: Slowking Shiny
+	// AzurillCritterNPCShiny.DisplayName: Azurill Shiny
 	// MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	// CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
 	// RampardosCritterNPCShiny.DisplayName: Rampardos Shiny

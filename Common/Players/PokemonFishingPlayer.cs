@@ -24,6 +24,7 @@ namespace Pokemod.Common.Players
 				ModContent.NPCType<StaryuCritterNPC>(),
 				ModContent.NPCType<MarillCritterNPC>(),
 				ModContent.NPCType<DratiniCritterNPC>(),
+				ModContent.NPCType<AzurillCritterNPC>(),
 			};
 
 			int[] shinyPokemonList =
@@ -34,6 +35,7 @@ namespace Pokemod.Common.Players
 				ModContent.NPCType<StaryuCritterNPCShiny>(),
 				ModContent.NPCType<MarillCritterNPCShiny>(),
 				ModContent.NPCType<DratiniCritterNPCShiny>(),
+				ModContent.NPCType<AzurillCritterNPCShiny>(),
 			};
 
 			const int oldRodLimit = 1;

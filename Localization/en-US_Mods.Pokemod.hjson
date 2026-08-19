@@ -617,6 +617,8 @@ Projectiles: {
 	MewtwoBossShadowBall.DisplayName: Mewtwo Boss Shadow Ball
 	RotomPetProjectileShiny.DisplayName: Rotom Pet Projectile Shiny
 	RotomPetProjectile.DisplayName: Rotom Pet Projectile
+	AzurillPetProjectileShiny.DisplayName: Azurill Pet Projectile Shiny
+	AzurillPetProjectile.DisplayName: Azurill Pet Projectile
 }
 
 Items: {
@@ -5479,6 +5481,11 @@ NPCs: {
 		Description: Being bitten by Shellder gave it intelligence comparable to that of internationally recognized scientists.
 	}
 
+	AzurillCritterNPC: {
+		DisplayName: Azurill
+		Description: It's a Pokémon that lives by water. It moves quickly on land by bouncing on its big tail.
+	}
+
 	MawileCritterNPC: {
 		DisplayName: Mawile
 		Description: Attached to its head is a huge set of jaws formed by horns. It can chew through iron beams.
@@ -5873,6 +5880,7 @@ NPCs: {
 	WooperCritterNPCShiny.DisplayName: Wooper Shiny
 	QuagsireCritterNPCShiny.DisplayName: Quagsire Shiny
 	SlowkingCritterNPCShiny.DisplayName: Slowking Shiny
+	AzurillCritterNPCShiny.DisplayName: Azurill Shiny
 	MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
 	RampardosCritterNPCShiny.DisplayName: Rampardos Shiny
