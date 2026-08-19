@@ -980,7 +980,7 @@ namespace Pokemod.Content.NPCs
         Jungle = 22, UndergroundJungle = 23,
         SurfaceMushroom = 24, UndergroundMushroom = 25,
         Sky = 26,
-        Beach = 27, UndergroundBeach = 27,
+        Beach = 27, UndergroundBeach = 61,
         Ocean = 28,
         Marble = 29,
         Granite = 30,

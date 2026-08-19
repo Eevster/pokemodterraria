@@ -20,9 +20,14 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override float catchRate => 60;
         public override int minLevel => 28;
 
+		public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Beach, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
+
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 				if (spawnInfo.Player.ZoneBeach) {

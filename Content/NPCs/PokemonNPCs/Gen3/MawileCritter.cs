@@ -20,7 +20,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		
 		public override int[][] spawnConditions =>
 		[
-            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+            [(int)SpawnArea.TheHallow, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)

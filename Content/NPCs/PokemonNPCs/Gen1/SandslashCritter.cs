@@ -20,16 +20,19 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override float catchRate => 90;
         public override int minLevel => 22;
 
+		public override int[][] spawnConditions =>
+        [
+            [(int)SpawnArea.Desert, (int)DayTimeStatus.Day, (int)WeatherStatus.All]
+        ];
+
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) { 
 			base.SetBestiary(database, bestiaryEntry);
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert);
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (ModContent.GetInstance<BetaMonsConfig>().BetaMonsToggle) {
-				if (spawnInfo.Player.ZoneDesert) {
+			if (spawnInfo.Player.ZoneDesert) {
                 return GetSpawnChance(spawnInfo, SpawnCondition.OverworldDay.Chance * 0.1f);
-            	}
-			}
+            }
 
 			return 0f;
 		}
