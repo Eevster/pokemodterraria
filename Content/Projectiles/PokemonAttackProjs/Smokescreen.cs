@@ -101,9 +101,9 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
         {
 			if(!exploded){
 				Explode();
-			}else{
-                target.AddBuff(BuffID.Darkness, 3*60);
-            }
+			}
+			target.AddBuff(BuffID.Darkness, 3*60);
+
             base.OnHitPlayer(target, info);
         }
 
@@ -112,10 +112,8 @@ namespace Pokemod.Content.Projectiles.PokemonAttackProjs
 			if(!exploded){
 				Explode();
 			}
-			else
-			{
-				target.ApplyStatMod(5, -1);
-			}
+			target.ApplyStatMod(5, -1);
+			
             base.OnHitPokemonPet(target, damageDone);
         }
 
