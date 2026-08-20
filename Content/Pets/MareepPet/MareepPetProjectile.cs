@@ -21,7 +21,7 @@ namespace Pokemod.Content.Pets.MareepPet
         public override int[] attackStartEnd => [11, 20];
 
         public override string[] evolutions => ["Flaaffy"];
-		public override int levelToEvolve => 16;
+		public override int levelToEvolve => 15;
 		public override int levelEvolutionsNumber => 1;
     }
 
