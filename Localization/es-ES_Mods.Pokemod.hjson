@@ -5729,7 +5729,7 @@ NPCs: {
 
 	MimeJrCritterNPC: {
 		DisplayName: Mime Jr.
-		Description: When this gifted mimic surprises an opponent, Mime Jr. feels so happy that it ends up forgetting it was imitating something.
+		Description: Es un gran imitador. Cuando logra sorprender a su adversario, la alegría lo embarga de tal forma que se olvida de continuar su actuación.
 	}
 
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
@@ -5927,6 +5927,7 @@ NPCs: {
 	// RampardosCritterNPCShiny.DisplayName: Rampardos Shiny
 	// CombeeCritterNPCShiny.DisplayName: Combee Shiny
 	// VespiquenCritterNPCShiny.DisplayName: Vespiquen Shiny
+	// MimeJrCritterNPCShiny.DisplayName: Mime Jr. Shiny
 	// MagnezoneCritterNPCShiny.DisplayName: Magnezone Shiny
 	// LickilickyCritterNPCShiny.DisplayName: Lickilicky Shiny
 	// RotomCritterNPCShiny.DisplayName: Rotom Shiny
@@ -5968,8 +5969,6 @@ NPCs: {
 	// OrthwormCritterNPCShiny_Tail.DisplayName: Orthworm Shiny
 	// OrthwormCritterNPCShiny_Body.DisplayName: Orthworm Shiny
 
-	// MimeJrCritterNPCShiny.DisplayName: Mime Jr. Shiny
-	
 	PokemonProfessor: {
 		DisplayName: Profesor Pokemon
 		Census.SpawnCondition: Disponible inmediatamente
@@ -6052,7 +6051,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
-	// MimeJrCritterNPCShiny.DisplayName: Mime Jr Critter N P C Shiny
 	// MewtwoBossBody.DisplayName: Malformed Subject
 	// MewtwoBossMinion.DisplayName: Experiement Controller
 }
