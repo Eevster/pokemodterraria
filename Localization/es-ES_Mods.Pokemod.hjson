@@ -619,6 +619,8 @@ Projectiles: {
 	// RotomPetProjectile.DisplayName: Rotom Pet Projectile
 	// AzurillPetProjectileShiny.DisplayName: Azurill Pet Projectile Shiny
 	// AzurillPetProjectile.DisplayName: Azurill Pet Projectile
+	// OrthwormPetProjectileShiny.DisplayName: Orthworm Pet Projectile Shiny
+	// OrthwormPetProjectile.DisplayName: Orthworm Pet Projectile
 }
 
 Items: {
@@ -2769,7 +2771,32 @@ Items: {
 
 	MewDNAItem: {
 		// Tooltip: ""
-		// DisplayName: Mew D N A Item
+		// DisplayName: Mew DNA
+	}
+
+	ExpCandyS: {
+		DisplayName: Caramelo experiencia S
+		Tooltip: "{$CommonItemTooltip.ExpCandy}"
+	}
+
+	ExpCandyM: {
+		Tooltip: "{$CommonItemTooltip.ExpCandy}"
+		DisplayName: Caramelo experiencia M
+	}
+
+	ExpCandyL: {
+		Tooltip: "{$CommonItemTooltip.ExpCandy}"
+		DisplayName: Caramelo experiencia L
+	}
+
+	ExpCandyXL: {
+		DisplayName: Caramelo experiencia XL
+		Tooltip: "{$CommonItemTooltip.ExpCandy}"
+	}
+
+	ExpCandyXS: {
+		DisplayName: Caramelo experiencia XS
+		Tooltip: "{$CommonItemTooltip.ExpCandy}"
 	}
 }
 
@@ -5606,6 +5633,11 @@ NPCs: {
 		Description: Blande sin esfuerzo su pesado martillo de más de 100 kg. Cuando quiere algo, lo roba y se lo lleva de vuelta a su guarida.
 	}
 
+	OrthwormCritterNPC: {
+		DisplayName: Orthworm
+		Description: Cuando lo atacan, usa los pelos de su cuerpo a modo de puños y hace llover un aluvión de puñetazos sobre sus enemigos.
+	}
+
 	TerrarianKabutoCritterNPC: {
 		DisplayName: Kabuto de Terraria
 		Description: Sellado hace mucho tiempo en la mazmorra, este Pokémon habita en los huesos de un Pokémon aún más antiguo.
@@ -5900,6 +5932,7 @@ NPCs: {
 	// TinkatinkCritterNPCShiny.DisplayName: Tinkatink Shiny
 	// TinkatonCritterNPCShiny.DisplayName: Tinkaton Shiny
 	// TinkatuffCritterNPCShiny.DisplayName: Tinkatuff Shiny
+	// OrthwormCritterNPCShiny.DisplayName: Orthworm Shiny
 	TerrarianKabutoCritterNPCShiny.DisplayName: Kabuto de Terraria Shiny
 	TerrarianKabutopsCritterNPCShiny.DisplayName: Kabutops de Terraria Shiny
 	TerrarianAerodactylCritterNPCShiny.DisplayName: Aerodactyl de Terraria Shiny
@@ -5921,6 +5954,10 @@ NPCs: {
 	// OnixCritterNPC_Tail.DisplayName: Onix
 	// OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
 	// OnixCritterNPCShiny_Tail.DisplayName: Onix Shiny
+	// OrthwormCritterNPC_Tail.DisplayName: Orthworm
+	// OrthwormCritterNPC_Body.DisplayName: Orthworm
+	// OrthwormCritterNPCShiny_Tail.DisplayName: Orthworm Shiny
+	// OrthwormCritterNPCShiny_Body.DisplayName: Orthworm Shiny
 
 	PokemonProfessor: {
 		DisplayName: Profesor Pokemon
@@ -6134,6 +6171,7 @@ CommonItemTooltip: {
 		'''
 	MegaStone: Permite al poseedor megaevolucionar a {0}, cuando se usa un mega brazalete
 	PokemonTypeDamageBoost: Incrementa el daño de tipo {0} en {1}%
+	ExpCandy: Un caramelo que incrementa la experiencia de uno de tus Pokemon en {0}
 }
 
 PokemonInfo: {

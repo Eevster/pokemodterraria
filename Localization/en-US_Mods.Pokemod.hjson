@@ -619,6 +619,8 @@ Projectiles: {
 	RotomPetProjectile.DisplayName: Rotom Pet Projectile
 	AzurillPetProjectileShiny.DisplayName: Azurill Pet Projectile Shiny
 	AzurillPetProjectile.DisplayName: Azurill Pet Projectile
+	OrthwormPetProjectileShiny.DisplayName: Orthworm Pet Projectile Shiny
+	OrthwormPetProjectile.DisplayName: Orthworm Pet Projectile
 }
 
 Items: {
@@ -1172,7 +1174,7 @@ Items: {
 
 	Everstone: {
 		DisplayName: Everstone
-		Tooltip: When equipped, any pokemon selected as favorite is prevented from evolving by level
+		Tooltip: When equipped or in the inventory, any pokemon selected as favorite is prevented from evolving by level
 	}
 
 	LeafStoneItem: {
@@ -2769,7 +2771,32 @@ Items: {
 
 	MewDNAItem: {
 		Tooltip: ""
-		DisplayName: Mew D N A Item
+		DisplayName: Mew DNA
+	}
+
+	ExpCandyS: {
+		DisplayName: Exp. Candy S
+		Tooltip: "{$CommonItemTooltip.ExpCandy}"
+	}
+
+	ExpCandyM: {
+		Tooltip: "{$CommonItemTooltip.ExpCandy}"
+		DisplayName: Exp. Candy M
+	}
+
+	ExpCandyL: {
+		Tooltip: "{$CommonItemTooltip.ExpCandy}"
+		DisplayName: Exp. Candy L
+	}
+
+	ExpCandyXL: {
+		DisplayName: Exp. Candy XL
+		Tooltip: "{$CommonItemTooltip.ExpCandy}"
+	}
+
+	ExpCandyXS: {
+		DisplayName: Exp. Candy XS
+		Tooltip: "{$CommonItemTooltip.ExpCandy}"
 	}
 }
 
@@ -5606,6 +5633,11 @@ NPCs: {
 		Description: The hammer tops 220 pounds, yet it gets swung around easily by Tinkaton as it steals whatever it pleases and carries its plunder back home.
 	}
 
+	OrthwormCritterNPC: {
+		DisplayName: Orthworm
+		Description: When attacked, this Pokémon will wield the tendrils on its body like fists and pelt the opponent with a storm of punches.
+	}
+
 	TerrarianKabutoCritterNPC: {
 		DisplayName: Terrarian Kabuto
 		Description: Sealed long ago within the dungeon, this Pokemon inhabits the bones of a Pokemon even more ancient.
@@ -5900,6 +5932,7 @@ NPCs: {
 	TinkatinkCritterNPCShiny.DisplayName: Tinkatink Shiny
 	TinkatonCritterNPCShiny.DisplayName: Tinkaton Shiny
 	TinkatuffCritterNPCShiny.DisplayName: Tinkatuff Shiny
+	OrthwormCritterNPCShiny.DisplayName: Orthworm Shiny
 	TerrarianKabutoCritterNPCShiny.DisplayName: Terrarian Kabuto Shiny
 	TerrarianKabutopsCritterNPCShiny.DisplayName: Terrarian Kabutops Shiny
 	TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
@@ -5921,6 +5954,10 @@ NPCs: {
 	OnixCritterNPC_Tail.DisplayName: Onix
 	OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
 	OnixCritterNPCShiny_Tail.DisplayName: Onix Shiny
+	OrthwormCritterNPC_Tail.DisplayName: Orthworm
+	OrthwormCritterNPC_Body.DisplayName: Orthworm
+	OrthwormCritterNPCShiny_Tail.DisplayName: Orthworm Shiny
+	OrthwormCritterNPCShiny_Body.DisplayName: Orthworm Shiny
 
 	PokemonProfessor: {
 		DisplayName: Pokemon Professor
@@ -6134,6 +6171,7 @@ CommonItemTooltip: {
 		'''
 	MegaStone: Allows the holder to mega evolve {0}, when a mega cuff is used
 	PokemonTypeDamageBoost: Increases {0} type damage by {1}%
+	ExpCandy: A candy that increases the exp of one of your Pokemon by {0}
 }
 
 PokemonInfo: {

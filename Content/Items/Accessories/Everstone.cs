@@ -22,5 +22,10 @@ namespace Pokemod.Content.Items.Accessories
         {
             player.GetModPlayer<PokemonPlayer>().HasEverstone = 3;
         }
+
+        public override void UpdateInventory(Player player)
+        {
+            player.GetModPlayer<PokemonPlayer>().HasEverstone = 3;
+        }
 	}
 }

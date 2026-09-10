@@ -558,9 +558,11 @@ namespace Pokemod.Content.NPCs
             {"Zeraora", new PokemonInfo(0807, [88, 112, 75, 102, 80, 143], [(int)TypeIndex.Electric], [new MoveLvl("Thunderbolt")], [(int)EggGroups.NoEggs], 1.5f, 44.5f, (int)StageIndex.Basic, (int)ExpTypes.Slow, legendary: true, completed: false)},
             
             //Gen 9
-            {"Tinkatink", new PokemonInfo(0957, [50, 45, 45, 35, 64, 58], [(int)TypeIndex.Fairy], [new MoveLvl("Tackle"), new MoveLvl("RockThrow", 10), new MoveLvl("Screech", 20), new MoveLvl("FlashCannon", 31)], [(int)EggGroups.Fairy], 0.4f, 8.9f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow, completed: true, artist: "Dusk")},
-            {"Tinkatuff", new PokemonInfo(0958, [65, 55, 55, 45, 82, 78], [(int)TypeIndex.Fairy,(int)TypeIndex.Steel], [new MoveLvl("Tackle"), new MoveLvl("RockThrow", 10), new MoveLvl("Screech", 20), new MoveLvl("FlashCannon", 31)], [(int)EggGroups.Fairy], 0.7f, 59.1f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow, completed: true, artist: "Dusk")},
-            {"Tinkaton", new PokemonInfo(0959, [85, 75, 77, 70, 105, 94], [(int)TypeIndex.Fairy,(int)TypeIndex.Steel], [new MoveLvl("Tackle"), new MoveLvl("RockThrow", 10), new MoveLvl("Screech", 20), new MoveLvl("FlashCannon", 31)], [(int)EggGroups.Fairy], 0.7f, 112.8f, (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow, completed: true, artist: "Dusk")},
+            {"Tinkatink", new PokemonInfo(0957, [50, 45, 45, 35, 64, 58], [(int)TypeIndex.Fairy], [new MoveLvl("Tackle"), new MoveLvl("RockThrow", 10), new MoveLvl("Screech", 20), new MoveLvl("FlashCannon", 31)], [(int)EggGroups.Fairy], 0.4f, 8.9f, (int)StageIndex.Basic, (int)ExpTypes.MediumSlow, artist: "Dusk")},
+            {"Tinkatuff", new PokemonInfo(0958, [65, 55, 55, 45, 82, 78], [(int)TypeIndex.Fairy,(int)TypeIndex.Steel], [new MoveLvl("Tackle"), new MoveLvl("RockThrow", 10), new MoveLvl("Screech", 20), new MoveLvl("FlashCannon", 31)], [(int)EggGroups.Fairy], 0.7f, 59.1f, (int)StageIndex.Stage1, (int)ExpTypes.MediumSlow, artist: "Dusk")},
+            {"Tinkaton", new PokemonInfo(0959, [85, 75, 77, 70, 105, 94], [(int)TypeIndex.Fairy,(int)TypeIndex.Steel], [new MoveLvl("Tackle"), new MoveLvl("RockThrow", 10), new MoveLvl("Screech", 20), new MoveLvl("FlashCannon", 31)], [(int)EggGroups.Fairy], 0.7f, 112.8f, (int)StageIndex.Stage2, (int)ExpTypes.MediumSlow, artist: "Dusk")},
+
+            {"Orthworm", new PokemonInfo(0968, [70, 85, 145, 60, 55, 65], [(int)TypeIndex.Steel], [new MoveLvl("Tackle", 1), new MoveLvl("Harden", 1), new MoveLvl("MudSlap", 7), new MoveLvl("TakeDown", 26), new MoveLvl("Dig", 30), new MoveLvl("Earthquake", 47)], [(int)EggGroups.Field], 2.5f, 310.0f, (int)StageIndex.Basic, (int)ExpTypes.Slow, completed: false, artist: "JACSMITH")},
 
             //Megas
             {"VenusaurMega", new PokemonInfo(0003, [80, 100, 123, 122, 120, 80], [(int)TypeIndex.Grass,(int)TypeIndex.Poison], [new MoveLvl("Earthquake")], [(int)EggGroups.NoEggs], 2.4f, 155.5f, (int)StageIndex.Mega, (int)ExpTypes.MediumSlow, artist: "JACSMITH")},
@@ -602,7 +604,7 @@ namespace Pokemod.Content.NPCs
             {"TerrarianMewtwo", new PokemonInfo(0150, [106, 110, 100, 140, 94, 130], [(int)TypeIndex.Psychic, (int)TypeIndex.Fire], [new MoveLvl("Teleport", 1), new MoveLvl("FlameWheel", 1), new MoveLvl("Confusion", 8), new MoveLvl("AncientPower", 16), new MoveLvl("LavaPlume", 24), new MoveLvl("CosmicPower", 32), new MoveLvl("ShadowBall", 40), new MoveLvl("Psychic", 48), new MoveLvl("Overheat", 56)], [(int)EggGroups.NoEggs], 2.0f, 122.0f, (int)StageIndex.Basic, (int)ExpTypes.Slow, legendary: true, completed: false, artist: "RollinMan")},
         };
 
-        public static int maxID = 0959;
+        public static int maxID = 0968;
 
         public static Dictionary<string, PokemonInfo> pokemonToAddInfo = new()
         {

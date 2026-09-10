@@ -11,6 +11,7 @@ using Terraria.ModLoader;
 using Pokemod.Content.NPCs;
 using Pokemod.Content.Items.Accessories.Gems;
 using Pokemod.Common.Configs;
+using Pokemod.Content.Items.Consumables;
 
 namespace Pokemod.Common.GlobalNPCs
 {
@@ -124,42 +125,90 @@ namespace Pokemod.Common.GlobalNPCs
                 //Badges
                 case NPCID.KingSlime:
                     npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<BoulderBadge>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyXS>(), 1, 1, 3, null));
                     break;
 
                 case NPCID.EyeofCthulhu:
                         npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<CascadeBadge>(), 1, 1, 1, null));
+                        npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyXS>(), 1, 6, 8, null));
+                    break;
+                
+                case NPCID.BrainofCthulhu:
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyXS>(), 1, 1, 2, null));
                     break;
 
+                case NPCID.EaterofWorldsBody:
+                case NPCID.EaterofWorldsHead:
+                case NPCID.EaterofWorldsTail:
+                    LeadingConditionRule leadingConditionRule = new(new Conditions.LegacyHack_IsABoss());
+                    leadingConditionRule.OnSuccess(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyXS>(), 1, 1, 2, null));
+                    npcLoot.Add(leadingConditionRule);
+                    break;
+                
                 case NPCID.QueenBee:
                     npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Leftovers>(), 5));
                     npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ThunderBadge>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyS>(), 1, 1, 2, null));
                     break;
                     
                 case NPCID.Deerclops:
                     npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ThunderBadge>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyS>(), 1, 1, 2, null));
                     break;
 
                 case NPCID.SkeletronHead:
                     npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<RainbowBadge>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyS>(), 1, 1, 3, null));
                     break;
 
                 case NPCID.WallofFlesh:
                     npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<SoulBadge>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyS>(), 1, 2, 4, null));
+                    break;
+                
+                case NPCID.QueenSlimeBoss:
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyS>(), 1, 2, 4, null));
                     break;
 
                     // The Twins will always drop the Marsh Badge, but the Destroyer and Skeletron Prime will only drop the Volcano Badge if all other mech bosses are down, otherwise they drop the marsh badge.
                 case NPCID.Retinazer:
                 case NPCID.Spazmatism:
                         npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<MarshBadge>(), 1, 1, 1, new Conditions.MissingTwin()));
+                        npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyM>(), 1, 1, 1, null));
+                        npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyS>(), 1, 1, 3, null));
                     break;
                 case NPCID.SkeletronPrime:
                 case NPCID.TheDestroyer:
                         npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<MarshBadge>(), 1, 1, 1, new AndCondition(new Conditions.DownedAllMechBosses(), new Conditions.MechanicalBossesDummyCondition(), true)));
                         npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<VolcanoBadge>(), 1, 1, 1, new AndCondition(new Conditions.DownedAllMechBosses(), new Conditions.MechanicalBossesDummyCondition())));
+                        npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyM>(), 1, 1, 1, null));
+                        npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyS>(), 1, 1, 3, null));
                     break;
 
                 case NPCID.Plantera:
                     npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<EarthBadge>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyM>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyS>(), 1, 3, 5, null));
+                    break;
+                
+                case NPCID.Golem:
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyM>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyS>(), 1, 3, 5, null));
+                    break;
+
+                case NPCID.DukeFishron:
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyL>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyM>(), 1, 1, 1, null));
+                    break;
+
+                case NPCID.HallowBoss:
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyL>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyM>(), 1, 1, 2, null));
+                    break;
+                
+                case NPCID.CultistBoss:
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyXL>(), 1, 1, 1, null));
+                    npcLoot.Add(new DropPerPlayerOnThePlayer(ModContent.ItemType<ExpCandyL>(), 1, 1, 3, null));
                     break;
             }
 		}
