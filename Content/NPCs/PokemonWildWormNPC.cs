@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -6,6 +6,7 @@ using Terraria.ID;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
+using Terraria.ModLoader;
 
 namespace Pokemod.Content.NPCs
 {
@@ -61,7 +62,13 @@ namespace Pokemod.Content.NPCs
 			return SegmentType == WormSegmentType.Head ? null : false;
 		}
 
+		public int segmentIndex;
+
 		private bool startDespawning;
+		public bool isStanding;
+		public float standingRotation;
+
+		public float moveTimer = 60;
 
         public override void SetStaticDefaults()
         {
@@ -129,6 +136,11 @@ namespace Pokemod.Content.NPCs
 						if(!isFlying){
 							isFlying = Main.rand.NextBool(3);
 						}
+					}
+
+					if (isStanding)
+					{
+						isStanding = Main.rand.NextBool();
 					}
 
 					NPC.netUpdate = true;
@@ -298,6 +310,8 @@ namespace Pokemod.Content.NPCs
 		/// </summary>
 		public int MaxSegmentLength { get; set; }
 
+		public int baseSegmentIndex = 0;
+
 		/// <summary>
 		/// The maximum distance in <b>pixels</b> within which the NPC will use tile collision, if <see cref="CanFly"/> returns <see langword="false"/>.<br/>
 		/// Defaults to 1000 pixels, which is equivalent to 62.5 tiles.
@@ -315,6 +329,11 @@ namespace Pokemod.Content.NPCs
 		public Vector2? ForcedTargetPosition { get; set; }
 
 		private Vector2 prevTarget;
+		public NPC BaseSegment = null;
+
+		private bool onAir;
+
+		public virtual float[] standingSegmentRotations => [];
 
 		/// <summary>
 		/// Override this method to use custom body-spawning code.<br/>
@@ -334,14 +353,21 @@ namespace Pokemod.Content.NPCs
 		/// <param name="type">The ID of the segment NPC to spawn</param>
 		/// <param name="latestNPC">The whoAmI of the most-recently spawned segment NPC in the worm, including the head</param>
 		/// <returns></returns>
-		protected int SpawnSegment(IEntitySource source, int type, int latestNPC) {
+		protected int SpawnSegment(IEntitySource source, int type, int latestNPC, int segmentIndex) {
 			// We spawn a new NPC, setting latestNPC to the newer NPC, whilst also using that same variable
 			// to set the parent of this new NPC. The parent of the new NPC (may it be a tail or body part)
 			// will determine the movement of this new NPC.
 			// Under there, we also set the realLife value of the new NPC, because of what is explained above.
 			int oldLatest = latestNPC;
 			latestNPC = NPC.NewNPC(source, (int)NPC.Center.X, (int)NPC.Center.Y, type, NPC.whoAmI);
-			if(Main.npc[latestNPC].ModNPC is WormPokemonNPC currentNPC) currentNPC.FollowingNPC = Main.npc[oldLatest];
+			if(Main.npc[latestNPC].ModNPC is WormPokemonNPC currentNPC){
+				currentNPC.FollowingNPC = Main.npc[oldLatest];
+				currentNPC.segmentIndex = segmentIndex+1;
+				if ((segmentIndex+1) < standingSegmentRotations.Length)
+				{
+					currentNPC.standingRotation = standingSegmentRotations[segmentIndex+1];
+				}
+			}
 
 			if(Main.npc[oldLatest].ModNPC is WormPokemonNPC previousNPC) previousNPC.FollowerNPC = Main.npc[latestNPC];
 
@@ -361,8 +387,11 @@ namespace Pokemod.Content.NPCs
 
 			HeadAI_Movement(collision);
 
-			if(Math.Abs(NPC.velocity.X) > float.Epsilon){
-				NPC.direction = Math.Sign(NPC.velocity.X);
+			if (!isStanding)
+			{
+				if(Math.Abs(NPC.velocity.X) > float.Epsilon){
+					NPC.direction = Math.Sign(NPC.velocity.X);
+				}
 			}
 			NPC.spriteDirection = -NPC.direction;
 		}
@@ -395,13 +424,13 @@ namespace Pokemod.Content.NPCs
 					else {
 						// Spawn the body segments like usual
 						while (distance > 0) {
-							latestNPC = SpawnSegment(source, BodyType, latestNPC);
+							latestNPC = SpawnSegment(source, BodyType, latestNPC, distance);
 							distance--;
 						}
 					}
 
 					// Spawn the tail segment
-					SpawnSegment(source, TailType, latestNPC);
+					SpawnSegment(source, TailType, latestNPC, HasCustomBodySegments?distance:-1);
 
 					NPC.netUpdate = true;
 
@@ -541,9 +570,16 @@ namespace Pokemod.Content.NPCs
 			float length = (float)Math.Sqrt(dirX * dirX + dirY * dirY);
 
 			// If we do not have any type of collision, we want the NPC to fall down and de-accelerate along the X axis.
-			if (!collision && !isFlying)
+			if (isStanding)
+			{
+				HeadAI_Movement_HandleStanding(dirX, speed, acceleration);
+			}
+			else if (!isFlying && !collision)
+			{
 				HeadAI_Movement_HandleFallingFromNoCollision(dirX, speed, acceleration);
+			}
 			else {
+				if(onAir) onAir = false;
 				// Else we want to play some audio (soundDelay) and move towards our target.
 				HeadAI_Movement_PlayDigSounds(length);
 
@@ -551,6 +587,29 @@ namespace Pokemod.Content.NPCs
 			}
 
 			HeadAI_Movement_SetRotation(collision);
+		}
+
+		private void HeadAI_Movement_HandleStanding(float dirX, float speed, float acceleration)
+		{
+			if(BaseSegment is not null)
+			{
+				NPC.direction = BaseSegment.direction>=0?1:-1;
+				float targetRotation = MathHelper.ToRadians(-standingRotation) + MathHelper.PiOver2;
+				targetRotation *= NPC.direction;
+
+				//NPC.rotation = targetRotation;
+				NPC.rotation = MathCalcHelper.RotateTowards(NPC.rotation, targetRotation, MathHelper.ToRadians(2.5f));
+				
+				NPC.velocity = Vector2.Zero;
+
+				Vector2 standingPosition = NPC.Center;
+				if(FollowerNPC is not null)
+				{
+					standingPosition = FollowerNPC.Center + 0.5f*(FollowerNPC.width+NPC.width)*-Vector2.UnitY.RotatedBy(NPC.rotation);
+				}
+
+				NPC.Center = standingPosition;
+			}
 		}
 
 		private void HeadAI_Movement_HandleFallingFromNoCollision(float dirX, float speed, float acceleration) {
@@ -584,6 +643,16 @@ namespace Pokemod.Content.NPCs
 					NPC.velocity.X += acceleration * 0.9f;
 				else
 					NPC.velocity.X -= acceleration * 0.9f;
+			}
+
+			if (!onAir)
+			{
+				onAir = true;
+				if(!isStanding) isStanding = Main.rand.NextBool();
+				if (isStanding && NPC.ModNPC is PokemonWildNPC basePokemon)
+				{
+					BaseSegment.direction = basePokemon.moveDirection>=0?1:-1;
+				}
 			}
 		}
 
@@ -672,7 +741,7 @@ namespace Pokemod.Content.NPCs
 		private void HeadAI_Movement_SetRotation(bool collision) {
 			// Set the correct rotation for this NPC.
 			// Assumes the sprite for the NPC points upward.  You might have to modify this line to properly account for your NPC's orientation
-			NPC.rotation = NPC.velocity.ToRotation() + MathHelper.PiOver2;
+			if(!isStanding) NPC.rotation = NPC.velocity.ToRotation() + MathHelper.PiOver2;
 
 			// Some netupdate stuff (multiplayer compatibility).
 			if (collision) {
@@ -698,6 +767,11 @@ namespace Pokemod.Content.NPCs
 	{
 		public sealed override WormSegmentType SegmentType => WormSegmentType.Body;
 
+		public override void ModifyTypeName(ref string typeName)
+        {
+			HeadSegment.ModNPC.ModifyTypeName(ref typeName);
+        }
+
 		internal override void BodyTailAI() {
 			CommonAI_BodyTail(this);
 		}
@@ -721,37 +795,118 @@ namespace Pokemod.Content.NPCs
 			}
 
 			if (following is not null) {
-				// Follow behind the segment "in front" of this NPC
-				// Use the current NPC.Center to calculate the direction towards the "parent NPC" of this NPC.
-				float dirX = following.Center.X - worm.NPC.Center.X;
-				float dirY = following.Center.Y - worm.NPC.Center.Y;
-				// We then use Atan2 to get a correct rotation towards that parent NPC.
-				// Assumes the sprite for the NPC points upward.  You might have to modify this line to properly account for your NPC's orientation
-				worm.NPC.rotation = (float)Math.Atan2(dirY, dirX) + MathHelper.PiOver2;
-				// We also get the length of the direction vector.
-				float length = (float)Math.Sqrt(dirX * dirX + dirY * dirY);
-				// We calculate a new, correct distance.
-				float dist = (length - worm.NPC.width) / length;
-				float posX = dirX * dist;
-				float posY = dirY * dist;
+				if(worm.HeadSegment is not null && worm.HeadSegment.ModNPC is WormPokemonHead head)
+				{
+					worm.isStanding = head.isStanding;
+					bool isBase = false;
 
-				// Reset the velocity of this NPC, because we don't want it to move on its own
-				worm.NPC.velocity = Vector2.Zero;
-				// And set this NPCs position accordingly to that of this NPCs parent NPC.
-				worm.NPC.position.X += posX;
-				worm.NPC.position.Y += posY;
+					if (head.BaseSegment is not null)
+					{
+						isBase = head.BaseSegment.whoAmI == worm.NPC.whoAmI;
+					}
 
-				Vector2 toHead = -Vector2.UnitY.RotatedBy(worm.NPC.rotation);
+					if(isBase)
+					{
+						if (worm.isStanding)
+						{
+							worm.NPC.noTileCollide = false;
+							worm.NPC.noGravity = false;
+						}
+						else
+						{
+							worm.NPC.noTileCollide = true;
+							worm.NPC.noGravity = true;
+						}
+					}
 
-				if(Math.Abs(toHead.X) > float.Epsilon){
-					worm.NPC.direction = Math.Sign(toHead.X);
+					if (!worm.isStanding)
+					{
+						// Follow behind the segment "in front" of this NPC
+						// Use the current NPC.Center to calculate the direction towards the "parent NPC" of this NPC.
+						float dirX = following.Center.X - worm.NPC.Center.X;
+						float dirY = following.Center.Y - worm.NPC.Center.Y;
+						// We then use Atan2 to get a correct rotation towards that parent NPC.
+						// Assumes the sprite for the NPC points upward.  You might have to modify this line to properly account for your NPC's orientation
+						worm.NPC.rotation = (float)Math.Atan2(dirY, dirX) + MathHelper.PiOver2;
+						// We also get the length of the direction vector.
+						float length = (float)Math.Sqrt(dirX * dirX + dirY * dirY);
+						// We calculate a new, correct distance.
+						float dist = (length - worm.NPC.width) / length;
+						float posX = dirX * dist;
+						float posY = dirY * dist;
+
+						// Reset the velocity of this NPC, because we don't want it to move on its own
+						worm.NPC.velocity = Vector2.Zero;
+						// And set this NPCs position accordingly to that of this NPCs parent NPC.
+						worm.NPC.position.X += posX;
+						worm.NPC.position.Y += posY;
+
+						Vector2 toHead = -Vector2.UnitY.RotatedBy(worm.NPC.rotation);
+
+						if(Math.Abs(toHead.X) > float.Epsilon){
+							worm.NPC.direction = Math.Sign(toHead.X);
+						}
+					}
+					else if(head.BaseSegment is not null)
+					{
+						bool inFrontOfBase = worm.segmentIndex < head.baseSegmentIndex;
+
+						worm.NPC.direction = head.BaseSegment.direction>=0?1:-1;
+						float targetRotation = MathHelper.ToRadians(-worm.standingRotation) + MathHelper.PiOver2;
+						targetRotation *= worm.NPC.direction;
+
+						if(head.BaseSegment.velocity.X != 0)
+						{
+							targetRotation += (float)(MathHelper.ToRadians(5f)*Math.Sin(MathHelper.ToRadians(6*worm.moveTimer)));
+							
+							worm.moveTimer--;
+							if(worm.moveTimer <= 0)
+							{
+								worm.moveTimer = 60;
+							}
+						}
+
+						//worm.NPC.rotation = targetRotation;
+						worm.NPC.rotation = MathCalcHelper.RotateTowards(worm.NPC.rotation, targetRotation, MathHelper.ToRadians(2.5f));
+						//Main.NewText(worm.NPC.direction + " " +MathHelper.ToDegrees(worm.NPC.rotation));
+						
+
+						if(!isBase){
+							worm.NPC.velocity = Vector2.Zero;
+
+							Vector2 standingPosition = following.Center - 0.5f*(following.width+worm.NPC.width)*-Vector2.UnitY.RotatedBy(worm.NPC.rotation);
+							if (inFrontOfBase)
+							{
+								NPC follower = worm.FollowerNPC;
+								if(follower is not null)
+								{
+									standingPosition = follower.Center + 0.5f*(follower.width+worm.NPC.width)*-Vector2.UnitY.RotatedBy(worm.NPC.rotation);
+								}
+							}
+
+							worm.NPC.Center = standingPosition;
+						}
+						else
+						{
+							if(head is PokemonWildNPC basePokemon)
+							{
+								if(basePokemon.moveDirection != 0) worm.NPC.direction = basePokemon.moveDirection;
+
+								worm.NPC.velocity.X = basePokemon.moveSpeed*basePokemon.moveDirection;
+								if (Collision.SolidCollision(worm.NPC.Center - new Vector2(8,8), 16, 16))
+								{
+									worm.NPC.velocity.Y -= 0.5f;
+								}
+							}
+						}
+					}
+
+					worm.NPC.hide = following.hide;
+					worm.NPC.friendly = following.friendly;
+					worm.NPC.dontTakeDamageFromHostiles = following.dontTakeDamageFromHostiles;
 				}
-				worm.NPC.spriteDirection = -worm.NPC.direction;
-
-				worm.NPC.hide = following.hide;
-				worm.NPC.friendly = following.friendly;
-				worm.NPC.dontTakeDamageFromHostiles = following.dontTakeDamageFromHostiles;
 			}
+			worm.NPC.spriteDirection = -worm.NPC.direction;
 		}
 	}
 
@@ -759,6 +914,11 @@ namespace Pokemod.Content.NPCs
 	public abstract class WormPokemonTail : WormPokemonNPC
 	{
 		public sealed override WormSegmentType SegmentType => WormSegmentType.Tail;
+		
+		public override void ModifyTypeName(ref string typeName)
+        {
+			HeadSegment.ModNPC.ModifyTypeName(ref typeName);
+        }
 
 		internal override void BodyTailAI() {
 			WormPokemonBody.CommonAI_BodyTail(this);

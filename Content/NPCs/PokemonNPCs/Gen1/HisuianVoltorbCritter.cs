@@ -39,7 +39,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
 			if (spawnInfo.Player.ZoneJungle)
 			{
-				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.001f);
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.005f);
 			}
 
 			return 0f;

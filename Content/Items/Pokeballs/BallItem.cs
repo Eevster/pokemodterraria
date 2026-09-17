@@ -236,7 +236,7 @@ namespace Pokemod.Content.Items.Pokeballs
 
         public override bool? CanHitNPC(NPC target)
         {
-            return target.GetGlobalNPC<PokemonNPCData>().isPokemon && !target.friendly;
+            return (target.GetGlobalNPC<PokemonNPCData>().isPokemon || (target.realLife >= 0 &&  Main.npc[target.realLife].GetGlobalNPC<PokemonNPCData>().isPokemon)) && !target.friendly;
         }
 
         public override bool? CanDamage()
@@ -248,7 +248,7 @@ namespace Pokemod.Content.Items.Pokeballs
         {
 			if(captureStage < 0){
 				Projectile.tileCollide = true;
-				targetPokemon = target;
+				targetPokemon = target.realLife < 0 ? target : Main.npc[target.realLife];
 				targetPokemon.CanBeReplacedByOtherNPCs = false;
 				targetPokemon.hide = true;
 				targetPokemon.friendly = true;

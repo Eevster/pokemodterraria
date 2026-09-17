@@ -52,6 +52,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override int TailType => ModContent.NPCType<OrthwormCritterNPC_Tail>();
 
+		public override float[] standingSegmentRotations => [0,30,60,30,0,-15];
+
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -92,6 +94,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
             MinSegmentLength = 6;
 			MaxSegmentLength = 6;
 
+			baseSegmentIndex = 4;
+			standingRotation = standingSegmentRotations[0];
+
 			MoveSpeed = moveSpeed;
 			Acceleration = 0.2f;
         }
@@ -106,7 +111,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         {
 			int latestNPC = NPC.whoAmI;
 
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < segmentCount; i++) {
 				int newWidth = 16;
 				int frame = 2;
 
@@ -114,17 +119,22 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 				{
 					case 0:
 						frame = 1;
-						newWidth = 20;
+						//newWidth = 20;
 						break;
 					default:
 						break;
 				}
 
-				latestNPC = SpawnSegment(NPC.GetSource_FromAI(), BodyType, latestNPC);
+				latestNPC = SpawnSegment(NPC.GetSource_FromAI(), BodyType, latestNPC, i);
 
 				if(Main.npc[latestNPC].ModNPC is WormPokemonNPC currentNPC){
 					currentNPC.NPC.Hitbox = new Rectangle((int)(currentNPC.NPC.position.X + (40 - newWidth) / 2), (int)(currentNPC.NPC.position.Y + (40 - newWidth)/2), newWidth, newWidth);
 					currentNPC.currentFrame = frame;
+
+					if((i+1) == baseSegmentIndex)
+					{
+						BaseSegment = currentNPC.NPC;
+					}
 				}
 			}
 
