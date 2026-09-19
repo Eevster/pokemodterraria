@@ -17,8 +17,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] jumpStartEnd => [4, 4];
 		public override int[] fallStartEnd => [7, 7];
 		public override int[] attackStartEnd => [8,11];
+        public override string[] variants => ["Amber", "Topaz", "Diamond", "Emerald", "Sapphire", "Ruby"];
 
-		public override float catchRate => 120;
+        public override float catchRate => 120;
 		public override int minLevel => 25;
 		
 		public override int[][] spawnConditions =>

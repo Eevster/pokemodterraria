@@ -18,6 +18,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [10, 10];
 		public override int[] attackStartEnd => [8, 11];
 
+        public override string[] variants => ["Amber", "Topaz", "Diamond", "Emerald", "Sapphire", "Ruby"];
+
         public override float catchRate => 50;
         public override int minLevel => 40;
 		
