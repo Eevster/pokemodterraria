@@ -625,6 +625,12 @@ Projectiles: {
 	AzurillPetProjectile.DisplayName: Azurill Pet Projectile
 	OrthwormPetProjectileShiny.DisplayName: Orthworm Pet Projectile Shiny
 	OrthwormPetProjectile.DisplayName: Orthworm Pet Projectile
+	LitwickPetProjectile.DisplayName: Litwick Pet Projectile
+	LitwickPetProjectileShiny.DisplayName: Litwick Pet Projectile Shiny
+	LampentPetProjectileShiny.DisplayName: Lampent Pet Projectile Shiny
+	LampentPetProjectile.DisplayName: Lampent Pet Projectile
+	ChandelurePetProjectile.DisplayName: Chandelure Pet Projectile
+	ChandelurePetProjectileShiny.DisplayName: Chandelure Pet Projectile Shiny
 }
 
 Items: {
@@ -2801,6 +2807,15 @@ Items: {
 	ExpCandyXS: {
 		DisplayName: Exp. Candy XS
 		Tooltip: "{$CommonItemTooltip.ExpCandy}"
+	}
+
+	DuskStoneItem: {
+		Tooltip:
+			'''
+			{$Mods.Pokemod.PokemonInfo.ItemActiveUse}
+			A peculiar stone that can make certain species of pokemon evolve. It has a dark spooky aura.
+			'''
+		DisplayName: Dusk Stone
 	}
 }
 
