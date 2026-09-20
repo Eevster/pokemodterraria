@@ -14,13 +14,13 @@ namespace Pokemod.Content.Pets.LitwickPet
 
         public override int moveStyle => 0;
 
-        public override int totalFrames => 20;
-        public override int animationSpeed => 11;
-        public override int[] idleStartEnd => [13, 15];
-        public override int[] walkStartEnd => [11, 12];
-        public override int[] jumpStartEnd => [15, 19];
-        public override int[] fallStartEnd => [18, 19];
-        public override int[] attackStartEnd => [5, 10];
+       public override int totalFrames => 20;
+		public override int animationSpeed => 7;
+		public override int[] idleStartEnd => [10,14];
+		public override int[] walkStartEnd => [0,4];
+		public override int[] jumpStartEnd => [15,18];
+		public override int[] fallStartEnd => [18,19];
+		public override int[] attackStartEnd => [5,9];
 
 		public override string[] evolutions => ["Lampent"];
 		public override int levelToEvolve => 41;

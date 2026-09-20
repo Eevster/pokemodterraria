@@ -47,23 +47,32 @@ namespace Pokemod.Content.Items.Consumables
         public override bool? UseItem(Player player)
         {
 			if(player.whoAmI == Main.myPlayer){
-				foreach(Projectile proj in Main.projectile){
-					if(proj.owner == player.whoAmI){
-						if(proj.ModProjectile != null){
-							if(proj.active){
-								if(proj.ModProjectile.GetType().IsSubclassOf(typeof(PokemonPetProjectile))){
-									Vector2 mousePosition = Main.MouseWorld;
-									if (Collision.CheckAABBvAABBCollision(proj.Hitbox.TopLeft(), proj.Hitbox.Size(), mousePosition - new Vector2(1f, 1f), new Vector2(2f, 2f))){
-										if (player.ItemTimeIsZero){
-											if (OnItemUse(proj))
-											{
-												//player.itemTime = 10;
-												return true;
-											}
-                                        }
-									}
+				if (player.ItemTimeIsZero){
+					const float distanceToUse = 12*16f;
+					float minDistance = distanceToUse;
+					Projectile targetPokemon = null;
+
+					foreach(Projectile proj in Main.projectile){
+						if(proj.owner == player.whoAmI){
+							if(proj.ModProjectile != null && proj.active && proj.ModProjectile.GetType().IsSubclassOf(typeof(PokemonPetProjectile))){
+								Vector2 mousePosition = Main.MouseWorld;
+										
+								//if (Collision.CheckAABBvAABBCollision(proj.Hitbox.TopLeft(), proj.Hitbox.Size(), mousePosition - new Vector2(distanceToUse, distanceToUse), 2f*new Vector2(distanceToUse, distanceToUse))){}
+								if(Vector2.Distance(mousePosition, proj.Center) < minDistance)
+								{
+									minDistance = Vector2.Distance(mousePosition, proj.Center);
+									targetPokemon = proj;
 								}
 							}
+						}
+					}
+
+					if(targetPokemon != null)
+					{
+						if (OnItemUse(targetPokemon))
+						{
+							//player.itemTime = 10;
+							return true;
 						}
 					}
 				}

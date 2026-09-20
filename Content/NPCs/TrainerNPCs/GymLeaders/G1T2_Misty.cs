@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Pokemod.Content.Items.Accessories.Gems;
 using Pokemod.Content.Items.Badges;
+using Pokemod.Content.Items.Consumables.TMs;
 using Pokemod.Content.Items.Tools;
 using Terraria;
 using Terraria.GameContent;
@@ -28,6 +30,13 @@ namespace Pokemod.Content.NPCs.TrainerNPCs.GymLeaders
         {
 			opponent.QuickSpawnItem(NPC.GetSource_FromThis(), ModContent.ItemType<CascadeBadge>(), 1);
 			opponent.QuickSpawnItem(NPC.GetSource_FromThis(), ItemID.GoldCoin, 3);
+
+			switch (Main.rand.Next(2))
+			{
+				case 0: opponent.QuickSpawnItem(NPC.GetSource_FromThis(), ModContent.ItemType<BubbleBeamTM>(), 1); break;
+				case 1: opponent.QuickSpawnItem(NPC.GetSource_FromThis(), ModContent.ItemType<WaterGem>(), 1); break;
+			}
+
             base.GiveRewards(opponent);
         }
 

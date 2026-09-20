@@ -28,7 +28,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override int[][] spawnConditions =>
         [
-            [(int)SpawnArea.Surface, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+            [(int)SpawnArea.Jungle, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+            [(int)SpawnArea.UndergroundJungle, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
 
