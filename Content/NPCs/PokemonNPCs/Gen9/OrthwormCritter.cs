@@ -68,7 +68,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 
         public override void SetDefaults()
         {
-			NPC.Hitbox = new Rectangle((int)(NPC.position.X + (96 - hitboxWidth) / 2), (int)(NPC.position.Y + (96 - hitboxHeight)/2), hitboxWidth, hitboxHeight);
+			NPC.Hitbox = new Rectangle((int)(NPC.position.X + (40 - hitboxWidth) / 2), (int)(NPC.position.Y + (40 - hitboxHeight)/2), hitboxWidth, hitboxHeight);
 
 			NPC.damage = 0;
 			NPC.lifeMax = 100;

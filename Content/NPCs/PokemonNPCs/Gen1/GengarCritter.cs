@@ -44,7 +44,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         {
             if (spawnInfo.Player.ZoneCorrupt || spawnInfo.Player.ZoneCrimson)
             {
-                return GetSpawnChance(spawnInfo, (SpawnCondition.Crimson.Chance + SpawnCondition.Corruption.Chance) * 0.2f);
+                return GetSpawnChance(spawnInfo, (SpawnCondition.Crimson.Chance + SpawnCondition.Corruption.Chance) * 0.02f);
             }
 
             return 0f;

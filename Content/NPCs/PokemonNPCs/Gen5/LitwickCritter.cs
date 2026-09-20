@@ -13,28 +13,34 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int moveStyle => 0;
 
 		public override int totalFrames => 20;
-		public override int animationSpeed => 11;
-		public override int[] idleStartEnd => [13,15];
-		public override int[] walkStartEnd => [11,12];
-		public override int[] jumpStartEnd => [15,19];
+		public override int animationSpeed => 7;
+		public override int[] idleStartEnd => [10,14];
+		public override int[] walkStartEnd => [0,4];
+		public override int[] jumpStartEnd => [15,18];
 		public override int[] fallStartEnd => [18,19];
-		public override int[] attackStartEnd => [0,12];
+		public override int[] attackStartEnd => [5,9];
         public override float catchRate => 190;
+
+		public override int minLevel => 25;
 		
 		public override int[][] spawnConditions =>
 		[
-			[(int)SpawnArea.Granite, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+			[(int)SpawnArea.TheDungeon, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.Graveyard, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Granite);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheDungeon);
             base.SetBestiary(database, bestiaryEntry);
         }
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneCorrupt) {
-                return GetSpawnChance(spawnInfo, 0.08f);
+			if (spawnInfo.Player.ZoneDungeon) {
+                return GetSpawnChance(spawnInfo, SpawnCondition.DungeonNormal.Chance * 0.1f);
+            }
+			if (spawnInfo.Player.ZoneGraveyard) {
+                return GetSpawnChance(spawnInfo, 0.05f);
             }
 
 			return 0f;
