@@ -635,6 +635,10 @@ Projectiles: {
 	TerrarianBreloomPetProjectileShiny.DisplayName: Terrarian Breloom Pet Projectile Shiny
 	TerrarianShroomishPetProjectile.DisplayName: Terrarian Shroomish Pet Projectile
 	TerrarianShroomishPetProjectileShiny.DisplayName: Terrarian Shroomish Pet Projectile Shiny
+	BreloomPetProjectile.DisplayName: Breloom Pet Projectile
+	BreloomPetProjectileShiny.DisplayName: Breloom Pet Projectile Shiny
+	ShroomishPetProjectile.DisplayName: Shroomish Pet Projectile
+	ShroomishPetProjectileShiny.DisplayName: Shroomish Pet Projectile Shiny
 }
 
 Items: {
@@ -5761,6 +5765,16 @@ NPCs: {
 		Description: It attacks by slamming into foes with its heavy tail, which erupts with spores upon impact. Contact with these spores causes frantic hallucinations.
 	}
 
+	ShroomishCritterNPC: {
+		DisplayName: Shroomish
+		Description: It prefers damp places. By day it remains still in the forest shade. It releases toxic powder from its head.
+	}
+
+	BreloomCritterNPC: {
+		DisplayName: Breloom
+		Description: It scatters poisonous spores and throws powerful punches while its foe is hampered by inhaled spores.
+	}
+
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur  Shiny
 	CharmanderCritterNPCShiny.DisplayName: Charmander  Shiny
 	SquirtleCritterNPCShiny.DisplayName: Squirtle  Shiny
@@ -6084,6 +6098,8 @@ NPCs: {
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
 	MewtwoBossBody.DisplayName: Malformed Subject
 	MewtwoBossMinion.DisplayName: Experiement Controller
+	BreloomCritterNPCShiny.DisplayName: Breloom Shiny
+	ShroomishCritterNPCShiny.DisplayName: Shroomish Shiny
 }
 
 Bestiary: {
