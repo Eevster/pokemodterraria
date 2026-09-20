@@ -631,6 +631,10 @@ Projectiles: {
 	// LampentPetProjectile.DisplayName: Lampent Pet Projectile
 	// ChandelurePetProjectile.DisplayName: Chandelure Pet Projectile
 	// ChandelurePetProjectileShiny.DisplayName: Chandelure Pet Projectile Shiny
+	// TerrarianBreloomPetProjectile.DisplayName: Terrarian Breloom Pet Projectile
+	// TerrarianBreloomPetProjectileShiny.DisplayName: Terrarian Breloom Pet Projectile Shiny
+	// TerrarianShroomishPetProjectile.DisplayName: Terrarian Shroomish Pet Projectile
+	// TerrarianShroomishPetProjectileShiny.DisplayName: Terrarian Shroomish Pet Projectile Shiny
 }
 
 Items: {
@@ -5747,6 +5751,16 @@ NPCs: {
 		Description: Es un gran imitador. Cuando logra sorprender a su adversario, la alegría lo embarga de tal forma que se olvida de continuar su actuación.
 	}
 
+	TerrarianShroomishCritterNPC: {
+		// DisplayName: Terrarian Shroomish
+		// Description: Found wandering around the mushroom groves, it constantly emits blue spores. Contact with these spores causes frantic hallucinations.
+	}
+
+	TerrarianBreloomCritterNPC: {
+		// DisplayName: Terrarian Breloom
+		// Description: It attacks by slamming into foes with its heavy tail, which erupts with spores upon impact. Contact with these spores causes frantic hallucinations.
+	}
+
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
 	CharmanderCritterNPCShiny.DisplayName: Charmander
 	SquirtleCritterNPCShiny.DisplayName: Squirtle
@@ -5983,6 +5997,8 @@ NPCs: {
 	// OrthwormCritterNPC_Body.DisplayName: Orthworm
 	// OrthwormCritterNPCShiny_Tail.DisplayName: Orthworm Shiny
 	// OrthwormCritterNPCShiny_Body.DisplayName: Orthworm Shiny
+	// TerrarianBreloomCritterNPCShiny.DisplayName: Terrarian Breloom Shiny
+	// TerrarianShroomishCritterNPCShiny.DisplayName: Terrarian Shroomish Shiny
 
 	PokemonProfessor: {
 		DisplayName: Profesor Pokemon
