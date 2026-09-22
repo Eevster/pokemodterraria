@@ -33,8 +33,8 @@ namespace Pokemod.Content.Items.Pokeballs
         }
 
 		public override void SetDefaults() {
-			Item.width = 14;
-			Item.height = 14;
+			Item.width = 16;
+			Item.height = 16;
 			Item.rare = ItemRarityID.Blue;
 			Item.value = BallValue;
 			Item.maxStack = Item.CommonMaxStack;
@@ -122,8 +122,8 @@ namespace Pokemod.Content.Items.Pokeballs
 		public override void SetDefaults()
         {
             Projectile.DamageType = ModContent.GetInstance<MeleeDamageClass>();
-            Projectile.width = 14;
-            Projectile.height = 14;
+            Projectile.width = 16;
+            Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.penetrate = 1;
