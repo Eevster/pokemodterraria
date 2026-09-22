@@ -6,8 +6,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class BreloomCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 48;
-		public override int hitboxHeight => 44;
+		public override int hitboxWidth => 24;
+		public override int hitboxHeight => 42;
 
 		public override int totalFrames => 24;
 		public override int animationSpeed => 7;

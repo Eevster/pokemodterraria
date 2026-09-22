@@ -5535,6 +5535,16 @@ NPCs: {
 		Description: Being bitten by Shellder gave it intelligence comparable to that of internationally recognized scientists.
 	}
 
+	ShroomishCritterNPC: {
+		DisplayName: Shroomish
+		Description: It prefers damp places. By day it remains still in the forest shade. It releases toxic powder from its head.
+	}
+
+	BreloomCritterNPC: {
+		DisplayName: Breloom
+		Description: It scatters poisonous spores and throws powerful punches while its foe is hampered by inhaled spores.
+	}
+
 	AzurillCritterNPC: {
 		DisplayName: Azurill
 		Description: It's a Pokémon that lives by water. It moves quickly on land by bouncing on its big tail.
@@ -5563,6 +5573,11 @@ NPCs: {
 	VespiquenCritterNPC: {
 		DisplayName: Vespiquen
 		Description: When it is in danger, grubs from its six-cell honeycomb strike back. There is only one in a colony.
+	}
+
+	MimeJrCritterNPC: {
+		DisplayName: Mime Jr.
+		Description: When this gifted mimic surprises an opponent, Mime Jr. feels so happy that it ends up forgetting it was imitating something.
 	}
 
 	MagnezoneCritterNPC: {
@@ -5602,17 +5617,17 @@ NPCs: {
 
 	SolosisCritterNPC: {
 		DisplayName: Solosis
-		Description: ""
+		Description: They drive away attackers by unleashing psychic power. They can use telepathy to talk with others.
 	}
 
 	DuosionCritterNPC: {
 		DisplayName: Duosion
-		Description: ""
+		Description: When their brains, now divided in two, are thinking the same thoughts, these Pokémon exhibit their maximum power.
 	}
 
 	ReuniclusCritterNPC: {
 		DisplayName: Reuniclus
-		Description: ""
+		Description: When Reuniclus shake hands, a network forms between their brains, increasing their psychic power.
 	}
 
 	JoltikCritterNPC: {
@@ -5695,6 +5710,16 @@ NPCs: {
 		Description: ""
 	}
 
+	TerrarianShroomishCritterNPC: {
+		DisplayName: Terrarian Shroomish
+		Description: Found wandering around the mushroom groves, it constantly emits blue spores. Contact with these spores causes frantic hallucinations.
+	}
+
+	TerrarianBreloomCritterNPC: {
+		DisplayName: Terrarian Breloom
+		Description: It attacks by slamming into foes with its heavy tail, which erupts with spores upon impact. Contact with these spores causes frantic hallucinations.
+	}
+
 	TerrarianSolosisCritterNPC: {
 		DisplayName: Terrarian Solosis
 		Description: ""
@@ -5748,31 +5773,6 @@ NPCs: {
 	HisuianElectrodeCritterNPC: {
 		DisplayName: Hisuian Electrode
 		Description: The tissue on the surface of its body is curiously similar in composition to an Apricorn. When irritated, this Pokémon lets loose an electric current equal to 20 lightning bolts.
-	}
-
-	MimeJrCritterNPC: {
-		DisplayName: Mime Jr.
-		Description: When this gifted mimic surprises an opponent, Mime Jr. feels so happy that it ends up forgetting it was imitating something.
-	}
-
-	TerrarianShroomishCritterNPC: {
-		DisplayName: Terrarian Shroomish
-		Description: Found wandering around the mushroom groves, it constantly emits blue spores. Contact with these spores causes frantic hallucinations.
-	}
-
-	TerrarianBreloomCritterNPC: {
-		DisplayName: Terrarian Breloom
-		Description: It attacks by slamming into foes with its heavy tail, which erupts with spores upon impact. Contact with these spores causes frantic hallucinations.
-	}
-
-	ShroomishCritterNPC: {
-		DisplayName: Shroomish
-		Description: It prefers damp places. By day it remains still in the forest shade. It releases toxic powder from its head.
-	}
-
-	BreloomCritterNPC: {
-		DisplayName: Breloom
-		Description: It scatters poisonous spores and throws powerful punches while its foe is hampered by inhaled spores.
 	}
 
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur  Shiny
@@ -5964,6 +5964,8 @@ NPCs: {
 	WooperCritterNPCShiny.DisplayName: Wooper Shiny
 	QuagsireCritterNPCShiny.DisplayName: Quagsire Shiny
 	SlowkingCritterNPCShiny.DisplayName: Slowking Shiny
+	ShroomishCritterNPCShiny.DisplayName: Shroomish Shiny
+	BreloomCritterNPCShiny.DisplayName: Breloom Shiny
 	AzurillCritterNPCShiny.DisplayName: Azurill Shiny
 	MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
@@ -5992,6 +5994,8 @@ NPCs: {
 	TerrarianOmanyteCritterNPCShiny.DisplayName: Terrarian Omanyte Shiny
 	TerrarianOmastarCritterNPCShiny.DisplayName: Terrarian Omastar Shiny
 	TerrarianMewtwoCritterNPCShiny.DisplayName: Terrarian Mewtwo Shiny
+	TerrarianShroomishCritterNPCShiny.DisplayName: Terrarian Shroomish Shiny
+	TerrarianBreloomCritterNPCShiny.DisplayName: Terrarian Breloom Shiny
 	TerrarianSolosisCritterNPCShiny.DisplayName: Terrarian Solosis Shiny
 	TerrarianReuniclusCritterNPCShiny.DisplayName: Terrarian Reuniclus Shiny
 	TerrarianDuosionCritterNPCShiny.DisplayName: Terrarian Duosion Shiny
@@ -6011,8 +6015,6 @@ NPCs: {
 	OrthwormCritterNPC_Body.DisplayName: Orthworm
 	OrthwormCritterNPCShiny_Tail.DisplayName: Orthworm Shiny
 	OrthwormCritterNPCShiny_Body.DisplayName: Orthworm Shiny
-	TerrarianBreloomCritterNPCShiny.DisplayName: Terrarian Breloom Shiny
-	TerrarianShroomishCritterNPCShiny.DisplayName: Terrarian Shroomish Shiny
 
 	PokemonProfessor: {
 		DisplayName: Pokemon Professor
@@ -6098,8 +6100,6 @@ NPCs: {
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
 	MewtwoBossBody.DisplayName: Malformed Subject
 	MewtwoBossMinion.DisplayName: Experiement Controller
-	BreloomCritterNPCShiny.DisplayName: Breloom Shiny
-	ShroomishCritterNPCShiny.DisplayName: Shroomish Shiny
 }
 
 Bestiary: {

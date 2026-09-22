@@ -635,7 +635,7 @@ namespace Pokemod.Common.UI.PokedexUI
 							{
 								if (pkPlayer.registeredPokemon.Keys.ToList().Contains(formName))
 								{
-									if (pkPlayer.registeredPokemon[formName] > 0) altPhase = 2;
+									if (pkPlayer.registeredPokemon[formName] > 0) altPhase = pkPlayer.registeredPokemon[formName]+1;
 								}
 							}
 
