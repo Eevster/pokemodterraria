@@ -1,0 +1,42 @@
+using Terraria.GameContent.Bestiary;
+using Terraria.ModLoader;
+using Terraria.ModLoader.Utilities;
+
+namespace Pokemod.Content.NPCs.PokemonNPCs
+{
+	public class TerrarianShroomishCritterNPC : PokemonWildNPC
+	{
+		public override int hitboxWidth => 28;
+		public override int hitboxHeight => 30;
+
+		public override int totalFrames => 22;
+		public override int animationSpeed => 7;
+		public override int[] idleStartEnd => [5,13];
+		public override int[] walkStartEnd => [16,21];
+		public override int[] jumpStartEnd => [13,15];
+		public override int[] fallStartEnd => [14,15];
+        public override int[] attackStartEnd => [0, 5];
+		public override float catchRate => 255;
+		
+		public override int[][] spawnConditions =>
+		[
+            [(int)SpawnArea.TheHallow, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+        ];
+
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheHallow);
+            base.SetBestiary(database, bestiaryEntry);
+        }
+
+		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
+			if (spawnInfo.Player.ZoneGlowshroom) {
+				return GetSpawnChance(spawnInfo, SpawnCondition.Overworld.Chance * 0.1f);
+			}
+
+			return 0f;
+		}
+	}
+
+	public class TerrarianShroomishCritterNPCShiny : TerrarianShroomishCritterNPC{}
+}
