@@ -9,19 +9,19 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int hitboxWidth => 24;
 		public override int hitboxHeight => 32;
 
-		public override int totalFrames => 15;
+		public override int totalFrames => 39;
 		public override int animationSpeed => 5;
 		public override int[] idleStartEnd => [0,6];
 		public override int[] walkStartEnd => [7,13];
-		public override int[] jumpStartEnd => [8,8];
-		public override int[] fallStartEnd => [11,11];
-		public override int[] attackStartEnd => [14,14];
+		public override int[] jumpStartEnd => [6,8];
+		public override int[] fallStartEnd => [9,10];
+		public override int[] attackStartEnd => [14,19];
 
 		public override bool canSwim => true;
 
-		public override int[] idleSwimStartEnd => [0,6];
-		public override int[] walkSwimStartEnd => [7,13];
-		public override int[] attackSwimStartEnd => [14,14];
+		public override int[] idleSwimStartEnd => [26,31];
+		public override int[] walkSwimStartEnd => [32,38];
+		public override int[] attackSwimStartEnd => [14,19];
 
         public override string[] variants => ["SquirtleSquad"];
 
