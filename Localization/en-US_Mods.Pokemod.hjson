@@ -639,6 +639,12 @@ Projectiles: {
 	BreloomPetProjectileShiny.DisplayName: Breloom Pet Projectile Shiny
 	ShroomishPetProjectile.DisplayName: Shroomish Pet Projectile
 	ShroomishPetProjectileShiny.DisplayName: Shroomish Pet Projectile Shiny
+	DuosionPetProjectile.DisplayName: Duosion Pet Projectile
+	DuosionPetProjectileShiny.DisplayName: Duosion Pet Projectile Shiny
+	ReuniclusPetProjectile.DisplayName: Reuniclus Pet Projectile
+	ReuniclusPetProjectileShiny.DisplayName: Reuniclus Pet Projectile Shiny
+	SolosisPetProjectile.DisplayName: Solosis Pet Projectile
+	SolosisPetProjectileShiny.DisplayName: Solosis Pet Projectile Shiny
 }
 
 Items: {
@@ -6100,6 +6106,9 @@ NPCs: {
 	MewtwoBossMinion.DisplayName: Experiement Controller
 	BreloomCritterNPCShiny.DisplayName: Breloom Shiny
 	ShroomishCritterNPCShiny.DisplayName: Shroomish Shiny
+	SolosisCritterNPCShiny.DisplayName: Solosis Critter N P C Shiny
+	ReuniclusCritterNPCShiny.DisplayName: Reuniclus Critter N P C Shiny
+	DuosionCritterNPCShiny.DisplayName: Duosion Critter N P C Shiny
 }
 
 Bestiary: {
@@ -6574,5 +6583,12 @@ Configs: {
 			Label: Pokemon Image Distance
 			Tooltip: ""
 		}
+	}
+}
+
+Achievements: {
+	AdventureStart: {
+		FriendlyName: Adventure Start
+		Description: Your adventure begins!
 	}
 }
