@@ -5541,6 +5541,16 @@ NPCs: {
 		Description: Al ser mordido por un Shellder, desarrolló una inteligencia comparable a la de una eminencia científica mundial.
 	}
 
+	ShroomishCritterNPC: {
+		DisplayName: Shroomish
+		Description: Prefiere los sitios húmedos. De día está tranquilamente en el bosque, a la sombra. Expulsa polvo tóxico por la cabeza.
+	}
+
+	BreloomCritterNPC: {
+		DisplayName: Breloom
+		Description: Esparce esporas venenosas muy nocivas que aturden a sus enemigos al inhalarlas y luego les asesta puñetazos de gran intensidad.
+	}
+
 	AzurillCritterNPC: {
 		DisplayName: Azurill
 		Description: Vive cerca del agua. Cuando está en tierra firme, se desplaza a gran velocidad botando sobre su gran cola.
@@ -5569,6 +5579,11 @@ NPCs: {
 	VespiquenCritterNPC: {
 		DisplayName: Vespiquen
 		Description: Si se encuentra en peligro, salen larvas de su panal de seis celdas y emprenden el ataque. Solo hay un único ejemplar por colonia.
+	}
+
+	MimeJrCritterNPC: {
+		DisplayName: Mime Jr.
+		Description: Es un gran imitador. Cuando logra sorprender a su adversario, la alegría lo embarga de tal forma que se olvida de continuar su actuación.
 	}
 
 	MagnezoneCritterNPC: {
@@ -5607,18 +5622,18 @@ NPCs: {
 	}
 
 	SolosisCritterNPC: {
-		// DisplayName: Solosis
-		// Description: ""
+		DisplayName: Solosis
+		Description: Desata su poder psíquico para ahuyentar al enemigo. Se comunica con sus compañeros por telepatía.
 	}
 
 	DuosionCritterNPC: {
-		// DisplayName: Duosion
-		// Description: ""
+		DisplayName: Duosion
+		Description: Cuando las dos partes de su cerebro piensan lo mismo, saca todo su poder a relucir.
 	}
 
 	ReuniclusCritterNPC: {
-		// DisplayName: Reuniclus
-		// Description: ""
+		DisplayName: Reuniclus
+		Description: Cuando los Reuniclus se dan la mano, sus cerebros se conectan y multiplican sus poderes psíquicos.
 	}
 
 	JoltikCritterNPC: {
@@ -5701,6 +5716,16 @@ NPCs: {
 		Description: ""
 	}
 
+	TerrarianShroomishCritterNPC: {
+		DisplayName: Shroomish de Terraria
+		Description: Se le encuentra deambulando por los bosques de setas y emite constantemente esporas azules. El contacto con estas esporas provoca alucinaciones.
+	}
+
+	TerrarianBreloomCritterNPC: {
+		DisplayName: Breloom de Terraria
+		Description: Ataca aplastando a sus enemigos con su pesada cola, la cual libera esporas al impactar. El contacto con estas esporas provoca alucinaciones.
+	}
+
 	TerrarianSolosisCritterNPC: {
 		DisplayName: Solosis de Terraria
 		Description: ""
@@ -5754,31 +5779,6 @@ NPCs: {
 	HisuianElectrodeCritterNPC: {
 		DisplayName: Hisuian Electrode
 		Description: Curiosamente, su complexión superficial es muy semejante a la de un bonguri. Cuando se enoja, la electricidad que emite es veinte veces más potente que la de un rayo.
-	}
-
-	MimeJrCritterNPC: {
-		DisplayName: Mime Jr.
-		Description: Es un gran imitador. Cuando logra sorprender a su adversario, la alegría lo embarga de tal forma que se olvida de continuar su actuación.
-	}
-
-	TerrarianShroomishCritterNPC: {
-		// DisplayName: Terrarian Shroomish
-		// Description: Found wandering around the mushroom groves, it constantly emits blue spores. Contact with these spores causes frantic hallucinations.
-	}
-
-	TerrarianBreloomCritterNPC: {
-		// DisplayName: Terrarian Breloom
-		// Description: It attacks by slamming into foes with its heavy tail, which erupts with spores upon impact. Contact with these spores causes frantic hallucinations.
-	}
-
-	ShroomishCritterNPC: {
-		// DisplayName: Shroomish
-		// Description: It prefers damp places. By day it remains still in the forest shade. It releases toxic powder from its head.
-	}
-
-	BreloomCritterNPC: {
-		// DisplayName: Breloom
-		// Description: It scatters poisonous spores and throws powerful punches while its foe is hampered by inhaled spores.
 	}
 
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
@@ -5970,6 +5970,8 @@ NPCs: {
 	// WooperCritterNPCShiny.DisplayName: Wooper Shiny
 	// QuagsireCritterNPCShiny.DisplayName: Quagsire Shiny
 	// SlowkingCritterNPCShiny.DisplayName: Slowking Shiny
+	// ShroomishCritterNPCShiny.DisplayName: Shroomish Shiny
+	// BreloomCritterNPCShiny.DisplayName: Breloom Shiny
 	// AzurillCritterNPCShiny.DisplayName: Azurill Shiny
 	// MawileCritterNPCShiny.DisplayName: Mawile Shiny
 	// CranidosCritterNPCShiny.DisplayName: Cranidos Shiny
@@ -5998,6 +6000,8 @@ NPCs: {
 	TerrarianOmanyteCritterNPCShiny.DisplayName: Omanyte de Terraria Shiny
 	TerrarianOmastarCritterNPCShiny.DisplayName: Omastar de Terraria Shiny
 	TerrarianMewtwoCritterNPCShiny.DisplayName: Mewtwo de Terraria Shiny
+	TerrarianShroomishCritterNPCShiny.DisplayName: Shroomish de Terraria Shiny
+	TerrarianBreloomCritterNPCShiny.DisplayName: Breloom de Terraria Shiny
 	TerrarianSolosisCritterNPCShiny.DisplayName: Solosis de Terraria Shiny
 	TerrarianReuniclusCritterNPCShiny.DisplayName: Reuniclus de Terraria Shiny
 	TerrarianDuosionCritterNPCShiny.DisplayName: Duosion de Terraria Shiny
@@ -6017,8 +6021,6 @@ NPCs: {
 	// OrthwormCritterNPC_Body.DisplayName: Orthworm
 	// OrthwormCritterNPCShiny_Tail.DisplayName: Orthworm Shiny
 	// OrthwormCritterNPCShiny_Body.DisplayName: Orthworm Shiny
-	// TerrarianBreloomCritterNPCShiny.DisplayName: Terrarian Breloom Shiny
-	// TerrarianShroomishCritterNPCShiny.DisplayName: Terrarian Shroomish Shiny
 
 	PokemonProfessor: {
 		DisplayName: Profesor Pokemon

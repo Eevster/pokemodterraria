@@ -6,8 +6,8 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class ChikoritaCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 28;
-		public override int hitboxHeight => 28;
+		public override int hitboxWidth => 20;
+		public override int hitboxHeight => 20;
 
 		public override int totalFrames => 20;
 		public override int animationSpeed => 5;

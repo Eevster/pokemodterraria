@@ -112,6 +112,7 @@ namespace Pokemod.Content.Pets
 		public virtual int animationSpeed => 5;
 		public virtual int[] idleStartEnd => [-1,-1];
 		public virtual int[] walkStartEnd => [-1,-1];
+		public virtual int[] runStartEnd => [-1,-1];
 		public virtual int[] jumpStartEnd => [-1,-1];
 		public virtual int[] fallStartEnd => [-1,-1];
 		public virtual int[] attackStartEnd => [-1,-1];
@@ -2465,8 +2466,8 @@ namespace Pokemod.Content.Pets
 						finalFrame = idleStartEnd[1];
 						break;
 					case (int)ProjStatus.Walk:
-						initialFrame = walkStartEnd[0];
-						finalFrame = walkStartEnd[1];
+						initialFrame = (runStartEnd[0] >= 0 && Math.Abs(Projectile.velocity.X) >= moveSpeed1) ? runStartEnd[0]:walkStartEnd[0];
+						finalFrame = (runStartEnd[1] >= 0 && Math.Abs(Projectile.velocity.X) >= moveSpeed1) ? runStartEnd[1]:walkStartEnd[1];
 						frameSpeed = (int)(animationSpeed*3f/Math.Clamp(Math.Abs(Projectile.velocity.X), 2f, 20f));
 						break;
 					case (int)ProjStatus.Jump:

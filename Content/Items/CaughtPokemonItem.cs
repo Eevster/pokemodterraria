@@ -66,8 +66,8 @@ namespace Pokemod.Content.Items
         public override void SetDefaults() {
 			Item.useTime = 30;
 			Item.useAnimation = 30;
-            Item.width = 14;
-            Item.height = 14;
+            Item.width = 16;
+            Item.height = 16;
 			Item.UseSound = SoundID.Item1;
 			Item.useStyle = ItemUseStyleID.Shoot;
 			Item.shoot = ProjectileID.None;
