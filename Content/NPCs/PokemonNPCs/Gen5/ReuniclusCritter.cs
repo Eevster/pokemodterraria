@@ -7,11 +7,11 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 {
 	public class ReuniclusCritterNPC : PokemonWildNPC
 	{
-		public override int hitboxWidth => 84;
-        public override int hitboxHeight => 50;
+		public override int hitboxWidth => 36;
+        public override int hitboxHeight => 40;
 
 		public override int totalFrames => 15;
-		public override int animationSpeed => 5;
+		public override int animationSpeed => 6;
 
         public override int moveStyle => 1;
         public override int[] idleStartEnd => [5, 9];

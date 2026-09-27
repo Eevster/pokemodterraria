@@ -5690,6 +5690,11 @@ NPCs: {
 		Description: Cuando lo atacan, usa los pelos de su cuerpo a modo de puños y hace llover un aluvión de puñetazos sobre sus enemigos.
 	}
 
+	ClodsireCritterNPC: {
+		DisplayName: Clodsire
+		Description: Cuando se siente amenazado, repele al enemigo con sus gruesas púas retráctiles. Esta técnica tan peligrosa es un arma de doble filo.
+	}
+
 	TerrarianKabutoCritterNPC: {
 		DisplayName: Kabuto de Terraria
 		Description: Sellado hace mucho tiempo en la mazmorra, este Pokémon habita en los huesos de un Pokémon aún más antiguo.
@@ -5776,13 +5781,18 @@ NPCs: {
 	}
 
 	HisuianVoltorbCritterNPC: {
-		DisplayName: Hisuian Voltorb
+		DisplayName: Voltorb de Hisui
 		Description: Curioso ejemplar que guarda cierta similitud con una Poké Ball. Cuanto más se altera, mayor es la descarga eléctrica que libera de su vientre, a la que sigue una sonora carcajada.
 	}
 
 	HisuianElectrodeCritterNPC: {
-		DisplayName: Hisuian Electrode
+		DisplayName: Electrode de Hisui
 		Description: Curiosamente, su complexión superficial es muy semejante a la de un bonguri. Cuando se enoja, la electricidad que emite es veinte veces más potente que la de un rayo.
+	}
+
+	PaldeanWooperCritterNPC: {
+		DisplayName: Wooper de Paldea
+		Description: Tras perder una disputa territorial, se vio forzado a vivir en tierra firme y desarrolló una membrana mucosa tóxica con la que proteger su cuerpo.
 	}
 
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur
@@ -5989,6 +5999,9 @@ NPCs: {
 	// VenipedeCritterNPCShiny.DisplayName: Venipede Shiny
 	// WhirlipedeCritterNPCShiny.DisplayName: Whirlipede Shiny
 	// ScolipedeCritterNPCShiny.DisplayName: Scolipede Shiny
+	// SolosisCritterNPCShiny.DisplayName: Solosis Shiny
+	// DuosionCritterNPCShiny.DisplayName: Duosion Shiny
+	// ReuniclusCritterNPCShiny.DisplayName: Reuniclus Shiny
 	// JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	// GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
 	// LitwickCritterNPCShiny.DisplayName: Litwick Shiny
@@ -5998,6 +6011,7 @@ NPCs: {
 	// TinkatonCritterNPCShiny.DisplayName: Tinkaton Shiny
 	// TinkatuffCritterNPCShiny.DisplayName: Tinkatuff Shiny
 	// OrthwormCritterNPCShiny.DisplayName: Orthworm Shiny
+	// ClodsireCritterNPCShiny.DisplayName: Clodsire Shiny
 	TerrarianKabutoCritterNPCShiny.DisplayName: Kabuto de Terraria Shiny
 	TerrarianKabutopsCritterNPCShiny.DisplayName: Kabutops de Terraria Shiny
 	TerrarianAerodactylCritterNPCShiny.DisplayName: Aerodactyl de Terraria Shiny
@@ -6017,6 +6031,7 @@ NPCs: {
 	AlolanSandslashCritterNPCShiny.DisplayName: Sandslash de Alola Shiny
 	HisuianVoltorbCritterNPCShiny.DisplayName: Voltorb de Hisui Shiny
 	HisuianElectrodeCritterNPCShiny.DisplayName: Electrode de Hisui Shiny
+	PaldeanWooperCritterNPCShiny.DisplayName: Wooper de Paldea Shiny
 	// OnixCritterNPC_Body.DisplayName: Onix
 	// OnixCritterNPC_Tail.DisplayName: Onix
 	// OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
@@ -6108,15 +6123,9 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
-	// MewtwoBossBody.DisplayName: Malformed Subject
-	// MewtwoBossMinion.DisplayName: Experiement Controller
-	// SolosisCritterNPCShiny.DisplayName: Solosis Critter
-	// ReuniclusCritterNPCShiny.DisplayName: Reuniclus Critter
-	// DuosionCritterNPCShiny.DisplayName: Duosion Critter
-	// PaldeanWooperCritterNPCShiny.DisplayName: Paldean Wooper Shiny
-	// PaldeanWooperCritterNPC.DisplayName: Paldean Wooper
-	// ClodsireCritterNPCShiny.DisplayName: Clodsire Shiny
-	// ClodsireCritterNPC.DisplayName: Clodsire
+
+	MewtwoBossBody.DisplayName: Sujeto malformado
+	MewtwoBossMinion.DisplayName: Controlador del experimento
 }
 
 Bestiary: {
@@ -6229,7 +6238,7 @@ WorldGen: {
 	// PokemonCenterPassMessage: Mods.Pokemod.WorldGen.PokemonCenterPassMessage
 }
 
-// Conditions.ScientistInTown: The Scientist has settled into town.
+Conditions.ScientistInTown: El científico se ha instalado en la ciudad.
 
 CommonItemTooltip: {
 	PokemonDamageBoost: Incrementa el daño de tus pokemon en {0}%

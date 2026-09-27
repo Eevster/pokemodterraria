@@ -9,16 +9,18 @@ namespace Pokemod.Content.Pets.DuosionPet
 {
 	public class DuosionPetProjectile : PokemonPetProjectile
 	{
-        public override int hitboxWidth => 32;
-        public override int hitboxHeight => 34;
+        public override int hitboxWidth => 24;
+        public override int hitboxHeight => 24;
 
-        public override int totalFrames => 20;
-        public override int animationSpeed => 6;
-        public override int[] idleStartEnd => [16, 19];
-        public override int[] walkStartEnd => [8, 11];
-        public override int[] jumpStartEnd => [12, 15];
-        public override int[] fallStartEnd => [15, 16];
-        public override int[] attackStartEnd => [0, 7];
+		public override int moveStyle => 1;
+		
+		public override int totalFrames => 20;
+		public override int animationSpeed => 6;
+		public override int[] idleStartEnd => [11,19];
+		public override int[] walkStartEnd => [7,10];
+		public override int[] idleFlyStartEnd => [11,19];
+        public override int[] walkFlyStartEnd => [7,10];
+        public override int[] attackFlyStartEnd => [0,6];
 
         public override string[] evolutions => ["Reuniclus"];
 		public override int levelToEvolve => 41;

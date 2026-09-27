@@ -9,16 +9,18 @@ namespace Pokemod.Content.Pets.SolosisPet
 {
 	public class SolosisPetProjectile : PokemonPetProjectile
 	{
-        public override int hitboxWidth => 28;
-        public override int hitboxHeight => 26;
+        public override int hitboxWidth => 20;
+        public override int hitboxHeight => 20;
 
-        public override int totalFrames => 14;
-        public override int animationSpeed => 5;
-        public override int[] idleStartEnd => [0, 0];
-        public override int[] walkStartEnd => [6, 9];
-        public override int[] jumpStartEnd => [10, 13];
-        public override int[] fallStartEnd => [12, 13];
-        public override int[] attackStartEnd => [0, 5];
+		public override int moveStyle => 1;
+		
+		public override int totalFrames => 14;
+		public override int animationSpeed => 5;
+		public override int[] idleStartEnd => [10,13];
+		public override int[] walkStartEnd => [6,9];
+		public override int[] idleFlyStartEnd => [10,13];
+        public override int[] walkFlyStartEnd => [6,9];
+        public override int[] attackFlyStartEnd => [0,5];
 
         public override string[] evolutions => ["Duosion"];
 		public override int levelToEvolve => 32;

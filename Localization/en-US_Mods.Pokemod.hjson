@@ -5690,6 +5690,11 @@ NPCs: {
 		Description: When attacked, this Pokémon will wield the tendrils on its body like fists and pelt the opponent with a storm of punches.
 	}
 
+	ClodsireCritterNPC: {
+		DisplayName: Clodsire
+		Description: When attacked, this Pokémon will retaliate by sticking thick spines out from its body. It’s a risky move that puts everything on the line.
+	}
+
 	TerrarianKabutoCritterNPC: {
 		DisplayName: Terrarian Kabuto
 		Description: Sealed long ago within the dungeon, this Pokemon inhabits the bones of a Pokemon even more ancient.
@@ -5783,6 +5788,11 @@ NPCs: {
 	HisuianElectrodeCritterNPC: {
 		DisplayName: Hisuian Electrode
 		Description: The tissue on the surface of its body is curiously similar in composition to an Apricorn. When irritated, this Pokémon lets loose an electric current equal to 20 lightning bolts.
+	}
+
+	PaldeanWooperCritterNPC: {
+		DisplayName: Paldean Wooper
+		Description: After losing a territorial struggle, Wooper began living on land. The Pokémon changed over time, developing a poisonous film to protect its body.
 	}
 
 	BulbasaurCritterNPCShiny.DisplayName: Bulbasaur  Shiny
@@ -5989,6 +5999,9 @@ NPCs: {
 	VenipedeCritterNPCShiny.DisplayName: Venipede Shiny
 	WhirlipedeCritterNPCShiny.DisplayName: Whirlipede Shiny
 	ScolipedeCritterNPCShiny.DisplayName: Scolipede Shiny
+	SolosisCritterNPCShiny.DisplayName: Solosis Shiny
+	DuosionCritterNPCShiny.DisplayName: Duosion Shiny
+	ReuniclusCritterNPCShiny.DisplayName: Reuniclus Shiny
 	JoltikCritterNPCShiny.DisplayName: Joltik Shiny
 	GalvantulaCritterNPCShiny.DisplayName: Galvantula Shiny
 	LitwickCritterNPCShiny.DisplayName: Litwick Shiny
@@ -5998,6 +6011,7 @@ NPCs: {
 	TinkatonCritterNPCShiny.DisplayName: Tinkaton Shiny
 	TinkatuffCritterNPCShiny.DisplayName: Tinkatuff Shiny
 	OrthwormCritterNPCShiny.DisplayName: Orthworm Shiny
+	ClodsireCritterNPCShiny.DisplayName: Clodsire Shiny
 	TerrarianKabutoCritterNPCShiny.DisplayName: Terrarian Kabuto Shiny
 	TerrarianKabutopsCritterNPCShiny.DisplayName: Terrarian Kabutops Shiny
 	TerrarianAerodactylCritterNPCShiny.DisplayName: Terrarian Aerodactyl Shiny
@@ -6017,6 +6031,7 @@ NPCs: {
 	AlolanSandslashCritterNPCShiny.DisplayName: Alolan Sandslash Shiny
 	HisuianVoltorbCritterNPCShiny.DisplayName: Hisuian Voltorb Shiny
 	HisuianElectrodeCritterNPCShiny.DisplayName: Hisuian Electrode Shiny
+	PaldeanWooperCritterNPCShiny.DisplayName: Paldean Wooper Shiny
 	OnixCritterNPC_Body.DisplayName: Onix
 	OnixCritterNPC_Tail.DisplayName: Onix
 	OnixCritterNPCShiny_Body.DisplayName: Onix Shiny
@@ -6109,14 +6124,7 @@ NPCs: {
 	G1T7_Blaine.DisplayName: Fire-type Gym Leader
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
 	MewtwoBossBody.DisplayName: Malformed Subject
-	MewtwoBossMinion.DisplayName: Experiement Controller
-	SolosisCritterNPCShiny.DisplayName: Solosis Critter
-	ReuniclusCritterNPCShiny.DisplayName: Reuniclus Critter
-	DuosionCritterNPCShiny.DisplayName: Duosion Critter
-	PaldeanWooperCritterNPCShiny.DisplayName: Paldean Wooper Shiny
-	PaldeanWooperCritterNPC.DisplayName: Paldean Wooper
-	ClodsireCritterNPCShiny.DisplayName: Clodsire Shiny
-	ClodsireCritterNPC.DisplayName: Clodsire
+	MewtwoBossMinion.DisplayName: Experiment Controller
 }
 
 Bestiary: {
