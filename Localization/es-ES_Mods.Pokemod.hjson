@@ -645,6 +645,10 @@ Projectiles: {
 	// ReuniclusPetProjectileShiny.DisplayName: Reuniclus Pet Projectile Shiny
 	// SolosisPetProjectile.DisplayName: Solosis Pet Projectile
 	// SolosisPetProjectileShiny.DisplayName: Solosis Pet Projectile Shiny
+	// PaldeanWooperPetProjectileShiny.DisplayName: Paldean Wooper Pet Projectile Shiny
+	// PaldeanWooperPetProjectile.DisplayName: Paldean Wooper Pet Projectile
+	// ClodsirePetProjectileShiny.DisplayName: Clodsire Pet Projectile Shiny
+	// ClodsirePetProjectile.DisplayName: Clodsire Pet Projectile
 }
 
 Items: {
@@ -6106,11 +6110,13 @@ NPCs: {
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
 	// MewtwoBossBody.DisplayName: Malformed Subject
 	// MewtwoBossMinion.DisplayName: Experiement Controller
-	// BreloomCritterNPCShiny.DisplayName: Breloom Shiny
-	// ShroomishCritterNPCShiny.DisplayName: Shroomish Shiny
 	// SolosisCritterNPCShiny.DisplayName: Solosis Critter N P C Shiny
 	// ReuniclusCritterNPCShiny.DisplayName: Reuniclus Critter N P C Shiny
 	// DuosionCritterNPCShiny.DisplayName: Duosion Critter N P C Shiny
+	// PaldeanWooperCritterNPCShiny.DisplayName: Paldean Wooper Critter N P C Shiny
+	// PaldeanWooperCritterNPC.DisplayName: Paldean Wooper Critter N P C
+	// ClodsireCritterNPCShiny.DisplayName: Clodsire Critter N P C Shiny
+	// ClodsireCritterNPC.DisplayName: Clodsire Critter N P C
 }
 
 Bestiary: {
