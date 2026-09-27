@@ -6110,13 +6110,13 @@ NPCs: {
 	G1T8_Giovanni.DisplayName: Ground-type Gym Leader
 	MewtwoBossBody.DisplayName: Malformed Subject
 	MewtwoBossMinion.DisplayName: Experiement Controller
-	SolosisCritterNPCShiny.DisplayName: Solosis Critter N P C Shiny
-	ReuniclusCritterNPCShiny.DisplayName: Reuniclus Critter N P C Shiny
-	DuosionCritterNPCShiny.DisplayName: Duosion Critter N P C Shiny
-	PaldeanWooperCritterNPCShiny.DisplayName: Paldean Wooper Critter N P C Shiny
-	PaldeanWooperCritterNPC.DisplayName: Paldean Wooper Critter N P C
-	ClodsireCritterNPCShiny.DisplayName: Clodsire Critter N P C Shiny
-	ClodsireCritterNPC.DisplayName: Clodsire Critter N P C
+	SolosisCritterNPCShiny.DisplayName: Solosis Critter
+	ReuniclusCritterNPCShiny.DisplayName: Reuniclus Critter
+	DuosionCritterNPCShiny.DisplayName: Duosion Critter
+	PaldeanWooperCritterNPCShiny.DisplayName: Paldean Wooper Shiny
+	PaldeanWooperCritterNPC.DisplayName: Paldean Wooper
+	ClodsireCritterNPCShiny.DisplayName: Clodsire Shiny
+	ClodsireCritterNPC.DisplayName: Clodsire
 }
 
 Bestiary: {
