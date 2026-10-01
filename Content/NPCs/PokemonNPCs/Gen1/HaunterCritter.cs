@@ -26,20 +26,25 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		
 		public override int[][] spawnConditions =>
 		[
-			[(int)SpawnArea.TheCorruption, (int)DayTimeStatus.All, (int)WeatherStatus.All],
-			[(int)SpawnArea.TheCrimson, (int)DayTimeStatus.All, (int)WeatherStatus.All]
+			[(int)SpawnArea.TheDungeon, (int)DayTimeStatus.All, (int)WeatherStatus.All],
+			[(int)SpawnArea.Graveyard, (int)DayTimeStatus.All, (int)WeatherStatus.All]
         ];
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
-			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption);
+			bestiaryEntry.AddTags(BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheDungeon);
             base.SetBestiary(database, bestiaryEntry);
         }
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-			if (spawnInfo.Player.ZoneCorrupt || spawnInfo.Player.ZoneCrimson) {
-				return GetSpawnChance(spawnInfo, (SpawnCondition.Crimson.Chance+SpawnCondition.Corruption.Chance) * 0.2f);
-			}
+			float chanceMult = 0.2f;
+
+			if (spawnInfo.Player.ZoneDungeon) {
+                return GetSpawnChance(spawnInfo, SpawnCondition.DungeonNormal.Chance * chanceMult);
+            }
+			if (spawnInfo.Player.ZoneGraveyard) {
+                return GetSpawnChance(spawnInfo, 0.5f*chanceMult);
+            }
 
 			return 0f;
 		}

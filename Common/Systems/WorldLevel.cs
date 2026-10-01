@@ -30,7 +30,7 @@ namespace Pokemod.Common.Systems
 			if(NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3) MaxWorldLevel = 35;
 			if(NPC.downedPlantBoss || NPC.downedGolemBoss) MaxWorldLevel = 40;
 			if(NPC.downedAncientCultist) MaxWorldLevel = 45;
-			if(NPC.downedMoonlord) MaxWorldLevel = 50;
+			if(NPC.downedMoonlord) MaxWorldLevel = 55;
         }
 
         public override void SaveWorldData(TagCompound tag) {
