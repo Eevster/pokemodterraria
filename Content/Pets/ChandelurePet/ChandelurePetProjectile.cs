@@ -21,6 +21,11 @@ namespace Pokemod.Content.Pets.LampentPet
         public override int[] idleFlyStartEnd => [0, 6];
         public override int[] walkFlyStartEnd => [16, 20];
         public override int[] attackFlyStartEnd => [7, 15];
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Projectile.light = 1f;
+        }
     }
 
 	public class ChandelurePetProjectileShiny : ChandelurePetProjectile{}

@@ -6123,7 +6123,6 @@ NPCs: {
 	G1T6_Sabrina.DisplayName: Lider de gimnasio de tipo Psíquico
 	G1T7_Blaine.DisplayName: Lider de gimnasio de tipo Fuego
 	G1T8_Giovanni.DisplayName: Lider de gimnasio de tipo Tierra
-
 	MewtwoBossBody.DisplayName: Sujeto malformado
 	MewtwoBossMinion.DisplayName: Controlador del experimento
 }
