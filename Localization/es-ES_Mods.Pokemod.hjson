@@ -414,6 +414,7 @@ Projectiles: {
 	// ShimmerballProj.DisplayName: Shimmerball Proj
 	// GalaxyballProj.DisplayName: Galaxyball Proj
 	// HealballProj.DisplayName: Healball Proj
+	// NetballProj.DisplayName: Netball Proj
 	VineWhip_Front.DisplayName: Látigo cepa
 	Overheat.DisplayName: Sofoco
 	// BlastoiseMegaPetProjectile.DisplayName: Blastoise Mega Pet Projectile
@@ -1310,6 +1311,11 @@ Items: {
 	HealballItem: {
 		DisplayName: Sana Ball
 		Tooltip: Una Poke Ball que restaura los HP de un pokemon capturado con ella
+	}
+
+	NetballItem: {
+		DisplayName: Malla Ball
+		Tooltip: Una Poke Ball un tanto diferente que funciona especialmente bien con pokemon de tipo agua o bicho
 	}
 
 	MaxPotion: {

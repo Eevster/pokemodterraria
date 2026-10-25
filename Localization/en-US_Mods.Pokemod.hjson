@@ -414,6 +414,7 @@ Projectiles: {
 	ShimmerballProj.DisplayName: Shimmerball Proj
 	GalaxyballProj.DisplayName: Galaxyball Proj
 	HealballProj.DisplayName: Healball Proj
+	NetballProj.DisplayName: Netball Proj
 	VineWhip_Front.DisplayName: Vine Whip_ Front
 	Overheat.DisplayName: Overheat
 	BlastoiseMegaPetProjectile.DisplayName: Blastoise Mega Pet Projectile
@@ -1310,6 +1311,11 @@ Items: {
 	HealballItem: {
 		DisplayName: Heal Ball
 		Tooltip: A remedial Poke Ball that restores the HP of a pokemon caught with it
+	}
+
+	NetballItem: {
+		DisplayName: Net Ball
+		Tooltip: A somewhat different Ball that is more effective when attempting to catch Water- or Bug-type pokemon.
 	}
 
 	MaxPotion: {
