@@ -19,6 +19,7 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
         public override int[] idleFlyStartEnd => [9, 18];
         public override int[] walkFlyStartEnd => [5, 8];
         public override int[] attackFlyStartEnd => [0, 4];
+        public override string[] variants => ["Halloween"];
         public override float catchRate => 190;
 
 		public override int minLevel => 40;

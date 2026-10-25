@@ -24,8 +24,13 @@ namespace Pokemod.Content.Pets.LampentPet
 
                 public override string[] evolutions => ["Chandelure"];
                 public override string[] itemToEvolve => ["DuskStoneItem"];
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Projectile.light = 1f;
+        }
 
-	}
+    }
 
 	public class LampentPetProjectileShiny : LampentPetProjectile{}
 }

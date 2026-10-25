@@ -28,7 +28,12 @@ namespace Pokemod.Content.Pets.LitwickPet
 
 		public override bool canBeHeld => true;
         public override Vector2 heldByPlayerPosition => new Vector2(-2,0);
-	}
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Projectile.light = 1f;
+        }
+    }
 
 	public class LitwickPetProjectileShiny : LitwickPetProjectile{}
 }

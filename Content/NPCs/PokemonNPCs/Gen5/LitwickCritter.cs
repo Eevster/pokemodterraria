@@ -20,8 +20,9 @@ namespace Pokemod.Content.NPCs.PokemonNPCs
 		public override int[] fallStartEnd => [18,19];
 		public override int[] attackStartEnd => [5,9];
         public override float catchRate => 190;
+		public override string[] variants => ["Halloween"];
 
-		public override int minLevel => 25;
+        public override int minLevel => 25;
 		
 		public override int[][] spawnConditions =>
 		[

@@ -17,25 +17,59 @@ External Credits:
 Pokesprite: Icons Gen 1-8
 MBCMechachu: Icons Gen 9 
 
-Pokemod v1.4.1
+Pokemod v1.5
 
 Detailed Change Log:
 
--New Pokemon:
---Lickilicky
--Moves:
---Confusion: Sound has been changed
--New Moves:
---Charge
---Cotton Guard
---Thunder Shock
--Bug Fixes:
---Fixed Move Tutor deleting Pokemon in Multiplayer
---Fixed Eject Button not working as intended
---Fixed Super Rod description
---Fixed Clefairy Evolution condition
---Fixed issues with Skiploom and Jumpluff
+-Pokemon:
+--Litwick Line Added
+--Furret and Lickilicky Spawn Conditons Tweaked
+--Added Mime Jr.
+--Fossils Now Register as Caught Upon Revival
+--Happiness Indicator (Hover Over Pokemon)
+--Movesets Added for Ryhorn and Rhydon
+--Added Rotom
+--Added Azurill
+--Added Orthworm
+--Added Gem Variations for Geodude Line
+--Added Terrarian Shroomish Line
+--Added Shroomish Line
+--Squirtle Resprite
+--Solosis Line Added
+--Paldean Wooper Line Added
+--Gastly Line Now Spawns in the Graveyard Biome
 
+
+-Other New Content:
+--Abandoned Pokemon Center Structure
+--New Boss Fight: Mewtwo
+--Added Support for Boss Checklist
+
+-Items:
+--Added EXP Candies
+
+
+-Class:
+--New Gloves Added to the Trainer Class
+
+
+-Battles:
+--Battle UI for Trainer Battles
+
+
+-Misc. Changes:
+--New Pokeball Sprites
+--Everstone Now Works By Carrying it in the Inventory
+
+
+
+-Bug Fixes:
+--Fixed many spritesheets
+--Fixed Pichu evolution
+--Fixed Multiplayer Battle Issues
+--Hoppip Evolution fixes
+--Dynamax Now Clearly Marked as W.I.P.
+--Mareep Now Evolves at Correct Level
 
 
 

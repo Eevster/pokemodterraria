@@ -1,4 +1,4 @@
-displayName = Pokemod V1.4 (The Bigger and Better Update)
+displayName = Pokemod V1.5 (Spooky Season)
 author = Eevster
-version = 1.4.1
+version = 1.5
 modReferences = SubworldLibrary, StructureHelper
